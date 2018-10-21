@@ -21,3 +21,12 @@ apuntando al *directorio* y no al archivo README.
 
   (En el caso de las **imágenes** deben linkearse también de manera absoluta, 
   pero en este caso **apuntando al archivo y no al directorio**)
+
+### Build
+
+Via https://github.com/continuum/transbankdevelopers-web el markdown simple de
+este repositorio se transforma y lleva a los repositorios requeridos por Cumbre
+para ser publicado en el sitio transbankdevelopers.cl. 
+
+[![Build
+Status](https://semaphoreci.com/api/v1/continuum/transbankdevelopers-web/branches/master/badge.svg)](https://semaphoreci.com/continuum/transbankdevelopers-web)
