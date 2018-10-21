@@ -1,7 +1,7 @@
 <div class="data-menu-side-right">
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">
-    <h4>Descarga nuestros plugins.</h4>
+    <h4>Descarga nuestro plugin.</h4>
     <br>
     <h4>Compatibilidad</h4>
     <ul>

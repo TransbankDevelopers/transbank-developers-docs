@@ -3,7 +3,7 @@
 <div class="data-menu-side-right">
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">
-    <h4>Descarga nuestro plugins.</h4>
+    <h4>Descarga nuestro plugin.</h4>
     {% for key, x in tool %}
       {% if x.fileActive %}
         <span class="btn-download" data-target='#modalDownloadPlugins' id="press-p-btn-{{x.ident}}"
