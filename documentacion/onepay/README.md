@@ -151,6 +151,10 @@ using Transbank.Onepay;
 Onepay.CallbackUrl = "https://www.misitioweb.com/onepay-result";
 ```
 
+```ruby
+Transbank::Onepay::Base.callback_url = "https://miapp.cl/endPayment"
+```
+
 
 Con eso estás preparado para crear una transacción. Para esto se debe crear en
 primera instancia un objeto `ShoppingCart` que se debe llenar un `Item` (o
@@ -198,6 +202,18 @@ cart.Add(new Item(
     expire: -1));
 ```
 
+```ruby
+cart = Transbank::Onepay::ShoppingCart.new
+cart.add(Item.new(amount: 15000,
+                  quantity: 1,
+                  description: "Zapatos",
+                  additional_data: nil,
+                  expire: -1))
+channel = Transbank::Onepay::Channel::WEB
+response = Transbank::Onepay::Transaction.create(shopping_cart: cart, channel: channel)
+```
+
+
 El monto en el carro de compras debe ser positivo, en caso contrario se lanzará una excepción.
 
 Luego que el carro de compras contiene todos los ítems, se crea la transacción:
@@ -228,6 +244,13 @@ using Transbank.Onepay.Model:
 ChannelType channelType = ChannelType.Parse(channel);
 var response = Transaction.Create(cart, channelType);
 ```
+
+```ruby
+channel = params["channel"]
+response = Transbank::Onepay::Transaction.create(shopping_cart: cart,
+                                                 channel: channel)
+```
+
 
 El segundo parámetro en el ejemplo corresponde al `channel` y debes capturar el
 valor que el frontend envió cuando invoco al endpoint que está creando la transacción para
@@ -372,6 +395,18 @@ else
 }
 ```
 
+```ruby
+if params["status"] == "PRE_AUTHORIZED"
+  response = Transbank::Onepay::Transaction.commit(occ: occ, external_unique_number: external_unique_number)
+else
+  # Mostrar página de error
+end
+
+rescue Transbank::Onepay::Errors::TransactionCommitError => e
+  # do something
+
+```
+
 El resultado obtenido en `response` tiene una forma como la de este ejemplo:
 
 ```json
@@ -439,6 +474,10 @@ OnepayBase::setAppScheme("mi-app://mi-app/onepay-result");
 using Transbank.Onepay:
 
 Onepay.AppScheme = "mi-app://mi-app/onepay-result";
+```
+
+```ruby
+Transbank::Onepay::Base.app_scheme = "mi-app://mi-app/onepay-result"
 ```
 
 Luego puedes invocar al mismo endpoint que construiste para Checkout, pero ahora
@@ -616,6 +655,11 @@ Onepay.ApiKey = "api-key-entregado-por-transbank";
 Onepay.SharedSecret = "secreto-entregado-por-transbank";
 ```
 
+```ruby
+Transbank::Onepay::Base.api_key = "entregado por transbank"
+Transbank::Onepay::Base.shared_secret = "entregado por transbank"
+```
+
 También puedes configurar el api key y secret de una petición específica:
 
 <div class="language-simple" data-multiple-language></div>
@@ -647,6 +691,11 @@ var options = new Options()
         }
 ```
 
+```ruby
+options = { api_key: 'api-key-entregado-por-transbank',
+            shared_secret: 'shared-secret-entregado-por-transbank' }
+```
+
 Esas opciones puedes pasarlas como parámetro a cualquier método
 transaccional de Onepay (`Transaction.create`, `Transaction.commit` y
 `Refund.create`).
@@ -674,6 +723,10 @@ OnepayBase::setCurrentIntegrationType('LIVE');
 using Transbank.Onepay;
 
 Onepay.IntegrationType = Transbank.Onepay.Enums.OnepayIntegrationType.LIVE;
+```
+
+```ruby
+Transbank::Onepay::Base.integration_type = :LIVE
 ```
 
 ## Más funcionalidades
