@@ -16,6 +16,9 @@ OnepayBase::setCurrentIntegrationType('LIVE');
 Onepay.IntegrationType = Transbank.Onepay.Enums.OnepayIntegrationType.LIVE;
 ```
 
+```python
+onepay.integration_type = onepay.IntegrationType.LIVE
+```
 
 ```http
 Host: www.onepay.cl
@@ -36,6 +39,9 @@ OnepayBase::setCurrentIntegrationType('TEST');
 Onepay.IntegrationType = Transbank.Onepay.Enums.OnepayIntegrationType.TEST;
 ```
 
+```python
+onepay.integration_type = onepay.IntegrationType.TEST
+```
 
 ```http
 Host: onepay.ionix.cl
@@ -76,6 +82,10 @@ Onepay.ApiKey = "api-key-entregado-por-transbank";
 Onepay.SharedSecret = "secreto-entregado-por-transbank";
 ```
 
+```python
+onepay.api_key = "api-key-entregado-por-transbank"
+onepay.shared_secret = "secreto-entregado-por-transbank"
+```
 
 
 
@@ -158,6 +168,17 @@ cart.Add(new Item(
 var response = Transaction.Create(cart, ChannelType.Web);
 ```
 
+```python
+onepay.app_scheme = "mi-app://mi-app/onepay-result"
+onepay.callback_url = "https://miapp.cl/endPayment"
+
+cart = ShoppingCart()
+cart.add(Item(description="Producto de prueba", 
+              quantity=1, amount=9900, 
+              additional_data=None, expire=None))
+result = Transaction.create(cart, Channel.WEB)
+```
+
 ```http
 POST /ewallet-plugin-api-services/services/transactionservice/sendtransaction
 Content-Type: application/json
@@ -236,6 +257,14 @@ resppnse.Ott;
 response.ExternalUniqueNumber;
 response.IssuedAt;
 response.QrAsBase64;
+```
+```python
+response.occ
+response.ott
+response.external_unique_number
+response.issued_at
+response.qr_as_base64
+```
 
 ```http
 200 OK
@@ -307,6 +336,10 @@ var response = Transaction.Create(
   cart, ChannelType.Web, myOwnExternalUniqueNumber);
 ```
 
+```python
+response = Transaction.create(shopping_cart, Channel.WEB,
+  my_own_external_unique_number)
+```
 
 Al usar los SDKs si no provees un external unique number, será generado automáticamente. Pero siempre puedes especificarlo manualmente.
 
@@ -328,6 +361,10 @@ $response = Transaction::commit($occ, $externalUniqueNumber);
 
 ```csharp
 var response = Transaction.Commit(occ, externalUniqueNumber);
+```
+
+```python
+response = Transaction.commit(occ, external_unique_number)
 ```
 
 ```http
@@ -387,6 +424,17 @@ response.TransactionDesc;
 response.InstallmentsAmount;
 response.InstallmentsNumber;
 response.BuyOrder;
+```
+
+```python
+response.occ
+response.authorization_code
+response.issued_at
+response.amount
+response.transaction_desc
+response.installments_amount
+response.installments_number
+response.buy_order
 ```
 
 ```http
@@ -452,6 +500,11 @@ var response = Refund.Create(
   amount, occ, externalUniqueNumber, authorizationCode);
 ```
 
+```python
+response = Refund.create(amount, occ, external_unique_number,
+  authorization_code)
+```
+
 ```http
 POST /ewallet-plugin-api-services/services/transactionservice/gettransactionnumber
 Content-Type: application/json
@@ -499,6 +552,12 @@ response.Occ;
 response.ExternalUniqueNumber;
 response.ReverseCode;
 response.IssuedAt;
+```
+```python
+response.occ
+response.external_unique_number
+response.reverse_code
+response.issued_at
 ```
 
 

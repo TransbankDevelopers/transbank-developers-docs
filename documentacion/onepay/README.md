@@ -151,6 +151,10 @@ using Transbank.Onepay;
 Onepay.CallbackUrl = "https://www.misitioweb.com/onepay-result";
 ```
 
+```python
+from transbank import onepay
+onepay.callback_url = "https://www.misitioweb.com/onepay-result"
+```
 
 Con eso estás preparado para crear una transacción. Para esto se debe crear en
 primera instancia un objeto `ShoppingCart` que se debe llenar un `Item` (o
@@ -198,6 +202,15 @@ cart.Add(new Item(
     expire: -1));
 ```
 
+```python
+from transbank.onepay.cart import ShoppingCart, Item
+
+cart = ShoppingCart()
+cart.add(Item(description="Zapatos", 
+              quantity=1, amount=15000, 
+              additional_data=None, expire=None))
+```
+
 El monto en el carro de compras debe ser positivo, en caso contrario se lanzará una excepción.
 
 Luego que el carro de compras contiene todos los ítems, se crea la transacción:
@@ -227,6 +240,13 @@ using Transbank.Onepay.Model:
 // ...
 ChannelType channelType = ChannelType.Parse(channel);
 var response = Transaction.Create(cart, channelType);
+```
+
+```python
+from transbank.onepay.transaction import Transaction, Channel
+
+channel = Channel(request.form.get("channel"))
+response = Transaction.create(cart, channel)
 ```
 
 El segundo parámetro en el ejemplo corresponde al `channel` y debes capturar el
@@ -372,6 +392,17 @@ else
 }
 ```
 
+```python
+if (status and status.upper() == "PRE_AUTHORIZED"):
+  try:
+    response = Transaction.commit(occ, external_unique_number)
+    // Procesar response
+  except TransactionCommitError:
+    // Error al confirmar la transacción
+else:
+  // Mostrar página de error
+```
+
 El resultado obtenido en `response` tiene una forma como la de este ejemplo:
 
 ```json
@@ -439,6 +470,12 @@ OnepayBase::setAppScheme("mi-app://mi-app/onepay-result");
 using Transbank.Onepay:
 
 Onepay.AppScheme = "mi-app://mi-app/onepay-result";
+```
+
+```python
+from transbank import onepay
+
+onepay.app_scheme = "mi-app://mi-app/onepay-result"
 ```
 
 Luego puedes invocar al mismo endpoint que construiste para Checkout, pero ahora
@@ -616,6 +653,13 @@ Onepay.ApiKey = "api-key-entregado-por-transbank";
 Onepay.SharedSecret = "secreto-entregado-por-transbank";
 ```
 
+```python
+from transbank import onepay
+
+onepay.api_key = "api-key-entregado-por-transbank"
+onepay.shared_secret = "secreto-entregado-por-transbank"
+```
+
 También puedes configurar el api key y secret de una petición específica:
 
 <div class="language-simple" data-multiple-language></div>
@@ -647,6 +691,13 @@ var options = new Options()
         }
 ```
 
+```python
+from transbank.onepay import Options
+
+options = Options("api-key-entregado-por-transbank", 
+                  "secreto-entregado-por-transbank")
+```
+
 Esas opciones puedes pasarlas como parámetro a cualquier método
 transaccional de Onepay (`Transaction.create`, `Transaction.commit` y
 `Refund.create`).
@@ -674,6 +725,12 @@ OnepayBase::setCurrentIntegrationType('LIVE');
 using Transbank.Onepay;
 
 Onepay.IntegrationType = Transbank.Onepay.Enums.OnepayIntegrationType.LIVE;
+```
+
+```python
+from transbank import onepay
+
+onepay.integration_type = onepay.IntegrationType.LIVE
 ```
 
 ## Más funcionalidades
