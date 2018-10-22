@@ -403,7 +403,7 @@ else
 end
 
 rescue Transbank::Onepay::Errors::TransactionCommitError => e
-  # do something
+  # Manejar el error de confirmación de transacción
 
 ```
 
