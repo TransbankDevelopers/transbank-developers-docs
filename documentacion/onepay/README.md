@@ -47,8 +47,8 @@ canal `MOBILE`, pero toda la lógica debe ser manejada por el comercio.
 Para el canal `APP` se ofrecen SDKs [iOS](https://github.com/TransbankDevelopers/transbank-sdk-ios-onepay)
 y [Android](https://github.com/TransbankDevelopers/transbank-sdk-android-onepay)
 
-Finalmente, para las labores del backend, se ofrecen SDKs para [Java](https://github.com/TransbankDevelopers/transbank-sdk-java), [.NET](https://github.com/TransbankDevelopers/transbank-sdk-dotnet) y [PHP](https://github.com/TransbankDevelopers/transbank-sdk-php). (Python y Ruby
-prontamente). Estos SDKs se utilizan en todos los casos, independiente del
+Finalmente, para las labores del backend, se ofrecen SDKs para [Java](https://github.com/TransbankDevelopers/transbank-sdk-java), [.NET](https://github.com/TransbankDevelopers/transbank-sdk-dotnet), [PHP](https://github.com/TransbankDevelopers/transbank-sdk-php), [Ruby](https://github.com/TransbankDevelopers/transbank-sdk-ruby) y [Python](https://github.com/TransbankDevelopers/transbank-sdk-python).
+Estos SDKs se utilizan en todos los casos, independiente del
 canal y de la modalidad de integración web.
 
 ## Integración Checkout
