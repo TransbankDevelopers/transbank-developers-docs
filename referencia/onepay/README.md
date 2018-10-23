@@ -250,21 +250,21 @@ response.getOcc();
 response.getOtt();
 response.getExternalUniqueNumber();
 response.getIssuedAt();
-response.getQrAsBase64();
+response.getQrCodeAsBase64();
 ```
 ```php
 response->getOcc();
 response->getOtt();
 response->getExternalUniqueNumber();
 response->getIssuedAt();
-response->getQrAsBase64();
+response->getQrCodeAsBase64();
 ```
 ```csharp
 response.Occ;
 resppnse.Ott;
 response.ExternalUniqueNumber;
 response.IssuedAt;
-response.QrAsBase64;
+response.QrCodeAsBase64;
 ```
 
 ```ruby
