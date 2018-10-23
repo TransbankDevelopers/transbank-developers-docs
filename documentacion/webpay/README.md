@@ -55,7 +55,7 @@ double amount = 1000;
 // Identificador que será retornado en el callback de resultado:
 String sessionId = "mi-id-de-sesion";
 // Identificador único de orden de compra:
-String buyOrder = String.valueOf(Math.abs(new Random().nextLong())
+String buyOrder = String.valueOf(Math.abs(new Random().nextLong()));
 String returnUrl = "https://callback/resultado/de/transaccion";
 String finalUrl = "https://callback/final/post/comprobante/webpay";
 WsInitTransactionOutput initResult = transaction.initTransaction(
