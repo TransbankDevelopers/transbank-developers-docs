@@ -20,6 +20,9 @@ Onepay.IntegrationType = Transbank.Onepay.Enums.OnepayIntegrationType.LIVE;
 Transbank::Onepay::Base.integration_type = :LIVE
 ```
 
+```python
+onepay.integration_type = onepay.IntegrationType.LIVE
+```
 
 ```http
 Host: www.onepay.cl
@@ -44,6 +47,9 @@ Onepay.IntegrationType = Transbank.Onepay.Enums.OnepayIntegrationType.TEST;
 Transbank::Onepay::Base.integration_type = :TEST
 ```
 
+```python
+onepay.integration_type = onepay.IntegrationType.TEST
+```
 
 ```http
 Host: onepay.ionix.cl
@@ -89,8 +95,10 @@ Transbank::Onepay::Base.api_key = "entregado por transbank"
 Transbank::Onepay::Base.shared_secret = "entregado por transbank"
 ```
 
-
-
+```python
+onepay.api_key = "api-key-entregado-por-transbank"
+onepay.shared_secret = "secreto-entregado-por-transbank"
+```
 
 - `apiKey`: Identificador del comercio, entregado por transbank.
 
@@ -186,6 +194,16 @@ channel = Transbank::Onepay::Channel::WEB
 response = Transbank::Onepay::Transaction.create(shopping_cart: cart, channel: channel)
 ```
 
+```python
+onepay.app_scheme = "mi-app://mi-app/onepay-result"
+onepay.callback_url = "https://miapp.cl/endPayment"
+
+cart = ShoppingCart()
+cart.add(Item(description="Producto de prueba", 
+              quantity=1, amount=9900, 
+              additional_data=None, expire=None))
+result = Transaction.create(cart, Channel.WEB)
+```
 
 ```http
 POST /ewallet-plugin-api-services/services/transactionservice/sendtransaction
@@ -266,8 +284,14 @@ response.ExternalUniqueNumber;
 response.IssuedAt;
 response.QrCodeAsBase64;
 ```
-
 ```ruby
+response.occ
+response.ott
+response.external_unique_number
+response.issued_at
+response.qr_code_as_base64
+```
+```python
 response.occ
 response.ott
 response.external_unique_number
@@ -351,6 +375,10 @@ response = Transbank::Onepay::Transaction.create(shopping_cart: cart,
                                                  external_unique_number: my_external_unique_number)
 ```
 
+```python
+response = Transaction.create(shopping_cart, Channel.WEB,
+  my_own_external_unique_number)
+```
 
 Al usar los SDKs si no provees un external unique number, será generado automáticamente. Pero siempre puedes especificarlo manualmente.
 
@@ -377,6 +405,10 @@ var response = Transaction.Commit(occ, externalUniqueNumber);
 ```ruby
 response = Transbank::Onepay::Transaction.commit(occ: occ,
                                                  external_unique_number: external_unique_number)
+```
+
+```python
+response = Transaction.commit(occ, external_unique_number)
 ```
 
 ```http
@@ -439,6 +471,17 @@ response.BuyOrder;
 ```
 
 ```ruby
+response.occ
+response.authorization_code
+response.issued_at
+response.amount
+response.transaction_desc
+response.installments_amount
+response.installments_number
+response.buy_order
+```
+
+```python
 response.occ
 response.authorization_code
 response.issued_at
@@ -519,6 +562,11 @@ response = Transbank::Onepay::Refund.create(nullify_amount: amount,
                                             authorization_code: authorization_code)
 ```
 
+```python
+response = Refund.create(amount, occ, external_unique_number,
+  authorization_code)
+```
+
 ```http
 POST /ewallet-plugin-api-services/services/transactionservice/gettransactionnumber
 Content-Type: application/json
@@ -567,8 +615,13 @@ response.ExternalUniqueNumber;
 response.ReverseCode;
 response.IssuedAt;
 ```
-
 ```ruby
+response.occ
+response.external_unique_number
+response.reverse_code
+response.issued_at
+```
+```python
 response.occ
 response.external_unique_number
 response.reverse_code

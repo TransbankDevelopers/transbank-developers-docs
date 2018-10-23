@@ -47,8 +47,8 @@ canal `MOBILE`, pero toda la lógica debe ser manejada por el comercio.
 Para el canal `APP` se ofrecen SDKs [iOS](https://github.com/TransbankDevelopers/transbank-sdk-ios-onepay)
 y [Android](https://github.com/TransbankDevelopers/transbank-sdk-android-onepay)
 
-Finalmente, para las labores del backend, se ofrecen SDKs para [Java](https://github.com/TransbankDevelopers/transbank-sdk-java), [.NET](https://github.com/TransbankDevelopers/transbank-sdk-dotnet) y [PHP](https://github.com/TransbankDevelopers/transbank-sdk-php). (Python y Ruby
-prontamente). Estos SDKs se utilizan en todos los casos, independiente del
+Finalmente, para las labores del backend, se ofrecen SDKs para [Java](https://github.com/TransbankDevelopers/transbank-sdk-java), [.NET](https://github.com/TransbankDevelopers/transbank-sdk-dotnet), [PHP](https://github.com/TransbankDevelopers/transbank-sdk-php), [Ruby](https://github.com/TransbankDevelopers/transbank-sdk-ruby) y [Python](https://github.com/TransbankDevelopers/transbank-sdk-python).
+Estos SDKs se utilizan en todos los casos, independiente del
 canal y de la modalidad de integración web.
 
 ## Integración Checkout
@@ -155,6 +155,10 @@ Onepay.CallbackUrl = "https://www.misitioweb.com/onepay-result";
 Transbank::Onepay::Base.callback_url = "https://miapp.cl/endPayment"
 ```
 
+```python
+from transbank import onepay
+onepay.callback_url = "https://www.misitioweb.com/onepay-result"
+```
 
 Con eso estás preparado para crear una transacción. Para esto se debe crear en
 primera instancia un objeto `ShoppingCart` que se debe llenar un `Item` (o
@@ -213,6 +217,14 @@ channel = Transbank::Onepay::Channel::WEB
 response = Transbank::Onepay::Transaction.create(shopping_cart: cart, channel: channel)
 ```
 
+```python
+from transbank.onepay.cart import ShoppingCart, Item
+
+cart = ShoppingCart()
+cart.add(Item(description="Zapatos", 
+              quantity=1, amount=15000, 
+              additional_data=None, expire=None))
+```
 
 El monto en el carro de compras debe ser positivo, en caso contrario se lanzará una excepción.
 
@@ -251,6 +263,12 @@ response = Transbank::Onepay::Transaction.create(shopping_cart: cart,
                                                  channel: channel)
 ```
 
+```python
+from transbank.onepay.transaction import Transaction, Channel
+
+channel = Channel(request.form.get("channel"))
+response = Transaction.create(cart, channel)
+```
 
 El segundo parámetro en el ejemplo corresponde al `channel` y debes capturar el
 valor que el frontend envió cuando invoco al endpoint que está creando la transacción para
@@ -407,6 +425,17 @@ rescue Transbank::Onepay::Errors::TransactionCommitError => e
 
 ```
 
+```python
+if (status and status.upper() == "PRE_AUTHORIZED"):
+  try:
+    response = Transaction.commit(occ, external_unique_number)
+    # Procesar response
+  except TransactionCommitError:
+    # Error al confirmar la transacción
+else:
+  # Mostrar página de error
+```
+
 El resultado obtenido en `response` tiene una forma como la de este ejemplo:
 
 ```json
@@ -478,6 +507,12 @@ Onepay.AppScheme = "mi-app://mi-app/onepay-result";
 
 ```ruby
 Transbank::Onepay::Base.app_scheme = "mi-app://mi-app/onepay-result"
+```
+
+```python
+from transbank import onepay
+
+onepay.app_scheme = "mi-app://mi-app/onepay-result"
 ```
 
 Luego puedes invocar al mismo endpoint que construiste para Checkout, pero ahora
@@ -660,6 +695,13 @@ Transbank::Onepay::Base.api_key = "entregado por transbank"
 Transbank::Onepay::Base.shared_secret = "entregado por transbank"
 ```
 
+```python
+from transbank import onepay
+
+onepay.api_key = "api-key-entregado-por-transbank"
+onepay.shared_secret = "secreto-entregado-por-transbank"
+```
+
 También puedes configurar el api key y secret de una petición específica:
 
 <div class="language-simple" data-multiple-language></div>
@@ -696,6 +738,13 @@ options = { api_key: 'api-key-entregado-por-transbank',
             shared_secret: 'shared-secret-entregado-por-transbank' }
 ```
 
+```python
+from transbank.onepay import Options
+
+options = Options("api-key-entregado-por-transbank", 
+                  "secreto-entregado-por-transbank")
+```
+
 Esas opciones puedes pasarlas como parámetro a cualquier método
 transaccional de Onepay (`Transaction.create`, `Transaction.commit` y
 `Refund.create`).
@@ -727,6 +776,12 @@ Onepay.IntegrationType = Transbank.Onepay.Enums.OnepayIntegrationType.LIVE;
 
 ```ruby
 Transbank::Onepay::Base.integration_type = :LIVE
+```
+
+```python
+from transbank import onepay
+
+onepay.integration_type = onepay.IntegrationType.LIVE
 ```
 
 ## Más funcionalidades
