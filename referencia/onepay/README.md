@@ -16,6 +16,10 @@ OnepayBase::setCurrentIntegrationType('LIVE');
 Onepay.IntegrationType = Transbank.Onepay.Enums.OnepayIntegrationType.LIVE;
 ```
 
+```ruby
+Transbank::Onepay::Base.integration_type = :LIVE
+```
+
 ```python
 onepay.integration_type = onepay.IntegrationType.LIVE
 ```
@@ -37,6 +41,10 @@ OnepayBase::setCurrentIntegrationType('TEST');
 
 ```csharp
 Onepay.IntegrationType = Transbank.Onepay.Enums.OnepayIntegrationType.TEST;
+```
+
+```ruby
+Transbank::Onepay::Base.integration_type = :TEST
 ```
 
 ```python
@@ -82,12 +90,15 @@ Onepay.ApiKey = "api-key-entregado-por-transbank";
 Onepay.SharedSecret = "secreto-entregado-por-transbank";
 ```
 
+```ruby
+Transbank::Onepay::Base.api_key = "entregado por transbank"
+Transbank::Onepay::Base.shared_secret = "entregado por transbank"
+```
+
 ```python
 onepay.api_key = "api-key-entregado-por-transbank"
 onepay.shared_secret = "secreto-entregado-por-transbank"
 ```
-
-
 
 - `apiKey`: Identificador del comercio, entregado por transbank.
 
@@ -166,6 +177,21 @@ cart.Add(new Item(
     additionalData: null,
     expire: -1));
 var response = Transaction.Create(cart, ChannelType.Web);
+```
+
+```ruby
+Transbank::Onepay::Base.app_scheme = "mi-app://mi-app/onepay-result"
+Transbank::Onepay::Base.callback_url = "https://miapp.cl/endPayment"
+
+
+cart = Transbank::Onepay::ShoppingCart.new
+cart.add(Item.new(amount: 9000,
+                  quantity: 1,
+                  description: "Producto de prueba",
+                  additional_data: nil,
+                  expire: -1))
+channel = Transbank::Onepay::Channel::WEB
+response = Transbank::Onepay::Transaction.create(shopping_cart: cart, channel: channel)
 ```
 
 ```python
@@ -258,12 +284,19 @@ response.ExternalUniqueNumber;
 response.IssuedAt;
 response.QrAsBase64;
 ```
+```ruby
+response.occ
+response.ott
+response.external_unique_number
+response.issued_at
+response.qr_code_as_base64
+```
 ```python
 response.occ
 response.ott
 response.external_unique_number
 response.issued_at
-response.qr_as_base64
+response.qr_code_as_base64
 ```
 
 ```http
@@ -336,6 +369,12 @@ var response = Transaction.Create(
   cart, ChannelType.Web, myOwnExternalUniqueNumber);
 ```
 
+```ruby
+response = Transbank::Onepay::Transaction.create(shopping_cart: cart,
+                                                 channel: channel,
+                                                 external_unique_number: my_external_unique_number)
+```
+
 ```python
 response = Transaction.create(shopping_cart, Channel.WEB,
   my_own_external_unique_number)
@@ -361,6 +400,11 @@ $response = Transaction::commit($occ, $externalUniqueNumber);
 
 ```csharp
 var response = Transaction.Commit(occ, externalUniqueNumber);
+```
+
+```ruby
+response = Transbank::Onepay::Transaction.commit(occ: occ,
+                                                 external_unique_number: external_unique_number)
 ```
 
 ```python
@@ -424,6 +468,17 @@ response.TransactionDesc;
 response.InstallmentsAmount;
 response.InstallmentsNumber;
 response.BuyOrder;
+```
+
+```ruby
+response.occ
+response.authorization_code
+response.issued_at
+response.amount
+response.transaction_desc
+response.installments_amount
+response.installments_number
+response.buy_order
 ```
 
 ```python
@@ -500,6 +555,13 @@ var response = Refund.Create(
   amount, occ, externalUniqueNumber, authorizationCode);
 ```
 
+```ruby
+response = Transbank::Onepay::Refund.create(nullify_amount: amount,
+                                            occ: occ,
+                                            external_unique_number: external_unique_number,
+                                            authorization_code: authorization_code)
+```
+
 ```python
 response = Refund.create(amount, occ, external_unique_number,
   authorization_code)
@@ -553,13 +615,18 @@ response.ExternalUniqueNumber;
 response.ReverseCode;
 response.IssuedAt;
 ```
+```ruby
+response.occ
+response.external_unique_number
+response.reverse_code
+response.issued_at
+```
 ```python
 response.occ
 response.external_unique_number
 response.reverse_code
 response.issued_at
 ```
-
 
 ```http
 200 OK
