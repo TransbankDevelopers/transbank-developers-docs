@@ -396,11 +396,11 @@ else
 if (status and status.upper() == "PRE_AUTHORIZED"):
   try:
     response = Transaction.commit(occ, external_unique_number)
-    // Procesar response
+    # Procesar response
   except TransactionCommitError:
-    // Error al confirmar la transacción
+    # Error al confirmar la transacción
 else:
-  // Mostrar página de error
+  # Mostrar página de error
 ```
 
 El resultado obtenido en `response` tiene una forma como la de este ejemplo:
