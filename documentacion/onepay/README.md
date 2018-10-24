@@ -226,7 +226,36 @@ cart.add(Item(description="Zapatos",
               additional_data=None, expire=None))
 ```
 
-El monto en el carro de compras debe ser positivo, en caso contrario se lanzará una excepción.
+Se permite agregar un `Item` al carro con amount negativo que generalmente representa un descuento. Lo importante es que el monto total en el carro de compras debe ser positivo, en caso contrario se lanzará una excepción.
+
+```php
+$cart->add(new Item('Descuento', 1, -100));
+```
+
+```java
+cart.add(new Item()
+        .setDescription("Descuento")
+        .setQuantity(1)
+        .setAmount(-100));
+```
+
+```csharp
+cart.Add(new Item(description: "Descuento",
+                quantity: 1,
+                amount: -100));
+```
+
+```ruby
+cart.add(Item.new(amount: -100,
+                quantity: 1,
+                description: "Descuento"))
+```
+
+```python
+cart.add(Item(description="Descuento",
+            quantity=1,
+            amount=-100))
+```
 
 Luego que el carro de compras contiene todos los ítems, se crea la transacción:
 
