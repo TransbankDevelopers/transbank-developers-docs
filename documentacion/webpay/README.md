@@ -30,7 +30,7 @@ WebpayNormal transaction =
 ```
 
 ```php
-$transaction = new Webpay(Configuration::forTestingWebpayPlusNormal())
+$transaction = (new Webpay(Configuration::forTestingWebpayPlusNormal()))
                ->getNormalTransaction();
 ```
 
@@ -201,7 +201,7 @@ WebpayOneClick transaction =
 
 ```php
 $transaction =
-    new Webpay(Configuration::forTestingWebpayOneClickNormal())
+    (new Webpay(Configuration::forTestingWebpayOneClickNormal()))
     ->getOneClickTransaction();
 ```
 
