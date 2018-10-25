@@ -201,7 +201,7 @@ WebpayNormal transaction =
 
 ```php
 $transaction =
-    new Webpay($configuration)->getNormalTransaction();
+    (new Webpay($configuration))->getNormalTransaction();
 ```
 
 ```csharp
@@ -568,7 +568,7 @@ WebpayMallNormal transaction =
 
 ```php
 $transaction =
-    new Webpay(configuration)->getMallNormalTransaction();
+    (new Webpay(configuration))->getMallNormalTransaction();
 ```
 
 ```csharp
@@ -931,7 +931,7 @@ CaptureOutput captureResult = transaction.capture(
 ```
 
 ```php
-$transaction = new Webpay(configuration)->getCaptureTransaction();
+$transaction = (new Webpay(configuration))->getCaptureTransaction();
 
 // Para comercios Webpay Plus Normal
 $captureResult = transaction.capture(
@@ -1069,7 +1069,7 @@ NullificationOutput result = transaction.nullify(
 ```
 
 ```php
-$transaction = new Webpay(configuration)->getNullifyTransaction();
+$transaction = (new Webpay(configuration))->getNullifyTransaction();
 
 // Para comercios Webpay Plus Normal
 $result = transaction.nullify(
@@ -1168,7 +1168,7 @@ WebpayOneClick transaction =
 ```
 
 ```php
-$transaction = new Webpay(configuration)->getOneClickTransaction();
+$transaction = (new Webpay(configuration))->getOneClickTransaction();
 ```
 
 ```csharp
