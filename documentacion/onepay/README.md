@@ -152,6 +152,8 @@ Onepay.CallbackUrl = "https://www.misitioweb.com/onepay-result";
 ```
 
 ```ruby
+require 'transbank/sdk'
+
 Transbank::Onepay::Base.callback_url = "https://miapp.cl/endPayment"
 ```
 
@@ -207,6 +209,8 @@ cart.Add(new Item(
 ```
 
 ```ruby
+require 'transbank/sdk'
+
 cart = Transbank::Onepay::ShoppingCart.new
 cart.add(Item.new(amount: 15000,
                   quantity: 1,
@@ -258,6 +262,8 @@ var response = Transaction.Create(cart, channelType);
 ```
 
 ```ruby
+require 'transbank/sdk'
+
 channel = params["channel"]
 response = Transbank::Onepay::Transaction.create(shopping_cart: cart,
                                                  channel: channel)
@@ -414,6 +420,8 @@ else
 ```
 
 ```ruby
+require 'transbank/sdk'
+
 if params["status"] == "PRE_AUTHORIZED"
   response = Transbank::Onepay::Transaction.commit(occ: occ, external_unique_number: external_unique_number)
 else
@@ -506,6 +514,8 @@ Onepay.AppScheme = "mi-app://mi-app/onepay-result";
 ```
 
 ```ruby
+require 'transbank/sdk'
+
 Transbank::Onepay::Base.app_scheme = "mi-app://mi-app/onepay-result"
 ```
 
@@ -691,6 +701,8 @@ Onepay.SharedSecret = "secreto-entregado-por-transbank";
 ```
 
 ```ruby
+require 'transbank/sdk'
+
 Transbank::Onepay::Base.api_key = "entregado por transbank"
 Transbank::Onepay::Base.shared_secret = "entregado por transbank"
 ```
@@ -734,6 +746,8 @@ var options = new Options()
 ```
 
 ```ruby
+require 'transbank/sdk'
+
 options = { api_key: 'api-key-entregado-por-transbank',
             shared_secret: 'shared-secret-entregado-por-transbank' }
 ```
@@ -775,6 +789,8 @@ Onepay.IntegrationType = Transbank.Onepay.Enums.OnepayIntegrationType.LIVE;
 ```
 
 ```ruby
+require 'transbank/sdk'
+
 Transbank::Onepay::Base.integration_type = :LIVE
 ```
 
