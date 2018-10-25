@@ -228,6 +228,8 @@ cart.add(Item(description="Zapatos",
 
 ### `Item` con `amount` negativo
 
+<div class="language-simple" data-multiple-language></div>
+
 ```php
 $cart->add(new Item('Descuento', 1, -100));
 ```
