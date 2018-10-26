@@ -24,9 +24,23 @@ debes agregar esta entrada en tu archivo `pom.xml` de Maven:
 <dependency>
     <groupId>com.github.transbankdevelopers</groupId>
     <artifactId>transbank-sdk-java</artifactId>
-    <version>1.5.1</version>
+    <version>{mira-en-github-la-ultima-version-disponible}</version>
 </dependency>
 ```
+
+Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Java](https://github.com/TransbankDevelopers/transbank-sdk-java#instalaci%C3%B3n) para mas opciones e información de la última versión disponible.
+
+[En
+**PHP**](https://github.com/TransbankDevelopers/transbank-sdk-php#instalaci%C3%B3n)
+puedes usar composer para descargar la última versión del SDK,
+ejecutando esto en la línea de comandos cuando estés en la raíz de tu proyecto:
+
+```bash
+composer require transbank/transbank-sdk
+```
+
+Te recomendamos leer [las instrucciones de instalación detalladas para el SDK PHP](https://github.com/TransbankDevelopers/transbank-sdk-php#instalaci%C3%B3n) para mas opciones de instalación.
+
 
 [En
 **.NET**](https://github.com/TransbankDevelopers/transbank-sdk-dotnet#instalaci%C3%B3n)
@@ -37,22 +51,31 @@ Studio:
 PM> Install-Package TransbankSDK
 ```
 
-[En
-**PHP**](https://github.com/TransbankDevelopers/transbank-sdk-php#instalaci%C3%B3n)
-te recomendamos usar composer para descargar la última versión del SDK,
-ejecutando esto en la línea de comandos cuando estés en la raíz de tu proyecto:
+Te recomendamos leer [las instrucciones de instalación detalladas para el SDK .NET](https://github.com/TransbankDevelopers/transbank-sdk-dotnet#instalaci%C3%B3n) para mas opciones de instalación.
+
+(Por ahora el SDK soporta sólo Onepay. Para Webpay en .NET debes seguir usando [libwebpay](https://github.com/TransbankDevelopers/libwebpay-dotnet), pero muy prontamente ese código será mejorado e incorporado en TransbankSDK)
+
+[**En Ruby**](https://github.com/TransbankDevelopers/transbank-sdk-ruby#instalaci%C3%B3n) puedes instalar el SDK como una gema:
 
 ```bash
-composer require transbank/transbank-sdk
+gem install transbank-sdk
 ```
 
-**En Ruby** tendremos SDK próximamente 🙊. Mientras tanto [puedes seguir usando
-libwebpay](https://github.com/TransbankDevelopers/libwebpay-ruby) 🙈.
+Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Ruby](https://github.com/TransbankDevelopers/transbank-sdk-ruby#instalaci%C3%B3n) para mas opciones de instalación.
 
-**En Python** tendremos SDK próximamente 🙊. Mientras tanto [puedes seguir usando
-libwebpay](https://github.com/TransbankDevelopers/libwebpay-python) 🙈.
+(Para webpay en Ruby puedes seguir usando [libwebpay](https://github.com/TransbankDevelopers/libwebpay-ruby) u otra alternativa)
 
-Para instrucciones mas detalladas, sigue el link de cada lenguaje.
+
+[**En Python**](https://github.com/TransbankDevelopers/transbank-sdk-python#instalaci%C3%B3n) puedes instalar el SDK desde PyPI:
+
+```bash
+pip install transbank-sdk
+```
+
+Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Python](https://github.com/TransbankDevelopers/transbank-sdk-python#instalaci%C3%B3n) para mas opciones de instalación.
+
+(Para webpay en Python puedes seguir usando [libwebpay](https://github.com/TransbankDevelopers/libwebpay-python), pero te recomendamos usar [python-tbk, creada por Cornershop](https://github.com/cornershop/python-tbk) que será la base de lo que integremos finalmente en transbank-sdk)
+
 
 ## Ambientes
 
