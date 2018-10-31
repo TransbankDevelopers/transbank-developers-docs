@@ -30,6 +30,10 @@ WebpayNormal transaction =
 ```
 
 ```php
+use Transbank\Webpay\Configuration;
+use Transbank\Webpay\Webpay;
+// ...
+
 $transaction = (new Webpay(Configuration::forTestingWebpayPlusNormal()))
                ->getNormalTransaction();
 ```
@@ -200,6 +204,10 @@ WebpayOneClick transaction =
 ```
 
 ```php
+use Transbank\Webpay\Configuration;
+use Transbank\Webpay\Webpay;
+// ...
+
 $transaction =
     (new Webpay(Configuration::forTestingWebpayOneClickNormal()))
     ->getOneClickTransaction();
@@ -408,6 +416,10 @@ WebpayOneClick oneClickTransaction = webpay.getOneClickTransaction();
 ```
 
 ```php
+use Transbank\Webpay\Configuration;
+use Transbank\Webpay\Webpay;
+// ...
+
 $configuration = new Configuration();
 $configuration->setCommerceCode("12345"); // acá va tu código de comercio
 $configuration->setPrivateKey( // pega acá la llave privada de tu certificado
@@ -464,6 +476,9 @@ configuration.setEnvironment(Webpay.Environment.PRODUCCION);
 ```
 
 ```php
+use Transbank\Webpay\Configuration;
+// ...
+
 $configuration = new Configuration();
 $configuration->setEnvironment("PRODUCCION");
 // agregar también configuración del código de comercio y certificados
