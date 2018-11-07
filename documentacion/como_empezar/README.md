@@ -106,12 +106,12 @@ como probar nuestros productos en este ambiente:
 
 - [Webpay Plus](webpay#webpay-plus)
 - [Webpay OneClick](webpay#webpay-oneclick)
-- [Onepay Checkout](onepay#integraci-n-checkout)
+- [Onepay Checkout](onepay#integracion-checkout)
 
 Después de haber realizado esas pruebas iniciales y antes del paso a producción
 tendrás que usar credenciales que identifiquen a tu comercio. De esa forma
 podrás realizar [la validación que te permitirá acceder a credenciales de
-producción](#el-proceso-de-validaci-n-y-puesta-en-producci-n).
+producción](#el-proceso-de-validacion-y-puesta-en-produccion).
 
 
 **Ambiente de producción**: Este ambiente es en el cual finalmente operará
@@ -183,7 +183,7 @@ valores entregados por el comercio al principio del flujo transaccional.
 
 ## Puesta en Producción
 
-Para el paso a producción el comercio debe realizar un [proceso de validación](#el-proceso-de-validaci-n-y-puesta-en-producci-n)
+Para el paso a producción el comercio debe realizar un [proceso de validación](#el-proceso-de-validacion-y-puesta-en-produccion)
 en el ambiente de integración. En este ambiente de integración Transbank le
 solicitará usar credenciales específicas para el comercio, de manera de simular
 lo mejor posible el ambiente productivo.
