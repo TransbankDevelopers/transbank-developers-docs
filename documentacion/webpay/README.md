@@ -377,7 +377,7 @@ Ese objeto `Webpay` se configura en base a un objeto `Configuration`. Y si bien
 para hacer pruebas iniciales pueden usarse las credenciales pre-configuradas
 (como se puede ver en todos los ejemplos anteriores), para poder superar el
 [proceso de
-validación](/documentacion/como_empezar#el-proceso-de-validaci-n-y-puesta-en-producci-n)
+validación](/documentacion/como_empezar#el-proceso-de-validacion-y-puesta-en-produccion)
 en el ambiente de integración será necesario configurar explícitamente tu código
 de comercio y certificados:
 
@@ -512,7 +512,7 @@ Plus y Webpay OneClick:
 Webpay Plus Normal solo reserve el cupo y la captura de la transacción se pueda
 realizar posteriormente.
 
-- [Anular Transacciones Webpay Plus](/referencia/webpay#anulaci-n-webpay-plus) para devolver dinero parcial o
+- [Anular Transacciones Webpay Plus](/referencia/webpay#anulacion-webpay-plus) para devolver dinero parcial o
 totalmente.
 
 - [Reversar Transacciones Webpay OneClick](/referencia/webpay#reversar-un-pago-webpay-oneclick) para dejar sin efecto una
