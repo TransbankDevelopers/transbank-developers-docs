@@ -895,7 +895,7 @@ autorizada pero requerirá una captura explícita posterior para confirmar la
 transacción.
 
 Puedes [leer más sobre la captura en la información del
-producto Webpay](/producto/webpay#autorizaci-n-y-captura)
+producto Webpay](/producto/webpay#autorizacion-y-captura)
 para concer más detalles y restricciones.
 
 Para realizar esa captura explícita debe usarse el método `capture()`
