@@ -158,7 +158,7 @@ if (output.responseCode == 0) {
 > no haya posibilidad de que la transacción se revierta. Si luego necesitas que
 > la transacción no se lleve a cabo (por ejemplo porque ya no tienes stock o
 > porque se generó un error en tu lógica de negocio que entrega el producto o
-> servicio), deberás [anular la transacción](/referencia/webpay#anulaci-n-webpay-plus).
+> servicio), deberás [anular la transacción](/referencia/webpay#anulacion-webpay-plus).
 
 En el caso exitoso deberás llevar el control vía `POST` nuevamente a Webpay para
 que el tarjetahabiente vea el comprobante que le deja claro que se ha realizado
@@ -518,7 +518,7 @@ totalmente.
 - [Reversar Transacciones Webpay OneClick](/referencia/webpay#reversar-un-pago-webpay-oneclick) para dejar sin efecto una
 transacción realizada durante el día.
 
-- [Eliminar Inscripciones Webpay OneClick](/referencia/webpay#eliminar-una-inscripci-n-webpay-oneclick) para eliminar el `tbkUser`
+- [Eliminar Inscripciones Webpay OneClick](/referencia/webpay#eliminar-una-inscripcion-webpay-oneclick) para eliminar el `tbkUser`
 cuando tus usuarios no quieren continuar con el servicio.
 
 - [Transacciones Webpay OneClick Mall](/referencia/webpay#webpay-oneclick-mall).
