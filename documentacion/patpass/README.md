@@ -150,7 +150,7 @@ Las credenciales de PatPass by Webpay se configuran de igual forma a las Webpay
 transacciones Webpay: en base a un objeto `Configuration`. Y si bien para hacer
 pruebas iniciales pueden usarse las credenciales pre-configuradas (como se puede
 ver en todos los ejemplos anteriores), para poder superar el [proceso de
-validación](/documentacion/como_empezar#el-proceso-de-validaci-n-y-puesta-en-producci-n)
+validación](/documentacion/como_empezar#el-proceso-de-validacion-y-puesta-en-produccion)
 en el ambiente de integración será necesario configurar explícitamente tu código
 de comercio y certificados:
 
