@@ -120,7 +120,7 @@ Desde el punto de vista de la transacción, lo que ocurre es lo siguiente:
 ## Anulaciones
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#anulaci-n-webpay-plus' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/webpay#anulacion-webpay-plus' tbk-link-name='Referencia Api'></div>
 </div>
 
 Las transacciones Webpay **realizadas con tarjeta de crédito** pueden ser anuladas mediante servicios web. Esta funcionalidad no aplica para tarjetas de débito Redcompra.

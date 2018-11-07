@@ -324,7 +324,7 @@ Content-Type: application/json
 
 Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 -------|------------
-responseCode<br> <i>  String  </i> |Código de respuesta que representa si la operación resultó exitosa o no. Puede tomar el valor `"OK"` (resultado exitoso),  `"INVALID_TRANSACTION"` (inconsistencia en el carro de compra en montos o cantidades), `"INVALID_PARAMS"` (otros parámetros incorrectos), `"TRANSACTION_ALREADY_EXISTS"` (External unique number ya había sido usado previamente), `"ILCAT_SERVICE_ERROR"` o `"ILCAT_RESPONSE_ERROR"` o `"ILCAT_ERROR"` (todos fallos internos). También puede tomar [uno de los valores comunes de error](#c-digos-de-error-comunes).
+responseCode<br> <i>  String  </i> |Código de respuesta que representa si la operación resultó exitosa o no. Puede tomar el valor `"OK"` (resultado exitoso),  `"INVALID_TRANSACTION"` (inconsistencia en el carro de compra en montos o cantidades), `"INVALID_PARAMS"` (otros parámetros incorrectos), `"TRANSACTION_ALREADY_EXISTS"` (External unique number ya había sido usado previamente), `"ILCAT_SERVICE_ERROR"` o `"ILCAT_RESPONSE_ERROR"` o `"ILCAT_ERROR"` (todos fallos internos). También puede tomar [uno de los valores comunes de error](#codigos-de-error-comunes).
 description <br> <i>  String  </i> | Contiene una descripción del resultado. Se utiliza para informar por qué ocurrio un error.
 result <br> <i>  Object  </i> | Tiene todos los datos de la transacción recién creada. Es `null` si el `responseCode` es diferente a `"OK"`.
 result.occ <br> <i>  String  </i> | Identificador único de la transacción en Onepay.
@@ -520,7 +520,7 @@ Content-Type: application/json
 
 Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 ------ | -----------
-responseCode <br> <i>  String  </i> | Puede tomar el valor `"OK"` (resultado exitoso), `"INVALID_PARAMS"` (cuando los parámetros son incorrectos), `"INVALID_TRANSACTION"` o `"INVALID_TRANSACTION_STATUS"` (ambos indicando que la transacción no está autorizada y no se puede confirmar) También puede tomar [uno de los valores comunes de error](#c-digos-de-error-comunes).
+responseCode <br> <i>  String  </i> | Puede tomar el valor `"OK"` (resultado exitoso), `"INVALID_PARAMS"` (cuando los parámetros son incorrectos), `"INVALID_TRANSACTION"` o `"INVALID_TRANSACTION_STATUS"` (ambos indicando que la transacción no está autorizada y no se puede confirmar) También puede tomar [uno de los valores comunes de error](#codigos-de-error-comunes).
 description <br> <i>  String  </i> | Contiene una descripción del resultado. Se utiliza para informar por qué ocurrio un error.
 result <br> <i>  Object  </i> | Tiene todos los datos de la transacción recién creada. Es `null` si el `responseCode` es diferente a `"OK"`.
 result.occ <br> <i>  String  </i> | Identificador único de la transacción Onepay.
@@ -651,7 +651,7 @@ Content-Type: application/json
 
 Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 ------ | -----------
-responseCode <br> <i>  String  </i> | Puede tomar el valor `"OK"` (resultado exitoso), `"INVALID_PARAMS"` (cuando los parámetros son incorrectos), `"INVALID_TRANSACTION"` o (la transacción no está autorizada y no se puede anular), `"INVALID_NULLIFY_AMOUNT`" (el monto no coincide con el de la transacción), `"NULLIFICATION_PERIOD_HAS_EXPIRED"` (ya no se puede anular la transacción), `"NONEXISTENT_TRANSACTION"` (la transacción no fue encontrada),  `"REVERSED_NULLIFY"` o `"FAILED_REVERSE_NULLIFY"` o  `"NONEXISTENT_USER"` o `"INVALID_USER"` o  `"NOT_ACTIVE_COMMERCE"` o `"ERROR"` (todos errores inesperados), También puede tomar [uno de los valores comunes de error](#c-digos-de-error-comunes).
+responseCode <br> <i>  String  </i> | Puede tomar el valor `"OK"` (resultado exitoso), `"INVALID_PARAMS"` (cuando los parámetros son incorrectos), `"INVALID_TRANSACTION"` o (la transacción no está autorizada y no se puede anular), `"INVALID_NULLIFY_AMOUNT`" (el monto no coincide con el de la transacción), `"NULLIFICATION_PERIOD_HAS_EXPIRED"` (ya no se puede anular la transacción), `"NONEXISTENT_TRANSACTION"` (la transacción no fue encontrada),  `"REVERSED_NULLIFY"` o `"FAILED_REVERSE_NULLIFY"` o  `"NONEXISTENT_USER"` o `"INVALID_USER"` o  `"NOT_ACTIVE_COMMERCE"` o `"ERROR"` (todos errores inesperados), También puede tomar [uno de los valores comunes de error](#codigos-de-error-comunes).
 description <br> <i>  String  </i> | Contiene una descripción del resultado. Se utiliza para informar por qué ocurrio un error.
 result <br> <i>  Object  </i> | Tiene todos los datos de la transacción recién creada. Es `null` si el `responseCode` es diferente a `"OK"`.
 result.occ <br> <i>  String  </i> | Identificador único de la transacción Onepay.
@@ -1061,9 +1061,9 @@ status | Estado resultante de la transacción. Puede ser `"PRE_AUTHORIZED"` (tra
 issuedAt | Fecha de creación de la transacción como timestamp unix.
 Los parámetros son todos String (pues son parte de una URL),
 
-Si quieres saber más sobre cómo manejar la invocación a tu  `appScheme`, [consulta la gúia de Onepay en la sección de integración para app móvil](/documentacion/onepay#integraci-n-en-app-m-vil).
+Si quieres saber más sobre cómo manejar la invocación a tu  `appScheme`, [consulta la gúia de Onepay en la sección de integración para app móvil](/documentacion/onepay#integracion-en-app-movil).
 
-Finalmente deberás enviar a tu backend la información que recibiste para que [confirme la transacción usando el API o uno de nuestros SDK backend](#confirmar-una-transacci-n).
+Finalmente deberás enviar a tu backend la información que recibiste para que [confirme la transacción usando el API o uno de nuestros SDK backend](#confirmar-una-transaccion).
 
 ### Retomar el control en tu app Android
 
@@ -1083,9 +1083,9 @@ externalUniqueNumber <br> <i>  String  </i> | Identificador de la transacción e
 status <br> <i>  String  </i> | Estado resultante de la transacción. Puede ser `"PRE_AUTHORIZED"` (transacción autorizada por el usuario), `"CANCELLED_BY_USER"`(el usuario abortó el pago) o `"REJECTED"` (transacción rechazada por el autorizador). También puede tomar el valor `"REVERSED"` (la transacción se reversó internamente después de no poder confirmar el pago) o `"REVERSE_NOT_COMPLETE"` (se intentó reversar, pero falló por alguna razón), pero estos casos deben ser manejados de igual forma que `"REJECTED"`.
 issuedAt <br> <i>  Long  </i> | Fecha de creación de la transacción como timestamp unix.
 
-Si quieres saber más sobre cómo configurar tu `Activity` para que reciba la invocación de Onepay, [consulta la gúia de Onepay en la sección de integración para app móvil](/documentacion/onepay#integraci-n-en-app-m-vil).
+Si quieres saber más sobre cómo configurar tu `Activity` para que reciba la invocación de Onepay, [consulta la gúia de Onepay en la sección de integración para app móvil](/documentacion/onepay#integracion-en-app-movil).
 
-Finalmente deberás enviar a tu backend la información que recibiste para que [confirme la transacción usando el API o uno de nuestros SDK backend](#confirmar-una-transacci-n).
+Finalmente deberás enviar a tu backend la información que recibiste para que [confirme la transacción usando el API o uno de nuestros SDK backend](#confirmar-una-transaccion).
 
 
 

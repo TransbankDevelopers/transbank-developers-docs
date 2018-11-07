@@ -158,7 +158,7 @@ if (output.responseCode == 0) {
 > no haya posibilidad de que la transacción se revierta. Si luego necesitas que
 > la transacción no se lleve a cabo (por ejemplo porque ya no tienes stock o
 > porque se generó un error en tu lógica de negocio que entrega el producto o
-> servicio), deberás [anular la transacción](/referencia/webpay#anulaci-n-webpay-plus).
+> servicio), deberás [anular la transacción](/referencia/webpay#anulacion-webpay-plus).
 
 En el caso exitoso deberás llevar el control vía `POST` nuevamente a Webpay para
 que el tarjetahabiente vea el comprobante que le deja claro que se ha realizado
@@ -377,7 +377,7 @@ Ese objeto `Webpay` se configura en base a un objeto `Configuration`. Y si bien
 para hacer pruebas iniciales pueden usarse las credenciales pre-configuradas
 (como se puede ver en todos los ejemplos anteriores), para poder superar el
 [proceso de
-validación](/documentacion/como_empezar#el-proceso-de-validaci-n-y-puesta-en-producci-n)
+validación](/documentacion/como_empezar#el-proceso-de-validacion-y-puesta-en-produccion)
 en el ambiente de integración será necesario configurar explícitamente tu código
 de comercio y certificados:
 
@@ -512,13 +512,13 @@ Plus y Webpay OneClick:
 Webpay Plus Normal solo reserve el cupo y la captura de la transacción se pueda
 realizar posteriormente.
 
-- [Anular Transacciones Webpay Plus](/referencia/webpay#anulaci-n-webpay-plus) para devolver dinero parcial o
+- [Anular Transacciones Webpay Plus](/referencia/webpay#anulacion-webpay-plus) para devolver dinero parcial o
 totalmente.
 
 - [Reversar Transacciones Webpay OneClick](/referencia/webpay#reversar-un-pago-webpay-oneclick) para dejar sin efecto una
 transacción realizada durante el día.
 
-- [Eliminar Inscripciones Webpay OneClick](/referencia/webpay#eliminar-una-inscripci-n-webpay-oneclick) para eliminar el `tbkUser`
+- [Eliminar Inscripciones Webpay OneClick](/referencia/webpay#eliminar-una-inscripcion-webpay-oneclick) para eliminar el `tbkUser`
 cuando tus usuarios no quieren continuar con el servicio.
 
 - [Transacciones Webpay OneClick Mall](/referencia/webpay#webpay-oneclick-mall).
