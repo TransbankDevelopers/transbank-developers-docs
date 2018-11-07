@@ -185,7 +185,7 @@ Transbank::Onepay::Base.callback_url = "https://miapp.cl/endPayment"
 
 
 cart = Transbank::Onepay::ShoppingCart.new
-cart.add(Item.new(amount: 9000,
+cart.add(Transbank::Onepay::Item.new(amount: 9000,
                   quantity: 1,
                   description: "Producto de prueba",
                   additional_data: nil,
