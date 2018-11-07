@@ -217,8 +217,6 @@ cart.add(Transbank::Onepay::Item.new(amount: 15000,
                   description: "Zapatos",
                   additional_data: nil,
                   expire: -1))
-channel = Transbank::Onepay::Channel::WEB
-response = Transbank::Onepay::Transaction.create(shopping_cart: cart, channel: channel)
 ```
 
 ```python
