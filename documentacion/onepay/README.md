@@ -212,7 +212,7 @@ cart.Add(new Item(
 require 'transbank/sdk'
 
 cart = Transbank::Onepay::ShoppingCart.new
-cart.add(Item.new(amount: 15000,
+cart.add(Transbank::Onepay::Item.new(amount: 15000,
                   quantity: 1,
                   description: "Zapatos",
                   additional_data: nil,
@@ -252,7 +252,7 @@ cart.Add(new Item(description: "Descuento",
 ```
 
 ```ruby
-cart.add(Item.new(amount: -100,
+cart.add(Transbank::Onepay::Item.new(amount: -100,
                 quantity: 1,
                 description: "Descuento"))
 ```
