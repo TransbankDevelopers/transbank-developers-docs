@@ -1061,7 +1061,7 @@ status | Estado resultante de la transacción. Puede ser `"PRE_AUTHORIZED"` (tra
 issuedAt | Fecha de creación de la transacción como timestamp unix.
 Los parámetros son todos String (pues son parte de una URL),
 
-Si quieres saber más sobre cómo manejar la invocación a tu  `appScheme`, [consulta la gúia de Onepay en la sección de integración para app móvil](/documentacion/onepay#integracion-en-app-movil).
+Si quieres saber más sobre cómo manejar la invocación a tu  `appScheme`, [consulta la gúia de Onepay en la sección de integración para app móvil](/documentacion/onepay#integracion-en-app-movil-comercio).
 
 Finalmente deberás enviar a tu backend la información que recibiste para que [confirme la transacción usando el API o uno de nuestros SDK backend](#confirmar-una-transaccion).
 
@@ -1083,7 +1083,7 @@ externalUniqueNumber <br> <i>  String  </i> | Identificador de la transacción e
 status <br> <i>  String  </i> | Estado resultante de la transacción. Puede ser `"PRE_AUTHORIZED"` (transacción autorizada por el usuario), `"CANCELLED_BY_USER"`(el usuario abortó el pago) o `"REJECTED"` (transacción rechazada por el autorizador). También puede tomar el valor `"REVERSED"` (la transacción se reversó internamente después de no poder confirmar el pago) o `"REVERSE_NOT_COMPLETE"` (se intentó reversar, pero falló por alguna razón), pero estos casos deben ser manejados de igual forma que `"REJECTED"`.
 issuedAt <br> <i>  Long  </i> | Fecha de creación de la transacción como timestamp unix.
 
-Si quieres saber más sobre cómo configurar tu `Activity` para que reciba la invocación de Onepay, [consulta la gúia de Onepay en la sección de integración para app móvil](/documentacion/onepay#integracion-en-app-movil).
+Si quieres saber más sobre cómo configurar tu `Activity` para que reciba la invocación de Onepay, [consulta la gúia de Onepay en la sección de integración para app móvil](/documentacion/onepay#integracion-en-app-movil-comercio).
 
 Finalmente deberás enviar a tu backend la información que recibiste para que [confirme la transacción usando el API o uno de nuestros SDK backend](#confirmar-una-transaccion).
 

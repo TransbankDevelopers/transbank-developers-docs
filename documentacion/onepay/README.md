@@ -454,7 +454,12 @@ else
 require 'transbank/sdk'
 
 if params["status"] == "PRE_AUTHORIZED"
-  response = Transbank::Onepay::Transaction.commit(occ: occ, external_unique_number: external_unique_number)
+  response = Transbank::Onepay::Transaction.commit(
+    occ: params["occ"],
+    external_unique_number: params["external_unique_number"]
+  )
+  # Procesar response
+
 else
   # Mostrar página de error
 end
@@ -499,7 +504,7 @@ HTTP GET, debe ser idempotente: Debe funcionar correctamente aunque sea
 ejecutado repetidas veces.
 </aside>
 
-## Integración en App Móvil
+## Integración en App Móvil Comercio
 
 Si tu comercio posee una app móvil, entonces debes integrar también los SDKs
 móviles. Comienza revisando la manera de [instalar el SDK
@@ -700,6 +705,213 @@ con el comprobante).
 
 Con eso has concluido la integración de Onepay, incluyendo sus cuatro componentes:
 backend, frontend-web (soportando canales WEB y MOBILE) y las dos apps móviles (para el canal APP). ¡Felicitaciones!
+
+## Integración en modalidad "cortafila"
+
+Las modalidades vistas hasta ahora contemplan que tu aplicación es usada
+directamente por el comprador (tarjetahabiente), quien compra directamente desde
+tu app móvil o desde tu web (y es dirigido a la app Onepay de la manera más 
+apropiada).
+
+Onepay ofrece la flexibilidad para ser usado también en la modalidad "cortafila"
+en tus tiendas físicas. Allí un vendedor usando por ejemplo un tablet puede 
+acercarse a los compradores y procesar rápidamente su compra usando Onepay. 
+
+Para hacer funcionar este proceso la integración es un poco diferente a las
+vistas anteriormente. Suponiendo que la app para el vendedor es una app móvil,
+ahora verás los pasos necesarios para realizar la integración.
+
+### 1. Tu app móvil inicia el flujo.
+
+    Para comenzar, la app móvil del vendedor será la que inicie la transacción.
+    Esta app debe invocar a tu backend (por ejemplo a través de un API REST).
+
+### 2. Tu backend crea la transacción Onepay
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+import cl.transbank.onepay.Onepay;
+import cl.transbank.onepay.model.*;
+
+// ...
+
+Onepay.setCallbackUrl("https://miapp.cl/endPayment");
+TransactionCreateResponse response = Transaction.create(cart, Channel.MOBILE);
+```
+
+```php
+use Transbank\Onepay;
+
+OnepayBase::setCallbackUrl("https://miapp.cl/endPayment");
+$channel = ChannelEnum::MOBILE();
+$response = Transaction::create($cart, $channel);
+
+```
+
+```csharp
+using Transbank.Onepay;
+using Transbank.Onepay.Model;
+
+// ...
+Onepay.CallbackUrl = "https://miapp.cl/endPayment";
+var response = Transaction.Create(cart, ChannelType.MOBILE);
+```
+
+```ruby
+require 'transbank/sdk'
+
+Transbank::Onepay::Base.callback_url = "https://miapp.cl/endPayment"
+channel = Transbank::Onepay::Channels::MOBILE
+response = Transbank::Onepay::Transaction.create(
+    shopping_cart: cart, channel: channel)
+```
+
+```python
+from transbank import onepay
+from transbank.onepay.transaction import Transaction, Channel
+
+onepay.callback_url = "https://miapp.cl/endPayment"
+response = Transaction.create(cart, Channel.MOBILE)
+```
+
+
+A partir de la información entregada por la app móvil del vendedor (información que debe estar autenticada y autorizada), deberás crear una transacción usando `MOBILE` como channel. Ten en cuenta que el callback que indiques será invocado en el dispositivo móvil del comprador y no del vendedor (como verás en el paso 4).
+
+Luego en la respuesta que le enviarás a la app móvil del vendedor debes incluir la respuesta de la transacción Onepay. 
+
+### 3. Dibujar el código QR en la app móvil.
+
+En base a lo retornado por tu backend (que a su vez retornó la transacción Onepay creada), debes dibujar el código QR para que el vendedor le permita al comprador usar su app Onepay. Para eso puedes usar el campo `qrCodeAsBase64` de la respuesta a la [creación de la transacción onepay](/referencia/onepay/#crear-una-transaccion).
+
+Te recomendamos también implementar un timeout y/o una interfaz para que el vendedor aborte la operación. Porque desde este momento el control lo tendrá el comprador en su propio dispositivo móvil.
+
+### 4. Retomar el control en el navegador móvil del comprador.
+
+Cuando el comprador escanee el QR con su app Onepay, no tendrás manera de saber el progreso de la operación. Pero cuando el comprador termine (exitosamente o con error), tu callback será invocado **en el navegador móvil del comprador**. 
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+import cl.transbank.onepay.model.*;
+
+String status = request.getParameter("status");
+String externalUniqueNumber = request.getParameter("externalUniqueNumber");
+String occ = request.getParameter("occ");
+
+if (null != status && status.equalsIgnoreCase("PRE_AUTHORIZED")) {
+    try { 
+        TransactionCommitResponse response =
+            Transaction.commit(occ, externalUniqueNumber);
+        // Procesar response
+        // Si response es exitoso, renderear página de exito
+        // en el navegador web del tarjetahabiente y despachar
+        // una push notification al dispositivo móvil que inició
+        // esta transacción.
+    } catch (TransbankException e) {
+        // Error al confirmar la transaccion
+    }
+} else {
+    // Mostrar página de error
+}
+```
+
+```php
+use Transbank\Onepay\Transaction;
+
+$status = $request->input("status");
+$externalUniqueNumber = $request->input("externalUniqueNumber");
+$occ = $request->input("occ");
+
+if (!empty($status) && strcasecmp($status,"PRE_AUTHORIZED") == 0) {
+    try { 
+        $response = Transaction::commit($occ, $externalUniqueNumber);
+        // Procesar $response.
+        // Si $response es exitoso, renderear página de exito
+        // en el navegador web del tarjetahabiente y despachar
+        // una push notification al dispositivo móvil que inició
+        // esta transacción.
+    } catch (Exception $e) {
+        // Error al confirmar la transaccion
+    }
+} else {
+    // Mostrar página de error
+}
+```
+
+```csharp
+using Transbank.Onepay;
+
+ if (null != status && status.Equals("PRE_AUTHORIZED", StringComparison.InvariantCultureIgnoreCase))
+ {
+    try
+    { 
+        var response = Transaction.Commit(occ, externalUniqueNumber);
+        // Procesar response
+        // Si response es exitoso, renderear página de exito
+        // en el navegador web del tarjetahabiente y despachar
+        // una push notification al dispositivo móvil que inició
+        // esta transacción.
+    }
+    catch (TransbankException e)
+    {
+        // Error al confirmar la transaccion
+    }
+}
+else
+{
+    // Mostrar página de error
+}
+```
+
+```ruby
+require 'transbank/sdk'
+
+if params["status"] == "PRE_AUTHORIZED"
+  response = Transbank::Onepay::Transaction.commit(
+    occ: params["occ"], 
+    external_unique_number: params["external_unique_number"]
+  )
+  # Procesar response
+  # Si response es exitoso, renderear página de exito
+  # en el navegador web del tarjetahabiente y despachar
+  # una push notification al dispositivo móvil que inició
+  # esta transacción.
+else
+  # Mostrar página de error
+end
+
+rescue Transbank::Onepay::Errors::TransactionCommitError => e
+  # Manejar el error de confirmación de transacción
+
+```
+
+```python
+if (status and status.upper() == "PRE_AUTHORIZED"):
+  try:
+    response = Transaction.commit(occ, external_unique_number)
+    # Procesar response
+    # Si response es exitoso, renderear página de exito
+    # en el navegador web del tarjetahabiente y despachar
+    # una push notification al dispositivo móvil que inició
+    # esta transacción.
+  except TransactionCommitError:
+    # Error al confirmar la transacción
+else:
+  # Mostrar página de error
+```
+
+En ese callback debes [confirmar la
+transacción](/referencia/onepay#confirmar-una-transaccion). Y si tiene éxito la
+transacción debes mostrar al comprador que todo salió ok **al mismo tiempo que
+notificas a tu app del vendedor** (por ejemplo con una _push notification_).
+
+<aside class="notice">
+Como el _callback_ final está implementado usando el método
+HTTP GET, debe ser idempotente: Debe funcionar correctamente aunque sea
+ejecutado repetidas veces.
+</aside>
+
 
 ## Credenciales del comercio
 
