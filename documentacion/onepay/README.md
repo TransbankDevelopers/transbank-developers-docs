@@ -904,7 +904,8 @@ else:
 En ese callback debes [confirmar la
 transacción](/referencia/onepay#confirmar-una-transaccion). Y si tiene éxito la
 transacción debes mostrar al comprador que todo salió ok **al mismo tiempo que
-notificas a tu app del vendedor** (por ejemplo con una _push notification_).
+notificas a tu app del vendedor** (por ejemplo con una _push notification_) para
+que esa app también muestre a su usuario que la venta realmente se ha cobrado.
 
 <aside class="notice">
 Como el _callback_ final está implementado usando el método
