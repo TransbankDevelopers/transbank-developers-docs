@@ -328,10 +328,6 @@ cuando Webpay le entrega el control, después del proceso de autorización y
 previo a redirigir al tarjeta habiente al comprobante de éxito de la
 transacción. Aplica para todos los tipos de transacciones.
 
-Es recomendable que en esta página muestre la imagen de background del
-formulario de pago, que se encuentra en la URL
-https://webpay3g.transbank.cl/webpayserver/imagenes/background.gif
-
 **Una vez finalizada a transacción**, el comercio debe presentar una página al
 tarjetahabiente para que este se informe del resultado de la transacción. La
 información a presentar dependerá de si la transacción fue autorizada o no.
