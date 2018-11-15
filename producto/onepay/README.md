@@ -43,6 +43,41 @@ En el caso de que el tarjetahabiente esté operando en un laptop o computador de
 
 De esta forma, el pago se realiza con mínima fricción para el tarjetahabiente y permite una mayor conversión en las ventas del comercio.
 
+## Onepay como Corta-fila
+
+Onepay también puede ser usado como "corta fila", permitiendo hacer más
+eficientes las ventas presenciales en la fila de pago. O eliminando
+completamente la necesidad de esa fila.
+
+¿Cómo?
+
+Muy simple: Le entregas a staff de tu tienda una aplicación móvil (por ejemplo
+en un tablet o teléfono) que le permite cerrar una venta, integrándose con
+Onepay.
+
+El flujo en tal caso funciona así:
+
+1. El tarjetahabiente está realizando una fila para ordenar un producto (por
+   ejemplo en una cafetería o restaurant) y se le acerca un vendedor con un
+   tablet. O quizás ya estaba comprando de manera asistida por tu vendedor
+   (imagina la típica venta en perfumería, tecnología, zapatos, etc).
+
+2. El vendedor ingresa en su tablet la información de la compra e inicia un
+   cobro con Onepay.
+
+3. El tablet se comunica con el backend del comercio para generar una
+   transacción Onepay con canal tipo "mobile".
+
+4. El tablet recibe la información de la transacción creada y muestra un QR para
+   que el vendedor lo muestre al cliente.
+
+5. El cliente paga con la aplicación Onepay escanea el código y paga con su
+   billetera móvil confirmando con su PIN.
+
+6. El cliente al finalizar la transacción ve en su teléfono un comprobante web
+   de la tienda. Al mismo momento de generar ese comprobante, el backend del
+   comercio avisa al tablet del vendedor que la transacción ha sido completada.
+
 <div class="container slate">
   <div class='slate-after-footer'>
     <div class='row d-flex align-items-stretch'>
