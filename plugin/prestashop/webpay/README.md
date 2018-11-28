@@ -36,7 +36,7 @@ Habilitar los siguientes módulos / extensiones para PHP:
 
 ## Instalación de Plugin
 
-1. Dirígete a [https://github.com/TransbankDevelopers/transbank-plugin-prestashop-webpay/releases](https://github.com/TransbankDevelopers/transbank-plugin-prestashop-webpay/releases), y descargue la última versión disponible del plugin.
+1. Dirígete a [https://github.com/TransbankDevelopers/transbank-plugin-prestashop-webpay/releases/latest](https://github.com/TransbankDevelopers/transbank-plugin-prestashop-webpay/releases/latest), y descargue la última versión disponible del plugin.
 
   Una vez descargado el plugin, ingresa a la página de administración de Prestashop (usualmente en _misitio.com_/admin), y dirígete a Módulos, Módulos y Servicios, indicado a continuación:
 
