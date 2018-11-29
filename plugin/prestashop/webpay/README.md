@@ -1,25 +1,13 @@
-<script>$(function () {$('[data-toggle="popover"]').popover()});</script>
-
 <div class="data-menu-side-right">
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">
     <h4>Descarga nuestro plugin.</h4>
-    {% for key, x in tool %}
-      {% if x.fileActive %}
-        <span class="btn-download" data-target='#modalDownloadPlugins' id="press-p-btn-{{x.ident}}"
-              data-plugin="download?type_d=plugin_v&f={{x.fileActive}}&v={{x.ident}}&tool={{x.tool}}&type_t={{x.type_t}}&pr={{x.pr}}">
-          <b class="td_btn-more sm">Versión {{x.version}}</b>
-        </span>
-        <h4>Compatibilidad</h4>
-        <ul>
-          <li>{{x.ecommerce}}</li>
-          <li>{{x.lenguaje}}</li>
-          <li><span data-container="body" data-toggle="popover" data-placement="top" data-content="{{x.md5}}">md5</span></li>
-          <li><span data-container="body" data-toggle="popover" data-placement="top" data-content="{{x.sha1}}">sha1</span></li>
-        </ul>
-      {% endif %}
-    {% endfor %}
-    <span class="btn-download top-x2 bottom-x2" data-toggle="modal" data-target="#modalChangelogPlugins"><b>Changelog</b></span>
+    <br>
+    <h4>Compatibilidad</h4>
+    <ul>
+      <li>Prestashop >= 1.6</li>
+      <li>PHP >= 5.6 y PHP <= 7.1</li>
+    </ul>
     <h4>Recuerda</h4>
     <ol>
       <li>Contar con tu llave privada y pública</li>
@@ -32,114 +20,146 @@
 <h1 class="toc-ignore">Webpay Prestashop</h1>
 <h1 style="display: none;">Webpay</h1>
 
+## Descripción
+
+Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente en tu comercio, basado en Prestashop.
+
 ## Requisitos
-Tener instalado y configurado previamente tu E-commerce.
 
-Habilitar los siguientes modulos para PHP:
-+ Soap
-+ OpenSSL 1.0.1 o superior
-+ SimpleXML
-+ DOM 2.7.8 o superior
-+ Mcrypt
-+ Sockets
-+ Único protocolo de comunicación aceptado: TLS 1.2
+Debes tener instalado previamente Prestashop.
 
-## Instalación
+Habilitar los siguientes módulos / extensiones para PHP:
+- Soap
+- OpenSSL 1.0.1 o superior
+- SimpleXML
+- DOM 2.7.8 o superior
 
-1. Una vez descargado el plugin ingresa al panel de administración de PrestaShop a la opción de **"Módulos y Servicios**.
+## Instalación de Plugin
 
-<img src="/images/plug/prestashop/webpay/01.png" class="rounded mx-auto d-block">
+1. Dirígete a [https://github.com/TransbankDevelopers/transbank-plugin-prestashop-webpay/releases/latest](https://github.com/TransbankDevelopers/transbank-plugin-prestashop-webpay/releases/latest), y descargue la última versión disponible del plugin.
 
-2. Dentro de **"Módulos y Servicios"** ingresa a **"Añadir nuevo módulo"** y selecciona el plugin recién descargado:
+  Una vez descargado el plugin, ingresa a la página de administración de Prestashop (usualmente en _misitio.com_/admin), y dirígete a Módulos, Módulos y Servicios, indicado a continuación:
 
-<img src="/images/plug/prestashop/webpay/02.png" class="rounded mx-auto d-block">
+<img src="/images/plug/prestashop/webpay/paso1.png" class="rounded mx-auto d-block"/>
+  
+1. Haz click sobre el botón "Subir un módulo":
 
-<img src="/images/plug/prestashop/webpay/03.png" class="rounded mx-auto d-block">
+<img src="/images/plug/prestashop/webpay/paso2.png" class="rounded mx-auto d-block"/>
+  
+1. Se abrirá un cuadro para subir el módulo descargado previamente. Procede a arrastrar el archivo, o haz click en "selecciona el archivo" y selecciónalo desde tu computador:
 
-<img src="/images/plug/prestashop/webpay/04.png" class="rounded mx-auto d-block">
+<img src="/images/plug/prestashop/webpay/paso3.png" class="rounded mx-auto d-block"/>
+
+1. Prestashop procederá a instalar el módulo. Una vez finalizado, se te indicará que el módulo fue instalado, y cuando esto suceda debes hacer click en el botón "Configurar":
+
+<img src="/images/plug/prestashop/webpay/paso4.png" class="rounded mx-auto d-block"/>
 
 ## Configuración
 
-1. Una vez instalado el plugin de Webpay Plus es momento de configurarlo. Para lo cual ingresa a **"Módulos y Servicios → Módulos instalados → WebPay Plus (CONFIGURAR)"**
+Este plugin posee un sitio de configuración que te permitirá ingresar credenciales que Transbank te otorgará, y además podrás generar un documento de diagnóstico en caso que Transbank te lo pida.
 
-<img src="/images/plug/prestashop/webpay/05.png" class="rounded mx-auto d-block"/>
+Para acceder a la configuración, debes seguir los siguientes pasos:
 
-### Observaciones
-<dl>
-  <dt>Los ambientes que encontrarás en la configuración del plugin son:</dt>
+1. Dirígete a la página de administración de Prestashop (usualmente en _misitio.com_/admin), y luego anda a Módulos, Módulos y Servicios.
 
-  <dd>**Integración**: Modo de prueba, tanto código de comercio, llaves y certificados, vienen dadas por defecto en el plugin y te permitirá generar simulaciones de compra para verificar la conexión con webpay de Transbank.</dd>
+<img src="/images/plug/prestashop/webpay/paso1.png" class="rounded mx-auto d-block"/>
 
-  <dd>**Certificación**: Etapa en la que Transbank está validando tu e-commerce (proceso QA).</dd>
+2. Busca "Webpay", y presiona el botón "Configurar":
 
-  <dd>**Producción**: Una vez que Transbank certifica tu e-commerce, estarás en condiciones de vender a través de tu sitio.</dd>
-</dl>
+<img src="/images/plug/prestashop/webpay/paso5.png" class="rounded mx-auto d-block"/>
 
-Para acceder a los ambientes de Certificación y Producción, debes afiliar tu comercio a Transbank. Una vez realizado, se te entregará un código de comercio, con el que deberás crear la llave y el certificado público. El certificado público debes enviarlo a Transbank para validar tu comercio.
+3. ¡Ya está! Estás en la pantalla de configuración del plugin, debes ingresar la siguiente información:
 
-Para conocer los requisitos de afiliación.  <a href="https://portaltransbank.cl/afiliacion/" target="blank">https://portaltransbank.cl/afiliacion/</a>
+  * **Ambiente**: Ambiente hacia donde se realiza la transacción. 
+  * **Código de comercio**: Es lo que te identifica como comercio.
+  * **Llave Privada**: Llave secreta que te autoriza y valida a hacer transacciones.
+  * **Certificado**: Llave publica que te autoriza y valida a hacer transacciones.
+  * **Certificado Transbank**: Llave secreta de webpay que te autoriza y valida a hacer transacciones.
 
-<img src="/images/plug/prestashop/webpay/06.png" class="rounded mx-auto d-block"/>
+  Las opciones disponibles para _Ambiente_ son: "Integración" para realizar pruebas y certificar la instalación con Transbank, y "Producción" para hacer transacciones reales una vez que Transbank ha aprobado el comercio.
+  
+### Credenciales de Prueba
 
-- Si presionamos el botón **"Información"** tendremos acceso a las herramientas de diagnóstico y de registro.
+Para el ambiente de Integración, puedes utilizar las siguientes credenciales para realizar pruebas:
 
-**Información**
+* Código de comercio: `597020000540`
+* Llave Privada: Se puede encontrar [aquí - private_key](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/597020000540.key)
+* Certificado Publico: Se puede encontrar [aquí - public_cert](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/597020000540.crt)
+* Certificado Webpay: Se puede encontrar [aquí - webpay_cert](https://github.com/TransbankDevelopers/transbank-sdk-php/blob/master/lib/webpay/webpay.php#L39)
 
-En la pestaña **"Información"** encontraremos información básica de nuestro servidor, ecommerce y del plugin Webpay instalado. También con el botón **"Crear PDF"** generamos un informe en formato pdf con información útil para el soporte y diagnóstico de problemas.
+1. Guardar los cambios presionando el botón [Guardar]
 
-<img src="/images/plug/prestashop/webpay/07.png" class="rounded mx-auto d-block"/>
+2. Además, puedes generar un documento de diagnóstico en caso que Transbank te lo pida. Para ello, haz click en el botón "Información" ahí podrás descargar un pdf.
 
-**PHP Info**
+<img src="/images/plug/prestashop/webpay/paso6.png" class="rounded mx-auto d-block"/>
 
-En la pestaña **"PHP info"** nos permite ver el reporte php_info generado por el servidor, con información útil para el soporte y diagnóstico de problemas. Con el botón **"Crear PHP info"** generamos este reporte en formato PDF.
+<img src="/images/plug/prestashop/webpay/paso7.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/prestashop/webpay/08.png" class="rounded mx-auto d-block"/>
+## Prueba de instalación con transacción
 
-**Registros**
+En ambiente de integración es posible realizar una prueba de transacción utilizando un emulador de pagos online.
 
-En la pestaña **"Registros"** Podemos activar, desactivar y configurar el tiempo y peso de los registros de comunicación con Transbank a guardarse. También se nos permite descargarlos y ver el último registro.
+* Ingresa al comercio
 
-<img src="/images/plug/prestashop/webpay/09.png" class="rounded mx-auto d-block"/>
+<img src="/images/plug/prestashop/webpay/demo1.png" class="rounded mx-auto d-block"/>
 
-### Ejemplo de Compra
+* Ya con la sesión iniciada, ingresa a cualquier sección para agregar productos
 
-A modo de ejemplo realizaremos la compra de un producto de una tienda y su interacción con el Plugin de Webpay Plus.
+<img src="/images/plug/prestashop/webpay/demo2.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/prestashop/webpay/10.png" class="rounded mx-auto d-block"/>
+* Agrega al carro de compras un producto, selecciona el carro de compras y luego presiona el botón [Pasar por caja]:
 
-Como vemos Webpay Plus se encuentra disponible como medio de pago dentro del eCommerce creado gracias al plugin instalado.
+<img src="/images/plug/prestashop/webpay/demo3.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/prestashop/webpay/11.png" class="rounded mx-auto d-block"/>
+* Presiona el botón [Pasar por caja]:
 
-Al realizar el pedido, nos aparecerá un pequeño resumen, previo a generar el inicio del pago.
+<img src="/images/plug/prestashop/webpay/demo4.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/prestashop/webpay/12.png" class="rounded mx-auto d-block"/>
+* Selecciona método de envío y presiona el botón [Continuar]
+  
+  Debes asegurarte que tu dirección de envio sea en Chile.
 
-El siguiente paso es la presentación del formulario de Webpay Plus, lo que inicia la interacción entre Transbank y tu ECommerce
+<img src="/images/plug/prestashop/webpay/demo5.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/webpay_form/form_01.png" class="rounded mx-auto d-block"/>
+* Selecciona método de Pago con Tarjetas de Credito o Redcompra, selecciona los "términos de servicio" y luego presiona el botón [Pedido con obligación de pago] y luego el botón [Pagar]
 
-<img src="/images/plug/webpay_form/form_02.png" class="rounded mx-auto d-block"/>
+<img src="/images/plug/prestashop/webpay/demo6.png" class="rounded mx-auto d-block"/>
 
-Luego se presenta el formulario del emisor correspondiente a la tarjeta ingresada para validar las claves del usuario. Los datos a ingresar para finalizar la compra son:
-+ Rut: 11.111.111-1
-+ Clave: 123
+<img src="/images/plug/prestashop/webpay/demo6.1.png" class="rounded mx-auto d-block"/>
 
-Si lo haces con Tarjeta de Crédito, ingresa en el campo asignado los siguientes datos:
-+ Nº tarjeta: 4051885600446623
-+ Rut: 11.111.111-1
-+ Clave: 123
-+ Vencimiento: Cualquiera
-+ Sin cuotas
+* Una vez presionado el botón para iniciar la compra, se mostrará la ventana de pago Webpay y deberás seguir el proceso de pago.
 
-<img src="/images/plug/webpay_form/form_03.png" class="rounded mx-auto d-block"/>
+Para pruebas puedes usar los siguientes datos:  
 
-<img src="/images/plug/webpay_form/form_04.png" class="rounded mx-auto d-block"/>
+* Número de tarjeta: `4051885600446623`
+* Rut: `11.111.111-1`
+* Cvv: `123`
+  
+<img src="/images/plug/prestashop/webpay/demo7.png" class="rounded mx-auto d-block"/>
 
-Para presentar el voucher de WebPay Plus con el detalle de la transacción exitosa.
+<img src="/images/plug/prestashop/webpay/demo8.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/webpay_form/form_05.png" class="rounded mx-auto d-block"/>
+Para pruebas puedes usar los siguientes datos:  
 
-Para finalizar con la presentación en el eCommerce del detalle de la transacción.
+* Rut: `11.111.111-1`
+* Clave: `123`
 
-<img src="/images/plug/prestashop/webpay/16.png" class="rounded mx-auto d-block"/>
+<img src="/images/plug/prestashop/webpay/demo9.png" class="rounded mx-auto d-block"/>
+
+Puedes aceptar o rechazar la transacción
+
+<img src="/images/plug/prestashop/webpay/demo10.png" class="rounded mx-auto d-block"/>
+
+<img src="/images/plug/prestashop/webpay/demo11.png" class="rounded mx-auto d-block"/>
+
+<img src="/images/plug/prestashop/webpay/demo12.png" class="rounded mx-auto d-block"/>
+  
+* Serás redirigido a Prestashop y podrás comprobar que el pago ha sido exitoso.
+
+<img src="/images/plug/prestashop/webpay/demo13.png" class="rounded mx-auto d-block"/>
+
+* Además si accedes al sitio de administración sección (Pedidos / Pediso) se podrá ver la orden creada y el detalle de los datos entregados por Webpay.
+
+<img src="/images/plug/prestashop/webpay/order1.png" class="rounded mx-auto d-block"/>
+
+<img src="/images/plug/prestashop/webpay/order2.png" class="rounded mx-auto d-block"/>
