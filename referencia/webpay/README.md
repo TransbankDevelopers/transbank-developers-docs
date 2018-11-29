@@ -896,7 +896,7 @@ transacción.
 
 Puedes [leer más sobre la captura en la información del
 producto Webpay](/producto/webpay#autorizacion-y-captura)
-para concer más detalles y restricciones.
+para conocer más detalles y restricciones.
 
 Para realizar esa captura explícita debe usarse el método `capture()`
 
@@ -1035,7 +1035,7 @@ La anulación puede realizarse máximo 30 días después de la fecha de la
 transacción original.
 
 Puedes [leer más sobre la anulación en la información del
-producto Webpay](/producto/webpay#anulaciones) para concer
+producto Webpay](/producto/webpay#anulaciones) para conocer
 más detalles y restricciones.
 
 Para anular una transacción se debe invocar al método `nullify()`.
