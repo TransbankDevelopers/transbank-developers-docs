@@ -516,7 +516,12 @@ realizar posteriormente.
 totalmente.
 
 - [Reversar Transacciones Webpay OneClick](/referencia/webpay#reversar-un-pago-webpay-oneclick) para dejar sin efecto una
-transacción realizada durante el día.
+transacción realizada durante el día contable actual.
+
+- [Anular Transacciones Webpay
+  OneClick](/referencia/webpay#anular-un-pago-webpay-oneclick) para dejar sin
+  efecto una transacción realizada en otra fecha distinta al día contable
+  actual.
 
 - [Eliminar Inscripciones Webpay OneClick](/referencia/webpay#eliminar-una-inscripcion-webpay-oneclick) para eliminar el `tbkUser`
 cuando tus usuarios no quieren continuar con el servicio.
