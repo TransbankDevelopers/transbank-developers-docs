@@ -39,9 +39,9 @@ Habilitar los siguientes módulos / extensiones para PHP:
 
 **Versiones disponibles** [Aquí](https://packagist.org/packages/transbank/webpay-magento2)
 
-En tu directorio de Magento2, ejecutar el comando, donde `VERSION` es la última versión:
+En tu directorio de Magento2, ejecutar el siguiente comando para instalar la última versión:
 
-    composer require transbank/webpay-magento2:VERSION
+    composer require transbank/webpay-magento2
 
 <img src="/images/plug/mage/webpay/paso7.png" class="rounded mx-auto d-block"/>
 
