@@ -879,10 +879,10 @@ WSDL: `/WSWebpayTransaction/cxf/WSCommerceIntegrationService?wsdl`
 ### Captura diferida Webpay Plus
 
 Este método permite a todo comercio habilitado realizar capturas de una
-transacción autorizada sin captura en plataforma Webpay 3G. El método
-contempla una única captura por cada autorización. Para ello se deberá
-indicar los datos asociados a la transacción de venta con autorización sin
-captura y el monto requerido para capturar el cual debe ser menor o igual al
+transacción autorizada sin captura generada en Webpay Plus o Webpay OneClick.
+El método contempla una única captura por cada autorización. Para ello se
+deberá indicar los datos asociados a la transacción de venta con autorización
+sin captura y el monto requerido para capturar el cual debe ser menor o igual al
 monto originalmente autorizado.
 
 Las ejecuciones con errores entregarán un `SoapFault` de acuerdo a la
@@ -1017,16 +1017,16 @@ Código | Descripción
 ### Anulación Webpay Plus
 
 Este método permite a todo comercio habilitado anular una transacción que fue
-generada en plataforma Webpay 3G. El método contempla anular total o
-parcialmente una transacción. Para ello se deberá indicar los datos asociados
-a la transacción de venta en línea que se desea anular y los montos requeridos
-para anular. Se considera totalmente anulada una transacción cuando el monto
-anulado o el monto total de anulaciones cursadas alcancen el monto autorizado en
-la venta en línea.
+generada en Webpay Plus (Normal y Mall) o Webpay OneClick Normal. El método
+contempla anular total o parcialmente una transacción. Para ello se deberá
+indicar los datos asociados a la transacción de venta en línea que se desea
+anular y los montos requeridos para anular. Se considera totalmente anulada una
+transacción cuando el monto anulado o el monto total de anulaciones cursadas
+alcancen el monto autorizado en la venta en línea.
 
-Resumen del método del servicio web de anulación de transacciones Webpay
-soporta una sola anulación parcial para la transacción de venta en línea. En
-caso de enviar una segunda anulación parcial se retornará una `Exception`.
+El servicio web de anulación de transacciones Webpay soporta una sola
+anulación parcial para la transacción de venta en línea. En caso de enviar
+una segunda anulación parcial se retornará una `Exception`.
 
 Las ejecuciones con errores entregarán un SoapFault de acuerdo a la
 codificación de errores definida mas abajo.
