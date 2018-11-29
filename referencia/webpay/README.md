@@ -1504,6 +1504,12 @@ Nombre  <br> <i> tipo </i> | Descripción
 reversed  <br> <i> xs:boolean </i> | Indica si tuvo éxito la reversa.
 reverseCode  <br> <i> xs:long </i> | Identificador único de la transacción de reversa.
 
+### Anular un pago Webpay OneClick
+
+En caso que ya no sea el mismo día contable y se requiera dejar sin efecto una
+venta, es posible anular un pago realizado con Webpay OneClick Normal usando [el
+mismo método de anulación Webpay Plus](#anulacion-webpay-plus).
+
 ### Eliminar una inscripción Webpay OneClick
 
 En el caso que el comercio requiera eliminar la inscripción de un usuario en
