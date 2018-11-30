@@ -1,25 +1,11 @@
-<script>$(function () {$('[data-toggle="popover"]').popover()});</script>
-
 <div class="data-menu-side-right">
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">
-    <h4>Descarga nuestro plugin.</h4>
-    {% for key, x in tool %}
-      {% if x.fileActive %}
-        <span class="btn-download" data-target='#modalDownloadPlugins' id="press-p-btn-{{x.ident}}"
-              data-plugin="download?type_d=plugin_v&f={{x.fileActive}}&v={{x.ident}}&tool={{x.tool}}&type_t={{x.type_t}}&pr={{x.pr}}">
-          <b class="td_btn-more sm">Versión {{x.version}}</b>
-        </span>
-        <h4>Compatibilidad</h4>
-        <ul>
-          <li>{{x.ecommerce}}</li>
-          <li>{{x.lenguaje}}</li>
-          <li><span data-container="body" data-toggle="popover" data-placement="top" data-content="{{x.md5}}">md5</span></li>
-          <li><span data-container="body" data-toggle="popover" data-placement="top" data-content="{{x.sha1}}">sha1</span></li>
-        </ul>
-      {% endif %}
-    {% endfor %}
-    <span class="btn-download top-x2 bottom-x2" data-toggle="modal" data-target="#modalChangelogPlugins"><b>Changelog</b></span>
+    <h4>Compatibilidad</h4>
+    <ul>
+      <li>Magento >= 2.0</li>
+      <li>PHP >= 5.6 y PHP <= 7.1</li>
+    </ul>
     <h4>Recuerda</h4>
     <ol>
       <li>Contar con tu llave privada y pública</li>
@@ -29,210 +15,188 @@
   </div>
 </div>
 
-<h1 class="toc-ignore">Webpay Magento</h1>
+<h1 class="toc-ignore">Webpay Magento2</h1>
 <h1 style="display: none;">Webpay</h1>
 
+## Descripción
+
+Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente en tu comercio, basado en Magento2.
+
 ## Requisitos
-Tener instalado previamente Magento2 y asegurarte de tener Composer instalado.
 
-Habilitar los siguientes modulos para PHP:
-+ Soap
-+ OpenSSL 1.0.1 o superior
-+ SimpleXML
-+ DOM 2.7.8 o superior
-+ Mcrypt
-+ Sockets
-+ Único protocolo de comunicación aceptado: TLS 1.2
+1. Debes tener instalado previamente Magento2 y asegurarte de tener [Composer](https://getcomposer.org) instalado.
+2. Tus credenciales de Magento Market a mano. Si no sabes cuales son tus credenciales puedes revisar esta guia: [https://devdocs.magento.com/guides/v2.2/install-gde/prereq/connect-auth.html](https://devdocs.magento.com/guides/v2.2/install-gde/prereq/connect-auth.html)
 
-## Instalación
+Habilitar los siguientes módulos / extensiones para PHP:
+- Soap
+- OpenSSL 1.0.1 o superior
+- SimpleXML
+- DOM 2.7.8 o superior
 
-1. La instalación del plugin se debe realizar directo en el servidor donde está instalado el E-commerce. Se debe ingresar a la ruta raíz del sitio.
+## Instalación del Plugin
 
-```shell
-soporte@debian:/var/www/html/entornos/magento2.x/2.1.12_2$ pwd /var/www/html/entornos/magento2.x/2.1.12_2
-```
+**Nota:** En este punto composer podría pedirte si lo requiere tus creedenciales de magento2.
 
-2. En esta ruta se debe copiar el archivo descargado.
+**Versiones disponibles** [Aquí](https://packagist.org/packages/transbank/webpay-magento2)
 
-```shell
-soporte@debian:/var/www/html/entornos/magento2.x/2.1.12_2$ ls -ltr
-total 1424
-drwxrwxrwx  6 soporte soporte   4096 ene 17  2017 update
--rwxrwxrwx  1 soporte soporte 362987 ene 17  2017 composer.lock
--rwxrwxrwx  1 soporte soporte   3000 ene 17  2017 composer.json
--rwxrwxrwx  1 soporte soporte   3935 ago 24 20:05 magento2__install.sh
-drwxrwxrwx  2 soporte soporte   4096 ago 24 20:06 magento-2-community-sample-data-2.1.2
--rwxrwxrwx  1 soporte soporte    631 ago 24 20:07 COPYING.txt
--rwxrwxrwx  1 soporte soporte   3381 ago 24 20:07 CONTRIBUTING.md
--rwxrwxrwx  1 soporte soporte 435065 ago 24 20:07 CHANGELOG.md
--rwxrwxrwx  1 soporte soporte  10364 ago 24 20:07 LICENSE.txt
--rwxrwxrwx  1 soporte soporte  10376 ago 24 20:07 LICENSE_AFL.txt
--rwxrwxrwx  1 soporte soporte    315 ago 24 20:07 ISSUE_TEMPLATE.md
--rwxrwxrwx  1 soporte soporte   2854 ago 24 20:07 Gruntfile.js.sample
-drwxrwxrwx  5 soporte soporte   4096 ago 24 20:07 dev
-drwxrwxrwx  2 soporte soporte   4096 ago 24 20:07 bin
-drwxrwxrwx  4 soporte soporte   4096 ago 24 20:07 app
-drwxrwxrwx  4 soporte soporte   4096 ago 24 20:07 lib
--rwxrwxrwx  1 soporte soporte   1358 ago 24 20:07 index.php
-drwxrwxrwx  2 soporte soporte   4096 ago 24 20:07 phpserver
--rwxrwxrwx  1 soporte soporte    804 ago 24 20:07 php.ini.sample
--rwxrwxrwx  1 soporte soporte   1427 ago 24 20:07 package.json.sample
--rwxrwxrwx  1 soporte soporte   5233 ago 24 20:07 nginx.conf.sample
-drwxrwxrwx  6 soporte soporte   4096 ago 24 20:07 pub
-drwxrwxrwx  7 soporte soporte   4096 ago 24 20:07 setup
-drwxrwxrwx 29 soporte soporte   4096 ago 24 20:07 vendor
-drwxrwxrwx  9 soporte soporte   4096 ago 24 20:19 var
--rwxr-xr-x  1 soporte soporte 539682 sep 26 16:36 webpay_magento2.tgz
-soporte@debian:/var/www/html/entornos/magento2.x/2.1.12_2$
-```
+En tu directorio de Magento2, ejecutar el siguiente comando para instalar la última versión:
 
-3. Descomprimir el archivo.
+    composer require transbank/webpay-magento2
 
-```shell
-soporte@debian:/var/www/html/entornos/magento2.x/2.1.12_2$
-soporte@debian:/var/www/html/entornos/magento2.x/2.1.12_2$ tar -xzvf webpay_magento2.tgz
-app/
-app/code/
-app/code/Transbank/
-app/code/Transbank/Webpay/
-.
-.
-.
-.
-.
-app/code/Transbank/Webpay/view/frontend/web/template/payment/
-app/code/Transbank/Webpay/view/frontend/web/template/payment/webpay.html
-soporte@debian:/var/www/html/entornos/magento2.x/2.1.12_2$
-```
+<img src="/images/plug/mage/webpay/paso7.png" class="rounded mx-auto d-block"/>
 
-4. Actualizar la instalación de Magento para que reconozca la instalación del plugin.
+Cuando finalice, ejecutar el comando:
 
-```shell
-soporte@debian:/var/www/html/entornos/magento2.x/2.1.12_2$ bin/magento setup:upgrade
-Cache cleared successfully
-File system cleanup:
-/var/www/html/entornos/magento2.x/2.1.12_2/var/generation/Composer
-/var/www/html/entornos/magento2.x/2.1.12_2/var/generation/Magento
-/var/www/html/entornos/magento2.x/2.1.12_2/var/generation/Symfony
-.
-.
-.
-.
-.
-Module 'Magento_WishlistSampleData':
-Module 'Transbank_Webpay':
-Please re-run Magento compile commandsoporte@debian:/var/www/html/entornos/magento2.x/2.1.12_2$
-```
+    magento module:enable Transbank_Webpay --clear-static-content
 
-5. Recompilar la instalación de Magento para que active el plugin.
+<img src="/images/plug/mage/webpay/paso8.png" class="rounded mx-auto d-block"/>
 
-```shell
-soporte@debian:/var/www/html/entornos/magento2.x/2.1.12_2$ bin/magento setup:di:compile
-Compilation was started.
-Interception cache generation... 7/7 [============================] 100% 7 mins 420.2 MiBB MiB
-Generated code and dependency injection configuration successfully.
-soporte@debian:/var/www/html/entornos/magento2.x/2.1.12_2$
-```
+Cuando finalice, ejecutar el comando:
 
-6. Finalizada la instalación se debe refrescar el cache del sitio para que considere los cambios realizados.
+    magento setup:upgrade && magento setup:di:compile && magento setup:static-content:deploy
 
-```shell
-soporte@debian:/var/www/html/entornos/magento2.x/2.1.12_2$ bin/magento cache:flush
-Flushed cache types:
-config
-layout
-block_html
-collections
-reflection
-db_ddl
-eav
-customer_notification
-full_page
-config_integration
-config_integration_api
-translate
-config_webservice
-soporte@debian:/var/www/html/entornos/magento2.x/2.1.12_2$
-```
+<img src="/images/plug/mage/webpay/paso9.png" class="rounded mx-auto d-block"/>
+  
+Una vez realizado el proceso anterior, Magento2 debe haber instalado el plugin Webpay. Cuando finalice, debes activar el plugin en el administrador de Magento2.
 
 ## Configuración
 
-1. Dentro del panel de administración del sitio dirigirse al menú **"STORES → Settings → Configuration"**:
+Este plugin posee un sitio de configuración que te permitirá ingresar credenciales que Transbank te otorgará y además podrás generar un documento de diagnóstico en caso que Transbank te lo pida.
 
-<img src="/images/plug/mage/webpay/emu_01.png" class="rounded mx-auto d-block"/>
+Para acceder a la configuración, debes seguir los siguientes pasos:
 
-2. Ingresar en el menú a **"SALES → Payment Methods":**
+1. Dirígete a la página de administración de Magento2 (usualmente en http://misitio.com/admin, http://localhost/admin) e ingresa usuario y clave.
 
-<img src="/images/plug/mage/webpay/emu_02.png" class="rounded mx-auto d-block"/>
+<img src="/images/plug/mage/webpay/paso10.png" class="rounded mx-auto d-block"/>
+  
+1. Dentro del sitio de administración dirígete a (Stores / Configuration).
 
-Será necesario habilitar el plugin para que este se encuentre disponible como método de pago en el sitio.
+<img src="/images/plug/mage/webpay/paso11.png" class="rounded mx-auto d-block"/>
 
-### Observaciones
-<dl>
-  <dt>Los ambientes que encontrarás en la configuración del plugin son:</dt>
+1. Luego a sección (Sales / Payments Methods).
 
-  <dd>**Integración**: Modo de prueba, tanto código de comercio, llaves y certificados, vienen dadas por defecto en el plugin y te permitirá generar simulaciones de compra para verificar la conexión con webpay de Transbank.</dd>
+<img src="/images/plug/mage/webpay/paso12.png" class="rounded mx-auto d-block"/>
 
-  <dd>**Certificación**: Etapa en la que Transbank está validando tu e-commerce (proceso QA).</dd>
+1. Elegir el país Chile
 
-  <dd>**Producción**: Una vez que Transbank certifica tu e-commerce, estarás en condiciones de vender a través de tu sitio.</dd>
-</dl>
+<img src="/images/plug/mage/webpay/paso13.png" class="rounded mx-auto d-block"/>
 
-Para acceder a los ambientes de Certificación y Producción, debes afiliar tu comercio a Transbank. Una vez realizado, se te entregará un código de comercio, con el que deberás crear la llave y el certificado público. El certificado público debes enviarlo a Transbank para validar tu comercio.
+1. Bajando al listado de métodos de pagos verás Webpay
 
-Para conocer los requisitos de afiliación.  <a href="https://portaltransbank.cl/afiliacion/" target="blank">https://portaltransbank.cl/afiliacion/</a>
+<img src="/images/plug/mage/webpay/paso14.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/mage/webpay/emu_03.png" class="rounded mx-auto d-block"/>
+1. ¡Ya está! Estás en la pantalla de configuración del plugin, debes ingresar la siguiente información:
+  * **Enable**: Al activarlo, Webpay estará disponible como medio de pago. Ten la precaución de que se encuentre marcada esta opción cuando quieras que los usuarios paguen con Webpay.
+  * **Ambiente**: Ambiente hacia donde se realiza la transacción. 
+  * **Código de comercio**: Es lo que te identifica como comercio.
+  * **Llave Privada**: Llave secreta que te autoriza y valida a hacer transacciones.
+  * **Certificado Publico**: Llave publica que te autoriza y valida a hacer transacciones.
+  * **Certificado Webpay**: Llave secreta de webpay que te autoriza y valida a hacer transacciones.
 
-- Si presionamos el botón "Información" tendremos acceso a las herramientas de diagnóstico y de registro.
+  Las opciones disponibles para _Ambiente_ son: "Integración" para realizar pruebas y certificar la instalación con Transbank, y "Producción" para hacer transacciones reales una vez que Transbank ha aprobado el comercio.
+  
+### Credenciales de Prueba
 
-**Información**
+Para el ambiente de Integración, puedes utilizar las siguientes credenciales para realizar pruebas:
 
-En la pestaña **"Información"** encontraremos información básica de nuestro servidor, ecommerce y del plugin Webpay instalado. También con el botón **"Crear PDF"** generamos un informe en formato pdf con información útil para el soporte y diagnóstico de problemas.
+* Código de comercio: `597020000540`
+* Llave Privada: Se puede encontrar [aquí - private_key](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/597020000540.key)
+* Certificado Publico: Se puede encontrar [aquí - public_cert](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/597020000540.crt)
+* Certificado Webpay: Se puede encontrar [aquí - webpay_cert](https://github.com/TransbankDevelopers/transbank-sdk-php/blob/master/lib/webpay/webpay.php#L39)
 
-<img src="/images/plug/mage/webpay/emu_04.png" class="rounded mx-auto d-block"/>
+1. Guardar los cambios presionando el botón [Save Config]
 
-**PHP Info**
+<img src="/images/plug/mage/webpay/paso15.png" class="rounded mx-auto d-block"/>
 
-En la pestaña **"PHP info"** nos permite ver el reporte php_info generado por el servidor, con información útil para el soporte y diagnóstico de problemas. Con el botón **"Crear PHP info"** generamos este reporte en formato PDF.
+1. Además, puedes generar un documento de diagnóstico en caso que Transbank te lo pida. Para ello, haz click en "Parametros Principales" botón "Información" ahí podrás descargar un pdf.
 
-<img src="/images/plug/mage/webpay/emu_05.png" class="rounded mx-auto d-block"/>
+<img src="/images/plug/mage/webpay/paso17.png" class="rounded mx-auto d-block"/>
 
-**Registros**
+## Configuración de magento2 para Chile CLP
 
-En la pestaña **"Registros"** Podemos activar, desactivar y configurar el tiempo y peso de los registros de comunicación con Transbank a guardarse. También se nos permite descargarlos y ver el último registro.
+El plugin solamente funciona con moneda chilena CLP dado esto magento2 debe estar correctamente configurado para que que se pueda usar Webpay.
 
-<img src="/images/plug/mage/webpay/emu_06.png" class="rounded mx-auto d-block"/>
+1. Ir a la sección de administración (Stores / General / Country Option) y elegir Chile tal como se muestra en la siguiente imagen, luego guardar los cambios.
 
-### Ejemplo de Compra
+<img src="/images/plug/mage/webpay/clp1.png" class="rounded mx-auto d-block"/>
 
-A modo de ejemplo, realizaremos la compra de un producto y su interacción con el Plugin de Webpay, bajo ambiente de Integración.
+1. Ir a la sección de administración (Stores / Currency Setup / Country Option) y elegir Chile tal como se muestra en la siguiente imagen, luego guardar los cambios.
 
-<img src="/images/plug/mage/webpay/emu_07.png" class="rounded mx-auto d-block"/>
+<img src="/images/plug/mage/webpay/clp2.png" class="rounded mx-auto d-block"/>
 
-El siguiente paso es la presentación del formulario de Webpay Plus, lo que inicia la interacción entre Transbank y tu eCommerce.
+1. Ir a la sección de administración (Stores / Currency) y verificar en las dos secciones (Currency Rates y Currency Symbols) que CLP se encuentre activo.
 
-<img src="/images/plug/webpay_form/form_01.png" class="rounded mx-auto d-block"/>
+<img src="/images/plug/mage/webpay/clp3.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/webpay_form/form_02.png" class="rounded mx-auto d-block"/>
+<img src="/images/plug/mage/webpay/clp4.png" class="rounded mx-auto d-block"/>
 
-Luego se presenta el formulario del emisor correspondiente a la tarjeta ingresada para validar las claves del usuario. Los datos a ingresar para finalizar la compra son:
-+ Rut: 11.111.111-1
-+ Clave: 123
+<img src="/images/plug/mage/webpay/clp5.png" class="rounded mx-auto d-block"/>
 
-Si lo haces con Tarjeta de Crédito, ingresa en el campo asignado los siguientes datos:
-+ Nº tarjeta: 4051885600446623
-+ Rut: 11.111.111-1
-+ Clave: 123
-+ Vencimiento: Cualquiera
-+ Sin cuotas
+## Prueba de instalación con transacción
 
-<img src="/images/plug/webpay_form/form_03.png" class="rounded mx-auto d-block"/>
+En ambiente de integración es posible realizar una prueba de transacción utilizando un emulador de pagos online.
 
-<img src="/images/plug/webpay_form/form_04.png" class="rounded mx-auto d-block"/>
+* Ingresa al comercio
 
-<img src="/images/plug/webpay_form/form_05.png" class="rounded mx-auto d-block"/>
+<img src="/images/plug/mage/webpay/demo1.png" class="rounded mx-auto d-block"/>
 
-Finalmente vemos el Voucher de Webpay Plus con el detalle de la transacción exitosa por parte de Webpay, el que al cabo de algunos segundos nos enviará al resumen de compra de tu eCommerce.
+* Ya con la sesión iniciada, ingresa a cualquier sección para agregar productos
 
-<img src="/images/plug/mage/webpay/emu_08.png" class="rounded mx-auto d-block"/>
+<img src="/images/plug/mage/webpay/demo2.png" class="rounded mx-auto d-block"/>
+
+* Agrega al carro de compras un producto:
+
+<img src="/images/plug/mage/webpay/demo3.png" class="rounded mx-auto d-block"/>
+
+* Selecciona el carro de compras y luego presiona el botón [Proceed to Checkout]:
+
+<img src="/images/plug/mage/webpay/demo4.png" class="rounded mx-auto d-block"/>
+
+* Selecciona método de envío y presiona el botón [Next]
+  
+  Debes asegurarte que tu dirección de envio sea en Chile.
+
+<img src="/images/plug/mage/webpay/demo5.png" class="rounded mx-auto d-block"/>
+
+* Selecciona método de pago Transbank Webpay, luego presiona el botón [Place Order]
+
+<img src="/images/plug/mage/webpay/demo6.png" class="rounded mx-auto d-block"/>
+
+* Una vez presionado el botón para iniciar la compra, se mostrará la ventana de pago Webpay y deberás seguir el proceso de pago.
+
+Para pruebas puedes usar los siguientes datos:  
+
+* Número de tarjeta: `4051885600446623`
+* Rut: `11.111.111-1`
+* Cvv: `123`
+  
+<img src="/images/plug/mage/webpay/demo7.png" class="rounded mx-auto d-block"/>
+
+<img src="/images/plug/mage/webpay/demo8.png" class="rounded mx-auto d-block"/>
+
+Para pruebas puedes usar los siguientes datos:  
+
+* Rut: `11.111.111-1`
+* Clave: `123`
+
+<img src="/images/plug/mage/webpay/demo9.png" class="rounded mx-auto d-block"/>
+
+Puedes aceptar o rechazar la transacción
+
+<img src="/images/plug/mage/webpay/demo10.png" class="rounded mx-auto d-block"/>
+
+<img src="/images/plug/mage/webpay/demo11.png" class="rounded mx-auto d-block"/>
+
+<img src="/images/plug/mage/webpay/demo12.png" class="rounded mx-auto d-block"/>
+  
+* Serás redirigido a Magento2 y podrás comprobar que el pago ha sido exitoso.
+
+<img src="/images/plug/mage/webpay/demo13.png" class="rounded mx-auto d-block"/>
+
+* Además si accedes al sitio de administración sección (Sales / Ordes) se podrá ver la orden creada y el detalle de los datos entregados por Webpay.
+
+<img src="/images/plug/mage/webpay/order1.png" class="rounded mx-auto d-block"/>
+
+<img src="/images/plug/mage/webpay/order2.png" class="rounded mx-auto d-block"/>
+
+<img src="/images/plug/mage/webpay/order3.png" class="rounded mx-auto d-block"/>

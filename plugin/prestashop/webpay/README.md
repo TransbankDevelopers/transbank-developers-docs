@@ -2,6 +2,7 @@
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">
     <h4>Descarga nuestro plugin.</h4>
+    <a class="td_btn-more" target="_blank" href="https://github.com/TransbankDevelopers/transbank-plugin-prestashop-webpay/releases/latest">Descargar Plugin</a>
     <br>
     <h4>Compatibilidad</h4>
     <ul>
