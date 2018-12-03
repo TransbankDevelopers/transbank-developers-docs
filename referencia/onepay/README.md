@@ -683,8 +683,9 @@ Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 -------|------------
 options <br> <i>  Object  </i> | Parámetros para arrancar la integración checkout.
 options.endpoint <br> <i>  String  </i> | URL del endpoint de creación de la transacción.
-options.commerceLogo <br> <i>  String  </i> | URL del logo del comercio que se dibujará dentro del modal de Onepay checkout.
+options.commerceLogo <br> <i>  String  </i> | (Opcional) URL del logo del comercio que se dibujará dentro del modal de Onepay checkout.
 options.callbackUrl <br> <i>  String  </i> | URL del endpoint que será el callback cuando la transacción finalice.
+options.transactionDescription <br> <i>  String  </i> | (Opcional) Texto que representa la descripción general de la compra, se dibujará en el modal sobre el valor del precio.
 
 
 > Ejemplo:
@@ -692,7 +693,8 @@ options.callbackUrl <br> <i>  String  </i> | URL del endpoint que será el call
 > Onepay.checkout({
 >  endpoint: './transaction-create',
 >  commerceLogo: 'https://tu-url.com/images/logo-01.png',
->  callbackUrl: './onepay-result'
+>  callbackUrl: './onepay-result',
+>  transactionDescription: 'Set de pelotas'
 > });
 > ```
 

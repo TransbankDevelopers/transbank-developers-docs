@@ -65,7 +65,8 @@ Luego en tu frontend debes invocar a `Onepay.checkout` de la siguiente forma:
 Onepay.checkout({
   endpoint: './transaction-create',
   commerceLogo: 'https://tu-url.com/images/icons/logo-01.png',
-  callbackUrl: './onepay-result'
+  callbackUrl: './onepay-result',
+  transactionDescription: 'Set de pelotas'
 });
 ```
 
@@ -96,7 +97,7 @@ Se espera que el `endpoint` retorne un JSON como el del siguiente ejemplo:
 
 En el paso 2 más abajo podrás ver más información sobre este `endpoint`.
 
-- `commerceLogo`: Corresponde a la URL full del logo de comercio que se mostrará
+- `commerceLogo`: (Opcional) Corresponde a la URL full del logo de comercio que se mostrará
   en el modal. Como el modal reside en un dominio externo, no puede ser una URL
   relativa (a diferencia de los otros parámetros). El logo se redimensionará a
   125 pixeles de ancho y la altura se calcula automáticamente para mantener las
@@ -107,6 +108,8 @@ En el paso 2 más abajo podrás ver más información sobre este `endpoint`.
 ha sido autorizada por el comercio. En este callback el comercio debe hacer la
 confirmación de la transacción, para lo cual dispone de 30 segundos desde que
 la transacción se autorizó, de lo contrario esta sera automáticamente reversada.
+
+- `transactionDescription` : (Opcional) Texto que representa la descripción general de la compra, se dibujará en el modal sobre el valor del precio.
 
 En el paso 3 más abajo podrás ver más sobre cómo se invoca este _callback_.
 
