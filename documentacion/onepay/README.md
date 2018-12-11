@@ -8,9 +8,19 @@
 
 ## Conceptos y SDKs
 
-El flujo de Onepay varía ligeramente según el *canal* mediante el cual
-se enlaza la transacción con la app Onepay en el teléfono del usuario.
-Los canales son:
+Onepay puede ser usado en diversos canales y en múltiples modalidades de pago.
+Por ende es importante entender esos canales y modalidades a la hora de realizar
+una integración.
+
+En cuanto a modalidades, Onepay puede usarse para ventas por internet y también
+para ventas presenciales. Veamos primero los conceptos necesarios para entender
+el pago por internet, lo que te permitirá también entender la forma de ocuparlo
+para modalidades presenciales ([como el caso de un
+cortafila](#integracion-en-modalidad-quotcortafilaquot)).
+
+**En las ventas por internet** el flujo de Onepay varía ligeramente según el
+*canal* mediante el cual se enlaza la transacción con la app Onepay en el
+teléfono del usuario. Los canales son:
 
 - `WEB`: Web desktop. En este caso aparece un QR en la pantalla del comercio que
 le permite al usuario escanearlo con la app Onepay y confirmar la transacción.
@@ -51,7 +61,17 @@ Finalmente, para las labores del backend, se ofrecen SDKs para [Java](https://gi
 Estos SDKs se utilizan en todos los casos, independiente del
 canal y de la modalidad de integración web.
 
-## Integración Checkout
+**En la venta presencial** se utilizan las mismas herramientas pero de diferente
+forma, pues ahora el dispositivo que genera la transacción (ej: totem de auto
+atención o un tablet operado como cortafila) no es propiedad del
+tarjetahabiente. En este caso se usa el canal `MOBILE`, pues será una pestaña
+del navegador móvil en el teléfono del cliente donde se notificará al comercio
+el resultado de la transacción.
+
+A continuación veremos el paso a paso para algunas integraciones tanto para
+venta por internet como presencial.
+
+## Integración Web (Checkout)
 
 
 ### 1. Front-end: Configuración.
@@ -507,7 +527,7 @@ HTTP GET, debe ser idempotente: Debe funcionar correctamente aunque sea
 ejecutado repetidas veces.
 </aside>
 
-## Integración en App Móvil Comercio
+## Integración Mobile (app-to-app)
 
 Si tu comercio posee una app móvil, entonces debes integrar también los SDKs
 móviles. Comienza revisando la manera de [instalar el SDK
@@ -709,14 +729,14 @@ con el comprobante).
 Con eso has concluido la integración de Onepay, incluyendo sus cuatro componentes:
 backend, frontend-web (soportando canales WEB y MOBILE) y las dos apps móviles (para el canal APP). ¡Felicitaciones!
 
-## Integración en modalidad "cortafila"
+## Integración Cortafila
 
 Las modalidades vistas hasta ahora contemplan que tu aplicación es usada
 directamente por el comprador (tarjetahabiente), quien compra directamente desde
 tu app móvil o desde tu web (y es dirigido a la app Onepay de la manera más 
 apropiada).
 
-Onepay ofrece la flexibilidad para ser usado también en la modalidad "cortafila"
+Onepay ofrece la flexibilidad para ser usado también en la modalidad cortafila
 en tus tiendas físicas. Allí un vendedor usando por ejemplo un tablet puede 
 acercarse a los compradores y procesar rápidamente su compra usando Onepay. 
 
