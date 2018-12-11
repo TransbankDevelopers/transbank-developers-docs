@@ -746,8 +746,8 @@ ahora verás los pasos necesarios para realizar la integración.
 
 ### 1. Tu app móvil inicia el flujo.
 
-    Para comenzar, la app móvil del vendedor será la que inicie la transacción.
-    Esta app debe invocar a tu backend (por ejemplo a través de un API REST).
+Para comenzar, la app móvil del vendedor será la que inicie la transacción.
+Esta app debe invocar a tu backend (por ejemplo a través de un API REST).
 
 ### 2. Tu backend crea la transacción Onepay
 
