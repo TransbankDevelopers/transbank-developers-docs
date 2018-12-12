@@ -43,7 +43,7 @@ En el caso de que el tarjetahabiente esté operando en un laptop o computador de
 
 De esta forma, el pago se realiza con mínima fricción para el tarjetahabiente y permite una mayor conversión en las ventas del comercio.
 
-## Onepay como Corta-fila
+## Onepay como Cortafila
 
 Onepay también puede ser usado como "corta fila", permitiendo hacer más
 eficientes las ventas presenciales en la fila de pago. O eliminando
