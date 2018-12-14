@@ -2,11 +2,12 @@
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">
     <h4>Descarga nuestro plugin.</h4>
+    <a class="td_btn-more" target="_blank" href="https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-onepay/releases/latest">Descargar Plugin</a>
     <br>
     <h4>Compatibilidad</h4>
     <ul>
       <li>Woocommerce >= 3.2</li>
-      <li>PHP >= 5.6</li>
+      <li>PHP >= 5.6 y PHP <= 7.1</li>
     </ul>
     <h4>Recuerda</h4>
     <ol>
