@@ -1,16 +1,14 @@
 <div class="data-menu-side-right">
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">
-    <h4>Descarga nuestro plugin.</h4>
-    <br>
     <h4>Compatibilidad</h4>
     <ul>
       <li>Magento >= 2.0</li>
-      <li>PHP >= 5.6 and < 7.0</li>
+      <li>PHP >= 5.6 y PHP <= 7.1</li>
     </ul>
     <h4>Recuerda</h4>
     <ol>
-      <li>Contar con tu llave privada y pública</li>
+      <li>Contar con tu Api Key y Shared Secret</li>
       <li>Contar con Magento2 instalado en tu sitio</li>
       <li>Contar con un sitio 'https' seguro</li>
     </ol>
@@ -33,7 +31,9 @@ Este plugin oficial ha sido creado para que puedas integrar Onepay fácilmente e
 
 **Nota:** En este punto composer podría pedirte si lo requiere tus creedenciales de magento2.
 
-En tu directorio de Magento2, ejecutar el comando:
+**Versiones disponibles** [Aquí](https://packagist.org/packages/transbank/onepay-magento2)
+
+En tu directorio de Magento2, ejecutar el siguiente comando para instalar la última versión:
 
     composer require transbank/onepay-magento2
 

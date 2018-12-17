@@ -9,7 +9,7 @@
     <h4>Recuerda</h4>
     <ol>
       <li>Contar con tu llave privada y pública</li>
-      <li>Tener correctamente configurado el Ecommerce</li>
+      <li>Contar con Magento2 instalado en tu sitio</li>
       <li>Contar con un sitio 'https' seguro</li>
     </ol>
   </div>

@@ -2,6 +2,7 @@
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">
     <h4>Descarga nuestro plugin.</h4>
+    <a class="td_btn-more" target="_blank" href="https://github.com/TransbankDevelopers/transbank-plugin-opencart-onepay/releases/latest">Descargar Plugin</a>
     <br>
     <h4>Compatibilidad</h4>
     <ul>
@@ -10,7 +11,7 @@
     </ul>
     <h4>Recuerda</h4>
     <ol>
-      <li>Contar con tu llave privada y pública</li>
+      <li>Contar con tu Api Key y Shared Secret</li>
       <li>Contar con OpenCart instalado en tu sitio</li>
       <li>Contar con un sitio 'https' seguro</li>
     </ol>
