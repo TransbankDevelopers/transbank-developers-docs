@@ -257,7 +257,7 @@ appScheme <br> <i>  String  </i> | Esquema de retorno a la aplicación del comer
 items <br> <i>  Array[Object]  </i> | Lista de items en el carro de compra. Corresponde al primer parámetro en los SDKs.
 items[].description <br> <i>  String  </i> | Descripción del ítem.
 items[].quantity <br> <i>  Number  </i> | Cantidad para el ítem descrito.
-items[].amount <br> <i>  Number  </i> | Precio unitario.
+items[].amount <br> <i>  Number  </i> | Precio unitario. Puede ser negativo para representar un descuento, siempre que el monto total del carro (sumando todos los items) sea positivo.
 items[].additionalData <br> <i>  String  </i> | 
 items[].expire <br> <i>  Number  </i> |
 
