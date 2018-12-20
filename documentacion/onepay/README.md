@@ -185,9 +185,9 @@ from transbank import onepay
 onepay.callback_url = "https://www.misitioweb.com/onepay-result"
 ```
 
-Con eso estás preparado para crear una transacción. Para esto se debe crear en
-primera instancia un objeto `ShoppingCart` que se debe llenar un `Item` (o
-varios):
+Con eso estás preparado para crear una transacción en el código backend que será invocado por la url del `endpoint`.
+
+Para esto se debe crear en primera instancia un objeto `ShoppingCart` que se debe llenar un `Item` (o varios):
 
 
 <div class="language-simple" data-multiple-language></div>
@@ -318,10 +318,10 @@ propios external unique numbers](/referencia/onepay#especificar-tus-propios-exte
 En el caso que no se pueda completar la transacción o `responseCode` en la
 respuesta del API sea distinto de `ok` se lanzará una excepción.
 
-Con eso ya tienes la información suficiente para responder el JSON que espera
-la modalidad checkout, pues sólo debes eliminar `signature` y agregar `amount`
-desde el `ShoppingCart` que construiste anteriormente. Con eso retornas algo
-como esto:
+Con eso ya tienes la información suficiente para responder el JSON que espera la
+modalidad checkout de parte de la url configurada como `endpoint`. Sólo debes
+eliminar `signature` y agregar `amount` desde el `ShoppingCart` que construiste
+anteriormente. Con eso retornas algo como esto:
 
 ```json
 {
