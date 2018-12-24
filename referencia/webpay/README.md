@@ -1415,7 +1415,7 @@ var output = transaction.authorize(
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 amount  <br> <i> xs:decimal </i> | Monto del pago en pesos.
-buyOrder  <br> <i> xs:long </i> | Identificador único de la compra generado por el comercio. Debe ser timestamp [yyyymmddhhMMss] + un correlativo de tres dígitos. Ej: Para la tercera transacción realizada el día 15 de julio de 2011 a las 11:55:50 la orden de compra sería: 20110715115550003.
+buyOrder  <br> <i> xs:long </i> | Identificador único de la compra generado por el comercio.
 tbkUser  <br> <i> xs:string </i> | Identificador único de la inscripción del cliente (devuelto por `finishInscription()`).
 username  <br> <i> xs:string </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `initInscription()`).
 
@@ -1655,7 +1655,7 @@ tbkUser  <br> <i> xs:string </i> | Identificador único de la inscripción de
 username  <br> <i> xs:string </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `initInscription()`).
 storesInput  <br> <i> wsOneClickMulticodeStorePaymentInput </i> | Lista de objetos con la información de cada transacción de las tiendas del mall.
 storesInput[].commerceId  <br> <i> xs:long </i> | Código de comercio hijo de la tienda.
-storesInput[].buyOrder  <br> <i> xs:string </i> | Identificador único de la compra generado por el comercio hijo (tienda). Debe ser timestamp [yyyymmddhhMMss] + un correlativo de tres dígitos. Ej: Para la tercera transacción realizada el día 15 de julio de 2011 a las 11:55:50 la orden de compra sería: 20110715115550003.
+storesInput[].buyOrder  <br> <i> xs:string </i> | Identificador único de la compra generado por el comercio hijo (tienda).
 storesInput[].amount  <br> <i> xs:decimal </i> | Monto de la sub-transacción de pago. En pesos o dólares según configuración comercio mall padre.
 storesInput[].sharesNumber  <br> <i> xs:int </i> | Cantidad de cuotas de la sub-transacción de pago.
 
