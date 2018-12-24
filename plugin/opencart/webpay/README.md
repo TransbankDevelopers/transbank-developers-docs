@@ -1,29 +1,18 @@
-<script>$(function () {$('[data-toggle="popover"]').popover()});</script>
-
 <div class="data-menu-side-right">
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">
     <h4>Descarga nuestro plugin.</h4>
-    {% for key, x in tool %}
-      {% if x.fileActive %}
-        <span class="btn-download" data-target='#modalDownloadPlugins' id="press-p-btn-{{x.ident}}"
-              data-plugin="download?type_d=plugin_v&f={{x.fileActive}}&v={{x.ident}}&tool={{x.tool}}&type_t={{x.type_t}}&pr={{x.pr}}">
-          <b class="td_btn-more sm">Versión {{x.version}}</b>
-        </span>
-        <h4>Compatibilidad</h4>
-        <ul>
-          <li>{{x.ecommerce}}</li>
-          <li>{{x.lenguaje}}</li>
-          <li><span data-container="body" data-toggle="popover" data-placement="top" data-content="{{x.md5}}">md5</span></li>
-          <li><span data-container="body" data-toggle="popover" data-placement="top" data-content="{{x.sha1}}">sha1</span></li>
-        </ul>
-      {% endif %}
-    {% endfor %}
-    <span class="btn-download top-x2 bottom-x2" data-toggle="modal" data-target="#modalChangelogPlugins"><b>Changelog</b></span>
+    <a class="td_btn-more" target="_blank" href="https://github.com/TransbankDevelopers/transbank-plugin-opencart-webpay/releases/latest">Descargar Plugin</a>
+    <br>
+    <h4>Compatibilidad</h4>
+    <ul>
+      <li>OpenCart >= 3.x</li>
+      <li>PHP >= 5.6 y PHP <= 7.1</li>
+    </ul>
     <h4>Recuerda</h4>
     <ol>
       <li>Contar con tu llave privada y pública</li>
-      <li>Tener correctamente configurado el Ecommerce</li>
+      <li>Contar con Prestashop instalado en tu sitio</li>
       <li>Contar con un sitio 'https' seguro</li>
     </ol>
   </div>
@@ -32,120 +21,158 @@
 <h1 class="toc-ignore">Webpay Opencart</h1>
 <h1 style="display: none;">Webpay</h1>
 
+## Descripción
+
+Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente en tu comercio, basado en Opencart.
+
 ## Requisitos
-Tener instalado y configurado previamente tu E-commerce.
 
-Habilitar los siguientes modulos para PHP:
-+ Soap
-+ OpenSSL 1.0.1 o superior
-+ SimpleXML
-+ DOM 2.7.8 o superior
-+ Mcrypt
-+ Sockets
-+ Único protocolo de comunicación aceptado: TLS 1.2
+Debes tener instalado previamente Opencart.
 
-## Instalación
+Habilitar los siguientes módulos / extensiones para PHP:
+- Soap
+- OpenSSL 1.0.1 o superior
+- SimpleXML
+- DOM 2.7.8 o superior
 
-1. Una vez descargado el Plugin, ingresa al panel de administración de extensiones de Opencart ubicado en la ruta **"Extensions → Extension Installer"**. El botón Upload nos permitirá subir nuestros archivos al servidor.
+## Instalación de Plugin
 
-<img src="/images/plug/open/webpay/01.png" class="rounded mx-auto d-block">
+1. Dirígete a [https://github.com/TransbankDevelopers/transbank-plugin-opencart-webpay/releases/latest](https://github.com/TransbankDevelopers/transbank-plugin-opencart-webpay/releases/latest), y descargue la última versión disponible del plugin.
 
-2. Recuerda tener activado y configurado correctamente tú FTP para que la subida de archivos se realice correctamente. Esto lo podemos verificar ingresando desde nuestro panel de administración en la ruta **"System → Settings → Edit Setting → FTP"**.
+  Una vez descargado el plugin, ingresa a la página de administración de Opencart (usualmente en _misitio.com_/admin), y dirígete a (Extensions / Intaller) indicado a continuación:
 
-<img src="/images/plug/open/webpay/02.png" class="rounded mx-auto d-block">
+  <img src="/images/plug/open/webpay/paso1.png" class="rounded mx-auto d-block"/>
+  
+2. Haz click sobre el botón [Upload], selecciona el archivo del plugin y Opencart procederá a instalar el plugin. Una vez finalizado, se te indicará que el módulo fue instalado:
 
-3. Opencart puede presentar ciertas dificultades con algunas configuraciones del servidor de FTP, por lo que te recomendamos, para casos como el de la imagen a continuación, deshabilitar el soporte FTP mediante una extensión gratuita llamada QuickFix, la cual puedes descargar desde el siguiente enlace [http://www.opencart.com/](http://www.opencart.com/)
+  <img src="/images/plug/open/webpay/paso2.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/open/webpay/03.png" class="rounded mx-auto d-block">
+### Refrescar el sistema de modificaciones de OpenCart
 
-La instalación se realiza de la misma forma que los otros Plugins, la diferencia está en que QuickFix es un archivo XML que no presenta problemas al hacer el upload, además deshabilita el soporte FTP de Opencart, por lo que los Plugins que se suban posteriormente no deberían presentar problemas.
+3. Dirígete a (Extensions / Modifications) y selecciona el plugin "Transbank Webpay" indicado a continuación:
 
-4. Al instalar la extensión deberíamos verla instalada en la ruta **"Extension Installer → Modifications"**
+  <img src="/images/plug/open/webpay/paso3.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/open/webpay/04.png" class="rounded mx-auto d-block"/>
+4. Con el plugin "Transbank Webpay" seleccionado presiona el botón "Refresh" ![save]<img src="/images/plug/open/webpay/mod_refresh.png" class="rounded mx-auto d-block"/> de la parte superior derecha.
 
-5. Una vez instalado el Plugin, debemos activar y configurar nuestro plugin desde la ruta: **"Extensions → Payments → Install"**
+OpenCart indicará que las modificaciones han sido exitosas sobre el plugin:
 
-<img src="/images/plug/open/webpay/05.png" class="rounded mx-auto d-block"/>
+  <img src="/images/plug/open/webpay/paso4.png" class="rounded mx-auto d-block"/>
+
+5. Dentro del sitio de administración dirígete a (Extensions / Extensions) y filtra por "Payments".
+
+  <img src="/images/plug/open/webpay/paso5.png" class="rounded mx-auto d-block"/>
+
+6. Busca hacia abajo el plugin "Webpay Plus".
+
+  <img src="/images/plug/open/webpay/paso6.png" class="rounded mx-auto d-block"/>
+
+7. Presiona el botón verde "+" para instalar el plugin.
+   
+  <img src="/images/plug/open/webpay/paso7.png" class="rounded mx-auto d-block"/>
+
+8. Cambiará a color rojo.
+
+  <img src="/images/plug/open/webpay/paso8.png" class="rounded mx-auto d-block"/>
 
 ## Configuración
 
-### Observaciones
-<dl>
-  <dt>Los ambientes que encontrarás en la configuración del plugin son:</dt>
+Este plugin posee un sitio de configuración que te permitirá ingresar credenciales que Transbank te otorgará, y además podrás generar un documento de diagnóstico en caso que Transbank te lo pida.
 
-  <dd>**Integración**: Modo de prueba, tanto código de comercio, llaves y certificados, vienen dadas por defecto en el plugin y te permitirá generar simulaciones de compra para verificar la conexión con webpay de Transbank.</dd>
+Para acceder a la configuración, debes seguir los siguientes pasos:
 
-  <dd>**Certificación**: Etapa en la que Transbank está validando tu e-commerce (proceso QA).</dd>
+1. Dirígete a la página de administración de Opencart (usualmente en _misitio.com_/admin), y luego dirígete a (Extensions / Extensions) , filtra por "Payments", busca "Webpay Plus" y presiona el botón "Edit" del plugin:
 
-  <dd>**Producción**: Una vez que Transbank certifica tu e-commerce, estarás en condiciones de vender a través de tu sitio.</dd>
-</dl>
+  <img src="/images/plug/open/webpay/paso8.png" class="rounded mx-auto d-block"/>
 
-Para acceder a los ambientes de Certificación y Producción, debes afiliar tu comercio a Transbank. Una vez realizado, se te entregará un código de comercio, con el que deberás crear la llave y el certificado público. El certificado público debes enviarlo a Transbank para validar tu comercio.
+2. ¡Ya está! Estás en la pantalla de configuración del plugin, debes ingresar la siguiente información:
 
-Para conocer los requisitos de afiliación.  <a href="https://portaltransbank.cl/afiliacion/" target="blank">https://portaltransbank.cl/afiliacion/</a>
+  * **Ambiente**: Ambiente hacia donde se realiza la transacción. 
+  * **Código de comercio**: Es lo que te identifica como comercio.
+  * **Llave Privada**: Llave secreta que te autoriza y valida a hacer transacciones.
+  * **Certificado**: Llave publica que te autoriza y valida a hacer transacciones.
+  * **Certificado Transbank**: Llave secreta de webpay que te autoriza y valida a hacer transacciones.
 
-Para verificar la configuración debemos ingresar desde el panel de administración siguiendo la ruta Extensions → Payments → Edit.
+  Las opciones disponibles para _Ambiente_ son: "Integración" para realizar pruebas y certificar la instalación con Transbank, y "Producción" para hacer transacciones reales una vez que Transbank ha aprobado el comercio.
 
-<img src="/images/plug/open/webpay/06.png" class="rounded mx-auto d-block"/>
+  Asegurate de configurar correctamente los estados de las ordenes:
 
-Si te encuentras en la primera etapa (Integración) y sólo deseas verificar que tu instalación funciona correctamente, deberás utilizar la información que la extensión trae por defecto y verificar que los campos, **total, estado completado, estado rechazado, Zona Geográfica, Estado** (Enabled habilita el Plugin) y **Orden** correspondan a tus preferencias. Luego debes guardar la configuración. Con lo anterior estarás listo para realizar las primeras pruebas de compra en tu tienda OnLine.
+  * **Estado completado**: Estado de una orden exitosa.
+  * **Estado rechazado**: Estado de una orden rechazada.
+  * **Estado cancelado**: Estado de una orden cancelada.
+  
+  <img src="/images/plug/open/webpay/paso9.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/open/webpay/07.png" class="rounded mx-auto d-block"/>
+### Credenciales de Prueba
 
-<dl>
-  <dt>Descripción de Opciones: </dt>
+Para el ambiente de Integración, puedes utilizar las siguientes credenciales para realizar pruebas:
 
-  <dd>**Código de Comercio, Llave Privada, Certificado, Certificado Transbank, Ambiente**: Información proporcionada por Transbank para ambiente Certificación o Producción.</dd>
+* Código de comercio: `597020000540`
+* Llave Privada: Se puede encontrar [aquí - private_key](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/597020000540.key)
+* Certificado Publico: Se puede encontrar [aquí - public_cert](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/597020000540.crt)
+* Certificado Webpay: Se puede encontrar [aquí - webpay_cert](https://github.com/TransbankDevelopers/transbank-sdk-php/blob/master/lib/webpay/webpay.php#L39)
 
-  <dd>**Total**: Compra mínima para que aparezca como medio de pago.</dd>
+1. Guardar los cambios presionando el botón [Guardar]
 
-  <dd>**Estado Completado**: Corresponde al estado con el que quedará la orden, al momento de ser finalizada.</dd>
+2. Además, puedes generar un documento de diagnóstico en caso que Transbank te lo pida. Para ello, haz click en el botón "Información" ahí podrás descargar un pdf.
 
-  <dd>**Estado rechazado**: Corresponde al estado con el que quedará la orden, al momento de ser rechazada.</dd>
+  <img src="/images/plug/open/webpay/paso10.png" class="rounded mx-auto d-block"/>
 
-  <dd>**Estado Anulado**: Corresponde al estado con el que quedará la orden, al momento de ser anulada.</dd>
+## Prueba de instalación con transacción
 
-  <dd>**Zona geográfica**: All Zones</dd>
+En ambiente de integración es posible realizar una prueba de transacción utilizando un emulador de pagos online.
 
-  <dd>**Estado**: Permite activar o desactivar el medio de pago.</dd>
+* Ingresa al comercio y con la sesión iniciada, ingresa a cualquier sección para agregar productos
 
-  <dd>**Orden**: Orden en el que aparecerá el medio de pago como opción.</dd>
-</dl>
+  <img src="/images/plug/open/webpay/demo1.png" class="rounded mx-auto d-block"/>
 
-### Ejemplo de Compra
+* Agrega al carro de compras un producto, selecciona el carro de compras y luego presiona el botón [Checkout]:
 
-A modo de ejemplo realizaremos la compra de un producto de una tienda y su interacción con el Plugin de Webpay Plus, bajo ambiente de Integración.
+  <img src="/images/plug/open/webpay/demo2.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/open/webpay/08.png" class="rounded mx-auto d-block"/>
+* Ingresa todos los datos requeridos:
 
-Como se puede verificar en la imagen, el **"Pago con Tarjetas de Crédito o Redcompra"** se encuentra disponible como medio de pago dentro del eCommerce.
+  <img src="/images/plug/open/webpay/demo3.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/open/webpay/09.png" class="rounded mx-auto d-block"/>
+* Selecciona método de pago "Pago con Tarjetas de Crédito o Redcompra":
+  
+  <img src="/images/plug/open/webpay/demo4.png" class="rounded mx-auto d-block"/>
 
-El siguiente paso es la presentación del formulario de Webpay Plus, lo que inicia la interacción entre Transbank y tu ECommerce.
+* Presiona el botón [Continuar a Webpay]
 
-<img src="/images/plug/webpay_form/form_01.png" class="rounded mx-auto d-block"/>
+  <img src="/images/plug/open/webpay/demo5.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/webpay_form/form_02.png" class="rounded mx-auto d-block"/>
+* Una vez presionado el botón para iniciar la compra, se mostrará la ventana de pago Webpay y deberás seguir el proceso de pago.
 
-Luego se presenta el formulario del emisor correspondiente a la tarjeta ingresada para validar las claves del usuario. Los datos a ingresar para finalizar la compra son:
-+ Rut: 11.111.111-1
-+ Clave: 123
+Para pruebas puedes usar los siguientes datos:  
 
-Si lo haces con Tarjeta de Crédito, ingresa en el campo asignado los siguientes datos:
-+ Nº tarjeta: 4051885600446623
-+ Rut: 11.111.111-1
-+ Clave: 123
-+ Vencimiento: Cualquiera
-+ Sin cuotas
+* Número de tarjeta: `4051885600446623`
+* Rut: `11.111.111-1`
+* Cvv: `123`
+  
+<img src="/images/plug/open/webpay/demo6.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/webpay_form/form_03.png" class="rounded mx-auto d-block"/>
+<img src="/images/plug/open/webpay/demo7.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/webpay_form/form_04.png" class="rounded mx-auto d-block"/>
+Para pruebas puedes usar los siguientes datos:  
 
-<img src="/images/plug/webpay_form/form_05.png" class="rounded mx-auto d-block"/>
+* Rut: `11.111.111-1`
+* Clave: `123`
 
-Finalmente vemos el Voucher de WebPay Plus con el detalle de la transacción exitosa por parte de Webpay, el que al cabo de algunos segundos nos enviará al resumen de compra de tu eCommerce.
+<img src="/images/plug/open/webpay/demo8.png" class="rounded mx-auto d-block"/>
 
-<img src="/images/plug/open/webpay/14.png" class="rounded mx-auto d-block"/>
+Puedes aceptar o rechazar la transacción
+
+<img src="/images/plug/open/webpay/demo9.png" class="rounded mx-auto d-block"/>
+
+<img src="/images/plug/open/webpay/demo10.png" class="rounded mx-auto d-block"/>
+  
+* Serás redirigido a Opencart y podrás comprobar que el pago ha sido exitoso.
+
+<img src="/images/plug/open/webpay/demo11.png" class="rounded mx-auto d-block"/>
+
+* Además si accedes al sitio de administración sección (Sales / Orders) se podrá ver la orden creada y el detalle de los datos entregados por Webpay.
+
+<img src="/images/plug/open/webpay/order1.png" class="rounded mx-auto d-block"/>
+
+<img src="/images/plug/open/webpay/order2.png" class="rounded mx-auto d-block"/>
