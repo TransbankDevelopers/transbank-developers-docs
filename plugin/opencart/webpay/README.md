@@ -87,6 +87,7 @@ Para acceder a la configuración, debes seguir los siguientes pasos:
 
 2. ¡Ya está! Estás en la pantalla de configuración del plugin, debes ingresar la siguiente información:
 
+  * **Estado**: Habilita o deshabilita el plugin, debes habilitarlo para que funcione como medio de pago en tu comercio.
   * **Ambiente**: Ambiente hacia donde se realiza la transacción. 
   * **Código de comercio**: Es lo que te identifica como comercio.
   * **Llave Privada**: Llave secreta que te autoriza y valida a hacer transacciones.
@@ -95,7 +96,9 @@ Para acceder a la configuración, debes seguir los siguientes pasos:
 
   Las opciones disponibles para _Ambiente_ son: "Integración" para realizar pruebas y certificar la instalación con Transbank, y "Producción" para hacer transacciones reales una vez que Transbank ha aprobado el comercio.
 
-  Asegurate de configurar correctamente los estados de las ordenes:
+### Configuración de los estados de la orden
+
+Asegurate de configurar correctamente los estados de la orden según corresponda a tu comercio:
 
   * **Estado completado**: Estado de una orden exitosa.
   * **Estado rechazado**: Estado de una orden rechazada.
