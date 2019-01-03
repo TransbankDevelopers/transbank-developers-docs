@@ -137,10 +137,13 @@ En el paso 3 más abajo podrás ver más sobre cómo se invoca este _callback_.
 - `transactionDescription` : (Opcional) Texto que representa la descripción general de la compra, se dibujará en el modal sobre el valor del precio.
 
 - `onclose` : (Opcional) Función de callback que será invocada cuando el usuario 
-cierre el ya sea porque se arrepintió de realizar el pago o porque hubo un error 
-en este último y el usuario presiono el botón "Entendido". Esto puede ser útil
+cierre el modal ya sea porque se arrepintió de realizar el pago o porque hubo un error 
+en este último y el usuario presionó el botón "Entendido". Esto puede ser útil
 para el flujo de tu comercio en caso que necesites de alguna forma poder saber y
-tomar control de la acción del usuario al cerrar el modal.
+tomar control de la acción del usuario al cerrar el modal. Los valores que puede
+tener el parámetro `status` son `CANCELED` en caso que usuario cierre al presionar
+el link `No pagar, volver a la pagina del comercio`, o `ERROR` en caso que el 
+usuario presione el botón `Entendido` si un error ocurre en el proceso de pago.
 
 <aside class="notice">
 Tip: En desarrollo puedes comenzar tus URLs de callback con // en lugar de
