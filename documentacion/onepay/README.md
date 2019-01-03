@@ -86,7 +86,10 @@ Onepay.checkout({
   endpoint: './transaction-create',
   commerceLogo: 'https://tu-url.com/images/icons/logo-01.png',
   callbackUrl: './onepay-result',
-  transactionDescription: 'Set de pelotas'
+  transactionDescription: 'Set de pelotas',
+  onclose: function (status) {
+      console.log('el estado recibido es: ', status);
+  }
 });
 ```
 
@@ -129,9 +132,15 @@ ha sido autorizada por el comercio. En este callback el comercio debe hacer la
 confirmación de la transacción, para lo cual dispone de 30 segundos desde que
 la transacción se autorizó, de lo contrario esta sera automáticamente reversada.
 
+En el paso 3 más abajo podrás ver más sobre cómo se invoca este _callback_.
+
 - `transactionDescription` : (Opcional) Texto que representa la descripción general de la compra, se dibujará en el modal sobre el valor del precio.
 
-En el paso 3 más abajo podrás ver más sobre cómo se invoca este _callback_.
+- `onclose` : (Opcional) Función de callback que será invocada cuando el usuario 
+cierre el ya sea porque se arrepintió de realizar el pago o porque hubo un error 
+en este último y el usuario presiono el botón "Entendido". Esto puede ser útil
+para el flujo de tu comercio en caso que necesites de alguna forma poder saber y
+tomar control de la acción del usuario al cerrar el modal.
 
 <aside class="notice">
 Tip: En desarrollo puedes comenzar tus URLs de callback con // en lugar de
