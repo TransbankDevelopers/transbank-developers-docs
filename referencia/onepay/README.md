@@ -1093,7 +1093,16 @@ Finalmente deberás enviar a tu backend la información que recibiste para que [
 
 Para la [modalidad Cortafilas](/documentacion/onepay#integracion-cortafila), hemos dispuesto en el SDK Android un componente que dibujará el QR a partir de la ott.
 
-Para integrar este componente, debes agregar en tu archivo layout:
+Para integrar este componente, debes agregar en el archivo build.gradle del módulo que contiene tu proyecto Android (generalmente en app/build.gradle), las siguientes dependencias:
+
+```
+dependencies {
+	implementation 'com.google.zxing:core:3.3.0'
+	implementation('com.journeyapps:zxing-android-embedded:3.6.0') { transitive = false }
+}
+```    
+
+También debes agregar en tu archivo layout:
 
 ```xml
 <cl.ionix.tbk_ewallet_sdk_android.ui.QROnepayView
