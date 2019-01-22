@@ -1089,5 +1089,22 @@ Si quieres saber más sobre cómo configurar tu `Activity` para que reciba la in
 
 Finalmente deberás enviar a tu backend la información que recibiste para que [confirme la transacción usando el API o uno de nuestros SDK backend](#confirmar-una-transaccion).
 
+### Dibujar QR para implementar modalidad Cortafilas en Android
 
+Para la [modalidad Cortafilas](/documentacion/onepay#integracion-cortafila), hemos dispuesto en el SDK Android un componente que dibujará el QR a partir de la ott.
 
+Para integrar este componente, debes agregar en tu archivo layout:
+
+```xml
+<cl.ionix.tbk_ewallet_sdk_android.ui.QROnepayView
+                android:id="@+id/qr_imageView"
+                android:layout_width="150dp"
+                android:layout_height="150dp" />
+```
+
+Y en la clase Java del Activity o Fragment en donde estás agregando el componente, debes obtener el elemento del layout para setear el ott, de la siguiente forma:
+
+```java
+QROnepayView imageViewQrCode = inflatedView.findViewById(R.id.qr_imageView);
+imageViewQrCode.setOtt(ott);
+```
