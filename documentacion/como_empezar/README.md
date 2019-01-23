@@ -278,8 +278,8 @@ en cómo hacerse cliente en el portal http://www.transbank.cl o contacte a su
 ejecutivo comercial.
 
 En esta etapa, el comercio envía las evidencias a soporte@transbank.cl mediante
-el formulario correspondiente para [**Webpay**](https://www.transbankdevelopers.cl/files/evidencia-integracion-webpay_v2.1-espanol.docx)
-o [**Onepay**](https://www.transbankdevelopers.cl/files/evidencia-de-integracion-onepay_v1.1-espanol.docx), 
+el formulario correspondiente para [**Webpay**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay.docx)
+o [**Onepay**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx), 
 indicando claramente las órdenes de compra, fecha
 y hora de las transacciones.
 
