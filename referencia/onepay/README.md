@@ -1117,3 +1117,21 @@ Y en la clase Java del Activity o Fragment en donde estás agregando el componen
 QROnepayView imageViewQrCode = inflatedView.findViewById(R.id.qr_imageView);
 imageViewQrCode.setOtt(ott);
 ```
+
+### Dibujar QR para implementar modalidad Cortafilas en iOS
+
+Para integrar este componente, puedes hacerlo por una de las dos formas:
+
+* Programáticamente. Dentro la inicialización de tu UIViewController, inicializa la clase QROnepayView y agrégalo a tu vista de la siguiente manera:
+
+```swift
+let qrOnepayView = QROnepayView(ott: "12345678")
+qrOnepayView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+self.view.addSubview(qrOnepayView)
+```
+
+* Usando Storyboards. En el UIViewController, agrega un View para indicar como Custom Class la clase `QROnepayView`. En el código de la implementación del UIViewController, sobre la variable que posee el Outlet de la clase, debes ejecutar lo siguiente:
+
+```swift
+qrOnepayView.setOtt("11111111")
+```
