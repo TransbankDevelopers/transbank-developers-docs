@@ -1093,27 +1093,45 @@ Finalmente deberás enviar a tu backend la información que recibiste para que [
 
 Para la [modalidad Cortafilas](/documentacion/onepay#integracion-cortafila), hemos dispuesto en el SDK Android un componente que dibujará el QR a partir de la ott.
 
-Para integrar este componente, debes agregar en el archivo build.gradle del módulo que contiene tu proyecto Android (generalmente en app/build.gradle), las siguientes dependencias:
+Para integrar este componente, debes agregar en el archivo build.gradle del módulo que contiene tu proyecto Android (generalmente en app/build.gradle).
 
-```
-dependencies {
-	implementation 'com.google.zxing:core:3.3.0'
-	implementation('com.journeyapps:zxing-android-embedded:3.6.0') { transitive = false }
-}
-```    
+> ```
+> dependencies {
+> 	implementation 'com.google.zxing:core:3.3.0'
+> 	implementation('com.journeyapps:zxing-android-embedded:3.6.0') { transitive = false }
+> }
+> ```
 
-También debes agregar en tu archivo layout:
+También debes agregar el componente en tu archivo layout.
 
-```xml
-<cl.ionix.tbk_ewallet_sdk_android.ui.QROnepayView
-                android:id="@+id/qr_imageView"
-                android:layout_width="150dp"
-                android:layout_height="150dp" />
-```
+> ```xml
+> <cl.ionix.tbk_ewallet_sdk_android.ui.QROnepayView
+>                 android:id="@+id/qr_imageView"
+>                 android:layout_width="150dp"
+>                 android:layout_height="150dp" />
+> ```
 
-Y en la clase Java del Activity o Fragment en donde estás agregando el componente, debes obtener el elemento del layout para setear el ott, de la siguiente forma:
+Y en la clase Java del Activity o Fragment en donde estás agregando el componente, debes obtener el elemento del layout para setear el ott.
 
-```java
-QROnepayView imageViewQrCode = inflatedView.findViewById(R.id.qr_imageView);
-imageViewQrCode.setOtt(ott);
-```
+> ```java
+> QROnepayView imageViewQrCode = inflatedView.findViewById(R.id.qr_imageView);
+> imageViewQrCode.setOtt(ott);
+> ```
+
+### Dibujar QR para implementar modalidad Cortafilas en iOS
+
+Para integrar este componente, puedes hacerlo por una de las dos formas:
+
+* Programáticamente. Dentro la inicialización de tu UIViewController, debes inicializar la clase QROnepayView y agregarlo a tu vista.
+
+> ```swift
+> let qrOnepayView = QROnepayView(ott: "12345678")
+> qrOnepayView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+> self.view.addSubview(qrOnepayView)
+> ```
+
+* Usando Storyboards. En el UIViewController, agrega un View para indicar como Custom Class la clase `QROnepayView`. En el código de la implementación del UIViewController, sobre la variable que posee el Outlet de la clase, debes setear el ott.
+
+> ```swift
+> qrOnepayView.setOtt("12345678")
+> ```
