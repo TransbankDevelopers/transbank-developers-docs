@@ -1095,6 +1095,7 @@ Para la [modalidad Cortafilas](/documentacion/onepay#integracion-cortafila), hem
 
 Para integrar este componente, debes agregar en el archivo build.gradle del módulo que contiene tu proyecto Android (generalmente en app/build.gradle).
 
+> En el archivo build.gradle:
 > ```
 > dependencies {
 > 	implementation 'com.google.zxing:core:3.3.0'
@@ -1104,6 +1105,7 @@ Para integrar este componente, debes agregar en el archivo build.gradle del mód
 
 También debes agregar el componente en tu archivo layout.
 
+> En el archivo xml del layout:
 > ```xml
 > <cl.ionix.tbk_ewallet_sdk_android.ui.QROnepayView
 >                 android:id="@+id/qr_imageView"
@@ -1113,7 +1115,8 @@ También debes agregar el componente en tu archivo layout.
 
 Y en la clase Java del Activity o Fragment en donde estás agregando el componente, debes obtener el elemento del layout para setear el ott.
 
-> ```java
+> En la clase encargada del layout:
+> ```
 > QROnepayView imageViewQrCode = inflatedView.findViewById(R.id.qr_imageView);
 > imageViewQrCode.setOtt(ott);
 > ```
@@ -1124,6 +1127,7 @@ Para integrar este componente, puedes hacerlo por una de las dos formas:
 
 * Programáticamente. Dentro la inicialización de tu UIViewController, debes inicializar la clase QROnepayView y agregarlo a tu vista.
 
+> Para incorporarlo programáticamente:
 > ```swift
 > let qrOnepayView = QROnepayView(ott: "12345678")
 > qrOnepayView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
@@ -1132,6 +1136,7 @@ Para integrar este componente, puedes hacerlo por una de las dos formas:
 
 * Usando Storyboards. En el UIViewController, agrega un View para indicar como Custom Class la clase `QROnepayView`. En el código de la implementación del UIViewController, sobre la variable que posee el Outlet de la clase, debes setear el ott.
 
+> Al usar Storyboard:
 > ```swift
 > qrOnepayView.setOtt("12345678")
 > ```
