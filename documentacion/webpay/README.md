@@ -468,7 +468,7 @@ using Transbank.Webpay;
 var configuration = new Configuration()
 {
     CommerceCode = = "12345", // acá va tu código de comercio
-    PrivateCertPfxPath = "C:\Certs\certificado.pfx" // pega acá la ruta a tu archivo pfx o p12
+    PrivateCertPfxPath = @"C:\Certs\certificado.pfx" // pega acá la ruta a tu archivo pfx o p12
     Password = "secret123" // pega acá el secreto con el cual se genero el archivo pfx o p12
 };
 
