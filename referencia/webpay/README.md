@@ -52,15 +52,9 @@ $configuration->setWebpayCert(
 ```
 
 ```csharp
-configuration.WebpayCert =
-    "-----BEGIN CERTIFICATE-----\n" +
-    "MIIEDzCCAvegAwIBAgIJAMaH4DFTKdnJMA0GCSqGSIb3DQEBCwUAMIGdMQswCQYD\n" +
-    "VQQGEwJDTDERMA8GA1UECAwIU2FudGlhZ28xETAPBgNVBAcMCFNhbnRpYWdvMRcw\n" +
-    ...
-    "MX5lzVXafBH/sPd545fBH2J3xAY3jtP764G4M8JayOFzGB0=\n" +
-    "-----END CERTIFICATE-----\n");
+configuration.WebpayCertPath = @"C:\Certs\certificado-publico-transbank.crt"
 ```
-
+ 
 Para validar las respuestas generadas por transbank debes usar un certificado
 público de webpay. En [el repositorio github
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
@@ -120,16 +114,8 @@ $configuration->setPublicCert(
 
 ```csharp
 configuration.CommerceCode = "597020000540";
-configuration.PrivateKey =
-    "-----BEGIN RSA PRIVATE KEY-----\n" +
-    ... +
-    "-----END RSA PRIVATE KEY-----\n"
-);
-configuration.PublicCert =
-    "-----BEGIN CERTIFICATE-----\n" +
-    ... +
-    "-----END CERTIFICATE-----\n"
-);
+configuration.PrivateCertPfxPath = @"C:/Path/to/private/Cert.pfx";
+configuration.Password = "PfxPassword";
 ```
 
 Todas las peticiones que hagas deben estar firmadas con tu llave privada y
@@ -139,6 +125,14 @@ código de comercio usado en cada petición.
 <aside class="notice">
 Ten en cuenta que tu(s) código(s) de comercio en ambiente de producción no son
 iguales a los entregados para el ambiente de integración.
+</aside>
+
+<aside class="warning">
+A diferencia de otros SDK, en .NET debes especificar la ruta a un archivo pfx o p12
+el cual debes generar tu a partir de tu llave privada y certificado público.
+
+Puedes mirar el siguiente enlace para obtener una guía rápida de como generar tu 
+propio archivo: [Crear archivo pfx usando openssl](https://www.ssl.com/how-to/create-a-pfx-p12-certificate-file-using-openssl/) 
 </aside>
 
 Consulta [la documentación para generar una llave privada y un certificado
@@ -183,13 +177,13 @@ $configuration = Configuration::forTestingWebpayOneClickNormal();
 ```
 
 ```csharp
-var configuration = Configuration.ForTestingWebpayPlusNormal;
+var configuration = Configuration.ForTestingWebpayPlusNormal();
 
-var configuration = Configuration.ForTestingWebpayPlusCapture;
+var configuration = Configuration.ForTestingWebpayPlusCapture();
 
-var configuration = Configuration.ForTestingWebpayPlusMall;
+var configuration = Configuration.ForTestingWebpayPlusMall();
 
-var configuration = Configuration.ForTestingWebpayOneClickNormal;
+var configuration = Configuration.ForTestingWebpayOneClickNormal();
 ```
 
 ## Webpay Plus Normal
@@ -664,9 +658,9 @@ $initResult = $transaction->initTransaction(
 var transactions = new Dictionary<string, string[]>();
 
 transactions.Add(storeCode,
-    new string[] {amount, buyOrder, sessionId});
+    new string[] {storeCode, amount, buyOrder});
 transactions.Add(anotherStoreCode,
-    new string[] {anotherAmount, anotherBuyOrder, anotherSessionId});
+    new string[] {anotherStoreCode, anotherAmount, anotherBuyOrder});
 
 var initResult = transaction.initTransaction(
     buyOrder, sessionId, returnUrl, finalUrl, transactions);
@@ -1334,16 +1328,16 @@ realizar las transacciones de pago.
 
 ```java
 OneClickFinishInscriptionOutput result =
-    transaction.getTransactionResult(
+    transaction.finishInscription(
         request.getParameter("TBK_TOKEN"));
 ```
 ```php
-$result = $transaction->getTransactionResult(
+$result = $transaction->finishInscription(
     $request->input("TBK_TOKEN"));
 ```
 
 ```csharp
-var result = transaction.getTransactionResult(tbkToken);
+var result = transaction.finishInscription(tbkToken);
 ```
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -1531,7 +1525,7 @@ $success = $transaction->removeUser($tbkUser, $username);
 ```
 
 ```csharp
-var success = transaction.removeUser(tbkUser, username);
+var success = transaction.RemoveUser(tbkUser, username);
 ```
 
 **Parámetros**

@@ -39,8 +39,11 @@ $transaction = (new Webpay(Configuration::forTestingWebpayPlusNormal()))
 ```
 
 ```csharp
+using Transbank.Webpay;
+//...
+
 var transaction =
-    new Webpay(Configuration.ForTestingWebpayPlusNormal).NormalTransaction;
+    new Webpay(Configuration.ForTestingWebpayPlusNormal()).NormalTransaction;
 ```
 
 <aside class="notice">
@@ -85,11 +88,14 @@ $tokenWs = $initResult->token;
 ```
 
 ```csharp
+using Transbank.Webpay;
+//...
+
 var amount = 1000;
 // Identificador que será retornado en el callback de resultado:
 var sessionId = "mi-id-de-sesion";
 // Identificador único de orden de compra:
-var buyOrder = new Random().next(100000, 999999999).ToString();
+var buyOrder = new Random().Next(100000, 999999999).ToString();
 var returnUrl = "https://callback/resultado/de/transaccion";
 var finalUrl = "https://callback/final/post/comprobante/webpay";
 var initResult = transaction.initTransaction(
@@ -145,6 +151,9 @@ if ($output->responseCode == 0) {
 ```
 
 ```csharp
+using Transbank.Webpay;
+//...
+
 var result = transaction.getTransactionResult(tokenWs);
 var output = result.detailOutput[0];
 if (output.responseCode == 0) {
@@ -214,8 +223,11 @@ $transaction =
 ```
 
 ```csharp
+using Transbank.Webpay;
+//...
+
 var transaction =
-    new Webpay(Configuration.ForTestingWebpayOneClickNormal)
+    new Webpay(Configuration.ForTestingWebpayOneClickNormal())
     .OneClickTransaction;
 ```
 
@@ -255,6 +267,9 @@ $tbkToken = $initResult->token;
 ```
 
 ```csharp
+using Transbank.Webpay;
+//...
+
 // Identificador del usuario en el comercio
 var username = "pepito"
 // Correo electrónico del usuario
@@ -302,6 +317,9 @@ if ($result->responseCode == 0) {
 ```
 
 ```csharp
+using Transbank.Webpay;
+//...
+
 var result = transaction.finishInscription(tbkToken);
 if (result.responseCode == 0) {
     // Inscripcion exitosa.
@@ -350,6 +368,9 @@ if ($output->responseCode == 0) {
 ```
 
 ```csharp
+using Transbank.Webpay;
+//...
+
 var buyOrder = new Random().next(100000, 999999999);
 var tbkUser = tbkUserRetornadoPorFinishInscription;
 var username = "pepito"; // El mismo usado en initInscription.
@@ -441,25 +462,29 @@ $oneClickTransaction = $webpay->getOneClickTransaction();
 ```
 
 ```csharp
-Configuration configuration = new Configuration();
-configuration.CommerceCode = "12345"; // acá va tu código de comercio
-configuration.PrivateKey =  // pega acá la llave privada de tu certificado
-    "-----BEGIN RSA PRIVATE KEY-----\n" +
-    "MIIEpQIBAAKCAQEA0ClVcH8RC1u+KpCPUnzYSIcmyXI87REsBkQzaA1QJe4w/B7g\n" +
-    //....
-    "MtdweTnQt73lN2cnYedRUhw9UTfPzYu7jdXCUAyAD4IEjFQrswk2x04=\n" +
-    "-----END RSA PRIVATE KEY-----");
-configuration.PublicCert = // pega acá tu certificado público
-    "-----BEGIN CERTIFICATE-----\n" +
-    "MIIDujCCAqICCQCZ42cY33KRTzANBgkqhkiG9w0BAQsFADCBnjELMAkGA1UEBhMC\n" +
-    //....
-    "-----END CERTIFICATE-----");
+using Transbank.Webpay;
+//...
+
+var configuration = new Configuration()
+{
+    CommerceCode = = "12345", // acá va tu código de comercio
+    PrivateCertPfxPath = @"C:\Certs\certificado.pfx" // pega acá la ruta a tu archivo pfx o p12
+    Password = "secret123" // pega acá el secreto con el cual se genero el archivo pfx o p12
+};
 
 var webpay = new Webpay(configuration);
 // Ahora puedes obtener las instancias de las transacciones
 // que usarás, por ejemplo:
 var oneClickTransaction = webpay.OneClickTransaction;
 ```
+
+<aside class="warning">
+A diferencia de otros SDK, en .NET debes especificar la ruta a un archivo pfx o p12
+el cual debes generar tu a partir de tu llave privada y certificado público.
+
+Puedes mirar el siguiente enlace para obtener una guía rápida de como generar tu 
+propio archivo: [Crear archivo pfx usando openssl](https://www.ssl.com/how-to/create-a-pfx-p12-certificate-file-using-openssl/) 
+</aside>
 
 ### Apuntar a producción
 
@@ -485,9 +510,14 @@ $configuration->setEnvironment("PRODUCCION");
 ```
 
 ```csharp
-Configuration configuration = new Configuration();
-configuration.Environment = "PRODUCCION";
-// agregar también configuración del código de comercio y certificados
+using Transbank.Webpay;
+//...
+
+Configuration configuration = new Configuration()
+{
+    Environment = "PRODUCCION";
+    // agregar también configuración del código de comercio y certificados
+}
 ```
 
 <aside class="warning">
