@@ -53,7 +53,6 @@ PM> Install-Package TransbankSDK
 
 Te recomendamos leer [las instrucciones de instalación detalladas para el SDK .NET](https://github.com/TransbankDevelopers/transbank-sdk-dotnet#instalaci%C3%B3n) para mas opciones de instalación.
 
-(Por ahora el SDK soporta sólo Onepay. Para Webpay en .NET debes seguir usando [libwebpay](https://github.com/TransbankDevelopers/libwebpay-dotnet), pero muy prontamente ese código será mejorado e incorporado en TransbankSDK)
 
 [En 
 **Ruby**](https://github.com/TransbankDevelopers/transbank-sdk-ruby#instalaci%C3%B3n) puedes instalar el SDK como una gema:
