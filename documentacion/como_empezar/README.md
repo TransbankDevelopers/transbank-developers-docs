@@ -385,9 +385,13 @@ Pruebas de validación para Webpay Normal más captura diferida:
 - Pago crédito exitoso sin cuotas
 - Pago crédito exitoso con cuotas
 - Pago crédito denegado
-- Pago cancelado (abortado en formulario Webpay) - Anulación parcial (solo si
-  integra el método)
+- Pago débito exitoso
+- Pago débito denegado
+- Anulación parcial (solo si integra el método)
 - Anulación total (solo si integra el método)
+- Pago cancelado (abortado en formulario Webpay)
+- Pago crédito con Captura Diferida por el total del monto autorizado en la transacción original
+- Pago crédito con Captura Diferida por monto menor al autorizado en la transacción original
 
 Pruebas de validación para Transacción Mall:
 
@@ -402,11 +406,20 @@ Pruebas de validación para Transacción Mall:
 
 Pruebas de validación para Transacción OneClick:
 
-- Inscripción rechazada
 - Inscripción exitosa
-- Autorización
-- Reversa
+- Inscripción rechazada
 - Remover usuario
+- Venta Autorizada
+- Venta Rechazada (Para validar rechazo en Integración, debe realizar una transacción superior a 10 millones)
+- Venta Reversada
+
+Pruebas de validación para Onepay
+
+- Pago crédito exitoso sin cuotas
+- Pago crédito exitoso con cuotas
+- Reversa de pago sin cuotas
+- Pago cancelado
+- Anulación total (solo si integra el método)
 
 <div class="container slate">
   <div class='slate-after-footer'>
