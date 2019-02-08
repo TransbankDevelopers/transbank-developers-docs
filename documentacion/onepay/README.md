@@ -915,7 +915,7 @@ ejecutado repetidas veces.
 
 ### 5. Aplicación demostrativa
 
-Si quieres ver el ejemplo funcional de una aplicación integrando Cortafilas, puedes revisar las demostraciones disponibles. Descarga la [aplicación  Android](https://play.google.com/store/apps/details?id=cl.transbank.onepay.pos) mirando su [código fuente](https://github.com/TransbankDevelopers/transbank-example-cortafilas-android-onepay), o dirígete a [la aplicación web](http://cortafilas-onepay.herokuapp.com) con su respectivo [código fuente](https://github.com/TransbankDevelopers/transbank-example-cortafilas-backend-onepay).
+Si quieres ver el ejemplo funcional de una aplicación integrando Cortafilas, puedes revisar las demostraciones disponibles. Descarga la [aplicación  Android](https://play.google.com/store/apps/details?id=cl.transbank.onepay.pos) mirando su [código fuente](https://github.com/TransbankDevelopers/demo-onepay-cortafila-android), o dirígete a [la aplicación web](http://cortafilas-onepay.herokuapp.com) con su respectivo [código fuente](https://github.com/TransbankDevelopers/demo-onepay-cortafila-backend).
 
 ## Credenciales del comercio
 
