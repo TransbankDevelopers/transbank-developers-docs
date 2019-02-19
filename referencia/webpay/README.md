@@ -54,7 +54,7 @@ $configuration->setWebpayCert(
 ```csharp
 configuration.WebpayCertPath = @"C:\Certs\certificado-publico-transbank.crt"
 ```
- 
+
 Para validar las respuestas generadas por transbank debes usar un certificado
 público de webpay. En [el repositorio github
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
@@ -1364,7 +1364,7 @@ $result->tbkUser;
 ```csharp
 result.responseCode;
 result.authCode;
-result.creditCardType.Value;
+result.creditCardType;
 result.last4CardDigits;
 result.tbkUser;
 ```
@@ -1422,6 +1422,7 @@ output.getLast4CardDigits();
 output.getTransactionId();
 output.getResponseCode();
 ```
+
 ```php
 $output->authorizationCode;
 $output->creditCardType;
@@ -1432,12 +1433,11 @@ $output->responseCode;
 
 ```csharp
 output.authorizationCode;
-output.creditCardType.value;
+output.creditCardType;
 output.last4CardDigits;
 output.transactionId;
 output.responseCode;
 ```
-
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1476,7 +1476,6 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buyorder  <br> <i> xs:long </i> | Orden de compra de la transacción a reversar.
 
-
 **Respuesta**
 
 ```java
@@ -1490,9 +1489,10 @@ $result->success;
 ```
 
 ```csharp
-// El SDK .NET solo entrega el booleano de estado, no el código de reversa :(
-result.success;
+result.reversed;
+result.reverseCode;
 ```
+
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 reversed  <br> <i> xs:boolean </i> | Indica si tuvo éxito la reversa.
