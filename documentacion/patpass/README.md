@@ -34,7 +34,14 @@ PENDIENTE
 ```
 
 ```csharp
-PENDIENTE
+using Transbank.PatPass;
+using Transbank.Webpay;
+using Transbank.Webpay.Wsdl.Normal;
+//...
+
+PatPassByWebpayNormal transaction = new Webpay(
+    Configuration.ForTestingPatPassByWebpayNormal("testpatpassbywebpay@mailinator.com")).
+        PatPassByWebpayTransaction;
 ```
 
 <aside class="notice">
@@ -75,12 +82,38 @@ PENDIENTE
 ```
 
 ```csharp
-PENDIENTE
+using Transbank.PatPass;
+using Transbank.Webpay;
+using Transbank.Webpay.Wsdl.Normal;
+//...
+
+decimal amount = 1000; // monto a cobrar cada mes
+string sessionId = "identificador que será retornado en el callback de resultado";
+string buyOrder = "identificador único de orden de compra";
+string returnUrl = "https://callback/resultado/de/transaccion";
+string finalUrl = "https://callback/final/post/comprobante/webpay";
+
+PatPassInfo info = new PatPassInfo
+{
+    ServiceId = "335456675433",
+    CardHolderId = "11.111.111-1",
+    CardHolderName = "Juan Pedro",
+    CardHolderLastName1 = "Alarcón",
+    CardHolderLastName2 = "Perez",
+    CardHolderMail = "example@example.com",
+    CellPhoneNumber = "1234567",
+    ExpirationDate = new System.DateTime(2019, 01, 01)
+};
+wsInitTransactionOutput initResult = transaction.initTransaction(
+    amount, buyOrder, sessionId, returnUrl, finalUrl, info);
+
+string formAction = initResult.url;
+string wsToken = initResult.token;
 ```
 
 Todo es muy similar a Webpay Normal, con la única diferencia de la información
 específica de PatPass que incluye los datos personales del usuario (donde es
-importante el correo electrónico para las notificaciones de patmass) y la fecha
+importante el correo electrónico para las notificaciones de PatPass) y la fecha
 de expiración de la suscripción.
 
 La URL y el token retornados te indican donde debes redirigir al usuario para
@@ -96,7 +129,6 @@ el RUT 11.111.111-1 y la clave 123. Para pruebas exhaustivas [consulta todas las
 tarjetas de prueba en la sección de
 Ambientes](/documentacion/como_empezar#ambientes).
 </aside>
-
 
 ### Confirmar una suscripción
 
@@ -125,7 +157,18 @@ PENDIENTE
 ```
 
 ```csharp
-PENDIENTE
+using Transbank.PatPass;
+using Transbank.Webpay;
+using Transbank.Webpay.Wsdl.Normal;
+//..
+
+transactionResultOutput result =
+    transaction.getTransactionResult(Request.Form["token_ws"]);
+wsTransactionDetailOutput output = result.detailOutput[0];
+if (output.responseCode == 0){
+    // Suscripción exitosa, puedes procesar el resultado con el contenido de
+    // las variables result y output.
+}
 ```
 
 > Los SDKs se encarga de que al mismo tiempo que se obtiene el resultado de la
@@ -135,8 +178,21 @@ PENDIENTE
 En el caso exitoso deberás llevar el control vía `POST` nuevamente a Webpay para
 que el tarjetahabiente vea el comprobante que le deja claro que se ha realizado
 el cargo en su tarjeta. Nuevamente deberás generar un formulario con el
-`token_ws` como un campo hidden. La URL para redirigir la debes obtener desde
-`result.getUrlRedirection()`.
+`token_ws` como un campo hidden. La URL para redirigir la debes obtener desde:
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+result.getUrlRedirection()
+```
+
+```php
+PENDIENTE
+```
+
+```csharp
+result.urlRedirection
+```
 
 Finalmente después del comprobante Webpay redirigirá otra vez (vía `POST`) a tu
 sitio, esta vez a la URL que indicaste en el `finalUrl` cuando iniciaste la
@@ -146,7 +202,7 @@ usuario.
 
 ## Credenciales y Ambiente
 
-Las credenciales de PatPass by Webpay se configuran de igual forma a las Webpay
+Las credenciales de PatPass by Webpay se configuran de igual forma a las
 transacciones Webpay: en base a un objeto `Configuration`. Y si bien para hacer
 pruebas iniciales pueden usarse las credenciales pre-configuradas (como se puede
 ver en todos los ejemplos anteriores), para poder superar el [proceso de
@@ -193,8 +249,33 @@ PENDIENTE
 ```
 
 ```csharp
-PENDIENTE
+using Transbank.PatPass;
+using Transbank.Webpay;
+using Transbank.Webpay.Wsdl.Normal;
+//..
+
+Configuration configuration = new Configuration()
+{
+    CommerceCode = "12345", // acá va tu código de comercio
+    PrivateCertPfxPath = @"C:\Certs\certificado.pfx", // pega acá la ruta a tu archivo pfx o p12
+    Password = "secret123" // pega acá el secreto con el cual se genero el archivo pfx o p12
+    CommerceMail = "mail-para-notificaciones-patpass@micomercio.cl",
+    PatPassCurrency = PatPassByWebpayNormal.Currency.DEFAULT
+};
+
+Webpay webpay = new Webpay(configuration);
+// Ahora puedes obtener las instancias de las transacciones
+// que usarás, por ejemplo:
+PatPassByWebpayNormal patPassTransaction = webpay.PatPassByWebpayTransaction;
 ```
+
+<aside class="warning">
+A diferencia de otros SDK, en .NET debes especificar la ruta a un archivo pfx o p12
+el cual debes generar tu a partir de tu llave privada y certificado público.
+
+Puedes mirar el siguiente enlace para obtener una guía rápida de como generar tu
+propio archivo: [Crear archivo pfx usando openssl](https://www.ssl.com/how-to/create-a-pfx-p12-certificate-file-using-openssl/)
+</aside>
 
 ### Apuntar a producción
 
@@ -215,7 +296,9 @@ PENDIENTE
 ```
 
 ```csharp
-PENDIENTE
+Configuration configuration = new Configuration();
+configuration.Environment("PRODUCCION");
+// agregar también configuración del código de comercio y certificados
 ```
 
 <aside class="warning">
