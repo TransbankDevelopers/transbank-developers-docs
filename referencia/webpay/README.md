@@ -916,11 +916,11 @@ WebpayCapture transaction =
 
 // Para comercios Webpay Plus Normal
 CaptureOutput captureResult = transaction.capture(
-    authorizationCode, captureAmount, buyOrder);
+    authorizationCode, capturedAmount, buyOrder);
 
 // Para comercios Webpay Plus Mall
 CaptureOutput captureResult = transaction.capture(
-    authorizationCode, captureAmount, buyOrder, storeCommerceCode);
+    authorizationCode, capturedAmount, buyOrder, storeCommerceCode);
 
 ```
 
@@ -929,11 +929,11 @@ $transaction = (new Webpay(configuration))->getCaptureTransaction();
 
 // Para comercios Webpay Plus Normal
 $captureResult = transaction.capture(
-    $authorizationCode, $captureAmount, $buyOrder);
+    $authorizationCode, $capturedAmount, $buyOrder);
 
 // Para comercios Webpay Plus Mall
 $captureResult = transaction.capture(
-    $authorizationCode, $captureAmount, $buyOrder, $storeCommerceCode);
+    $authorizationCode, $capturedAmount, $buyOrder, $storeCommerceCode);
 ```
 
 ```csharp
@@ -941,11 +941,11 @@ var transaction = new Webpay(configuration).CaptureTransaction;
 
 // Para comercios Webpay Plus Normal
 var captureResult = transaction.capture(
-    authorizationCode, captureAmount, buyOrder);
+    authorizationCode, capturedAmount, buyOrder);
 
 // Para comercios Webpay Plus Mall
 var captureResult = transaction.capture(
-    authorizationCode, captureAmount, buyOrder, storeCommerceCode);
+    authorizationCode, capturedAmount, buyOrder, storeCommerceCode);
 
 ```
 
@@ -956,7 +956,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
 buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
 commerceId  <br> <i> xs:long </i> | Código de comercio o tienda mall que realizó la transacción. Largo: 12.
-captureAmount  <br> <i> xs:decimal </i> | Monto que se desea capturar. Largo máximo: 10.
+capturedAmount  <br> <i> xs:decimal </i> | Monto que se desea capturar. Largo máximo: 10.
 
 **Respuesta**
 
@@ -964,21 +964,21 @@ captureAmount  <br> <i> xs:decimal </i> | Monto que se desea capturar. Largo ma
 captureResult.getToken();
 captureResult.getAuthorizationCode();
 captureResult.getAuthorizationDate();
-captureResult.getCaptureAmount();
+captureResult.getCapturedAmount();
 ```
 
 ```php
 $captureResult->token;
 $captureResult->authorizationCode;
 $captureResult->authorizationDate;
-$captureResult->captureAmount;
+$captureResult->capturedAmount;
 ```
 
 ```csharp
 captureResult.token;
 captureResult.authorizationCode;
 captureResult.authorizationDate;
-captureResult.captureAmount;
+captureResult.capturedAmount;
 ```
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -986,7 +986,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 token  <br> <i> xs:string </i> | Token de la transacción.
 authorizationCode  <br> <i> xs:string </i> | Código de autorización de la captura diferida.
 authorizationDate  <br> <i> xs:string </i> | Fecha y hora de la autorización.
-captureAmount  <br> <i> xs:decimal </i> | Monto capturado.
+capturedAmount  <br> <i> xs:decimal </i> | Monto capturado.
 
 
 En caso de error pueden aparecer los siguientes códigos exclusivos del método
