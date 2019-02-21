@@ -1094,8 +1094,8 @@ var result = transaction.nullify(
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción que se requiere anular. Para el caso que se esté anulando una transacción de captura en línea, este código corresponde al código de autorización de la captura. Largo máximo: 6.
-authorizedAmount  <br> <i> xs:decimal </i> | Monto autorizado de la transacción que se requiere anular. Para el caso que se esté anulando una transacción de captura en línea, este monto corresponde al monto de la captura. Largo máximo: 10.
+authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción que se requiere anular. Si la transacción es de captura diferida, se debe usar el código obtenido al llamar a `capture()`. Largo máximo: 6.
+authorizedAmount  <br> <i> xs:decimal </i> | Monto autorizado de la transacción que se requiere anular. Si la transacción es de captura diferida, se debe usar el monto capturado cuando se invocó a `capture()`. Largo máximo: 10.
 buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se requiere anular. Largo máximo: 26.
 nullifyAmount  <br> <i> xs:decimal </i> | Monto que se desea anular de la transacción. Largo máximo: 10.
 commerceId  <br> <i> xs:long </i> | Código de comercio o tienda mall que realizó la transacción. Largo: 12.
