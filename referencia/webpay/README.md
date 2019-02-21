@@ -54,7 +54,7 @@ $configuration->setWebpayCert(
 ```csharp
 configuration.WebpayCertPath = @"C:\Certs\certificado-publico-transbank.crt"
 ```
- 
+
 Para validar las respuestas generadas por transbank debes usar un certificado
 público de webpay. En [el repositorio github
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
@@ -131,8 +131,8 @@ iguales a los entregados para el ambiente de integración.
 A diferencia de otros SDK, en .NET debes especificar la ruta a un archivo pfx o p12
 el cual debes generar tu a partir de tu llave privada y certificado público.
 
-Puedes mirar el siguiente enlace para obtener una guía rápida de como generar tu 
-propio archivo: [Crear archivo pfx usando openssl](https://www.ssl.com/how-to/create-a-pfx-p12-certificate-file-using-openssl/) 
+Puedes mirar el siguiente enlace para obtener una guía rápida de como generar tu
+propio archivo: [Crear archivo pfx usando openssl](https://www.ssl.com/how-to/create-a-pfx-p12-certificate-file-using-openssl/)
 </aside>
 
 Consulta [la documentación para generar una llave privada y un certificado
@@ -366,14 +366,14 @@ var initResult = transaction.initTransaction(
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-WSTransactionType  <br> <i> wsTransactionType </i> | Indica el tipo de transacción, su valor debe ser siempre TR_NORMAL_WS para transacciones normales. Los SDKs se encargan automáticamente de este parámetro.
+WSTransactionType  <br> <i> wsTransactionType </i> | Indica el tipo de transacción, su valor debe ser siempre TR_NORMAL_WS para transacciones normales. Los SDKs se encargan automáticamente de este parámetro
 sessionId  <br> <i> xs:string </i> | (Opcional) Identificador de sesión, uso interno de comercio, este valor es devuelto al final de la transacción. Largo máximo: 61
-returnURL  <br> <i> xs:anyURI </i> | URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización Largo máximo: 256.
+returnURL  <br> <i> xs:anyURI </i> | URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización. Largo máximo: 256
 finalURL  <br> <i>xs:anyURI </i> | URL del comercio a la cual Webpay redireccionará posterior al voucher de éxito de Webpay. Largo máximo 256
-transactionDetails  <br> <i>wsTransactionDetail </i> | Lista de objetos del tipo wsTransactionDetail, el cual contiene datos de la transacción. Para transacciones normales debe contener exactamente un elemento.
-transactionDetails[0].amount  <br> <i> xs:decimal </i> | Monto de la transacción. Máximo 2 decimales para USD. Largo máximo: 10.
-transactionDetails[0].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>.
-transactionDetails[0].commerceCode  <br> <i>xs:string </i> | Código comercio de la tienda entregado por Transbank. Largo: 12. Los SDKs se encargan automáticamente de este parámetro a partir de la configuración de comercio y certificados/llaves usada para iniciar la transacción.
+transactionDetails  <br> <i>wsTransactionDetail </i> | Lista de objetos del tipo wsTransactionDetail, el cual contiene datos de la transacción. Para transacciones normales debe contener exactamente un elemento
+transactionDetails[0].amount  <br> <i> xs:decimal </i> | Monto de la transacción. Máximo 2 decimales para USD. Largo máximo: 10
+transactionDetails[0].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>
+transactionDetails[0].commerceCode  <br> <i>xs:string </i> | Código comercio de la tienda entregado por Transbank. Largo: 12. Los SDKs se encargan automáticamente de este parámetro a partir de la configuración de comercio y certificados/llaves usada para iniciar la transacción
 
 **Respuesta**
 
@@ -381,6 +381,7 @@ transactionDetails[0].commerceCode  <br> <i>xs:string </i> | Código comercio d
 initResult.getToken();
 initResult.getUrl();
 ```
+
 ```php
 $initResult->token;
 $initResult->url;
@@ -398,7 +399,7 @@ url  <br> <i> xs:string </i> | URL de formulario de pago Webpay. Largo máximo:
 
 ### Confirmar una transacción Webpay Plus Normal
 
-Cuando el comercio retoma el control mediante `returnURL` puede confirmar una
+Cuando el comercio retoma el control mediante `returnURL` puedes confirmar una
 transacción usando los métodos  `getTransactionResult()` y
 `acknowledgeTransaction()`
 
@@ -411,6 +412,7 @@ TransactionResultOutput result =
     transaction.getTransactionResult(
         request.getParameter("token_ws"));
 ```
+
 ```php
 $result = transaction->getTransactionResult(
     $request->input("token_ws"));
@@ -451,6 +453,7 @@ if (output.getResponseCode() == 0) {
     output.getBuyOrder();
 }
 ```
+
 ```php
 $output = $result->detailOutput;
 if ($output->responseCode == 0) {
@@ -493,16 +496,14 @@ if (output.responseCode == 0) {
     output.commerceCode;
     output.buyOrder;
 }
-
 ```
-
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda indicado en `initTransaction()`. Largo máximo: 26
 sessionId  <br> <i> xs:string </i> | Identificador de sesión, el mismo enviado originalmente por el comercio en `initTransaction()`. Largo máximo: 61.
 cardDetails  <br> <i> carddetails </i> | Objeto que representa los datos de la tarjeta de crédito del tarjeta habiente.
-cardDetails.cardNumber  <br> <i> xs:string </i> | 4 últimos números de la tarjeta de crédito del tarjetahabiente.Solo para comercios autorizados por Transbank se envía el número completo. Largo máximo: 16.
+cardDetails.cardNumber  <br> <i> xs:string </i> | 4 últimos números de la tarjeta de crédito del tarjetahabiente. Solo para comercios autorizados por Transbank se envía el número completo. Largo máximo: 16.
 cardDetails.cardExpirationDate  <br> <i> xs:string </i> |(Opcional) Fecha de expiración de la tarjeta de crédito del tarjetahabiente. Formato YYMM Solo para comercios autorizados por Transbank. Largo máximo: 4
 accoutingDate  <br> <i> xs:string </i> | Fecha de la autorización. Largo: 4, formato MMDD
 transactionDate  <br> <i> xs:string </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
