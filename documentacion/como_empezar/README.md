@@ -232,7 +232,7 @@ State or Province Name (full name) []:
 Locality Name (eg, city) []:SANTIAGO
 Organization Name (eg, company) []:
 Organizational Unit Name (eg, section) []:
-Common Name (eg, your name or your server’s hostname) []:*597029124456*
+Common Name (eg, your name or your server’s hostname) []:597029124456
 Email Address []:
 Please enter the following ‘extra’ attributes
 to be sent with your certificate request
