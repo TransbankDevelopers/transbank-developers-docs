@@ -127,7 +127,7 @@ Las transacciones Webpay **realizadas con tarjeta de crédito** pueden ser anula
 
 Las anulaciones pueden ser totales o parciales. **Las anulaciones parciales solo están permitidas en la modalidad de Venta Normal (VN)**. En caso que la transacción haya sido abonada al comercio, la anulación generará una retención en los siguientes abonos por el monto previamente autorizado.
 
-El comercio tiene un plazo de 30 días desde la fecha de venta para anular transacciones vía servicios web, a partir de la fecha de la venta.
+El comercio tiene un plazo de 90 días desde la fecha de venta para anular transacciones vía servicios web, a partir de la fecha de la venta.
 
 <div class="container slate">
   <div class='slate-after-footer'>

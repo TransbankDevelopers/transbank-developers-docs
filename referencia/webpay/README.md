@@ -1026,7 +1026,7 @@ una segunda anulación parcial se retornará una `Exception`.
 Las ejecuciones con errores entregarán un SoapFault de acuerdo a la
 codificación de errores definida mas abajo.
 
-La anulación puede realizarse máximo 30 días después de la fecha de la
+La anulación puede realizarse máximo 90 días después de la fecha de la
 transacción original.
 
 Puedes [leer más sobre la anulación en la información del
