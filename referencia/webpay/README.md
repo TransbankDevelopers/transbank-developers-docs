@@ -136,7 +136,7 @@ propio archivo: [Crear archivo pfx usando openssl](https://www.ssl.com/how-to/cr
 </aside>
 
 Consulta [la documentación para generar una llave privada y un certificado
-usando openssl](/documentacion/como_empezar#credenciales-en-webpay) si
+usando openssl](/documentacion/como_empezar#credenciales-en-webpay-y-patpass) si
 no sabes aún como realizarlo.
 
 En [el repositorio github

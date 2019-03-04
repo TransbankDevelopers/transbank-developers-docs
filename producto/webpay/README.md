@@ -65,6 +65,11 @@ El modelo de pago contempla un proceso previo de inscripción o enrolamiento de
 
 4. Finalizada la autorización, Webpay entrega al comercio la información que le permitirá realizar realizar cobros a futuro usando [otro servicio web provisto para ese fin](/documentacion/webpay#realizar-transacciones).
 
+El tipo de transacción OneClick es útil para bajar la fricción en comercios en
+los cuales el tarjetahabiente realiza compras frecuentemente pero sin un patrón
+fijo. En el caso de suscripciones mensuales se debe utilizar
+[PatPass](patpass).
+
  Al no contar con sistema de autenticación bancaria en los cargos que se realizan después de la autorización, será el comercio el responsable de asumir el riesgo de fraude o desconocimientos de compra que realice un tarjetahabiente.
 
 ### Webpay OneClick Mall
