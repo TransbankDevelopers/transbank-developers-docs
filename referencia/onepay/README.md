@@ -121,7 +121,7 @@ onepay.shared_secret = "secreto-entregado-por-transbank"
 </aside>
 
 ### Simulador de Transacciones
-Dentro del flujo de venta, puedes utilizar un simulador de transacciones donde podras generar casos de éxito y fracaso, para utilizarlo sigue los siguientes pasos:
+Dentro del flujo de venta, puedes utilizar un simulador de transacciones donde podrás generar casos de éxito y fracaso, para utilizarlo sigue los siguientes pasos:
 
 * Una vez presionado el botón para iniciar la compra, se mostrará la ventana de pago Onepay, tal como se ve en la imagen. Toma nota del número que aparece como "Código de compra", ya que lo necesitarás para emular el pago en el siguiente paso.
   ![Paso 1](/images/referencia/onepay/sim1.png)
@@ -129,7 +129,7 @@ Dentro del flujo de venta, puedes utilizar un simulador de transacciones donde p
 * En otra ventana del navegador, ingresa al emulador de pagos desde [https://onepay.ionix.cl/mobile-payment-emulator/](https://onepay.ionix.cl/mobile-payment-emulator/), utiliza test@onepay.cl como correo electrónico, y el código de compra obtenido desde la pantalla anterior. Una vez ingresado los datos solicitados, presiona el botón "Iniciar Pago":
   ![Paso 2](/images/referencia/onepay/sim2.png)
 
-* Si todo va bien, el emulador mostrará opciones para simular situaciones distintas. Para simular un pago exitoso, presiona el botón `PRE_AUTHORIZED`. En caso de querer simular un pago fallido, presiona le botón `REJECTED`. Simularemos un pago exitóso presionando el botón `PRE_AUTHORIZED`.
+* Si todo va bien, el emulador mostrará opciones para simular situaciones distintas. Para simular un pago exitoso, presiona el botón `PRE_AUTHORIZED`. En caso de querer simular un pago fallido, presiona le botón `REJECTED`. Simularemos un pago exitoso presionando el botón `PRE_AUTHORIZED`.
   ![Paso 3](/images/referencia/onepay/sim3.png)
 
 * Vuelve a la ventana del navegador donde comenzaste, y podrás comprobar que el pago ha sido exitoso.
