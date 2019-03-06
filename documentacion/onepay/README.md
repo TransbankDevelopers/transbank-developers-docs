@@ -352,6 +352,8 @@ y también recibirá las instrucciones de cada paso a realizar para autorizar el
 pago. Si el canal es `MOBILE` el SDK javascript automáticamente abrirá la app
 Onepay en el mismo teléfono del usuario.
 
+Existe un [Simulador de transacciones](/referencia/onepay#simulador-de-transacciones) que puedes utilizar para generar transacciones exitosas o fallidas.
+
 ### 3. Back-end: Confirmar la Transacción
 
 Eventualemnte la transacción llegará a término y el control retornará al backend
