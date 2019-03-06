@@ -278,6 +278,22 @@ TransactionCreateResponse response = Transaction.create(cart, channel);
 ```
 
 ```php
+/*
+ * IMPORTANTE: El ejemplo esta pensado en la forma mas simple de integrar que
+ * es apuntando a integración. El SDK si no haz seteado el ambiente asume que
+ * usaras integración razón por la cual no es necesario que lo configures.
+ * Sin embargo debes tener presente que al momento de apuntar a producción
+ * deberás configurar el ambiente así como tu API_KEY y SHARED_SECRET antes
+ * de realizar la llamada a Transaction::create ya que de lo contrario estarás
+ * apuntando a INTEGRACION
+ * 
+ * ejemplo:
+ * use Transbank\Onepay\OnepayBase;
+ * OnepayBase::setCurrentIntegrationType('LIVE');
+ * OnepayBase::setApiKey("api-key-entregado-por-transbank");
+ * OnepayBase::setSharedSecret("secreto-entregado-por-transbank");
+ */
+
 $channel = $request->input("channel");
 $response = Transaction::create($cart, $channel);
 
@@ -413,6 +429,22 @@ if (null != status && status.equalsIgnoreCase("PRE_AUTHORIZED")) {
 ```
 
 ```php
+/*
+ * IMPORTANTE: El ejemplo esta pensado en la forma mas simple de integrar que
+ * es apuntando a integración. El SDK si no haz seteado el ambiente asume que
+ * usaras integración razón por la cual no es necesario que lo configures.
+ * Sin embargo debes tener presente que al momento de apuntar a producción
+ * deberás configurar el ambiente así como tu API_KEY y SHARED_SECRET antes
+ * de realizar la llamada a Transaction::commit ya que de lo contrario estarás
+ * apuntando a INTEGRACION
+ * 
+ * ejemplo:
+ * use Transbank\Onepay\OnepayBase;
+ * OnepayBase::setCurrentIntegrationType('LIVE');
+ * OnepayBase::setApiKey("api-key-entregado-por-transbank");
+ * OnepayBase::setSharedSecret("secreto-entregado-por-transbank");
+ */
+
 use Transbank\Onepay\Transaction;
 
 $status = $request->input("status");
@@ -743,6 +775,22 @@ TransactionCreateResponse response = Transaction.create(cart, Channel.MOBILE);
 ```
 
 ```php
+/*
+ * IMPORTANTE: El ejemplo esta pensado en la forma mas simple de integrar que
+ * es apuntando a integración. El SDK si no haz seteado el ambiente asume que
+ * usaras integración razón por la cual no es necesario que lo configures.
+ * Sin embargo debes tener presente que al momento de apuntar a producción
+ * deberás configurar el ambiente así como tu API_KEY y SHARED_SECRET antes
+ * de realizar la llamada a Transaction::create ya que de lo contrario estarás
+ * apuntando a INTEGRACION
+ * 
+ * ejemplo:
+ * use Transbank\Onepay\OnepayBase;
+ * OnepayBase::setCurrentIntegrationType('LIVE');
+ * OnepayBase::setApiKey("api-key-entregado-por-transbank");
+ * OnepayBase::setSharedSecret("secreto-entregado-por-transbank");
+ */
+
 use Transbank\Onepay;
 
 OnepayBase::setCallbackUrl("https://miapp.cl/endPayment");
@@ -819,6 +867,22 @@ if (null != status && status.equalsIgnoreCase("PRE_AUTHORIZED")) {
 ```
 
 ```php
+/*
+ * IMPORTANTE: El ejemplo esta pensado en la forma mas simple de integrar que
+ * es apuntando a integración. El SDK si no haz seteado el ambiente asume que
+ * usaras integración razón por la cual no es necesario que lo configures.
+ * Sin embargo debes tener presente que al momento de apuntar a producción
+ * deberás configurar el ambiente así como tu API_KEY y SHARED_SECRET antes
+ * de realizar la llamada a Transaction::commit ya que de lo contrario estarás
+ * apuntando a INTEGRACION
+ * 
+ * ejemplo:
+ * use Transbank\Onepay\OnepayBase;
+ * OnepayBase::setCurrentIntegrationType('LIVE');
+ * OnepayBase::setApiKey("api-key-entregado-por-transbank");
+ * OnepayBase::setSharedSecret("secreto-entregado-por-transbank");
+ */
+
 use Transbank\Onepay\Transaction;
 
 $status = $request->input("status");
