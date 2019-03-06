@@ -280,7 +280,7 @@ TransactionCreateResponse response = Transaction.create(cart, channel);
 ```php
 /*
  * IMPORTANTE: El ejemplo está pensado en la forma mas simple de integrar que
- * es apuntando a integración. El SDK asume que usaras integración si no has 
+ * es apuntando a integración. El SDK asume que usarás integración si no has 
  * seteado el ambiente, razón por la cual no es necesario que lo configures.
  * Sin embargo, debes tener presente que al momento de apuntar a producción
  * deberás configurar el ambiente así como tu API_KEY y SHARED_SECRET antes
@@ -431,7 +431,7 @@ if (null != status && status.equalsIgnoreCase("PRE_AUTHORIZED")) {
 ```php
 /*
  * IMPORTANTE: El ejemplo está pensado en la forma mas simple de integrar que
- * es apuntando a integración. El SDK asume que usaras integración si no has 
+ * es apuntando a integración. El SDK asume que usarás integración si no has 
  * seteado el ambiente, razón por la cual no es necesario que lo configures.
  * Sin embargo, debes tener presente que al momento de apuntar a producción
  * deberás configurar el ambiente así como tu API_KEY y SHARED_SECRET antes
@@ -777,7 +777,7 @@ TransactionCreateResponse response = Transaction.create(cart, Channel.MOBILE);
 ```php
 /*
  * IMPORTANTE: El ejemplo está pensado en la forma mas simple de integrar que
- * es apuntando a integración. El SDK asume que usaras integración si no has 
+ * es apuntando a integración. El SDK asume que usarás integración si no has 
  * seteado el ambiente, razón por la cual no es necesario que lo configures.
  * Sin embargo, debes tener presente que al momento de apuntar a producción
  * deberás configurar el ambiente así como tu API_KEY y SHARED_SECRET antes
@@ -869,7 +869,7 @@ if (null != status && status.equalsIgnoreCase("PRE_AUTHORIZED")) {
 ```php
 /*
  * IMPORTANTE: El ejemplo está pensado en la forma mas simple de integrar que
- * es apuntando a integración. El SDK asume que usaras integración si no has 
+ * es apuntando a integración. El SDK asume que usarás integración si no has 
  * seteado el ambiente, razón por la cual no es necesario que lo configures.
  * Sin embargo, debes tener presente que al momento de apuntar a producción
  * deberás configurar el ambiente así como tu API_KEY y SHARED_SECRET antes
