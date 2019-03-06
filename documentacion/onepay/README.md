@@ -279,7 +279,7 @@ TransactionCreateResponse response = Transaction.create(cart, channel);
 
 ```php
 /*
- * IMPORTANTE: El ejemplo está pensado en la forma mas simple de integrar que
+ * IMPORTANTE: El ejemplo está pensado en la forma más simple de integrar que
  * es apuntando a integración. El SDK asume que usarás integración si no has 
  * seteado el ambiente, razón por la cual no es necesario que lo configures.
  * Sin embargo, debes tener presente que al momento de apuntar a producción
@@ -430,7 +430,7 @@ if (null != status && status.equalsIgnoreCase("PRE_AUTHORIZED")) {
 
 ```php
 /*
- * IMPORTANTE: El ejemplo está pensado en la forma mas simple de integrar que
+ * IMPORTANTE: El ejemplo está pensado en la forma más simple de integrar que
  * es apuntando a integración. El SDK asume que usarás integración si no has 
  * seteado el ambiente, razón por la cual no es necesario que lo configures.
  * Sin embargo, debes tener presente que al momento de apuntar a producción
@@ -776,7 +776,7 @@ TransactionCreateResponse response = Transaction.create(cart, Channel.MOBILE);
 
 ```php
 /*
- * IMPORTANTE: El ejemplo está pensado en la forma mas simple de integrar que
+ * IMPORTANTE: El ejemplo está pensado en la forma más simple de integrar que
  * es apuntando a integración. El SDK asume que usarás integración si no has 
  * seteado el ambiente, razón por la cual no es necesario que lo configures.
  * Sin embargo, debes tener presente que al momento de apuntar a producción
@@ -868,7 +868,7 @@ if (null != status && status.equalsIgnoreCase("PRE_AUTHORIZED")) {
 
 ```php
 /*
- * IMPORTANTE: El ejemplo está pensado en la forma mas simple de integrar que
+ * IMPORTANTE: El ejemplo está pensado en la forma más simple de integrar que
  * es apuntando a integración. El SDK asume que usarás integración si no has 
  * seteado el ambiente, razón por la cual no es necesario que lo configures.
  * Sin embargo, debes tener presente que al momento de apuntar a producción
