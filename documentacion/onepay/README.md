@@ -1113,6 +1113,32 @@ from transbank import onepay
 onepay.integration_type = onepay.IntegrationType.LIVE
 ```
 
+## Conciliación de Transacciones
+Una vez hayas realizado transacciones en producción quedará un historial de transacciones que puedes revisar entrando a [www.transbank.cl](https://www.transbank.cl/). Si lo deseas puedes realizar una conciliación entre tu sistema y el reporte que entrega el portal.
+
+Para realizar la conciliación debes seguir los siguientes pasos:
+
+1. Iniciar sesión con tu usuario y contraseña en [www.transbank.cl](https://www.transbank.cl/)
+   
+2. Luego, en el menú principal presionar "Webpay" y luego "Reporte transaccional". ![Paso 2](/images/documentacion/conciliacion1.png)
+   
+3. En la parte superior de la ventana puedes encontrar un buscador que te ayudará a filtrar, según los parámetros que gustes, las transacciones que quieras cuadrar. Para encontrar las transacciones de Onepay, en producto, debes seleccionar Webpay3G ![Paso 3](/images/documentacion/conciliacion2.png)
+
+4. Dentro de la tabla en la imagen anterior puedes presionar el número de orden de compra para abrir los detalles de la transacción. Es en esta sección donde podrás encontrar y conciliar la mayoría de los parámetros devueltos al confirmar una transacción utilizando `getTransactionResult()`. ![Paso 4](/images/documentacion/conciliacion3.png)
+
+5. Sólo queda realizar la conciliación. A continuación puedes ver una lista de parámetros que recibirás al momento de confirmar una transaccion y a que fila de la tabla "Detalles de la transacción" corresponden (la lista completa de parámetros la puedes encontrar [acá](/referencia/onepay#confirmar-una-transaccion)).
+
+
+Nombre parámetro  <br> <i> tipo </i>  | Fila en tabla
+------   | -----------
+responseCode <br> <i>  String  </i> | Código de respuesta
+result.authorizationCode <br> <i>  String  </i> | Código de autorización
+result.issuedAt <br> <i>  Number  </i> | Fecha de creación (viene con formato unix timestamp)
+result.amount <br> <i>  Number  </i> | Monto de la transacción.
+result.transactionDesc <br> <i>  String  </i> | Tipo de producto
+result.installmentsNumber <br> <i>  Number  </i> | Número de cuotas.
+result.buyOrder <br> <i>  Number  </i> | Orden de compra.
+
 ## Más funcionalidades
 
 Consulta la [referencia del API](/referencia/onepay) para más funcionalidades ofrecidas por Onepay:
