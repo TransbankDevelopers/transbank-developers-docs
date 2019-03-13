@@ -528,6 +528,45 @@ dicho certificado. De lo contrario, expirará el certificado y dejarás de poder
 operar con Transbank.
 </aside>
 
+## Conciliación de Transacciones
+Una vez hayas realizado transacciones en producción quedará un historial de transacciones que puedes revisar entrando a [www.transbank.cl](https://www.transbank.cl/). Si lo deseas realizar una conciliación entre tu sistema y el reporte que entrega el portal.
+
+Para realizar la conciliación debes seguir los siguientes pasos:
+
+1. Iniciar sesión con tu usuario y contraseña en [www.transbank.cl](https://www.transbank.cl/)
+   
+2. Luego, en el menú principal presionar "Webpay" y luego "Reporte transaccional". ![Paso 2](/images/documentacion/conciliacion1.png)
+   
+3. En la parte superior de la ventana puedes encontrar un buscador que te ayudará a filtrar, según los parámetros que gustes, las transacciones que quieras cuadrar. Para encontrar las transacciones de Webpay Plus, en producto, debes seleccionar Webpay3G, en caso de querer las de Webpay OneClick selecciona "OneClick" ![Paso 3](/images/documentacion/conciliacion2.png)
+
+4. Dentro de la tabla en la imagen anterior puedes presionar el número de orden de compra para abrir los detalles de la transacción. Es en esta sección donde podrás encontrar y conciliar la mayoría de los parámetros devueltos al confirmar una transacción. ![Paso 4](/images/documentacion/conciliacion3.png)
+
+5. Sólo queda realizar la conciliación. A continuación puedes ver una lista de parámetros que recibirás al momento de confirmar una transacción y a que fila de la tabla "Detalles de la transacción" corresponden (la lista completa de parámetros de Webpay Plus la puedes encontrar [acá](/referencia/webpay#confirmar-una-transaccion-webpay-plus-normal) y la de Webpay OneClick [acá](/referencia/webpay#autorizar-un-pago-con-webpay-oneclick)).
+
+
+**En el caso de Webpay Plus Normal**
+Nombre parámetro   <br> <i> tipo </i> | Fila en tabla
+------   | -----------
+buyOrder  <br> <i> xs:string </i> | Orden de compra
+cardDetails.cardNumber  <br> <i> xs:string </i> | Final número de tarjeta (solo para comercios autorizados por Transbank se envía el número completo).
+transactionDate  <br> <i> xs:string </i> | Fecha creación
+VCI  <br> <i> xs:string </i> | VCI. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)
+detailsOutput[0].authorizationCode  <br> <i> xs:string </i> | Código de autorización
+detailsOutput[0].paymentTypeCode   <br> <i> xs:string </i> | Tipo de producto
+detailsOutput[0].responseCode  <br> <i> xs:string </i> | Código de respuesta.
+detailsOutput[0].amount  <br> <i> Formato número entero para transacciones en peso y decimal para transacciones en dólares. </i> | Monto
+detailsOutput[0].sharesNumber  <br> <i> xs:int </i> | Número de cuotas
+detailsOutput[0].commerceCode  <br> <i> xs:string </i> | Comercio, desde el quinto dígito en adelante del `commerceCode` corresponde al número antes del guión que podemos apreciar en la imagen anterior.
+detailsOutput[0].buyOrder  <br> <i> xs:string </i> | Orden de compra
+
+**En el caso de Webpay Oneclick**
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+authorizationCode  <br> <i> xs:string </i> | Código de autorización
+creditCardType  <br> <i> creditCardType </i> | Medio de Pago
+last4CardDigits  <br> <i> xs:string </i> | Final número tarjeta
+responseCode  <br> <i> xs:int </i> | Código de respuesta
+
 ## Más Funcionalidades
 
 Consulta la referencia del API para más funcionalidades ofrecidas por Webpay
