@@ -86,7 +86,7 @@ Transbank provee dos ambientes para todos sus productos:
 la integración a Webpay y testea su solución de medio pago. Asimismo, en éste
 ambiente es que se valida la integración del comercio.
 
-Para las transaccciones Webpay y PatPass en estos ambientes se deben usar estas
+Para las transaccciones Webpay en estos ambientes se deben usar estas
 tarjetas:
 
 - VISA 4051885600446623, CVV 123, cualquier fecha de expiración. Esta tarjeta
@@ -108,7 +108,6 @@ como probar nuestros productos en este ambiente:
 - [Webpay Plus](webpay#webpay-plus)
 - [Webpay OneClick](webpay#webpay-oneclick)
 - [Onepay Checkout](onepay#integracion-checkout)
-- [PatPass by Webpay](patpass#patpass-by-webpay)
 
 Después de haber realizado esas pruebas iniciales y antes del paso a producción
 tendrás que usar credenciales que identifiquen a tu comercio. De esa forma
@@ -201,9 +200,9 @@ Estos valores serán provistos por transbank y en su conjunto permiten hacer
 transacciones a nombre del comercio. **Debes custodiar estas credenciales para
 evitar que caigan en manos de terceros**.
 
-### Credenciales en Webpay y PatPass
+### Credenciales en Webpay
 
-En el caso de Webpay y PatPass by Webpay, las credenciales consisten en:
+En el caso de Webpay, las credenciales consisten en:
 
 - Un código de comercio.
 - Una llave privada.
@@ -315,7 +314,7 @@ producción.
 <aside class="warning">
 Importante: Es responsabilidad del comercio considerar que el certificado
 público que Transbank comparte con los comercios (y que es incluido en los SDKs)
-para integraciones de Webpay y PatPass tiene una fecha de caducidad, como
+para integraciones de Webpay tiene una fecha de caducidad, como
 asimismo el certificado que el comercio genera y que comparte con Transbank para
 realizar las transacciones sobre Webpay. El comercio es responsable por
 resguardar su llave privada y su certificado público, como asimismo es
@@ -325,7 +324,7 @@ responsable por reemplazar estos cuando caduquen.
 
 ## Requerimientos de páginas de transición y de fin de transacción
 
-### Webpay y PatPass
+### Webpay
 
 **La página de transición** de comercio, es la página que muestra el comercio
 cuando Webpay le entrega el control, después del proceso de autorización y

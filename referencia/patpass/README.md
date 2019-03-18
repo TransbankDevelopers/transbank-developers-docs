@@ -113,8 +113,7 @@ Puedes mirar el siguiente enlace para obtener una guía rápida de como generar 
 </aside>
 
 Consulta [la documentación para generar una llave privada y un certificado
-usando openssl](/documentacion/como_empezar#credenciales-en-webpay-y-patpass si
-no sabes aún como realizarlo.
+usando openssl](/documentacion/como_empezar#credenciales-en-webpay si no sabes aún como realizarlo.
 
 En [el repositorio github
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
