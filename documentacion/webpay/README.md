@@ -597,6 +597,14 @@ cuando tus usuarios no quieren continuar con el servicio.
 
 - [Transacciones Webpay OneClick Mall](/referencia/webpay#webpay-oneclick-mall).
 
+## Ejemplos de integración
+
+Ponemos a tu disposición una serie de repositorios en nuestro Github para ayudarte a entender la integración mejor.
+
+- [Ejemplo de Webpay en PHP](https://github.com/TransbankDevelopers/transbank-sdk-php-webpay-example)
+- [Ejemplo de Webpay en .Net](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-example)
+- [Ejemplo de Webpay en Java](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-example)
+
 <div class="container slate">
   <div class='slate-after-footer'>
     <div class='row d-flex align-items-stretch'>

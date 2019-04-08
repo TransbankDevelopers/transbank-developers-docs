@@ -1158,6 +1158,18 @@ transacción.
 - [Detectar y/o instalar la app Onepay desde tu app](/referencia/onepay#detectar-e-instalar-la-app-onepay) para asegurar la
   mejor experiencia de pago en apps móviles.
 
+## Ejemplos de integración
+
+Ponemos a tu disposición una serie de repositorios en nuestro Github para ayudarte a entender la integración mejor.
+
+- [Ejemplo de Onepay en PHP](https://github.com/TransbankDevelopers/transbank-sdk-php-onepay-example)
+- [Ejemplo de Onepay en .Net](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-onepay-example)
+- [Ejemplo de Onepay en Java](https://github.com/TransbankDevelopers/transbank-sdk-java-onepay-example)
+- [Ejemplo de Onepay en Python](https://github.com/TransbankDevelopers/transbank-sdk-python-onepay-example)
+- [Ejemplo de Onepay en Ruby](https://github.com/TransbankDevelopers/transbank-sdk-ruby-onepay-example)
+- [Ejemplo de Onepay Cortafila en Android](https://github.com/TransbankDevelopers/demo-onepay-cortafila-android)
+- [Ejemplo de Onepay Cortafila Backend](https://github.com/TransbankDevelopers/demo-onepay-cortafila-backend)
+
 <div class="container slate">
   <div class='slate-after-footer'>
     <div class='row d-flex align-items-stretch'>
