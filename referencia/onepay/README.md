@@ -160,6 +160,8 @@ Crea una transacción a partir de un carro de compras.
 ```java
 Onepay.setAppScheme("mi-app://mi-app/onepay-result");
 Onepay.setCallbackUrl("https://miapp.cl/endPayment");
+Onepay.setQrWidthHeight(100); // Opcional
+Onepay.setCommerceLogoUrl("http://some.url/logo"); // Opcional
 
 ShoppingCart cart = new ShoppingCart();
 cart.add(
@@ -171,21 +173,38 @@ cart.add(
         .setExpire(-1));
 TransactionCreateResponse response = Transaction.create(
   cart, Onepay.Channel.WEB);
+
+// O, si lo deseas, puedes configurar opciones por transacción
+TransactionCreateResponse response = Transaction.create(
+  cart, Onepay.Channel.WEB,
+  new Options().setQrWidthHeight(200)
+               .setCommerceLogoUrl("http://commerce.cl/logo")
+)
 ```
 
 ```php
 OnepayBase::setAppScheme("mi-app://mi-app/onepay-result");
 OnepayBase::setCallbackUrl("https://miapp.cl/endPayment");
+OnepayBase::setQrWidthHeight(100); // Opcional
+OnepayBase::setCommerceLogoUrl("http://some.url/logo"); // Opcional
 
 $cart = new ShoppingCart();
 $cart->add(
   new Item('Producto de prueba', 1, 9900, null, null));
 $response = Transaction::create($cart, $channel, 'WEB');
+
+// O, si lo deseas, puedes configurar opciones por transacción
+$options = new options()
+$options->setQrWidthHeight(200);
+$options->setCommerceLogoUrl("http://commerce.cl/logo");
+$response = Transaction::create($cart, $channel, 'WEB', $options);
 ```
 
 ```csharp
 Onepay.AppScheme = "mi-app://mi-app/onepay-result";
 Onepay.CallbackUrl = "https://miapp.cl/endPayment";
+Onepay.QrWidthHeight = 100; // Opcional
+Onepay.CommerceLogoUrl = "http://some.url/logo"; // Opcional
 
 ShoppingCart cart = new ShoppingCart();
 cart.Add(new Item(
@@ -195,11 +214,19 @@ cart.Add(new Item(
     additionalData: null,
     expire: -1));
 var response = Transaction.Create(cart, ChannelType.Web);
+
+// O, si lo deseas, puedes configurar opciones por transacción
+var response = Transaction.Create(cart, ChannelType.Web, new Options(
+  commerceLogoUrl: 'http://some.url/logo',
+  qrWidthHeight: 200
+));
 ```
 
 ```ruby
 Transbank::Onepay::Base.app_scheme = "mi-app://mi-app/onepay-result"
 Transbank::Onepay::Base.callback_url = "https://miapp.cl/endPayment"
+Transbank::Onepay::Base.qr_width_height = 100 # Opcional
+Transbank::Onepay::Base.commerce_logo_url = "http://some.url/logo" # Opcional
 
 
 cart = Transbank::Onepay::ShoppingCart.new
@@ -210,17 +237,29 @@ cart.add(Transbank::Onepay::Item.new(amount: 9000,
                   expire: -1))
 channel = Transbank::Onepay::Channel::WEB
 response = Transbank::Onepay::Transaction.create(shopping_cart: cart, channel: channel)
+
+# O, si lo deseas, puedes configurar opciones por transacción
+response = Transbank::Onepay::Transaction.create(
+  shopping_cart: cart, channel: channel, options: {
+    qr_width_height: 200, commerce_logo_url: 'http://commerce.cl/logo'
+  }
+)
 ```
 
 ```python
 onepay.app_scheme = "mi-app://mi-app/onepay-result"
 onepay.callback_url = "https://miapp.cl/endPayment"
+onepay.qr_width_height = 100 # Opcional
+onepay.commerce_logo_url = "http://some.url/logo" # Opcional
 
 cart = ShoppingCart()
 cart.add(Item(description="Producto de prueba", 
               quantity=1, amount=9900, 
               additional_data=None, expire=None))
 result = Transaction.create(cart, Channel.WEB)
+
+# O, si lo deseas, puedes configurar opciones por transacción
+result = Transaction.create(cart, Channel.WEB, Options(commerce_logo_url="http://commerce.cl/logo", qr_width_height=200))
 ```
 
 ```http
