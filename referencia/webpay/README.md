@@ -4,7 +4,6 @@
 
 ### Ambiente de Producción
 
-
 ```java
 Configuration configuration = new Configuration();
 configuration.setEnvironment(Webpay.Environment.LIVE);
@@ -20,9 +19,8 @@ var configuration = new Configuration();
 configuration.Environment = "PRODUCCION";
 ```
 
-
 Las URLs de endpoints de producción están alojados dentro de
-https://webpay3g.transbank.cl/.
+<https://webpay3g.transbank.cl/>.
 
 > Los SDKs traen pre-configurado los certificados de Transbank y validan
 > automáticamente las respuestas. Sólo debes asegurarte de mantener tu SDK
@@ -55,12 +53,11 @@ $configuration->setWebpayCert(
 configuration.WebpayCertPath = @"C:\Certs\certificado-publico-transbank.crt"
 ```
 
-Para validar las respuestas generadas por transbank debes usar un certificado
-público de webpay. En [el repositorio github
+Para validar las respuestas generadas por Transbank debes usar un certificado
+público de Webpay. En [el repositorio GitHub
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
 podrás encontrar [el certificado
 actualizado](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/tree/master/produccion).
-
 
 ### Ambiente de Integración
 
@@ -77,7 +74,7 @@ configuration.Environment = "INTEGRACION";
 ```
 
 Las URLs de endpoints de integración están alojados dentro de
-https://webpay3gint.transbank.cl/.
+<https://webpay3gint.transbank.cl/>.
 
 Consulta [la documentación para conocer las tarjetas de prueba que funcionan en
 el ambiente de integración](/documentacion/como_empezar#ambientes).
@@ -119,7 +116,7 @@ configuration.Password = "PfxPassword";
 ```
 
 Todas las peticiones que hagas deben estar firmadas con tu llave privada y
-certificado enviado a transbank. Dichas credenciales deben coincidir con el
+certificado enviado a Transbank. Dichas credenciales deben coincidir con el
 código de comercio usado en cada petición.
 
 <aside class="notice">
@@ -139,18 +136,16 @@ Consulta [la documentación para generar una llave privada y un certificado
 usando openssl](/documentacion/como_empezar#credenciales-en-webpay) si
 no sabes aún como realizarlo.
 
-En [el repositorio github
+En [el repositorio GitHub
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
 podrás encontrar [códigos de comercios y certificados actualizados para probar
 en integración aunque aún no tengas tu propio código de
 comercio](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/tree/master/integracion).
 
-
 > Los SDKs ya incluyen esos códigos de comercio, certificados y llaves privadas
 > que funcionan en el ambiente de integración, por lo que puedes obtener
 > rápidamente una configuración lista para hacer tus primeras pruebas en dicho
 > ambiente:
-
 
 ```java
 Configuration configuration =
@@ -210,7 +205,7 @@ débito, en donde quién realiza el pago ingresa al sitio del comercio,
 selecciona productos o servicio, y el ingreso asociado a los datos de la tarjeta
 de crédito o débito lo realiza en forma segura en Webpay.
 
-#### Flujo en caso de éxito
+### Flujo en caso de éxito
 
 De cara al tarjetahabiente, el flujo de páginas para la transacción es el
 siguiente:
@@ -280,7 +275,7 @@ entregar el producto o servicio en caso que ocurra.
     nuevamente a Webpay, con la finalidad de desplegar el comprobante de pago.
     Es importante realizar este punto para que el tarjetahabiente entienda que
     el proceso de pago fue exitoso, y que involucrará un cargo a su tarjeta
-    bancaria. El redirecionamiento a Webpay se hace utilizando como destino la
+    bancaria. El redireccionamiento a Webpay se hace utilizando como destino la
     URL informada por el método `getTransactionResult()`enviando por método
     POST el token de la transacción en la variable `token_ws`.
 15. Webpay recibe un requerimiento con la variable `token_ws`
@@ -328,7 +323,7 @@ Nota que el nombre de las variables recibidas es diferente. En lugar de `token_w
 </aside>
 
 9. El comercio con la variable `TBK_TOKEN` debe invocar el método
-   `getTransactionResult()`, para obtener elresultado de la autorización. En
+   `getTransactionResult()`, para obtener el resultado de la autorización. En
    este caso debe obtener una excepción, pues el pago fue abortado.
 10. El comercio debe informar al tarjetahabiente que su pago no se completó.
 
@@ -679,7 +674,7 @@ buyOrder  <br> <i> xs:string </i> | Es el código único de la orden de compra
 transactionDetails  <br> <i>wsTransactionDetail </i> | Lista de objetos del tipo wsTransactionDetail, uno por cada tienda diferente del mall que participa en la transacción.
 transactionDetails[].amount  <br> <i> xs:decimal </i> | Monto de la transacción de una tienda del mall. Máximo 2 decimales para USD. Largo máximo: 10.
 transactionDetails[].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda del mall. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>.
-transactionDetails[].commerceCode  <br> <i>xs:string </i> | Código comercio asignado por transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
+transactionDetails[].commerceCode  <br> <i>xs:string </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
 
 **Respuesta**
 
@@ -900,9 +895,9 @@ Para realizar esa captura explícita debe usarse el método `capture()`
 Permite solicitar a Webpay la captura diferida de una transacción con
 autorización y sin captura simultánea.
 
-> Los SDKs permitqen indicar opcionalmente el código de comercio de la
+> Los SDKs permiten indicar opcionalmente el código de comercio de la
 > transacción a capturar, para soportar la captura en comercios Webpay Plus
-> Mall. En comercios Webpay Plus Normal, no es necesario esepcificar el código
+> Mall. En comercios Webpay Plus Normal, no es necesario especificar el código
 > de comercio pues se usa el indicado en la configuración.
 
 <aside class="notice">
@@ -1041,7 +1036,7 @@ Permite solicitar a Webpay la anulación de una transacción realizada previam
 
 > Los SDKs permiten indicar opcionalmente el código de comercio de la
 > transacción a anular, para soportar la anulación en comercios Webpay Plus
-> Mall. En comercios Webpay Plus Normal, no es necesario esepcificar el código
+> Mall. En comercios Webpay Plus Normal, no es necesario especificar el código
 > de comercio pues se usa el indicado en la configuración.
 
 <aside class="notice">
@@ -1452,7 +1447,6 @@ responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de pago, do
 
 Este proceso permite reversar una venta cuando esta no pudo concretarse, dentro del mismo día contable, con la finalidad de anular un cargo realizado al cliente. Para esto se debe consumir el método `codeReverseOneClick()` con la orden de compra de la transacción a reversar.
 
-
 #### `codeReverseOneClick()`
 
 Permite reversar una transacción de venta autorizada con anterioridad. Este
@@ -1475,7 +1469,7 @@ var result = transaction.reverseTransaction(buyOrderLong);
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-buyorder  <br> <i> xs:long </i> | Orden de compra de la transacción a reversar.
+buyOrder  <br> <i> xs:long </i> | Orden de compra de la transacción a reversar.
 
 **Respuesta**
 
@@ -1601,7 +1595,7 @@ instante el comercio debe llamar a `finishInscription()`.
 
 <aside class="warning">
 El comercio tendrá un máximo de 60 segundos para llamar a este método luego
-de recibir el token en la url de fin de inscripción (`returnUrl`). Pasados los
+de recibir el token en la URL de fin de inscripción (`returnUrl`). Pasados los
 60 segundos sin llamada a finishInscription, la inscripción en curso junto con
 el usuario serán eliminados.
 </aside>
@@ -1698,7 +1692,7 @@ También es posible *reversar una anulación* debido a problemas operacionales
 (por ejemplo un error de comunicación al momento de anular, que le impida al
 comercio saber si Transbank recibió la anulación).
 
-Para llavar a cabo la reversa, el comercio debe usar el método `reverse()`. Para la anulación, se debe usar el método `nullify()`. Y para reversar una anulación existe el método `reverseNullification() `
+Para llevar a cabo la reversa, el comercio debe usar el método `reverse()`. Para la anulación, se debe usar el método `nullify()`. Y para reversar una anulación existe el método `reverseNullification() `
 
 #### `reverse()`
 
@@ -1772,7 +1766,6 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 reversed  <br> <i> xs:boolean </i> | Indica si la reversa se realizó correctamente o no.
 reverseCode  <br> <i> xs:long </i> | Identificador único de la transacción de reversa.
-
 
 <aside class="warning">
 La llamada a este método y por lo tanto la operación de reversa de anulación,
