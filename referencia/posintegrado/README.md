@@ -1,6 +1,158 @@
 # POS Integrado
 
-## A
+<aside class="success">
+El SDK y la Librería en C, se encargan de este protocolo de comunicación con el POS y de manejar el puerto serial configurado.
+</aside>
+
+## Protocolo de Comunicación Caja - POS
+
+La comunicación se realiza a través de un puerto serial `RS232`, a velocidades que van entre los 1200bps hasta 115200bps `8N1`
+es decir `8` bits de datos, `N`ingún bit de paridad y `1` bit de parada.
+
+![Diagrama de Comunicación Caja - POS](/images/referencia/posintegrado/diagrama-comunicacion-caja-pos.png)
+
+ Termino    | Descripción
+ -------    | -------
+ STX        | Indica el inicio de un mensaje (texto) <br><i>Hex</i>: `0x02`
+ DATOS      | Corresponde al commando a enviar al POS o la respuesta de este
+ ETX        | Indica el fin de un mensaje (texto) <br><i>Hex</i>: `0x03`
+ LRC        | Es un byte que se concatena al final del mensaje `<ETX>` y se calcula realizando la operación `XOR` byte a byte de `<DATOS>` + `<ETX>`
+ ACK        | Representa la recepción correcta del mensaje enviado <br><i>Hex</i>: `0x06`
+ NACK       | Representa la incorrecta recepción del mensaje enviado, o que el `LRC` del mensaje recibido no corresponde con el enviado. <br><i>Hex</i>: `0x15`
+ Timeout1   | Es el tiempo de espera de la caja para recibir ACK/NACK por parte del POS Integrado antes de reintentar el envío del mensaje.
+ Timeout2   | Es el tiempo de espera de el POS para recibir ACK/NACK por parte de la Caja antes de reintentar el envío del mensaje de respuesta.
+
+<aside class="notice">
+Todos los comandos que se envían al POS deben cumplir con el flujo antes mencionado.
+</aside>
+
+<aside class="notice">
+Todos los mensajes intercambiados entre la caja y el POS Integrado cumplen con el formato: <strong>&lt;STX&gt;DATOS&lt;ETX&gt;LRC</strong>
+</aside>
+
+### Ejemplo de calculo LRC
+
+Dado el siguiente comando:
+
+```html
+<STX>0200|123|<ETX>
+```
+
+Que en notación hexadecimal seria:
+
+```bash
+0x02 0x30 0x32 0x30 0x30 0x7C 0x31 0x32 0x33 0x7C 0x03
+```
+
+Para calcular el `LRC` debemos omitir el inicio de texto `<STX>` o `0x02`.
+
+La operación entonces seria:
+
+```c
+(((((((((0x30 XOR 0x32) XOR 0x30) XOR 0x30) XOR 0x7C) XOR 0x31) XOR 0x32) XOR 0x33) XOR 0x7C) XOR 0x03)
+```
+
+El resultado entonces seria `0x31` en hexadecimal o `1` en ASCII, por lo tanto, el mensaje completo para enviar al POS Integrado es:
+
+```bash
+<STX>                   DATOS                           <ETX>   LRC
+ 0x02    0x30 0x32 0x30 0x30 0x7C 0x31 0x32 0x33 0x7C    0x03    0x31
+```
+
+## Mensajes
+
+### Mensaje de Cierre
+
+Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencias/posintegrado#tabla-de-respuestas))
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Responses;
+//...
+RegisterCloseResponse responce = POS.Instance.RegisterClose();
+```
+
+```c
+#include "transbank.h"
+#include "transbank_serial_utils.h"
+//...
+LoadKeyCloseResponse responce = register_close();
+}
+```
+
+![Diagrama de Secuencia Cierre](/images/referencia/posintegrado/diagrama-cierre.png)
+
+<aside class="notice">
+Para el cierre no se solicitara tarjeta supervisora.
+</aside>
+
+### Mensaje de Carga de Llaves
+
+Esta transacción permite al POS Integrado del comercio requerir cargar nuevas _Working Keys_ desde Transbank. Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencia/posintegrado#tabla-de-respuestas))
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Responses;
+//...
+LoadKeysResponse responce = POS.Instance.LoadKeys();
+```
+
+```c
+#include "transbank.h"
+#include "transbank_serial_utils.h"
+//...
+LoadKeyCloseResponse responce = load_keys();
+}
+```
+
+<aside class="warning">
+El uso de esta transacción debe ser limitado a pruebas de comunicación o cuando el POS Integrado pierda las llaves.
+</aside>
+
+### Mensaje de Pooling
+
+Esta mensaje es enviado por la caja para saber si el POS está conectado. En el SDK el resultado de esta operación es un `Booleano` o un `0` representado en la constante `TBK_OK` en el caso de la librería en C.
+
+```csharp
+using Transbank.POS;
+//...
+bool connected = POS.Instance.Polling();
+```
+
+```c
+#include "transbank.h"
+#include "transbank_serial_utils.h"
+//...
+int retval = polling();
+if (retval == TBK_OK){
+    //...
+}
+```
+
+### Mensaje de Cambio a POS Normal
+
+Este comando le permitirá a la caja realizar el cambio de modalidad a través de un comando. El POS debe
+estar en modo integrado y al recibir el comando quedara en modo normal.  El resultado de esta operación es un `Booleano` en el caso del SDK o un `0` representado en la constante `TBK_OK` en el caso de la librería en C.
+
+```csharp
+using Transbank.POS;
+//...
+bool connected = POS.Instance.SetNormalMode();
+```
+
+```c
+#include "transbank.h"
+#include "transbank_serial_utils.h"
+//...
+int retval = set_normal_mode();
+if (retval == TBK_OK){
+    //...
+}
+```
+
+<aside class="notice">
+Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en modo Integrado siguiendo las instrucciones disponibles descritas en []()
+</aside>
 
 ## Tabla de respuestas
 

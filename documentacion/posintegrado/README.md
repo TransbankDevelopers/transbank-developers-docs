@@ -55,7 +55,7 @@ using Transbank.POS.Responses:
 
 ### Listar puertos disponibles
 
-Si los respectivos drivers están instalados, entonces puedes usar la función `ListPorts()` del paquete  
+Si los respectivos drivers están instalados, entonces puedes usar la función `ListPorts()` del paquete
 `Transbank.POS.Utils`para identificar los puertos que se encuentren disponibles y seleccionar el que
 corresponda con el puerto donde conectaste el POS Integrado.
 
@@ -74,7 +74,7 @@ char * ports = list_ports();
 ### Abrir un puerto Serial
 
 Para abrir un puerto serial y comunicarte con el POS Integrado, necesitaras el nombre del puerto (El cual
-puedes identificar usando la función mencionada en el apartado anterior #Listar puertos disponibles). Tambien
+puedes identificar usando la función mencionada en el apartado anterior #Listar puertos disponibles). También
 necesitaras el baudrate al cual esta configurado el puerto serial del POS Integrado (Por defecto es 115200),
 y puedes obtener los distintos valores desde la clase `TbkBaudrates` del paquete `Transbank.POS.Utils`.
 
@@ -121,7 +121,7 @@ if(retval == SP_OK){
 
 ### Transacción de Cierre
 
-Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta ka transacción de cierre contra el Autorizador (no se contempla Bath Upload). Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencias/posintegrado#tabla-de-respuestas))
+Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencias/posintegrado#tabla-de-respuestas))
 
 ```csharp
 using Transbank.POS;
