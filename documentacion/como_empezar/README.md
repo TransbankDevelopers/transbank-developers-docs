@@ -20,6 +20,7 @@ Para instalar el SDK, debes agregarlo al gestor de dependencias de tu lenguaje:
 [En
 **Java**](https://github.com/TransbankDevelopers/transbank-sdk-java#instalaci%C3%B3n)
 debes agregar esta entrada en tu archivo `pom.xml` de Maven:
+
 ```xml
 <dependency>
     <groupId>com.github.transbankdevelopers</groupId>
@@ -41,20 +42,18 @@ composer require transbank/transbank-sdk
 
 Te recomendamos leer [las instrucciones de instalación detalladas para el SDK PHP](https://github.com/TransbankDevelopers/transbank-sdk-php#instalaci%C3%B3n) para mas opciones de instalación.
 
-
 [En
 **.NET**](https://github.com/TransbankDevelopers/transbank-sdk-dotnet#instalaci%C3%B3n)
 puedes instalar el SDK desde la línea de comandos del Package Manager de Visual
 Studio:
 
-```
+```bash
 PM> Install-Package TransbankSDK
 ```
 
 Te recomendamos leer [las instrucciones de instalación detalladas para el SDK .NET](https://github.com/TransbankDevelopers/transbank-sdk-dotnet#instalaci%C3%B3n) para mas opciones de instalación.
 
-
-[En 
+[En
 **Ruby**](https://github.com/TransbankDevelopers/transbank-sdk-ruby#instalaci%C3%B3n) puedes instalar el SDK como una gema:
 
 ```bash
@@ -65,8 +64,7 @@ Te recomendamos leer [las instrucciones de instalación detalladas para el SDK R
 
 (Para webpay en Ruby puedes seguir usando [libwebpay](https://github.com/TransbankDevelopers/libwebpay-ruby) u otra alternativa)
 
-
-[En 
+[En
 **Python**](https://github.com/TransbankDevelopers/transbank-sdk-python#instalaci%C3%B3n) puedes instalar el SDK desde PyPI:
 
 ```bash
@@ -77,7 +75,6 @@ Te recomendamos leer [las instrucciones de instalación detalladas para el SDK P
 
 (Para webpay en Python puedes seguir usando [libwebpay](https://github.com/TransbankDevelopers/libwebpay-python), pero te recomendamos usar [python-tbk, creada por Cornershop](https://github.com/cornershop/python-tbk) que será la base de lo que integremos finalmente en transbank-sdk)
 
-
 ## Ambientes
 
 Transbank provee dos ambientes para todos sus productos:
@@ -86,7 +83,7 @@ Transbank provee dos ambientes para todos sus productos:
 la integración a Webpay y testea su solución de medio pago. Asimismo, en éste
 ambiente es que se valida la integración del comercio.
 
-Para las transaccciones Webpay en estos ambientes se deben usar estas
+Para las transacciones Webpay en estos ambientes se deben usar estas
 tarjetas:
 
 - VISA 4051885600446623, CVV 123, cualquier fecha de expiración. Esta tarjeta
@@ -114,7 +111,6 @@ tendrás que usar credenciales que identifiquen a tu comercio. De esa forma
 podrás realizar [la validación que te permitirá acceder a credenciales de
 producción](#el-proceso-de-validacion-y-puesta-en-produccion).
 
-
 **Ambiente de producción**: Este ambiente es en el cual finalmente operará
 productivamente el comercio. En este ambiente puede hacer pruebas con tarjetas
 de crédito o débito reales. Las credenciales de este ambiente son entregadas
@@ -125,7 +121,6 @@ Tip: Cada uno de estos ambientes maneja distintas URLs (endpoints) y
 distintos códigos de comercios. Tenlo presente cuando hagas cambios de un
 ambiente a otro.
 </aside>
-
 
 ## Seguridad
 
@@ -149,7 +144,7 @@ utilice, cumpla con los protocolos de seguridad.
 Si el comercio está utilizando una solución basada en Plugins o SDK, debe
 estar atento a las actualizaciones que periódicamente Transbank realizará.
 Estas actualizaciones pueden responder a mantener compatibilidad con los CMS o
-Shoppping Cart, modificaciones por seguridad, adición de propiedades o
+Shopping Cart, modificaciones por seguridad, adición de propiedades o
 funciones, o correcciones a las comunicaciones. La comunicación oficial siempre
 se realizará a través del sitio http://www.transbankdevelopers.cl.
 
@@ -196,7 +191,7 @@ En el caso de Onepay las credenciales consisten en:
 - Un API Key
 - Un secreto ("shared secret").
 
-Estos valores serán provistos por transbank y en su conjunto permiten hacer
+Estos valores serán provistos por Transbank y en su conjunto permiten hacer
 transacciones a nombre del comercio. **Debes custodiar estas credenciales para
 evitar que caigan en manos de terceros**.
 
@@ -263,7 +258,6 @@ y guardar el certificado y también su llave privada (`597029124456.key`), los
 que junto a tu código de comercio te permitirán transaccionar. **Debes custodiar
 esa llave privada para evitar que caiga en manos de terceros**.
 
-
 ### El proceso de Validación y puesta en Producción
 
 Durante la validación de la integración se pretende verificar que el comercio
@@ -275,12 +269,12 @@ servicio Webpay sin poseer una validación.
 
 Por otro lado, Transbank no validará ninguna integración a algún comercio que
 no posea código de comercio productivo. Para obtenerlo, sigue las instrucciones
-en cómo hacerse cliente en el portal http://www.transbank.cl o contacte a su
+en cómo hacerse cliente en el portal <http://www.transbank.cl> o contacte a su
 ejecutivo comercial.
 
 En esta etapa, el comercio envía las evidencias a soporte@transbank.cl mediante
 el formulario correspondiente para [**Webpay**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay.docx)
-o [**Onepay**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx), 
+o [**Onepay**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx),
 indicando claramente las órdenes de compra, fecha
 y hora de las transacciones.
 
@@ -321,7 +315,6 @@ resguardar su llave privada y su certificado público, como asimismo es
 responsable por reemplazar estos cuando caduquen.
 </aside>
 
-
 ## Requerimientos de páginas de transición y de fin de transacción
 
 ### Webpay
@@ -350,7 +343,7 @@ Se recomienda, como mínimo, que posea:
 
 **Cuando la transacción no sea autorizada**, se recomienda informar al tarjetahabiente al respecto. Puede presentar un texto explicativo como:
 
-```
+```bash
 Orden de Compra XXXXXXX rechazada
 Las posibles causas de este rechazo son:
 * Error en el ingreso de los datos de su tarjeta de Crédito o Débito (fecha y/o código de seguridad).
@@ -439,7 +432,7 @@ Pruebas de validación para Onepay
         <h3 class='toc-ignore fo-size-22'>Si aún tienes dudas envíanos un mensaje</h3>
         <a class="pointer magenta" data-toggle='modal' data-target='#modalContactForm'>
           <div class='td_block_gray'>
-            <div class="fo-size-20"><i class="fas fa-envelope"></i> Envianos un mensaje..</div>
+            <div class="fo-size-20"><i class="fas fa-envelope"></i> Envíanos un mensaje..</div>
             <div class='td_pa-txt'>
               Si necesitas resolver algún tipo de incidencia en el portal o si existe algún problema con tu integración y  que no has podido resolver, contáctanos a través de nuestro formulario.
             </div>

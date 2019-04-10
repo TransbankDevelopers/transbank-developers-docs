@@ -1,3 +1,5 @@
+#
+
 <div class="data-menu-side-right">
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">
@@ -30,6 +32,7 @@ Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente e
 Debes tener instalado previamente Woocommerce.
 
 Habilitar los siguientes módulos / extensiones para PHP:
+
 - Soap
 - OpenSSL 1.0.1 o superior
 - SimpleXML
@@ -39,15 +42,15 @@ Habilitar los siguientes módulos / extensiones para PHP:
 
 1. Dirígete a [https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay/releases/latest](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay/releases/latest), y descargue la última versión disponible del plugin.
 
-  Una vez descargado el plugin, ingresa a la página de administración de Woocommerce (usualmente en http://misitio.com/wp-admin, http://localhost/wp-admin) y dirígete a (Plugins / Add New), indicado a continuación:
+  Una vez descargado el plugin, ingresa a la página de administración de Woocommerce (usualmente en <http://misitio.com/wp-admin>, <http://localhost/wp-admi>) y dirígete a (Plugins / Add New), indicado a continuación:
 
 <img src="/images/plug/woo/webpay/paso1.png" class="rounded mx-auto d-block"/>
-  
-1. Selecciona el archivo que descargaste en el paso anterior. Al finalizar aparecerá que fue instalado exitosamente.
+
+2. Selecciona el archivo que descargaste en el paso anterior. Al finalizar aparecerá que fue instalado exitosamente.
 
 <img src="/images/plug/woo/webpay/paso2.png" class="rounded mx-auto d-block"/>
 
-1. Además debes `Activar Plugin`.
+3. Además debes `Activar Plugin`.
 
 <img src="/images/plug/woo/webpay/paso3.png" class="rounded mx-auto d-block"/>
 
@@ -59,7 +62,7 @@ Este plugin posee un sitio de configuración que te permitirá ingresar credenci
 
 Para acceder a la configuración, debes seguir los siguientes pasos:
 
-1. Dirígete a la página de administración de Woocommerce (usualmente en http://misitio.com/wp-admin, http://localhost/wp-admin) e ingresa usuario y clave.
+1. Dirígete a la página de administración de Woocommerce (usualmente en <http://misitio.com/wp-admin>, <http://localhost/wp-admin>) e ingresa usuario y clave.
 
 2. Dentro del sitio de administración dirígete a (Plugins / Installed Plugins) y busca `Transbank Webpay Plus`.
 
@@ -70,27 +73,26 @@ Para acceder a la configuración, debes seguir los siguientes pasos:
 <img src="/images/plug/woo/webpay/paso5.png" class="rounded mx-auto d-block"/>
 
 4. ¡Ya está! Estás en la pantalla de configuración del plugin, debes ingresar la siguiente información:
-
-  * **Ambiente**: Ambiente hacia donde se realiza la transacción. 
-  * **Código de comercio**: Es lo que te identifica como comercio.
-  * **Llave Privada**: Llave secreta que te autoriza y valida a hacer transacciones.
-  * **Certificado**: Llave publica que te autoriza y valida a hacer transacciones.
-  * **Certificado Transbank**: Llave secreta de webpay que te autoriza y valida a hacer transacciones.
+   - **Ambiente**: Ambiente hacia donde se realiza la transacción.
+   - **Código de comercio**: Es lo que te identifica como comercio.
+   - **Llave Privada**: Llave secreta que te autoriza y valida a hacer transacciones.
+   - **Certificado**: Llave publica que te autoriza y valida a hacer transacciones.
+   - **Certificado Transbank**: Llave secreta de webpay que te autoriza y valida a hacer transacciones.
 
   Las opciones disponibles para _Ambiente_ son: "Integración" para realizar pruebas y certificar la instalación con Transbank, y "Producción" para hacer transacciones reales una vez que Transbank ha aprobado el comercio.
-  
+
 ### Credenciales de Prueba
 
 Para el ambiente de Integración, puedes utilizar las siguientes credenciales para realizar pruebas:
 
-* Código de comercio: `597020000540`
-* Llave Privada: Se puede encontrar [aquí - private_key](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/597020000540.key)
-* Certificado Publico: Se puede encontrar [aquí - public_cert](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/597020000540.crt)
-* Certificado Webpay: Se puede encontrar [aquí - webpay_cert](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/tbk.pem.crt)
+- Código de comercio: `597020000540`
+- Llave Privada: Se puede encontrar [aquí - private_key](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/597020000540.key)
+- Certificado Publico: Se puede encontrar [aquí - public_cert](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/597020000540.crt)
+- Certificado Webpay: Se puede encontrar [aquí - webpay_cert](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/tbk.pem.crt)
 
-1. Guardar los cambios presionando el botón [Save changes]
+5. Guardar los cambios presionando el botón [Save changes]
 
-2. Además, puedes generar un documento de diagnóstico en caso que Transbank te lo pida. Para ello, haz click en el botón "Información" ahí podrás descargar un pdf.
+6. Además, puedes generar un documento de diagnóstico en caso que Transbank te lo pida. Para ello, haz click en el botón "Información" ahí podrás descargar un pdf.
 
 <img src="/images/plug/woo/webpay/paso6.png" class="rounded mx-auto d-block"/>
 
@@ -98,36 +100,36 @@ Para el ambiente de Integración, puedes utilizar las siguientes credenciales pa
 
 En ambiente de integración es posible realizar una prueba de transacción utilizando un emulador de pagos online.
 
-* Ingresa al comercio
+- Ingresa al comercio
 
 <img src="/images/plug/woo/webpay/demo1.png" class="rounded mx-auto d-block"/>
 
-* Ingresa a cualquier sección para agregar productos
+- Ingresa a cualquier sección para agregar productos
 
 <img src="/images/plug/woo/webpay/demo2.png" class="rounded mx-auto d-block"/>
 
-* Agrega al carro de compras un producto, selecciona el carro de compras y luego presiona el botón [Proceed to checkout]:
+- Agrega al carro de compras un producto, selecciona el carro de compras y luego presiona el botón [Proceed to checkout]:
 
 <img src="/images/plug/woo/webpay/demo3.png" class="rounded mx-auto d-block"/>
 
-* Agrega los datos que te pida y selecciona `Transbank Webpay` luego presiona el botón [Place order]
+- Agrega los datos que te pida y selecciona `Transbank Webpay` luego presiona el botón [Place order]
 
 <img src="/images/plug/woo/webpay/demo4.png" class="rounded mx-auto d-block"/>
 
-* Una vez presionado el botón para iniciar la compra, se mostrará la ventana de pago Webpay y deberás seguir el proceso de pago.
+- Una vez presionado el botón para iniciar la compra, se mostrará la ventana de pago Webpay y deberás seguir el proceso de pago.
 
-Para pruebas puedes usar los siguientes datos:  
+Para pruebas puedes usar los siguientes datos:
 
-* Número de tarjeta: `4051885600446623`
-* Rut: `11.111.111-1`
-* Cvv: `123`
+- Número de tarjeta: `4051885600446623`
+- Rut: `11.111.111-1`
+- Cvv: `123`
 
 <img src="/images/plug/woo/webpay/demo5.png" class="rounded mx-auto d-block"/>
 
-Para pruebas puedes usar los siguientes datos:  
+Para pruebas puedes usar los siguientes datos:
 
-* Rut: `11.111.111-1`
-* Clave: `123`
+- Rut: `11.111.111-1`
+- Clave: `123`
 
 <img src="/images/plug/woo/webpay/demo6.png" class="rounded mx-auto d-block"/>
 
@@ -137,11 +139,11 @@ Puedes aceptar o rechazar la transacción
 
 <img src="/images/plug/woo/webpay/demo8.png" class="rounded mx-auto d-block"/>
 
-* Serás redirigido a Woocommerce y podrás comprobar que el pago ha sido exitoso.
+- Serás redirigido a Woocommerce y podrás comprobar que el pago ha sido exitoso.
 
 <img src="/images/plug/woo/webpay/demo9.png" class="rounded mx-auto d-block"/>
 
-* Además si accedes al sitio de administración sección (Woocommerce / Orders) se podrá ver la orden creada y el detalle de los datos entregados por Webpay.
+- Además si accedes al sitio de administración sección (Woocommerce / Orders) se podrá ver la orden creada y el detalle de los datos entregados por Webpay.
 
 <img src="/images/plug/woo/webpay/order1.png" class="rounded mx-auto d-block"/>
 

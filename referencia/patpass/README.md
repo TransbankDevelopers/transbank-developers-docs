@@ -18,7 +18,7 @@ var configuration = new Configuration();
 configuration.Environment = "PRODUCCION";
 ```
 
-Las URLs de endpoint de producción estan alojadas dentro de
+Las URLs de endpoint de producción están alojadas dentro de
 <https://webpay3g.transbank.cl/.>
 
 > Los SDKs traen pre-configurado los certificados de Transbank y validan
@@ -45,7 +45,7 @@ PENDIENTE
 configuration.WebpayCertPath = @"C:\Certs\certificado-publico-transbank.crt"
 ```
 
-Para validar las respuestas generadas por transbank debes usar un certificado público de webpay. En [el repositorio github
+Para validar las respuestas generadas por Transbank debes usar un certificado público de webpay. En [el repositorio Github
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
 podrás encontrar [el certificado
 actualizado](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/tree/master/produccion).
@@ -97,7 +97,7 @@ configuration.Password = "PfxPassword";
 ```
 
 Todas las peticiones que hagas deben estar firmadas con tu llave privada y
-certificado enviado a transbank. Dichas credenciales deben coincidir con el
+certificado enviado a Transbank. Dichas credenciales deben coincidir con el
 código de comercio usado en cada petición.
 
 <aside class="notice">
@@ -115,7 +115,7 @@ Puedes mirar el siguiente enlace para obtener una guía rápida de como generar 
 Consulta [la documentación para generar una llave privada y un certificado
 usando openssl](/documentacion/como_empezar#credenciales-en-webpay si no sabes aún como realizarlo.
 
-En [el repositorio github
+En [el repositorio Github
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
 podrás encontrar [códigos de comercios y certificados actualizados para probar
 en integración aunque aún no tengas tu propio código de
@@ -158,7 +158,7 @@ WSDL: `/WSWebpayTransaction/cxf/WSWebpayService?wsdl`
 
 Una transacción de autorización de PatPass by WebPay corresponde a una solicitud de inscripción de pago recurrente con tarjetas de crédito, en donde el primer pago se resuelve al instante, y los subsiguientes quedan programados para ser ejecutados mes a mes. PatPass by WebPay cuenta con fecha de caducidad o termino, la cual debe ser proporcionada junto a otros datos para esta transacción. La transacción puede ser realizada en Dólares y Pesos, para este último caso es posible enviar el monto en UF y WebPay realizará la conversión a pesos al momento de realizar el cargo al tarjetahabiente.
 
-El flujo de pago en PatPass by WebPay se inicia desde el comercio, en donde el Tarjetahabiente selecciona el producto o servicio. Una vez realizado esto, elije pagar con PatPass by WebPay, en donde se despliega el formulario de pago y se completan los datos requeridos, dando paso al proceso de autenticación del Tarjetahabiente con el objetivo de validar que la tarjeta este siendo utilizada por el titular. Una vez resuelta la autenticación se procede a autorizar el pago y si esta es aprobada, se emite un comprobante electrónico de pago y el sistema procede a generar la inscripción encargada de la recurrencia mensual.
+El flujo de pago en PatPass by WebPay se inicia desde el comercio, en donde el Tarjetahabiente selecciona el producto o servicio. Una vez realizado esto, elige pagar con PatPass by WebPay, en donde se despliega el formulario de pago y se completan los datos requeridos, dando paso al proceso de autenticación del Tarjetahabiente con el objetivo de validar que la tarjeta este siendo utilizada por el titular. Una vez resuelta la autenticación se procede a autorizar el pago y si esta es aprobada, se emite un comprobante electrónico de pago y el sistema procede a generar la inscripción encargada de la recurrencia mensual.
 
 Dentro de los atributos más relevantes de WebPay se pueden mencionar:
 
@@ -182,7 +182,7 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
 3. Webpay procesa el requerimiento y entrega como resultado de la operación el token de la transacción y URL de redireccionamiento a la cual se deberá redirigir al tarjetahabiente.
 4. Comercio redirecciona al tarjetahabiente hacia Webpay, con el token de la transacción a la URL indicada en punto 3. La redirección se realiza enviando por método POST el token en variable `token_ws`.
 5. El navegador Web del tarjetahabiente realiza una petición HTTPS a Webpay, en base al redireccionamiento generado por el comercio en el punto 4.
-6. Webpay responde al requerimiento desplegando el formulario de pago de Webpay. Desde este punto la comunicación es entre Webpay y el tarjetahabiente, sin interferir el comercio. El formulario de pago de PatPass by Webpay despliega, entre otras cosas, el monto de la transacción, fecha de término de suscripción, información del comercio como nombre y logotipo, y la opcion de pago a través de crédito.
+6. Webpay responde al requerimiento desplegando el formulario de pago de Webpay. Desde este punto la comunicación es entre Webpay y el tarjetahabiente, sin interferir el comercio. El formulario de pago de PatPass by Webpay despliega, entre otras cosas, el monto de la transacción, fecha de término de suscripción, información del comercio como nombre y logotipo, y la opción de pago a través de crédito.
 7. Tarjetahabiente ingresa los datos de la tarjeta, hace clic en pagar.
 8. WebPay procesa la solicitud de autorización (primero autenticación bancaria y luego la autorización de la transacción), y si todo resulta exitoso, realiza el proceso de inscripción de PatPass by WebPay.
 9. Una vez resuelta la autorización, WebPay retorna el control al comercio, realizando un redireccionamiento HTTPS hacia la página de transición del comercio, en donde se envía por método POST el token de la transacción en la variable `token_ ws`. El comercio debe implementar la recepción de esta variable.
@@ -202,7 +202,7 @@ Excepción indicando la situación. Esta excepción debe ser manejada para no
 entregar el producto o servicio en caso que ocurra.
 </aside>
 
-14. Una vez recibido el resultado de la transacción e informado a WebPay su correcta recepción, el sitio del comercio debe redirigir al tarjetahabiente nuevamente a WebPay, con la finalidad de desplegar el comprobante de pago. Es importante realizar este punto para que el tarjetahabiente entienda que el proceso de pago fue exitoso, y que involucrará un cargo a su tarjeta bancaria. El re direccionamiento a WebPay se hace utilizando como destino la URL informada por el método `getTransactionResult()` enviando por método POST el token de la transacción en la variable `token_ws`.
+14. Una vez recibido el resultado de la transacción e informado a WebPay su correcta recepción, el sitio del comercio debe redirigir al tarjetahabiente nuevamente a WebPay, con la finalidad de desplegar el comprobante de pago. Es importante realizar este punto para que el tarjetahabiente entienda que el proceso de pago fue exitoso, y que involucrará un cargo a su tarjeta bancaria. El redireccionamiento a WebPay se hace utilizando como destino la URL informada por el método `getTransactionResult()` enviando por método POST el token de la transacción en la variable `token_ws`.
 15. WebPay recibe un requerimiento con el token en la variable `token_ws`.
 16. WebPay identifica la transacción y despliega el comprobante de pago al tarjetahabiente.
 17. Una vez visualizado el comprobante de pago por un periodo acotado de tiempo, el tarjetahabiente es redirigido de vuelta al sitio del comercio, por medio de redireccionamiento con el token en la variable `token_ws` enviada por método POST hacia la página final informada por el comercio en el método `initTransaction()`.
@@ -220,7 +220,7 @@ Si el tarjetahabiente anula la transacción en el formulario de pago de Webpay,
 3. Webpay procesa el requerimiento y entrega como resultado de la operación el token de la transacción y URL de redireccionamiento a la cual se deberá redirigir al tarjetahabiente.
 4. Comercio redirecciona al tarjetahabiente hacia Webpay, con el token de la transacción a la URL indicada en punto 3. La redirección se realiza enviando por método POST el token en variable `token_ws`.
 5. El navegador Web del tarjetahabiente realiza una petición HTTPS a Webpay, en base al redireccionamiento generado por el comercio en el punto 4.
-6. Webpay responde al requerimiento desplegando el formulario de pago de Webpay. Desde este punto la comunicación es entre Webpay y el tarjetahabiente, sin interferir el comercio. El formulario de pago de PatPass by Webpay despliega, entre otras cosas, el monto de la transacción, fecha de término de suscripción, información del comercio como nombre y logotipo, y la opcion de pago a través de crédito.
+6. Webpay responde al requerimiento desplegando el formulario de pago de Webpay. Desde este punto la comunicación es entre Webpay y el tarjetahabiente, sin interferir el comercio. El formulario de pago de PatPass by Webpay despliega, entre otras cosas, el monto de la transacción, fecha de término de suscripción, información del comercio como nombre y logotipo, y la opción de pago a través de crédito.
 7. Tarjetahabiente hace clic en anular, en formulario PatPass by WebPay.
 8. Webpay retorna el control al comercio, realizando un redireccionamiento HTTPS hacia la página de **final del comercio**, en donde se envía por método POST el token de la transacción en la variable `TBK_TOKEN` además de las variables `TBK_ORDEN_COMPRA` y `TBK_ID_SESION`.
 
@@ -229,7 +229,7 @@ Nota que el nombre de las variables recibidas es diferente. En lugar de `token_w
 </aside>
 
 9. El comercio con la variable `TBK_TOKEN` debe invocar el método
-   `getTransactionResult()`, para obtener elresultado de la autorización. En
+   `getTransactionResult()`, para obtener el resultado de la autorización. En
    este caso debe obtener una excepción, pues el pago fue abortado.
 10. El comercio debe informar al tarjetahabiente que su pago no se completó.
 
@@ -398,7 +398,7 @@ detailsOutput  <br> <i> wsTransactionDetailOutput </i> | Lista con resultado de 
 detailsOutput[0].authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción Largo máximo: 6
 detailsOutput[0].paymentTypeCode   <br> <i> xs:string </i> | Tipo de pago de la transacción. <br> VN = Venta Normal <br> Largo máximo: 2
 detailsOutput[0].responseCode  <br> <i> xs:string </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado. <br> -100 Rechazo por inscripción de PatPass by Webpay.
-detailsOutput[0].amount  <br> <i> xs:decimal </i> | Monto de la transacción. Formato número entero para transacciones en peso y decimal para transacciones en dólares y UF maximo 2 decimales. Largo máximo: 10
+detailsOutput[0].amount  <br> <i> xs:decimal </i> | Monto de la transacción. Formato número entero para transacciones en peso y decimal para transacciones en dólares y UF máximo 2 decimales. Largo máximo: 10
 detailsOutput[0].sharesNumber  <br> <i> xs:int </i> | Cantidad de cuotas. Valor por defecto 0. Largo máximo: 2
 detailsOutput[0].commerceCode  <br> <i> xs:string </i> | Código comercio de la tienda. Largo: 12
 detailsOutput[0].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Largo máximo: 26

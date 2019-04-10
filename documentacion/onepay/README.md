@@ -5,7 +5,6 @@
   <div tbk-link='/plugin/onepay' tbk-link-name='Plugins'></div>
 </div>
 
-
 ## Conceptos y SDKs
 
 Onepay puede ser usado en diversos canales y en múltiples modalidades de pago.
@@ -73,8 +72,7 @@ venta por internet como presencial.
 
 ## Integración Web (Checkout)
 
-
-### 1. Front-end: Configuración.
+### 1. Front-end: Configuración
 
 Para realizar la integración checkout debes utilizar [nuestro SDK Javascript](https://github.com/TransbankDevelopers/transbank-sdk-js-onepay) siguiendo las
 [instrucciones de instalación](https://github.com/TransbankDevelopers/transbank-sdk-js-onepay#instalaci%C3%B3n).
@@ -126,7 +124,6 @@ En el paso 2 más abajo podrás ver más información sobre este `endpoint`.
   125 pixeles de ancho y la altura se calcula automáticamente para mantener las
   proporciones de la imagen.
 
-
 - `callbackUrl` : URL que se invocará desde el SDK una vez que la transacción
 ha sido autorizada por el comercio. En este callback el comercio debe hacer la
 confirmación de la transacción, para lo cual dispone de 30 segundos desde que
@@ -136,13 +133,13 @@ En el paso 3 más abajo podrás ver más sobre cómo se invoca este _callback_.
 
 - `transactionDescription` : (Opcional) Texto que representa la descripción general de la compra, se dibujará en el modal sobre el valor del precio.
 
-- `onclose` : (Opcional) Función de callback que será invocada cuando el usuario 
-cierre el modal ya sea porque se arrepintió de realizar el pago o porque hubo un error 
+- `onclose` : (Opcional) Función de callback que será invocada cuando el usuario
+cierre el modal ya sea porque se arrepintió de realizar el pago o porque hubo un error
 en este último y el usuario presionó el botón "Entendido". Esto puede ser útil
 para el flujo de tu comercio en caso que necesites de alguna forma poder saber y
 tomar control de la acción del usuario al cerrar el modal. Los valores que puede
 tener el parámetro `status` son `CANCELED` en caso que usuario cierre al presionar
-el link `No pagar, volver a la pagina del comercio`, o `ERROR` en caso que el 
+el link `No pagar, volver a la pagina del comercio`, o `ERROR` en caso que el
 usuario presione el botón `Entendido` si un error ocurre en el proceso de pago.
 
 <aside class="notice">
@@ -201,7 +198,6 @@ Con eso estás preparado para crear una transacción en el código backend que s
 
 Para esto se debe crear en primera instancia un objeto `ShoppingCart` que se debe llenar un `Item` (o varios):
 
-
 <div class="language-simple" data-multiple-language></div>
 
 ```java
@@ -258,13 +254,12 @@ cart.add(Transbank::Onepay::Item.new(amount: 15000,
 from transbank.onepay.cart import ShoppingCart, Item
 
 cart = ShoppingCart()
-cart.add(Item(description="Zapatos", 
-              quantity=1, amount=15000, 
+cart.add(Item(description="Zapatos",
+              quantity=1, amount=15000,
               additional_data=None, expire=None))
 ```
 
 Luego que el carro de compras contiene todos los ítems, se crea la transacción:
-
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -280,13 +275,13 @@ TransactionCreateResponse response = Transaction.create(cart, channel);
 ```php
 /*
  * IMPORTANTE: El ejemplo está pensado en la forma más simple de integrar que
- * es apuntando a integración. El SDK asume que usarás integración si no has 
+ * es apuntando a integración. El SDK asume que usarás integración si no has
  * seteado el ambiente, razón por la cual no es necesario que lo configures.
  * Sin embargo, debes tener presente que al momento de apuntar a producción
  * deberás configurar el ambiente así como tu API_KEY y SHARED_SECRET antes
  * de realizar la llamada a Transaction::create, ya que de lo contrario estarás
  * apuntando a INTEGRACION
- * 
+ *
  * ejemplo:
  * use Transbank\Onepay\OnepayBase;
  * OnepayBase::setCurrentIntegrationType('LIVE');
@@ -372,15 +367,15 @@ Existe un [Simulador de transacciones](/referencia/onepay#simulador-de-transacci
 
 ### 3. Back-end: Confirmar la Transacción
 
-Eventualemnte la transacción llegará a término y el control retornará al backend
-mediante el metodo `GET` en la url indicada en el `callbackUrl` en el paso 1
+Eventualmente la transacción llegará a término y el control retornará al backend
+mediante el método `GET` en la url indicada en el `callbackUrl` en el paso 1
 (frontend) y 2 (backend). Es muy importante que pongas la misma URL en ambos
 pasos. De esta forma sólo tienes que escribir un único código que maneje la
 confirmación de la transacción independiente si el canal es `WEB` o `MOBILE`.
 
 Para el canal `WEB` (desktop) en la integración checkout el resultado de éxito o
 fracaso le aparecerá comunicado al usuario dentro del diálogo modal, para luego
-redirigir al usuario al _callback_ espeficado en el paso 1. Para el canal
+redirigir al usuario al _callback_ especificado en el paso 1. Para el canal
 `MOBILE` la app de Onepay abrirá una **nueva pestaña** en el navegador móvil del
 usuario y en esa pestaña se invocará la url de _callback_ especificado en el
 paso 2.
@@ -389,7 +384,7 @@ En este callback el comercio debe hacer la confirmación de la transacción, par
 lo cual dispone de 30 segundos desde que la transacción se autorizó. De lo
 contrario esta sera automáticamente reversada.
 
-El callback será invocado vía `GET` e irán los parametros `occ` y
+El callback será invocado vía `GET` e irán los parámetros `occ` y
 `externalUniqueNumber` con los cuales podrás invocar la confirmación de la
 transacción desde tu backend. Adicionalmente se envía el parámetro `status`,
 que puede tomar los siguientes valores:
@@ -416,7 +411,7 @@ String externalUniqueNumber = request.getParameter("externalUniqueNumber");
 String occ = request.getParameter("occ");
 
 if (null != status && status.equalsIgnoreCase("PRE_AUTHORIZED")) {
-    try { 
+    try {
         TransactionCommitResponse response =
             Transaction.commit(occ, externalUniqueNumber);
         // Procesar response
@@ -431,13 +426,13 @@ if (null != status && status.equalsIgnoreCase("PRE_AUTHORIZED")) {
 ```php
 /*
  * IMPORTANTE: El ejemplo está pensado en la forma más simple de integrar que
- * es apuntando a integración. El SDK asume que usarás integración si no has 
+ * es apuntando a integración. El SDK asume que usarás integración si no has
  * seteado el ambiente, razón por la cual no es necesario que lo configures.
  * Sin embargo, debes tener presente que al momento de apuntar a producción
  * deberás configurar el ambiente así como tu API_KEY y SHARED_SECRET antes
  * de realizar la llamada a Transaction::commit, ya que de lo contrario estarás
  * apuntando a INTEGRACION
- * 
+ *
  * ejemplo:
  * use Transbank\Onepay\OnepayBase;
  * OnepayBase::setCurrentIntegrationType('LIVE');
@@ -452,7 +447,7 @@ $externalUniqueNumber = $request->input("externalUniqueNumber");
 $occ = $request->input("occ");
 
 if (!empty($status) && strcasecmp($status,"PRE_AUTHORIZED") == 0) {
-    try { 
+    try {
         $response = Transaction::commit($occ, $externalUniqueNumber);
         // Procesar $response
     } catch (Exception $e) {
@@ -469,7 +464,7 @@ using Transbank.Onepay;
  if (null != status && status.Equals("PRE_AUTHORIZED", StringComparison.InvariantCultureIgnoreCase))
  {
     try
-    { 
+    {
         var response = Transaction.Commit(occ, externalUniqueNumber);
         // Procesar response
     }
@@ -530,7 +525,6 @@ El resultado obtenido en `response` tiene una forma como la de este ejemplo:
 
 Para completar el flujo, solo queda que le des la noticia al usuario de que el
 pago ha sido exitoso y le muestres un comprobante de ser necesario.
-
 
 <aside class="notice">
 Como el _callback_ final está implementado usando el método
@@ -731,9 +725,10 @@ Intent intent = getIntent();
 String occ = intent.getStringExtra("occ");
 String externalUniqueNumber = intent.getStringExtra("externalUniqueNumber");
 ```
+
 Finalmente deberás enviar el occ y el externalUniqueNumber a tu backend (quizás
 quieras reusar el mismo `callbackUrl` que confirma transacciones en modo
-checkout, pasando el status `"PRE_AUTHORIZED"` y algun parámetro adicional que
+checkout, pasando el status `"PRE_AUTHORIZED"` y algún parámetro adicional que
 le haga saber a tu backend que devuelva JSON en lugar de dibujar una página web
 con el comprobante).
 
@@ -744,18 +739,18 @@ backend, frontend-web (soportando canales WEB y MOBILE) y las dos apps móviles 
 
 Las modalidades vistas hasta ahora contemplan que tu aplicación es usada
 directamente por el comprador (tarjetahabiente), quien compra directamente desde
-tu app móvil o desde tu web (y es dirigido a la app Onepay de la manera más 
+tu app móvil o desde tu web (y es dirigido a la app Onepay de la manera más
 apropiada).
 
 Onepay ofrece la flexibilidad para ser usado también en la modalidad cortafila
-en tus tiendas físicas. Allí un vendedor usando por ejemplo un tablet puede 
-acercarse a los compradores y procesar rápidamente su compra usando Onepay. 
+en tus tiendas físicas. Allí un vendedor usando por ejemplo un tablet puede
+acercarse a los compradores y procesar rápidamente su compra usando Onepay.
 
 Para hacer funcionar este proceso la integración es un poco diferente a las
 vistas anteriormente. Suponiendo que la app para el vendedor es una app móvil,
 ahora verás los pasos necesarios para realizar la integración.
 
-### 1. Tu app móvil inicia el flujo.
+### 1. Tu app móvil inicia el flujo
 
 Para comenzar, la app móvil del vendedor será la que inicie la transacción.
 Esta app debe invocar a tu backend (por ejemplo a través de un API REST).
@@ -777,13 +772,13 @@ TransactionCreateResponse response = Transaction.create(cart, Channel.MOBILE);
 ```php
 /*
  * IMPORTANTE: El ejemplo está pensado en la forma más simple de integrar que
- * es apuntando a integración. El SDK asume que usarás integración si no has 
+ * es apuntando a integración. El SDK asume que usarás integración si no has
  * seteado el ambiente, razón por la cual no es necesario que lo configures.
  * Sin embargo, debes tener presente que al momento de apuntar a producción
  * deberás configurar el ambiente así como tu API_KEY y SHARED_SECRET antes
  * de realizar la llamada a Transaction::create, ya que de lo contrario estarás
  * apuntando a INTEGRACION
- * 
+ *
  * ejemplo:
  * use Transbank\Onepay\OnepayBase;
  * OnepayBase::setCurrentIntegrationType('LIVE');
@@ -825,20 +820,19 @@ onepay.callback_url = "https://miapp.cl/endPayment"
 response = Transaction.create(cart, Channel.MOBILE)
 ```
 
-
 A partir de la información entregada por la app móvil del vendedor (información que debe estar autenticada y autorizada), deberás crear una transacción usando `MOBILE` como channel. Ten en cuenta que el callback que indiques será invocado en el dispositivo móvil del comprador y no del vendedor (como verás en el paso 4).
 
-Luego en la respuesta que le enviarás a la app móvil del vendedor debes incluir la respuesta de la transacción Onepay. 
+Luego en la respuesta que le enviarás a la app móvil del vendedor debes incluir la respuesta de la transacción Onepay.
 
-### 3. Dibujar el código QR en la app móvil.
+### 3. Dibujar el código QR en la app móvil
 
 En base a lo retornado por tu backend (que a su vez retornó la transacción Onepay creada), debes dibujar el código QR para que el vendedor le permita al comprador usar su app Onepay. Para eso puedes usar el campo `qrCodeAsBase64` de la respuesta a la [creación de la transacción onepay](/referencia/onepay/#crear-una-transaccion).
 
 Te recomendamos también implementar un timeout y/o una interfaz para que el vendedor aborte la operación. Porque desde este momento el control lo tendrá el comprador en su propio dispositivo móvil.
 
-### 4. Retomar el control en el navegador móvil del comprador.
+### 4. Retomar el control en el navegador móvil del comprador
 
-Cuando el comprador escanee el QR con su app Onepay, no tendrás manera de saber el progreso de la operación. Pero cuando el comprador termine (exitosamente o con error), tu callback será invocado **en el navegador móvil del comprador**. 
+Cuando el comprador escanee el QR con su app Onepay, no tendrás manera de saber el progreso de la operación. Pero cuando el comprador termine (exitosamente o con error), tu callback será invocado **en el navegador móvil del comprador**.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -850,7 +844,7 @@ String externalUniqueNumber = request.getParameter("externalUniqueNumber");
 String occ = request.getParameter("occ");
 
 if (null != status && status.equalsIgnoreCase("PRE_AUTHORIZED")) {
-    try { 
+    try {
         TransactionCommitResponse response =
             Transaction.commit(occ, externalUniqueNumber);
         // Procesar response
@@ -869,13 +863,13 @@ if (null != status && status.equalsIgnoreCase("PRE_AUTHORIZED")) {
 ```php
 /*
  * IMPORTANTE: El ejemplo está pensado en la forma más simple de integrar que
- * es apuntando a integración. El SDK asume que usarás integración si no has 
+ * es apuntando a integración. El SDK asume que usarás integración si no has
  * seteado el ambiente, razón por la cual no es necesario que lo configures.
  * Sin embargo, debes tener presente que al momento de apuntar a producción
  * deberás configurar el ambiente así como tu API_KEY y SHARED_SECRET antes
  * de realizar la llamada a Transaction::commit, ya que de lo contrario estarás
  * apuntando a INTEGRACION
- * 
+ *
  * ejemplo:
  * use Transbank\Onepay\OnepayBase;
  * OnepayBase::setCurrentIntegrationType('LIVE');
@@ -890,7 +884,7 @@ $externalUniqueNumber = $request->input("externalUniqueNumber");
 $occ = $request->input("occ");
 
 if (!empty($status) && strcasecmp($status,"PRE_AUTHORIZED") == 0) {
-    try { 
+    try {
         $response = Transaction::commit($occ, $externalUniqueNumber);
         // Procesar $response.
         // Si $response es exitoso, renderear página de exito
@@ -911,7 +905,7 @@ using Transbank.Onepay;
  if (null != status && status.Equals("PRE_AUTHORIZED", StringComparison.InvariantCultureIgnoreCase))
  {
     try
-    { 
+    {
         var response = Transaction.Commit(occ, externalUniqueNumber);
         // Procesar response
         // Si response es exitoso, renderear página de exito
@@ -935,7 +929,7 @@ require 'transbank/sdk'
 
 if params["status"] == "PRE_AUTHORIZED"
   response = Transbank::Onepay::Transaction.commit(
-    occ: params["occ"], 
+    occ: params["occ"],
     external_unique_number: params["external_unique_number"]
   )
   # Procesar response
@@ -986,7 +980,7 @@ Si quieres ver el ejemplo funcional de una aplicación integrando Cortafilas, pu
 ## Credenciales del comercio
 
 Para establecer las credenciales de tu comercio (y no seguir usando las
-credenciales pre-configuradas que solo fucnionan en TEST), puedes realizarlo
+credenciales pre-configuradas que solo funcionan en TEST), puedes realizarlo
 así:
 
 <div class="language-simple" data-multiple-language></div>
@@ -1031,7 +1025,6 @@ También puedes configurar el api key y secret de una petición específica:
 
 <div class="language-simple" data-multiple-language></div>
 
-
 ```java
 import cl.transbank.onepay.model.Options;
 //...
@@ -1040,7 +1033,6 @@ Options options = new Options()
                   .setApiKey("api-key-entregado-por-transbank")
                   .setSharedSecret("secreto-entregado-por-transbank");
 ```
-
 
 ```php
 use Transbank\Onepay\Options;
@@ -1068,7 +1060,7 @@ options = { api_key: 'api-key-entregado-por-transbank',
 ```python
 from transbank.onepay import Options
 
-options = Options("api-key-entregado-por-transbank", 
+options = Options("api-key-entregado-por-transbank",
                   "secreto-entregado-por-transbank")
 ```
 
@@ -1114,20 +1106,20 @@ onepay.integration_type = onepay.IntegrationType.LIVE
 ```
 
 ## Conciliación de Transacciones
+
 Una vez hayas realizado transacciones en producción quedará un historial de transacciones que puedes revisar entrando a [www.transbank.cl](https://www.transbank.cl/). Si lo deseas puedes realizar una conciliación entre tu sistema y el reporte que entrega el portal.
 
 Para realizar la conciliación debes seguir los siguientes pasos:
 
 1. Iniciar sesión con tu usuario y contraseña en [www.transbank.cl](https://www.transbank.cl/)
-   
+
 2. Luego, en el menú principal presionar "Webpay" y luego "Reporte transaccional". ![Paso 2](/images/documentacion/conciliacion1.png)
-   
+
 3. En la parte superior de la ventana puedes encontrar un buscador que te ayudará a filtrar, según los parámetros que gustes, las transacciones que quieras cuadrar. Para encontrar las transacciones de Onepay, en producto, debes seleccionar Webpay3G ![Paso 3](/images/documentacion/conciliacion2.png)
 
 4. Dentro de la tabla en la imagen anterior puedes presionar el número de orden de compra para abrir los detalles de la transacción. Es en esta sección donde podrás encontrar y conciliar la mayoría de los parámetros devueltos al confirmar una transacción utilizando `getTransactionResult()`. ![Paso 4](/images/documentacion/conciliacion3.png)
 
-5. Sólo queda realizar la conciliación. A continuación puedes ver una lista de parámetros que recibirás al momento de confirmar una transaccion y a que fila de la tabla "Detalles de la transacción" corresponden (la lista completa de parámetros la puedes encontrar [acá](/referencia/onepay#confirmar-una-transaccion)).
-
+5. Sólo queda realizar la conciliación. A continuación puedes ver una lista de parámetros que recibirás al momento de confirmar una transacción y a que fila de la tabla "Detalles de la transacción" corresponden (la lista completa de parámetros la puedes encontrar [acá](/referencia/onepay#confirmar-una-transaccion)).
 
 Nombre parámetro  <br> <i> tipo </i>  | Fila en tabla
 ------   | -----------
@@ -1176,7 +1168,7 @@ transacción.
         <h3 class='toc-ignore fo-size-22'>Si aún tienes dudas envíanos un mensaje</h3>
         <a class="pointer magenta" data-toggle='modal' data-target='#modalContactForm'>
           <div class='td_block_gray'>
-            <div class="fo-size-20"><i class="fas fa-envelope"></i> Envianos un mensaje..</div>
+            <div class="fo-size-20"><i class="fas fa-envelope"></i> Envíanos un mensaje..</div>
             <div class='td_pa-txt'>
               Si necesitas resolver algún tipo de incidencia en el portal o si existe algún problema con tu integración y  que no has podido resolver, contáctanos a través de nuestro formulario.
             </div>

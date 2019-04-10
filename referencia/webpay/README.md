@@ -4,7 +4,6 @@
 
 ### Ambiente de Producción
 
-
 ```java
 Configuration configuration = new Configuration();
 configuration.setEnvironment(Webpay.Environment.LIVE);
@@ -20,9 +19,8 @@ var configuration = new Configuration();
 configuration.Environment = "PRODUCCION";
 ```
 
-
 Las URLs de endpoints de producción están alojados dentro de
-https://webpay3g.transbank.cl/.
+<https://webpay3g.transbank.cl/>.
 
 > Los SDKs traen pre-configurado los certificados de Transbank y validan
 > automáticamente las respuestas. Sólo debes asegurarte de mantener tu SDK
@@ -55,12 +53,11 @@ $configuration->setWebpayCert(
 configuration.WebpayCertPath = @"C:\Certs\certificado-publico-transbank.crt"
 ```
 
-Para validar las respuestas generadas por transbank debes usar un certificado
-público de webpay. En [el repositorio github
+Para validar las respuestas generadas por Transbank debes usar un certificado
+público de webpay. En [el repositorio GitHub
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
 podrás encontrar [el certificado
 actualizado](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/tree/master/produccion).
-
 
 ### Ambiente de Integración
 
@@ -77,7 +74,7 @@ configuration.Environment = "INTEGRACION";
 ```
 
 Las URLs de endpoints de integración están alojados dentro de
-https://webpay3gint.transbank.cl/.
+<https://webpay3gint.transbank.cl/>.
 
 Consulta [la documentación para conocer las tarjetas de prueba que funcionan en
 el ambiente de integración](/documentacion/como_empezar#ambientes).
@@ -119,7 +116,7 @@ configuration.Password = "PfxPassword";
 ```
 
 Todas las peticiones que hagas deben estar firmadas con tu llave privada y
-certificado enviado a transbank. Dichas credenciales deben coincidir con el
+certificado enviado a Transbank. Dichas credenciales deben coincidir con el
 código de comercio usado en cada petición.
 
 <aside class="notice">
@@ -139,18 +136,16 @@ Consulta [la documentación para generar una llave privada y un certificado
 usando openssl](/documentacion/como_empezar#credenciales-en-webpay) si
 no sabes aún como realizarlo.
 
-En [el repositorio github
+En [el repositorio Github
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
 podrás encontrar [códigos de comercios y certificados actualizados para probar
 en integración aunque aún no tengas tu propio código de
 comercio](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/tree/master/integracion).
 
-
 > Los SDKs ya incluyen esos códigos de comercio, certificados y llaves privadas
 > que funcionan en el ambiente de integración, por lo que puedes obtener
 > rápidamente una configuración lista para hacer tus primeras pruebas en dicho
 > ambiente:
-
 
 ```java
 Configuration configuration =
@@ -328,7 +323,7 @@ Nota que el nombre de las variables recibidas es diferente. En lugar de `token_w
 </aside>
 
 9. El comercio con la variable `TBK_TOKEN` debe invocar el método
-   `getTransactionResult()`, para obtener elresultado de la autorización. En
+   `getTransactionResult()`, para obtener el resultado de la autorización. En
    este caso debe obtener una excepción, pues el pago fue abortado.
 10. El comercio debe informar al tarjetahabiente que su pago no se completó.
 
@@ -362,6 +357,7 @@ $initResult = $transaction->initTransaction(
 var initResult = transaction.initTransaction(
         amount, buyOrder, sessionId, returnUrl, finalUrl);
 ```
+
 **Parámetros**
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -403,7 +399,7 @@ Cuando el comercio retoma el control mediante `returnURL` puedes confirmar una
 transacción usando los métodos  `getTransactionResult()` y
 `acknowledgeTransaction()`
 
-####  `getTransactionResult()`
+#### `getTransactionResult()`
 
 Permite obtener el resultado de la transacción una vez que Webpay ha resuelto su autorización financiera.
 
@@ -518,8 +514,7 @@ detailsOutput[0].sharesNumber  <br> <i> xs:int </i> | Cantidad de cuotas. Largo 
 detailsOutput[0].commerceCode  <br> <i> xs:string </i> | Código comercio de la tienda. Largo: 12
 detailsOutput[0].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Largo máximo: 26
 
-
-####  `acknowledgeTransaction()`
+#### `acknowledgeTransaction()`
 
 Indica a Webpay que se ha recibido conforme el resultado de la transacción.
 
@@ -554,7 +549,6 @@ reversada por Webpay: Timeout error (Transactions REVERSED) con código 277.
 </aside>
 
 ## Webpay Plus Mall
-
 
 ```java
 WebpayMallNormal transaction =
@@ -687,6 +681,7 @@ transactionDetails[].commerceCode  <br> <i>xs:string </i> | Código comercio as
 initResult.getToken();
 initResult.getUrl();
 ```
+
 ```php
 $initResult->token;
 $initResult->url;
@@ -703,7 +698,6 @@ Nombre  <br> <i> tipo </i> | Descripción
 token  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 url  <br> <i> xs:string </i> | URL de formulario de pago Webpay. Largo máximo: 256.
 
-
 ### Confirmar una transacción Webpay Plus Mall
 
 Para confirmar una transacción se deben usar los métodos  `getTransactionResult()` y
@@ -719,6 +713,7 @@ TransactionResultOutput result =
     transaction.getTransactionResult(
         request.getParameter("token_ws"));
 ```
+
 ```php
 $result = transaction->getTransactionResult(
     $request->input("token_ws"));
@@ -900,9 +895,9 @@ Para realizar esa captura explícita debe usarse el método `capture()`
 Permite solicitar a Webpay la captura diferida de una transacción con
 autorización y sin captura simultánea.
 
-> Los SDKs permitqen indicar opcionalmente el código de comercio de la
+> Los SDKs permiten indicar opcionalmente el código de comercio de la
 > transacción a capturar, para soportar la captura en comercios Webpay Plus
-> Mall. En comercios Webpay Plus Normal, no es necesario esepcificar el código
+> Mall. En comercios Webpay Plus Normal, no es necesario especificar el código
 > de comercio pues se usa el indicado en la configuración.
 
 <aside class="notice">
@@ -922,7 +917,6 @@ CaptureOutput captureResult = transaction.capture(
 // Para comercios Webpay Plus Mall
 CaptureOutput captureResult = transaction.capture(
     authorizationCode, capturedAmount, buyOrder, storeCommerceCode);
-
 ```
 
 ```php
@@ -989,7 +983,6 @@ authorizationCode  <br> <i> xs:string </i> | Código de autorización de la ca
 authorizationDate  <br> <i> xs:string </i> | Fecha y hora de la autorización.
 capturedAmount  <br> <i> xs:decimal </i> | Monto capturado.
 
-
 En caso de error pueden aparecer los siguientes códigos exclusivos del método
 `capture()`:
 
@@ -1041,7 +1034,7 @@ Permite solicitar a Webpay la anulación de una transacción realizada previam
 
 > Los SDKs permiten indicar opcionalmente el código de comercio de la
 > transacción a anular, para soportar la anulación en comercios Webpay Plus
-> Mall. En comercios Webpay Plus Normal, no es necesario esepcificar el código
+> Mall. En comercios Webpay Plus Normal, no es necesario especificar el código
 > de comercio pues se usa el indicado en la configuración.
 
 <aside class="notice">
@@ -1088,7 +1081,6 @@ var result = transaction.nullify(
 var result = transaction.nullify(
     authorizationCode, authorizedAmount, buyOrder, nullifyAmount,
     storeCommerceCode);
-
 ```
 
 **Parámetros**
@@ -1136,7 +1128,6 @@ balance  <br> <i> xs:decimal </i> | Saldo actualizado de la transacción (consi
 nullifiedAmount  <br> <i> xs:decimal </i> | Monto anulado.
 
 En caso de error pueden aparecer los siguientes códigos de error comunes para el método `nullify()`:
-
 
 Código | Descripción
 ------ | -----------
@@ -1295,6 +1286,7 @@ responseURL  <br> <i> xs:string </i> | URL del comercio a la cual Webpay redirec
 initResult.getToken();
 initResult.getUrlWebpay();
 ```
+
 ```php
 $initResult->token;
 $initResult->urlWebpay;
@@ -1332,6 +1324,7 @@ OneClickFinishInscriptionOutput result =
     transaction.finishInscription(
         request.getParameter("TBK_TOKEN"));
 ```
+
 ```php
 $result = $transaction->finishInscription(
     $request->input("TBK_TOKEN"));
@@ -1354,6 +1347,7 @@ result.getCreditCardType().getValue();
 result.getLast4CardDigits();
 result.getTbkUser();
 ```
+
 ```php
 $result->responseCode;
 $result->authCode;
@@ -1451,7 +1445,6 @@ responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de pago, do
 ### Reversar un pago Webpay OneClick
 
 Este proceso permite reversar una venta cuando esta no pudo concretarse, dentro del mismo día contable, con la finalidad de anular un cargo realizado al cliente. Para esto se debe consumir el método `codeReverseOneClick()` con la orden de compra de la transacción a reversar.
-
 
 #### `codeReverseOneClick()`
 
@@ -1561,7 +1554,6 @@ Las diferencias son:
   individualmente, pues es posible que el emisor de la tarjeta autorice algunas
   y otras no.
 
-
 ### Crear una inscripción Webpay OneClick Mall
 
 Para iniciar la inscripción debe usarse el método `initInscription()`
@@ -1591,7 +1583,6 @@ urlInscriptionForm  <br> <i> xs:string </i> | URL de Webpay para iniciar la insc
 Una vez que se llama a este webservice el usuario debe ser redireccionado vía
 POST a `urlInscriptionForm` con parámetro `TBK_TOKEN` igual al token.
 </aside>
-
 
 ### Confirmar una inscripción Webpay OneClick Mall
 
@@ -1698,7 +1689,7 @@ También es posible *reversar una anulación* debido a problemas operacionales
 (por ejemplo un error de comunicación al momento de anular, que le impida al
 comercio saber si Transbank recibió la anulación).
 
-Para llavar a cabo la reversa, el comercio debe usar el método `reverse()`. Para la anulación, se debe usar el método `nullify()`. Y para reversar una anulación existe el método `reverseNullification() `
+Para llevar a cabo la reversa, el comercio debe usar el método `reverse()`. Para la anulación, se debe usar el método `nullify()`. Y para reversar una anulación existe el método `reverseNullification() `
 
 #### `reverse()`
 
@@ -1772,7 +1763,6 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 reversed  <br> <i> xs:boolean </i> | Indica si la reversa se realizó correctamente o no.
 reverseCode  <br> <i> xs:long </i> | Identificador único de la transacción de reversa.
-
 
 <aside class="warning">
 La llamada a este método y por lo tanto la operación de reversa de anulación,

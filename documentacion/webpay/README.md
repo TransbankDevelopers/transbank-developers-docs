@@ -1,6 +1,7 @@
 # Webpay
 
 ## Webpay Plus
+
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-plus' tbk-link-name='Referencia Api'></div>
   <div tbk-link='/plugin/webpay' tbk-link-name='Plugins'></div>
@@ -185,13 +186,14 @@ En [la referencia detallada de Webpay Plus puedes ver cada paso del flujo, inclu
 los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-plus-normal).
 
 ## Webpay OneClick
+
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-oneclick-normal' tbk-link-name='Referencia Api'></div>
 </div>
 
 ### Crear una inscripción
 
-Para usar Webpay Onelick en transacciones asociadas a un único comercio, lo
+Para usar Webpay OneClick en transacciones asociadas a un único comercio, lo
 primero que necesitas es preparar una instancia de `WebpayOneClick` con la
 `Configuration` que incluye el código de comercio y los certificados a
 usar
@@ -332,7 +334,6 @@ Con eso habrás completado el flujo "feliz" en que todo funciona OK. En [la
 referencia detallada de Webpay OneClick puedes ver cada paso del flujo,
 incluyendo los casos de borde que también debes
 manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-oneclick-normal).
-
 
 ### Realizar transacciones
 
@@ -482,8 +483,8 @@ var oneClickTransaction = webpay.OneClickTransaction;
 A diferencia de otros SDK, en .NET debes especificar la ruta a un archivo pfx o p12
 el cual debes generar tu a partir de tu llave privada y certificado público.
 
-Puedes mirar el siguiente enlace para obtener una guía rápida de como generar tu 
-propio archivo: [Crear archivo pfx usando openssl](https://www.ssl.com/how-to/create-a-pfx-p12-certificate-file-using-openssl/) 
+Puedes mirar el siguiente enlace para obtener una guía rápida de como generar tu
+propio archivo: [Crear archivo pfx usando openssl](https://www.ssl.com/how-to/create-a-pfx-p12-certificate-file-using-openssl/)
 </aside>
 
 ### Apuntar a producción
@@ -529,20 +530,20 @@ operar con Transbank.
 </aside>
 
 ## Conciliación de Transacciones
+
 Una vez hayas realizado transacciones en producción quedará un historial de transacciones que puedes revisar entrando a [www.transbank.cl](https://www.transbank.cl/). Si lo deseas realizar una conciliación entre tu sistema y el reporte que entrega el portal.
 
 Para realizar la conciliación debes seguir los siguientes pasos:
 
 1. Iniciar sesión con tu usuario y contraseña en [www.transbank.cl](https://www.transbank.cl/)
-   
+
 2. Luego, en el menú principal presionar "Webpay" y luego "Reporte transaccional". ![Paso 2](/images/documentacion/conciliacion1.png)
-   
+
 3. En la parte superior de la ventana puedes encontrar un buscador que te ayudará a filtrar, según los parámetros que gustes, las transacciones que quieras cuadrar. Para encontrar las transacciones de Webpay Plus, en producto, debes seleccionar Webpay3G, en caso de querer las de Webpay OneClick selecciona "OneClick" ![Paso 3](/images/documentacion/conciliacion2.png)
 
 4. Dentro de la tabla en la imagen anterior puedes presionar el número de orden de compra para abrir los detalles de la transacción. Es en esta sección donde podrás encontrar y conciliar la mayoría de los parámetros devueltos al confirmar una transacción. ![Paso 4](/images/documentacion/conciliacion3.png)
 
 5. Sólo queda realizar la conciliación. A continuación puedes ver una lista de parámetros que recibirás al momento de confirmar una transacción y a que fila de la tabla "Detalles de la transacción" corresponden (la lista completa de parámetros de Webpay Plus la puedes encontrar [acá](/referencia/webpay#confirmar-una-transaccion-webpay-plus-normal) y la de Webpay OneClick [acá](/referencia/webpay#autorizar-un-pago-con-webpay-oneclick)).
-
 
 **En el caso de Webpay Plus Normal**
 Nombre parámetro   <br> <i> tipo </i> | Fila en tabla
@@ -615,7 +616,7 @@ cuando tus usuarios no quieren continuar con el servicio.
         <h3 class='toc-ignore fo-size-22'>Si aún tienes dudas envíanos un mensaje</h3>
         <a class="pointer magenta" data-toggle='modal' data-target='#modalContactForm'>
           <div class='td_block_gray'>
-            <div class="fo-size-20"><i class="fas fa-envelope"></i> Envianos un mensaje..</div>
+            <div class="fo-size-20"><i class="fas fa-envelope"></i> Envíanos un mensaje..</div>
             <div class='td_pa-txt'>
               Si necesitas resolver algún tipo de incidencia en el portal o si existe algún problema con tu integración y  que no has podido resolver, contáctanos a través de nuestro formulario.
             </div>
