@@ -1,7 +1,7 @@
 # Webpay
 
 <div class="pos-title-nav">
-  <div class="video" data-toggle="modal" data-src="/public/resourse/mooc/webpay/menu/index.html" data-target="#ModalCenterData">Introducción Elearning <i class="op-link"></i></div>
+  <div class="video" data-toggle="modal" data-src="/public/resourse/mooc/webpay/menu/index.html" data-target="#ModalCenterData">Introducción E-learning <i class="op-link"></i></div>
 </div>
 
 Webpay es la pasarela de pago de Transbank para realizar transacciones desde Internet con tarjetas bancarías de crédito y débito Redcompra de manera eficaz y segura.
@@ -99,7 +99,7 @@ Para tarjeta de crédito pueden ser los siguientes tipos de pago (con las abrevi
 
 Para tarjeta de débito Redcompra el tipo de pago siempre corresponde a:
 
-- Venta débido Redcompra (VD): Pago con tarjeta de débito Redcompra.
+- Venta débito Redcompra (VD): Pago con tarjeta de débito Redcompra.
 
 ## Autorización y Captura
 
