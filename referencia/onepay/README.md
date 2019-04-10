@@ -161,7 +161,7 @@ Crea una transacción a partir de un carro de compras.
 Onepay.setAppScheme("mi-app://mi-app/onepay-result");
 Onepay.setCallbackUrl("https://miapp.cl/endPayment");
 Onepay.setQrWidthHeight(100); // Opcional
-Onepay.setCommerceLogoUrl("http://some.url/logo"); // Opcional
+Onepay.setCommerceLogoUrl("https://some.url/logo"); // Opcional
 
 ShoppingCart cart = new ShoppingCart();
 cart.add(
@@ -178,7 +178,7 @@ TransactionCreateResponse response = Transaction.create(
 TransactionCreateResponse response = Transaction.create(
   cart, Onepay.Channel.WEB,
   new Options().setQrWidthHeight(200)
-               .setCommerceLogoUrl("http://commerce.cl/logo")
+               .setCommerceLogoUrl("https://commerce.cl/logo")
 )
 ```
 
@@ -186,7 +186,7 @@ TransactionCreateResponse response = Transaction.create(
 OnepayBase::setAppScheme("mi-app://mi-app/onepay-result");
 OnepayBase::setCallbackUrl("https://miapp.cl/endPayment");
 OnepayBase::setQrWidthHeight(100); // Opcional
-OnepayBase::setCommerceLogoUrl("http://some.url/logo"); // Opcional
+OnepayBase::setCommerceLogoUrl("https://some.url/logo"); // Opcional
 
 $cart = new ShoppingCart();
 $cart->add(
@@ -196,7 +196,7 @@ $response = Transaction::create($cart, $channel, 'WEB');
 // O, si lo deseas, puedes configurar opciones por transacción
 $options = new options()
 $options->setQrWidthHeight(200);
-$options->setCommerceLogoUrl("http://commerce.cl/logo");
+$options->setCommerceLogoUrl("https://commerce.cl/logo");
 $response = Transaction::create($cart, $channel, 'WEB', $options);
 ```
 
@@ -204,7 +204,7 @@ $response = Transaction::create($cart, $channel, 'WEB', $options);
 Onepay.AppScheme = "mi-app://mi-app/onepay-result";
 Onepay.CallbackUrl = "https://miapp.cl/endPayment";
 Onepay.QrWidthHeight = 100; // Opcional
-Onepay.CommerceLogoUrl = "http://some.url/logo"; // Opcional
+Onepay.CommerceLogoUrl = "https://some.url/logo"; // Opcional
 
 ShoppingCart cart = new ShoppingCart();
 cart.Add(new Item(
@@ -217,7 +217,7 @@ var response = Transaction.Create(cart, ChannelType.Web);
 
 // O, si lo deseas, puedes configurar opciones por transacción
 var response = Transaction.Create(cart, ChannelType.Web, new Options(
-  commerceLogoUrl: 'http://some.url/logo',
+  commerceLogoUrl: 'https://some.url/logo',
   qrWidthHeight: 200
 ));
 ```
@@ -226,7 +226,7 @@ var response = Transaction.Create(cart, ChannelType.Web, new Options(
 Transbank::Onepay::Base.app_scheme = "mi-app://mi-app/onepay-result"
 Transbank::Onepay::Base.callback_url = "https://miapp.cl/endPayment"
 Transbank::Onepay::Base.qr_width_height = 100 # Opcional
-Transbank::Onepay::Base.commerce_logo_url = "http://some.url/logo" # Opcional
+Transbank::Onepay::Base.commerce_logo_url = "https://some.url/logo" # Opcional
 
 
 cart = Transbank::Onepay::ShoppingCart.new
@@ -241,7 +241,7 @@ response = Transbank::Onepay::Transaction.create(shopping_cart: cart, channel: c
 # O, si lo deseas, puedes configurar opciones por transacción
 response = Transbank::Onepay::Transaction.create(
   shopping_cart: cart, channel: channel, options: {
-    qr_width_height: 200, commerce_logo_url: 'http://commerce.cl/logo'
+    qr_width_height: 200, commerce_logo_url: 'https://commerce.cl/logo'
   }
 )
 ```
@@ -250,7 +250,7 @@ response = Transbank::Onepay::Transaction.create(
 onepay.app_scheme = "mi-app://mi-app/onepay-result"
 onepay.callback_url = "https://miapp.cl/endPayment"
 onepay.qr_width_height = 100 # Opcional
-onepay.commerce_logo_url = "http://some.url/logo" # Opcional
+onepay.commerce_logo_url = "https://some.url/logo" # Opcional
 
 cart = ShoppingCart()
 cart.add(Item(description="Producto de prueba", 
@@ -259,7 +259,7 @@ cart.add(Item(description="Producto de prueba",
 result = Transaction.create(cart, Channel.WEB)
 
 # O, si lo deseas, puedes configurar opciones por transacción
-result = Transaction.create(cart, Channel.WEB, Options(commerce_logo_url="http://commerce.cl/logo", qr_width_height=200))
+result = Transaction.create(cart, Channel.WEB, Options(commerce_logo_url="https://commerce.cl/logo", qr_width_height=200))
 ```
 
 ```http
