@@ -285,8 +285,8 @@ TransactionCreateResponse response = Transaction.create(cart, channel);
  * ejemplo:
  * use Transbank\Onepay\OnepayBase;
  * OnepayBase::setCurrentIntegrationType('LIVE');
- * OnepayBase::setApiKey("api-key-entregado-por-transbank");
- * OnepayBase::setSharedSecret("secreto-entregado-por-transbank");
+ * OnepayBase::setApiKey('api-key-entregado-por-transbank');
+ * OnepayBase::setSharedSecret('secreto-entregado-por-transbank');
  */
 
 $channel = $request->input("channel");
