@@ -55,10 +55,8 @@ onepay.integration_type = onepay.IntegrationType.TEST
 Host: onepay.ionix.cl
 ```
 
-
 - `TEST` (Integración) se utiliza para el desarrollo y la validación de una
   integración. La URL Base es `https://onepay.ionix.cl`.
-
 
 En cuanto a credenciales, todos los métodos del API requieren tres parámetros:
 
@@ -73,7 +71,6 @@ Java | `fe9d371d-10ae-4138-8cfb-e2215b82c0d3` | `7968CDF8-F4CC-4BC5-8E27-D0513B
 Ruby | `760272c4-9950-4bf3-be16-a6729800231a` | `152C392E-F77C-426A-8667-55BEBB00EF1A`
 Python | `8e279b4e-917d-4cbf-b0e3-9432adefff6a` | `66535F26-5918-435C-ACAB-F628F4CC65EF`
 .NET | `297a620c-c776-4dd6-a42c-8669c6a4f2c5` | `81A33064-26DC-4267-8616-C97D252E7378`
-
 
 ```java
 Onepay.setApiKey("api-key-entregado-por-transbank");
@@ -100,12 +97,12 @@ onepay.api_key = "api-key-entregado-por-transbank"
 onepay.shared_secret = "secreto-entregado-por-transbank"
 ```
 
-- `apiKey`: Identificador del comercio, entregado por transbank.
+- `apiKey`: Identificador del comercio, entregado por Transbank.
 
 > Los SDKs manejan automáticamente el cálculo del parámetro `signature`
 
 - `signature`: Corresponde a la representación `base64` de un hash `HMAC-SHA256`
-  usando como llave un _shared secret_ entregado por transbank al comercio. El
+  usando como llave un _shared secret_ entregado por Transbank al comercio. El
   texto a firmar con esa llave es la concatenación ciertos parámetros de negocio
   (documentados en cada _endpoint_) precedidos el largo de cada string.
 
@@ -121,21 +118,22 @@ onepay.shared_secret = "secreto-entregado-por-transbank"
 </aside>
 
 ### Simulador de Transacciones
+
 Dentro del flujo de venta, puedes utilizar un simulador de transacciones donde podrás generar casos de éxito y fracaso, para utilizarlo sigue los siguientes pasos:
 
-* Una vez presionado el botón para iniciar la compra, se mostrará la ventana de pago Onepay, tal como se ve en la imagen. Toma nota del número que aparece como "Código de compra", ya que lo necesitarás para emular el pago en el siguiente paso.
+- Una vez presionado el botón para iniciar la compra, se mostrará la ventana de pago Onepay, tal como se ve en la imagen. Toma nota del número que aparece como "Código de compra", ya que lo necesitarás para emular el pago en el siguiente paso.
   ![Paso 1](/images/referencia/onepay/sim1.png)
 
-* En otra ventana del navegador, ingresa al emulador de pagos desde [https://onepay.ionix.cl/mobile-payment-emulator/](https://onepay.ionix.cl/mobile-payment-emulator/), utiliza test@onepay.cl como correo electrónico, y el código de compra obtenido desde la pantalla anterior. Una vez ingresado los datos solicitados, presiona el botón "Iniciar Pago":
+- En otra ventana del navegador, ingresa al emulador de pagos desde [https://onepay.ionix.cl/mobile-payment-emulator/](https://onepay.ionix.cl/mobile-payment-emulator/), utiliza test@onepay.cl como correo electrónico, y el código de compra obtenido desde la pantalla anterior. Una vez ingresado los datos solicitados, presiona el botón "Iniciar Pago":
   ![Paso 2](/images/referencia/onepay/sim2.png)
 
-* Si todo va bien, el emulador mostrará opciones para simular situaciones distintas. Para simular un pago exitoso, presiona el botón `PRE_AUTHORIZED`. En caso de querer simular un pago fallido, presiona le botón `REJECTED`. Simularemos un pago exitoso presionando el botón `PRE_AUTHORIZED`.
+- Si todo va bien, el emulador mostrará opciones para simular situaciones distintas. Para simular un pago exitoso, presiona el botón `PRE_AUTHORIZED`. En caso de querer simular un pago fallido, presiona le botón `REJECTED`. Simularemos un pago exitoso presionando el botón `PRE_AUTHORIZED`.
   ![Paso 3](/images/referencia/onepay/sim3.png)
 
-* Vuelve a la ventana del navegador donde comenzaste, y podrás comprobar que el pago ha sido exitoso.
+- Vuelve a la ventana del navegador donde comenzaste, y podrás comprobar que el pago ha sido exitoso.
   ![Paso 4](/images/referencia/onepay/sim4.png)
 
-* Alternativamente, en vez de simular un pago exitoso puedes simular un pago rechazado utilizando el botón `REJECTED` en el emulador. Si vuelves a la ventana del comercio, podrás ver que la operación ha sido cancelada.
+- Alternativamente, en vez de simular un pago exitoso puedes simular un pago rechazado utilizando el botón `REJECTED` en el emulador. Si vuelves a la ventana del comercio, podrás ver que la operación ha sido cancelada.
   ![Paso 5](/images/referencia/onepay/sim5.png)
 
 ### Códigos de Error Comunes
@@ -253,8 +251,8 @@ onepay.qr_width_height = 100 # Opcional
 onepay.commerce_logo_url = "https://some.url/logo" # Opcional
 
 cart = ShoppingCart()
-cart.add(Item(description="Producto de prueba", 
-              quantity=1, amount=9900, 
+cart.add(Item(description="Producto de prueba",
+              quantity=1, amount=9900,
               additional_data=None, expire=None))
 result = Transaction.create(cart, Channel.WEB)
 
@@ -292,16 +290,14 @@ Content-Type: application/json
 }
 ```
 
-
 **Parámetros**
-
 
 Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 ------ | -----------
 appKey<br><i>String</i> | Identificador del lenguaje de programación usado. Los SDKs lo manejan internamente.
 apiKey <br> <i>  String  </i> | Identificador del comercio. Los SDK lo toman desde la configuración global de Onepay o desde el parámetro `options`.
 signature <br> <i>  String  </i> | Firma creada a partir de los parámetros `externalUniqueNumber`, `total`, `itemsQuantity`, `issuedAt` y `callbackUrl` (en ese orden). Los parámetros deben ser convertidos a string y concatenados, prefijando cada parámetro con el número de caracteres que le corresponde. Luego se debe aplicar HMAC-SHA256 sobre ese string, usado el _shared secret_ entregado por Transbank como llave. Los SDKs manejan este parámetro automáticamente en función del _shared secret_ provisto en la configuración global o desde el parámetro `options`.
-externalUniqueNumber <br> <i>  String  </i> | Identificador de la transacción en el sistema del comercio. Debe ser único para el comercio. Si la transacción falla, no se puede reutilizar en una nueva transacción (aunque sea un reintento). Los SDKs generan un identificador único automáticamente, a menos que se proveea explícitamente un tercer parámetro con el external unique number.
+externalUniqueNumber <br> <i>  String  </i> | Identificador de la transacción en el sistema del comercio. Debe ser único para el comercio. Si la transacción falla, no se puede reutilizar en una nueva transacción (aunque sea un reintento). Los SDKs generan un identificador único automáticamente, a menos que se provea explícitamente un tercer parámetro con el external unique number.
 total <br> <i>  Number  </i> | Monto total de la compra. Los SDKs lo calculan automáticamente a partir del `cart` pasado como primer parámetro.
 itemsQuantity <br> <i>  Integer  </i> | Cantidad de objetos comprados. Debe ser igual al largo del array `items`. Los SDKs lo calculan automáticamente a partir del `cart` pasado como primer parámetro.
 issuedAt <br> <i>  Number  </i> | Fecha de creación de la transacción expresado en unix timestamp. Los SDKs lo calculan automáticamente.
@@ -315,7 +311,7 @@ items <br> <i>  Array[Object]  </i> | Lista de items en el carro de compra. Corr
 items[].description <br> <i>  String  </i> | Descripción del ítem.
 items[].quantity <br> <i>  Number  </i> | Cantidad para el ítem descrito.
 items[].amount <br> <i>  Number  </i> | Precio unitario. Puede ser negativo para representar un descuento, siempre que el monto total del carro (sumando todos los items) sea positivo.
-items[].additionalData <br> <i>  String  </i> | 
+items[].additionalData <br> <i>  String  </i> |
 items[].expire <br> <i>  Number  </i> |
 
 **Respuesta**
@@ -327,6 +323,7 @@ response.getExternalUniqueNumber();
 response.getIssuedAt();
 response.getQrCodeAsBase64();
 ```
+
 ```php
 response->getOcc();
 response->getOtt();
@@ -334,6 +331,7 @@ response->getExternalUniqueNumber();
 response->getIssuedAt();
 response->getQrCodeAsBase64();
 ```
+
 ```csharp
 response.Occ;
 resppnse.Ott;
@@ -341,6 +339,7 @@ response.ExternalUniqueNumber;
 response.IssuedAt;
 response.QrCodeAsBase64;
 ```
+
 ```ruby
 response.occ
 response.ott
@@ -348,6 +347,7 @@ response.external_unique_number
 response.issued_at
 response.qr_code_as_base64
 ```
+
 ```python
 response.occ
 response.ott
@@ -372,7 +372,6 @@ Content-Type: application/json
     "qrCodeAsBase64": "jkdjiojijiuh768ygYTBUHGYGYYTRF788989878y876777fgfgfgfghretgyguyo8njhjhugyug6766668yuui"
   }
 }
-
 ```
 
 > Los SDKs sólo retornan los campos presentes dentro de `result`. Si el
@@ -382,7 +381,7 @@ Content-Type: application/json
 Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 -------|------------
 responseCode<br> <i>  String  </i> |Código de respuesta que representa si la operación resultó exitosa o no. Puede tomar el valor `"OK"` (resultado exitoso),  `"INVALID_TRANSACTION"` (inconsistencia en el carro de compra en montos o cantidades), `"INVALID_PARAMS"` (otros parámetros incorrectos), `"TRANSACTION_ALREADY_EXISTS"` (External unique number ya había sido usado previamente), `"ILCAT_SERVICE_ERROR"` o `"ILCAT_RESPONSE_ERROR"` o `"ILCAT_ERROR"` (todos fallos internos). También puede tomar [uno de los valores comunes de error](#codigos-de-error-comunes).
-description <br> <i>  String  </i> | Contiene una descripción del resultado. Se utiliza para informar por qué ocurrio un error.
+description <br> <i>  String  </i> | Contiene una descripción del resultado. Se utiliza para informar por qué ocurrió un error.
 result <br> <i>  Object  </i> | Tiene todos los datos de la transacción recién creada. Es `null` si el `responseCode` es diferente a `"OK"`.
 result.occ <br> <i>  String  </i> | Identificador único de la transacción en Onepay.
 result.ott <br> <i>  String  </i> | Identificador temporal de la transacción (8 dígitos)
@@ -397,7 +396,6 @@ Cuando la transacción sea aprobada o rechazada, se invocará vía método `GET`
 URL `callbackUrl` (en canal `WEB` modalidad checkout y en canal `MOBILE`) o la
 URL `appScheme` (en canal `APP`) con los siguientes parámetros.
 
-
 Parámetro de callback | Descripción |
 ----------------------|-------------|
 occ | Identificador de la transacción Onepay.
@@ -406,9 +404,7 @@ status | Estado resultante de la transacción. Puede ser `"PRE_AUTHORIZED"` (tra
 
 Los parámetros son todos String (pues son parte de una URL), excepto en Android donde los parámetros de un intent son tipados. Ver la referencia del SDK móvil para más detalles.
 
-
 ##### Especificar tus propios external unique numbers
-
 
 ```java
 
@@ -444,8 +440,8 @@ Al usar los SDKs si no provees un external unique number, será generado automá
 A través del servicio `gettransactionnumber` se obtiene la información de una
 transacción y al mismo tiempo se confirma por parte del comercio.
 
-
 #### `POST /ewallet-plugin-api-services/services/transactionservice/gettransactionnumber`
+
 ```java
 TransactionCommitResponse response =
   Transaction.commit(occ, externalUniqueNumber);
@@ -506,6 +502,7 @@ response.getInstallmentsAmount();
 response.getInstallmentsNumber();
 response.getBuyOrder();
 ```
+
 ```php
 response->getOcc();
 response->getAuthorizationCode();
@@ -516,6 +513,7 @@ response->getInstallmentsAmount();
 response->getInstallmentsNumber();
 response->getBuyOrder();
 ```
+
 ```csharp
 response.Occ;
 response.AuthorizationCode;
@@ -574,11 +572,10 @@ Content-Type: application/json
 > `responseCode` es diferente de `"OK"` lanzan una excepción incluyendo el
 > `responseCode` y `description`.
 
-
 Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 ------ | -----------
 responseCode <br> <i>  String  </i> | Puede tomar el valor `"OK"` (resultado exitoso), `"INVALID_PARAMS"` (cuando los parámetros son incorrectos), `"INVALID_TRANSACTION"` o `"INVALID_TRANSACTION_STATUS"` (ambos indicando que la transacción no está autorizada y no se puede confirmar) También puede tomar [uno de los valores comunes de error](#codigos-de-error-comunes).
-description <br> <i>  String  </i> | Contiene una descripción del resultado. Se utiliza para informar por qué ocurrio un error.
+description <br> <i>  String  </i> | Contiene una descripción del resultado. Se utiliza para informar por qué ocurrió un error.
 result <br> <i>  Object  </i> | Tiene todos los datos de la transacción recién creada. Es `null` si el `responseCode` es diferente a `"OK"`.
 result.occ <br> <i>  String  </i> | Identificador único de la transacción Onepay.
 result.authorizationCode <br> <i>  String  </i> | Código de autorización del pago.
@@ -602,6 +599,7 @@ RefundCreateResponse response =
   Refund.create(amount, occ, externalUniqueNumber,
   authorizationCode);
 ```
+
 ```php
 $response = Refund::create(
   $amount, $occ, $externalUniqueNumber,$authorizationCode);
@@ -640,7 +638,6 @@ Content-Type: application/json
 }
 ```
 
-
 Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 ------ | -----------
 appKey <br> <i>  String  </i> | Identificador del lenguaje de programación usado. Los SDKs lo manejan internamente.
@@ -660,24 +657,28 @@ response.getExternalUniqueNumber();
 response.getReverseCode();
 response.getIssuedAt();
 ```
+
 ```php
 response->getOcc();
 response->getExternalUniqueNumber();
 response->getReverseCode();
 response->getIssuedAt();
 ```
+
 ```csharp
 response.Occ;
 response.ExternalUniqueNumber;
 response.ReverseCode;
 response.IssuedAt;
 ```
+
 ```ruby
 response.occ
 response.external_unique_number
 response.reverse_code
 response.issued_at
 ```
+
 ```python
 response.occ
 response.external_unique_number
@@ -709,7 +710,7 @@ Content-Type: application/json
 Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 ------ | -----------
 responseCode <br> <i>  String  </i> | Puede tomar el valor `"OK"` (resultado exitoso), `"INVALID_PARAMS"` (cuando los parámetros son incorrectos), `"INVALID_TRANSACTION"` o (la transacción no está autorizada y no se puede anular), `"INVALID_NULLIFY_AMOUNT`" (el monto no coincide con el de la transacción), `"NULLIFICATION_PERIOD_HAS_EXPIRED"` (ya no se puede anular la transacción), `"NONEXISTENT_TRANSACTION"` (la transacción no fue encontrada),  `"REVERSED_NULLIFY"` o `"FAILED_REVERSE_NULLIFY"` o  `"NONEXISTENT_USER"` o `"INVALID_USER"` o  `"NOT_ACTIVE_COMMERCE"` o `"ERROR"` (todos errores inesperados), También puede tomar [uno de los valores comunes de error](#codigos-de-error-comunes).
-description <br> <i>  String  </i> | Contiene una descripción del resultado. Se utiliza para informar por qué ocurrio un error.
+description <br> <i>  String  </i> | Contiene una descripción del resultado. Se utiliza para informar por qué ocurrió un error.
 result <br> <i>  Object  </i> | Tiene todos los datos de la transacción recién creada. Es `null` si el `responseCode` es diferente a `"OK"`.
 result.occ <br> <i>  String  </i> | Identificador único de la transacción Onepay.
 result.reverseCode <br> <i>  String  </i> | Código de autorización de la anulación.
@@ -743,7 +744,6 @@ options.endpoint <br> <i>  String  </i> | URL del endpoint de creación de la t
 options.commerceLogo <br> <i>  String  </i> | (Opcional) URL del logo del comercio que se dibujará dentro del modal de Onepay checkout.
 options.callbackUrl <br> <i>  String  </i> | URL del endpoint que será el callback cuando la transacción finalice.
 options.transactionDescription <br> <i>  String  </i> | (Opcional) Texto que representa la descripción general de la compra, se dibujará en el modal sobre el valor del precio.
-
 
 > Ejemplo:
 > ```javascript
@@ -863,7 +863,6 @@ Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 -------|------------
 occ <br> <i>  String  </i> | Identificador de la transacción en Onepay
 
-
 **Respuesta**
 
 Ninguna. Al final del flujo de aprobación del pago recibirás el callback que
@@ -941,7 +940,7 @@ transaction.occ <br> <i>  Number  </i> | Identificador de la transacción ya cr
 transaction.ott <br> <i>  Number  </i> | Identificador temporal de 8 dígitos de la transacción ya creada en Onepay.
 transaction.externalUniqueNumber <br> <i>  String  </i> | Identificador de la transacción en los sistemas del comercio.
 transaction.qrCodeAsBase64 <br> <i>  String  </i> | Código QR tal como lo devuelve [el API de creación de transacción](#post-ewallet-plugin-api-services-services-transactionservice-sendtransaction).
-transaction.paymentStatusHandler <br> <i>  Object  </i> | Funciones de escucha para los evetos de Onepay
+transaction.paymentStatusHandler <br> <i>  Object  </i> | Funciones de escucha para los eventos de Onepay
 
 **Callbacks**
 
@@ -999,10 +998,11 @@ En Android debes pasar un contexto como parámetro al constructor de `OnePay` (t
 >   onepay.installOnePay();
 > }
 > ```
+
 #### `isOnePayInstalled()`
 
 Este método te permite saber si la app Onepay ya se encuentra instalada en el
-dispositivo del usaurio.
+dispositivo del usuario.
 
 **Parámetros**
 
@@ -1101,7 +1101,7 @@ El callback de ser invocado recibirá dos parámetros:
 
 Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 ------ | -----------
-status[iOS] o error[Android] <br> </i>OnePayState[iOS] o Error[Android]</i>  | Indica que situación de error ha ocurrido. Las opciones posibles son que hayas indicado una occ inváida (`OnePayState.occInvalid`[iOS] o `INVALID_OCC`[Android]) o que Onepay no está instalado (`OnePayState.notInstalled`[iOS] o `ONE_PAY_NOT_INSTALLED`[Android])
+status[iOS] o error[Android] <br> </i>OnePayState[iOS] o Error[Android]</i>  | Indica que situación de error ha ocurrido. Las opciones posibles son que hayas indicado una occ inválida (`OnePayState.occInvalid`[iOS] o `INVALID_OCC`[Android]) o que Onepay no está instalado (`OnePayState.notInstalled`[iOS] o `ONE_PAY_NOT_INSTALLED`[Android])
 description <br> <i>  String  </i> | Información adicional sobre el error.
 
 ### Retomar el control en tu app iOS
@@ -1120,7 +1120,7 @@ status | Estado resultante de la transacción. Puede ser `"PRE_AUTHORIZED"` (tra
 issuedAt | Fecha de creación de la transacción como timestamp unix.
 Los parámetros son todos String (pues son parte de una URL),
 
-Si quieres saber más sobre cómo manejar la invocación a tu  `appScheme`, [consulta la gúia de Onepay en la sección de integración para app móvil](/documentacion/onepay#integracion-en-app-movil-comercio).
+Si quieres saber más sobre cómo manejar la invocación a tu  `appScheme`, [consulta la guía de Onepay en la sección de integración para app móvil](/documentacion/onepay#integracion-en-app-movil-comercio).
 
 Finalmente deberás enviar a tu backend la información que recibiste para que [confirme la transacción usando el API o uno de nuestros SDK backend](#confirmar-una-transaccion).
 
@@ -1142,7 +1142,7 @@ externalUniqueNumber <br> <i>  String  </i> | Identificador de la transacción e
 status <br> <i>  String  </i> | Estado resultante de la transacción. Puede ser `"PRE_AUTHORIZED"` (transacción autorizada por el usuario), `"CANCELLED_BY_USER"`(el usuario abortó el pago) o `"REJECTED"` (transacción rechazada por el autorizador). También puede tomar el valor `"REVERSED"` (la transacción se reversó internamente después de no poder confirmar el pago) o `"REVERSE_NOT_COMPLETE"` (se intentó reversar, pero falló por alguna razón), pero estos casos deben ser manejados de igual forma que `"REJECTED"`.
 issuedAt <br> <i>  Long  </i> | Fecha de creación de la transacción como timestamp unix.
 
-Si quieres saber más sobre cómo configurar tu `Activity` para que reciba la invocación de Onepay, [consulta la gúia de Onepay en la sección de integración para app móvil](/documentacion/onepay#integracion-en-app-movil-comercio).
+Si quieres saber más sobre cómo configurar tu `Activity` para que reciba la invocación de Onepay, [consulta la guía de Onepay en la sección de integración para app móvil](/documentacion/onepay#integracion-en-app-movil-comercio).
 
 Finalmente deberás enviar a tu backend la información que recibiste para que [confirme la transacción usando el API o uno de nuestros SDK backend](#confirmar-una-transaccion).
 

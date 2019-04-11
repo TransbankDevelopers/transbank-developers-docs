@@ -1,3 +1,5 @@
+#
+
 <div class="data-menu-side-right">
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">
@@ -25,11 +27,11 @@ Este plugin oficial ha sido creado para que puedas integrar Onepay fácilmente e
 ## Requisitos
 
 1. Debes tener instalado previamente Magento2 y asegurarte de tener [Composer](https://getcomposer.org) instalado.
-2. Tus credenciales de Magento Market a mano. Si no sabes cuales son tus credenciales puedes revisar esta guia: [https://devdocs.magento.com/guides/v2.2/install-gde/prereq/connect-auth.html](https://devdocs.magento.com/guides/v2.2/install-gde/prereq/connect-auth.html)
+2. Tus credenciales de Magento Market a mano. Si no sabes cuales son tus credenciales puedes revisar esta guía: [https://devdocs.magento.com/guides/v2.2/install-gde/prereq/connect-auth.html](https://devdocs.magento.com/guides/v2.2/install-gde/prereq/connect-auth.html)
 
 ## Instalación del Plugin
 
-**Nota:** En este punto composer podría pedirte si lo requiere tus creedenciales de magento2.
+**Nota:** En este punto composer podría pedirte si lo requiere tus credenciales de magento2.
 
 **Versiones disponibles** [Aquí](https://packagist.org/packages/transbank/onepay-magento2)
 
@@ -80,10 +82,11 @@ Para acceder a la configuración, debes seguir los siguientes pasos:
   ![Paso 14](/images/plug/mage/onepay/paso14.png)
 
 6. ¡Ya está! Estás en la pantalla de configuración del plugin, debes ingresar la siguiente información:
-  * **Enable**: Al activarlo, Onepay estará disponible como medio de pago. Ten la precaución de que se encuentre marcada esta opción cuando quieras que los usuarios paguen con Onepay.
-  * **Endpoint**: Ambiente hacia donde se realiza la transacción.
-  * **APIKey**: Es lo que te identifica como comercio.
-  * **Shared Secret**: Llave secreta que te autoriza y valida a hacer transacciones.
+
+   * **Enable**: Al activarlo, Onepay estará disponible como medio de pago. Ten la precaución de que se encuentre marcada esta opción cuando quieras que los usuarios paguen con Onepay.
+   * **Endpoint**: Ambiente hacia donde se realiza la transacción.
+   * **APIKey**: Es lo que te identifica como comercio.
+   * **Shared Secret**: Llave secreta que te autoriza y valida a hacer transacciones.
 
   Las opciones disponibles para _Endpoint_ son: "Integración" para realizar pruebas y certificar la instalación con Transbank, y "Producción" para hacer transacciones reales una vez que Transbank ha aprobado el comercio. Dependiendo de cual Endpoint se ha seleccionado el plugin usará uno de los dos set de APIKey y Shared Secret según corresponda.
 
@@ -144,7 +147,7 @@ En ambiente de integración es posible realizar una prueba de transacción utili
 
 * Selecciona método de envío y presiona el botón [Next]
 
-  Debes asegurarte que tu dirección de envio sea en Chile.
+  Debes asegurarte que tu dirección de envío sea en Chile.
 
   ![Paso 7](/images/plug/mage/onepay/paso22.png)
 
@@ -157,10 +160,10 @@ En ambiente de integración es posible realizar una prueba de transacción utili
   ![Paso 9](/images/plug/mage/onepay/paso24.png)
 
 * En otra ventana del navegador, ingresa al emulador de pagos desde [https://onepay.ionix.cl/mobile-payment-emulator/](https://onepay.ionix.cl/mobile-payment-emulator/), utiliza test@onepay.cl como correo electrónico, y el código de compra obtenido desde la pantalla anterior. Una vez ingresado los datos solicitados, presiona el botón "Iniciar Pago":
-*
+
   ![Paso 10](/images/plug/mage/onepay/paso25.png)
 
-* Si todo va bien, el emulador mostrará opciones para simular situaciones distintas. Para simular un pago exitoso, presiona el botón `PRE_AUTHORIZED`. En caso de querer simular un pago fallido, presiona le botón `REJECTED`. Simularemos un pago exitóso presionando el botón `PRE_AUTHORIZED`.
+* Si todo va bien, el emulador mostrará opciones para simular situaciones distintas. Para simular un pago exitoso, presiona el botón `PRE_AUTHORIZED`. En caso de querer simular un pago fallido, presiona le botón `REJECTED`. Simularemos un pago exitoso presionando el botón `PRE_AUTHORIZED`.
 
   ![Paso 11](/images/plug/mage/onepay/paso26.png)
 
@@ -168,7 +171,7 @@ En ambiente de integración es posible realizar una prueba de transacción utili
 
  ![Paso 12](/images/plug/mage/onepay/paso27.png)
 
-* Además si accedes al sitio de administración seccion (Sales / Ordes) se podrá ver la orden creada y el detalle de los datos entregados por Onepay.
+* Además si accedes al sitio de administración sección (Sales / Orders) se podrá ver la orden creada y el detalle de los datos entregados por Onepay.
 
  ![Paso 13](/images/plug/mage/onepay/paso28.png)
 
