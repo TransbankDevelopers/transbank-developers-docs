@@ -862,290 +862,6 @@ comercio no debe entregar producto o servicio, ya que la transacción ha sido
 reversada por Webpay: Timeout error (Transactions REVERSED) con código 277.
 </aside>
 
-## Otros Servicios Webpay Plus
-
-WSDL: `/WSWebpayTransaction/cxf/WSCommerceIntegrationService?wsdl`
-
-### Captura diferida Webpay Plus
-
-Este método permite a todo comercio habilitado realizar capturas de una
-transacción autorizada sin captura generada en Webpay Plus o Webpay OneClick.
-El método contempla una única captura por cada autorización. Para ello se
-deberá indicar los datos asociados a la transacción de venta con autorización
-sin captura y el monto requerido para capturar el cual debe ser menor o igual al
-monto originalmente autorizado.
-
-Las ejecuciones con errores entregarán un `SoapFault` de acuerdo a la
-codificación de errores definida más abajo.
-
-Para capturar una transacción, ésta debe haber sido creada (según lo visto
-anteriormente para Webpay Plus Normal o Webpay Plus Mall) por un código de
-comercio configurado para captura diferida. De esa forma la transacción estará
-autorizada pero requerirá una captura explícita posterior para confirmar la
-transacción.
-
-Puedes [leer más sobre la captura en la información del
-producto Webpay](/producto/webpay#autorizacion-y-captura)
-para conocer más detalles y restricciones.
-
-Para realizar esa captura explícita debe usarse el método `capture()`
-
-#### `capture()`
-
-Permite solicitar a Webpay la captura diferida de una transacción con
-autorización y sin captura simultánea.
-
-> Los SDKs permiten indicar opcionalmente el código de comercio de la
-> transacción a capturar, para soportar la captura en comercios Webpay Plus
-> Mall. En comercios Webpay Plus Normal, no es necesario especificar el código
-> de comercio pues se usa el indicado en la configuración.
-
-<aside class="notice">
-El método `capture()` debe ser invocado siempre indicando el código del
-comercio que realizó la transacción. En el caso de comercios Webpay Plus Mall,
-el código debe ser el código de la tienda virtual específica.
-</aside>
-
-```java
-WebpayCapture transaction =
-    new Webpay(configuration).getCaptureTransaction();
-
-// Para comercios Webpay Plus Normal
-CaptureOutput captureResult = transaction.capture(
-    authorizationCode, capturedAmount, buyOrder);
-
-// Para comercios Webpay Plus Mall
-CaptureOutput captureResult = transaction.capture(
-    authorizationCode, capturedAmount, buyOrder, storeCommerceCode);
-```
-
-```php
-$transaction = (new Webpay(configuration))->getCaptureTransaction();
-
-// Para comercios Webpay Plus Normal
-$captureResult = transaction.capture(
-    $authorizationCode, $capturedAmount, $buyOrder);
-
-// Para comercios Webpay Plus Mall
-$captureResult = transaction.capture(
-    $authorizationCode, $capturedAmount, $buyOrder, $storeCommerceCode);
-```
-
-```csharp
-var transaction = new Webpay(configuration).CaptureTransaction;
-
-// Para comercios Webpay Plus Normal
-var captureResult = transaction.capture(
-    authorizationCode, capturedAmount, buyOrder);
-
-// Para comercios Webpay Plus Mall
-var captureResult = transaction.capture(
-    authorizationCode, capturedAmount, buyOrder, storeCommerceCode);
-
-```
-
-**Parámetros**
-
-Nombre  <br> <i> tipo </i> | Descripción
-------   | -----------
-authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
-buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
-commerceId  <br> <i> xs:long </i> | Código de comercio o tienda mall que realizó la transacción. Largo: 12.
-capturedAmount  <br> <i> xs:decimal </i> | Monto que se desea capturar. Largo máximo: 10.
-
-**Respuesta**
-
-```java
-captureResult.getToken();
-captureResult.getAuthorizationCode();
-captureResult.getAuthorizationDate();
-captureResult.getCapturedAmount();
-```
-
-```php
-$captureResult->token;
-$captureResult->authorizationCode;
-$captureResult->authorizationDate;
-$captureResult->capturedAmount;
-```
-
-```csharp
-captureResult.token;
-captureResult.authorizationCode;
-captureResult.authorizationDate;
-captureResult.capturedAmount;
-```
-
-Nombre  <br> <i> tipo </i> | Descripción
-------   | -----------
-token  <br> <i> xs:string </i> | Token de la transacción.
-authorizationCode  <br> <i> xs:string </i> | Código de autorización de la captura diferida.
-authorizationDate  <br> <i> xs:string </i> | Fecha y hora de la autorización.
-capturedAmount  <br> <i> xs:decimal </i> | Monto capturado.
-
-En caso de error pueden aparecer los siguientes códigos exclusivos del método
-`capture()`:
-
-Código | Descripción
------- | -----------
-304 | Validación de campos de entrada nulos
-245 | Código de comercio no existe
-22 | El comercio no se encuentra activo
-316 | El comercio indicado no corresponde al certificado o no es hijo del comercio MALL en caso de transacciones MALL
-308 | Operación no permitida
-274 | Transacción no encontrada
-16 | La transacción no es de captura diferida
-292 | La transacción no está autorizada
-284 | Periodo de captura excedido
-310 | Transacción reversada previamente
-309 | Transacción capturada previamente
-311 | Monto a capturar excede el monto autorizado
-315 | Error del autorizador
-
-### Anulación Webpay Plus
-
-Este método permite a todo comercio habilitado anular una transacción que fue
-generada en Webpay Plus (Normal y Mall) o Webpay OneClick Normal. El método
-contempla anular total o parcialmente una transacción. Para ello se deberá
-indicar los datos asociados a la transacción de venta en línea que se desea
-anular y los montos requeridos para anular. Se considera totalmente anulada una
-transacción cuando el monto anulado o el monto total de anulaciones cursadas
-alcancen el monto autorizado en la venta en línea.
-
-El servicio web de anulación de transacciones Webpay soporta una sola
-anulación parcial para la transacción de venta en línea. En caso de enviar
-una segunda anulación parcial se retornará una `Exception`.
-
-Las ejecuciones con errores entregarán un SoapFault de acuerdo a la
-codificación de errores definida mas abajo.
-
-La anulación puede realizarse máximo 90 días después de la fecha de la
-transacción original.
-
-Puedes [leer más sobre la anulación en la información del
-producto Webpay](/producto/webpay#anulaciones) para conocer
-más detalles y restricciones.
-
-Para anular una transacción se debe invocar al método `nullify()`.
-
-#### `nullify()`
-
-Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentra vigente.
-
-> Los SDKs permiten indicar opcionalmente el código de comercio de la
-> transacción a anular, para soportar la anulación en comercios Webpay Plus
-> Mall. En comercios Webpay Plus Normal, no es necesario especificar el código
-> de comercio pues se usa el indicado en la configuración.
-
-<aside class="notice">
-El método `nullify()` debe ser invocado siempre indicando el código del comercio que realizó la transacción. En el caso de comercios Webpay Plus Mall, el código debe ser el código de la tienda virtual específica.
-</aside>
-
-```java
-WebpayNullify transaction =
-    new Webpay(configuration).getNullifyTransaction();
-
-// Para comercios Webpay Plus Normal
-NullificationOutput result = transaction.nullify(
-    authorizationCode, authorizedAmount, buyOrder, nullifyAmount);
-
-// Para comercios Webpay Plus Mall
-NullificationOutput result = transaction.nullify(
-    authorizationCode, authorizedAmount, buyOrder, nullifyAmount,
-    storeCommerceCode);
-
-```
-
-```php
-$transaction = (new Webpay(configuration))->getNullifyTransaction();
-
-// Para comercios Webpay Plus Normal
-$result = transaction.nullify(
-    $authorizationCode, $authorizedAmount, $buyOrder, $nullifyAmount);
-
-// Para comercios Webpay Plus Mall
-$result = transaction.nullify(
-    $authorizationCode, $authorizedAmount, $buyOrder, $nullifyAmount,
-    $storeCommerceCode);
-
-```
-
-```csharp
-var transaction = new Webpay(configuration).NullifyTransaction;
-
-// Para comercios Webpay Plus Normal
-var result = transaction.nullify(
-    authorizationCode, authorizedAmount, buyOrder, nullifyAmount);
-
-// Para comercios Webpay Plus Mall
-var result = transaction.nullify(
-    authorizationCode, authorizedAmount, buyOrder, nullifyAmount,
-    storeCommerceCode);
-```
-
-**Parámetros**
-
-Nombre  <br> <i> tipo </i> | Descripción
-------   | -----------
-authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción que se requiere anular. Si la transacción es de captura diferida, se debe usar el código obtenido al llamar a `capture()`. Largo máximo: 6.
-authorizedAmount  <br> <i> xs:decimal </i> | Monto autorizado de la transacción que se requiere anular. Si la transacción es de captura diferida, se debe usar el monto capturado cuando se invocó a `capture()`. Largo máximo: 10.
-buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se requiere anular. Largo máximo: 26.
-nullifyAmount  <br> <i> xs:decimal </i> | Monto que se desea anular de la transacción. Largo máximo: 10.
-commerceId  <br> <i> xs:long </i> | Código de comercio o tienda mall que realizó la transacción. Largo: 12.
-
-**Respuesta**
-
-```java
-result.getToken();
-result.getAuthorizationCode();
-result.getAuthorizationDate();
-result.getBalance();
-result.getNullifiedAmount();
-```
-
-```php
-$result->token;
-$result->authorizationCode;
-$result->authorizationDate;
-$result->balance;
-$result->nullifiedAmount;
-```
-
-```csharp
-result.token;
-result.authorizationCode;
-result.authorizationDate;
-result.balance;
-result.nullifiedAmount;
-```
-
-Nombre  <br> <i> tipo </i> | Descripción
-------   | -----------
-token  <br> <i> xs:string </i> | Token de la transacción.
-authorizationCode  <br> <i> xs:string </i> | Código de autorización de la anulación.
-authorizationDate  <br> <i> xs:string </i> | Fecha y hora de la autorización.
-balance  <br> <i> xs:decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado).
-nullifiedAmount  <br> <i> xs:decimal </i> | Monto anulado.
-
-En caso de error pueden aparecer los siguientes códigos de error comunes para el método `nullify()`:
-
-Código | Descripción
------- | -----------
-304 | Validación de campos de entrada nulos
-245 | Código de comercio no existe
-22 | El comercio no se encuentra activo
-316 | El comercio indicado no corresponde al certificado o no es hijo del comercio MALL en caso de transacciones MALL
-308 | Operación no permitida
-274 | Transacción no encontrada
-16 | La transacción no permite anulación
-292 | La transacción no está autorizada
-284 | Periodo de anulación excedido
-310 | Transacción anulada previamente
-311 | Monto a anular excede el saldo disponible para anular
-312 | Error genérico para anulaciones
-315 | Error del autorizador
-53 | La transacción no permite anulación parcial de transacciones con cuotas
-
 ## Webpay OneClick Normal
 
 ```java
@@ -1792,3 +1508,287 @@ username  <br> <i> xs:string </i> | Nombre de usuario, del cliente, en el sistem
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 result  <br> <i> xs:boolean </i> | Indica si la eliminación se realizó correctamente o no.
+
+## Otros Servicios Webpay Plus
+
+WSDL: `/WSWebpayTransaction/cxf/WSCommerceIntegrationService?wsdl`
+
+### Captura diferida Webpay Plus
+
+Este método permite a todo comercio habilitado realizar capturas de una
+transacción autorizada sin captura generada en Webpay Plus o Webpay OneClick.
+El método contempla una única captura por cada autorización. Para ello se
+deberá indicar los datos asociados a la transacción de venta con autorización
+sin captura y el monto requerido para capturar el cual debe ser menor o igual al
+monto originalmente autorizado.
+
+Las ejecuciones con errores entregarán un `SoapFault` de acuerdo a la
+codificación de errores definida más abajo.
+
+Para capturar una transacción, ésta debe haber sido creada (según lo visto
+anteriormente para Webpay Plus Normal o Webpay Plus Mall) por un código de
+comercio configurado para captura diferida. De esa forma la transacción estará
+autorizada pero requerirá una captura explícita posterior para confirmar la
+transacción.
+
+Puedes [leer más sobre la captura en la información del
+producto Webpay](/producto/webpay#autorizacion-y-captura)
+para conocer más detalles y restricciones.
+
+Para realizar esa captura explícita debe usarse el método `capture()`
+
+#### `capture()`
+
+Permite solicitar a Webpay la captura diferida de una transacción con
+autorización y sin captura simultánea.
+
+> Los SDKs permiten indicar opcionalmente el código de comercio de la
+> transacción a capturar, para soportar la captura en comercios Webpay Plus
+> Mall. En comercios Webpay Plus Normal, no es necesario especificar el código
+> de comercio pues se usa el indicado en la configuración.
+
+<aside class="notice">
+El método `capture()` debe ser invocado siempre indicando el código del
+comercio que realizó la transacción. En el caso de comercios Webpay Plus Mall,
+el código debe ser el código de la tienda virtual específica.
+</aside>
+
+```java
+WebpayCapture transaction =
+    new Webpay(configuration).getCaptureTransaction();
+
+// Para comercios Webpay Plus Normal
+CaptureOutput captureResult = transaction.capture(
+    authorizationCode, capturedAmount, buyOrder);
+
+// Para comercios Webpay Plus Mall
+CaptureOutput captureResult = transaction.capture(
+    authorizationCode, capturedAmount, buyOrder, storeCommerceCode);
+```
+
+```php
+$transaction = (new Webpay(configuration))->getCaptureTransaction();
+
+// Para comercios Webpay Plus Normal
+$captureResult = transaction.capture(
+    $authorizationCode, $capturedAmount, $buyOrder);
+
+// Para comercios Webpay Plus Mall
+$captureResult = transaction.capture(
+    $authorizationCode, $capturedAmount, $buyOrder, $storeCommerceCode);
+```
+
+```csharp
+var transaction = new Webpay(configuration).CaptureTransaction;
+
+// Para comercios Webpay Plus Normal
+var captureResult = transaction.capture(
+    authorizationCode, capturedAmount, buyOrder);
+
+// Para comercios Webpay Plus Mall
+var captureResult = transaction.capture(
+    authorizationCode, capturedAmount, buyOrder, storeCommerceCode);
+
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
+buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
+commerceId  <br> <i> xs:long </i> | Código de comercio o tienda mall que realizó la transacción. Largo: 12.
+capturedAmount  <br> <i> xs:decimal </i> | Monto que se desea capturar. Largo máximo: 10.
+
+**Respuesta**
+
+```java
+captureResult.getToken();
+captureResult.getAuthorizationCode();
+captureResult.getAuthorizationDate();
+captureResult.getCapturedAmount();
+```
+
+```php
+$captureResult->token;
+$captureResult->authorizationCode;
+$captureResult->authorizationDate;
+$captureResult->capturedAmount;
+```
+
+```csharp
+captureResult.token;
+captureResult.authorizationCode;
+captureResult.authorizationDate;
+captureResult.capturedAmount;
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> xs:string </i> | Token de la transacción.
+authorizationCode  <br> <i> xs:string </i> | Código de autorización de la captura diferida.
+authorizationDate  <br> <i> xs:string </i> | Fecha y hora de la autorización.
+capturedAmount  <br> <i> xs:decimal </i> | Monto capturado.
+
+En caso de error pueden aparecer los siguientes códigos exclusivos del método
+`capture()`:
+
+Código | Descripción
+------ | -----------
+304 | Validación de campos de entrada nulos
+245 | Código de comercio no existe
+22 | El comercio no se encuentra activo
+316 | El comercio indicado no corresponde al certificado o no es hijo del comercio MALL en caso de transacciones MALL
+308 | Operación no permitida
+274 | Transacción no encontrada
+16 | La transacción no es de captura diferida
+292 | La transacción no está autorizada
+284 | Periodo de captura excedido
+310 | Transacción reversada previamente
+309 | Transacción capturada previamente
+311 | Monto a capturar excede el monto autorizado
+315 | Error del autorizador
+
+### Anulación Webpay Plus
+
+Este método permite a todo comercio habilitado anular una transacción que fue
+generada en Webpay Plus (Normal y Mall) o Webpay OneClick Normal. El método
+contempla anular total o parcialmente una transacción. Para ello se deberá
+indicar los datos asociados a la transacción de venta en línea que se desea
+anular y los montos requeridos para anular. Se considera totalmente anulada una
+transacción cuando el monto anulado o el monto total de anulaciones cursadas
+alcancen el monto autorizado en la venta en línea.
+
+El servicio web de anulación de transacciones Webpay soporta una sola
+anulación parcial para la transacción de venta en línea. En caso de enviar
+una segunda anulación parcial se retornará una `Exception`.
+
+Las ejecuciones con errores entregarán un SoapFault de acuerdo a la
+codificación de errores definida mas abajo.
+
+La anulación puede realizarse máximo 90 días después de la fecha de la
+transacción original.
+
+Puedes [leer más sobre la anulación en la información del
+producto Webpay](/producto/webpay#anulaciones) para conocer
+más detalles y restricciones.
+
+Para anular una transacción se debe invocar al método `nullify()`.
+
+#### `nullify()`
+
+Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentra vigente.
+
+> Los SDKs permiten indicar opcionalmente el código de comercio de la
+> transacción a anular, para soportar la anulación en comercios Webpay Plus
+> Mall. En comercios Webpay Plus Normal, no es necesario especificar el código
+> de comercio pues se usa el indicado en la configuración.
+
+<aside class="notice">
+El método `nullify()` debe ser invocado siempre indicando el código del comercio que realizó la transacción. En el caso de comercios Webpay Plus Mall, el código debe ser el código de la tienda virtual específica.
+</aside>
+
+```java
+WebpayNullify transaction =
+    new Webpay(configuration).getNullifyTransaction();
+
+// Para comercios Webpay Plus Normal
+NullificationOutput result = transaction.nullify(
+    authorizationCode, authorizedAmount, buyOrder, nullifyAmount);
+
+// Para comercios Webpay Plus Mall
+NullificationOutput result = transaction.nullify(
+    authorizationCode, authorizedAmount, buyOrder, nullifyAmount,
+    storeCommerceCode);
+
+```
+
+```php
+$transaction = (new Webpay(configuration))->getNullifyTransaction();
+
+// Para comercios Webpay Plus Normal
+$result = transaction.nullify(
+    $authorizationCode, $authorizedAmount, $buyOrder, $nullifyAmount);
+
+// Para comercios Webpay Plus Mall
+$result = transaction.nullify(
+    $authorizationCode, $authorizedAmount, $buyOrder, $nullifyAmount,
+    $storeCommerceCode);
+
+```
+
+```csharp
+var transaction = new Webpay(configuration).NullifyTransaction;
+
+// Para comercios Webpay Plus Normal
+var result = transaction.nullify(
+    authorizationCode, authorizedAmount, buyOrder, nullifyAmount);
+
+// Para comercios Webpay Plus Mall
+var result = transaction.nullify(
+    authorizationCode, authorizedAmount, buyOrder, nullifyAmount,
+    storeCommerceCode);
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción que se requiere anular. Si la transacción es de captura diferida, se debe usar el código obtenido al llamar a `capture()`. Largo máximo: 6.
+authorizedAmount  <br> <i> xs:decimal </i> | Monto autorizado de la transacción que se requiere anular. Si la transacción es de captura diferida, se debe usar el monto capturado cuando se invocó a `capture()`. Largo máximo: 10.
+buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se requiere anular. Largo máximo: 26.
+nullifyAmount  <br> <i> xs:decimal </i> | Monto que se desea anular de la transacción. Largo máximo: 10.
+commerceId  <br> <i> xs:long </i> | Código de comercio o tienda mall que realizó la transacción. Largo: 12.
+
+**Respuesta**
+
+```java
+result.getToken();
+result.getAuthorizationCode();
+result.getAuthorizationDate();
+result.getBalance();
+result.getNullifiedAmount();
+```
+
+```php
+$result->token;
+$result->authorizationCode;
+$result->authorizationDate;
+$result->balance;
+$result->nullifiedAmount;
+```
+
+```csharp
+result.token;
+result.authorizationCode;
+result.authorizationDate;
+result.balance;
+result.nullifiedAmount;
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> xs:string </i> | Token de la transacción.
+authorizationCode  <br> <i> xs:string </i> | Código de autorización de la anulación.
+authorizationDate  <br> <i> xs:string </i> | Fecha y hora de la autorización.
+balance  <br> <i> xs:decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado).
+nullifiedAmount  <br> <i> xs:decimal </i> | Monto anulado.
+
+En caso de error pueden aparecer los siguientes códigos de error comunes para el método `nullify()`:
+
+Código | Descripción
+------ | -----------
+304 | Validación de campos de entrada nulos
+245 | Código de comercio no existe
+22 | El comercio no se encuentra activo
+316 | El comercio indicado no corresponde al certificado o no es hijo del comercio MALL en caso de transacciones MALL
+308 | Operación no permitida
+274 | Transacción no encontrada
+16 | La transacción no permite anulación
+292 | La transacción no está autorizada
+284 | Periodo de anulación excedido
+310 | Transacción anulada previamente
+311 | Monto a anular excede el saldo disponible para anular
+312 | Error genérico para anulaciones
+315 | Error del autorizador
+53 | La transacción no permite anulación parcial de transacciones con cuotas
