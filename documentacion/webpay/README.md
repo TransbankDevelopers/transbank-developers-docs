@@ -168,7 +168,7 @@ if (output.responseCode == 0) {
 > no haya posibilidad de que la transacción se revierta. Si luego necesitas que
 > la transacción no se lleve a cabo (por ejemplo porque ya no tienes stock o
 > porque se generó un error en tu lógica de negocio que entrega el producto o
-> servicio), deberás [anular la transacción](/referencia/webpay#anulacion-webpay-plus).
+> servicio), deberás [anular la transacción](/referencia/webpay#anulaciones).
 
 En el caso exitoso deberás llevar el control vía `POST` nuevamente a Webpay para
 que el tarjetahabiente vea el comprobante que le deja claro que se ha realizado
@@ -578,11 +578,11 @@ Plus y Webpay OneClick:
   denominada _mall_. Con esto puedes realizar una sola integración y cobrar a
   nombre de tus clientes o partners.
 
-- [Realizar Captura Diferida](/referencia/webpay#captura-diferida-webpay-plus) de manera que la autorización de
+- [Realizar Captura Diferida](/referencia/webpay#captura-diferida) de manera que la autorización de
 Webpay Plus Normal solo reserve el cupo y la captura de la transacción se pueda
 realizar posteriormente.
 
-- [Anular Transacciones Webpay Plus](/referencia/webpay#anulacion-webpay-plus) para devolver dinero parcial o
+- [Anular Transacciones Webpay Plus](/referencia/webpay#anulaciones) para devolver dinero parcial o
 totalmente.
 
 - [Reversar Transacciones Webpay OneClick](/referencia/webpay#reversar-un-pago-webpay-oneclick) para dejar sin efecto una

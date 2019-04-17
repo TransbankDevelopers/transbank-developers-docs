@@ -1212,7 +1212,7 @@ reverseCode  <br> <i> xs:long </i> | Identificador único de la transacción 
 
 En caso que ya no sea el mismo día contable y se requiera dejar sin efecto una
 venta, es posible anular un pago realizado con Webpay OneClick Normal usando [el
-mismo método de anulación Webpay Plus](#anulacion-webpay-plus).
+mismo método de anulación Webpay Plus](#anulaciones).
 
 ### Eliminar una inscripción Webpay OneClick
 
@@ -1509,15 +1509,18 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 result  <br> <i> xs:boolean </i> | Indica si la eliminación se realizó correctamente o no.
 
-## Otros Servicios Webpay Plus
+## Otros Servicios
 
 WSDL: `/WSWebpayTransaction/cxf/WSCommerceIntegrationService?wsdl`
 
-### Captura diferida Webpay Plus
+### Captura diferida
 
 Este método permite a todo comercio habilitado realizar capturas de una
 transacción autorizada sin captura generada en Webpay Plus o Webpay OneClick.
-El método contempla una única captura por cada autorización. Para ello se
+El método contempla una única captura por cada autorización. En el caso de 
+OneClick Mall, una vez realizada la inscripción, el comercio padre tiene 
+permitido autorizar transacciones sin captura para los comercios "hijo" 
+registrados que tengan habilitado captura diferida. Para estos casos se
 deberá indicar los datos asociados a la transacción de venta con autorización
 sin captura y el monto requerido para capturar el cual debe ser menor o igual al
 monto originalmente autorizado.
@@ -1525,8 +1528,7 @@ monto originalmente autorizado.
 Las ejecuciones con errores entregarán un `SoapFault` de acuerdo a la
 codificación de errores definida más abajo.
 
-Para capturar una transacción, ésta debe haber sido creada (según lo visto
-anteriormente para Webpay Plus Normal o Webpay Plus Mall) por un código de
+Para capturar una transacción, ésta debe haber sido creada por un código de
 comercio configurado para captura diferida. De esa forma la transacción estará
 autorizada pero requerirá una captura explícita posterior para confirmar la
 transacción.
@@ -1549,7 +1551,7 @@ autorización y sin captura simultánea.
 
 <aside class="notice">
 El método `capture()` debe ser invocado siempre indicando el código del
-comercio que realizó la transacción. En el caso de comercios Webpay Plus Mall,
+comercio que realizó la transacción. En el caso de comercios Webpay Plus Mall o OneClick Mall,
 el código debe ser el código de la tienda virtual específica.
 </aside>
 
@@ -1649,7 +1651,7 @@ Código | Descripción
 311 | Monto a capturar excede el monto autorizado
 315 | Error del autorizador
 
-### Anulación Webpay Plus
+### Anulaciones
 
 Este método permite a todo comercio habilitado anular una transacción que fue
 generada en Webpay Plus (Normal y Mall) o Webpay OneClick Normal. El método
