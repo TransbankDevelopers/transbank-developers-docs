@@ -101,6 +101,8 @@ Para tarjeta de débito Redcompra el tipo de pago siempre corresponde a:
 
 - Venta débito Redcompra (VD): Pago con tarjeta de débito Redcompra.
 
+- Venta Prepago (VP): Pago con tarjeta de débito Redcompra.
+
 ## Autorización y Captura
 
 <div class="pos-title-nav">
