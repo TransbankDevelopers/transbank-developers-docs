@@ -1654,7 +1654,7 @@ Código | Descripción
 ### Anulaciones
 
 Este método permite a todo comercio habilitado anular una transacción que fue
-generada en Webpay Plus (Normal y Mall) o Webpay OneClick Normal. El método
+generada y capturada en Webpay Plus o Webpay OneClick (Normal y Mall). El método
 contempla anular total o parcialmente una transacción. Para ello se deberá
 indicar los datos asociados a la transacción de venta en línea que se desea
 anular y los montos requeridos para anular. Se considera totalmente anulada una
