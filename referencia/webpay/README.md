@@ -1517,8 +1517,8 @@ WSDL: `/WSWebpayTransaction/cxf/WSCommerceIntegrationService?wsdl`
 
 Este método permite a todo comercio habilitado realizar capturas de una
 transacción autorizada sin captura generada en Webpay Plus o Webpay OneClick.
-El método contempla una única captura por cada autorización. En el caso de 
-OneClick Mall, una vez realizada la inscripción, el comercio padre tiene 
+El método contempla una única captura por cada autorización. En el caso de Mall,
+una vez realizada la inscripción, el comercio padre tiene 
 permitido autorizar transacciones sin captura para los comercios "hijo" 
 registrados que tengan habilitado captura diferida. Para estos casos se
 deberá indicar los datos asociados a la transacción de venta con autorización
