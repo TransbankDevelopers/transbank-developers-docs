@@ -119,23 +119,62 @@ if(retval == SP_OK){
 }
 ```
 
-### Transacción de Cierre
+### Transacción de Venta
 
-Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencias/posintegrado#tabla-de-respuestas))
+Este comando es enviado por la caja para solicitar la ejecución de una venta. Los siguientes parámetros deben ser enviados desde la caja:
+
+- `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
+- `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
+- `Enviar Mensaje`: Este parámetro indica al POS si debe enviar mensajes intermedios a la caja mientras se realiza el proceso de venta. Los mensajes intermedios que envía el POS y que deben ser mostrados por la Caja, deben corresponder según los siguientes códigos:
+  - `78`: Lectura de Tarjeta.
+  - `79`: Confirmación de Monto.
+  - `80`: Selección de Cuotas.
+  - `81`: Ingreso de Pinpass.
+  - `82`: Envío de transacción a Transbank.
 
 ```csharp
 using Transbank.POS;
 using Transbank.POS.Responses;
 //...
-RegisterCloseResponse responce = POS.Instance.RegisterClose();
+SaleResponse response = POS.Instance.Sale(ammount, ticket);
 ```
 
 ```c
 #include "transbank.h"
 #include "transbank_serial_utils.h"
 //...
-LoadKeyCloseResponse responce = register_close();
+char* response = sale(ammount, ticket, false);
+```
+
+### Transacción de Cierre
+
+Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencias/posintegrado#tabla-de-respuestas))
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Responses;
+//...
+RegisterCloseResponse response = POS.Instance.RegisterClose();
+```
+
+```c
+#include "transbank.h"
+#include "transbank_serial_utils.h"
+//...
+LoadKeyCloseResponse response = register_close();
 }
+```
+
+El resultado del cierre de caja se entrega en la forma de un objeto `RegisterCloseResponse`o una estructura `BaseResponse` en el caso de la librería C.
+
+```json
+"FunctionCode": 510
+"ResponseMessage": "Aprobado"
+"Success": true
+"CommerceCode": 550062700310
+"TerminalId": "ABC1234C"
 ```
 
 <aside class="notice">
@@ -150,14 +189,14 @@ Esta transacción permite al POS Integrado del comercio requerir cargar nuevas _
 using Transbank.POS;
 using Transbank.POS.Responses;
 //...
-LoadKeysResponse responce = POS.Instance.LoadKeys();
+LoadKeysResponse response = POS.Instance.LoadKeys();
 ```
 
 ```c
 #include "transbank.h"
 #include "transbank_serial_utils.h"
 //...
-LoadKeyCloseResponse responce = load_keys();
+LoadKeyCloseResponse response = load_keys();
 }
 ```
 

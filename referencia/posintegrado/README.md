@@ -65,6 +65,8 @@ El resultado entonces seria `0x31` en hexadecimal o `1` en ASCII, por lo tanto, 
 
 Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencias/posintegrado#tabla-de-respuestas))
 
+<div class="language-simple" data-multiple-language></div>
+
 ```csharp
 using Transbank.POS;
 using Transbank.POS.Responses;
@@ -80,11 +82,57 @@ LoadKeyCloseResponse responce = register_close();
 }
 ```
 
+El resultado del cierre de caja se entrega en la forma de un objeto `RegisterCloseResponse`o una estructura `BaseResponse` en el caso de la librería C.
+
+```json
+"FunctionCode": 510
+"ResponseMessage": "Aprobado"
+"Success": true
+"CommerceCode": 550062700310
+"TerminalId": "ABC1234C"
+```
+
 ![Diagrama de Secuencia Cierre](/images/referencia/posintegrado/diagrama-cierre.png)
+
+1. La caja envía el requerimiento y espera como respuesta ACK/NACK, en caso de que llegue un NACK, debe reintentar el envío del requerimiento 2 veces. Si recibe un ACK debe esperar la respuesta de la transacción.
+2. El POS envía requerimiento al Autorizador, en caso de ser aprobada, se borra Batch y se envía respuesta a la caja. En caso de ser rechazada se envía respuesta a la caja indicando el error.
+3. La caja al recibir la respuesta envía un ACK si el mensaje está correcto, o un NACK para el caso en que el LRC no corresponde.
+4. El POS al recibir el ACK vuelve al inicio a esperar un nuevo comando, para el caso que recibe un NACK vuelve a enviar la respuesta 2 veces más.
 
 <aside class="notice">
 Para el cierre no se solicitara tarjeta supervisora.
 </aside>
+
+#### Solicitud de Cierre
+
+DATO        | LARGO     | Comentario
+------      | ------    | ------
+`<STX>`     | 1         | Indica el inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
+`Comando`   | 4         | <i>valor ASCII</i>: `0500` <br><i>valor hexadecimal</i>: `0x30 0x35 0x30 0x30`
+`Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`<ETX>`     | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
+`<LRC>`     | 1         | Resultado del calculo del LRC del mensaje.
+
+*Mensaje* en <i>ASCII</i>: `<STX>0500||<ETX>6`
+
+*Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x35, 0x30, 0x30, 0x07, 0x07, 0x03, 0x06}`
+
+#### Respuesta de Cierre
+
+DATO                    | LARGO     | COMENTARIO
+------                  | ------    | ------
+`<STX>`                 |  1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
+`Comando`               |  4        | <i>Valor ASCII</i>:  `0510` <br><i>valor hexadecimal</i>: `0x30 0x35 0x31 0x30`
+`Separador`             |  1        | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Código Respuesta`      |  2        | Valor Numérico
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Código de comercio`    | 12        | Valor Numérico
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Terminal ID`           |  8        | Valor Alfanumérico
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
+`<LRC>`                 |  1        | Resultado del calculo del LRC del mensaje.
 
 ### Mensaje de Carga de Llaves
 
