@@ -13,7 +13,7 @@ Onepay es una billetera digital que permite realizar compras en tiendas de comer
 
 El producto es seguro, pues los datos del tarjetahabiente no son almacenados en el dispositivo móvil. Y el comercio queda protegido ante fraude o desconocimientos de compra.
 
-Onepay opera con los emisores locales de tarjeta de crédito y opera con todos los tipos de cuotas disponbiles.
+Onepay opera con los emisores locales de tarjeta de crédito y opera con todos los tipos de cuotas disponibles.
 
 De cara al tarjetahabiente se pueden identificar dos flujos de pago dependiendo de si la compra es realizada en el mismo dispositivo donde reside su billetera Onepay (Pago Mobile) o si la compra es realizada en otro dispositivo (Pago Desktop). Sin embargo para la integración de Onepay web la diferencia es totalmente transparente para el comercio.
 

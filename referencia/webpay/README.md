@@ -357,6 +357,7 @@ $initResult = $transaction->initTransaction(
 var initResult = transaction.initTransaction(
         amount, buyOrder, sessionId, returnUrl, finalUrl);
 ```
+
 **Parámetros**
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -398,7 +399,7 @@ Cuando el comercio retoma el control mediante `returnURL` puedes confirmar una
 transacción usando los métodos  `getTransactionResult()` y
 `acknowledgeTransaction()`
 
-####  `getTransactionResult()`
+#### `getTransactionResult()`
 
 Permite obtener el resultado de la transacción una vez que Webpay ha resuelto su autorización financiera.
 
@@ -502,19 +503,18 @@ cardDetails.cardNumber  <br> <i> xs:string </i> | 4 últimos números de la t
 cardDetails.cardExpirationDate  <br> <i> xs:string </i> |(Opcional) Fecha de expiración de la tarjeta de crédito del tarjetahabiente. Formato YYMM Solo para comercios autorizados por Transbank. Largo máximo: 4
 accoutingDate  <br> <i> xs:string </i> | Fecha de la autorización. Largo: 4, formato MMDD
 transactionDate  <br> <i> xs:string </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
-VCI  <br> <i> xs:string </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)
+VCI  <br> <i> xs:string </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure), ACS2 (Autenticación fallida extranjera). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)
 urlRedirection  <br> <i> xs:string </i> | URL de redirección para visualización de voucher. Largo máximo: 256
 detailsOutput  <br> <i> wsTransactionDetailOutput </i> | Lista con resultado de cada una de las `transactionDetails` enviados en `initTransaction()`. Para Webpay Plus Normal tiene máximo un elemento.
 detailsOutput[0].authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción Largo máximo: 6
-detailsOutput[0].paymentTypeCode   <br> <i> xs:string </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés.
+detailsOutput[0].paymentTypeCode   <br> <i> xs:string </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
 detailsOutput[0].responseCode  <br> <i> xs:string </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado.
 detailsOutput[0].amount  <br> <i> Formato número entero para transacciones en peso y decimal para transacciones en dólares. </i> | Monto de la transacción. Largo máximo: 10
 detailsOutput[0].sharesNumber  <br> <i> xs:int </i> | Cantidad de cuotas. Largo máximo: 2
 detailsOutput[0].commerceCode  <br> <i> xs:string </i> | Código comercio de la tienda. Largo: 12
 detailsOutput[0].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Largo máximo: 26
 
-
-####  `acknowledgeTransaction()`
+#### `acknowledgeTransaction()`
 
 Indica a Webpay que se ha recibido conforme el resultado de la transacción.
 
@@ -549,7 +549,6 @@ reversada por Webpay: Timeout error (Transactions REVERSED) con código 277.
 </aside>
 
 ## Webpay Plus Mall
-
 
 ```java
 WebpayMallNormal transaction =
@@ -682,6 +681,7 @@ transactionDetails[].commerceCode  <br> <i>xs:string </i> | Código comercio as
 initResult.getToken();
 initResult.getUrl();
 ```
+
 ```php
 $initResult->token;
 $initResult->url;
@@ -698,7 +698,6 @@ Nombre  <br> <i> tipo </i> | Descripción
 token  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 url  <br> <i> xs:string </i> | URL de formulario de pago Webpay. Largo máximo: 256.
 
-
 ### Confirmar una transacción Webpay Plus Mall
 
 Para confirmar una transacción se deben usar los métodos  `getTransactionResult()` y
@@ -714,6 +713,7 @@ TransactionResultOutput result =
     transaction.getTransactionResult(
         request.getParameter("token_ws"));
 ```
+
 ```php
 $result = transaction->getTransactionResult(
     $request->input("token_ws"));
@@ -817,11 +817,11 @@ cardDetails.cardNumber  <br> <i> xs:string </i> | 4 últimos números de la t
 cardDetails.cardExpirationDate  <br> <i> xs:string </i> |(Opcional) Fecha de expiración de la tarjeta de crédito del tarjetahabiente. Formato YYMM Solo para comercios autorizados por Transbank. Largo máximo: 4
 accoutingDate  <br> <i> xs:string </i> | Fecha de la autorización. Largo: 4, formato MMDD
 transactionDate  <br> <i> xs:string </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
-VCI  <br> <i> xs:string </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)
+VCI  <br> <i> xs:string </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure), ACS2 (Autenticación fallida extranjera). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)
 urlRedirection  <br> <i> xs:string </i> | URL de redirección para visualización de voucher. Largo máximo: 256
 detailsOutput  <br> <i> wsTransactionDetailOutput </i> | Lista con resultado de cada una de las `transactionDetails` enviados en `initTransaction()`.
 detailsOutput[].authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción Largo máximo: 6
-detailsOutput[].paymentTypeCode   <br> <i> xs:string </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés.
+detailsOutput[].paymentTypeCode   <br> <i> xs:string </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
 detailsOutput[].responseCode  <br> <i> xs:string </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado.
 detailsOutput[].amount  <br> <i> Formato número entero para transacciones en peso y decimal para transacciones en dólares. </i> | Monto de la transacción. Largo máximo: 10
 detailsOutput[].sharesNumber  <br> <i> xs:int </i> | Cantidad de cuotas. Largo máximo: 2
@@ -917,7 +917,6 @@ CaptureOutput captureResult = transaction.capture(
 // Para comercios Webpay Plus Mall
 CaptureOutput captureResult = transaction.capture(
     authorizationCode, capturedAmount, buyOrder, storeCommerceCode);
-
 ```
 
 ```php
@@ -983,7 +982,6 @@ token  <br> <i> xs:string </i> | Token de la transacción.
 authorizationCode  <br> <i> xs:string </i> | Código de autorización de la captura diferida.
 authorizationDate  <br> <i> xs:string </i> | Fecha y hora de la autorización.
 capturedAmount  <br> <i> xs:decimal </i> | Monto capturado.
-
 
 En caso de error pueden aparecer los siguientes códigos exclusivos del método
 `capture()`:
@@ -1083,7 +1081,6 @@ var result = transaction.nullify(
 var result = transaction.nullify(
     authorizationCode, authorizedAmount, buyOrder, nullifyAmount,
     storeCommerceCode);
-
 ```
 
 **Parámetros**
@@ -1131,7 +1128,6 @@ balance  <br> <i> xs:decimal </i> | Saldo actualizado de la transacción (consi
 nullifiedAmount  <br> <i> xs:decimal </i> | Monto anulado.
 
 En caso de error pueden aparecer los siguientes códigos de error comunes para el método `nullify()`:
-
 
 Código | Descripción
 ------ | -----------
@@ -1290,6 +1286,7 @@ responseURL  <br> <i> xs:string </i> | URL del comercio a la cual Webpay redirec
 initResult.getToken();
 initResult.getUrlWebpay();
 ```
+
 ```php
 $initResult->token;
 $initResult->urlWebpay;
@@ -1327,6 +1324,7 @@ OneClickFinishInscriptionOutput result =
     transaction.finishInscription(
         request.getParameter("TBK_TOKEN"));
 ```
+
 ```php
 $result = $transaction->finishInscription(
     $request->input("TBK_TOKEN"));
@@ -1349,6 +1347,7 @@ result.getCreditCardType().getValue();
 result.getLast4CardDigits();
 result.getTbkUser();
 ```
+
 ```php
 $result->responseCode;
 $result->authCode;
@@ -1555,7 +1554,6 @@ Las diferencias son:
   individualmente, pues es posible que el emisor de la tarjeta autorice algunas
   y otras no.
 
-
 ### Crear una inscripción Webpay OneClick Mall
 
 Para iniciar la inscripción debe usarse el método `initInscription()`
@@ -1585,7 +1583,6 @@ urlInscriptionForm  <br> <i> xs:string </i> | URL de Webpay para iniciar la insc
 Una vez que se llama a este webservice el usuario debe ser redireccionado vía
 POST a `urlInscriptionForm` con parámetro `TBK_TOKEN` igual al token.
 </aside>
-
 
 ### Confirmar una inscripción Webpay OneClick Mall
 

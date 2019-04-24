@@ -1,3 +1,5 @@
+#
+
 <div class="data-menu-side-right">
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">
@@ -64,10 +66,10 @@ Para acceder a la configuración, debes seguir los siguientes pasos:
   ![Paso 3](/images/plug/woo/onepay/paso6.png)
 
 4. ¡Ya está! Estás en la pantalla de configuración del plugin, debes ingresar la siguiente información:
-  * **Activar Onepay**: Al activarlo, Onepay estará disponible como medio de pago. Ten la precaución de que se encuentre marcada esta opción cuando quieras que los usuarios paguen con Onepay.
-  * **APIKey**: Es lo que te identifica como comercio.
-  * **Shared Secret**: Llave secreta que te autoriza y valida a hacer transacciones.
-  * **Endpoint**: Ambiente hacia donde se realiza la transacción.
+     * **Activar Onepay**: Al activarlo, Onepay estará disponible como medio de pago. Ten la precaución de que se encuentre marcada esta opción cuando quieras que los usuarios paguen con Onepay.
+     * **APIKey**: Es lo que te identifica como comercio.
+     * **Shared Secret**: Llave secreta que te autoriza y valida a hacer transacciones.
+     * **Endpoint**: Ambiente hacia donde se realiza la transacción.
 
   Las opciones disponibles para _Endpoint_ son: "Integración" para realizar pruebas y certificar la instalación con Transbank, y "Producción" para hacer transacciones reales una vez que Transbank ha aprobado el comercio.
 
@@ -81,7 +83,6 @@ Para el ambiente de Integración, puedes utilizar las siguientes credenciales pa
 
 * APIKey: `dKVhq1WGt_XapIYirTXNyUKoWTDFfxaEV63-O5jcsdw`
 * Shared Secret: `?XW#WOLG##FBAGEAYSNQ5APD#JF@$AYZ`
-
 
 ## Prueba de instalación con transacción
 
@@ -102,7 +103,7 @@ En ambiente de integración es posible realizar una pruebas de transacción util
 * En otra ventana del navegador, ingresa al emulador de pagos desde [https://onepay.ionix.cl/mobile-payment-emulator/](https://onepay.ionix.cl/mobile-payment-emulator/), utiliza test@onepay.cl como correo electrónico, y el código de compra obtenido desde la pantalla anterior. Una vez ingresado los datos solicitados, presiona el botón "Iniciar Pago":
   ![Paso 5](/images/plug/woo/onepay/emu5.png)
 
-* Si todo va bien, el emulador mostrará opciones para simular situaciones distintas. Para simular un pago exitoso, presiona el botón `PRE_AUTHORIZED`. En caso de querer simular un pago fallido, presiona le botón `REJECTED`. Simularemos un pago exitóso presionando el botón `PRE_AUTHORIZED`.
+* Si todo va bien, el emulador mostrará opciones para simular situaciones distintas. Para simular un pago exitoso, presiona el botón `PRE_AUTHORIZED`. En caso de querer simular un pago fallido, presiona le botón `REJECTED`. Simularemos un pago exitoso presionando el botón `PRE_AUTHORIZED`.
   ![Paso 6](/images/plug/woo/onepay/emu6.png)
 
 * Vuelve a la ventana del navegador donde se encuentra WooCommerce, y podrás comprobar que el pago ha sido exitoso.

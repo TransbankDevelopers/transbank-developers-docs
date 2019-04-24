@@ -55,10 +55,8 @@ onepay.integration_type = onepay.IntegrationType.TEST
 Host: onepay.ionix.cl
 ```
 
-
 - `TEST` (Integración) se utiliza para el desarrollo y la validación de una
   integración. La URL Base es `https://onepay.ionix.cl`.
-
 
 En cuanto a credenciales, todos los métodos del API requieren tres parámetros:
 
@@ -73,7 +71,6 @@ Java | `fe9d371d-10ae-4138-8cfb-e2215b82c0d3` | `7968CDF8-F4CC-4BC5-8E27-D0513B
 Ruby | `760272c4-9950-4bf3-be16-a6729800231a` | `152C392E-F77C-426A-8667-55BEBB00EF1A`
 Python | `8e279b4e-917d-4cbf-b0e3-9432adefff6a` | `66535F26-5918-435C-ACAB-F628F4CC65EF`
 .NET | `297a620c-c776-4dd6-a42c-8669c6a4f2c5` | `81A33064-26DC-4267-8616-C97D252E7378`
-
 
 ```java
 Onepay.setApiKey("api-key-entregado-por-transbank");
@@ -121,21 +118,22 @@ onepay.shared_secret = "secreto-entregado-por-transbank"
 </aside>
 
 ### Simulador de Transacciones
+
 Dentro del flujo de venta, puedes utilizar un simulador de transacciones donde podrás generar casos de éxito y fracaso, para utilizarlo sigue los siguientes pasos:
 
-* Una vez presionado el botón para iniciar la compra, se mostrará la ventana de pago Onepay, tal como se ve en la imagen. Toma nota del número que aparece como "Código de compra", ya que lo necesitarás para emular el pago en el siguiente paso.
+- Una vez presionado el botón para iniciar la compra, se mostrará la ventana de pago Onepay, tal como se ve en la imagen. Toma nota del número que aparece como "Código de compra", ya que lo necesitarás para emular el pago en el siguiente paso.
   ![Paso 1](/images/referencia/onepay/sim1.png)
 
-* En otra ventana del navegador, ingresa al emulador de pagos desde [https://onepay.ionix.cl/mobile-payment-emulator/](https://onepay.ionix.cl/mobile-payment-emulator/), utiliza test@onepay.cl como correo electrónico, y el código de compra obtenido desde la pantalla anterior. Una vez ingresado los datos solicitados, presiona el botón "Iniciar Pago":
+- En otra ventana del navegador, ingresa al emulador de pagos desde [https://onepay.ionix.cl/mobile-payment-emulator/](https://onepay.ionix.cl/mobile-payment-emulator/), utiliza test@onepay.cl como correo electrónico, y el código de compra obtenido desde la pantalla anterior. Una vez ingresado los datos solicitados, presiona el botón "Iniciar Pago":
   ![Paso 2](/images/referencia/onepay/sim2.png)
 
-* Si todo va bien, el emulador mostrará opciones para simular situaciones distintas. Para simular un pago exitoso, presiona el botón `PRE_AUTHORIZED`. En caso de querer simular un pago fallido, presiona le botón `REJECTED`. Simularemos un pago exitoso presionando el botón `PRE_AUTHORIZED`.
+- Si todo va bien, el emulador mostrará opciones para simular situaciones distintas. Para simular un pago exitoso, presiona el botón `PRE_AUTHORIZED`. En caso de querer simular un pago fallido, presiona le botón `REJECTED`. Simularemos un pago exitoso presionando el botón `PRE_AUTHORIZED`.
   ![Paso 3](/images/referencia/onepay/sim3.png)
 
-* Vuelve a la ventana del navegador donde comenzaste, y podrás comprobar que el pago ha sido exitoso.
+- Vuelve a la ventana del navegador donde comenzaste, y podrás comprobar que el pago ha sido exitoso.
   ![Paso 4](/images/referencia/onepay/sim4.png)
 
-* Alternativamente, en vez de simular un pago exitoso puedes simular un pago rechazado utilizando el botón `REJECTED` en el emulador. Si vuelves a la ventana del comercio, podrás ver que la operación ha sido cancelada.
+- Alternativamente, en vez de simular un pago exitoso puedes simular un pago rechazado utilizando el botón `REJECTED` en el emulador. Si vuelves a la ventana del comercio, podrás ver que la operación ha sido cancelada.
   ![Paso 5](/images/referencia/onepay/sim5.png)
 
 ### Códigos de Error Comunes
@@ -160,6 +158,8 @@ Crea una transacción a partir de un carro de compras.
 ```java
 Onepay.setAppScheme("mi-app://mi-app/onepay-result");
 Onepay.setCallbackUrl("https://miapp.cl/endPayment");
+Onepay.setQrWidthHeight(100); // Opcional
+Onepay.setCommerceLogoUrl("https://some.url/logo"); // Opcional
 
 ShoppingCart cart = new ShoppingCart();
 cart.add(
@@ -171,21 +171,38 @@ cart.add(
         .setExpire(-1));
 TransactionCreateResponse response = Transaction.create(
   cart, Onepay.Channel.WEB);
+
+// O, si lo deseas, puedes configurar opciones por transacción
+TransactionCreateResponse response = Transaction.create(
+  cart, Onepay.Channel.WEB,
+  new Options().setQrWidthHeight(200)
+               .setCommerceLogoUrl("https://commerce.cl/logo")
+)
 ```
 
 ```php
 OnepayBase::setAppScheme("mi-app://mi-app/onepay-result");
 OnepayBase::setCallbackUrl("https://miapp.cl/endPayment");
+OnepayBase::setQrWidthHeight(100); // Opcional
+OnepayBase::setCommerceLogoUrl("https://some.url/logo"); // Opcional
 
 $cart = new ShoppingCart();
 $cart->add(
   new Item('Producto de prueba', 1, 9900, null, null));
 $response = Transaction::create($cart, $channel, 'WEB');
+
+// O, si lo deseas, puedes configurar opciones por transacción
+$options = new options()
+$options->setQrWidthHeight(200);
+$options->setCommerceLogoUrl("https://commerce.cl/logo");
+$response = Transaction::create($cart, $channel, 'WEB', $options);
 ```
 
 ```csharp
 Onepay.AppScheme = "mi-app://mi-app/onepay-result";
 Onepay.CallbackUrl = "https://miapp.cl/endPayment";
+Onepay.QrWidthHeight = 100; // Opcional
+Onepay.CommerceLogoUrl = "https://some.url/logo"; // Opcional
 
 ShoppingCart cart = new ShoppingCart();
 cart.Add(new Item(
@@ -195,11 +212,19 @@ cart.Add(new Item(
     additionalData: null,
     expire: -1));
 var response = Transaction.Create(cart, ChannelType.Web);
+
+// O, si lo deseas, puedes configurar opciones por transacción
+var response = Transaction.Create(cart, ChannelType.Web, new Options(
+  commerceLogoUrl: 'https://some.url/logo',
+  qrWidthHeight: 200
+));
 ```
 
 ```ruby
 Transbank::Onepay::Base.app_scheme = "mi-app://mi-app/onepay-result"
 Transbank::Onepay::Base.callback_url = "https://miapp.cl/endPayment"
+Transbank::Onepay::Base.qr_width_height = 100 # Opcional
+Transbank::Onepay::Base.commerce_logo_url = "https://some.url/logo" # Opcional
 
 
 cart = Transbank::Onepay::ShoppingCart.new
@@ -210,17 +235,29 @@ cart.add(Transbank::Onepay::Item.new(amount: 9000,
                   expire: -1))
 channel = Transbank::Onepay::Channel::WEB
 response = Transbank::Onepay::Transaction.create(shopping_cart: cart, channel: channel)
+
+# O, si lo deseas, puedes configurar opciones por transacción
+response = Transbank::Onepay::Transaction.create(
+  shopping_cart: cart, channel: channel, options: {
+    qr_width_height: 200, commerce_logo_url: 'https://commerce.cl/logo'
+  }
+)
 ```
 
 ```python
 onepay.app_scheme = "mi-app://mi-app/onepay-result"
 onepay.callback_url = "https://miapp.cl/endPayment"
+onepay.qr_width_height = 100 # Opcional
+onepay.commerce_logo_url = "https://some.url/logo" # Opcional
 
 cart = ShoppingCart()
-cart.add(Item(description="Producto de prueba", 
-              quantity=1, amount=9900, 
+cart.add(Item(description="Producto de prueba",
+              quantity=1, amount=9900,
               additional_data=None, expire=None))
 result = Transaction.create(cart, Channel.WEB)
+
+# O, si lo deseas, puedes configurar opciones por transacción
+result = Transaction.create(cart, Channel.WEB, Options(commerce_logo_url="https://commerce.cl/logo", qr_width_height=200))
 ```
 
 ```http
@@ -266,9 +303,9 @@ itemsQuantity <br> <i>  Integer  </i> | Cantidad de objetos comprados. Debe ser
 issuedAt <br> <i>  Number  </i> | Fecha de creación de la transacción expresado en Unix timestamp. Los SDKs lo calculan automáticamente.
 channel <br> <i>  String  </i> | Canal por el que se está interactuando con el usuario final. Puede tomar el valor `"WEB"` (cuando la transacción se está realizando a través de un navegador en un PC de escritorio), `"MOBILE"` (para transacciones realizadas a través de por un navegador web móvil) o `"APP"` (cuando la transacción se lleva a cabo en una aplicación móvil). Los SDKs reciben el canal como un segundo parámetro, separado del carro de compra.
 generateOttQrCode <br> <i>  Boolean  </i> | Indica si es necesario crear el código QR para la transacción actual. Su valor por defecto es `false`. Valor fijado siempre como `true` en los SDKs.
-widthHeight <br> <i>  Number  </i> | Valor en pixeles para el tamaño que tendrá la imagen del código QR como ancho y alto. En este momento, solo los SDK de PHP y Java soportan estos parámetros.
-commerceLogoUrl <br> <i>  String  </i> | Indica la dirección al logo del comercio. Se utiliza en la aplicación OnePay para descargar y mostrar dicha imagen durante el proceso de compra. En este momento, solo los SDK de PHP y Java soportan estos parámetros.
-callbackUrl <br> <i>  String  </i> | URL de retorno al comercio. Se utiliza para devolverle el control al comercio cuando la transacción es de tipo `WEB` (modalidad checkout) o `MOBILE`. Los SDKs obtienen este valor desde la configuración global de Onepay.
+widthHeight <br> <i>  Number  </i> | Valor en pixeles para el tamaño que tendrá la imagen del código QR como ancho y alto.
+commerceLogoUrl <br> <i>  String  </i> | Indica la dirección al logo del comercio. Se utiliza en la aplicación OnePay para descargar y mostrar dicha imagen durante el proceso de compra.
+callbackUrl <br> <i>  String  </i> | Url de retorno al comercio. Se utiliza para devolverle el control al comercio cuando la transacción es de tipo `WEB` (modalidad checkout) o `MOBILE`. Los SDKs obtienen este valor desde la configuración global de Onepay.
 appScheme <br> <i>  String  </i> | Esquema de retorno a la aplicación del comercio. Es obligatorio sólo cuando el channel es `APP`, en caso contrario puede ser `null`. Los SDKs obtienen este valor desde la configuración global de Onepay.
 items <br> <i>  Array[Object]  </i> | Lista de items en el carro de compra. Corresponde al primer parámetro en los SDKs.
 items[].description <br> <i>  String  </i> | Descripción del ítem.
@@ -533,7 +570,6 @@ Content-Type: application/json
 > Los SDKs sólo retornan los campos presentes dentro de `result`. Si el
 > `responseCode` es diferente de `"OK"` lanzan una excepción incluyendo el
 > `responseCode` y `description`.
-
 
 Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 ------ | -----------
