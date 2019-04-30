@@ -2,9 +2,7 @@
 
 ## Cómo empezar
 
-El SDK para POS Integrado, cuenta de 2 partes, la primera pieza es una librería/SDK escrito en C,
-el cual es multi plataforma, y debe ser instalado en tu maquina para poder ser utilizado por la
-segunda pieza, la cual mediante un Wrapper, accede a las funciones disponibles en la librería C.
+El SDK para POS Integrado cuenta de 2 partes, una librería/SDK en C, que debe ser instalado en tu maquina para poder ser utilizado por la segunda pieza. Esta pieza es un Wrapper para accede a las funciones disponibles en la librería C.
 
 Adicionalmente, necesitaras tener instalados los drivers correspondientes a tu tarjeta de
 puerto serial o adaptador USB Serial.
@@ -14,7 +12,13 @@ La comunicación con el POS Integrado se realiza mediante puerto serial RS232.
 </aside>
 
 <aside class="notice">
-Tu eres el responsable de instalar el driver correcto para tu tarjeta o adaptador serial.
+Tú eres el responsable de instalar el driver correcto para tu tarjeta o adaptador serial.
+</aside>
+
+<aside class="success">
+Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilicen el chip CH340: http://www.wch.cn/download/CH341SER_EXE.html <br>
+Tambien puedes encontrar drivers para adaptadores con chip prolific en esta web:
+http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041
 </aside>
 
 ### LibSerialPort
@@ -77,10 +81,7 @@ char * ports = list_ports();
 
 ### Abrir un puerto Serial
 
-Para abrir un puerto serial y comunicarte con el POS Integrado, necesitaras el nombre del puerto (El cual
-puedes identificar usando la función mencionada en el apartado anterior #Listar puertos disponibles). También
-necesitaras el baudrate al cual esta configurado el puerto serial del POS Integrado (Por defecto es 115200),
-y puedes obtener los distintos valores desde la clase `TbkBaudrates` del paquete `Transbank.POS.Utils`.
+Para abrir un puerto serial y comunicarte con el POS Integrado, necesitaras el nombre del puerto (El cual puedes identificar usando [la función mencionada en el apartado anterior](/documentacion/posintegrado#listar-puertos-disponibles)).
 
 Si el puerto no puede ser abierto, se lanzara una exception `TransbankException`.
 
@@ -91,7 +92,7 @@ using Transbank.POS;
 using Transbank.POS.Utils;
 //...
 string portName = "COM3";
-POS.Instance.OpenPort(portName, TbkBaudrate.TBK_115200);
+POS.Instance.OpenPort(portName);
 ```
 
 ```c
@@ -158,7 +159,7 @@ char* response = sale(ammount, ticket, false);
 
 ### Transacción de Cierre
 
-Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencias/posintegrado#tabla-de-respuestas))
+Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencia/posintegrado#tabla-de-respuestas))
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -188,7 +189,7 @@ El resultado del cierre de caja se entrega en la forma de un objeto `RegisterClo
 ```
 
 <aside class="notice">
-Para el cierre no se solicitara tarjeta supervisora.
+Para el cierre no se solicitará tarjeta supervisora.
 </aside>
 
 ### Transacción de Carga de Llaves
@@ -226,7 +227,7 @@ El resultado del cierre de caja se entrega en la forma de un objeto `RegisterClo
 El uso de esta transacción debe ser limitado a pruebas de comunicación o cuando el POS Integrado pierda las llaves.
 </aside>
 
-### Transacción de Pooling
+### Transacción de Poll
 
 Esta mensaje es enviado por la caja para saber si el POS está conectado. En el SDK el resultado de esta operación es un `Booleano` o un `0` representado en la constante `TBK_OK` en el caso de la librería en C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzara una excepción del tipo `TransbankException`.
 
@@ -235,14 +236,14 @@ Esta mensaje es enviado por la caja para saber si el POS está conectado. En el 
 ```csharp
 using Transbank.POS;
 //...
-bool connected = POS.Instance.Polling();
+bool connected = POS.Instance.Poll();
 ```
 
 ```c
 #include "transbank.h"
 #include "transbank_serial_utils.h"
 //...
-int retval = polling();
+int retval = poll();
 if (retval == TBK_OK){
     //...
 }

@@ -102,10 +102,7 @@ char * ports = list_ports();
 
 ### Abrir un puerto Serial
 
-Para abrir un puerto serial y comunicarte con el POS Integrado, necesitaras el nombre del puerto (El cual
-puedes identificar usando la función mencionada en el apartado anterior #Listar puertos disponibles). También
-necesitaras el baudrate al cual esta configurado el puerto serial del POS Integrado (Por defecto es 115200),
-y puedes obtener los distintos valores desde la clase `TbkBaudrates` del paquete `Transbank.POS.Utils`.
+Para abrir un puerto serial y comunicarte con el POS Integrado, necesitaras el nombre del puerto (El cual puedes identificar usando [la función mencionada en el apartado anterior](referencia/posintegrado#listar-puertos-disponibles)). También necesitaras el baudrate al cual esta configurado el puerto serial del POS Integrado (Por defecto es 115200), y puedes obtener los distintos valores desde la clase `TbkBaudrates` del paquete `Transbank.POS.Utils`.
 
 Si el puerto no puede ser abierto, se lanzara una exception `TransbankException`.
 
@@ -276,7 +273,7 @@ DATO                    | LARGO         | COMENTARIO
 `<ETX>`                 |  1            | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
 `LRC`                   |  1            | Resultado del calculo del `LRC` del mensaje.
 
-### Mensaje de Pooling
+### Mensaje de Poll
 
 Esta mensaje es enviado por la caja para saber si el POS está conectado. En el SDK el resultado de esta operación es un `Booleano` o un `0` representado en la constante `TBK_OK` en el caso de la librería en C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzara una excepción del tipo `TransbankException`.
 
@@ -285,24 +282,24 @@ Esta mensaje es enviado por la caja para saber si el POS está conectado. En el 
 ```csharp
 using Transbank.POS;
 //...
-bool connected = POS.Instance.Polling();
+bool connected = POS.Instance.Poll();
 ```
 
 ```c
 #include "transbank.h"
 #include "transbank_serial_utils.h"
 //...
-int retval = polling();
+int retval = poll();
 if (retval == TBK_OK){
     //...
 }
 ```
 
-![Diagrama de Secuencia Polling](/images/referencia/posintegrado/diagrama-polling.png)
+![Diagrama de Secuencia Poll](/images/referencia/posintegrado/diagrama-poll.png)
 
 1. La caja envía el requerimiento y espera como respuesta `<ACK>`, en caso de recibir `<ACK>`, esto indica que el POS se encuentra operativo y listo para recibir comandos. si no se recibe respuesta o no es `<ACK>` se debe reintentar el envío del comando 2 veces.
 
-#### Solicitud Polling
+#### Solicitud Poll
 
 DATO        | LARGO     | Comentario
 ------      | ------    | ------
@@ -315,7 +312,7 @@ DATO        | LARGO     | Comentario
 
 *Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x31, 0x30, 0x30, 0x03, 0x02}`
 
-#### Respuesta Polling
+#### Respuesta Poll
 
 DATO                    | LARGO         | COMENTARIO
 ------                  | ------        | ------
