@@ -544,7 +544,8 @@ Para realizar la conciliación debes seguir los siguientes pasos:
 
 3. En la parte superior de la ventana puedes encontrar un buscador que te ayudará a filtrar, según los parámetros que gustes, las transacciones que quieras cuadrar. Para encontrar las transacciones de Webpay Plus, en producto, debes seleccionar "Webpay3G", en caso de querer las de Webpay OneClick selecciona "OneClick". Debes tener en cuenta que lamentablemente **el reporte no distingue entre Webpay y Onepay**. Bajo el producto Webpay3G encontraras transacciones de ambos productos. ![Paso 3](/images/documentacion/conciliacion2.png)
 
-4. Dentro de la tabla en la imagen anterior puedes presionar el número de orden de compra para abrir los detalles de la transacción. Es en esta sección donde podrás encontrar y conciliar la mayoría de los parámetros devueltos al confirmar una transacción. ![Paso 4](/images/documentacion/conciliacion3.png)
+4. Dentro de la tabla en la imagen anterior puedes presionar el número de orden de compra para abrir los detalles de la transacción. Es en esta sección donde podrás encontrar y conciliar la mayoría de los parámetros devueltos al confirmar una transacción.
+![Paso 4](/images/documentacion/conciliacion3.png)
 
 5. Sólo queda realizar la conciliación. A continuación puedes ver una lista de parámetros que recibirás al momento de confirmar una transacción y a que fila de la tabla "Detalles de la transacción" corresponden (la lista completa de parámetros de Webpay Plus la puedes encontrar [acá](/referencia/webpay#confirmar-una-transaccion-webpay-plus-normal) y la de Webpay OneClick [acá](/referencia/webpay#autorizar-un-pago-con-webpay-oneclick)).
 
