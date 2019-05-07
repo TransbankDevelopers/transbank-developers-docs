@@ -139,7 +139,7 @@ Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la
 using Transbank.POS;
 using Transbank.POS.Responses;
 //...
-RegisterCloseResponse response = POS.Instance.RegisterClose();
+CloseResponse response = POS.Instance.Close();
 ```
 
 ```c
@@ -150,7 +150,7 @@ BaseResponse response = register_close();
 }
 ```
 
-El resultado del cierre de caja se entrega en la forma de un objeto `RegisterCloseResponse`o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzara una excepción del tipo `TransbankRegisterCloseException`.
+El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse`o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzara una excepción del tipo `TransbankCloseException`.
 
 ```json
 "FunctionCode": 510
