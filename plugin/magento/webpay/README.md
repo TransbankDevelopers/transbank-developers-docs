@@ -95,7 +95,6 @@ Para acceder a la configuración, debes seguir los siguientes pasos:
     - **Código de comercio**: Es lo que te identifica como comercio.
     - **Llave Privada**: Llave secreta que te autoriza y valida a hacer transacciones.
     - **Certificado Público**: Llave pública que te autoriza y valida a hacer transacciones.
-    - **Certificado Webpay**: Llave secreta de webpay que te autoriza y valida a hacer transacciones.
 
   Las opciones disponibles para _Ambiente_ son: "Integración" para realizar pruebas y certificar la instalación con Transbank, y "Producción" para hacer transacciones reales una vez que Transbank ha aprobado el comercio.
 
@@ -106,7 +105,6 @@ Para el ambiente de Integración, puedes utilizar las siguientes credenciales pa
 - Código de comercio: `597020000540`
 - Llave Privada: Se puede encontrar [aquí - private_key](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/597020000540.key)
 - Certificado Público: Se puede encontrar [aquí - public_cert](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/597020000540.crt)
-- Certificado Webpay: Se puede encontrar [aquí - webpay_cert](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/tbk.pem.crt)
 
 7. Guardar los cambios presionando el botón [Save Config]
 
