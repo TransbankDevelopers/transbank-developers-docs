@@ -104,7 +104,7 @@ char * ports = list_ports();
 
 Para abrir un puerto serial y comunicarte con el POS Integrado, necesitaras el nombre del puerto (El cual puedes identificar usando [la función mencionada en el apartado anterior](referencia/posintegrado#listar-puertos-disponibles)). También necesitaras el baudrate al cual esta configurado el puerto serial del POS Integrado (Por defecto es 115200), y puedes obtener los distintos valores desde la clase `TbkBaudrates` del paquete `Transbank.POS.Utils`.
 
-Si el puerto no puede ser abierto, se lanzara una exception `TransbankException`.
+Si el puerto no puede ser abierto, se lanzará una exception `TransbankException`.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -150,7 +150,7 @@ BaseResponse response = register_close();
 }
 ```
 
-El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse`o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzara una excepción del tipo `TransbankCloseException`.
+El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse`o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException`.
 
 ```json
 "FunctionCode": 510
@@ -223,7 +223,7 @@ BaseResponse response = load_keys();
 }
 ```
 
-El resultado de la carga de llaves se entrega en la forma de un objeto `LoadKeysResponse`o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzara una excepción del tipo `TransbankLoadKeysException`.
+El resultado de la carga de llaves se entrega en la forma de un objeto `LoadKeysResponse`o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankLoadKeysException`.
 
 ```json
 "FunctionCode": 510
@@ -275,7 +275,7 @@ DATO                    | LARGO         | COMENTARIO
 
 ### Mensaje de Poll
 
-Esta mensaje es enviado por la caja para saber si el POS está conectado. En el SDK el resultado de esta operación es un `Booleano` o un `0` representado en la constante `TBK_OK` en el caso de la librería en C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzara una excepción del tipo `TransbankException`.
+Esta mensaje es enviado por la caja para saber si el POS está conectado. En el SDK el resultado de esta operación es un `Booleano` o un `0` representado en la constante `TBK_OK` en el caso de la librería en C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankException`.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -320,7 +320,7 @@ DATO                    | LARGO         | COMENTARIO
 
 ### Mensaje de Cambio a POS Normal
 
-Este comando le permitirá a la caja realizar el cambio de modalidad a través de un comando. El POS debe estar en modo integrado y al recibir el comando quedara en modo normal.  El resultado de esta operación es un `Booleano` en el caso del SDK o un `0` representado en la constante `TBK_OK` en el caso de la librería en C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzara una excepción del tipo `TransbankException`.
+Este comando le permitirá a la caja realizar el cambio de modalidad a través de un comando. El POS debe estar en modo integrado y al recibir el comando quedara en modo normal.  El resultado de esta operación es un `Booleano` en el caso del SDK o un `0` representado en la constante `TBK_OK` en el caso de la librería en C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankException`.
 
 <div class="language-simple" data-multiple-language></div>
 
