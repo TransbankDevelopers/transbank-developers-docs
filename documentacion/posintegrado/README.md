@@ -213,10 +213,10 @@ BaseResponse response = load_keys();
 }
 ```
 
-El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse`o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzara una excepción del tipo `TransbankCloseException`.
+El resultado de la carga de llaves entrega en la forma de un objeto `LoadKeysResponse`o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzara una excepción del tipo `TransbankLoadKeysException`.
 
 ```json
-"FunctionCode": 510
+"FunctionCode": 810
 "ResponseMessage": "Aprobado"
 "Success": true
 "CommerceCode": 550062700310
