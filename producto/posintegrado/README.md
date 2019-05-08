@@ -8,7 +8,7 @@ El POS integrado permite realizar transacciones con tarjeta de Crédito/Debito c
 - [x] Venta.
 - [x] Cierre.
 - [ ] Anulación.
-- [ ] Ultima Venta.
+- [ ] Última Venta.
 - [ ] Detalle de Ventas.
 - [ ] Totales.
 - [x] Poll.
@@ -57,7 +57,7 @@ Ante cualquier cambio que efectúe el Establecimiento, ya sea de Sistema Operati
 De acuerdo a las normativas vigentes, las transacciones con Tarjeta de Crédito y Débito incorporan los siguientes elementos de seguridad en el sistema:
 
 - La información leída en el punto de venta NO es almacenada en ningún sistema.
-- Para efectos de cuadratura e identificación de transacciones, se utilizar el NÚMERO DE OPERACION.
+- Para efectos de cuadratura e identificación de transacciones, se utilizar el NÚMERO DE OPERACIÓN.
 
 ### Tratamiento de los Tracks de la Tarjeta
 
