@@ -578,7 +578,7 @@ detailsOutput[0].buyOrder  <br> <i> xs:string </i> | Orden de compra
 
 ### OneClick
 
-Para realizar la conciliación debes seguir los siguientes passos:
+Para realizar la conciliación debes seguir los siguientes pasos:
 
 1. Iniciar sesión con tu usuario y contraseña en [www.transbank.cl](https://www.transbank.cl/)
 
