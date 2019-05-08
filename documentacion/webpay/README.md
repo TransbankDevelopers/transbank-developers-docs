@@ -536,20 +536,31 @@ transacciones que puedes revisar entrando a
 [www.transbank.cl](https://www.transbank.cl/). Si lo deseas  puedes realizar una
 conciliación entre tu sistema y el reporte que entrega el portal.
 
+### Webpay Plus
+
 Para realizar la conciliación debes seguir los siguientes pasos:
 
-1. Iniciar sesión con tu usuario y contraseña en [www.transbank.cl](https://www.transbank.cl/)
+1. Iniciar sesión con tu usuario y contraseña en [www.transbank.cl](https://www.transbank.cl)
 
-2. Luego, en el menú principal presionar "Webpay" y luego "Reporte transaccional". ![Paso 2](/images/documentacion/conciliacion1.png)
+2. Una vez entras al portal, en el menú principal presiona "Webpay", y luego "Reporte Transaccional"
+![Paso 2](/images/documentacion/conciliacion1.png)
 
-3. En la parte superior de la ventana puedes encontrar un buscador que te ayudará a filtrar, según los parámetros que gustes, las transacciones que quieras cuadrar. Para encontrar las transacciones de Webpay Plus, en producto, debes seleccionar "Webpay3G", en caso de querer las de Webpay OneClick selecciona "OneClick". Debes tener en cuenta que lamentablemente **el reporte no distingue entre Webpay y Onepay**. Bajo el producto Webpay3G encontraras transacciones de ambos productos. ![Paso 3](/images/documentacion/conciliacion2.png)
+3. En la parte superior de la ventana puedes encontrar un buscador que te ayudará
+a filtrar, según los parámetros que gustes, las transacciones que quieras cuadrar.
+Para filtrar por las transacciones de Webpay Plus, en el campo "Producto" debes
+seleccionar **Webpay3G**. Debes tener en cuenta que lamentablemente
+**el reporte no distingue entre Webpay y Onepay**, debido a esto, bajo el producto "Webpay3G" encontrarás transacciones de ambos productos.
+![Paso 3](/images/documentacion/conciliacion2.png)
 
-4. Dentro de la tabla en la imagen anterior puedes presionar el número de orden de compra para abrir los detalles de la transacción. Es en esta sección donde podrás encontrar y conciliar la mayoría de los parámetros devueltos al confirmar una transacción.
+4. Dentro de la tabla en la imagen anterior puedes presionar el número de orden de
+compra para abrir los detalles de la transacción. Es en esta sección donde podrás encontrar y conciliar los parámetros devueltos por el SDK al confirmar una transacción.
 ![Paso 4](/images/documentacion/conciliacion3.png)
 
-5. Sólo queda realizar la conciliación. A continuación puedes ver una lista de parámetros que recibirás al momento de confirmar una transacción y a que fila de la tabla "Detalles de la transacción" corresponden (la lista completa de parámetros de Webpay Plus la puedes encontrar [acá](/referencia/webpay#confirmar-una-transaccion-webpay-plus-normal) y la de Webpay OneClick [acá](/referencia/webpay#autorizar-un-pago-con-webpay-oneclick)).
-
-**En el caso de Webpay Plus Normal**
+5. Sólo queda realizar la conciliación. A continuación puedes ver una lista de
+parámetros que recibirás al momento de confirmar una transacción y a que fila
+de la tabla "Detalles de la transacción" corresponden (la lista completa de
+parámetros de Webpay Plus la puedes encontrar
+[acá](/referencia/webpay#confirmar-una-transaccion-webpay-plus-normal))
 
 Nombre parámetro   <br> <i> tipo </i> | Fila en tabla
 ------   | -----------
@@ -565,7 +576,31 @@ detailsOutput[0].sharesNumber  <br> <i> xs:int </i> | Número de cuotas
 detailsOutput[0].commerceCode  <br> <i> xs:string </i> | Comercio, desde el quinto dígito en adelante del `commerceCode` corresponde al número antes del guión que podemos apreciar en la imagen anterior.
 detailsOutput[0].buyOrder  <br> <i> xs:string </i> | Orden de compra
 
-**En el caso de Webpay Oneclick**
+### OneClick
+
+Para realizar la conciliación debes seguir los siguientes passos:
+
+1. Iniciar sesión con tu usuario y contraseña en [www.transbank.cl](https://www.transbank.cl/)
+
+2. Una vez entras al portal, en el menú principal presiona "Webpay", y luego "Reporte Transaccional"
+![Paso 2](/images/documentacion/conciliacion1.png)
+
+3. En la parte superior de la ventana puedes encontrar un buscador que te ayudará
+a filtrar, según los parámetros que gustes, las transacciones que quieras cuadrar.
+Para filtrar por las transacciones de OneClick, en el campo "Producto" debes
+seleccionar **OneClick**.
+![Paso 3](/images/documentacion/conciliacion2.png)
+
+4. Dentro de la tabla en la imagen anterior puedes presionar el número de orden de
+compra para abrir los detalles de la transacción. Es en esta sección donde podrás
+encontrar y conciliar los parámetros devueltos por el SDK al confirmar una transacción.
+![Paso 4](/images/documentacion/conciliacion3.png)
+
+5. Sólo queda realizar la conciliación. A continuación puedes ver una lista de
+parámetros que recibirás al momento de confirmar una transacción y a que fila
+de la tabla "Detalles de la transacción" corresponden (la lista completa de
+parámetros de OneClick la puedes encontrar
+[acá](/referencia/webpay#autorizar-un-pago-con-webpay-oneclick))
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
