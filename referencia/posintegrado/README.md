@@ -129,6 +129,132 @@ if ( retval == TBK_OK ){
 
 ## Mensajes
 
+### Mensaje de Venta
+
+Este comando es enviado por la caja para solicitar la ejecución de una venta. Los siguientes parámetros deben ser enviados desde la caja:
+
+- `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
+- `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
+- `Enviar Mensaje`: Este parámetro indica al POS si debe enviar mensajes intermedios a la caja mientras se realiza el proceso de venta. Los mensajes intermedios que envía el POS y que deben ser mostrados por la Caja, deben corresponder según los siguientes códigos:
+  - `78`: Lectura de Tarjeta.
+  - `79`: Confirmación de Monto.
+  - `80`: Selección de Cuotas.
+  - `81`: Ingreso de Pinpass.
+  - `82`: Envío de transacción a Transbank.
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Responses;
+//...
+SaleResponse response = POS.Instance.Sale(ammount, ticket);
+```
+
+```c
+#include "transbank.h"
+#include "transbank_serial_utils.h"
+//...
+char* response = sale(ammount, ticket, false);
+```
+
+El resultado de la venta se entrega en la forma de un objeto `SaleResponse` o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException`.
+
+```json
+"Function": 210
+"Response": "Aprobado"
+"Commerce Code": 550062700310
+"Terminal Id": "ABC1234C"
+"Ticket": "AB123"
+"Autorization Code": "XZ123456"
+"Ammount": 15000
+"Shares Number": 3
+"Shares Amount": 5000
+"Last 4 Digits": 6677
+"Operation Number": 60
+"Card Type": CR
+"Accounting Date":
+"Account Number":
+"Card Brand": AX
+"Real Date": 28/10/2019 22:35:12
+"Employee Id":
+"Tip": 1500
+```
+
+<aside class="warning">
+Actualmente no están soportados los mensajes intermedios. Por esta razón el 3º parámetro de la función en C debe ser siempre falso.
+</aside>
+
+![Diagrama de Secuencia Venta](/images/referencia/posintegrado/diagrama-venta.png)
+
+1. La caja envía el requerimiento y espera como respuesta `<ACK>`/`<NAK>`, en caso de que llegue un `<NAK>`, debe reintentar el envío del requerimiento 2 veces. Si recibe un `<ACK>` debe esperar la respuesta de la transacción.
+2. El POS solicita los datos al usuario, y envía el requerimiento al Autorizador, en caso de ser aprobada, se guarda en Batch y se envía respuesta a la caja. En caso de ser rechazada se envía respuesta a la caja indicando el error. ([Ver Tabla de Respuestas](/referencia/posintegrado#tabla-de-respuestas))
+3. La caja al recibir la respuesta envía un `<ACK>` si el mensaje está correcto, o un `<NAK>` para el caso en que el `LRC` no corresponde.
+4. El POS al recibir el `<ACK>` vuelve al inicio a esperar un nuevo comando, para el caso que recibe un `<NAK>` vuelve a enviar la respuesta 2 veces más.
+
+#### Solicitud de Venta
+
+DATO        | LARGO     | Comentario
+------      | ------    | ------
+`<STX>`     | 1         | Indica el inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
+`Comando`   | 4         | <i>valor ASCII</i>: `0200` <br><i>valor hexadecimal</i>: `0x30 0x32 0x30 0x30`
+`Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Monto`     | 9         | Valor Numérico que debe ser convertido a hexadecimal.
+`Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Ticket`    | 6         | Valor ASCII, Número de boleta o ticket, que debe ser convertido a hexadecimal
+`Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Status`    | 1         | Indica al POS si debe enviar mensajes intermedios o de estado de la transacción <br><i>1</i>: Envía Mensajes<br><i>0</i>: No envía mensajes
+`<ETX>`     | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
+`LRC`       | 1         | Resultado del calculo del `LRC` del mensaje
+
+#### Respuesta de Venta
+
+DATO                    | LARGO     | COMENTARIO
+------                  | ------    | ------
+`<STX>`                 |  1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
+`Comando`               |  4        | <i>Valor ASCII</i>:  `0510` <br><i>valor hexadecimal</i>: `0x30 0x35 0x31 0x30`
+`Separador`             |  1        | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Código Respuesta`      |  2        | Valor Numérico
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Código de comercio`    | 12        | Valor Numérico
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Terminal ID`           |  8        | Valor Alfanumérico
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Ticket`                |  6        | Valor ASCII, Número de boleta o ticket
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Codigo de Autorizacion`|  6        | Valor ASCII
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Monto`                 |  9        | Valor Numérico <br><i>Largo máximo</i>: 9 <br><i>Largo mínimo</i>: 1
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Número Cuotas`         |  2        | Valor Numérico <br><i>Largo máximo</i>: 2 <br><i>Largo mínimo</i>: 1
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Monto Cuota`           |  9        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 9 <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Últimos 4 Digitos`     |  4        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 4 <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Número Operación`      |  6        | Valor Numérico, Correlativo de Transacción del POS **(Opcional)** <br><i>Largo máximo</i>: 6 <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Tipo de Tarjeta`       |  2        | Valor ASCII <br><i>CR</i>: Crédito <br><i>DB</i>: Debito
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Fecha Contable`        |  6        | Valor ASCII. Se utiliza solo con ventas Debito **(Opcional)**
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Número de Cuenta`      | 19        | Valor ASCII. Se utiliza solo con ventas Debito **(Opcional)** <br><i>Largo máximo</i>: 19 <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Abreviación Tarjeta`   |  2        | Valor ASCII **(Opcional)** <br>[Ver Tabla de abreviación de Tarjetas](/referencia/posintegrado#tabla-de-abreviacion-de-tarjetas)
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Fecha de Transacción`  |  2        | Valor ASCII **(Opcional)** <br><i>Formato</i>: `DDMMAAAA`
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Hora de Transacción`   |  6        | Valor ASCII **(Opcional)** <br><i> Formato</i>: `HHMMSS`
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Empleado`              |  4        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 4</i> <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Propina`               |  9        | Valor Numérico <br><i>Largo máximo</i>: 9 </i> <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
+`LRC`                   |  1        | Resultado del calculo del `LRC` del mensaje
+
 ### Mensaje de Cierre
 
 Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencia/posintegrado#tabla-de-respuestas))
@@ -180,7 +306,7 @@ DATO        | LARGO     | Comentario
 `Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
 `Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
 `<ETX>`     | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
-`LRC`       | 1         | Resultado del calculo del `LRC` del mensaje.
+`LRC`       | 1         | Resultado del calculo del `LRC` del mensaje
 
 *Mensaje* en <i>ASCII</i>: `<STX>0500||<ETX>6`
 
@@ -200,7 +326,7 @@ DATO                    | LARGO     | COMENTARIO
 `Terminal ID`           |  8        | Valor Alfanumérico
 `Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
 `<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
-`LRC`                 |  1        | Resultado del calculo del `LRC` del mensaje.
+`LRC`                 |  1        | Resultado del calculo del `LRC` del mensaje
 
 ### Mensaje de Carga de Llaves
 
@@ -251,7 +377,7 @@ DATO        | LARGO     | Comentario
 `<STX>`     | 1         | Indica el inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
 `Comando`   | 4         | <i>valor ASCII</i>: `0800` <br><i>valor hexadecimal</i>: `0x30 0x38 0x30 0x30`
 `<ETX>`     | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
-`LRC`       | 1         | Resultado del calculo del `LRC` del mensaje.
+`LRC`       | 1         | Resultado del calculo del `LRC` del mensaje
 
 *Mensaje* en <i>ASCII</i>: `<STX>0800<ETX><VT>`
 
@@ -259,19 +385,19 @@ DATO        | LARGO     | Comentario
 
 #### Respuesta de Carga de Llaves
 
-DATO                    | LARGO         | COMENTARIO
-------                  | ------        | ------
-`<STX>`                 |  1            | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
-`Comando`               |  4            | <i>Valor ASCII</i>:  `0810` <br><i>valor hexadecimal</i>: `0x30 0x38 0x31 0x30`
-`Separador`             |  1            | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
-`Código Respuesta`      |  2            | Valor Numérico
-`Separador`             |  1            |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
-`Código de comercio`    | 12            | Valor Numérico
-`Separador`             |  1            |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
-`Terminal ID`           |  8            | Valor Alfanumérico
-`Separador`             |  1 (Opcional) |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
-`<ETX>`                 |  1            | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
-`LRC`                   |  1            | Resultado del calculo del `LRC` del mensaje.
+DATO                    | LARGO     | COMENTARIO
+------                  | ------    | ------
+`<STX>`                 |  1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
+`Comando`               |  4        | <i>Valor Alfanumérico</i>:  `0810` <br><i>valor hexadecimal</i>: `0x30 0x38 0x31 0x30`
+`Separador`             |  1        | <i>valor Alfanumérico</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Código Respuesta`      |  2        | Valor Numérico
+`Separador`             |  1        |  <i>valor Alfanumérico</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Código de comercio`    | 12        | Valor Numérico
+`Separador`             |  1        |  <i>valor Alfanumérico</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Terminal ID`           |  8        | Valor Alfanumérico
+`Separador`             |  1        |  <i>valor Alfanumérico **(Opcional)**</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
+`LRC`                   |  1        | Resultado del calculo del `LRC` del mensaje
 
 ### Mensaje de Poll
 
@@ -304,9 +430,9 @@ if (retval == TBK_OK){
 DATO        | LARGO     | Comentario
 ------      | ------    | ------
 `<STX>`     | 1         | Indica el inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
-`Comando`   | 4         | <i>valor ASCII</i>: `0100` <br><i>valor hexadecimal</i>: `0x30 0x31 0x30 0x30`
+`Comando`   | 4         | <i>valor Alfanumérico</i>: `0100` <br><i>valor hexadecimal</i>: `0x30 0x31 0x30 0x30`
 `<ETX>`     | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
-`LRC`       | 1         | Resultado del calculo del LRC del mensaje.
+`LRC`       | 1         | Resultado del calculo del LRC del mensaje
 
 *Mensaje* en <i>ASCII</i>: `<STX>0100<ETX><STX>`
 
@@ -350,9 +476,9 @@ DATO        | LARGO     | Comentario
 ------      | ------    | ------
 `<STX>`     | 1         | Indica el inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
 `Comando`   | 4         | <i>valor ASCII</i>: `0300` <br><i>valor hexadecimal</i>: `0x30 0x33 0x30 0x30`
-`Separador`             |  1            | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
 `<ETX>`     | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
-`LRC`       | 1         | Resultado del calculo del LRC del mensaje.
+`LRC`       | 1         | Resultado del calculo del LRC del mensaje
 
 *Mensaje* en <i>ASCII</i>: `<STX>0300<ETX><NUL>`
 

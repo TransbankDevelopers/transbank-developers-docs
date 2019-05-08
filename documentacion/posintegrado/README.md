@@ -134,12 +134,6 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta. L
 
 - `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
 - `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
-- `Enviar Mensaje`: Este parámetro indica al POS si debe enviar mensajes intermedios a la caja mientras se realiza el proceso de venta. Los mensajes intermedios que envía el POS y que deben ser mostrados por la Caja, deben corresponder según los siguientes códigos:
-  - `78`: Lectura de Tarjeta.
-  - `79`: Confirmación de Monto.
-  - `80`: Selección de Cuotas.
-  - `81`: Ingreso de Pinpass.
-  - `82`: Envío de transacción a Transbank.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -156,6 +150,33 @@ SaleResponse response = POS.Instance.Sale(ammount, ticket);
 //...
 char* response = sale(ammount, ticket, false);
 ```
+
+El resultado de la venta se entrega en la forma de un objeto `SaleResponse` o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException`.
+
+```json
+"Function": 210
+"Response": "Aprobado"
+"Commerce Code": 550062700310
+"Terminal Id": "ABC1234C"
+"Ticket": "AB123"
+"Autorization Code": "XZ123456"
+"Ammount": 15000
+"Shares Number": 3
+"Shares Amount": 5000
+"Last 4 Digits": 6677
+"Operation Number": 60
+"Card Type": CR
+"Accounting Date":
+"Account Number":
+"Card Brand": AX
+"Real Date": 28/10/2019 22:35:12
+"Employee Id":
+"Tip": 1500
+```
+
+<aside class="warning">
+Actualmente no están soportados los mensajes intermedios. Por esta razón el 3º parámetro de la función en C debe ser siempre falso.
+</aside>
 
 ### Transacción de Cierre
 
@@ -178,7 +199,7 @@ BaseResponse response = register_close();
 }
 ```
 
-El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse`o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException`.
+El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse` o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException`.
 
 ```json
 "FunctionCode": 510
@@ -213,7 +234,7 @@ BaseResponse response = load_keys();
 }
 ```
 
-El resultado de la carga de llaves entrega en la forma de un objeto `LoadKeysResponse`o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLoadKeysException`.
+El resultado de la carga de llaves entrega en la forma de un objeto `LoadKeysResponse` o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLoadKeysException`.
 
 ```json
 "FunctionCode": 810
