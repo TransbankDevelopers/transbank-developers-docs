@@ -182,6 +182,10 @@ Actualmente no están soportados los mensajes intermedios. Por esta razón el 3�
 
 Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencia/posintegrado#tabla-de-respuestas))
 
+<aside class="success">
+Esta transacción también realiza el cambió de llaves.
+<aside>
+
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
@@ -216,6 +220,10 @@ Para el cierre no se solicitará tarjeta supervisora.
 ### Transacción de Carga de Llaves
 
 Esta transacción permite al POS Integrado del comercio requerir cargar nuevas _Working Keys_ desde Transbank. Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencia/posintegrado#tabla-de-respuestas))
+
+<aside class="success">
+Las llaves se deben cambiar automáticamente todos los días. Puedes usar este método como parte de un procedimiento de inicialización que se ejecute en forma automática todos los días. Ten presente que la transacción de Cierre también realiza el cambió de llaves.
+<aside>
 
 <div class="language-simple" data-multiple-language></div>
 
