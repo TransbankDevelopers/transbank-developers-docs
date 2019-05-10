@@ -2,9 +2,9 @@
 
 ## Cómo empezar
 
-El SDK para POS Integrado cuenta de 2 partes, una librería/SDK en C, que debe ser instalado en tu maquina para poder ser utilizado por la segunda pieza. Esta pieza es un Wrapper para accede a las funciones disponibles en la librería C.
+El SDK para POS Integrado cuenta de 2 partes, una librería/SDK en C, que debe ser instalado en tu máquina para poder ser utilizado por la segunda pieza. Esta pieza es un Wrapper para accede a las funciones disponibles en la librería C.
 
-Adicionalmente, necesitaras tener instalados los drivers correspondientes a tu tarjeta de
+Adicionalmente, necesitarás tener instalados los drivers correspondientes a tu tarjeta de
 puerto serial o adaptador USB Serial.
 
 <aside class="notice">
@@ -17,7 +17,7 @@ Tú eres el responsable de instalar el driver correcto para tu tarjeta o adaptad
 
 <aside class="success">
 Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilicen el chip CH340: http://www.wch.cn/download/CH341SER_EXE.html <br>
-Tambien puedes encontrar drivers para adaptadores con chip prolific en esta web:
+También puedes encontrar drivers para adaptadores con chip Prolific en esta web:
 http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041
 </aside>
 
@@ -31,10 +31,10 @@ Puedes obtener el código desde el repositorio usando git:
 git clone git://sigrok.org/libserialport
 ```
 
-Para compilar en windows necesitaras lo siguiente:
+Para compilar en windows necesitarás lo siguiente:
 
 - [msys2 - mingw-w64](http://www.msys2.org/) Puedes descargarlo siguiendo el link y las instrucciones provistas en su sitio web.
-  - Adicionalmente, necesitaras el toolchain para tu arquitectura:
+  - Adicionalmente, necesitarás el toolchain para tu arquitectura:
     - x86: `pacman -S mingw-w64-i686-toolchain`
     - x64: `pacman -S mingw-w64-x86_64-toolchain`
 
@@ -81,7 +81,7 @@ char * ports = list_ports();
 
 ### Abrir un puerto Serial
 
-Para abrir un puerto serial y comunicarte con el POS Integrado, necesitaras el nombre del puerto (El cual puedes identificar usando [la función mencionada en el apartado anterior](/documentacion/posintegrado#listar-puertos-disponibles)).
+Para abrir un puerto serial y comunicarte con el POS Integrado, necesitarás el nombre del puerto (El cual puedes identificar usando [la función mencionada en el apartado anterior](/documentacion/posintegrado#listar-puertos-disponibles)).
 
 Si el puerto no puede ser abierto, se lanzará una exception `TransbankException`.
 
