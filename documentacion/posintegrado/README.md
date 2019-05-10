@@ -16,9 +16,8 @@ Tú eres el responsable de instalar el driver correcto para tu tarjeta o adaptad
 </aside>
 
 <aside class="success">
-Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilicen el chip CH340: http://www.wch.cn/download/CH341SER_EXE.html <br>
-También puedes encontrar drivers para adaptadores con chip Prolific en esta web:
-http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041
+Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilicen el [chip CH340](http://www.wch.cn/download/CH341SER_EXE.html)<br>
+También puedes encontrar drivers para adaptadores con [chip Prolific](http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041)
 </aside>
 
 ### LibSerialPort
