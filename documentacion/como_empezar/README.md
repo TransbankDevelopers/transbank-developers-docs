@@ -13,6 +13,12 @@ En esta sección veremos los pasos para comenzar con el SDK que corresponda al
 lenguaje de programación que utilices en tu backend. Para los SDKs
 específicos a Onepay, visita la sección dedicada a ese producto.
 
+## Flujo de Integración
+
+Inicialmente el comercio tendrá algunas tareas necesarias que realizar mientras ocurre el proceso de intergación. Aquí puedes conocer el flujo completo a continuación
+
+<img class="td_img-night" src="/images/documentacion/flujo-integracion.svg" alt="Flujo de integración">
+
 ## Instalación SDK
 
 Para instalar el SDK, debes agregarlo al gestor de dependencias de tu lenguaje:
