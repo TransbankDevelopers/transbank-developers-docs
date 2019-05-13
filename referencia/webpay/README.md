@@ -210,12 +210,11 @@ de crédito o débito lo realiza en forma segura en Webpay.
 De cara al tarjetahabiente, el flujo de páginas para la transacción es el
 siguiente:
 
-![Flujo de páginas Webpay Plus Normal](/images/flujo-paginas-webpay.png)
+<img class="td_img-night" src="/images/flujo-paginas-webpay.png" alt="Flujo de páginas Webpay Plus Normal">
 
 Desde el punto de vista técnico, la secuencia es la siguiente:
 
-![Diagrama de secuencia Webpay Plus
-Normal](/images/diagrama-secuencia-webpay.png)
+<img class="td_img-night" src="/images/diagrama-secuencia-webpay.png" alt="Diagrama de secuencia Webpay Plus Normal">
 
 1. Una vez seleccionado los bienes o servicios, tarjetahabiente decide pagar a
    través de Webpay.
@@ -290,8 +289,7 @@ entregar el producto o servicio en caso que ocurra.
 
 #### Flujo si usuario aborta el pago
 
-![Diagrama de secuencia si usuario aborta el
-pago](/images/diagrama-secuencia-webpay-abortar.png)
+<img class="td_img-night" src="/images/diagrama-secuencia-webpay-abortar.png" alt="Diagrama de secuencia si usuario aborta el pago">
 
 Si el tarjetahabiente anula la transacción en el formulario de pago de Webpay,
 el flujo cambia y los pasos son los siguientes:
@@ -1188,8 +1186,7 @@ inscripción.
 
 Proceso:
 
-![Diagrama de secuencia inscripción
-Oneclick](/images/diagrama-secuencia-oneclick-inscripcion.png)
+<img class="td_img-night" src="/images/diagrama-secuencia-oneclick-inscripcion.png" alt="Diagrama de secuencia inscripción Oneclick">
 
 - El cliente se conecta y autentica en la página del comercio, mediante su
   nombre de usuario y clave.
@@ -1225,8 +1222,7 @@ El monto del pago debe estar dentro de los límites establecidos para este tipo
 de transacciones, el proceso interno es similar a un cargo normal de Webpay.
 Proceso:
 
-![Diagrama de secuencia inscripción
-Oneclick](/images/diagrama-secuencia-oneclick-pago.png)
+<img class="td_img-night" src="/images/diagrama-secuencia-oneclick-pago.png" alt="Diagrama de secuencia inscripción Oneclick">
 
 - El cliente se conecta y autentica en la página o aplicación del comercio
   mediante su nombre de usuario y clave.
