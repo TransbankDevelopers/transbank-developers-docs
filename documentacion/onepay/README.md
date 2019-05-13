@@ -1113,7 +1113,8 @@ Para realizar la conciliación debes seguir los siguientes pasos:
 
 1. Iniciar sesión con tu usuario y contraseña en [www.transbank.cl](https://www.transbank.cl/)
 
-2. Luego, en el menú principal presionar "Webpay" y luego "Reporte transaccional". ![Paso 2](/images/documentacion/conciliacion1.png)
+2. Una vez entras al portal, en el menú principal presiona "Webpay", y luego "Reporte Transaccional"
+![Paso 2](/images/documentacion/conciliacion1.png)
 
 3. En la parte superior de la ventana puedes encontrar un buscador que te ayudará a filtrar, según los parámetros que gustes, las transacciones que quieras cuadrar. Para encontrar las transacciones de Onepay, en producto, debes seleccionar Webpay3G. Debes tener en cuenta que lamentablemente **el reporte no distingue entre Webpay y Onepay**. Bajo el producto Webpay3G encontraras transacciones de ambos productos. ![Paso 3](/images/documentacion/conciliacion2.png)
 
