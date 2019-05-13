@@ -87,7 +87,7 @@ El nuevo método de administración de llaves para PIN que usará Transbank es e
 
 Bajo este método los PED son inicializados en un ambiente seguro, con datos de identificación propios de cada PED (Identificador de la llave de derivación, Identificador de PED único y un contador de transacciones iniciado en cero), más una llave inicial que se calcula usando los datos propios de cada PED y la llave de derivación base. Con esta llave inicial se genera la próxima llave de cifrado para PIN. Este proceso se realiza con una función asimétrica (DUKPT del PinPad), es decir, una función de un solo sentido, de forma que el PED no sea capaz de generar ninguna llave anterior a la actual.
 
-### Calculo de MAC
+### Cálculo de MAC
 
 Para asegurar la integridad de la información que viaja desde y hacia el Autorizador de comercio, se introduce un código de autenticación de mensajes (MAC) el cual es enviado en el mensaje de requerimiento y validado por el Autorizador de Transbank al recibirlo. A su vez, el Autorizador de Transbank envía un código de MAC para el mensaje de respuesta, el cual debe ser validado por la caja. Si la validación que hace la caja del código de MAC es negativa debe generar una reversa. La transacción de reversa debe ser igual a la respuesta recibida pero con el campo RESPONSE CODE con el valor 989 y el campo MESSAGE SUBTYPE en R. Cuando el Autorizador de Transbank detecta un MAC inválido en el mensaje de requerimiento, envía un mensaje de respuesta con código de rechazo 898 (MAC inválido).
 

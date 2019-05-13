@@ -157,5 +157,5 @@ El comercio tiene un plazo de 90 días desde la fecha de venta para anular tran
         </a>
       </div>
     </div>
-  </div>s
+  </div>
 </div>
