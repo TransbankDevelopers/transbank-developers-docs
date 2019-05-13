@@ -183,7 +183,7 @@ Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la
 
 <aside class="success">
 Esta transacción también realiza el cambió de llaves.
-<aside>
+</aside>
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -222,7 +222,7 @@ Esta transacción permite al POS Integrado del comercio requerir cargar nuevas _
 
 <aside class="success">
 Las llaves se deben cambiar automáticamente todos los días. Puedes usar este método como parte de un procedimiento de inicialización que se ejecute en forma automática todos los días. Ten presente que la transacción de Cierre también realiza el cambió de llaves.
-<aside>
+</aside>
 
 <div class="language-simple" data-multiple-language></div>
 
