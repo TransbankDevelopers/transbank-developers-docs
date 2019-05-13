@@ -300,10 +300,10 @@ signature <br> <i>  String  </i> | Firma creada a partir de los parámetros `ex
 externalUniqueNumber <br> <i>  String  </i> | Identificador de la transacción en el sistema del comercio. Debe ser único para el comercio. Si la transacción falla, no se puede reutilizar en una nueva transacción (aunque sea un reintento). Los SDKs generan un identificador único automáticamente, a menos que se provea explícitamente un tercer parámetro con el external unique number.
 total <br> <i>  Number  </i> | Monto total de la compra. Los SDKs lo calculan automáticamente a partir del `cart` pasado como primer parámetro.
 itemsQuantity <br> <i>  Integer  </i> | Cantidad de objetos comprados. Debe ser igual al largo del array `items`. Los SDKs lo calculan automáticamente a partir del `cart` pasado como primer parámetro.
-issuedAt <br> <i>  Number  </i> | Fecha de creación de la transacción expresado en unix timestamp. Los SDKs lo calculan automáticamente.
+issuedAt <br> <i>  Number  </i> | Fecha de creación de la transacción expresado en Unix timestamp. Los SDKs lo calculan automáticamente.
 channel <br> <i>  String  </i> | Canal por el que se está interactuando con el usuario final. Puede tomar el valor `"WEB"` (cuando la transacción se está realizando a través de un navegador en un PC de escritorio), `"MOBILE"` (para transacciones realizadas a través de por un navegador web móvil) o `"APP"` (cuando la transacción se lleva a cabo en una aplicación móvil). Los SDKs reciben el canal como un segundo parámetro, separado del carro de compra.
 generateOttQrCode <br> <i>  Boolean  </i> | Indica si es necesario crear el código QR para la transacción actual. Su valor por defecto es `false`. Valor fijado siempre como `true` en los SDKs.
-widthHeight <br> <i>  Number  </i> | Valor en pixeles para el tamaño que tendrá la imagen del código QR como ancho y alto. 
+widthHeight <br> <i>  Number  </i> | Valor en pixeles para el tamaño que tendrá la imagen del código QR como ancho y alto.
 commerceLogoUrl <br> <i>  String  </i> | Indica la dirección al logo del comercio. Se utiliza en la aplicación OnePay para descargar y mostrar dicha imagen durante el proceso de compra.
 callbackUrl <br> <i>  String  </i> | Url de retorno al comercio. Se utiliza para devolverle el control al comercio cuando la transacción es de tipo `WEB` (modalidad checkout) o `MOBILE`. Los SDKs obtienen este valor desde la configuración global de Onepay.
 appScheme <br> <i>  String  </i> | Esquema de retorno a la aplicación del comercio. Es obligatorio sólo cuando el channel es `APP`, en caso contrario puede ser `null`. Los SDKs obtienen este valor desde la configuración global de Onepay.
@@ -387,7 +387,7 @@ result.occ <br> <i>  String  </i> | Identificador único de la transacción en O
 result.ott <br> <i>  String  </i> | Identificador temporal de la transacción (8 dígitos)
 result.signature <br> <i>  String  </i> | Firma creada a partir de los campos `response.occ`, `response.externalUniqueNumber` y `response.issuedAt` (en ese orden). Para validar la firma los parámetros deben ser convertidos a string y concatenados, prefijando cada parámetro con el número de caracteres que le corresponde. Luego se debe aplicar HMAC-SHA256 sobre ese string, usado el _shared secret_ entregado por Transbank como llave. Los SDKs validan este parámetro automáticamente en función del _shared secret_ provisto en la configuración global o desde el parámetro `options` y lanzan una excepción en caso que la firma no sea correcta.
 result.externalUniqueNumber <br> <i>  String  </i> | Identificador de la transacción en el sistema del comercio.
-result.issuedAt <br> <i>  Number  </i> | Fecha de creación de la transacción en unix timestamp.
+result.issuedAt <br> <i>  Number  </i> | Fecha de creación de la transacción en Unix timestamp.
 result.qrCodeAsBase64 <br> <i>  String  </i> | Base64 que contiene el QR con la ott de la transacción.
 
 **Callbacks**
@@ -407,7 +407,6 @@ Los parámetros son todos String (pues son parte de una URL), excepto en Android
 ##### Especificar tus propios external unique numbers
 
 ```java
-
 TransactionCreateResponse response = Transaction.create(
   cart, Onepay.Channel.WEB, myOwnExternalUniqueNumber);
 ```
@@ -488,7 +487,7 @@ apiKey <br> <i>  String  </i> | Identificador del comercio. Los SDK lo toman des
 signature <br> <i>  String  </i> | Firma creada a partir de los parámetros `occ`, `externalUniqueNumber` e `issuedAt` (en ese orden). Los parámetros deben ser convertidos a string y concatenados, prefijando cada parámetro con el número de caracteres que le corresponde. Luego se debe aplicar HMAC-SHA256 sobre ese string, usado el _shared secret_ entregado por Transbank como llave. Los SDKs manejan este parámetro automáticamente en función del _shared secret_ provisto en la configuración global o desde el parámetro `options`.
 occ <br> <i>  String  </i> | Identificador único de la transacción Onepay. Es el primer parámetro para esta funcionalidad en los SDK.
 externalUniqueNumber <br> <i>  String  </i> | Identificador de la transacción en el sistema del comercio. Es el segundo parámetro para esta funcionalidad en los SDK.
-issuedAt <br> <i>  Number  </i> | Fecha de creación de la petición en unix timestamp. Los SDKs lo manejan automáticamente.
+issuedAt <br> <i>  Number  </i> | Fecha de creación de la petición en Unix timestamp. Los SDKs lo manejan automáticamente.
 
 **Respuesta**
 
@@ -579,7 +578,7 @@ description <br> <i>  String  </i> | Contiene una descripción del resultado. Se
 result <br> <i>  Object  </i> | Tiene todos los datos de la transacción recién creada. Es `null` si el `responseCode` es diferente a `"OK"`.
 result.occ <br> <i>  String  </i> | Identificador único de la transacción Onepay.
 result.authorizationCode <br> <i>  String  </i> | Código de autorización del pago.
-result.issuedAt <br> <i>  Number  </i> | Fecha de creación de la transacción como unix timestamp.
+result.issuedAt <br> <i>  Number  </i> | Fecha de creación de la transacción como Unix timestamp.
 result.signature <br> <i>  String  </i> | Firma creada a partir de los campos `response.occ`, `response.authorizationCode`, `response.issuedAt`, `response.amount`, `response.installmentsAmount`, `response.installmentsNumber` y `buyOrder.issuedAt` (en ese orden). Para validar la firma los parámetros deben ser convertidos a string y concatenados, prefijando cada parámetro con el número de caracteres que le corresponde. Luego se debe aplicar HMAC-SHA256 sobre ese string, usado el _shared secret_ entregado por Transbank como llave. Los SDKs validan este parámetro automáticamente en función del _shared secret_ provisto en la configuración global o desde el parámetro `options` y lanzan una excepción en caso que la firma no sea correcta.
 result.amount <br> <i>  Number  </i> | Monto de la transacción.
 result.transactionDesc <br> <i>  String  </i> | Descripción del tipo de venta.
@@ -647,7 +646,7 @@ occ <br> <i>  String  </i> | Identificador único de la transacción Onepay. Es 
 externalUniqueNumber <br> <i>  String  </i> | Identificador de la transacción en el sistema del comercio. Es el segundo parámetro para esta funcionalidad en los SDK.
 authorizationCode <br> <i>  String  </i> | Código de autorización recibido al confirmar la transacción.
 nullifyAmount <br> <i>  Number  </i> | Monto de la transacción a anular.
-issuedAt <br> <i>  Number  </i> | Fecha de creación de la petición en unix timestamp. Los SDKs lo manejan automáticamente.
+issuedAt <br> <i>  Number  </i> | Fecha de creación de la petición en Unix timestamp. Los SDKs lo manejan automáticamente.
 
 **Respuesta**
 
@@ -714,15 +713,15 @@ description <br> <i>  String  </i> | Contiene una descripción del resultado. Se
 result <br> <i>  Object  </i> | Tiene todos los datos de la transacción recién creada. Es `null` si el `responseCode` es diferente a `"OK"`.
 result.occ <br> <i>  String  </i> | Identificador único de la transacción Onepay.
 result.reverseCode <br> <i>  String  </i> | Código de autorización de la anulación.
-result.issuedAt <br> <i>  Number  </i> | Fecha de creación de la transacción como unix timestamp.
+result.issuedAt <br> <i>  Number  </i> | Fecha de creación de la transacción como Unix timestamp.
 result.signature <br> <i>  String  </i> | Firma creada a partir de los campos `response.occ`, `response.externalUniqueNumber`, `response.reverseCode`, `response.issuedAt` (en ese orden). Para validar la firma los parámetros deben ser convertidos a string y concatenados, prefijando cada parámetro con el número de caracteres que le corresponde. Luego se debe aplicar HMAC-SHA256 sobre ese string, usado el _shared secret_ entregado por Transbank como llave. Los SDKs validan este parámetro automáticamente en función del _shared secret_ provisto en la configuración global o desde el parámetro `options` y lanzan una excepción en caso que la firma no sea correcta.
 result.externalUniqueNumber <br> <i>  String  </i> | Identificador de la transacción en el sistema del comercio.
 
-## SDK Frontend Javascript
+## SDK Frontend JavaScript
 
 ### Modalidad Checkout
 
-La modalidad checkout del SDK Javascript permite integrar fácilmente Onepay, simplemente invocando a una función javascript e implementando dos _endpoints_
+La modalidad checkout del SDK JavaScript permite integrar fácilmente Onepay, simplemente invocando a una función JavaScript e implementando dos _endpoints_
 en tu backend. Onepay checkout se encarga de levantar un "modal" que toma el control de toda la experiencia del usuario y la sincronización con la app Onepay.
 
 #### `Onepay.checkout(options)`
@@ -966,7 +965,6 @@ Todas las funciones de los SDK Móviles son métodos de una instancia `onepay`.
 > let onepay = OnePay()
 > ```
 
-
 > En Android:
 > ```
 > OnePay onepay = new OnePay(this);
@@ -1108,7 +1106,7 @@ description <br> <i>  String  </i> | Información adicional sobre el error.
 
 En iOS la URL que hayas indicado en `appSchema` (al crear la transacción con el
 API i en la configuración de tu SDK backend) será invocada por Onepay para
-retomar el control. Debes manejar esta url en tu AppDelegate. Los parámetros que
+retomar el control. Debes manejar esta URL en tu AppDelegate. Los parámetros que
 te permitirán saber el resultado de la transacción los recibirás en la _query
 string_ de esta URL:
 
@@ -1117,7 +1115,7 @@ Parámetro de callback | Descripción |
 occ | Identificador de la transacción Onepay.
 externalUniqueNumber | Identificador de la transacción en el sistema del comercio.
 status | Estado resultante de la transacción. Puede ser `"PRE_AUTHORIZED"` (transacción autorizada por el usuario), `"CANCELLED_BY_USER"`(el usuario abortó el pago) o `"REJECTED"` (transacción rechazada por el autorizador). También puede tomar el valor `"REVERSED"` (la transacción se reversó internamente después de no poder confirmar el pago) o `"REVERSE_NOT_COMPLETE"` (se intentó reversar, pero falló por alguna razón), pero estos casos deben ser manejados de igual forma que `"REJECTED"`.
-issuedAt | Fecha de creación de la transacción como timestamp unix.
+issuedAt | Fecha de creación de la transacción como timestamp Unix.
 Los parámetros son todos String (pues son parte de una URL),
 
 Si quieres saber más sobre cómo manejar la invocación a tu  `appScheme`, [consulta la guía de Onepay en la sección de integración para app móvil](/documentacion/onepay#integracion-en-app-movil-comercio).
@@ -1140,7 +1138,7 @@ Parámetro de callback <br> <i>tipo</i>| Descripción<br>&nbsp;
 occ <br> <i>  String  </i> | Identificador de la transacción Onepay.
 externalUniqueNumber <br> <i>  String  </i> | Identificador de la transacción en el sistema del comercio.
 status <br> <i>  String  </i> | Estado resultante de la transacción. Puede ser `"PRE_AUTHORIZED"` (transacción autorizada por el usuario), `"CANCELLED_BY_USER"`(el usuario abortó el pago) o `"REJECTED"` (transacción rechazada por el autorizador). También puede tomar el valor `"REVERSED"` (la transacción se reversó internamente después de no poder confirmar el pago) o `"REVERSE_NOT_COMPLETE"` (se intentó reversar, pero falló por alguna razón), pero estos casos deben ser manejados de igual forma que `"REJECTED"`.
-issuedAt <br> <i>  Long  </i> | Fecha de creación de la transacción como timestamp unix.
+issuedAt <br> <i>  Long  </i> | Fecha de creación de la transacción como timestamp Unix.
 
 Si quieres saber más sobre cómo configurar tu `Activity` para que reciba la invocación de Onepay, [consulta la guía de Onepay en la sección de integración para app móvil](/documentacion/onepay#integracion-en-app-movil-comercio).
 

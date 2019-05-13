@@ -45,7 +45,7 @@ PENDIENTE
 configuration.WebpayCertPath = @"C:\Certs\certificado-publico-transbank.crt"
 ```
 
-Para validar las respuestas generadas por Transbank debes usar un certificado público de webpay. En [el repositorio Github
+Para validar las respuestas generadas por Transbank debes usar un certificado público de Webpay. En [el repositorio GitHub
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
 podrás encontrar [el certificado
 actualizado](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/tree/master/produccion).
@@ -115,7 +115,7 @@ Puedes mirar el siguiente enlace para obtener una guía rápida de como generar 
 Consulta [la documentación para generar una llave privada y un certificado
 usando openssl](/documentacion/como_empezar#credenciales-en-webpay si no sabes aún como realizarlo.
 
-En [el repositorio Github
+En [el repositorio GitHub
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
 podrás encontrar [códigos de comercios y certificados actualizados para probar
 en integración aunque aún no tengas tu propio código de

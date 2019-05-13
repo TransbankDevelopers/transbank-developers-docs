@@ -62,7 +62,7 @@ gem install transbank-sdk
 
 Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Ruby](https://github.com/TransbankDevelopers/transbank-sdk-ruby#instalaci%C3%B3n) para mas opciones de instalación.
 
-(Para webpay en Ruby puedes seguir usando [libwebpay](https://github.com/TransbankDevelopers/libwebpay-ruby) u otra alternativa)
+(Para Webpay en Ruby puedes seguir usando [libwebpay](https://github.com/TransbankDevelopers/libwebpay-ruby) u otra alternativa)
 
 [En
 **Python**](https://github.com/TransbankDevelopers/transbank-sdk-python#instalaci%C3%B3n) puedes instalar el SDK desde PyPI:
@@ -73,7 +73,7 @@ pip install transbank-sdk
 
 Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Python](https://github.com/TransbankDevelopers/transbank-sdk-python#instalaci%C3%B3n) para mas opciones de instalación.
 
-(Para webpay en Python puedes seguir usando [libwebpay](https://github.com/TransbankDevelopers/libwebpay-python), pero te recomendamos usar [python-tbk, creada por Cornershop](https://github.com/cornershop/python-tbk) que será la base de lo que integremos finalmente en transbank-sdk)
+(Para Webpay en Python puedes seguir usando [libwebpay](https://github.com/TransbankDevelopers/libwebpay-python), pero te recomendamos usar [python-tbk, creada por Cornershop](https://github.com/cornershop/python-tbk) que será la base de lo que integremos finalmente en transbank-sdk)
 
 ## Ambientes
 
@@ -146,7 +146,7 @@ estar atento a las actualizaciones que periódicamente Transbank realizará.
 Estas actualizaciones pueden responder a mantener compatibilidad con los CMS o
 Shopping Cart, modificaciones por seguridad, adición de propiedades o
 funciones, o correcciones a las comunicaciones. La comunicación oficial siempre
-se realizará a través del sitio http://www.transbankdevelopers.cl.
+se realizará a través del sitio <http://www.transbankdevelopers.cl>.
 
 ### Uso de HTTPS
 
@@ -174,7 +174,7 @@ de la parte receptora validar dicha firma.
 ### Validación de montos y órdenes de compra
 
 El comercio debe verificar al completar cualquier transacción que los valores
-informados por Transbank (monto de la compra, _buyOrder_, etc) coinciden con los
+informados por Transbank (monto de la compra, _buyOrder_, etc.) coinciden con los
 valores entregados por el comercio al principio del flujo transaccional.
 
 ## Puesta en Producción

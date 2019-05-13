@@ -54,7 +54,7 @@ configuration.WebpayCertPath = @"C:\Certs\certificado-publico-transbank.crt"
 ```
 
 Para validar las respuestas generadas por Transbank debes usar un certificado
-público de webpay. En [el repositorio GitHub
+público de Webpay. En [el repositorio GitHub
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
 podrás encontrar [el certificado
 actualizado](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/tree/master/produccion).
@@ -136,7 +136,7 @@ Consulta [la documentación para generar una llave privada y un certificado
 usando openssl](/documentacion/como_empezar#credenciales-en-webpay) si
 no sabes aún como realizarlo.
 
-En [el repositorio Github
+En [el repositorio GitHub
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
 podrás encontrar [códigos de comercios y certificados actualizados para probar
 en integración aunque aún no tengas tu propio código de
@@ -205,7 +205,7 @@ débito, en donde quién realiza el pago ingresa al sitio del comercio,
 selecciona productos o servicio, y el ingreso asociado a los datos de la tarjeta
 de crédito o débito lo realiza en forma segura en Webpay.
 
-#### Flujo en caso de éxito
+### Flujo en caso de éxito
 
 De cara al tarjetahabiente, el flujo de páginas para la transacción es el
 siguiente:
@@ -275,7 +275,7 @@ entregar el producto o servicio en caso que ocurra.
     nuevamente a Webpay, con la finalidad de desplegar el comprobante de pago.
     Es importante realizar este punto para que el tarjetahabiente entienda que
     el proceso de pago fue exitoso, y que involucrará un cargo a su tarjeta
-    bancaria. El redirecionamiento a Webpay se hace utilizando como destino la
+    bancaria. El redireccionamiento a Webpay se hace utilizando como destino la
     URL informada por el método `getTransactionResult()`enviando por método
     POST el token de la transacción en la variable `token_ws`.
 15. Webpay recibe un requerimiento con la variable `token_ws`
@@ -673,7 +673,7 @@ buyOrder  <br> <i> xs:string </i> | Es el código único de la orden de compra
 transactionDetails  <br> <i>wsTransactionDetail </i> | Lista de objetos del tipo wsTransactionDetail, uno por cada tienda diferente del mall que participa en la transacción.
 transactionDetails[].amount  <br> <i> xs:decimal </i> | Monto de la transacción de una tienda del mall. Máximo 2 decimales para USD. Largo máximo: 10.
 transactionDetails[].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda del mall. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>.
-transactionDetails[].commerceCode  <br> <i>xs:string </i> | Código comercio asignado por transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
+transactionDetails[].commerceCode  <br> <i>xs:string </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
 
 **Respuesta**
 
@@ -1468,7 +1468,7 @@ var result = transaction.reverseTransaction(buyOrderLong);
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-buyorder  <br> <i> xs:long </i> | Orden de compra de la transacción a reversar.
+buyOrder  <br> <i> xs:long </i> | Orden de compra de la transacción a reversar.
 
 **Respuesta**
 
@@ -1592,7 +1592,7 @@ instante el comercio debe llamar a `finishInscription()`.
 
 <aside class="warning">
 El comercio tendrá un máximo de 60 segundos para llamar a este método luego
-de recibir el token en la url de fin de inscripción (`returnUrl`). Pasados los
+de recibir el token en la URL de fin de inscripción (`returnUrl`). Pasados los
 60 segundos sin llamada a finishInscription, la inscripción en curso junto con
 el usuario serán eliminados.
 </aside>

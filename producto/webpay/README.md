@@ -1,7 +1,7 @@
 # Webpay
 
 <div class="pos-title-nav">
-  <div class="video" data-toggle="modal" data-src="/public/resourse/mooc/webpay/menu/index.html" data-target="#ModalCenterData">Introducción Elearning <i class="op-link"></i></div>
+  <div class="video" data-toggle="modal" data-src="/public/resourse/mooc/webpay/menu/index.html" data-target="#ModalCenterData">Introducción E-learning <i class="op-link"></i></div>
 </div>
 
 Webpay es la pasarela de pago de Transbank para realizar transacciones desde Internet con tarjetas bancarias de crédito y débito Redcompra de manera eficaz y segura.
