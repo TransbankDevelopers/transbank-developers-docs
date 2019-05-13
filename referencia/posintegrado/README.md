@@ -262,13 +262,13 @@ DATO        | LARGO     | Comentario
 ------      | ------    | ------
 `<STX>`     | 1         | Indica el inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
 `Comando`   | 4         | <i>valor ASCII</i>: `0200` <br><i>valor hexadecimal</i>: `0x30 0x32 0x30 0x30`
-`Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Monto`     | 9         | Valor Numérico que debe ser convertido a hexadecimal.
-`Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Ticket`    | 6         | Valor ASCII, Número de boleta o ticket, que debe ser convertido a hexadecimal
-`Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
-`Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
-`Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Status`    | 1         | Indica al POS si debe enviar mensajes intermedios o de estado de la transacción <br><i>1</i>: Envía Mensajes<br><i>0</i>: No envía mensajes
 `<ETX>`     | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
 `LRC`       | 1         | Resultado del calculo del `LRC` del mensaje
@@ -279,43 +279,43 @@ DATO                    | LARGO     | COMENTARIO
 ------                  | ------    | ------
 `<STX>`                 |  1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
 `Comando`               |  4        | <i>Valor ASCII</i>:  `0510` <br><i>valor hexadecimal</i>: `0x30 0x35 0x31 0x30`
-`Separador`             |  1        | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Código Respuesta`      |  2        | Valor Numérico
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Código de comercio`    | 12        | Valor Numérico
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Terminal ID`           |  8        | Valor Alfanumérico
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Ticket`                |  6        | Valor ASCII, Número de boleta o ticket
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Codigo de Autorizacion`|  6        | Valor ASCII
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Monto`                 |  9        | Valor Numérico <br><i>Largo máximo</i>: 9 <br><i>Largo mínimo</i>: 1
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Número Cuotas`         |  2        | Valor Numérico <br><i>Largo máximo</i>: 2 <br><i>Largo mínimo</i>: 1
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Monto Cuota`           |  9        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 9 <br><i>Largo mínimo</i>: 0
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Últimos 4 Digitos`     |  4        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 4 <br><i>Largo mínimo</i>: 0
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Número Operación`      |  6        | Valor Numérico, Correlativo de Transacción del POS **(Opcional)** <br><i>Largo máximo</i>: 6 <br><i>Largo mínimo</i>: 0
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Tipo de Tarjeta`       |  2        | Valor ASCII <br><i>CR</i>: Crédito <br><i>DB</i>: Debito
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Fecha Contable`        |  6        | Valor ASCII. Se utiliza solo con ventas Debito **(Opcional)**
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Número de Cuenta`      | 19        | Valor ASCII. Se utiliza solo con ventas Debito **(Opcional)** <br><i>Largo máximo</i>: 19 <br><i>Largo mínimo</i>: 0
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Abreviación Tarjeta`   |  2        | Valor ASCII **(Opcional)** <br>[Ver Tabla de abreviación de Tarjetas](/referencia/posintegrado#tabla-de-abreviacion-de-tarjetas)
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Fecha de Transacción`  |  2        | Valor ASCII **(Opcional)** <br><i>Formato</i>: `DDMMAAAA`
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Hora de Transacción`   |  6        | Valor ASCII **(Opcional)** <br><i> Formato</i>: `HHMMSS`
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Empleado`              |  4        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 4</i> <br><i>Largo mínimo</i>: 0
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Propina`               |  9        | Valor Numérico <br><i>Largo máximo</i>: 9 </i> <br><i>Largo mínimo</i>: 0
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
 `LRC`                   |  1        | Resultado del calculo del `LRC` del mensaje
 
@@ -383,8 +383,8 @@ DATO        | LARGO     | Comentario
 ------      | ------    | ------
 `<STX>`     | 1         | Indica el inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
 `Comando`   | 4         | <i>valor ASCII</i>: `0500` <br><i>valor hexadecimal</i>: `0x30 0x35 0x30 0x30`
-`Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
-`Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `<ETX>`     | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
 `LRC`       | 1         | Resultado del calculo del `LRC` del mensaje
 
@@ -398,13 +398,13 @@ DATO                    | LARGO     | COMENTARIO
 ------                  | ------    | ------
 `<STX>`                 |  1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
 `Comando`               |  4        | <i>Valor ASCII</i>:  `0510` <br><i>valor hexadecimal</i>: `0x30 0x35 0x31 0x30`
-`Separador`             |  1        | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Código Respuesta`      |  2        | Valor Numérico
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Código de comercio`    | 12        | Valor Numérico
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Terminal ID`           |  8        | Valor Alfanumérico
-`Separador`             |  1        |  <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
 `LRC`                 |  1        | Resultado del calculo del `LRC` del mensaje
 
@@ -485,13 +485,13 @@ DATO                    | LARGO     | COMENTARIO
 ------                  | ------    | ------
 `<STX>`                 |  1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
 `Comando`               |  4        | <i>Valor Alfanumérico</i>:  `0810` <br><i>valor hexadecimal</i>: `0x30 0x38 0x31 0x30`
-`Separador`             |  1        | <i>valor Alfanumérico</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        | <i>valor Alfanumérico</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Código Respuesta`      |  2        | Valor Numérico
-`Separador`             |  1        |  <i>valor Alfanumérico</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor Alfanumérico</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Código de comercio`    | 12        | Valor Numérico
-`Separador`             |  1        |  <i>valor Alfanumérico</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor Alfanumérico</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Terminal ID`           |  8        | Valor Alfanumérico
-`Separador`             |  1        |  <i>valor Alfanumérico **(Opcional)**</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador`             |  1        |  <i>valor Alfanumérico **(Opcional)**</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
 `LRC`                   |  1        | Resultado del calculo del `LRC` del mensaje
 
@@ -604,7 +604,7 @@ DATO        | LARGO     | Comentario
 ------      | ------    | ------
 `<STX>`     | 1         | Indica el inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
 `Comando`   | 4         | <i>valor ASCII</i>: `0300` <br><i>valor hexadecimal</i>: `0x30 0x33 0x30 0x30`
-`Separador` | 1         | <i>valor ASCII</i>: `|` <br><i>valor hexadecimal</i>: `0x07`
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `<ETX>`     | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
 `LRC`       | 1         | Resultado del calculo del LRC del mensaje
 
