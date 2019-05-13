@@ -716,6 +716,7 @@ Toda transacción cuyo código de respuesta en el POS Integrado sea distinto de 
 ## Tabla de Abreviación de Tarjetas
 
 Tarjeta         | Abreviación
+------          | -----------
 VISA            | VI
 MASTERCARD      | MC
 CABAL           | CA
