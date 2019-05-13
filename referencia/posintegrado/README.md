@@ -97,7 +97,7 @@ List<string> ports = Serial.ListPorts();
 ```c
 #include "transbank_serial_utils.h"
 //...
-char * ports = list_ports();
+char *ports = list_ports();
 ```
 
 ### Abrir un puerto Serial
@@ -120,7 +120,7 @@ POS.Instance.OpenPort(portName, TbkBaudrate.TBK_115200);
 #include "transbank.h"
 #include "transbank_serial_utils.h"
 //...
-char* portName = "COM4";
+char *portName = "COM4";
 int retval = open_port(portName, 115200);
 if ( retval == TBK_OK ){
     //...
