@@ -37,24 +37,16 @@ Todos los mensajes intercambiados entre la caja y el POS Integrado cumplen con e
 ### Ejemplo de calculo LRC
 
 Dado el siguiente comando:
-
-```html
-<STX>0200|123|<ETX>
-```
+`<STX>0200|123|<ETX>`
 
 Que en notación hexadecimal seria:
-
-```bash
-0x02 0x30 0x32 0x30 0x30 0x7C 0x31 0x32 0x33 0x7C 0x03
-```
+`0x02 0x30 0x32 0x30 0x30 0x7C 0x31 0x32 0x33 0x7C 0x03`
 
 Para calcular el `LRC` debemos omitir el inicio de texto `<STX>` o `0x02`.
 
 La operación entonces seria:
 
-```c
-(((((((((0x30 XOR 0x32) XOR 0x30) XOR 0x30) XOR 0x7C) XOR 0x31) XOR 0x32) XOR 0x33) XOR 0x7C) XOR 0x03)
-```
+`(((((((((0x30 XOR 0x32) XOR 0x30) XOR 0x30) XOR 0x7C) XOR 0x31) XOR 0x32) XOR 0x33) XOR 0x7C) XOR 0x03)`
 
 El resultado entonces seria `0x31` en hexadecimal o `1` en ASCII, por lo tanto, el mensaje completo para enviar al POS Integrado es:
 
@@ -535,7 +527,7 @@ if (retval == TBK_OK){
 
 ![Diagrama de Secuencia Poll](/images/referencia/posintegrado/diagrama-poll.png)
 
-1. La caja envía el requerimiento y espera como respuesta `<ACK>`, en caso de recibir `<ACK>`, esto indica que el POS se encuentra operativo y listo para recibir comandos. si no se recibe respuesta o no es `<ACK>` se debe reintentar el envío del comando 2 veces.
+1. La caja envía el requerimiento y espera como respuesta `<ACK>`, en caso de recibir `<ACK>`, esto indica que el POS se encuentra operativo y listo para recibir comandos. si no se recibe respuesta o es `<NAK>` se debe reintentar el envío del comando 2 veces.
 
 #### Solicitud Poll
 
@@ -596,7 +588,7 @@ if (retval == TBK_OK){
 
 ![Diagrama de Secuencia Cambio a POS Normal](/images/referencia/posintegrado/diagrama-cambio-pos-normal.png)
 
-1. La caja envía el requerimiento y espera como respuesta `<ACK>`, en caso de recibir `<ACK>`, esto indica que el POS cambio se realizó correctamente, si no se recibe respuesta o no es `<ACK>` se debe reintentar el envío del comando 2 veces.
+1. La caja envía el requerimiento y espera como respuesta `<ACK>`, en caso de recibir `<ACK>`, esto indica que el POS cambio se realizó correctamente, si no se recibe respuesta o es `<NAK>` se debe reintentar el envío del comando 2 veces.
 
 #### Solicitud Cambio a POS Normal
 
