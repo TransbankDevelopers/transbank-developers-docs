@@ -1,5 +1,10 @@
 # POS Integrado
 
+<div class="pos-title-nav">
+  <div tbk-link='/documentacion/posintegrado?csharp#' tbk-link-name='Documentación'></div>
+  <div tbk-link='/referencia/posintegrado?csharp#' tbk-link-name='Referencia Api'></div>
+</div>
+
 El POS integrado permite realizar transacciones con tarjeta de Crédito/Debito con Transbank utilizando el un puerto serial de un PC o Caja. La comunicación con Transbank y la lógica del procesamiento de una transacción financiera es realizada por el equipo POS, facilitando así la integración con un sistema de caja.
 
 ## Transacciones Soportadas

@@ -1,5 +1,9 @@
 # POS Integrado
 
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/posintegrado?csharp#' tbk-link-name='Referencia Api'></div>
+</div>
+
 ## Cómo empezar
 
 El SDK para POS Integrado cuenta de 2 partes, una librería/SDK en C, que debe ser instalado en tu máquina para poder ser utilizado por la segunda pieza. Esta pieza es un Wrapper para accede a las funciones disponibles en la librería C.
@@ -42,6 +46,10 @@ Procura seguir todos los pasos descritos en el sitio de msys2
 </aside>
 
 ### Primeros pasos
+
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/posintegrado?csharp##primeros-pasos' tbk-link-name='Referencia Api'></div>
+</div>
 
 Para usar el SDK es necesario incluir las siguientes referencias.
 
