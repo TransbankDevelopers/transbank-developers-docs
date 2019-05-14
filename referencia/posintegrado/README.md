@@ -527,7 +527,7 @@ if (retval == TBK_OK){
 
 ![Diagrama de Secuencia Poll](/images/referencia/posintegrado/diagrama-poll.png)
 
-1. La caja envía el requerimiento y espera como respuesta `<ACK>`, en caso de recibir `<ACK>`, esto indica que el POS se encuentra operativo y listo para recibir comandos. si no se recibe respuesta o no es `<ACK>` se debe reintentar el envío del comando 2 veces.
+1. La caja envía el requerimiento y espera como respuesta `<ACK>`, en caso de recibir `<ACK>`, esto indica que el POS se encuentra operativo y listo para recibir comandos. si no se recibe respuesta o es `<NAK>` se debe reintentar el envío del comando 2 veces.
 
 #### Solicitud Poll
 
@@ -588,7 +588,7 @@ if (retval == TBK_OK){
 
 ![Diagrama de Secuencia Cambio a POS Normal](/images/referencia/posintegrado/diagrama-cambio-pos-normal.png)
 
-1. La caja envía el requerimiento y espera como respuesta `<ACK>`, en caso de recibir `<ACK>`, esto indica que el POS cambio se realizó correctamente, si no se recibe respuesta o no es `<ACK>` se debe reintentar el envío del comando 2 veces.
+1. La caja envía el requerimiento y espera como respuesta `<ACK>`, en caso de recibir `<ACK>`, esto indica que el POS cambio se realizó correctamente, si no se recibe respuesta o es `<NAK>` se debe reintentar el envío del comando 2 veces.
 
 #### Solicitud Cambio a POS Normal
 
