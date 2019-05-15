@@ -6,7 +6,7 @@
 
 ## Cómo empezar
 
-Primero, debes instalar en tu maquina la librería/SDK en C, puedes encontrar el código fuente en [GitHub](https://github.com/TransbankDevelopers/transbank-pos-sdk-c) y seguir las instrucciones.
+Primero, debes instalar en tu máquina la librería/SDK en C, puedes encontrar el código fuente en [GitHub](https://github.com/TransbankDevelopers/transbank-pos-sdk-c) y seguir las instrucciones.
 
 También puede probar las dlls que se adjuntan en el [ultimo release](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest)
 

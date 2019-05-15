@@ -292,11 +292,11 @@ DATO                    | LARGO     | COMENTARIO
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Número Operación`      |  6        | Valor Numérico, Correlativo de Transacción del POS **(Opcional)** <br><i>Largo máximo</i>: 6 <br><i>Largo mínimo</i>: 0
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
-`Tipo de Tarjeta`       |  2        | Valor ASCII <br><i>CR</i>: Crédito <br><i>DB</i>: Debito
+`Tipo de Tarjeta`       |  2        | Valor ASCII <br><i>CR</i>: Crédito <br><i>DB</i>: Débito
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
-`Fecha Contable`        |  6        | Valor ASCII. Se utiliza solo con ventas Debito **(Opcional)**
+`Fecha Contable`        |  6        | Valor ASCII. Se utiliza solo con ventas Débito **(Opcional)**
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
-`Número de Cuenta`      | 19        | Valor ASCII. Se utiliza solo con ventas Debito **(Opcional)** <br><i>Largo máximo</i>: 19 <br><i>Largo mínimo</i>: 0
+`Número de Cuenta`      | 19        | Valor ASCII. Se utiliza solo con ventas Débito **(Opcional)** <br><i>Largo máximo</i>: 19 <br><i>Largo mínimo</i>: 0
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Abreviación Tarjeta`   |  2        | Valor ASCII **(Opcional)** <br>[Ver Tabla de abreviación de Tarjetas](/referencia/posintegrado#tabla-de-abreviacion-de-tarjetas)
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
@@ -659,7 +659,7 @@ Transacción ya Fue Anulada                              | 04
 No existe Transacción para Anular                       | 05
 Tarjeta no Soportada                                    | 06
 Transacción Cancelada desde el POS                      | 07
-No puede Anular Transacción Debito                      | 08
+No puede Anular Transacción Débito                      | 08
 Error Lectura Tarjeta                                   | 09
 Monto menor al mínimo permitido                         | 10
 No existe venta                                         | 11
