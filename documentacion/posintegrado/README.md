@@ -1,30 +1,40 @@
 # POS Integrado
 
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/posintegrado?csharp#' tbk-link-name='Referencia'></div>
+</div>
+
 ## Cómo empezar
 
-El SDK para POS Integrado cuenta de 2 partes, una librería/SDK en C, que debe ser instalado en tu máquina para poder ser utilizado por la segunda pieza. Esta pieza es un Wrapper para accede a las funciones disponibles en la librería C.
+Primero, debes instalar en tu máquina la librería/SDK en C, puedes encontrar el código fuente en [GitHub](https://github.com/TransbankDevelopers/transbank-pos-sdk-c) y seguir las instrucciones.
 
-Adicionalmente, necesitarás tener instalados los drivers correspondientes a tu tarjeta de
+También puede probar las DLLs que se adjuntan en el [último release](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest)
+
+Esta librería y sus dependencias son requisitos para utilizar el SDK.
+
+Por el momento, el SDK está disponible para [.Net](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet) y lo puedes encontrar en [NuGet.org](https://www.nuget.org/packages/TransbankPosSDK/) para instalarlo puedes utilizar por ejemplo el package manager de VisualStudio.
+
+```bash
+PM> Install-Package TransbankPosSDK
+```
+
+Recuerda que necesitas tener instalados los drivers correspondientes a tu tarjeta de
 puerto serial o adaptador USB Serial.
 
 <aside class="notice">
-La comunicación con el POS Integrado se realiza mediante puerto serial RS232.
-</aside>
-
-<aside class="notice">
-Tú eres el responsable de instalar el driver correcto para tu tarjeta o adaptador serial.
+La comunicación con el POS Integrado se realiza mediante puerto serial RS232 y
+que tú eres el responsable de instalar el driver correcto para tu tarjeta o adaptador serial.
 </aside>
 
 <aside class="success">
-Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilicen el [chip CH340](http://www.wch.cn/download/CH341SER_EXE.html)<br>
-También puedes encontrar drivers para adaptadores con [chip Prolific](http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041)
+Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilicen el [chip CH340](http://www.wch.cn/download/CH341SER_EXE.html). También puedes encontrar drivers para adaptadores con [chip Prolific](http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041)
 </aside>
 
 ### LibSerialPort
 
 El SDK depende de [libSerialPort](https://sigrok.org/wiki/Libserialport) para la comunicación serial.
 
-Puedes obtener el código desde el repositorio usando git:
+Incluimos una DLL compilada en el [release de la librería en C](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest), pero puedes obtener el código desde el repositorio oficial usando git:
 
 ```bash
 git clone git://sigrok.org/libserialport
@@ -43,25 +53,13 @@ Procura seguir todos los pasos descritos en el sitio de msys2
 
 ### Primeros pasos
 
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/posintegrado?csharp#primeros-pasos' tbk-link-name='Referencia'></div>
+</div>
+
 Para usar el SDK es necesario incluir las siguientes referencias.
 
 <div class="language-simple" data-multiple-language></div>
-
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
 
 ```csharp
 using Transbank.POS;
@@ -82,22 +80,6 @@ corresponda con el puerto donde conectaste el POS Integrado.
 
 <div class="language-simple" data-multiple-language></div>
 
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
-
 ```csharp
 using Transbank.POS.Utils;
 //...
@@ -117,22 +99,6 @@ Para abrir un puerto serial y comunicarte con el POS Integrado, necesitarás el 
 Si el puerto no puede ser abierto, se lanzará una exception `TransbankException`.
 
 <div class="language-simple" data-multiple-language></div>
-
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
 
 ```csharp
 using Transbank.POS;
@@ -159,22 +125,6 @@ Al finalizar el uso del POS, o si se desea desconectar de la Caja se debe libera
 
 <div class="language-simple" data-multiple-language></div>
 
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
-
 ```csharp
 using Transbank.POS;
 //...
@@ -199,22 +149,6 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta. L
 - `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
 
 <div class="language-simple" data-multiple-language></div>
-
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
 
 ```csharp
 using Transbank.POS;
@@ -267,22 +201,6 @@ Esta transacción también realiza el cambió de llaves.
 
 <div class="language-simple" data-multiple-language></div>
 
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
-
 ```csharp
 using Transbank.POS;
 using Transbank.POS.Responses;
@@ -322,22 +240,6 @@ Las llaves se deben cambiar automáticamente todos los días. Puedes usar este m
 
 <div class="language-simple" data-multiple-language></div>
 
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
-
 ```csharp
 using Transbank.POS;
 using Transbank.POS.Responses;
@@ -373,22 +275,6 @@ Esta mensaje es enviado por la caja para saber si el POS está conectado. En el 
 
 <div class="language-simple" data-multiple-language></div>
 
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
-
 ```csharp
 using Transbank.POS;
 //...
@@ -411,22 +297,6 @@ Este comando le permitirá a la caja realizar el cambio de modalidad a través d
 
 <div class="language-simple" data-multiple-language></div>
 
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
-
 ```csharp
 using Transbank.POS;
 //...
@@ -446,3 +316,38 @@ if (retval == TBK_OK){
 <aside class="notice">
 Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en modo Integrado siguiendo las instrucciones disponibles descritas en []()
 </aside>
+
+## Ejemplos de integración
+
+Ponemos a tu disposición un ejemplo en nuestro Github para ayudarte a entender mejor la integración.
+
+- [Ejemplo Windows Forms](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet-example)
+
+<div class="container slate">
+  <div class='slate-after-footer'>
+    <div class='row d-flex align-items-stretch'>
+      <div class='col-12 col-lg-6'>
+        <h3 class='toc-ignore fo-size-22'>¿Tienes alguna duda de integración?</h3>
+        <a href='https://join-transbankdevelopers-slack.herokuapp.com/' target='_blank'>
+          <div class='td_block_gray'>
+            <img src="https://p9.zdassets.com/hc/theme_assets/138842/200037786/logo.png" alt="" style="width: 90px; min-width: 100px;">
+            <div class='td_pa-txt'>
+              Únete a la comunidad de integradores en Slack y comparte buenos tips ayudando a los nuevos o buscando soluciones alternativas. Nuestro equipo está ahí para ayudarte.
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class='col-12 col-lg-6'>
+        <h3 class='toc-ignore fo-size-22'>Si aún tienes dudas envíanos un mensaje</h3>
+        <a class="pointer magenta" data-toggle='modal' data-target='#modalContactForm'>
+          <div class='td_block_gray'>
+            <div class="fo-size-20"><i class="fas fa-envelope"></i> Envíanos un mensaje.</div>
+            <div class='td_pa-txt'>
+              Si necesitas resolver algún tipo de incidencia en el portal o si existe algún problema con tu integración y  que no has podido resolver, contáctanos a través de nuestro formulario.
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

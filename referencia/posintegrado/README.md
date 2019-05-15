@@ -61,22 +61,6 @@ Para usar el SDK es necesario incluir las siguientes referencias.
 
 <div class="language-simple" data-multiple-language></div>
 
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
-
 ```csharp
 using Transbank.POS;
 using Transbank.POS.Utils;
@@ -95,22 +79,6 @@ Si los respectivos drivers están instalados, entonces puedes usar la función `
 corresponda con el puerto donde conectaste el POS Integrado.
 
 <div class="language-simple" data-multiple-language></div>
-
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
 
 ```csharp
 using Transbank.POS.Utils;
@@ -131,22 +99,6 @@ Para abrir un puerto serial y comunicarte con el POS Integrado, necesitarás el 
 Si el puerto no puede ser abierto, se lanzará una exception `TransbankException`.
 
 <div class="language-simple" data-multiple-language></div>
-
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
 
 ```csharp
 using Transbank.POS;
@@ -183,22 +135,6 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta. L
   - `82`: Envío de transacción a Transbank.
 
 <div class="language-simple" data-multiple-language></div>
-
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
 
 ```csharp
 using Transbank.POS;
@@ -292,11 +228,11 @@ DATO                    | LARGO     | COMENTARIO
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Número Operación`      |  6        | Valor Numérico, Correlativo de Transacción del POS **(Opcional)** <br><i>Largo máximo</i>: 6 <br><i>Largo mínimo</i>: 0
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
-`Tipo de Tarjeta`       |  2        | Valor ASCII <br><i>CR</i>: Crédito <br><i>DB</i>: Debito
+`Tipo de Tarjeta`       |  2        | Valor ASCII <br><i>CR</i>: Crédito <br><i>DB</i>: Débito
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
-`Fecha Contable`        |  6        | Valor ASCII. Se utiliza solo con ventas Debito **(Opcional)**
+`Fecha Contable`        |  6        | Valor ASCII. Se utiliza solo con ventas Débito **(Opcional)**
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
-`Número de Cuenta`      | 19        | Valor ASCII. Se utiliza solo con ventas Debito **(Opcional)** <br><i>Largo máximo</i>: 19 <br><i>Largo mínimo</i>: 0
+`Número de Cuenta`      | 19        | Valor ASCII. Se utiliza solo con ventas Débito **(Opcional)** <br><i>Largo máximo</i>: 19 <br><i>Largo mínimo</i>: 0
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
 `Abreviación Tarjeta`   |  2        | Valor ASCII **(Opcional)** <br>[Ver Tabla de abreviación de Tarjetas](/referencia/posintegrado#tabla-de-abreviacion-de-tarjetas)
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
@@ -316,22 +252,6 @@ DATO                    | LARGO     | COMENTARIO
 Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencia/posintegrado#tabla-de-respuestas))
 
 <div class="language-simple" data-multiple-language></div>
-
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
 
 ```csharp
 using Transbank.POS;
@@ -406,22 +326,6 @@ Esta transacción permite al POS Integrado del comercio requerir cargar nuevas _
 
 <div class="language-simple" data-multiple-language></div>
 
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
-
 ```csharp
 using Transbank.POS;
 using Transbank.POS.Responses;
@@ -493,22 +397,6 @@ Esta mensaje es enviado por la caja para saber si el POS está conectado. En el 
 
 <div class="language-simple" data-multiple-language></div>
 
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
-
 ```csharp
 using Transbank.POS;
 //...
@@ -553,22 +441,6 @@ DATO                    | LARGO         | COMENTARIO
 Este comando le permitirá a la caja realizar el cambio de modalidad a través de un comando. El POS debe estar en modo integrado y al recibir el comando quedara en modo normal.  El resultado de esta operación es un `Booleano` en el caso del SDK o un `0` representado en la constante `TBK_OK` en el caso de la librería en C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankException`.
 
 <div class="language-simple" data-multiple-language></div>
-
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
 
 ```csharp
 using Transbank.POS;
@@ -659,7 +531,7 @@ Transacción ya Fue Anulada                              | 04
 No existe Transacción para Anular                       | 05
 Tarjeta no Soportada                                    | 06
 Transacción Cancelada desde el POS                      | 07
-No puede Anular Transacción Debito                      | 08
+No puede Anular Transacción Débito                      | 08
 Error Lectura Tarjeta                                   | 09
 Monto menor al mínimo permitido                         | 10
 No existe venta                                         | 11
