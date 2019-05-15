@@ -6,29 +6,35 @@
 
 ## Cómo empezar
 
-El SDK para POS Integrado cuenta de 2 partes, una librería/SDK en C, que debe ser instalado en tu máquina para poder ser utilizado por la segunda pieza. Esta pieza es un Wrapper para accede a las funciones disponibles en la librería C.
+Primero, debes instalar en tu maquina la librería/SDK en C, puedes encontrar el código fuente en [GitHub](https://github.com/TransbankDevelopers/transbank-pos-sdk-c) y seguir las instrucciones.
 
-Adicionalmente, necesitarás tener instalados los drivers correspondientes a tu tarjeta de
+También puede probar las dlls que se adjuntan en el [ultimo release](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest)
+
+Esta librería y sus dependencias son requisitos para utilizar el SDK.
+
+Por el momento, el SDK esta disponible para [.Net](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet) y lo puedes encontrar en [NuGet.org](https://www.nuget.org/packages/TransbankPosSDK/) para instalarlo puedes utilizar por ejemplo el package manager de VisualStudio.
+
+```bash
+PM> Install-Package TransbankPosSDK
+```
+
+Recuerda que necesitas tener instalados los drivers correspondientes a tu tarjeta de
 puerto serial o adaptador USB Serial.
 
 <aside class="notice">
-La comunicación con el POS Integrado se realiza mediante puerto serial RS232.
-</aside>
-
-<aside class="notice">
-Tú eres el responsable de instalar el driver correcto para tu tarjeta o adaptador serial.
+La comunicación con el POS Integrado se realiza mediante puerto serial RS232 y
+que tú eres el responsable de instalar el driver correcto para tu tarjeta o adaptador serial.
 </aside>
 
 <aside class="success">
-Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilicen el [chip CH340](http://www.wch.cn/download/CH341SER_EXE.html)<br>
-También puedes encontrar drivers para adaptadores con [chip Prolific](http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041)
+Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilicen el [chip CH340](http://www.wch.cn/download/CH341SER_EXE.html). También puedes encontrar drivers para adaptadores con [chip Prolific](http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041)
 </aside>
 
 ### LibSerialPort
 
 El SDK depende de [libSerialPort](https://sigrok.org/wiki/Libserialport) para la comunicación serial.
 
-Puedes obtener el código desde el repositorio usando git:
+Incluimos una dll compilada en el [release de la librería en C](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest), pero puedes obtener el código desde el repositorio oficial usando git:
 
 ```bash
 git clone git://sigrok.org/libserialport
