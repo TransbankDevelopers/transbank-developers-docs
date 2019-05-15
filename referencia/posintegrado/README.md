@@ -61,22 +61,6 @@ Para usar el SDK es necesario incluir las siguientes referencias.
 
 <div class="language-simple" data-multiple-language></div>
 
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
-
 ```csharp
 using Transbank.POS;
 using Transbank.POS.Utils;
@@ -95,22 +79,6 @@ Si los respectivos drivers están instalados, entonces puedes usar la función `
 corresponda con el puerto donde conectaste el POS Integrado.
 
 <div class="language-simple" data-multiple-language></div>
-
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
 
 ```csharp
 using Transbank.POS.Utils;
@@ -131,22 +99,6 @@ Para abrir un puerto serial y comunicarte con el POS Integrado, necesitarás el 
 Si el puerto no puede ser abierto, se lanzará una exception `TransbankException`.
 
 <div class="language-simple" data-multiple-language></div>
-
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
 
 ```csharp
 using Transbank.POS;
@@ -183,22 +135,6 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta. L
   - `82`: Envío de transacción a Transbank.
 
 <div class="language-simple" data-multiple-language></div>
-
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
 
 ```csharp
 using Transbank.POS;
@@ -317,22 +253,6 @@ Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la
 
 <div class="language-simple" data-multiple-language></div>
 
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
-
 ```csharp
 using Transbank.POS;
 using Transbank.POS.Responses;
@@ -406,22 +326,6 @@ Esta transacción permite al POS Integrado del comercio requerir cargar nuevas _
 
 <div class="language-simple" data-multiple-language></div>
 
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
-
 ```csharp
 using Transbank.POS;
 using Transbank.POS.Responses;
@@ -493,22 +397,6 @@ Esta mensaje es enviado por la caja para saber si el POS está conectado. En el 
 
 <div class="language-simple" data-multiple-language></div>
 
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
-
 ```csharp
 using Transbank.POS;
 //...
@@ -553,22 +441,6 @@ DATO                    | LARGO         | COMENTARIO
 Este comando le permitirá a la caja realizar el cambio de modalidad a través de un comando. El POS debe estar en modo integrado y al recibir el comando quedara en modo normal.  El resultado de esta operación es un `Booleano` en el caso del SDK o un `0` representado en la constante `TBK_OK` en el caso de la librería en C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankException`.
 
 <div class="language-simple" data-multiple-language></div>
-
-```java
-próximamente
-```
-
-```php
-próximamente
-```
-
-```ruby
-próximamente
-```
-
-```python
-próximamente
-```
 
 ```csharp
 using Transbank.POS;
