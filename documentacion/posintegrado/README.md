@@ -463,7 +463,7 @@ Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en 
 
 ## Ejemplos de integración
 
-Ponemos a tu disposición un ejemplo en nuestro Github para ayudarte a entender la integración mejor.
+Ponemos a tu disposición un ejemplo en nuestro Github para ayudarte a entender mejor la integración.
 
 - [Ejemplo Windows Forms](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet-example)
 
