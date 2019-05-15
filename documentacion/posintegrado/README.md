@@ -8,11 +8,11 @@
 
 Primero, debes instalar en tu máquina la librería/SDK en C, puedes encontrar el código fuente en [GitHub](https://github.com/TransbankDevelopers/transbank-pos-sdk-c) y seguir las instrucciones.
 
-También puede probar las DLLs que se adjuntan en el [ultimo release](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest)
+También puede probar las DLLs que se adjuntan en el [último release](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest)
 
 Esta librería y sus dependencias son requisitos para utilizar el SDK.
 
-Por el momento, el SDK esta disponible para [.Net](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet) y lo puedes encontrar en [NuGet.org](https://www.nuget.org/packages/TransbankPosSDK/) para instalarlo puedes utilizar por ejemplo el package manager de VisualStudio.
+Por el momento, el SDK está disponible para [.Net](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet) y lo puedes encontrar en [NuGet.org](https://www.nuget.org/packages/TransbankPosSDK/) para instalarlo puedes utilizar por ejemplo el package manager de VisualStudio.
 
 ```bash
 PM> Install-Package TransbankPosSDK
