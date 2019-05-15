@@ -125,3 +125,32 @@ En las versiones más antiguas cada comercio tenía una tarjeta supervisora que 
 ### Manejo de Clave Maestra de Comercio Activación
 
 La solicitud de esta clave se realiza a Servicio al Cliente, desde celulares 600 638 6380 y desde teléfonos fijos +56 2 2661 2700.
+
+<div class="container slate">
+  <div class='slate-after-footer'>
+    <div class='row d-flex align-items-stretch'>
+      <div class='col-12 col-lg-6'>
+        <h3 class='toc-ignore fo-size-22'>¿Tienes alguna duda de integración?</h3>
+        <a href='https://join-transbankdevelopers-slack.herokuapp.com/' target='_blank'>
+          <div class='td_block_gray'>
+            <img src="https://p9.zdassets.com/hc/theme_assets/138842/200037786/logo.png" alt="" style="width: 90px; min-width: 100px;">
+            <div class='td_pa-txt'>
+              Únete a la comunidad de integradores en Slack y comparte buenos tips ayudando a los nuevos o buscando soluciones alternativas. Nuestro equipo está ahí para ayudarte.
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class='col-12 col-lg-6'>
+        <h3 class='toc-ignore fo-size-22'>Si aún tienes dudas envíanos un mensaje</h3>
+        <a class="pointer magenta" data-toggle='modal' data-target='#modalContactForm'>
+          <div class='td_block_gray'>
+            <div class="fo-size-20"><i class="fas fa-envelope"></i> Envíanos un mensaje..</div>
+            <div class='td_pa-txt'>
+              Si necesitas resolver algún tipo de incidencia en el portal o si existe algún problema con tu integración y  que no has podido resolver, contáctanos a través de nuestro formulario.
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
