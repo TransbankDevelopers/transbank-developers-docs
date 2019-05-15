@@ -8,7 +8,7 @@
 
 Primero, debes instalar en tu máquina la librería/SDK en C, puedes encontrar el código fuente en [GitHub](https://github.com/TransbankDevelopers/transbank-pos-sdk-c) y seguir las instrucciones.
 
-También puede probar las dlls que se adjuntan en el [ultimo release](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest)
+También puede probar las DLLs que se adjuntan en el [ultimo release](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest)
 
 Esta librería y sus dependencias son requisitos para utilizar el SDK.
 
@@ -34,7 +34,7 @@ Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilice
 
 El SDK depende de [libSerialPort](https://sigrok.org/wiki/Libserialport) para la comunicación serial.
 
-Incluimos una dll compilada en el [release de la librería en C](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest), pero puedes obtener el código desde el repositorio oficial usando git:
+Incluimos una DLL compilada en el [release de la librería en C](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest), pero puedes obtener el código desde el repositorio oficial usando git:
 
 ```bash
 git clone git://sigrok.org/libserialport
