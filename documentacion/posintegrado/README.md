@@ -54,7 +54,7 @@ Procura seguir todos los pasos descritos en el sitio de msys2
 ### Primeros pasos
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/posintegrado?csharp##primeros-pasos' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/posintegrado?csharp#primeros-pasos' tbk-link-name='Referencia'></div>
 </div>
 
 Para usar el SDK es necesario incluir las siguientes referencias.
