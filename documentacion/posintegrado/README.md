@@ -1,7 +1,7 @@
 # POS Integrado
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/posintegrado?csharp#' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/posintegrado?csharp#' tbk-link-name='Referencia'></div>
 </div>
 
 ## Cómo empezar
