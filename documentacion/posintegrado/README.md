@@ -230,6 +230,40 @@ El resultado del cierre de caja se entrega en la forma de un objeto `CloseRespon
 Para el cierre no se solicitará tarjeta supervisora.
 </aside>
 
+### Transacción de Totales
+
+Esta transacción es gatillada por la caja para solicitar al POS el Total de las transacciones que se han realizado y permanecen aún en memoria.
+
+<aside class="warning">
+Un cierre de terminal, vacía la memoria del POS
+</aside>
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Responses;
+//...
+GetTotalsResponse response = POS.Instance.GetTotals();
+```
+
+```c
+#include "transbank.h"
+#include "transbank_serial_utils.h"
+//...
+TotalsResponse response = get_totals();
+}
+```
+
+El resultado de la transacción entrega en la forma de un objeto `GetTotalsResponse` o una estructura `TotalsResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankGetTotalsException`.
+
+```json
+"Function": 710
+"Response": "Aprobado"
+"TX Count": 3     // Cantidad de transacciones
+"TX Total": 15000 // Suma total de los montos de cada transaccion
+```
+
 ### Transacción de Carga de Llaves
 
 Esta transacción permite al POS Integrado del comercio requerir cargar nuevas _Working Keys_ desde Transbank. Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencia/posintegrado#tabla-de-respuestas))
@@ -293,7 +327,7 @@ if (retval == TBK_OK){
 
 ### Transacción de Cambio a POS Normal
 
-Este comando le permitirá a la caja realizar el cambio de modalidad a través de un comando. El POS debe estar en modo integrado y al recibir el comando quedara en modo normal.  El resultado de esta operación es un `Booleano` en el caso del SDK o un `0` representado en la constante `TBK_OK` en el caso de la librería en C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankException`.
+Este comando le permitirá a la caja realizar el cambio de modalidad a través de un comando. El POS debe estar en modo integrado y al recibir el comando quedara en modo normal. El resultado de esta operación es un `Booleano` en el caso del SDK o un `0` representado en la constante `TBK_OK` en el caso de la librería en C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankException`.
 
 <div class="language-simple" data-multiple-language></div>
 
