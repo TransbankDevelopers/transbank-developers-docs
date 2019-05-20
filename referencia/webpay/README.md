@@ -40,7 +40,7 @@ configuration.setWebpayCert(
 ```
 
 ```php
-$configuration->setWebpayCert(Webpay::defaultCert());
+$configuration->setWebpayCert(Webpay::defaultCert("PRODUCCION"));
 ```
 
 ```csharp
