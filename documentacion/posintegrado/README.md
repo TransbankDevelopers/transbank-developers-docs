@@ -230,7 +230,7 @@ El resultado del cierre de caja se entrega en la forma de un objeto `CloseRespon
 Para el cierre no se solicitará tarjeta supervisora.
 </aside>
 
-### Transacción de Totales
+### Transacción Totales
 
 Esta transacción es gatillada por la caja para solicitar al POS el Total de las transacciones que se han realizado y permanecen aún en memoria.
 
