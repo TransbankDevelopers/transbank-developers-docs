@@ -1788,3 +1788,100 @@ username  <br> <i> xs:string </i> | Nombre de usuario, del cliente, en el sistem
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 result  <br> <i> xs:boolean </i> | Indica si la eliminación se realizó correctamente o no.
+
+## Otros Servicios Webpay OneClick Mall
+
+### Captura Diferida Webpay OneClick Mall
+> Los SDKs no soportan aún los servicios Webpay OneClick Mall.
+
+Una transacción OneClick Mall permite que el tarjetahabiente registre su
+tarjeta de la misma forma en que ocurre con una transacción OneClick, asociando
+dicha inscripción a un comercio padre. Ahora, una vez realizada la inscripción, 
+el comercio padre tiene permitido autorizar transacciones sin captura para
+los comercios “hijo” registrados que tengan habilitado captura diferida.
+Además posterior a la autorización tiene permitido capturar dicho monto reservado.
+La autorización se encarga de validar si es posible realizar el cargo a la
+cuenta asociada a la tarjeta de crédito realizando en el mismo acto la reserva
+de monto de la transacción.
+La captura hace efectiva la reserva hecha previamente o cargo en la cuenta de
+crédito asociada a la tarjeta del titular.
+Estas modalidades, por separado, solo son válidas para tarjetas de crédito.
+
+Para realizar esa captura explícita debe usarse el método `capture()`
+
+#### `capture()`
+
+Este método permite a los comercios OneClick Mall habilitados, poder
+realizar capturas diferidas de una transacción previamente autorizada. El método
+contempla una única captura por cada autorización. Para ello se deberá indicar los
+datos asociados a la transacción de venta y el monto requerido para capturar, el cual
+debe ser menor o igual al monto originalmente autorizado.
+Para capturar una transacción, ésta debe haber sido creada por un código de
+comercio configurado para captura diferida. De esta forma la transacción estará
+autorizada pero requerirá una captura explícita posterior para confirmar la
+transacción.
+
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción que se requiere capturar. Largo máximo: 6.
+buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
+commerceId  <br> <i> xs:long </i> | Código de tienda mall que realizó la transacción. Largo: 12.
+capturedAmount  <br> <i> xs:decimal </i> | Monto que se desea capturar. Largo máximo: 10.
+
+**Respuesta**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> xs:string </i> | Token de la transacción.
+authorizationCode  <br> <i> xs:string </i> | Código de autorización de la captura diferida.
+authorizationDate  <br> <i> xs:string </i> | Fecha y hora de la autorización.
+capturedAmount  <br> <i> xs:decimal </i> | Monto capturado.
+
+<aside class="notice">
+En caso de error apareceran los mismos códigos exclusivos del método `capture()`
+para captura simpultanea.
+</aside>
+
+### Anulación Monto Capturado Webpay OneClick Mall
+> Los SDKs no soportan aún los servicios Webpay OneClick Mall.
+
+Para anular una transacción se debe invocar al método `nullify()`.
+
+#### `nullify()`
+
+Este método permite a todo comercio Webpay OneClick Mall habilitado, anular
+una transacción que fue generada y capturada. El método contempla anular total o
+parcialmente una transacción capturada. Para ello se deberá indicar los datos
+asociados a la transacción de venta en línea que se desea anular, los montos
+requeridos para anular y el codigo de autorizacion de una captura.
+Se considera totalmente anulada una transacción cuando el monto anulado o el
+monto total de anulaciones cursadas alcancen el monto autorizado en la venta en
+línea.
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+authorizationCode  <br> <i> xs:string </i> | Código de autorización obtenido al llamar a `capture()`. Largo máximo: 6.
+authorizedAmount  <br> <i> xs:decimal </i> | Monto autorizado y capturado luego de invocar el método capture(). Largo máximo: 10.
+buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se requiere anular. Largo máximo: 26.
+nullifyAmount  <br> <i> xs:decimal </i> | Monto que se desea anular de la transacción. Largo máximo: 10.
+commerceId  <br> <i> xs:long </i> | Código de comercio o tienda mall que realizó la transacción. Largo: 12.
+
+**Respuesta**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> xs:string </i> | Token de la transacción.
+authorizationCode  <br> <i> xs:string </i> | Código de autorización de la anulación.
+authorizationDate  <br> <i> xs:string </i> | Fecha y hora de la autorización.
+balance  <br> <i> xs:decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado).
+nullifiedAmount  <br>  <i> xs:decimal </i> | Monto anulado.
+
+<aside class="notice">
+En caso de error aparecerán los mismos códigos de error que entrega el método
+`nullify()` en captura simultánea.
+</aside>
