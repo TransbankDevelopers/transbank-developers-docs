@@ -232,7 +232,8 @@ Para el cierre no se solicitará tarjeta supervisora.
 
 ### Transacción Totales
 
-Esta transacción es gatillada por la caja para solicitar al POS el Total de las transacciones que se han realizado y permanecen aún en memoria.
+Esta operación le permitirá a la caja obtener desde el _POS_ un resumen con el monto total y la cantidad de transacciones
+que se han realizado hasta el minuto y que aún permanecen en la memoria del _POS_.
 
 <aside class="warning">
 Un cierre de terminal, vacía la memoria del POS
