@@ -40,13 +40,7 @@ configuration.setWebpayCert(
 ```
 
 ```php
-$configuration->setWebpayCert(
-    "-----BEGIN CERTIFICATE-----\n" +
-    "MIIEDzCCAvegAwIBAgIJAMaH4DFTKdnJMA0GCSqGSIb3DQEBCwUAMIGdMQswCQYD\n" +
-    "VQQGEwJDTDERMA8GA1UECAwIU2FudGlhZ28xETAPBgNVBAcMCFNhbnRpYWdvMRcw\n" +
-    ...
-    "MX5lzVXafBH/sPd545fBH2J3xAY3jtP764G4M8JayOFzGB0=\n" +
-    "-----END CERTIFICATE-----\n");
+$configuration->setWebpayCert(Webpay::defaultCert());
 ```
 
 ```csharp
@@ -98,13 +92,13 @@ configuration.setPublicCert(
 ```php
 $configuration->setCommerceCode("597020000540");
 $configuration->setPrivateKey(
-    "-----BEGIN RSA PRIVATE KEY-----\n" +
-    ... +
+    "-----BEGIN RSA PRIVATE KEY-----\n" .
+    ... .
     "-----END RSA PRIVATE KEY-----\n"
 );
 $configuration->setPublicCert(
-    "-----BEGIN CERTIFICATE-----\n" +
-    ... +
+    "-----BEGIN CERTIFICATE-----\n" .
+    ... .
     "-----END CERTIFICATE-----\n"
 );
 ```
