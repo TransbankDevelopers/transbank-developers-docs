@@ -239,6 +239,9 @@ que se han realizado hasta el minuto y que aún permanecen en la memoria del _PO
 Un cierre de terminal, vacía la memoria del POS
 </aside>
 
+Además la caja podrá determinar si existen transacciones que no fueron informadas desde el _POS_,
+haciendo una comparación de los totales entre la caja y el _POS_. La impresión del _Voucher_ con el resumen será realizada por el _POS_.
+
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
