@@ -47,6 +47,24 @@ var transaction =
     new Webpay(Configuration.ForTestingWebpayPlusNormal()).NormalTransaction;
 ```
 
+```ruby
+# Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+```
+
+```python
+# Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+```
+
 <aside class="notice">
 Como necesitarás ese objeto `transaction` en múltiples ocasiones, es buena idea
 encapsular la lógica que lo genera en algún método que puedas reutilizar.
@@ -106,6 +124,44 @@ var formAction = initResult.url;
 var tokenWs = initResult.token;
 ```
 
+```ruby
+# Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
+```python
+# Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
 La URL y el token retornados te indican donde debes redirigir al usuario para
 que comience el flujo de pago. Esta redirección debe ser vía `POST` por lo que
 deberás crear un formulario web con un campo `token_ws` hidden y enviarlo
@@ -161,6 +217,30 @@ if (output.responseCode == 0) {
     // Transaccion exitosa, puedes procesar el resultado con el contenido de
     // las variables result y output.
 }
+```
+
+```ruby
+# Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
+```
+
+```python
+# Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
 ```
 
 > **Importante**: El SDK se encarga de que al mismo tiempo que se obtiene el
@@ -233,6 +313,26 @@ var transaction =
     .OneClickTransaction;
 ```
 
+```ruby
+# Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+```
+
+```python
+# Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+```
+
 <aside class="notice">
 Como necesitarás ese objeto `transaction` en múltiples ocasiones, es buena idea
 encapsular la lógica que lo genera en algún método que puedas reutilizar.
@@ -282,6 +382,36 @@ var formAction = initResult.urlWebpay;
 var tbkToken = initResult.token;
 ```
 
+```ruby
+# Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
+
+
+
+```
+
+```python
+# Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
+
+
+
+```
+
 Tal como en el caso de Webpay Plus, debes redireccionar vía `POST` el
 navegador del usuario a la url retornada en `initInscription`. **A diferencia
 de Webpay Plus, acá el nombre del parámetro que contiene el token se debe
@@ -328,6 +458,30 @@ if (result.responseCode == 0) {
     // Ahora puedes usar result.tbkUser para autorizar transacciones
     // oneclick sin nueva intervención del usuario.
 }
+```
+
+```ruby
+# Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
+```
+
+```python
+# Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
 ```
 
 Con eso habrás completado el flujo "feliz" en que todo funciona OK. En [la
@@ -380,6 +534,34 @@ var output = transaction.authorize(buyOrder, tbkUser, username, amount);
 if (output.responseCode == 0) {
     // Transacción exitosa, procesar output
 }
+```
+
+```ruby
+# Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
+
+
+```
+
+```python
+# Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
+
+
 ```
 
 ## Credenciales y Ambiente
@@ -479,6 +661,42 @@ var webpay = new Webpay(configuration);
 var oneClickTransaction = webpay.OneClickTransaction;
 ```
 
+```ruby
+# Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
+```python
+# Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
 <aside class="warning">
 A diferencia de otros SDK, en .NET debes especificar la ruta a un archivo pfx o p12
 el cual debes generar tu a partir de tu llave privada y certificado público.
@@ -519,6 +737,30 @@ Configuration configuration = new Configuration()
     Environment = "PRODUCCION";
     // agregar también configuración del código de comercio y certificados
 }
+```
+
+```ruby
+# Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
+```
+
+```python
+# Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
 ```
 
 <aside class="warning">
