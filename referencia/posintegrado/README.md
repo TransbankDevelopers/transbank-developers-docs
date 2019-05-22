@@ -320,6 +320,44 @@ DATO                    | LARGO     | COMENTARIO
 `<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
 `LRC`                 |  1        | Resultado del calculo del `LRC` del mensaje
 
+### Mensaje de Totales
+
+Esta operación le permitirá a la caja tener un resumen de totales con las transacciones que fueron procesadas.
+
+### Solicitud de Totales
+
+DATO                         | LARGO     | COMENTARIO
+------                       | ------    | ------
+`<STX>`                      |  1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
+`Comando`                    |  4        | <i>Valor ASCII</i>:  `0700` <br><i>valor hexadecimal</i>: `0x30 0x37 0x30 0x30`
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
+`<ETX>`                      |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
+`<LRC>`                      |  1        | Resultado del cálculo (byte) del `XOR` del mensaje
+
+*Mensaje* en <i>ASCII</i>: `<STX>0700||<ETX><EOT>`
+
+*Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x37, 0x30, 0x30, 0x07, 0x07, 0x03, 0x04}`
+
+#### Respuesta de Totales
+
+DATO                         | LARGO     | COMENTARIO
+------                       | ------    | ------
+`<STX>`                      |  1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
+`Comando`                    |  4        | <i>Valor ASCII</i>:  `0710` <br><i>valor hexadecimal</i>: `0x30 0x37 0x31 0x30`
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
+`Código Respuesta`           |  2        | Valor Numérico
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
+`Número de transacciones`    |  3        | Valor Numérico
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x07`
+`Totales`                    |  9        | Valor Numérico
+`<ETX>`                      |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
+`<LRC>`                      |  1        | Resultado del cálculo (byte) del `XOR` del mensaje
+
+*Mensaje* en <i>ASCII</i>: `<STX>0710|00|1|2000<ETX>J`
+
+*Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x37, 0x31, 0x30, 0x07, 0x30, 0x30, 0x07, 0x31, 0x07, 0x32, 0x30, 0x30, 0x30, 0x03, 0x04}`
+
 ### Mensaje de Carga de Llaves
 
 Esta transacción permite al POS Integrado del comercio requerir cargar nuevas _Working Keys_ desde Transbank. Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencia/posintegrado#tabla-de-respuestas))
