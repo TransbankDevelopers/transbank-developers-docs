@@ -2,7 +2,7 @@
 
 ## Ambientes y Credenciales
 
-La API REST de Webpay está protegida para garantizar que solamente comercios autorizados por Transbank hagan uso de las operaciones disponibles. La seguridad esta implementada mediante los siguientes mecanismos:
+La API REST de PatPass by Webpay está protegida para garantizar que solamente comercios autorizados por Transbank hagan uso de las operaciones disponibles. La seguridad esta implementada mediante los siguientes mecanismos:
 
 * Canal seguro a través de TLSv1.2 para la comunicación del cliente con Webpay.
 * Autenticación y autorización mediante el intercambio de headers Tbk-Api-Key-Id y Tbk-Api-Key-Secret.
