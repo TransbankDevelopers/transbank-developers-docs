@@ -633,7 +633,7 @@ token es caducado y no podrá ser utilizado en un pago.
 ```
 
 ```http
-POST https://webpay3gint.transbank.cl/rswebpaytransaction/api/webpay/v1.0/transactions
+POST /rswebpaytransaction/api/webpay/v1.0/transactions
 
 Tbk-Api-Key-Id: 597055555532
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -732,7 +732,7 @@ una vez que Webpay ha resueltosu autorización financiera.
 ```
 
 ```http
-PUT https://webpay3gint.transbank.cl/rswebpaytransaction/api/webpay/v1.0/transactions/{token}
+PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
 Tbk-Api-Key-Id: 597055555532
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -843,7 +843,7 @@ Obtiene resultado de transacción a partir de un token.
 ```
 
 ```http
-GET https://webpay3gint.transbank.cl/rswebpaytransaction/api/webpay/v1.0/transactions/{token}
+GET /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
 Tbk-Api-Key-Id: 597055555532
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -984,7 +984,7 @@ el código debe ser el código de la tienda virtual específica.
 ```
 
 ```http
-PUT https://webpay3gint.transbank.cl/rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
+PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
 Tbk-Api-Key-Id: 597055555532
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -1125,7 +1125,7 @@ El método `nullify()` debe ser invocado siempre indicando el código del come
 ```
 
 ```http
-PUT https://webpay3gint.transbank.cl/rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refund
+PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refund
 Tbk-Api-Key-Id: 597055555532
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -1320,7 +1320,7 @@ Webpay OneClick el parámetro se llama `TBK_TOKEN`.
 ```
 
 ```http
-POST http://servidorwebpay.cl/rswebpaytransaction/api/webpay/v1/init_transaction
+POST /rswebpaytransaction/api/oneclick/v1.0/inscriptions
 
 Tbk-Api-Key-Id: 597055555532
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -1511,7 +1511,7 @@ selecciona pagar con OneClick en el comercio.
 ```
 
 ```http
-POST http://servidorwebpay.cl/rswebpaytransaction/api/webpay/v1/init_transaction
+POST /rswebpaytransaction/api/oneclick/v1.0/transactions
 
 Tbk-Api-Key-Id: 597055555532
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -1839,7 +1839,7 @@ Permite gatillar el inicio del proceso de inscripción.
 ```
 
 ```http
-POST http://servidorwebpay.cl/rswebpaytransaction/api/webpay/v1/init_transaction
+POST /rswebpaytransaction/api/oneclick/v1.0/inscriptions
 
 Tbk-Api-Key-Id: 597055555532
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
