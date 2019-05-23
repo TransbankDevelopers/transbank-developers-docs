@@ -211,7 +211,7 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
 10. El navegador Web del tarjetahabiente realiza una petición HTTPS al
     sitio del comercio, en base a la redirección generada por Webpay en el
     punto 9.
-11. El sitio del comercio recibe la variable `token_ws` y invoca el segundo
+11. El sitio del comercio recibe la variable `token_ws` e invoca el segundo
     método Web para confirmar y obtener el resultado de la autorización.
     El resultado de la autorización podrá ser consultado posteriormente con la 
     variable anteriormente mencionada.
@@ -225,7 +225,7 @@ una vez que se confirma la transacción.  Además ya no se debe mostrar el vouch
 de Transbank, solo debe mostrarse desde el sitio del comercio.
 </aside>
 
-1.   Sitio del comercio despliega voucher con los datos de la transacción.
+13. Sitio del comercio despliega voucher con los datos de la transacción.
 
 #### Flujo si usuario aborta el pago
 
