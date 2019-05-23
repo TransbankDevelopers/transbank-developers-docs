@@ -1807,4 +1807,569 @@ balance  <br> <i> xs:long </i> | Monto restante.
 
 ## Webpay OneClick Mall
 
-# TODO
+#### Flujo de inscripción y pago
+
+El flujo de Webpay OneClick Mall es en general el mismo que el de [Webpay
+OneClick Normal](#webpay-oneclick-normal) tanto de cara al tarjeta habiente como
+de cara al integrador.
+
+Las diferencias son:
+
+- El usuario debe estar registrado en la página del comercio "mall" agrupador,
+  pero las transacciones son a nombre de loas "tiendas" del mall.
+- Se pueden indicar múltiples transacciones a autorizar en una misma operación.
+- Se debe verificar por separado el resultado de cada una de esas transacciones
+  individualmente, pues es posible que el emisor de la tarjeta autorice algunas
+  y otras no.
+
+### Crear una inscripción Webpay OneClick Mall
+
+Para iniciar la inscripción debe usarse el método `initInscription()`
+
+#### `initInscription()`
+
+Permite gatillar el inicio del proceso de inscripción.
+
+> Los SDKs no soportan aún los servicios Webpay OneClick Mall.
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+POST http://servidorwebpay.cl/rswebpaytransaction/api/webpay/v1/init_transaction
+
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+ "username": "juanperez",
+ "email": "juan.perez@gmail.com",
+ "response_url": "http://www.comercio.cl/return_inscription"
+}
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+username  <br> <i> xs:string </i> | Identificador del usuario registrado en el comercio. Largo máximo: 256.
+email  <br> <i> xs:string </i> | Email del usuario registrado en el comercio. Largo máximo: 256.
+responseURL  <br> <i> xs:string </i> | URL del comercio a la cual Webpay redireccionará posterior al proceso de inscripción. Largo máximo: 256.
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+
+{
+  "token": "e128a9c24c0a3cbc09223973327b97c8c474f6b74be509196cce4caf162a016a",
+  "url_webpay": "https://webpay3g.transbank.cl/webpayserver/bp_inscription.cgi"
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> xs:string </i> | Identificador, único, del proceso de inscripción. Debe ser enviado por parámetro (`TBK_TOKEN`) a la URL `urlWebpay`.
+urlWebpay  <br> <i> xs:string </i> | URL de Webpay para iniciar la inscripción.
+
+<aside class="notice">
+Una vez que se llama a este webservice el usuario debe ser redireccionado vía
+POST a `urlInscriptionForm` con parámetro `TBK_TOKEN` igual al token.
+</aside>
+
+### Confirmar una inscripción Webpay OneClick Mall
+
+Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a
+la URL de fin de inscripción que definió el comercio (`responseURL`). En ese
+instante el comercio debe llamar a `finishInscription()`.
+
+<aside class="warning">
+El comercio tendrá un máximo de 60 segundos para llamar a este método luego
+de recibir el token en la URL de fin de inscripción (`returnUrl`). Pasados los
+60 segundos sin llamada a finishInscription, la inscripción en curso junto con
+el usuario serán eliminados.
+</aside>
+
+#### `finishInscription()`
+
+Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
+
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+POST /rswebpaytransaction/api/oneclick/v1.0/inscriptions/{token}
+
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+ "username": "juanperez",
+ "email": "juan.perez@gmail.com",
+ "response_url": "http://www.comercio.cl/return_inscription"
+}
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> xs:string </i> | Identificador del proceso de inscripción. Es entregado por Webpay en la respuesta del método `initInscription()`.
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+
+{
+  "response_code": 0,
+  "tbk_user": "b6bd6ba3-e718-4107-9386-d2b099a8dd42",
+  "authorization_code": 123456,
+  "credit_card_type": "Visa",
+  "last_four_card_digits": "4092"
+}
+
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de inscripción, donde 0 (cero) es aprobado.
+tbkUser  <br> <i> xs:string </i> | Identificador único de la inscripción del cliente en Webpay OneClick, que debe ser usado para realizar pagos o borrar la inscripción.
+authorizationCode  <br> <i> xs:string </i> | Código que identifica la autorización de la inscripción.
+creditCardType  <br> <i> creditCardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna).
+lastFourCardDigits  <br> <i> xs:string </i> | Los últimos 4 dígitos de la tarjeta ingresada por el cliente en la inscripción.
+
+### Autorizar un pago con Webpay OneClick Mall
+
+Una vez realizada la inscripción, el comercio puede usar el `tbkUser` recibido
+para realizar transacciones. Para eso debes usar el método `authorize()`.
+
+#### `authorize()`
+
+Permite autorizar un pago.
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+POST /rswebpaytransaction/api/oneclick/v1.0/transactions
+
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "username": "juanperez",
+  "tbk_user": "b6bd6ba3-e718-4107-9386-d2b099a8dd42",
+  "buy_order": "ordenCompra123456789",
+  "details": [
+    {
+      "commerce_code": 597026010055,
+      "buy_order": "ordenCompra123445",
+      "amount": 1000,
+      "installments_number": 5
+  }] 
+}
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+username  <br> <i> xs:string </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `initInscription()`).
+tbkUser  <br> <i> xs:string </i> | Identificador único de la inscripción del cliente (devuelto por `finishInscription()`).
+buyOrder  <br> <i> xs:long </i> | Identificador único de la compra generado por el comercio.
+details  <br> <i> array </i> | Lista de objetos, uno por cada tienda diferente del mall que participa en la transacción.
+details [].commerceCode  <br> <i>xs:string </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
+details [].buyOrder  <br> <i> xs:string </i> | Identificador único de la compra generado por el comercio hijo (tienda).
+details [].amount  <br> <i> xs:decimal </i> | Monto de la sub-transacción de pago. En pesos o dólares según configuración comercio mall padre.
+details [].installments_number  <br> <i> xs:decimal </i> | Cantidad de cuotas de la sub-transacción de pago.
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+
+{
+  "buy_order": "415034240",
+  "card_detail": {
+    "card_number": "6623"
+  },
+  "accounting_date": "0321",
+  "transaction_date": "2019-03-21T15:43:48.523Z",
+  "details": [
+    {
+      "amount": 500,
+      "status": "AUTHORIZED",
+      "authorization_code": "1213",
+      "payment_type_code": "VN",
+      "response_code": 0,
+      "installments_number": 0,
+      "commerce_code": "597026010055",
+      "buy_order": "505479072"
+  }]
+}
+
+```
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+buyOrder  <br> <i> xs:string </i> | Orden de compra generada por el comercio padre.
+cardDetail  <br> <i> cardDetail </i> | Objeto que contiene información de la tarjeta utilizado por el tarjetahabiente.
+cardDetail.cardNumber  <br> <i> xs:string </i> | Los últimos 4 dígitos de la tarjeta usada en la transacción.
+accountingDate  <br> <i> xs:string </i> | Fecha contable de la autorización del pago.
+TransactionDate  <br> <i> xs:dateTime </i> | Fecha completa (timestamp) de la autorización del pago.
+details  <br> <i> array </i> | Lista con el resultado de cada transacción de las tiendas hijas.
+details[].amount  <br> <i> xs:decimal </i> | Monto de la sub-transacción de pago.
+details[].status  <br> <i> xs:string </i> | Estado de la transacción (AUTHORIZED, FAILED).
+details[].authorizationCode  <br> <i> xs:string </i> | Código de autorización de la sub-transacción de pago.
+details[].payment_type_code  <br> <i> xs:string </i> | [Tipo](/producto/webpay#tipos-de-pago) (VC, NC, SI, etc.) de la sub-transacción de pago.
+details[].responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
+details[].installmentsNumber  <br> <i> xs:int </i> | Cantidad de cuotas de la sub-transacción de pago.
+details[].commerceCode  <br> <i> xs:long </i> | Código de comercio del comercio hijo (tienda).
+details[].buyOrder  <br> <i> xs:string </i> | Orden de compra generada por el comercio hijo para la sub-transacción de pago.
+
+<aside class="warning">
+Cualquier valor distinto de número en `installmentsNumber` (incluyendo letras,
+inexistencia del campo o nulo) será asumido como cero, es decir "Sin cuotas".
+</aside>
+
+### Consultar un pago realizado con Webpay OneClick Mall
+
+Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
+
+#### `consultar()`
+
+Permite consultar el estado d epago realizado a través de Webpay Oneclick. 
+Retorna el resultado de la autorización.
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+GET /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}
+
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción a  consultar.
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+
+{
+  "buy_order": "415034240",
+  "card_detail": {
+    "card_number": "6623"
+  },
+  "accounting_date": "0321",
+  "transaction_date": "2019-03-21T15:43:48.523Z",
+  "details": [
+    {
+      "amount": 500,
+      "status": "AUTHORIZED",
+      "authorization_code": "1213",
+      "payment_type_code": "VN",
+      "response_code": 0,
+      "installments_number": 0,
+      "commerce_code": "597026010055",
+      "buy_order": "505479072"
+  }]
+}
+
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+buyOrder  <br> <i> xs:string </i> | Orden de compra generada por el comercio padre.
+cardDetail  <br> <i> cardDetail </i> | Objeto que contiene información de la tarjeta utilizado por el tarjetahabiente.
+cardDetail.cardNumber  <br> <i> xs:string </i> | Los últimos 4 dígitos de la tarjeta usada en la transacción.
+accountingDate  <br> <i> xs:string </i> | Fecha contable de la autorización del pago.
+TransactionDate  <br> <i> xs:dateTime </i> | Fecha completa (timestamp) de la autorización del pago.
+details  <br> <i> array </i> | Lista con el resultado de cada transacción de las tiendas hijas.
+details[].amount  <br> <i> xs:decimal </i> | Monto de la sub-transacción de pago.
+details[].status  <br> <i> xs:string </i> | Estado de la transacción (AUTHORIZED, FAILED).
+details[].authorizationCode  <br> <i> xs:string </i> | Código de autorización de la sub-transacción de pago.
+details[].payment_type_code  <br> <i> xs:string </i> | [Tipo](/producto/webpay#tipos-de-pago) (VC, NC, SI, etc.) de la sub-transacción de pago.
+details[].responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
+details[].installmentsNumber  <br> <i> xs:int </i> | Cantidad de cuotas de la sub-transacción de pago.
+details[].commerceCode  <br> <i> xs:long </i> | Código de comercio del comercio hijo (tienda).
+details[].buyOrder  <br> <i> xs:string </i> | Orden de compra generada por el comercio hijo para la sub-transacción de pago.
+
+### Reversar o Anular un pago Webpay OneClick Mall
+
+Para Webpay OneClick Mall hay dos operaciones diferentes para dejar sin efecto
+transacciones autorizadas: La reversa y la anulación.
+
+**La reversa** se aplica para **problemas operacionales (lado comercio) o de
+comunicación entre comercio y Transbank que impidan recibir a tiempo la
+respuesta de una autorización**. En tal caso el comercio **debe** intentar
+reversar la transacción de autorización para evitar un posible descuadre entre
+comercio y Transbank. La reversa funciona sobre la operación completa del mall,
+lo que significa que **todas las transacciones realizadas en la operación mall
+serán reversadas**. Y sólo puede ser usada hasta 30 segundos después de la
+llamada a `authorize()`
+
+**La anulación**, en cambio, actúa individualmente sobre las transacciones de
+las _tiendas_ de un mall. Por ende, **la anulación es la operación correcta a
+utilizar para fines financieros**, de manera de anular un cargo ya realizado.
+También es posible *reversar una anulación* debido a problemas operacionales
+(por ejemplo un error de comunicación al momento de anular, que le impida al
+comercio saber si Transbank recibió la anulación).
+
+Para llevar a cabo la reversa, el comercio debe usar el método para este caso 
+sin indicar el monto. Para la anulación, se debe usar el método indicando el monto
+de la anulación.
+
+#### `codeReverseOneClick()`
+
+Permite reversar o anular una transacción de venta autorizada con anterioridad. 
+Este método retorna como respuesta un identificador único de la transacción de reversa/anulación.
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+PUT /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}/refund
+
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "commerce_code": 597026010055,
+  "detail_buy_order": "ordenCompra12345",
+  "amount": 1000
+}
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción a  reversar o anular.
+commerceCode  <br> <i> xs:string </i> | Código de comercio hijo.
+detailBuyOrder  <br> <i> xs:string </i> | Orden de compra hija de la transacción a  reversar o anular.
+amount  <br> <i> xs:int </i> | (Opcional) Monto a anular. Si está presente se ejecuta una anulación, en caso contrario se ejecuta una reversa (a menos que haya pasado el tiempo máximo para reversar).
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+
+{
+  "type": "NULLIFY",
+  "authorization_code": "123456",
+  "authorization_date": "2019-03-20T20:18:20Z",
+  "nullified_amount": 1000.00,
+  "balance": 0.00
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+type  <br> <i> xs:string </i> | Tipo de reembolso (REVERSE. NULLIFY).
+authorizationCode  <br> <i> xs:boolean </i> | Código de autorización
+authorizationDate  <br> <i> ISO8601 </i> | Fecha de la autorización de la transacción.
+nullifiedAmount  <br> <i> xs:long </i> | Monto anulado.
+balance  <br> <i> xs:long </i> | Monto restante de la sub-transacción de pago original: monto inicial – monto anulado.
