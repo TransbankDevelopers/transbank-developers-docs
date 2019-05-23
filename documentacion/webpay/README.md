@@ -167,6 +167,11 @@ que comience el flujo de pago. Esta redirección debe ser vía `POST` por lo que
 deberás crear un formulario web con un campo `token_ws` hidden y enviarlo
 programáticamente para entregar el control a Webpay.
 
+<aside class="warning">
+Debido a la posibilidad que el formulario de WebPay no se despliegue, no se 
+recomienda el uso de Iframe para WebPay Plus.
+</aside>
+
 <aside class="notice">
 Tip: En el ambiente de integración puedes usar la tarjeta VISA 4051885600446623
 para hacer pruebas simples de éxito. El CVV es 123 y la fecha de vencimiento
