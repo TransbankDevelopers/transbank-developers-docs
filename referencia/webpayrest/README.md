@@ -221,25 +221,11 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
 En la versión anterior de WebPay, había que invocar `acknowledgeTransaction()` 
 para informar a WebPay que se había recibido el resultado la transacción sin
 problemas. Ahora no es necesario, ya que ésto se realiza de forma automática
-una vez que se confirma la transacción.
+una vez que se confirma la transacción.  Además ya no se debe mostrar el voucher
+de Transbank, solo debe mostrarse desde el sitio del comercio.
 </aside>
 
-13. Una vez confirmado y recibido el resultado de la transacción, el sitio del 
-    comercio debe redirigir al tarjetahabiente nuevamente a Webpay, con la finalidad 
-    de desplegar el comprobante de pago. Es importante realizar este punto para 
-    que el tarjetahabiente entienda que el proceso de pago fue exitoso, y que involucrará un cargo a su tarjeta
-    bancaria. El redireccionamiento a Webpay se hace utilizando como destino la
-    URL informada por el método que confirma la transacción, enviando por método
-    POST el token de la transacción en la variable `token_ws`.
-14. Webpay recibe un requerimiento con la variable `token_ws`
-15. Webpay identifica la transacción y despliega el comprobante de pago al
-    tarjetahabiente.
-16. Una vez visualizado el comprobante de pago por un periodo acotado de tiempo,
-    el tarjetahabiente es redirigido de vuelta al sitio del comercio, por medio
-    de redireccionamiento con el token en la variable token_ws enviada por
-    método POST hacia la página retorno informada por el comercio al crear la 
-    transacción.
-17. Sitio del comercio despliega página retorno de pago
+1.   Sitio del comercio despliega voucher con los datos de la transacción.
 
 #### Flujo si usuario aborta el pago
 
