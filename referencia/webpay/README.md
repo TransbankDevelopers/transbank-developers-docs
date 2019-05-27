@@ -1789,8 +1789,6 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 result  <br> <i> xs:boolean </i> | Indica si la eliminación se realizó correctamente o no.
 
-## Otros Servicios Webpay OneClick Mall
-
 ### Captura Diferida Webpay OneClick Mall
 > Los SDKs no soportan aún los servicios Webpay OneClick Mall.
 
@@ -1843,45 +1841,4 @@ capturedAmount  <br> <i> xs:decimal </i> | Monto capturado.
 <aside class="notice">
 En caso de error apareceran los mismos códigos exclusivos del método `capture()`
 para captura simpultanea.
-</aside>
-
-### Anulación Monto Capturado Webpay OneClick Mall
-> Los SDKs no soportan aún los servicios Webpay OneClick Mall.
-
-Para anular una transacción se debe invocar al método `nullify()`.
-
-#### `nullify()`
-
-Este método permite a todo comercio Webpay OneClick Mall habilitado, anular
-una transacción que fue generada y capturada. El método contempla anular total o
-parcialmente una transacción capturada. Para ello se deberá indicar los datos
-asociados a la transacción de venta en línea que se desea anular, los montos
-requeridos para anular y el codigo de autorizacion de una captura.
-Se considera totalmente anulada una transacción cuando el monto anulado o el
-monto total de anulaciones cursadas alcancen el monto autorizado en la venta en
-línea.
-
-**Parámetros**
-
-Nombre  <br> <i> tipo </i> | Descripción
-------   | -----------
-authorizationCode  <br> <i> xs:string </i> | Código de autorización obtenido al llamar a `capture()`. Largo máximo: 6.
-authorizedAmount  <br> <i> xs:decimal </i> | Monto autorizado y capturado luego de invocar el método capture(). Largo máximo: 10.
-buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se requiere anular. Largo máximo: 26.
-nullifyAmount  <br> <i> xs:decimal </i> | Monto que se desea anular de la transacción. Largo máximo: 10.
-commerceId  <br> <i> xs:long </i> | Código de comercio o tienda mall que realizó la transacción. Largo: 12.
-
-**Respuesta**
-
-Nombre  <br> <i> tipo </i> | Descripción
-------   | -----------
-token  <br> <i> xs:string </i> | Token de la transacción.
-authorizationCode  <br> <i> xs:string </i> | Código de autorización de la anulación.
-authorizationDate  <br> <i> xs:string </i> | Fecha y hora de la autorización.
-balance  <br> <i> xs:decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado).
-nullifiedAmount  <br>  <i> xs:decimal </i> | Monto anulado.
-
-<aside class="notice">
-En caso de error aparecerán los mismos códigos de error que entrega el método
-`nullify()` en captura simultánea.
 </aside>
