@@ -1829,6 +1829,11 @@ buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se r
 commerceId  <br> <i> xs:long </i> | Código de tienda mall que realizó la transacción. Largo: 12.
 capturedAmount  <br> <i> xs:decimal </i> | Monto que se desea capturar. Largo máximo: 10.
 
+<aside class="notice">
+El método `capture()` debe ser invocado siempre indicando el código del
+comercio de la tienda virtual específica.
+</aside>
+
 **Respuesta**
 
 Nombre  <br> <i> tipo </i> | Descripción
