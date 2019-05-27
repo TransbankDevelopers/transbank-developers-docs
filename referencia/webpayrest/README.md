@@ -1745,7 +1745,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción a  reversar o anular.
+buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción a reversar o anular.
 amount  <br> <i> xs:int </i> | (Opcional) Monto a anular. Si está presente se ejecuta una anulación, en caso contrario se ejecuta una reversa (a menos que haya pasado el tiempo máximo para reversar).
 
 **Respuesta**
@@ -2142,7 +2142,7 @@ Esta operación permite obtener el estado de la transacción en cualquier mome
 
 #### `consultar()`
 
-Permite consultar el estado d epago realizado a través de Webpay Oneclick. 
+Permite consultar el estado de pago realizado a través de Webpay Oneclick. 
 Retorna el resultado de la autorización.
 
 ```java
@@ -2359,3 +2359,1133 @@ authorizationCode  <br> <i> xs:boolean </i> | Código de autorización
 authorizationDate  <br> <i> ISO8601 </i> | Fecha de la autorización de la transacción.
 nullifiedAmount  <br> <i> xs:long </i> | Monto anulado.
 balance  <br> <i> xs:long </i> | Monto restante de la sub-transacción de pago original: monto inicial – monto anulado.
+
+## Webpay Transacción Completa
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+ 
+```
+
+Una transacción completa permite al comercio presentar al tarjetahabiente un
+formulario propio para almacenar los datos de la tarjeta, fecha de vencimiento
+y cvv.
+
+
+### Crear una Transacción Completa
+
+Para crear una transacción completa basta llamar al método `initTransaction()`
+
+#### `initTransaction()`
+
+Permite inicializar una transacción completa en Webpay. Como respuesta a la 
+invocación se genera un token que representa en forma única una transacción.
+
+<aside class="notice">
+Es importante considerar que una vez invocado este método, el token que es
+entregado tiene un periodo reducido de vida de 5 minutos, posterior a esto el
+token es caducado y no podrá ser utilizado en un pago.
+</aside>
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+POST /rswebpaytransaction/api/webpay/v1.0/transactions
+
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "buy_order": "ordenCompra12345678",
+  "session_id": "sesion1234564",
+  "amount": 10000,
+  "cvv": 123,
+  "card_number": "4239000000000000",
+  "card_expiration_date": "22/10"
+}
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>
+sessionId  <br> <i> xs:string </i> | (Opcional) Identificador de sesión, uso interno de comercio, este valor es devuelto al final de la transacción. Largo máximo: 61
+amount  <br> <i> xs:decimal </i> | Monto de la transacción. Máximo 2 decimales para USD. Largo máximo: 10
+cvv  <br> <i> xs:string </i> | URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización. Largo máximo: 4
+cardNumber  <br> <i> xs:string </i> | Número de la tarjeta con la que se debe hacer la transacción. Largo máximo: 16
+cardExpirationDate  <br> <i> xs:string </i> | Fecha de expiración de la tarjeta con la que se realiza la transacción. Largo máximo: 5
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+
+{
+  "token": "e074d38c628122c63e5c0986368ece22974d6fee1440617d85873b7b4efa48a3",
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
+
+### Consulta de cuotas
+
+Para consultar el valor de las cuotas que pagará el tarjeta habiente en una 
+transacción completa, es necesario llamar al método `askInstallments()`
+
+#### `askInstallments()`
+
+Operación que permite obtener el monto de la cuota a partir del número de cuotas. 
+El id de la consulta que selecciona el tarjetahabiente debe ser informado en la 
+invocación de la confirmación.
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/installments
+
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "installments_number": 10
+}
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> xs:string </i> | Número de orden de compra. Largo máximo: 64
+installments_number  <br> <i> xs:decimal </i> | Cantidad de cuotas. Largo máximo: 2
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+
+{
+  "installments_amount": 3334,
+  "id_query_installments": 11,
+  "deferred_periods": [
+    {
+      "amount": 1000,
+      "period": 1
+    }
+  ] 
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+installments_amount  <br> <i> xs:string </i> | Monto de cada cuota. Largo: 64.
+id_query_installments  <br> <i> xs:string </i> | Identificador de las cuotas. Largo: 2.
+deferred_periods  <br> <i> xs:string </i> | Arreglo con periodos diferidos.
+deferred_periods.amount  <br> <i> xs:string </i> | Monto. Largo: 17.
+deferred_periods.period  <br> <i> xs:string </i> | Índice de periodo. Largo: 2.
+
+### Confirmación de la transacción
+
+Una vez iniciada la transacción y consultado el monto de las cuotas, puedes 
+confirmar y obtener el resultado de una transacción completa usando el metodo
+`getTransactionResult()`.
+
+#### `getTransactionResult()`
+
+Operación que permite confirmar una transacción. Retorna el estado de la 
+transacción.
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
+
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "token": "e074d38c628122c63e5c0986368ece22974d6fee1440617d85873b7b4efa48a3",
+  "id_query_installments": 15,
+  "deferred_period_index": 1,
+  "grace_period": false
+}
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> xs:string </i> | Token identificador de la transacción. Largo máximo: 64
+id_query_installments  <br> <i> xs:decimal </i> | (Opcional) Identificador de cuota. Largo máximo: 2
+deferred_period_index  <br> <i> xs:decimal </i> | (Opcional) Cantidad de periodo diferido. Largo máximo: 2
+grace_period  <br> <i> xs:decimal </i> | (Opcional) Indicador de periodo de gracia.
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+
+{
+  "vci": "TSY",
+  "amount": 10000,
+  "status": "AUTHORIZED",
+  "buy_order": "ordenCompra12345678",
+  "session_id": "sesion1234557545",
+  "card_detail": {
+    "card_number": "1234"
+  },
+  "accounting_date": "0320",
+  "transaction_date": "2019-03-20T20:18:20Z",
+  "authorization_code": "877550",
+  "payment_type_code": "VN",
+  "response_code": 0,
+  "installments_number": 0
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+vci  <br> <i> xs:string </i> | Código de respuesta de la autenticación bancaria
+amount  <br> <i> xs:int </i> | Monto de la transacción. Sólo en caso de dolar acepta dos decimales.
+status  <br> <i> xs:string </i> | Estado de la transacción (AUTHORIZED, FAILED).
+buy_order  <br> <i> xs:string </i> | Número de orden de compra.
+sessionId  <br> <i> xs:string </i> | ID de sesión de la compra.
+cardDetail  <br> <i> cardDetail </i> | Objeto que contiene información de la tarjeta utilizado por el tarjetahabiente.
+cardNumber  <br> <i> xs:string </i> | Los últimos 4 dígitos de la tarjeta usada en la transacción.
+accountingDate  <br> <i> xs:string </i> | Fecha contable de la transacción.
+transactionDate  <br> <i> ISO8601 </i> | Fecha de la transacción.
+authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción de pago.
+paymentTypeCode  <br> <i> xs:string </i> | Indica el tipo de tarjeta utilizada.
+responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
+installments_number <br> <i> xs:int </i> | Número de cuotas de la transacción.
+
+### Consultar estado de una transacción completa
+
+Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
+
+#### `getResult()`
+
+Obtiene resultado de transacción a partir de un token.
+
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+GET /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> xs:string </i> | Token identificador de la transacción. Largo: 64.
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+
+{
+  "vci": "TSY",
+  "amount": 10000,
+  "status": "AUTHORIZED",
+  "buy_order": "ordenCompra12345678",
+  "session_id": "sesion1234557545",
+  "card_detail": {
+    "card_number": "1234"
+  },
+  "accounting_date": "0320",
+  "transaction_date": "2019-03-20T20:18:20Z",
+  "authorization_code": "877550",
+  "payment_type_code": "VN",
+  "response_code": 0,
+  "installments_number": 0
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+vci  <br> <i> xs:string </i> | Código de respuesta de la autenticación bancaria
+amount  <br> <i> xs:int </i> | Monto de la transacción. Sólo en caso de dolar acepta dos decimales.
+status  <br> <i> xs:string </i> | Estado de la transacción (AUTHORIZED, FAILED).
+buy_order  <br> <i> xs:string </i> | Número de orden de compra.
+sessionId  <br> <i> xs:string </i> | ID de sesión de la compra.
+cardDetail  <br> <i> cardDetail </i> | Objeto que contiene información de la tarjeta utilizado por el tarjetahabiente.
+cardNumber  <br> <i> xs:string </i> | Los últimos 4 dígitos de la tarjeta usada en la transacción.
+accountingDate  <br> <i> xs:string </i> | Fecha contable de la transacción.
+transactionDate  <br> <i> ISO8601 </i> | Fecha de la transacción.
+authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción de pago.
+paymentTypeCode  <br> <i> xs:string </i> | Indica el tipo de tarjeta utilizada.
+responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
+installments_number <br> <i> xs:int </i> | Número de cuotas de la transacción.
+
+### Anulación Webpay Plus
+
+Permite generar el reembolso del total o parte del monto de una transacción completa.
+Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una reversa o una anulación:
+
+* Si se especifica un valor en el campo “amount” se ejecutará siempre una anulación.
+* Si se supera el tiempo máximo para ejecutar una reversa se ejecutará una anulación.
+* Si no se ha dado ninguno de los casos anteriores se ejecutará una reversa.
+
+#### `nullify()`
+
+Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentre vigente.
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refund
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+ "amount": 1000
+}
+```
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
+amount  <br> <i> xs:decimal </i> | (Opcional) Monto que se desea anular de la transacción. Largo máximo: 17.
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+{
+  "type": "NULLIFY",
+  "authorization_code": "123456",
+  "authorization_date": "2019-03-20T20:18:20Z",
+  "nullified_amount": 1000.00,
+  "balance": 0.00
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+type  <br> <i> xs:string </i> | Tipo de reembolso (REVERSE. NULLIFY).
+authorizationCode  <br> <i> xs:string </i> | Código de autorización de la anulación.
+authorizationDate  <br> <i> xs:string </i> | Fecha y hora de la autorización.
+nullifiedAmount  <br> <i> xs:decimal </i> | Monto anulado.
+balance  <br> <i> xs:decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado).
+
+
+## Webpay Transacción Mall Completa
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+ 
+```
+
+Una transacción Mall Completa corresponde a una solicitud de transacciones completas
+de un conjunto de pagos con tarjetas de crédito, en donde quién realiza el pago 
+ingresa al sitio del comercio, selecciona productos o
+servicios, y el ingreso asociado a los datos de la tarjeta de crédito 
+lo realiza una única vez en forma segura en Webpay para el conjunto de pagos.
+Cada pago tendrá su propio resultado, autorizado o rechazado.
+
+![Desagregación de un pago Webpay Mall](/images/pago-webpay-mall.png)
+
+El Mall Webpay agrupa múltiples tiendas, son estas últimas las que pueden
+generar transacciones. Tanto el mall como las tiendas asociadas son
+identificadas a través de un número denominado código de comercio.
+
+#### Flujo Webpay Transacción Mall Completa
+
+El flujo de Transacción Mall Completa es en general el mismo que el de [Webpay Transacción Completa](#webpay-transaccion-completa) tanto de cara al tarjeta habiente como de cara al integrador.
+
+Las diferencias son:
+
+- Se debe usar un código de comercio configurado para modalidad Mall en
+  Transbank, el cual debe ser indicado al iniciar la transacción.
+- Se pueden indicar múltiples transacciones, cada una asociada a un código de
+  comercio de tienda (que debe estar configurada en Transbank como perteneciente
+  al mall).
+- Se debe verificar por separado el resultado de cada una de esas transacciones
+  individualmente, pues es posible que el emisor de la tarjeta autorice algunas
+  y otras no.
+
+
+### Crear una Transacción Mall Completa
+
+Para crear una Transacción Mall Completa basta llamar al método `initTransaction()`
+
+#### `initTransaction()`
+
+Permite inicializar una transacción mall completa en Webpay. Como respuesta a la 
+invocación se genera un token que representa en forma única una transacción.
+
+<aside class="notice">
+Es importante considerar que una vez invocado este método, el token que es
+entregado tiene un periodo reducido de vida de 5 minutos, posterior a esto el
+token es caducado y no podrá ser utilizado en un pago.
+</aside>
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+POST /rswebpaytransaction/api/webpay/v1.0/transactions
+
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "buy_order": "ordenCompra12345678",
+  "session_id": "sesion1234564",
+  "card_number": "4239000000000000",
+  "card_expiration_date": "22/10",
+  "details": [
+    {
+      "amount": 10000,
+      "commerce_code": 597026008905,
+      "buy_order": "123456789"
+    }, 
+    {
+      "amount": 10000,
+      "commerce_code": 597026008913,
+      "buy_order": "123456790"
+    } 
+  ]
+}
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+buyOrder  <br> <i> xs:string </i> | Es el código único de la orden de compra generada por el comercio mall.
+sessionId  <br> <i> xs:string </i> |  Identificador de sesión, uso interno de comercio, este valor es devuelto al final de la transacción. Largo máximo: 61
+cardNumber  <br> <i> xs:string </i> | Número de la tarjeta con la que se debe hacer la transacción. Largo máximo: 16
+cardExpirationDate  <br> <i> xs:string </i> | Fecha de expiración de la tarjeta con la que se realiza la transacción. Largo máximo: 5
+details  <br> <i> array </i> | Lista de objetos, uno por cada tienda diferente del mall que participa en la transacción.
+details [].amount  <br> <i> xs:decimal </i> | Monto de la transacción de una tienda del mall. Máximo 2 decimales para USD. Largo máximo: 10.
+details [].commerceCode  <br> <i>xs:string </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
+details [].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda del mall. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>.
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+
+{
+  "token": "e074d38c628122c63e5c0986368ece22974d6fee1440617d85873b7b4efa48a3",
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> xs:string </i> | Token identificador de la transacción. Largo: 64.
+
+### Consulta de cuotas
+
+Para consultar el valor de las cuotas que pagará el tarjeta habiente en cada transacción dentro transacción mall completa, es necesario llamar al método `askInstallments()`
+
+#### `askInstallments()`
+
+Operación que permite obtener el monto de la cuota a partir del número de cuotas. 
+El id de la consulta que selecciona el tarjetahabiente debe ser informado en la 
+invocación de la confirmación.
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/installments
+
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "commerce_code": 597026008905,
+  "buy_order": "123456789",
+  "installments_number": 10
+}
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> xs:string </i> | Número de orden de compra. Largo máximo: 64
+commerce_code  <br> <i> xs:string </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12
+buy_order  <br> <i> xs:string </i> | Orden de compra de la tienda del mall. Largo máximo: 26 
+installments_number  <br> <i> xs:integer </i> | Cantidad de cuotas. Largo máximo: 2
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+
+{
+  "installments_amount": 3334,
+  "id_query_installments": 11,
+  "deferred_periods": [
+    {
+      "amount": 1000,
+      "period": 1
+    }
+  ] 
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+installments_amount  <br> <i> xs:string </i> | Monto de cada cuota. Largo: 64.
+id_query_installments  <br> <i> xs:string </i> | Identificador de las cuotas. Largo: 2.
+deferred_periods  <br> <i> xs:string </i> | Arreglo con periodos diferidos.
+deferred_periods.amount  <br> <i> xs:string </i> | Monto. Largo: 17.
+deferred_periods.period  <br> <i> xs:string </i> | Índice de periodo. Largo: 2.
+
+### Confirmación de la transacción
+
+Una vez iniciada la transacción y consultado el monto de las cuotas por cada subtransacción, puedes confirmar y obtener el resultado de una transacción completa usando el metodo `getTransactionResult()`.
+
+#### `getTransactionResult()`
+
+Operación que permite confirmar una transacción. Retorna el estado de la 
+transacción.
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
+
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "details": [
+    {
+      "commerce_code": 597026008913,
+      "buy_order": "ordenCompra1234",
+      "id_query_installments": 12,
+      "deferred_period_index": 1,
+      "grace_period": false  
+    }
+  ] 
+}
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> xs:string </i> | Token identificador de la transacción. Largo máximo: 64
+details <br> <i> details </i> | Listado con las transacciones mall. 
+commerce_code  <br> <i> xs:string </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo máximo: 64
+buy_order  <br> <i> xs:string </i> | Orden de compra de la tienda del mall. Largo máximo: 26
+id_query_installments  <br> <i> xs:decimal </i> | (Opcional) Identificador de cuota. Largo máximo: 2
+deferred_period_index  <br> <i> xs:decimal </i> | (Opcional) Cantidad de periodo diferido. Largo máximo: 2
+grace_period  <br> <i> xs:decimal </i> | (Opcional) Indicador de periodo de gracia.
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+
+{
+  "buy_order": "415034240",
+  "card_detail": {
+    "card_number": "6623"
+  },
+  "accounting_date": "0321",
+  "transaction_date": "2019-03-21T15:43:48.523Z",
+  "details": [
+    {
+      "amount": 500,
+      "status": "AUTHORIZED",
+      "authorization_code": "1213",
+      "payment_type_code": "VN",
+      "response_code": 0,
+      "installments_number": 0,
+      "commerce_code": "597026010055",
+      "buy_order": "505479072"
+    }
+  ]
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+buyOrder  <br> <i> xs:string </i> | Orden de compra del mall. Largo máximo: 26
+cardDetails  <br> <i> carddetails </i> | Objeto que representa los datos de la tarjeta de crédito del tarjeta habiente.
+cardDetails.cardNumber  <br> <i> xs:string </i> | 4 últimos números de la tarjeta de crédito del tarjetahabiente.Solo para comercios autorizados por Transbank se envía el número completo. Largo máximo: 16.
+accoutingDate  <br> <i> xs:string </i> | Fecha de la autorización. Largo: 4, formato MMDD
+transactionDate  <br> <i> xs:string </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
+details  <br> <i> array </i> | Lista con resultado de cada una de las transacciones enviadas.
+details[].amount  <br> <i> number </i> | Monto de la transacción. Largo máximo: 10
+details[].status  <br> <i> xs:string </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 26
+details[].authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción Largo máximo: 6
+details[].paymentTypeCode   <br> <i> xs:string </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
+details[].responseCode  <br> <i> xs:string </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado.
+details[].installments_number  <br> <i> xs:int </i> | Cantidad de cuotas. Largo máximo: 2
+details[].installments_amount  <br> <i> xs:int </i> | Monto de cada cuota. Largo máximo: 17
+details[].commerceCode  <br> <i> xs:string </i> | Código comercio de la tienda. Largo: 12
+details[].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Largo máximo: 26
+
+### Consultar estado de una transacción mall completa
+
+Esta operación permite obtener el estado de la transacción mall completa en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
+
+#### `getResult()`
+
+Obtiene resultado de transacción a partir de un token.
+
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+GET /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> xs:string </i> | Token identificador de la transacción. Largo: 64.
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+
+{
+  "buy_order": "415034240",
+  "card_detail": {
+    "card_number": "6623"
+  },
+  "accounting_date": "0321",
+  "transaction_date": "2019-03-21T15:43:48.523Z",
+  "details": [
+    {
+      "amount": 500,
+      "status": "AUTHORIZED",
+      "authorization_code": "1213",
+      "payment_type_code": "VN",
+      "response_code": 0,
+      "installments_number": 0,
+      "commerce_code": "597026010055",
+      "buy_order": "505479072"
+    } 
+  ]
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+buyOrder  <br> <i> xs:string </i> | Orden de compra del mall. Largo máximo: 26
+cardDetails  <br> <i> carddetails </i> | Objeto que representa los datos de la tarjeta de crédito del tarjeta habiente.
+cardDetails.cardNumber  <br> <i> xs:string </i> | 4 últimos números de la tarjeta de crédito del tarjetahabiente.Solo para comercios autorizados por Transbank se envía el número completo. Largo máximo: 16.
+accoutingDate  <br> <i> xs:string </i> | Fecha de la autorización. Largo: 4, formato MMDD
+transactionDate  <br> <i> xs:string </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
+details  <br> <i> array </i> | Lista con resultado de cada una de las transacciones enviadas.
+details[].amount  <br> <i> number </i> | Monto de la transacción. Largo máximo: 10
+details[].status  <br> <i> xs:string </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 26
+details[].authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción Largo máximo: 6
+details[].paymentTypeCode   <br> <i> xs:string </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
+details[].responseCode  <br> <i> xs:string </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado.
+details[].installments_number  <br> <i> xs:int </i> | Cantidad de cuotas. Largo máximo: 2
+details[].installments_amount  <br> <i> xs:int </i> | Monto de cada cuota. Largo máximo: 17
+details[].commerceCode  <br> <i> xs:string </i> | Código comercio de la tienda. Largo: 12
+details[].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Largo máximo: 26
+
+### Anulación Webpay Transacción Completa
+
+Permite generar el reembolso del total o parte del monto de una transacción completa.
+Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una reversa o una anulación:
+
+* Si se especifica un valor en el campo “amount” se ejecutará siempre una anulación.
+* Si se supera el tiempo máximo para ejecutar una reversa se ejecutará una anulación.
+* Si no se ha dado ninguno de los casos anteriores se ejecutará una reversa.
+
+#### `nullify()`
+
+Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentre vigente.
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refund
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "buy_order": "415034240",
+  "commerce_code": "597026010055",
+  "amount": 1000
+}
+```
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
+buyOrder  <br> <i> xs:string </i> | Orden de compra del mall. Largo máximo: 26
+details [].commerceCode  <br> <i>xs:string </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
+amount  <br> <i> xs:decimal </i> | (Opcional) Monto que se desea anular de la transacción. Largo máximo: 17.
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+{
+  "type": "NULLIFY",
+  "authorization_code": "123456",
+  "authorization_date": "2019-03-20T20:18:20Z",
+  "nullified_amount": 1000.00,
+  "balance": 0.00
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+type  <br> <i> xs:string </i> | Tipo de reembolso (REVERSE. NULLIFY).
+authorizationCode  <br> <i> xs:string </i> | Código de autorización de la anulación.
+authorizationDate  <br> <i> xs:string </i> | Fecha y hora de la autorización.
+nullifiedAmount  <br> <i> xs:decimal </i> | Monto anulado.
+balance  <br> <i> xs:decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado).
