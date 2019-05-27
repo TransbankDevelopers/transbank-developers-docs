@@ -295,21 +295,21 @@ POST /rswebpaytransaction/api/webpay/v1.0/transactions
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>
-sessionId <br><i> xs:string </i> | (Opcional) Identificador de sesión, uso interno de comercio, este valor es devuelto al final de la transacción. Largo máximo: 61
-amount <br><i> xs:decimal </i> | Monto de la transacción. Máximo 2 decimales para USD y UF. Largo máximo: 10
-returnURL <br><i> xs:anyURI </i> | URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización. Largo máximo: 256
+buyOrder  <br> <i> String </i> | Orden de compra de la tienda. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>. Largo máximo: 26
+sessionId <br><i> String </i> | (Opcional) Identificador de sesión, uso interno de comercio, este valor es devuelto al final de la transacción. Largo máximo: 61
+amount <br><i> Number </i> | Monto de la transacción. Máximo 2 decimales para USD y UF. Largo máximo: 17
+returnURL <br><i> String </i> | URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización. Largo máximo: 255
 wpmDetail <br><i> wpmDetail </i> | Objeto que contiene datos asociados a la inscripción de PatPass by WebPay.
-wpmDetail.serviceId <br><i> xs:string </i> | Corresponde al identificador de servicio con que el comercio identifica a su cliente. Largo máximo: 30
-wpmDetail.cardHolderId <br><i> xs:string </i> | RUT del tarjetahabiente. Largo máximo: 12. Formato: NNNNNNNNA
-wpmDetail.cardHolderName <br><i> xs:string </i> | Nombre tarjetahabiente. Largo máximo: 50
-wpmDetail.cardHolderLastName1 <br><i> xs:string </i> | Apellido paterno tarjetahabiente. Largo máximo: 50
-wpmDetail.cardHolderLastName2 <br><i> xs:string </i> | Apellido materno tarjetahabiente. Largo máximo: 50
-wpmDetail.cardHolderMail <br><i> xs:string </i> | Correo electrónico tarjetahabiente. Largo máximo: 50
-wpmDetail.cellPhoneNumber <br><i> xs:string </i> | Número teléfono celular tarjetahabiente. Largo máximo: 12
-wpmDetail.expirationDate <br><i> xs:dateTime </i> | Fecha expiración de PatPass by WebPay, corresponde al último pago. Largo: 10. Formato AAAA-MM-DD
-wpmDetail.commerceMail <br><i> xs:string </i> | Correo electrónico comercio. Largo máximo: 50. Los SDKs se encargan automáticamente de este parámetro a partir del email de comercio ingresado en la configuración usada para iniciar la transacción
-wpmDetail.ufFlag <br><i> xs:boolean </i> | Valor en true indica que el monto enviado está expresado en UF, valor en false indica que valor esta expresado en Pesos o dólar según corresponda
+wpmDetail.serviceId <br><i> String </i> | Corresponde al identificador de servicio con que el comercio identifica a su cliente. Largo máximo: 255
+wpmDetail.cardHolderId <br><i> String </i> | RUT del tarjetahabiente. Largo máximo: 255. Formato: NNNNNNNNA
+wpmDetail.cardHolderName <br><i> String </i> | Nombre tarjetahabiente. Largo máximo: 255
+wpmDetail.cardHolderLastName1 <br><i> String </i> | Apellido paterno tarjetahabiente. Largo máximo: 255
+wpmDetail.cardHolderLastName2 <br><i> String </i> | Apellido materno tarjetahabiente. Largo máximo: 255
+wpmDetail.cardHolderMail <br><i> String </i> | Correo electrónico tarjetahabiente. Largo máximo: 255
+wpmDetail.cellPhoneNumber <br><i> String </i> | Número teléfono celular tarjetahabiente. Largo máximo: 255
+wpmDetail.expirationDate <br><i> DateTime </i> | Fecha expiración de PatPass by WebPay, corresponde al último pago. Largo: 10. Formato AAAA-MM-DD
+wpmDetail.commerceMail <br><i> String </i> | Correo electrónico comercio. Largo máximo: 50. Los SDKs se encargan automáticamente de este parámetro a partir del email de comercio ingresado en la configuración usada para iniciar la transacción
+wpmDetail.ufFlag <br><i> Boolean </i> | Valor en true indica que el monto enviado está expresado en UF, valor en false indica que valor esta expresado en Pesos o dólar según corresponda
 
 **Respuesta**
 
@@ -345,8 +345,8 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
-url  <br> <i> xs:string </i> | URL de formulario de pago PatPass by Webpay. Largo máximo: 256.
+token  <br> <i> String </i> | Token de la transacción. Largo: 64.
+url  <br> <i> String </i> | URL de formulario de pago PatPass by Webpay. Largo máximo: 256.
 
 ### Confirmar una transacción PatPass by Webpay Normal
 
@@ -387,7 +387,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
+token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 
 **Respuesta**
 
@@ -435,16 +435,16 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-VCI  <br> <i> xs:string </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure), ACS2 (Autenticación fallida extranjera). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)
-amount  <br> <i> xs:integer </i> | Monto de la transacción. Formato número entero para transacciones en peso y decimal para transacciones en dólares y UF máximo 2 decimales. Largo máximo: 10
-status  <br> <i> xs:string </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 64
-buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda indicado en `initTransaction()`. Largo máximo: 26
-sessionId  <br> <i> xs:string </i> | Identificador de sesión, el mismo enviado originalmente por el comercio en `initTransaction()`. Largo máximo: 61.
+VCI  <br> <i> String </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure), ACS2 (Autenticación fallida extranjera). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio). Largo máximo: 64
+amount  <br> <i> Number </i> | Monto de la transacción. Formato número entero para transacciones en peso y decimal para transacciones en dólares y UF máximo 2 decimales. Largo máximo: 17
+status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 64
+buyOrder  <br> <i> String </i> | Orden de compra de la tienda indicado en `initTransaction()`. Largo máximo: 26
+sessionId  <br> <i> String </i> | Identificador de sesión, el mismo enviado originalmente por el comercio en `initTransaction()`. Largo máximo: 61.
 cardDetails  <br> <i> carddetails </i> | Objeto que representa los datos de la tarjeta de crédito del tarjeta habiente.
-cardDetails.cardNumber  <br> <i> xs:string </i> | 4 últimos números de la tarjeta de crédito del tarjetahabiente. Solo para comercios autorizados por Transbank se envía el número completo. Largo máximo: 16.
-accountingDate  <br> <i> xs:string </i> | Fecha de la autorización. Largo: 4, formato MMDD
-transactionDate  <br> <i> xs:string </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
-authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción Largo máximo: 6
-paymentTypeCode   <br> <i> xs:string </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
-responseCode  <br> <i> xs:string </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado. <br> -100 Rechazo por inscripción de PatPass by Webpay.
-installments_number  <br> <i> xs:int </i> | Cantidad de cuotas. Largo máximo: 2
+cardDetails.cardNumber  <br> <i> String </i> | 4 últimos números de la tarjeta de crédito del tarjetahabiente. Solo para comercios autorizados por Transbank se envía el número completo. Largo máximo: 19.
+accountingDate  <br> <i> String </i> | Fecha de la autorización. Largo: 4, formato MMDD
+transactionDate  <br> <i> String </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
+authorizationCode  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
+paymentTypeCode   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
+responseCode  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado. <br> -100 Rechazo por inscripción de PatPass by Webpay.
+installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
