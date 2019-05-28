@@ -40,7 +40,14 @@ configuration.setWebpayCert(
 ```
 
 ```php
-$configuration->setWebpayCert(Webpay::defaultCert("PRODUCCION"));
+$configuration->setWebpayCert(
+     "-----BEGIN CERTIFICATE-----\n" .
+    "MIIEDzCCAvegAwIBAgIJAMaH4DFTKdnJMA0GCSqGSIb3DQEBCwUAMIGdMQswCQYD\n" .
+    "VQQGEwJDTDERMA8GA1UECAwIU2FudGlhZ28xETAPBgNVBAcMCFNhbnRpYWdvMRcw\n" .
+    ...
+    "MX5lzVXafBH/sPd545fBH2J3xAY3jtP764G4M8JayOFzGB0=\n" .
+    "-----END CERTIFICATE-----\n");
+);
 ```
 
 ```csharp
