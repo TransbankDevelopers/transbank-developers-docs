@@ -219,6 +219,29 @@ char *lastSaleResponse = last_sale();
 }
 ```
 
+El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `LastSaleResponse` o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLastSaleException`.
+
+```json
+"Function": 260
+"Response": "Aprobado"
+"Commerce Code": 550062700310
+"Terminal Id": "ABC1234C"
+"Ticket": "AB123"
+"Autorization Code": "XZ123456"
+"Ammount": 15000
+"Shares Number": 3
+"Shares Amount": 5000
+"Last 4 Digits": 6677
+"Operation Number": 60
+"Card Type": CR
+"Accounting Date":
+"Account Number":
+"Card Brand": AX
+"Real Date": 28/10/2019 22:35:12
+"Employee Id":
+"Tip": 1500
+```
+
 ### Transacción de Cierre
 
 Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencia/posintegrado#tabla-de-respuestas))
