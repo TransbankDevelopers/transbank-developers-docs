@@ -325,7 +325,7 @@ DATO                    | LARGO     | COMENTARIO
 `Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
 `Ticket`                |  6        | Valor ASCII, Número de boleta o ticket
 `Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Codigo de Autorizacion`|  6        | Valor ASCII
+`Código de Autorización`|  6        | Valor ASCII
 `Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
 `Monto`                 |  9        | Valor Numérico <br><i>Largo máximo</i>: 9 <br><i>Largo mínimo</i>: 1
 `Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
@@ -354,7 +354,7 @@ DATO                    | LARGO     | COMENTARIO
 `Propina`               |  9        | Valor Numérico <br><i>Largo máximo</i>: 9 </i> <br><i>Largo mínimo</i>: 0
 `Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
 `<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
-`LRC`                   |  1        | Resultado del cálculo (byte) `XOR` del mensaje
+`<LRC>`                 |  1        | Resultado del cálculo (byte) `XOR` del mensaje
 
 ### Mensaje de Cierre
 
