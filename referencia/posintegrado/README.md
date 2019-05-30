@@ -305,7 +305,6 @@ DATO        | LARGO     | Comentario
 `<ETX>`     | 1         | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
 `<LRC>`     | 1         | Resultado del cálculo (byte) `XOR` del mensaje
 
-
 *Mensaje* en <i>ASCII</i>: `<STX>0250|<ETX>x`
 
 #### Respuesta de Última Venta
