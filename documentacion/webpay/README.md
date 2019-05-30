@@ -605,7 +605,9 @@ import cl.transbank.webpay.WebpayOneClick;
 //...
 
 Configuration configuration = new Configuration();
-configuration.setCommerceCode("12345"); // acá va tu código de comercio
+
+// a continuación va tu código de comercio, Si el código que posees es de 8 dígitos debes anteponer 5970.
+configuration.setCommerceCode("12345");
 configuration.setPrivateKey( // pega acá la llave privada de tu certificado
     "-----BEGIN RSA PRIVATE KEY-----\n" +
     "MIIEpQIBAAKCAQEA0ClVcH8RC1u+KpCPUnzYSIcmyXI87REsBkQzaA1QJe4w/B7g\n" +
