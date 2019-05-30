@@ -363,9 +363,9 @@ El resultado de la transacción entrega en la forma de un objeto `GetTotalsRespo
 DATO                         | LARGO     | COMENTARIO
 ------                       | ------    | ------
 `<STX>`                      |  1        | Indica inicio de texto o comando <br><i>Valor hexadecimal</i>: `0x02`
-`Comando`                    |  4        | <i>Valor ASCII</i>:  `0700` <br><i>Valor hexadecimal</i>: `0x30 0x37 0x30 0x30`
-`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x07`
-`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x07`
+`Comando`                    |  4        | <i>Valor ASCII</i>: `0700` <br><i>Valor hexadecimal</i>: `0x30 0x37 0x30 0x30`
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
 `<ETX>`                      |  1        | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
 `<LRC>`                      |  1        | Resultado del cálculo (byte) del `XOR` del mensaje
 
@@ -378,12 +378,12 @@ DATO                         | LARGO     | COMENTARIO
 DATO                         | LARGO     | COMENTARIO
 ------                       | ------    | ------
 `<STX>`                      |  1        | Indica inicio de texto o comando <br><i>Valor hexadecimal</i>: `0x02`
-`Comando`                    |  4        | <i>Valor ASCII</i>:  `0710` <br><i>Valor hexadecimal</i>: `0x30 0x37 0x31 0x30`
-`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x07`
+`Comando`                    |  4        | <i>Valor ASCII</i>: `0710` <br><i>Valor hexadecimal</i>: `0x30 0x37 0x31 0x30`
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
 `Código Respuesta`           |  2        | Valor Numérico
-`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x07`
-`Número de transacciones`    |  3        | Valor Numérico
-`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x07`
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Cantidad de transacciones`  |  3        | Valor Numérico
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
 `Totales`                    |  9        | Valor Numérico
 `<ETX>`                      |  1        | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
 `<LRC>`                      |  1        | Resultado del cálculo (byte) del `XOR` del mensaje
