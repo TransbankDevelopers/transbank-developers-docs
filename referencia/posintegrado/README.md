@@ -293,9 +293,7 @@ El resultado de la transacción última venta devuelve los mismos datos que una 
 ![Diagrama de Secuencia Última Venta](/images/referencia/posintegrado/diagrama-ultima-venta.png)
 
 1. La caja envía el requerimiento y espera como respuesta `<ACK>`/`<NAK>`, en caso de que llegue un `<NAK>`, debe reintentar el envío del requerimiento 2 veces. Si recibe un `<ACK>` debe esperar la respuesta de la transacción.
-2. El POS solicita los datos al usuario, y envía el requerimiento al Autorizador, en caso de ser aprobada, se guarda en Batch y se envía respuesta a la caja. En caso de ser rechazada se envía respuesta a la caja indicando el error. ([Ver Tabla de Respuestas](/referencia/posintegrado#tabla-de-respuestas))
-3. La caja al recibir la respuesta envía un `<ACK>` si el mensaje está correcto, o un `<NAK>` para el caso en que el `LRC` no corresponde.
-4. El POS al recibir el `<ACK>` vuelve al inicio a esperar un nuevo comando, para el caso que recibe un `<NAK>` vuelve a enviar la respuesta 2 veces más.
+2. Una vez recibida la respuesta, la caja calcula el `<LRC>` del mensaje y lo compara con el recibido, en el caso de coincidir la caja envía un `<ACK>` al **POS** dando por finalizado el comando; en caso contrario envía `<NAK>` y vuelve a esperar la respuesta del **POS**.
 
 #### Solicitud de Última Venta
 
