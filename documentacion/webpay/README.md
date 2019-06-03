@@ -181,6 +181,16 @@ tarjetas de prueba en la sección de
 Ambientes](/documentacion/como_empezar#ambientes).
 </aside>
 
+<div class='url-modal-embed' data-lenguaje-visible='php' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/YBy7DlQ-Bws" >
+  <div class="container-embed">
+    <div class="data-info-url">
+      <b>Video tutorial de integración SDK PHP 1</b><br>
+      Crear una transacción
+    </div>
+    <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
+  </div>
+</div>
+
 ### Confirmar una transacción
 
 Una vez que el tarjetahabiente ha pagado (o declinado, o ha ocurrido un error),
@@ -269,6 +279,16 @@ usuario. Con eso habrás completado el flujo "feliz" en que todo funciona.
 
 En [la referencia detallada de Webpay Plus puedes ver cada paso del flujo, incluyendo
 los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-plus-normal).
+
+<div class='url-modal-embed' data-lenguaje-visible='php' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/J0vTgY6jnnk" >
+  <div class="container-embed">
+    <div class="data-info-url">
+      <b>Video tutorial de integración SDK PHP 2</b><br>
+      Confirmar una transacción
+    </div>
+    <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
+  </div>
+</div>
 
 ## Webpay OneClick
 
