@@ -2138,7 +2138,7 @@ inexistencia del campo o nulo) será asumido como cero, es decir "Sin cuotas".
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
-#### `Transaction.status()`
+#### `Transaction.status()`
 
 Permite consultar el estado de pago realizado a través de Webpay Oneclick. 
 Retorna el resultado de la autorización.
@@ -2490,9 +2490,9 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 ### Consulta de cuotas
 
 Para consultar el valor de las cuotas que pagará el tarjeta habiente en una 
-transacción completa, es necesario llamar al método `askInstallments()`
+transacción completa, es necesario llamar al método `Transaction.installments()`
 
-#### `askInstallments()`
+#### `Transaction.installments()`
 
 Operación que permite obtener el monto de la cuota a partir del número de cuotas. 
 El id de la consulta que selecciona el tarjetahabiente debe ser informado en la 
