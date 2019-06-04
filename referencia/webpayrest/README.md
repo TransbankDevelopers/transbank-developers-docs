@@ -921,8 +921,7 @@ details[].installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo 
 details[].installments_amount  <br> <i> Number </i> | Monto de cada cuota. Largo máximo: 17
 details[].commerceCode  <br> <i> String </i> | Código comercio de la tienda. Largo: 12
 details[].buyOrder  <br> <i> String </i> | Orden de compra de la tienda. Largo máximo: 26
-details[].status  <br> <i> String </i> | Estado de la transacción
-(AUTHORIZED, FAILED). Largo máximo: 26
+details[].status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 26
 
 ## Otros Servicios Webpay Plus
 
