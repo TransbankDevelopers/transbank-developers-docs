@@ -1,4 +1,4 @@
-# Webpay Rest (En Progreso)
+# Webpay Rest
 
 ## Ambientes y Credenciales
 
