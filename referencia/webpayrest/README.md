@@ -644,8 +644,8 @@ token es caducado y no podrá ser utilizado en un pago.
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions
 
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -742,8 +742,8 @@ una vez que Webpay ha resueltosu autorización financiera.
 
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
@@ -993,8 +993,8 @@ el código debe ser el código de la tienda virtual específica.
 
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -1330,8 +1330,8 @@ Webpay OneClick el parámetro se llama `TBK_TOKEN`.
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/inscriptions
 
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -1426,8 +1426,8 @@ realizar las transacciones de pago.
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/inscriptions/{token}
 
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -1521,8 +1521,8 @@ selecciona pagar con OneClick en el comercio.
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/transactions
 
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -1635,8 +1635,8 @@ Retorna el resultado de la autorización.
 ```http
 GET /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}
 
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
@@ -1739,8 +1739,8 @@ Este método retorna como respuesta un identificador único de la transacció
 ```http
 PUT /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}/refund
 
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -1848,8 +1848,8 @@ Permite gatillar el inicio del proceso de inscripción.
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/inscriptions
 
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -1950,8 +1950,8 @@ Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/inscriptions/{token}
 
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -2043,8 +2043,8 @@ Permite autorizar un pago.
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/transactions
 
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -2175,8 +2175,8 @@ Retorna el resultado de la autorización.
 ```http
 GET /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}
 
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
@@ -2304,8 +2304,8 @@ Este método retorna como respuesta un identificador único de la transacció
 ```http
 PUT /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}/refund
 
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -2436,7 +2436,7 @@ token es caducado y no podrá ser utilizado en un pago.
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions
 
-Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Id: 597055555530
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
@@ -2530,7 +2530,7 @@ invocación de la confirmación.
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/installments
 
-Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Id: 597055555530
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
@@ -2626,7 +2626,7 @@ transacción.
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
 
-Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Id: 597055555530
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
@@ -2738,7 +2738,7 @@ Obtiene resultado de transacción a partir de un token.
 
 ```http
 GET /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Id: 597055555530
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 ```
@@ -2995,8 +2995,8 @@ token es caducado y no podrá ser utilizado en un pago.
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions
 
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -3100,8 +3100,8 @@ invocación de la confirmación.
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/installments
 
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -3198,8 +3198,8 @@ transacción.
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
 
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -3324,8 +3324,8 @@ Obtiene resultado de transacción a partir de un token.
 
 ```http
 GET /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
@@ -3436,8 +3436,8 @@ Permite solicitar a Webpay la anulación de una transacción realizada previam
 
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refund
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
