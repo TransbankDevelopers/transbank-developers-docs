@@ -13,7 +13,7 @@ El POS integrado permite realizar transacciones con tarjeta de Crédito/Débito 
 - [x] Venta.
 - [x] Cierre.
 - [ ] Anulación.
-- [ ] Última Venta.
+- [x] Última Venta.
 - [ ] Detalle de Ventas.
 - [ ] Totales.
 - [x] Poll.
