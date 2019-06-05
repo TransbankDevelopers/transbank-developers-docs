@@ -250,10 +250,10 @@ Esta transacción siempre será responsabilidad de la caja y es quien decide cua
 Las anulaciones <strong>sólo</strong> pueden realizarse para transacciones con tarjeta de crédito y que aún se encuentren en la memoria del POS.
 </aside>
 
-El comando de anulación soporte los siguientes parámetros que pueden ser enviados desde la caja.
+El comando de anulación soporta los siguientes parámetros que pueden ser enviados desde la caja.
 
 <aside class="notice">
-<strong>Número de operación:</strong> es el correlativo impreso en el voucher de venta. Este número le indica al POS la transacción en memoria que se desea anular.
+<strong>Número de operación:</strong> es el correlativo impreso en el voucher de venta. Este número le indicará al POS la transacción en memoria que se desea anular.
 </aside>
 
 <div class="language-simple" data-multiple-language></div>
@@ -273,7 +273,7 @@ CancellationResponse response = cancellation(21);
 }
 ```
 
-Como respuesta el POS enviará código de aprobación correspondiente al campo 38 del ISO, acompañado del código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas. [Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas))
+Como respuesta el **POS** enviará un código de aprobación correspondiente al campo 38 del ISO, acompañado de un código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas. [Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas)
 
 ```json
 "FunctionCode": 1210
