@@ -1487,7 +1487,80 @@ authorizationCode  <br> <i> String </i> | Código que identifica la autorizacio
 creditCardType  <br> <i> creditCardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna).
 lastFourCardDigits  <br> <i> String </i> | Los últimos 4 dígitos de la tarjeta ingresada por el cliente en la inscripción.
 
-### Autorizar un pago con Webpay OneClick
+### Eliminar una inscripción con Webpay Oneclick
+Una vez finalizado el proceso de inscripción es posible eliminarla de ser necesario. Para esto debes usar el método llamado `Inscription.remove()`.
+
+#### `Inscription.remove()`
+Permite eliminar un usuario enrolado a Oneclick.
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+DELETE /rswebpaytransaction/api/oneclick/v1.0/inscriptions
+
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
+Content-Type: application/json
+
+{
+  "tbk_user": "b6bd6ba3-e718-4107-9386-d2b099a8dd42",
+  "username": "juanperez",
+}
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+tbkUser  <br> <i> String </i> | Identificador único de la inscripción del cliente (devuelto por `Inscription.finish()`).
+username  <br> <i> String </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `Inscription.start()`).
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+```
+
+### Autorizar un pago con Webpay Oneclick
 
 Una vez realizada la inscripción, el comercio puede usar el `tbkUser` recibido
 para realizar transacciones. Para eso debe usar el método `Transaction.authorize()`.
@@ -2010,6 +2083,79 @@ tbkUser  <br> <i> String </i> | Identificador único de la inscripción del cl
 authorizationCode  <br> <i> String </i> | Código que identifica la autorización de la inscripción.
 creditCardType  <br> <i> creditCardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna).
 lastFourCardDigits  <br> <i> String </i> | Los últimos 4 dígitos de la tarjeta ingresada por el cliente en la inscripción.
+
+### Eliminar una inscripción con Webpay Oneclick Mall
+Una vez finalizado el proceso de inscripción es posible eliminarla de ser necesario. Para esto debes usar el método llamado `Inscription.remove()`.
+
+#### `Inscription.remove()`
+Permite eliminar un usuario enrolado a Oneclick Mall.
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+DELETE /rswebpaytransaction/api/oneclick/v1.0/inscriptions
+
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
+Content-Type: application/json
+
+{
+  "tbk_user": "b6bd6ba3-e718-4107-9386-d2b099a8dd42",
+  "username": "juanperez",
+}
+```
+
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+tbkUser  <br> <i> String </i> | Identificador único de la inscripción del cliente (devuelto por `Inscription.finish()`).
+username  <br> <i> String </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `Inscription.start()`).
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+```
 
 ### Autorizar un pago con Webpay OneClick Mall
 
