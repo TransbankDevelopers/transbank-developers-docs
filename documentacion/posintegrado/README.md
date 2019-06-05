@@ -242,6 +242,50 @@ El resultado de la transacción última venta devuelve los mismos datos que una 
 "Tip": 1500
 ```
 
+### Transacción de Anulación
+
+Esta transacción siempre será responsabilidad de la caja y es quien decide cuando realizar una anulación.
+
+<aside class="warning">
+Las anulaciones <strong>sólo</strong> pueden realizarse para transacciones con tarjeta de crédito y que aún se encuentren en la memoria del POS.
+</aside>
+
+El comando de anulación soporte los siguientes parámetros que pueden ser enviados desde la caja.
+
+<aside class="notice">
+<strong>Número de operación:</strong> es el correlativo impreso en el voucher de venta. Este número le indica al POS la transacción en memoria que se desea anular.
+</aside>
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Responses;
+//...
+CancellationResponse response = POS.Instance.Cancellation(21);
+```
+
+```c
+#include "transbank.h"
+#include "transbank_serial_utils.h"
+//...
+CancellationResponse response = cancellation(21);
+}
+```
+
+Como respuesta el POS enviará código de aprobación correspondiente al campo 38 del ISO, acompañado del código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas. [Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas))
+
+```json
+"FunctionCode": 1210
+"ResponseCode": 0
+"CommerceCode": 597029414300
+"TerminalId": "ABCD1234"
+"AuthorizationCode": "ABCD1234"
+"OperationID": 123456
+"ResponseMessage": "Aprobado"
+"Success": true
+```
+
 ### Transacción de Cierre
 
 Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencia/posintegrado#tabla-de-respuestas))

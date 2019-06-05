@@ -353,6 +353,92 @@ DATO                    | LARGO     | COMENTARIO
 `<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
 `<LRC>`                 |  1        | Resultado del cálculo (byte) `XOR` del mensaje
 
+### Mensaje de Anulación
+
+Esta transacción siempre será responsabilidad de la caja y es quien decide cuando realizar una anulación.
+
+<aside class="warning">
+Las anulaciones <strong>sólo</strong> pueden realizarse para transacciones con tarjeta de crédito y que aún se encuentren en la memoria del POS.
+</aside>
+
+El comando de anulación soporte los siguientes parámetros que pueden ser enviados desde la caja.
+
+<aside class="notice">
+<strong>Número de operación:</strong> es el correlativo impreso en el voucher de venta. Este número le indica al POS la transacción en memoria que se desea anular.
+</aside>
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Responses;
+//...
+CancellationResponse response = POS.Instance.Cancellation(21);
+```
+
+```c
+#include "transbank.h"
+#include "transbank_serial_utils.h"
+//...
+CancellationResponse response = cancellation(21);
+}
+```
+
+Como respuesta el **POS** enviará código de aprobación correspondiente al campo 38 del ISO, acompañado del código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas. [Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas))
+
+```json
+"FunctionCode": 1210
+"ResponseCode": 0
+"CommerceCode": 597029414300
+"TerminalId": "ABCD1234"
+"AuthorizationCode": "ABCD1234"
+"OperationID": 123456
+"ResponseMessage": "Aprobado"
+"Success": true
+```
+
+![Diagrama de Secuencia Anulación](/images/referencia/posintegrado/diagrama-anulacion.png)
+
+1. La caja envía el requerimiento y espera como respuesta `<ACK>`/`<NAK>`, en caso de que llegue un `<NAK>`, debe reintentar el envío del requerimiento 2 veces más. Si recibe un `<ACK>` debe esperar la respuesta de la transacción.
+2. El **POS** envía el requerimiento al autorizador, en caso de ser aprobada se guarda en batch y se envía la respuesta a la caja. En el caso de ser rechazada se envía la respuesta a la caja indicando el error.
+3. La caja al recibir la respuesta envía un `<ACK>` si el mensaje está correcto, o un `<NAK>` para el caso en que el `<LRC>` no corresponda.
+4. El **POS** al recibir el `<ACK>` vuelve al inicio a la espera de un nuevo comando, para el caso que reciba un `<NAK>` o no reciba ninguna validación dentro de los próximos 10 segundos; vuelve a enviar la respuesta. Esto lo repetirá 2 veces más.
+
+#### Solicitud de Anulación
+
+DATO                      | LARGO     | Comentario
+------                    | ------    | ------
+`<STX>`                   | 1         | Indica el inicio de texto o comando <br><i>Valor hexadecimal</i>: `0x02`
+`Comando`                 | 4         | <i>Valor ASCII</i>: `1200` <br><i>Valor hexadecimal</i>: `0x31 0x32 0x30 0x30`
+`Separador`               | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Número de Operación`     | 6         | Valor Numérico, Correlativo de Transacción del POS<br><i>Largo máximo</i>: 6
+`Separador`               | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`<ETX>`                   | 1         | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
+`<LRC>`                   | 1         | Resultado del cálculo (byte) `XOR` del mensaje
+
+*Mensaje* en <i>ASCII</i>: `<STX>1200|10|<ETX><LRC>`
+
+*Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x31, 0x32, 0x30, 0x30, 0x7c, 0x31, 0x30, 0x7c, 0x03, 0x01}`
+
+#### Respuesta de Anulación
+
+DATO                      | LARGO     | COMENTARIO
+------                    | ------    | ------
+`<STX>`                   |  1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
+`Comando`                 |  4        | <i>Valor ASCII</i>: `1210`<br><i>Valor hexadecimal</i>: `0x31 0x32 0x31 0x30`
+`Separador`               |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Código de Respuesta`     |  2        | Valor Numérico
+`Separador`               |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Código de comercio`      | 12        | Valor Numérico
+`Separador`               |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Terminal ID`             |  8        | Valor Alfanumérico
+`Separador`               |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Código de Autorización`  |  6        | Valor Alfanumérico<br><i>Largo máximo</i>: 6
+`Separador`               |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Número de Operación`     |  6        | Valor Numérico, Correlativo de Transacción del POS<br><i>Largo máximo</i>: 6
+`<ETX>`                   |  1        | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
+`<LRC>`                   |  1        | Resultado del cálculo (byte) `XOR` del mensaje
+
 ### Mensaje de Cierre
 
 Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencia/posintegrado#tabla-de-respuestas))
