@@ -109,7 +109,16 @@ En [el repositorio GitHub
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
 podrás encontrar [códigos de comercios y llaves secretas para probar
 en integración aunque aún no tengas tu propio código de
-comercio](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/tree/master/integracion).
+comercio](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/tree/master/integracion). Alternativamente puedes revisar la siguiente tabla con credenciales de integración para hacer pruebas.
+
+Producto | Código de Comercio | Secreto |
+-------- | ------------ | -------------|
+Webpay Plus | `597055555532` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+Webpay Plus Mall | `Próximamente...` | `Próximamente...`
+Webpay Oneclick | `Próximamente...` | `Próximamente...`
+Webpay Oneclick Mall | `Próximamente...` | `Próximamente...`
+Webpay Transacción Completa | `597055555530` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+Webpay Transacción Completa Diferida | `597055555531` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
 
 > Los SDKs ya incluyen esos códigos de comercio y llaves secretas
 > que funcionan en el ambiente de integración, por lo que puedes obtener
