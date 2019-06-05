@@ -1,3 +1,9 @@
+<aside class="notice">
+Acabamos de publicar la nueva y futura referencia REST para los servicios 
+de Transbank que próximamente pasará a ser la referencia oficial.
+Si tienes curiosidad, te invitamos a conocerla [aquí](/referencia/webpayrest)
+</aside>
+
 # Webpay
 
 ## Ambientes y Credenciales

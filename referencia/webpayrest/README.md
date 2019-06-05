@@ -1,3 +1,9 @@
+<aside class="warning">
+Estás viendo la *nueva referencia REST que aún, por lo tanto no existen
+herramientas de desarrollo creadas. Si quieres volver a la referencia oficial
+(SOAP) haz [click aquí](/referencia/webpay)
+</aside>
+
 # Webpay Rest
 
 ## Ambientes y Credenciales
