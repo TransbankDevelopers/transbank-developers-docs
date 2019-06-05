@@ -7,7 +7,7 @@ La API REST de Webpay está protegida para garantizar que solamente comercios a
 * Canal seguro a través de TLSv1.2 para la comunicación del cliente con Webpay.
 * Autenticación y autorización mediante el intercambio de headers Tbk-Api-Key-Id y Tbk-Api-Key-Secret.
 
-### Ambiente de Producción
+### Ambiente de Producción
 
 Las URLs de endpoints de producción están alojados dentro de
 <https://webpay3g.transbank.cl/>.
@@ -2007,7 +2007,7 @@ lastFourCardDigits  <br> <i> String </i> | Los últimos 4 dígitos de la tarje
 Una vez realizada la inscripción, el comercio puede usar el `tbkUser` recibido
 para realizar transacciones. Para eso debes usar el método `Transaction.authorize()`.
 
-#### `Transaction.authorize()`
+#### `Transaction.authorize()`
 
 Permite autorizar un pago.
 
