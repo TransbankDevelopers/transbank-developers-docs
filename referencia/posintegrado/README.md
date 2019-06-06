@@ -426,6 +426,78 @@ DATO                    | LARGO     | COMENTARIO
 `<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
 `LRC`                 |  1        | Resultado del calculo del `LRC` del mensaje
 
+### Mensaje de Totales
+
+Esta operación le permitirá a la caja obtener desde el _POS_ un resumen con el monto total y la cantidad de transacciones
+que se han realizado hasta el minuto y que aún permanecen en la memoria del _POS_.
+
+<aside class="warning">
+Un cierre de terminal, vacía la memoria del POS
+</aside>
+
+Además la caja podrá determinar si existen transacciones que no fueron informadas desde el _POS_,
+haciendo una comparación de los totales entre la caja y el _POS_. La impresión del _Voucher_ con el resumen será realizada por el _POS_.
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Responses;
+//...
+GetTotalsResponse response = POS.Instance.GetTotals();
+```
+
+```c
+#include "transbank.h"
+#include "transbank_serial_utils.h"
+//...
+TotalsResponse response = get_totals();
+}
+```
+
+El resultado de la transacción entrega en la forma de un objeto `GetTotalsResponse` o una estructura `TotalsResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankGetTotalsException`.
+
+```json
+"Function": 710
+"Response": "Aprobado"
+"TX Count": 3     // Cantidad de transacciones
+"TX Total": 15000 // Suma total de los montos de cada transaccion
+```
+
+### Solicitud de Totales
+
+DATO                         | LARGO     | COMENTARIO
+------                       | ------    | ------
+`<STX>`                      |  1        | Indica inicio de texto o comando <br><i>Valor hexadecimal</i>: `0x02`
+`Comando`                    |  4        | <i>Valor ASCII</i>: `0700` <br><i>Valor hexadecimal</i>: `0x30 0x37 0x30 0x30`
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`<ETX>`                      |  1        | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
+`<LRC>`                      |  1        | Resultado del cálculo (byte) del `XOR` del mensaje
+
+*Mensaje* en <i>ASCII</i>: `<STX>0700||<ETX><EOT>`
+
+*Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x37, 0x30, 0x30, 0x07, 0x07, 0x03, 0x04}`
+
+#### Respuesta de Totales
+
+DATO                         | LARGO     | COMENTARIO
+------                       | ------    | ------
+`<STX>`                      |  1        | Indica inicio de texto o comando <br><i>Valor hexadecimal</i>: `0x02`
+`Comando`                    |  4        | <i>Valor ASCII</i>: `0710` <br><i>Valor hexadecimal</i>: `0x30 0x37 0x31 0x30`
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Código Respuesta`           |  2        | Valor Numérico
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Cantidad de transacciones`  |  3        | Valor Numérico
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Totales`                    |  9        | Valor Numérico
+`<ETX>`                      |  1        | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
+`<LRC>`                      |  1        | Resultado del cálculo (byte) del `XOR` del mensaje
+
+*Mensaje* en <i>ASCII</i>: `<STX>0710|00|1|2000<ETX>J`
+
+*Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x37, 0x31, 0x30, 0x07, 0x30, 0x30, 0x07, 0x31, 0x07, 0x32, 0x30, 0x30, 0x30, 0x03, 0x04}`
+
 ### Mensaje de Carga de Llaves
 
 Esta transacción permite al POS Integrado del comercio requerir cargar nuevas _Working Keys_ desde Transbank. Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencia/posintegrado#tabla-de-respuestas))
