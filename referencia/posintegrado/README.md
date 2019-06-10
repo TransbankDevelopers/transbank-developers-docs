@@ -466,7 +466,7 @@ El resultado de la transacción entrega en la forma de un objeto `GetTotalsRespo
 
 ![Diagrama de Solicitud de Totales](/images/referencia/posintegrado/diagrama-totales.png)
 
-### Solicitud de Totales
+#### Solicitud de Totales
 
 DATO                         | LARGO     | COMENTARIO
 ------                       | ------    | ------
