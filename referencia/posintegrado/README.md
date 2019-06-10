@@ -464,7 +464,9 @@ El resultado de la transacción entrega en la forma de un objeto `GetTotalsRespo
 "TX Total": 15000 // Suma total de los montos de cada transaccion
 ```
 
-### Solicitud de Totales
+![Diagrama de Solicitud de Totales](/images/referencia/posintegrado/diagrama-totales.png)
+
+#### Solicitud de Totales
 
 DATO                         | LARGO     | COMENTARIO
 ------                       | ------    | ------
