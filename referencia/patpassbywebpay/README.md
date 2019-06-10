@@ -447,4 +447,4 @@ transactionDate  <br> <i> String </i> | Fecha y hora de la autorización. Largo
 authorizationCode  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
 paymentTypeCode   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
 responseCode  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado. <br> -100 Rechazo por inscripción de PatPass by Webpay.
-installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
+installmentsNumber  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
