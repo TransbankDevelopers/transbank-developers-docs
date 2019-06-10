@@ -1,4 +1,4 @@
-# PatPass Rest (En Progreso)
+# PatPass Rest
 
 ## Ambientes y Credenciales
 
