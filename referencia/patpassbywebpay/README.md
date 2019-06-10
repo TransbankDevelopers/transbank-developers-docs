@@ -91,8 +91,8 @@ el ambiente de integración](/documentacion/como_empezar#ambientes).
 ```
 
 ```http
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
@@ -378,8 +378,8 @@ Permite obtener el resultado de la transacción una vez que Webpay ha resuelto 
 
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
