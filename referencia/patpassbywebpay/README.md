@@ -1,4 +1,4 @@
-# PatPass Rest (En Progreso)
+# PatPass Rest
 
 ## Ambientes y Credenciales
 
@@ -7,7 +7,7 @@ La API REST de PatPass by Webpay está protegida para garantizar que solamente 
 * Canal seguro a través de TLSv1.2 para la comunicación del cliente con Webpay.
 * Autenticación y autorización mediante el intercambio de headers Tbk-Api-Key-Id y Tbk-Api-Key-Secret.
 
-### Ambiente de Producción
+### Ambiente de Producción
 
 Las URLs de endpoints de producción están alojados dentro de
 <https://webpay3g.transbank.cl/>.
@@ -91,8 +91,8 @@ el ambiente de integración](/documentacion/como_empezar#ambientes).
 ```
 
 ```http
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
@@ -187,7 +187,7 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
 ![Diagrama de secuencia PatPass by Webpay Normal](/images/diagrama-secuencia-webpay.png)
 
 1. Una vez seleccionado los bienes o servicios, tarjetahabiente decide pagar a través de PatPass by WebPay.
-2. El comercio inicia una transacción en Webpay, invocando el método `initTransaction()`.
+2. El comercio inicia una transacción en Webpay, invocando el método `Transaction.create()`.
 3. Webpay procesa el requerimiento y entrega como resultado de la operación el token de la transacción y URL de redireccionamiento a la cual se deberá redirigir al tarjetahabiente.
 4. Comercio redirecciona al tarjetahabiente hacia Webpay, con el token de la transacción a la URL indicada en punto 3. La redirección se realiza enviando por método POST el token en variable `token_ws`.
 5. El navegador Web del tarjetahabiente realiza una petición HTTPS a Webpay, en base al redireccionamiento generado por el comercio en el punto 4.
@@ -219,7 +219,7 @@ pago](/images/diagrama-secuencia-webpay-abortar.png)
 Si el tarjetahabiente anula la transacción en el formulario de pago de Webpay, el flujo cambia y los pasos son los siguientes:
 
 1. Una vez seleccionado los bienes o servicios, tarjetahabiente decide pagar a través de PatPass by WebPay.
-2. El comercio inicia una transacción en Webpay, invocando el método `initTransaction()`.
+2. El comercio inicia una transacción en Webpay, invocando el método `Transaction.create()`.
 3. Webpay procesa el requerimiento y entrega como resultado de la operación el token de la transacción y URL de redireccionamiento a la cual se deberá redirigir al tarjetahabiente.
 4. Comercio redirecciona al tarjetahabiente hacia Webpay, con el token de la transacción a la URL indicada en punto 3. La redirección se realiza enviando por método POST el token en variable `token_ws`.
 5. El navegador Web del tarjetahabiente realiza una petición HTTPS a Webpay, en base al redireccionamiento generado por el comercio en el punto 4.
@@ -232,15 +232,15 @@ Nota que el nombre de las variables recibidas es diferente. En lugar de `token_w
 </aside>
 
 9. El comercio con la variable `TBK_TOKEN` debe invocar el método
-   `getTransactionResult()`, para obtener el resultado de la autorización. En
+   `Transaction.commit()`, para obtener el resultado de la autorización. En
    este caso debe obtener una excepción, pues el pago fue abortado.
 10. El comercio debe informar al tarjetahabiente que su pago no se completó.
 
 ### Crear una transacción PatPass by Webpay Normal
 
-Para crear una transacción basta llamar al método `initTransaction()`
+Para crear una transacción basta llamar al método `Transaction.create()`
 
-#### `initTransaction()`
+#### `Transaction.create()`
 
 Permite inicializar una transacción en PatPass by Webpay. Como respuesta a la invocación se genera un token que representa en forma única una transacción.
 
@@ -350,9 +350,9 @@ url  <br> <i> String </i> | URL de formulario de pago PatPass by Webpay. Largo m
 
 ### Confirmar una transacción PatPass by Webpay Normal
 
-Cuando el comercio retoma el control mediante `returnURL` puedes confirmar una transacción usando los métodos  `getTransactionResult()` y `acknowledgeTransaction()`
+Cuando el comercio retoma el control mediante `returnURL` puedes confirmar una transacción usando el método  `Transaction.commit()`.
 
-#### `getTransactionResult()`
+#### `Transaction.commit()`
 
 Permite obtener el resultado de la transacción una vez que Webpay ha resuelto su autorización financiera.
 
@@ -378,8 +378,8 @@ Permite obtener el resultado de la transacción una vez que Webpay ha resuelto 
 
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
@@ -438,8 +438,8 @@ Nombre  <br> <i> tipo </i> | Descripción
 VCI  <br> <i> String </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure), ACS2 (Autenticación fallida extranjera). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio). Largo máximo: 64
 amount  <br> <i> Number </i> | Monto de la transacción. Formato número entero para transacciones en peso y decimal para transacciones en dólares y UF máximo 2 decimales. Largo máximo: 17
 status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 64
-buyOrder  <br> <i> String </i> | Orden de compra de la tienda indicado en `initTransaction()`. Largo máximo: 26
-sessionId  <br> <i> String </i> | Identificador de sesión, el mismo enviado originalmente por el comercio en `initTransaction()`. Largo máximo: 61.
+buyOrder  <br> <i> String </i> | Orden de compra de la tienda indicado en `Transaction.create()`. Largo máximo: 26
+sessionId  <br> <i> String </i> | Identificador de sesión, el mismo enviado originalmente por el comercio en `Transaction.create()`. Largo máximo: 61.
 cardDetails  <br> <i> carddetails </i> | Objeto que representa los datos de la tarjeta de crédito del tarjeta habiente.
 cardDetails.cardNumber  <br> <i> String </i> | 4 últimos números de la tarjeta de crédito del tarjetahabiente. Solo para comercios autorizados por Transbank se envía el número completo. Largo máximo: 19.
 accountingDate  <br> <i> String </i> | Fecha de la autorización. Largo: 4, formato MMDD
@@ -447,4 +447,4 @@ transactionDate  <br> <i> String </i> | Fecha y hora de la autorización. Largo
 authorizationCode  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
 paymentTypeCode   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
 responseCode  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado. <br> -100 Rechazo por inscripción de PatPass by Webpay.
-installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
+installmentsNumber  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
