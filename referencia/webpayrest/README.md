@@ -478,7 +478,9 @@ transactionDate  <br> <i> String </i> | Fecha y hora de la autorización. Largo
 authorizationCode  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
 paymentTypeCode   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
 responseCode  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado.
+installmentsAmount <br> <i> Number </i> | Monto de las cuotas. Largo máximo: 17
 installmentsNumber  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
+balance  <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
 ### Obtener estado de una transacción Webpay Plus Normal
 
@@ -580,7 +582,9 @@ transactionDate  <br> <i> String </i> | Fecha y hora de la autorización. Largo
 authorizationCode  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
 paymentTypeCode   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
 responseCode  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado.
+installmentsAmount <br> <i> Number </i> | Monto de las cuotas. Largo máximo: 17
 installmentsNumber  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
+balance  <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
 ## Webpay Plus Mall
 
@@ -824,12 +828,12 @@ details [].authorizationCode  <br> <i> String </i> | Código de autorización 
 details [].paymentTypeCode   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
 details [].responseCode  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado.
 details [].amount  <br> <i> Formato número entero para transacciones en peso y decimal para transacciones en dólares. </i> | Monto de la transacción. Largo máximo: 10
-details [].installmentsNumber  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 details [].installmentsAmount  <br> <i> Number </i> | Monto de cada cuota. Largo máximo: 17
+details [].installmentsNumber  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 details [].commerceCode  <br> <i> String </i> | Código comercio de la tienda. Largo: 12
 details [].buyOrder  <br> <i> String </i> | Orden de compra de la tienda. Largo máximo: 26
-details [].status  <br> <i> String </i> | Estado de la transacción
-(AUTHORIZED, FAILED). Largo máximo: 26
+details [].status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 26
+balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
 ### Obtener estado de una transacción Webpay Plus Mall
 
@@ -939,6 +943,7 @@ details [].installmentsAmount  <br> <i> Number </i> | Monto de cada cuota. Largo
 details [].commerceCode  <br> <i> String </i> | Código comercio de la tienda. Largo: 12
 details [].buyOrder  <br> <i> String </i> | Orden de compra de la tienda. Largo máximo: 26
 details [].status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 26
+balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
 ## Otros Servicios Webpay Plus
 
@@ -1786,7 +1791,8 @@ transactionDate  <br> <i> ISO8601 </i> | Fecha de la transacción.
 authorizationCode  <br> <i> String </i> | Código de autorización de la transacción de pago.
 paymentTypeCode  <br> <i> String </i> | Indica el tipo de tarjeta utilizada.
 responseCode  <br> <i> Number </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
-installmentsNMumber <br> <i> Number </i> | Número de cuotas de la transacción.
+installmentsNumber <br> <i> Number </i> | Número de cuotas de la transacción.
+balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
 
 ### Reversar o anular un pago Webpay OneClick
 
@@ -2404,6 +2410,9 @@ details [].responseCode  <br> <i> Number </i> | Código de retorno del proceso 
 details [].installmentsNumber  <br> <i> Number </i> | Cantidad de cuotas de la sub-transacción de pago.
 details [].commerceCode  <br> <i> Number </i> | Código de comercio del comercio hijo (tienda).
 details [].buyOrder  <br> <i> String </i> | Orden de compra generada por el comercio hijo para la sub-transacción de pago.
+status  <br> <i> Text </i> | Estado de la transacción (AUTHORIZED,FAILED). Largo máximo: 64
+balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
+
 
 ### Reversar o Anular un pago Webpay OneClick Mall
 
@@ -2860,6 +2869,7 @@ authorizationCode  <br> <i> String </i> | Código de autorización de la trans
 paymentTypeCode  <br> <i> String </i> | Indica el tipo de tarjeta utilizada. Largo máximo: 2
 responseCode  <br> <i> Number </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
 installmentsNumber <br> <i> Number </i> | Número de cuotas de la transacción. Largo máximo: 2
+balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
 ### Consultar estado de una transacción completa
 
@@ -2962,8 +2972,9 @@ authorizationCode  <br> <i> String </i> | Código de autorización de la trans
 paymentTypeCode  <br> <i> String </i> | Indica el tipo de tarjeta utilizada.
 responseCode  <br> <i> Number </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
 installments_number <br> <i> Number </i> | Número de cuotas de la transacción. Largo máximo: 2
+balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
-### Anulación Webpay Plus
+### Anulación Transaccion Completa
 
 Permite generar el reembolso del total o parte del monto de una transacción completa.
 Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una reversa o una anulación:
@@ -3054,6 +3065,7 @@ authorizationCode  <br> <i> String </i> | Código de autorización de la anula
 authorizationDate  <br> <i> String </i> | Fecha y hora de la autorización.
 nullifiedAmount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17
+responseCode  <br> <i> Number </i> | Código de resultado del pago. Si es exitoso es 0, de lo contrario el pago no fue realizado. Largo máximo: 2
 
 
 ## Webpay Transacción Mall Completa
@@ -3446,6 +3458,8 @@ details [].installmentsNumber  <br> <i> Number </i> | Cantidad de cuotas. Largo 
 details [].installmentsAmount  <br> <i> Number </i> | Monto de cada cuota. Largo máximo: 17
 details [].commerceCode  <br> <i> String </i> | Código comercio de la tienda. Largo: 6
 details [].buyOrder  <br> <i> String </i> | Orden de compra de la tienda. Largo máximo: 255
+status <br> <i> Text </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 17
+balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 64
 
 ### Consultar estado de una transacción mall completa
 
@@ -3554,6 +3568,8 @@ details [].installmentsNumber  <br> <i> Number </i> | Cantidad de cuotas. Largo 
 details [].installmentsAmount  <br> <i> Number </i> | Monto de cada cuota. Largo máximo: 17
 details [].commerceCode  <br> <i> String </i> | Código comercio de la tienda. Largo: 6
 details [].buyOrder  <br> <i> String </i> | Orden de compra de la tienda. Largo máximo: 255
+status <br> <i> Text </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 17
+balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 64
 
 ### Anulación Webpay Transacción Completa
 
@@ -3650,3 +3666,4 @@ authorizationCode  <br> <i> String </i> | Código de autorización de la anula
 authorizationDate  <br> <i> String </i> | Fecha y hora de la autorización.
 nullifiedAmount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17
+responseCode <br> <i> Number </i> | Código del resultado del pago. Si es exitoso es 0, de lo contrario el pago no fue realizado
