@@ -357,7 +357,7 @@ WsInitTransactionOutput initResult =
 
 ```php
 $initResult = $transaction->initTransaction(
-        $amount, $sessionId, $buyOrder, $returnUrl, $finalUrl);
+        $amount, $buyOrder, $sessionId, $returnUrl, $finalUrl);
 ```
 
 ```csharp
