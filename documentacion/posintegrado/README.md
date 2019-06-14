@@ -262,15 +262,14 @@ El comando de anulación soporta los siguientes parámetros que pueden ser envia
 using Transbank.POS;
 using Transbank.POS.Responses;
 //...
-CancellationResponse response = POS.Instance.Cancellation(21);
+RefundResp response = POS.Instance.Refund(21);
 ```
 
 ```c
 #include "transbank.h"
 #include "transbank_serial_utils.h"
 //...
-CancellationResponse response = cancellation(21);
-}
+RefundResponse response = refund(21);
 ```
 
 Como respuesta el **POS** enviará un código de aprobación correspondiente al campo 38 del ISO, acompañado de un código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas. [Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas)
