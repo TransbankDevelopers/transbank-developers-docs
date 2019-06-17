@@ -195,10 +195,6 @@ Actualmente no están soportados los mensajes intermedios. Por esta razón el 3�
 
 Este comando es enviado por la caja, solicitando al POS la re-impresión de la última venta realizada.
 
-<aside class="warning">
-La transacción de cierre borra todas las transacciones almacenadas en la memoria del POS.
-</aside>
-
 Si el POS recibe el comando de Última Venta y no existen transacciones en memoria del POS, se envía la respuesta a la caja indicando el código de respuesta 11.
 ([Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas))
 
@@ -250,6 +246,10 @@ Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la
 Esta transacción también realiza el cambió de llaves.
 </aside>
 
+<aside class="warning">
+La transacción de cierre borra todas las transacciones almacenadas en la memoria del POS.
+</aside>
+
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
@@ -285,10 +285,6 @@ Para el cierre no se solicitará tarjeta supervisora.
 
 Esta operación le permitirá a la caja obtener desde el _POS_ un resumen con el monto total y la cantidad de transacciones
 que se han realizado hasta el minuto y que aún permanecen en la memoria del _POS_.
-
-<aside class="warning">
-Un cierre de terminal, vacía la memoria del POS
-</aside>
 
 Además la caja podrá determinar si existen transacciones que no fueron informadas desde el _POS_,
 haciendo una comparación de los totales entre la caja y el _POS_. La impresión del _Voucher_ con el resumen será realizada por el _POS_.
