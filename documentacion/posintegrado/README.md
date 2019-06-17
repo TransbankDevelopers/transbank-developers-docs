@@ -282,10 +282,6 @@ Para el cierre no se solicitará tarjeta supervisora.
 Esta operación le permitirá a la caja obtener desde el _POS_ un resumen con el monto total y la cantidad de transacciones
 que se han realizado hasta el minuto y que aún permanecen en la memoria del _POS_.
 
-<aside class="warning">
-Un cierre de terminal, vacía la memoria del POS
-</aside>
-
 Además la caja podrá determinar si existen transacciones que no fueron informadas desde el _POS_,
 haciendo una comparación de los totales entre la caja y el _POS_. La impresión del _Voucher_ con el resumen será realizada por el _POS_.
 
