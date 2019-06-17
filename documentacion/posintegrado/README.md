@@ -195,10 +195,6 @@ Actualmente no están soportados los mensajes intermedios. Por esta razón el 3�
 
 Este comando es enviado por la caja, solicitando al POS la re-impresión de la última venta realizada.
 
-<aside class="warning">
-La transacción de cierre borra todas las transacciones almacenadas en la memoria del POS.
-</aside>
-
 Si el POS recibe el comando de Última Venta y no existen transacciones en memoria del POS, se envía la respuesta a la caja indicando el código de respuesta 11.
 ([Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas))
 
