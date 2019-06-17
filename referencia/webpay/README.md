@@ -376,7 +376,7 @@ finalURL  <br> <i>xs:anyURI </i> | URL del comercio a la cual Webpay redireccion
 transactionDetails  <br> <i>wsTransactionDetail </i> | Lista de objetos del tipo wsTransactionDetail, el cual contiene datos de la transacción. Para transacciones normales debe contener exactamente un elemento
 transactionDetails[0].amount  <br> <i> xs:decimal </i> | Monto de la transacción. Máximo 2 decimales para USD. Largo máximo: 10
 transactionDetails[0].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>
-transactionDetails[0].commerceCode  <br> <i>xs:string </i> | Código comercio de la tienda entregado por Transbank. Largo: 12. Los SDKs se encargan automáticamente de este parámetro a partir de la configuración de comercio y certificados/llaves usada para iniciar la transacción
+transactionDetails[0].commerceCode  <br> <i>xs:string </i> | Código comercio de la tienda entregado por Transbank. Largo: 12, Si el código que posees es de 8 dígitos debes anteponer 5970. Los SDKs se encargan automáticamente de este parámetro a partir de la configuración de comercio y certificados/llaves usada para iniciar la transacción
 
 **Respuesta**
 
@@ -680,7 +680,7 @@ buyOrder  <br> <i> xs:string </i> | Es el código único de la orden de compra
 transactionDetails  <br> <i>wsTransactionDetail </i> | Lista de objetos del tipo wsTransactionDetail, uno por cada tienda diferente del mall que participa en la transacción.
 transactionDetails[].amount  <br> <i> xs:decimal </i> | Monto de la transacción de una tienda del mall. Máximo 2 decimales para USD. Largo máximo: 10.
 transactionDetails[].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda del mall. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>.
-transactionDetails[].commerceCode  <br> <i>xs:string </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
+transactionDetails[].commerceCode  <br> <i>xs:string </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.<br>Si el código que posees es de 8 dígitos debes anteponer 5970.
 
 **Respuesta**
 
@@ -957,7 +957,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
 buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
-commerceId  <br> <i> xs:long </i> | Código de comercio o tienda mall que realizó la transacción. Largo: 12.
+commerceId  <br> <i> xs:long </i> | Código de comercio o tienda mall que realizó la transacción. Largo: 12.<br>Si el código que posees es de 8 dígitos debes anteponer 5970.
 capturedAmount  <br> <i> xs:decimal </i> | Monto que se desea capturar. Largo máximo: 10.
 
 **Respuesta**
@@ -1098,7 +1098,7 @@ authorizationCode  <br> <i> xs:string </i> | Código de autorización de la tr
 authorizedAmount  <br> <i> xs:decimal </i> | Monto autorizado de la transacción que se requiere anular. Si la transacción es de captura diferida, se debe usar el monto capturado cuando se invocó a `capture()`. Largo máximo: 10.
 buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se requiere anular. Largo máximo: 26.
 nullifyAmount  <br> <i> xs:decimal </i> | Monto que se desea anular de la transacción. Largo máximo: 10.
-commerceId  <br> <i> xs:long </i> | Código de comercio o tienda mall que realizó la transacción. Largo: 12.
+commerceId  <br> <i> xs:long </i> | Código de comercio o tienda mall que realizó la transacción. Largo: 12.<br>Si el código que posees es de 8 dígitos debes anteponer 5970.
 
 **Respuesta**
 
@@ -1835,7 +1835,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción que se requiere capturar. Largo máximo: 6.
 buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
-commerceId  <br> <i> xs:long </i> | Código de tienda mall que realizó la transacción. Largo: 12.
+commerceId  <br> <i> xs:long </i> | Código de tienda mall que realizó la transacción. Largo: 12.<br>Si el código que posees es de 8 dígitos debes anteponer 5970.
 capturedAmount  <br> <i> xs:decimal </i> | Monto que se desea capturar. Largo máximo: 10.
 
 <aside class="notice">

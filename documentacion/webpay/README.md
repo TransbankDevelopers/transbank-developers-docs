@@ -625,7 +625,9 @@ import cl.transbank.webpay.WebpayOneClick;
 //...
 
 Configuration configuration = new Configuration();
-configuration.setCommerceCode("12345"); // acá va tu código de comercio
+
+// a continuación va tu código de comercio, Si el código que posees es de 8 dígitos debes anteponer 5970.
+configuration.setCommerceCode("597012345678");
 configuration.setPrivateKey( // pega acá la llave privada de tu certificado
     "-----BEGIN RSA PRIVATE KEY-----\n" +
     "MIIEpQIBAAKCAQEA0ClVcH8RC1u+KpCPUnzYSIcmyXI87REsBkQzaA1QJe4w/B7g\n" +
@@ -650,7 +652,9 @@ use Transbank\Webpay\Webpay;
 // ...
 
 $configuration = new Configuration();
-$configuration->setCommerceCode("12345"); // acá va tu código de comercio
+
+// a continuación va tu código de comercio, Si el código que posees es de 8 dígitos debes anteponer 5970.
+$configuration->setCommerceCode("12345");
 $configuration->setPrivateKey( // pega acá la llave privada de tu certificado
     "-----BEGIN RSA PRIVATE KEY-----\n" +
     "MIIEpQIBAAKCAQEA0ClVcH8RC1u+KpCPUnzYSIcmyXI87REsBkQzaA1QJe4w/B7g\n" +
@@ -675,7 +679,8 @@ using Transbank.Webpay;
 
 var configuration = new Configuration()
 {
-    CommerceCode = "12345", // acá va tu código de comercio
+    // a continuación va tu código de comercio, Si el código que posees es de 8 dígitos debes anteponer 5970.
+    CommerceCode = "12345",
     PrivateCertPfxPath = @"C:\Certs\certificado.pfx", // pega acá la ruta a tu archivo pfx o p12
     Password = "secret123" // pega acá el secreto con el cual se genero el archivo pfx o p12
 };
