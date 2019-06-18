@@ -383,7 +383,7 @@ RefundResp response = POS.Instance.Refund(21);
 RefundResponse response = refund(21);
 ```
 
-Como respuesta el **POS** enviará un código de aprobación correspondiente al campo 38 del ISO, acompañado de un código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas. [Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas)
+Como respuesta el **POS** enviará un código de aprobación, acompañado de un código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas. [Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas)
 
 ```json
 "FunctionCode": 1210
