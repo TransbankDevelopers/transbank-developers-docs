@@ -762,15 +762,15 @@ Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en 
 1. Primero debes ingresar al menú `Comercio` en el POS seleccionando la opción correspondiente en la pantalla del POS.
 
 2. Luego debes seleccionar la opción `Func. Comercio` e ingresar la **Clave Supervisora** confirmando con la tecla `Enter` (verde).
-<img src="/images/referencia/posintegrado/diagrama-ultima-venta.png" alt="Diagrama de Secuencia Última Venta">
+<img src="/images/referencia/posintegrado/cambio-pos-integrado-1.png" alt="Ingresar al menu Comercio">
 
 3. A continuación  selecciona la opción `POS Integrado` desde la pantalla 2-2
 
 4. Ingresa nuevamente la **Clave Supervisora** confirmando con la tecla `Enter`
-<img src="/images/referencia/posintegrado/diagrama-ultima-venta.png" alt="Diagrama de Secuencia Última Venta">
+<img src="/images/referencia/posintegrado/cambio-pos-integrado-2.png" alt="Pantalla POS Integrado">
 
 5. Finalmente, debes seleccionar la opción `Conectar Caja`
-<img src="/images/referencia/posintegrado/diagrama-ultima-venta.png" alt="Diagrama de Secuencia Última Venta">
+<img src="/images/referencia/posintegrado/cambio-pos-integrado-3.png" alt="Pantalla POS Integrado">
 
 <aside class="notice">
 La <strong>Clave Supervisora</strong> por defecto es 123456
