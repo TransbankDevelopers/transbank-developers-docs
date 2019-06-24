@@ -13,7 +13,7 @@ Cuando veas cosas como texto entre símbolos <strong>&lt; &gt;</strong> nos esta
 La comunicación se realiza a través de un puerto serial `RS232`, a velocidades que van entre los 1200bps hasta 115200bps `8N1`
 es decir `8` bits de datos, `N`ingún bit de paridad y `1` bit de parada.
 
-![Diagrama de Comunicación Caja - POS](/images/referencia/posintegrado/diagrama-comunicacion-caja-pos.png)
+<img class="td_img-night" src="/images/referencia/posintegrado/diagrama-comunicacion-caja-pos.png" alt="Diagrama de Comunicación Caja - POS">
 
  Termino    | Descripción
  -------    | -------
@@ -177,7 +177,7 @@ El resultado de la venta se entrega en la forma de un objeto `SaleResponse` o un
 Actualmente no están soportados los mensajes intermedios. Por esta razón el 3º parámetro de la función en C debe ser siempre falso.
 </aside>
 
-![Diagrama de Secuencia Venta](/images/referencia/posintegrado/diagrama-venta.png)
+<img class="td_img-night" src="/images/referencia/posintegrado/diagrama-venta.png" alt="Diagrama de Secuencia Venta">
 
 1. La caja envía el requerimiento y espera como respuesta `<ACK>`/`<NAK>`, en caso de que llegue un `<NAK>`, debe reintentar el envío del requerimiento 2 veces. Si recibe un `<ACK>` debe esperar la respuesta de la transacción.
 2. El POS solicita los datos al usuario, y envía el requerimiento al Autorizador, en caso de ser aprobada, se guarda en Batch y se envía respuesta a la caja. En caso de ser rechazada se envía respuesta a la caja indicando el error. ([Ver Tabla de Respuestas](/referencia/posintegrado#tabla-de-respuestas))
@@ -290,7 +290,7 @@ El resultado de la transacción última venta devuelve los mismos datos que una 
 "Tip": 1500
 ```
 
-![Diagrama de Secuencia Última Venta](/images/referencia/posintegrado/diagrama-ultima-venta.png)
+<img class="td_img-night" src="/images/referencia/posintegrado/diagrama-ultima-venta.png" alt="Diagrama de Secuencia Última Venta">
 
 1. La caja envía el requerimiento y espera como respuesta `<ACK>`/`<NAK>`, en caso de que llegue un `<NAK>`, debe reintentar el envío del requerimiento 2 veces. Si recibe un `<ACK>` debe esperar la respuesta de la transacción.
 2. Una vez recibida la respuesta, la caja calcula el `<LRC>` del mensaje y lo compara con el recibido, en el caso de coincidir la caja envía un `<ACK>` al **POS** dando por finalizado el comando; en caso contrario envía `<NAK>` y vuelve a esperar la respuesta del **POS**.
@@ -396,7 +396,7 @@ Como respuesta el **POS** enviará un código de aprobación, acompañado de un 
 "Success": true
 ```
 
-![Diagrama de Secuencia Anulación](/images/referencia/posintegrado/diagrama-anulacion.png)
+<img class="td_img-night" src="/images/referencia/posintegrado/diagrama-anulacion.png" alt="Diagrama de Secuencia Anulación">
 
 1. La caja envía el requerimiento y espera como respuesta `<ACK>`/`<NAK>`, en caso de que llegue un `<NAK>`, debe reintentar el envío del requerimiento 2 veces más. Si recibe un `<ACK>` debe esperar la respuesta de la transacción.
 2. El **POS** envía el requerimiento al autorizador, en caso de ser aprobada se guarda en batch y se envía la respuesta a la caja. En el caso de ser rechazada se envía la respuesta a la caja indicando el error.
@@ -473,7 +473,7 @@ El resultado del cierre de caja se entrega en la forma de un objeto `CloseRespon
 "TerminalId": "ABC1234C"
 ```
 
-![Diagrama de Secuencia Cierre](/images/referencia/posintegrado/diagrama-cierre.png)
+<img class="td_img-night" src="/images/referencia/posintegrado/diagrama-cierre.png" alt="Diagrama de Secuencia Cierre">
 
 1. La caja envía el requerimiento y espera como respuesta `<ACK>`/`<NAK>`, en caso de que llegue un `<NAK>`, debe reintentar el envío del requerimiento 2 veces. Si recibe un `<ACK>` debe esperar la respuesta de la transacción.
 2. El POS envía requerimiento al Autorizador, en caso de ser aprobada, se borra Batch y se envía respuesta a la caja. En caso de ser rechazada se envía respuesta a la caja indicando el error.
@@ -549,7 +549,7 @@ El resultado de la transacción entrega en la forma de un objeto `GetTotalsRespo
 "TX Total": 15000 // Suma total de los montos de cada transaccion
 ```
 
-![Diagrama de Solicitud de Totales](/images/referencia/posintegrado/diagrama-totales.png)
+<img class="td_img-night" src="/images/referencia/posintegrado/diagrama-totales.png" alt="Diagrama de Solicitud de Totales">
 
 #### Solicitud de Totales
 
@@ -620,7 +620,7 @@ El resultado de la carga de llaves se entrega en la forma de un objeto `LoadKeys
 "TerminalId": "ABC1234C"
 ```
 
-![Diagrama de Secuencia Carga de Llaves](/images/referencia/posintegrado/diagrama-carga-llaves.png)
+<img class="td_img-night" src="/images/referencia/posintegrado/diagrama-carga-llaves.png" alt="Diagrama de Secuencia Carga de Llaves">
 
 1. La caja envía el requerimiento y espera como respuesta `<ACK>`/`<NAK>`, en caso de que la respuesta sea negativa, se debe reintentar el envío del requerimiento 2 veces. Si recibe un `<ACK>` se debe esperar la respuesta de la transacción.
 2. El POS envía el requerimiento al Autorizador, en caso de ser aprobado, se guarda la nueva llave y se envía la respuesta a la caja. En caso de ser rechazada se indica el error a la Caja.
@@ -682,7 +682,7 @@ if (retval == TBK_OK){
 }
 ```
 
-![Diagrama de Secuencia Poll](/images/referencia/posintegrado/diagrama-poll.png)
+<img class="td_img-night" src="/images/referencia/posintegrado/diagrama-poll.png" alt="Diagrama de Secuencia Poll">
 
 1. La caja envía el requerimiento y espera como respuesta `<ACK>`, en caso de recibir `<ACK>`, esto indica que el POS se encuentra operativo y listo para recibir comandos. si no se recibe respuesta o es `<NAK>` se debe reintentar el envío del comando 2 veces.
 
@@ -727,7 +727,7 @@ if (retval == TBK_OK){
 }
 ```
 
-![Diagrama de Secuencia Cambio a POS Normal](/images/referencia/posintegrado/diagrama-cambio-pos-normal.png)
+<img class="td_img-night" src="/images/referencia/posintegrado/diagrama-cambio-pos-normal.png" alt="Diagrama de Secuencia Cambio a POS Normal">
 
 1. La caja envía el requerimiento y espera como respuesta `<ACK>`, en caso de recibir `<ACK>`, esto indica que el POS cambio se realizó correctamente, si no se recibe respuesta o es `<NAK>` se debe reintentar el envío del comando 2 veces.
 
@@ -762,15 +762,15 @@ Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en 
 1. Primero debes ingresar al menú `Comercio` en el POS seleccionando la opción correspondiente en la pantalla del POS.
 
 2. Luego debes seleccionar la opción `Func. Comercio` e ingresar la **Clave Supervisora** confirmando con la tecla `Enter` (verde).
-![Ingresar al menu Comercio](/images/referencia/posintegrado/cambio-pos-integrado-1.png)
+<img src="/images/referencia/posintegrado/cambio-pos-integrado-1.png" alt="Ingresar al menu Comercio">
 
 3. A continuación  selecciona la opción `POS Integrado` desde la pantalla 2-2
 
 4. Ingresa nuevamente la **Clave Supervisora** confirmando con la tecla `Enter`
-![Pantalla POS Integrado](/images/referencia/posintegrado/cambio-pos-integrado-2.png)
+<img src="/images/referencia/posintegrado/cambio-pos-integrado-2.png" alt="Pantalla POS Integrado">
 
 5. Finalmente, debes seleccionar la opción `Conectar Caja`
-![Pantalla POS Integrado](/images/referencia/posintegrado/cambio-pos-integrado-3.png)
+<img src="/images/referencia/posintegrado/cambio-pos-integrado-3.png" alt="Pantalla POS Integrado">
 
 <aside class="notice">
 La <strong>Clave Supervisora</strong> por defecto es 123456
