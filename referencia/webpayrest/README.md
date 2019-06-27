@@ -586,6 +586,136 @@ installments_amount <br> <i> Number </i> | Monto de las cuotas. Largo máximo: 1
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 balance  <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
+### Reembolso Webpay Plus
+
+Este método permite a todo comercio habilitado, reembolsar o anular una
+transacción que fue generada en Webpay Plus. El método permite generar el
+reembolso del total o parte del monto de una transacción.
+Dependiendo de la siguiente lógica de negocio la invocación a esta
+operación generará una reversa o una anulación:
+* Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
+* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
+
+La anulación puede realizarse máximo 90 días después de la fecha de la
+transacción original.
+
+Puedes [leer más sobre la anulación en la información del
+producto Webpay](/producto/webpay#anulaciones) para conocer
+más detalles y restricciones.
+
+Para anular una transacción se debe invocar al método `Transaction.refund()`.
+
+#### `Transaction.refund()`
+
+Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentra vigente.
+
+> Los SDKs permiten indicar opcionalmente el código de comercio de la
+> transacción a anular, para soportar la anulación en comercios Webpay Plus
+> Mall. En comercios Webpay Plus Normal, no es necesario especificar el código
+> de comercio pues se usa el indicado en la configuración.
+
+<aside class="notice">
+El método `Transaction.refund()` debe ser invocado siempre indicando el código del comercio que realizó la transacción. En el caso de comercios Webpay Plus Mall, el código debe ser el código de la tienda virtual específica.
+</aside>
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refunds
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "amount": 1000
+}
+```
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> String </i> | Token de la transacción. Largo: 64.
+amount  <br> <i> Decimal </i> | (Opcional) Monto que se desea anular de la transacción. Largo máximo: 10.
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+{
+  "type": "NULLIFY",
+  "authorization_code": "123456",
+  "authorization_date": "2019-03-20T20:18:20Z",
+  "nullified_amount": 1000.00,
+  "balance": 0.00
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+type  <br> <i> String </i> | Tipo de reembolso (REVERSE. NULLIFY). Largo máximo: 10
+authorization_code  <br> <i> String </i> | Código de autorización de la anulación. Largo máximo: 6
+authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
+balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17
+nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
+
+En caso de error pueden aparecer los siguientes códigos de error comunes para el método `Transaction.refund()`:
+
+Código | Descripción
+------ | -----------
+304 | Validación de campos de entrada nulos
+245 | Código de comercio no existe
+22 | El comercio no se encuentra activo
+316 | El comercio indicado no corresponde al certificado o no es hijo del comercio MALL en caso de transacciones MALL
+308 | Operación no permitida
+274 | Transacción no encontrada
+16 | La transacción no permite anulación
+292 | La transacción no está autorizada
+284 | Periodo de anulación excedido
+310 | Transacción anulada previamente
+311 | Monto a anular excede el saldo disponible para anular
+312 | Error genérico para anulaciones
+315 | Error del autorizador
+53 | La transacción no permite anulación parcial de transacciones con cuotas
+
 ## Webpay Plus Mall
 
 Una transacción Mall Normal corresponde a una solicitud de autorización
@@ -945,163 +1075,15 @@ details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda. Largo
 details [].status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 26
 balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
-## Otros Servicios Webpay Plus
-
-### Captura diferida Webpay Plus
-
-Este método permite a todo comercio habilitado realizar capturas de una
-transacción autorizada sin captura generada en Webpay Plus o Webpay OneClick.
-El método contempla una única captura por cada autorización. Para ello se
-deberá indicar los datos asociados a la transacción de venta con autorización
-sin captura y el monto requerido para capturar el cual debe ser menor o igual al
-monto originalmente autorizado.
-
-Para capturar una transacción, ésta debe haber sido creada (según lo visto
-anteriormente para Webpay Plus Normal o Webpay Plus Mall) por un código de
-comercio configurado para captura diferida. De esa forma la transacción estará
-autorizada pero requerirá una captura explícita posterior para confirmar la
-transacción.
-
-Puedes [leer más sobre la captura en la información del
-producto Webpay](/producto/webpay#autorizacion-y-captura)
-para conocer más detalles y restricciones.
-
-Para realizar esa captura explícita debe usarse el método `Transaction.capture()`
-
-#### `Transaction.capture()`
-
-Permite solicitar a Webpay la captura diferida de una transacción con
-autorización y sin captura simultánea.
-
-> Los SDKs permiten indicar opcionalmente el código de comercio de la
-> transacción a capturar, para soportar la captura en comercios Webpay Plus
-> Mall. En comercios Webpay Plus Normal, no es necesario especificar el código
-> de comercio pues se usa el indicado en la configuración.
-
-<aside class="notice">
-El método `Transaction.capture()` debe ser invocado siempre indicando el código del
-comercio que realizó la transacción. En el caso de comercios Webpay Plus Mall,
-el código debe ser el código de la tienda virtual específica.
-</aside>
-
-```java
-// Este SDK aún no se encuentra disponible
-```
-
-```php
-// Este SDK aún no se encuentra disponible
-```
-
-```csharp
-// Este SDK aún no se encuentra disponible
-```
-
-```ruby
-# Este SDK aún no se encuentra disponible
-```
-
-```python
-# Este SDK aún no se encuentra disponible
-```
-
-```http
-PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
-Content-Type: application/json
-
-{
-  "commerce_code": "597026007976",
-  "buy_order": "ordenCompra12345678",
-  "authorization_code": "123456",
-  "capture_mount": 1000
-}
-```
-**Parámetros**
-
-Nombre  <br> <i> tipo </i> | Descripción
-------   | -----------
-token  <br> <i> String </i> | Token de la transacción. Largo: 64.
-authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
-buy_order  <br> <i> String </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
-commerce_id  <br> <i> Number </i> | (Opcional) Tienda mall que realizó la transacción. Largo: 6.
-captured_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo máximo: 17.
-
-**Respuesta**
-
-```java
-// Este SDK aún no se encuentra disponible
-```
-
-```php
-// Este SDK aún no se encuentra disponible
-```
-
-```csharp
-// Este SDK aún no se encuentra disponible
-```
-
-```ruby
-# Este SDK aún no se encuentra disponible
-```
-
-```python
-# Este SDK aún no se encuentra disponible
-```
-
-```http
-200 OK
-Content-Type: application/json
-{
-  "token": "e074d38c628122c63e5c0986368ece22974d6fee1440617d85873b7b4efa48a3",
-  "authorization_code": "123456",
-  "authorization_date": "2019-03-20T20:18:20Z",
-  "captured_amount": 1000
-}
-```
-
-Nombre  <br> <i> tipo </i> | Descripción
-------   | -----------
-token  <br> <i> String </i> | Token de la transacción. Largo máximo: 64
-authorization_code  <br> <i> String </i> | Código de autorización de la captura diferida. Largo máximo: 6
-authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
-captured_amount  <br> <i> Decimal </i> | Monto capturado. Largo máximo: 6
-
-En caso de error pueden aparecer los siguientes códigos exclusivos del método
-`Transaction.capture()`:
-
-Código | Descripción
------- | -----------
-304 | Validación de campos de entrada nulos
-245 | Código de comercio no existe
-22 | El comercio no se encuentra activo
-316 | El comercio indicado no corresponde al certificado o no es hijo del comercio MALL en caso de transacciones MALL
-308 | Operación no permitida
-274 | Transacción no encontrada
-16 | La transacción no es de captura diferida
-292 | La transacción no está autorizada
-284 | Periodo de captura excedido
-310 | Transacción reversada previamente
-309 | Transacción capturada previamente
-311 | Monto a capturar excede el monto autorizado
-315 | Error del autorizador
-
-### Anulación Webpay Plus
+### Reembolso Webpay Plus Mall
 
 Este método permite a todo comercio habilitado anular una transacción que fue
-generada en Webpay Plus (Normal y Mall) o Webpay OneClick Normal. El método
-contempla anular total o parcialmente una transacción. Para ello se deberá
-indicar los datos asociados a la transacción de venta en línea que se desea
-anular y los montos requeridos para anular. Se considera totalmente anulada una
-transacción cuando el monto anulado o el monto total de anulaciones cursadas
-alcancen el monto autorizado en la venta en línea.
-
-El servicio web de anulación de transacciones Webpay soporta una sola
-anulación parcial para la transacción de venta en línea. En caso de enviar
-una segunda anulación parcial se retornará una `Exception`.
-
-Las ejecuciones con errores entregarán un SoapFault de acuerdo a la
-codificación de errores definida mas abajo.
+generada en Webpay Plus Mall. El método permite generar el
+reembolso del total o parte del monto de una transacción.
+Dependiendo de la siguiente lógica de negocio la invocación a esta
+operación generará una reversa o una anulación:
+* Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
+* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
 
 La anulación puede realizarse máximo 90 días después de la fecha de la
 transacción original.
@@ -1227,6 +1209,147 @@ Código | Descripción
 312 | Error genérico para anulaciones
 315 | Error del autorizador
 53 | La transacción no permite anulación parcial de transacciones con cuotas
+
+## Webpay Plus Captura Diferida
+
+### Ejecutar captura diferida Webpay Plus
+
+Este método permite a todo comercio habilitado realizar capturas de una
+transacción autorizada sin captura generada en Webpay Plus.
+El método contempla una única captura por cada autorización. Para ello se
+deberá indicar los datos asociados a la transacción de venta con autorización
+sin captura y el monto requerido para capturar el cual debe ser menor o igual al
+monto originalmente autorizado.
+
+Para capturar una transacción, ésta debe haber sido creada (según lo visto
+anteriormente para Webpay Plus Normal o Webpay Plus Mall) por un código de
+comercio configurado para captura diferida. De esa forma la transacción estará
+autorizada pero requerirá una captura explícita posterior para confirmar la
+transacción.
+
+Puedes [leer más sobre la captura en la información del
+producto Webpay](/producto/webpay#autorizacion-y-captura)
+para conocer más detalles y restricciones.
+
+Para realizar esa captura explícita debe usarse el método `Transaction.capture()`
+
+#### `Transaction.capture()`
+
+Permite solicitar a Webpay la captura diferida de una transacción con
+autorización y sin captura simultánea.
+
+> Los SDKs permiten indicar opcionalmente el código de comercio de la
+> transacción a capturar, para soportar la captura en comercios Webpay Plus
+> Mall. En comercios Webpay Plus Normal, no es necesario especificar el código
+> de comercio pues se usa el indicado en la configuración.
+
+<aside class="notice">
+El método `Transaction.capture()` debe ser invocado siempre indicando el código del
+comercio que realizó la transacción. En el caso de comercios Webpay Plus Mall,
+el código debe ser el código de la tienda virtual específica.
+</aside>
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
+Content-Type: application/json
+
+{
+  "commerce_code": "597026007976",
+  "buy_order": "ordenCompra12345678",
+  "authorization_code": "123456",
+  "capture_mount": 1000
+}
+```
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> String </i> | Token de la transacción. Largo: 64.
+commerce_code  <br> <i> Number </i> | (Opcional, solo usar en caso Mall) Tienda hija que realizó la transacción. Largo: 6.
+buy_order  <br> <i> String </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
+authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
+capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo máximo: 17.
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+{
+  "token": "e074d38c628122c63e5c0986368ece22974d6fee1440617d85873b7b4efa48a3",
+  "authorization_code": "123456",
+  "authorization_date": "2019-03-20T20:18:20Z",
+  "captured_amount": 1000
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> String </i> | Token de la transacción. Largo máximo: 64
+authorization_code  <br> <i> String </i> | Código de autorización de la captura diferida. Largo máximo: 6
+authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
+captured_amount  <br> <i> Decimal </i> | Monto capturado. Largo máximo: 6
+
+En caso de error pueden aparecer los siguientes códigos exclusivos del método
+`Transaction.capture()`:
+
+Código | Descripción
+------ | -----------
+304 | Validación de campos de entrada nulos
+245 | Código de comercio no existe
+22 | El comercio no se encuentra activo
+316 | El comercio indicado no corresponde al certificado o no es hijo del comercio MALL en caso de transacciones MALL
+308 | Operación no permitida
+274 | Transacción no encontrada
+16 | La transacción no es de captura diferida
+292 | La transacción no está autorizada
+284 | Periodo de captura excedido
+310 | Transacción reversada previamente
+309 | Transacción capturada previamente
+311 | Monto a capturar excede el monto autorizado
+315 | Error del autorizador
 
 ## Webpay OneClick Normal
 
