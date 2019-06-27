@@ -1146,7 +1146,7 @@ El método `Transaction.refund()` debe ser invocado siempre indicando el códi
 ```
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refund
+POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refunds
 Tbk-Api-Key-Id: 597055555532
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -1824,7 +1824,7 @@ Este método retorna como respuesta un identificador único de la transacció
 ```
 
 ```http
-PUT /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}/refund
+POST /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}/refunds
 
 Tbk-Api-Key-Id: Próximamente...
 Tbk-Api-Key-Secret: Próximamente...
@@ -2465,7 +2465,7 @@ Este método retorna como respuesta un identificador único de la transacció
 ```
 
 ```http
-PUT /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}/refund
+POST /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}/refunds
 
 Tbk-Api-Key-Id: Próximamente...
 Tbk-Api-Key-Secret: Próximamente...
@@ -3008,7 +3008,7 @@ Permite solicitar a Webpay la anulación de una transacción realizada previam
 ```
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refund
+POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refunds
 Tbk-Api-Key-Id: 597055555532
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
