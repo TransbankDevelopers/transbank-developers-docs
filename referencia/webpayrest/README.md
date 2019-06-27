@@ -244,7 +244,7 @@ de Transbank, solo debe mostrarse desde el sitio del comercio.
 
 13. Sitio del comercio despliega voucher con los datos de la transacción.
 
-#### Flujo si usuario aborta el pago
+### Flujo si usuario aborta el pago
 
 <img class="td_img-night" src="/images/diagrama-secuencia-webpay-abortar.png" alt="Diagrama de secuencia si usuario aborta el pago">
 
