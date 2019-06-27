@@ -786,8 +786,8 @@ token es caducado y no podrá ser utilizado en un pago.
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions
 
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555535
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
@@ -797,9 +797,14 @@ Content-Type: application/json
  "details": [
      {
          "amount": 10000,
-         "commerce_code": 597026008905,
+         "commerce_code": 597055555536,
          "buy_order": "ordenCompraDetalle1234"
-     }
+     },
+     {     
+        "amount": 12000,
+        "commerce_code": 597055555537,
+        "buy_order": "ordenCompraDetalle4321"
+     },
  ]
 }
 ```
@@ -884,8 +889,8 @@ una vez que Webpay ha resueltosu autorización financiera.
 
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555535
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 ```
 
@@ -936,7 +941,7 @@ Content-Type: application/json
       "payment_type_code": "VN",
       "response_code": 0,
       "installments_number": 0,
-      "commerce_code": "597026010055",
+      "commerce_code": "597055555536",
       "buy_order": "505479072",
       "status": "AUTHORIZED"
   }]
@@ -995,7 +1000,7 @@ Obtiene resultado de transacción a partir de un token.
 
 ```http
 GET /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Id: 597055555535
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 ```
@@ -1047,7 +1052,7 @@ Content-Type: application/json
       "payment_type_code": "VN",
       "response_code": 0,
       "installments_number": 0,
-      "commerce_code": "597026010055",
+      "commerce_code": "597055555536",
       "buy_order": "505479072",
       "status": "AUTHORIZED"
   }]
@@ -1129,13 +1134,13 @@ El método `Transaction.refund()` debe ser invocado siempre indicando el códi
 
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refunds
-Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Id: 597055555535
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
   "buy_order": "415034240",
-  "commerce_code": "597026010055",
+  "commerce_code": "597055555536",
   "amount": 1000
 }
 ```
@@ -1271,12 +1276,12 @@ el código debe ser el código de la tienda virtual específica.
 
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555535
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
-  "commerce_code": "597026007976",
+  "commerce_code": "597055555536",
   "buy_order": "ordenCompra12345678",
   "authorization_code": "123456",
   "capture_mount": 1000
