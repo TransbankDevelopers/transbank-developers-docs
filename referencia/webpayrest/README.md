@@ -3605,14 +3605,12 @@ Permite solicitar a Webpay la anulación de una transacción realizada previam
 ```
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refund
+POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refunds
 Tbk-Api-Key-Id: Próximamente...
 Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
-  "buy_order": "415034240",
-  "commerce_code": "597026010055",
   "amount": 1000
 }
 ```
@@ -3621,9 +3619,8 @@ Content-Type: application/json
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64.
-buy_order  <br> <i> String </i> | Orden de compra del mall. Largo máximo: 26
-details [].commerce_code  <br> <i>String </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
-amount  <br> <i> Decimal </i> | (Opcional) Monto que se desea anular de la transacción. Largo máximo: 17.
+amount  <br> <i> Number </i> | Monto a anular. Largo máximo: 17
+
 
 **Respuesta**
 
@@ -3655,7 +3652,8 @@ Content-Type: application/json
   "authorization_code": "123456",
   "authorization_date": "2019-03-20T20:18:20Z",
   "nullified_amount": 1000.00,
-  "balance": 0.00
+  "balance": 0.00,
+  "response_code": 0
 }
 ```
 
@@ -3666,4 +3664,4 @@ authorization_code  <br> <i> String </i> | Código de autorización de la anul
 authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
 nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17
-response_code <br> <i> Number </i> | Código del resultado del pago. Si es exitoso es 0, de lo contrario el pago no fue realizado
+response_code <br> <i> Number </i> | Código del resultado del pago. Si es exitoso es 0, de lo contrario el pago no fue realizado. Largo máximo: 2
