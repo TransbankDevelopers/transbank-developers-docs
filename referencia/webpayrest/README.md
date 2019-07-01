@@ -157,7 +157,7 @@ Webpay Transacción Completa Diferida | `597055555531` | `579B532A7440BB0C9079DE
  
 ```
 
-## Webpay Plus Normal
+## Webpay Plus
 
 ```java
 // Este SDK aún no se encuentra disponible
@@ -194,11 +194,11 @@ de crédito o débito lo realiza en forma segura en Webpay.
 De cara al tarjetahabiente, el flujo de páginas para la transacción es el
 siguiente:
 
-<img class="td_img-night" src="/images/flujo-paginas-webpay.png" alt="Flujo de páginas Webpay Plus Normal">
+<img class="td_img-night" src="/images/flujo-paginas-webpay.png" alt="Flujo de páginas Webpay Plus">
 
 Desde el punto de vista técnico, la secuencia es la siguiente:
 
-<img class="td_img-night" src="/images/diagrama-secuencia-webpay.png" alt="Diagrama de secuencia Webpay Plus Normal">
+<img class="td_img-night" src="/images/diagrama-secuencia-webpay.png" alt="Diagrama de secuencia Webpay Plus">
 
 1. Una vez seleccionado los bienes o servicios, tarjetahabiente decide pagar a
    través de Webpay.
@@ -281,7 +281,7 @@ Nota que el nombre de las variables recibidas es diferente. En lugar de `token_w
    este caso debe obtener una excepción, pues el pago fue abortado.
 10. El comercio debe informar al tarjetahabiente que su pago no se completó.
 
-### Crear una transacción Webpay Plus Normal
+### Crear una transacción Webpay Plus
 
 Para crear una transacción basta llamar al método `Transaction.create()`
 
@@ -377,7 +377,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 url  <br> <i> String </i> | URL de formulario de pago Webpay. Largo máximo: 255.
 
-### Confirmar una transacción Webpay Plus Normal
+### Confirmar una transacción Webpay Plus
 
 Cuando el comercio retoma el control mediante `return_url` debes confirmar y obtener
 el resultado de una transacción usando el método  `Transaction.commit()`.
@@ -482,7 +482,7 @@ installments_amount <br> <i> Number </i> | Monto de las cuotas. Largo máximo: 1
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 balance  <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
-### Obtener estado de una transacción Webpay Plus Normal
+### Obtener estado de una transacción Webpay Plus
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
@@ -593,8 +593,8 @@ transacción que fue generada en Webpay Plus. El método permite generar el
 reembolso del total o parte del monto de una transacción.
 Dependiendo de la siguiente lógica de negocio la invocación a esta
 operación generará una reversa o una anulación:
-* Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
-* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
+- Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
+- Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
 
 La anulación puede realizarse máximo 90 días después de la fecha de la
 transacción original.
@@ -611,7 +611,7 @@ Permite solicitar a Webpay la anulación de una transacción realizada previam
 
 > Los SDKs permiten indicar opcionalmente el código de comercio de la
 > transacción a anular, para soportar la anulación en comercios Webpay Plus
-> Mall. En comercios Webpay Plus Normal, no es necesario especificar el código
+> Mall. En comercios Webpay Plus, no es necesario especificar el código
 > de comercio pues se usa el indicado en la configuración.
 
 <aside class="notice">
@@ -1087,8 +1087,8 @@ generada en Webpay Plus Mall. El método permite generar el
 reembolso del total o parte del monto de una transacción.
 Dependiendo de la siguiente lógica de negocio la invocación a esta
 operación generará una reversa o una anulación:
-* Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
-* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
+- Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
+- Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
 
 La anulación puede realizarse máximo 90 días después de la fecha de la
 transacción original.
@@ -1105,7 +1105,7 @@ Permite solicitar a Webpay la anulación de una transacción realizada previam
 
 > Los SDKs permiten indicar opcionalmente el código de comercio de la
 > transacción a anular, para soportar la anulación en comercios Webpay Plus
-> Mall. En comercios Webpay Plus Normal, no es necesario especificar el código
+> Mall. En comercios Webpay Plus, no es necesario especificar el código
 > de comercio pues se usa el indicado en la configuración.
 
 <aside class="notice">
@@ -1227,7 +1227,7 @@ sin captura y el monto requerido para capturar el cual debe ser menor o igual al
 monto originalmente autorizado.
 
 Para capturar una transacción, ésta debe haber sido creada (según lo visto
-anteriormente para Webpay Plus Normal o Webpay Plus Mall) por un código de
+anteriormente para Webpay Plus o Webpay Plus Mall) por un código de
 comercio configurado para captura diferida. De esa forma la transacción estará
 autorizada pero requerirá una captura explícita posterior para confirmar la
 transacción.
@@ -1245,7 +1245,7 @@ autorización y sin captura simultánea.
 
 > Los SDKs permiten indicar opcionalmente el código de comercio de la
 > transacción a capturar, para soportar la captura en comercios Webpay Plus
-> Mall. En comercios Webpay Plus Normal, no es necesario especificar el código
+> Mall. En comercios Webpay Plus, no es necesario especificar el código
 > de comercio pues se usa el indicado en la configuración.
 
 <aside class="notice">
@@ -3704,9 +3704,9 @@ balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo ma�
 Permite generar el reembolso del total o parte del monto de una transacción completa.
 Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una reversa o una anulación:
 
-* Si se especifica un valor en el campo “amount” se ejecutará siempre una anulación.
-* Si se supera el tiempo máximo para ejecutar una reversa se ejecutará una anulación.
-* Si no se ha dado ninguno de los casos anteriores se ejecutará una reversa.
+- Si se especifica un valor en el campo “amount” se ejecutará siempre una anulación.
+- Si se supera el tiempo máximo para ejecutar una reversa se ejecutará una anulación.
+- Si no se ha dado ninguno de los casos anteriores se ejecutará una reversa.
 
 #### `Transaction.refund()`
 
