@@ -685,7 +685,8 @@ Content-Type: application/json
   "authorization_code": "123456",
   "authorization_date": "2019-03-20T20:18:20Z",
   "nullified_amount": 1000.00,
-  "balance": 0.00
+  "balance": 0.00,
+  "response_code": 0
 }
 ```
 
@@ -696,6 +697,7 @@ authorization_code  <br> <i> String </i> | Código de autorización de la anul
 authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17
 nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
+response_code <br> <i> Number </i> | Código de resultado del pago. Si es exitoso es 0,de lo contrario el pago no fue realizado. Largo Máximo: 2
 
 En caso de error pueden aparecer los siguientes códigos de error comunes para el método `Transaction.refund()`:
 
@@ -1185,7 +1187,8 @@ Content-Type: application/json
   "authorization_code": "123456",
   "authorization_date": "2019-03-20T20:18:20Z",
   "nullified_amount": 1000.00,
-  "balance": 0.00
+  "balance": 0.00,
+  "response_code": 0
 }
 ```
 
@@ -1196,6 +1199,7 @@ authorization_code  <br> <i> String </i> | Código de autorización de la anul
 authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17
 nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
+response_code <br> <i> Number </i> | Código de resultado del pago. Si es exitoso es 0, de lo contrario el pago no fue realizado. Largo máximo: 2
 
 En caso de error pueden aparecer los siguientes códigos de error comunes para el método `Transaction.refund()`:
 
@@ -1276,15 +1280,16 @@ el código debe ser el código de la tienda virtual específica.
 ```
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refund
+PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
 Tbk-Api-Key-Id: Próximamente...
 Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
-  "buy_order": "415034240",
   "commerce_code": "Próximamente...",
-  "amount": 1000
+  "buy_order": "415034240",
+  "authorization_code": "12345",
+  "capture_amount": 1000
 }
 ```
 **Parámetros**
@@ -1326,7 +1331,8 @@ Content-Type: application/json
   "token": "e074d38c628122c63e5c0986368ece22974d6fee1440617d85873b7b4efa48a3",
   "authorization_code": "123456",
   "authorization_date": "2019-03-20T20:18:20Z",
-  "captured_amount": 1000
+  "captured_amount": 1000,
+  "response_code": 0
 }
 ```
 
@@ -1336,6 +1342,7 @@ token  <br> <i> String </i> | Token de la transacción. Largo máximo: 64
 authorization_code  <br> <i> String </i> | Código de autorización de la captura diferida. Largo máximo: 6
 authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
 captured_amount  <br> <i> Decimal </i> | Monto capturado. Largo máximo: 6
+response_code  <br> <i> Number </i> | Código de resultado del pago. Si es exitoso es 0,de lo contrario el pago no fue realizado. Largo máximo: 2
 
 En caso de error pueden aparecer los siguientes códigos exclusivos del método
 `Transaction.capture()`:
