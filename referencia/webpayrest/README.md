@@ -99,8 +99,8 @@ el ambiente de integración](/documentacion/como_empezar#ambientes).
 ```
 
 ```http
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
@@ -121,12 +121,12 @@ comercio](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/t
 
 Producto | Código de Comercio | Secreto |
 -------- | ------------ | -------------|
-Webpay Plus | `597055555532` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+Webpay Plus | `Próximamente...` | `Próximamente...`
 Webpay Plus Mall | `Próximamente...` | `Próximamente...`
 Webpay Oneclick | `Próximamente...` | `Próximamente...`
 Webpay Oneclick Mall | `Próximamente...` | `Próximamente...`
-Webpay Transacción Completa | `597055555530` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Webpay Transacción Completa Diferida | `597055555531` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+Webpay Transacción Completa | `Próximamente...` | `Próximamente...`
+Webpay Transacción Completa Diferida | `Próximamente...` | `Próximamente...`
 
 > Los SDKs ya incluyen esos códigos de comercio y llaves secretas
 > que funcionan en el ambiente de integración, por lo que puedes obtener
@@ -319,8 +319,8 @@ token es caducado y no podrá ser utilizado en un pago.
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions
 
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -409,8 +409,8 @@ Permite confirmar y obtener el resultado de la transacción una vez que Webpay 
 
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
@@ -513,8 +513,8 @@ Obtiene resultado de transacción a partir de un token.
 
 ```http
 GET /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
@@ -797,7 +797,7 @@ Content-Type: application/json
  "details": [
      {
          "amount": 10000,
-         "commerce_code": "597055555536",
+         "commerce_code": "Próximamente...",
          "buy_order": "ordenCompraDetalle1234"
      },
      {     
@@ -941,7 +941,7 @@ Content-Type: application/json
       "payment_type_code": "VN",
       "response_code": 0,
       "installments_number": 0,
-      "commerce_code": "597055555536",
+      "commerce_code": "Próximamente...",
       "buy_order": "505479072",
       "status": "AUTHORIZED"
   }]
@@ -1000,8 +1000,8 @@ Obtiene resultado de transacción a partir de un token.
 
 ```http
 GET /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: 597055555535
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
@@ -1052,7 +1052,7 @@ Content-Type: application/json
       "payment_type_code": "VN",
       "response_code": 0,
       "installments_number": 0,
-      "commerce_code": "597055555536",
+      "commerce_code": "Próximamente...",
       "buy_order": "505479072",
       "status": "AUTHORIZED"
   }]
@@ -1139,9 +1139,10 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 
 {
-  "buy_order": "415034240",
-  "commerce_code": "597055555536",
-  "amount": 1000
+  "commerce_code": "Próximamente...",
+  "buy_order": "ordenCompra12345678",
+  "authorization_code": "123456",
+  "capture_mount": 1000
 }
 ```
 **Parámetros**
@@ -1275,16 +1276,15 @@ el código debe ser el código de la tienda virtual específica.
 ```
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
-Tbk-Api-Key-Id: 597055555535
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refund
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
-  "commerce_code": "597055555536",
-  "buy_order": "ordenCompra12345678",
-  "authorization_code": "123456",
-  "capture_mount": 1000
+  "buy_order": "415034240",
+  "commerce_code": "Próximamente...",
+  "amount": 1000
 }
 ```
 **Parámetros**
@@ -2341,7 +2341,7 @@ Content-Type: application/json
   "buy_order": "ordenCompra123456789",
   "details": [
     {
-      "commerce_code": 597026010055,
+      "commerce_code": Próximamente...,
       "buy_order": "ordenCompra123445",
       "amount": 1000,
       "installments_number": 5
@@ -2403,7 +2403,7 @@ Content-Type: application/json
       "payment_type_code": "VN",
       "response_code": 0,
       "installments_number": 0,
-      "commerce_code": "597026010055",
+      "commerce_code": "Próximamente...",
       "buy_order": "505479072"
   }]
 }
@@ -2515,7 +2515,7 @@ Content-Type: application/json
       "payment_type_code": "VN",
       "response_code": 0,
       "installments_number": 0,
-      "commerce_code": "597026010055",
+      "commerce_code": "Próximamente...",
       "buy_order": "505479072"
   }]
 }
@@ -2600,7 +2600,7 @@ Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
-  "commerce_code": 597026010055,
+  "commerce_code": Próximamente...,
   "detail_buy_order": "ordenCompra12345",
   "amount": 1000
 }
@@ -2727,8 +2727,8 @@ token es caducado y no podrá ser utilizado en un pago.
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions
 
-Tbk-Api-Key-Id: 597055555530
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -2821,8 +2821,8 @@ invocación de la confirmación.
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/installments
 
-Tbk-Api-Key-Id: 597055555530
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -2917,8 +2917,8 @@ transacción.
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
 
-Tbk-Api-Key-Id: 597055555530
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -3030,8 +3030,8 @@ Obtiene resultado de transacción a partir de un token.
 
 ```http
 GET /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: 597055555530
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
@@ -3136,9 +3136,9 @@ Permite solicitar a Webpay la anulación de una transacción realizada previam
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refunds
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refund
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
@@ -3301,12 +3301,12 @@ Content-Type: application/json
   "details": [
     {
       "amount": 10000,
-      "commerce_code": 597026008905,
+      "commerce_code": "Próximamente...",
       "buy_order": "123456789"
     }, 
     {
       "amount": 10000,
-      "commerce_code": 597026008913,
+      "commerce_code": "Próximamente...",
       "buy_order": "123456790"
     } 
   ]
@@ -3399,7 +3399,7 @@ Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
-  "commerce_code": 597026008905,
+  "commerce_code": Próximamente...,
   "buy_order": "123456789",
   "installments_number": 10
 }
@@ -3499,7 +3499,7 @@ Content-Type: application/json
 {
   "details": [
     {
-      "commerce_code": 597026008913,
+      "commerce_code": Próximamente...,
       "buy_order": "ordenCompra1234",
       "id_query_installments": 12,
       "deferred_period_index": 1,
@@ -3562,7 +3562,7 @@ Content-Type: application/json
       "payment_type_code": "VN",
       "response_code": 0,
       "installments_number": 0,
-      "commerce_code": "597026010055",
+      "commerce_code": "Próximamente...",
       "buy_order": "505479072"
     }
   ]
@@ -3672,7 +3672,7 @@ Content-Type: application/json
       "payment_type_code": "VN",
       "response_code": 0,
       "installments_number": 0,
-      "commerce_code": "597026010055",
+      "commerce_code": "Próximamente...",
       "buy_order": "505479072"
     } 
   ]
@@ -3739,6 +3739,8 @@ Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 
 {
+  "buy_order": "415034240",
+  "commerce_code": "Próximamente...",
   "amount": 1000
 }
 ```
