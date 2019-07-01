@@ -586,7 +586,7 @@ installments_amount <br> <i> Number </i> | Monto de las cuotas. Largo máximo: 1
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 balance  <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
-### Reembolso Webpay Plus
+### Reversar o Anular un pago Webpay Plus
 
 Este método permite a todo comercio habilitado, reembolsar o anular una
 transacción que fue generada en Webpay Plus. El método permite generar el
@@ -1082,13 +1082,12 @@ details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda. Largo
 details [].status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 26
 balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
-### Reembolso Webpay Plus Mall
+### Reversar o Anular un pago Webpay Plus Mall
 
-Este método permite a todo comercio habilitado anular una transacción que fue
-generada en Webpay Plus Mall. El método permite generar el
-reembolso del total o parte del monto de una transacción.
-Dependiendo de la siguiente lógica de negocio la invocación a esta
-operación generará una reversa o una anulación:
+Este método permite a todo comercio habilitado reversar o anular una transacción
+que fue generada en Webpay Plus Mall. El método permite generar el reembolso del
+total o parte del monto de una transacción. Dependiendo de la siguiente lógica
+de negocio la invocación a esta operación generará una reversa o una anulación:
 - Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
 - Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
 
@@ -1929,7 +1928,7 @@ response_code  <br> <i> Number </i> | Código de retorno del proceso de pago, d
 installments_number <br> <i> Number </i> | Número de cuotas de la transacción.
 balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
 
-### Reversar o anular un pago Webpay OneClick
+### Reversar o Anular un pago Webpay OneClick
 
 Este proceso permite reversar una venta cuando esta no pudo concretarse dentro del mismo día contable, o anularlo.
 
@@ -3109,7 +3108,24 @@ response_code  <br> <i> Number </i> | Código de retorno del proceso de pago, d
 installments_number <br> <i> Number </i> | Número de cuotas de la transacción. Largo máximo: 2
 balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
-### Anulación Transaccion Completa
+### Reversar o Anular un pago Transaccion Completa
+
+Este método permite a todo comercio habilitado reversar o anular una transacción
+completa. El método permite generar el reembolso del total o parte del monto de
+una transacción dependiendo de la siguiente lógica de negocio la invocación a
+esta operación generará una reversa o una anulación:
+- Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
+- Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
+
+La anulación puede realizarse máximo 90 días después de la fecha de la
+transacción original.
+
+Puedes [leer más sobre la anulación en la información del
+producto Webpay](/producto/webpay#anulaciones) para conocer
+más detalles y restricciones.
+
+Para anular una transacción se debe invocar al método `Transaction.refund()`.
+
 
 Permite generar el reembolso del total o parte del monto de una transacción completa.
 Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una reversa o una anulación:
