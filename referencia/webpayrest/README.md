@@ -21,23 +21,23 @@ Las URLs de endpoints de producción están alojados dentro de
 <https://webpay3g.transbank.cl/>.
 
 ```java
-// Este SDK aún no se encuentra disponible
+// Host: https://webpay3g.transbank.cl
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+// Host: https://webpay3g.transbank.cl
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+// Host: https://webpay3g.transbank.cl
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+# Host: https://webpay3g.transbank.cl
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+# Host: https://webpay3g.transbank.cl
 ```
 
 ```http
@@ -47,23 +47,23 @@ Host: https://webpay3g.transbank.cl
 ### Ambiente de Integración
 
 ```java
-// Este SDK aún no se encuentra disponible
+// Host: https://webpay3gint.transbank.cl
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+// Host: https://webpay3gint.transbank.cl
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+// Host: https://webpay3gint.transbank.cl
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+# Host: https://webpay3gint.transbank.cl
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+# Host: https://webpay3gint.transbank.cl
 ```
 
 ```http
@@ -79,23 +79,33 @@ el ambiente de integración](/documentacion/como_empezar#ambientes).
 ### Credenciales del Comercio
 
 ```java
-// Este SDK aún no se encuentra disponible
+// Tbk-Api-Key-Id: Próximamente...
+// Tbk-Api-Key-Secret: Próximamente...
+// Content-Type: application/json
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+// Tbk-Api-Key-Id: Próximamente...
+// Tbk-Api-Key-Secret: Próximamente...
+// Content-Type: application/json
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+// Tbk-Api-Key-Id: Próximamente...
+// Tbk-Api-Key-Secret: Próximamente...
+// Content-Type: application/json
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+# Tbk-Api-Key-Id: Próximamente...
+# Tbk-Api-Key-Secret: Próximamente...
+# Content-Type: application/json
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+# Tbk-Api-Key-Id: Próximamente...
+# Tbk-Api-Key-Secret: Próximamente...
+# Content-Type: application/json
 ```
 
 ```http
