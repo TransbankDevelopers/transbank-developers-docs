@@ -814,7 +814,7 @@ Content-Type: application/json
      },
      {     
         "amount": 12000,
-        "commerce_code": "597055555537",
+        "commerce_code": "Próximamente...",
         "buy_order": "ordenCompraDetalle4321"
      },
  ]
