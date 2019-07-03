@@ -97,6 +97,10 @@ Para acceder a la configuración, debes seguir los siguientes pasos:
 
   Las opciones disponibles para _Ambiente_ son: "Integración" para realizar pruebas y certificar la instalación con Transbank, y "Producción" para hacer transacciones reales una vez que Transbank ha aprobado el comercio.
 
+<aside class="notice">
+  Tip: No es necesario que cambies el certificado de Transbank, ya que este se reemplaza al seleccionar el **ambiente**.
+</aside>
+
 ### Configuración de los estados de la orden
 
 Asegurate de configurar correctamente los estados de la orden según corresponda a tu comercio:
