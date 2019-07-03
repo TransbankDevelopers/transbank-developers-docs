@@ -4,7 +4,7 @@
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">
     <h4>Descarga nuestro plugin.</h4>
-    <a class="td_btn-more" target="_blank" href="https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay/releases/latest">Descargar Plugin</a>
+    <a class="td_btn-more" target="_blank"  href="https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay/releases/latest">Descargar Plugin</a>
     <br>
     <h4>Compatibilidad</h4>
     <ul>
@@ -79,6 +79,10 @@ Para acceder a la configuración, debes seguir los siguientes pasos:
    - **Certificado**: Llave publica que te autoriza y valida a hacer transacciones.
 
   Las opciones disponibles para _Ambiente_ son: "Integración" para realizar pruebas y certificar la instalación con Transbank, y "Producción" para hacer transacciones reales una vez que Transbank ha aprobado el comercio.
+
+<aside class="notice">
+  Tip: Ya no es necesario configurar el **Certificado Transbank**, en versiones anteriores era requerido, actualmente este se reemplaza al seleccionar **ambiente**.
+</aside>
 
 ### Credenciales de Prueba
 
