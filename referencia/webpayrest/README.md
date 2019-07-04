@@ -3226,7 +3226,7 @@ authorization_code  <br> <i> String </i> | Código de autorización de la anul
 authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
 nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17
-response_code  <br> <i> Number </i> | Código de resultado del pago. Si es exitoso es 0, de lo contrario el pago no fue realizado. Largo máximo: 2
+response_code  <br> <i> Number </i> | Código de resultado de la reversa/anulación. Si es exitoso es 0, de lo contrario la reversa/anulación no fue realizada. Largo máximo: 2
 
 
 ## Webpay Transacción Mall Completa
