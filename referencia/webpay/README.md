@@ -274,8 +274,9 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
 De no ser consumido `acknowledgeTransaction()` o demorar más de 30 segundos en
 su consumo, Webpay realizará la reversa de la transacción, asumiendo que
 existieron problemas de comunicación. En este caso el método retorna una
-Excepción indicando la situación. Esta excepción debe ser manejada para no
-entregar el producto o servicio en caso que ocurra.
+Excepción indicando la situación, el mensaje obtenido en la excepción será
+`Timeout error (Transaction is REVERSED)(272)`. Esta excepción debe ser manejada
+para no entregar el producto o servicio en caso que ocurra.
 </aside>
 
 14. Una vez recibido el resultado de la transacción e informado a Webpay su
