@@ -683,7 +683,7 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` o
 ]
 ```
 
-<img class="td_img-night" src="/images/referencia/posintegrado/diagrama-detalle.png" alt="Diagrama de Detalle de Ventas">
+<img class="td_img-night" src="/images/referencia/posintegrado/diagrama-detalle-ventas.png" alt="Diagrama de Detalle de Ventas">
 
 #### Solicitud de Detalle de Ventas
 
