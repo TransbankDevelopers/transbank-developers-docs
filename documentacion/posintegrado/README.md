@@ -516,7 +516,7 @@ if (retval == TBK_OK){
 ```
 
 <aside class="notice">
-Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en modo Integrado siguiendo las instrucciones disponibles descritas en []()
+Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en modo Integrado siguiendo las instrucciones disponibles descritas en [Cambio a POS Integrado](referencia/posintegrado#cambio-modalidad-pos-integrado)
 </aside>
 
 ## Ejemplos de integración
