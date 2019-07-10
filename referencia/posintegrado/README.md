@@ -119,6 +119,28 @@ if ( retval == TBK_OK ){
 }
 ```
 
+### Cerrar un puerto Serial
+
+Al finalizar el uso del POS, o si se desea desconectar de la Caja se debe liberar el puerto serial abierto anteriormente.
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POS;
+//...
+bool closed = POS.Instance.ClosePort();
+```
+
+```c
+#include "transbank.h"
+#include "transbank_serial_utils.h"
+//...
+retval = close_port();
+if(retval == SP_OK){
+    //...
+}
+```
+
 ## Mensajes
 
 ### Mensaje de Venta
@@ -352,6 +374,8 @@ DATO                    | LARGO     | COMENTARIO
 `Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
 `<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
 `<LRC>`                 |  1        | Resultado del cálculo (byte) `XOR` del mensaje
+
+<br>
 
 ### Mensaje de Anulación
 
