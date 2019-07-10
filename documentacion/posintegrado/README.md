@@ -338,18 +338,18 @@ haciendo una comparación de los totales entre la caja y el _POS_. La impresión
 using Transbank.POS;
 using Transbank.POS.Responses;
 //...
-GetTotalsResponse response = POS.Instance.GetTotals();
+TotalsResponse response = POS.Instance.Totals();
 ```
 
 ```c
 #include "transbank.h"
 #include "transbank_serial_utils.h"
 //...
-TotalsResponse response = get_totals();
+TotalsCResponse response = get_totals();
 }
 ```
 
-El resultado de la transacción entrega en la forma de un objeto `GetTotalsResponse` o una estructura `TotalsResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankGetTotalsException`.
+El resultado de la transacción entrega en la forma de un objeto `TotalsResponse` o una estructura `TotalsCResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankTotalsException`.
 
 ```json
 "Function": 710
