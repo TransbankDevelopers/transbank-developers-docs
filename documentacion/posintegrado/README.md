@@ -358,6 +358,80 @@ El resultado de la transacción entrega en la forma de un objeto `TotalsResponse
 "TX Total": 15000 // Suma total de los montos de cada transaccion
 ```
 
+### Transacción de Detalle de Ventas
+
+Esta transacción solicita al POS **todas** las transacciones que se han realizado y permanecen en la memoria del POS. El parámetro que recibe esta función es de tipo booleano e indica si se realiza la impresión del detalle en el POS. En el caso de que no se solicite la impresión, el POS envía **todas** las transacciones a la caja, una por una.
+
+<aside class="warning">
+Una transacción de cierre vacía la memoria del POS
+</aside>
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Responses;
+//...
+bool printOnPOS = false;
+List<DetailResponse> Details(printOnPOS)
+```
+
+```c
+#include "transbank.h"
+#include "transbank_serial_utils.h"
+//...
+bool print_on_pos = false;
+char *response = sales_detail(print_on_pos);
+}
+```
+
+El resultado de la transacción entrega una lista de objetos  `DetailResponse` o un `char *` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSalesDetailException`.
+
+```json
+[
+  {
+    "Function": 261,
+    "Response": "Aprobado",
+    "Commerce Code": 550062700310,
+    "Terminal Id": "ABC1234C",
+    "Ticket": "AB123",
+    "Autorization Code": "XZ123456",
+    "Ammount": 15000,
+    "Shares Number": 3,
+    "Shares Amount": 5000,
+    "Last 4 Digits": 6677,
+    "Operation Number": 60,
+    "Card Type": CR,
+    "Accounting Date": ,
+    "Account Number": ,
+    "Card Brand": AX,
+    "Real Date": "28/10/2019 22:35:12",
+    "Employee Id": ,
+    "Tip": 1500,
+  },
+  {
+    "Function": 261,
+    "Response": "Aprobado",
+    "Commerce Code": 550062700310,
+    "Terminal Id": "ABC1234C",
+    "Ticket": "AB123",
+    "Autorization Code": "XZ123456",
+    "Ammount": 15000,
+    "Shares Number": 3,
+    "Shares Amount": 5000,
+    "Last 4 Digits": 6677,
+    "Operation Number": 60,
+    "Card Type": CR,
+    "Accounting Date": ,
+    "Account Number": ,
+    "Card Brand": AX,
+    "Real Date": "28/10/2019 22:35:12",
+    "Employee Id": ,
+    "Tip": 1500
+  }
+]
+```
+
 ### Transacción de Carga de Llaves
 
 Esta transacción permite al POS Integrado del comercio requerir cargar nuevas _Working Keys_ desde Transbank. Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencia/posintegrado#tabla-de-respuestas))
