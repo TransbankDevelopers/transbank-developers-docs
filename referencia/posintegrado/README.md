@@ -119,6 +119,28 @@ if ( retval == TBK_OK ){
 }
 ```
 
+### Cerrar un puerto Serial
+
+Al finalizar el uso del POS, o si se desea desconectar de la Caja se debe liberar el puerto serial abierto anteriormente.
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POS;
+//...
+bool closed = POS.Instance.ClosePort();
+```
+
+```c
+#include "transbank.h"
+#include "transbank_serial_utils.h"
+//...
+retval = close_port();
+if(retval == SP_OK){
+    //...
+}
+```
+
 ## Mensajes
 
 ### Mensaje de Venta
@@ -353,6 +375,8 @@ DATO                    | LARGO     | COMENTARIO
 `<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
 `<LRC>`                 |  1        | Resultado del cálculo (byte) `XOR` del mensaje
 
+<br>
+
 ### Mensaje de Anulación
 
 Esta transacción siempre será responsabilidad de la caja y es quien decide cuando realizar una anulación.
@@ -529,18 +553,18 @@ haciendo una comparación de los totales entre la caja y el _POS_. La impresión
 using Transbank.POS;
 using Transbank.POS.Responses;
 //...
-GetTotalsResponse response = POS.Instance.GetTotals();
+TotalsResponse response = POS.Instance.Totals();
 ```
 
 ```c
 #include "transbank.h"
 #include "transbank_serial_utils.h"
 //...
-TotalsResponse response = get_totals();
+TotalsCResponse response = get_totals();
 }
 ```
 
-El resultado de la transacción entrega en la forma de un objeto `GetTotalsResponse` o una estructura `TotalsResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankGetTotalsException`.
+El resultado de la transacción entrega en la forma de un objeto `TotalsResponse` o una estructura `TotalsCResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankTotalsException`.
 
 ```json
 "Function": 710
@@ -584,6 +608,144 @@ DATO                         | LARGO     | COMENTARIO
 *Mensaje* en <i>ASCII</i>: `<STX>0710|00|1|2000<ETX>J`
 
 *Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x37, 0x31, 0x30, 0x7c, 0x30, 0x30, 0x7c, 0x31, 0x7c, 0x32, 0x30, 0x30, 0x30, 0x03, 0x04}`
+
+### Mensaje Detalle de Ventas
+
+Esta operación solicita al POS **todas** las transacciones que se han realizado y permanecen en la memoria del POS. El parámetro que recibe esta función es de tipo booleano e indica si se realiza la impresión del detalle en el POS. En el caso de que no se solicite la impresión, el POS envía **todas** las transacciones a la caja, una por una.
+
+<aside class="warning">
+Una transacción de cierre vacía la memoria del POS
+</aside>
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Responses;
+//...
+bool printOnPOS = false;
+List<DetailResponse> Details(printOnPOS)
+```
+
+```c
+#include "transbank.h"
+#include "transbank_serial_utils.h"
+//...
+bool print_on_pos = false;
+char *response = sales_detail(print_on_pos);
+}
+```
+
+El resultado de la transacción entrega una lista de objetos  `DetailResponse` o un `char *` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSalesDetailException`.
+
+```json
+[
+  {
+    "Function": 261,
+    "Response": "Aprobado",
+    "Commerce Code": 550062700310,
+    "Terminal Id": "ABC1234C",
+    "Ticket": "AB123",
+    "Autorization Code": "XZ123456",
+    "Ammount": 15000,
+    "Shares Number": 3,
+    "Shares Amount": 5000,
+    "Last 4 Digits": 6677,
+    "Operation Number": 60,
+    "Card Type": CR,
+    "Accounting Date": ,
+    "Account Number": ,
+    "Card Brand": AX,
+    "Real Date": "28/10/2019 22:35:12",
+    "Employee Id": ,
+    "Tip": 1500,
+  },
+  {
+    "Function": 261,
+    "Response": "Aprobado",
+    "Commerce Code": 550062700310,
+    "Terminal Id": "ABC1234C",
+    "Ticket": "AB123",
+    "Autorization Code": "XZ123456",
+    "Ammount": 15000,
+    "Shares Number": 3,
+    "Shares Amount": 5000,
+    "Last 4 Digits": 6677,
+    "Operation Number": 60,
+    "Card Type": CR,
+    "Accounting Date": ,
+    "Account Number": ,
+    "Card Brand": AX,
+    "Real Date": "28/10/2019 22:35:12",
+    "Employee Id": ,
+    "Tip": 1500
+  }
+]
+```
+
+<img class="td_img-night" src="/images/referencia/posintegrado/diagrama-detalle-ventas.png" alt="Diagrama de Detalle de Ventas">
+
+#### Solicitud de Detalle de Ventas
+
+DATO                         | LARGO     | COMENTARIO
+------                       | ------    | ------
+`<STX>`                      |  1        | Indica inicio de texto o comando <br><i>Valor hexadecimal</i>: `0x02`
+`Comando`                    |  4        | <i>Valor ASCII</i>: `0260` <br><i>Valor hexadecimal</i>: `0x30 0x32 0x36 0x30`
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Imprimir en Caja`           |  1        | Valor Numérico: <br><i>Imprimir en POS:</i>: `0`<br><i>Enviar a Caja:</i>`1`
+`Separador`                  |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`<ETX>`                      |  1        | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
+`<LRC>`                      |  1        | Resultado del cálculo (byte) del `XOR` del mensaje
+
+*Mensaje* en <i>ASCII</i>: `<STX>0260|1|<ETX><LRC>`
+
+*Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x32, 0x36, 0x30, 0x7c, 0x7c, 0x03, 0x07}`
+
+#### Respuesta de Detalle de Ventas
+
+DATO                    | LARGO     | COMENTARIO
+------                  | ------    | ------
+`<STX>`                 |  1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
+`Comando`               |  4        | <i>Valor ASCII</i>:  `0261` <br><i>valor hexadecimal</i>: `0x30 0x35 0x31 0x30`
+`Separador`             |  1        | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Código Respuesta`      |  2        | Valor Numérico
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Código de comercio`    | 12        | Valor Numérico
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Terminal ID`           |  8        | Valor Alfanumérico
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Ticket`                |  6        | Valor ASCII, Número de boleta o ticket
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Codigo de Autorizacion`|  6        | Valor ASCII
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Monto`                 |  9        | Valor Numérico <br><i>Largo máximo</i>: 9 <br><i>Largo mínimo</i>: 1
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Número Cuotas`         |  2        | Valor Numérico <br><i>Largo máximo</i>: 2 <br><i>Largo mínimo</i>: 1
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Monto Cuota`           |  9        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 9 <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Últimos 4 Digitos`     |  4        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 4 <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Número Operación`      |  6        | Valor Numérico, Correlativo de Transacción del POS **(Opcional)** <br><i>Largo máximo</i>: 6 <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Tipo de Tarjeta`       |  2        | Valor ASCII <br><i>CR</i>: Crédito <br><i>DB</i>: Débito
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Fecha Contable`        |  6        | Valor ASCII. Se utiliza solo con ventas Débito **(Opcional)**
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Número de Cuenta`      | 19        | Valor ASCII. Se utiliza solo con ventas Débito **(Opcional)** <br><i>Largo máximo</i>: 19 <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Abreviación Tarjeta`   |  2        | Valor ASCII **(Opcional)** <br>[Ver Tabla de abreviación de Tarjetas](/referencia/posintegrado#tabla-de-abreviacion-de-tarjetas)
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Fecha de Transacción`  |  2        | Valor ASCII **(Opcional)** <br><i>Formato</i>: `DDMMAAAA`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Hora de Transacción`   |  6        | Valor ASCII **(Opcional)** <br><i> Formato</i>: `HHMMSS`
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Empleado`              |  4        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 4</i> <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Propina`               |  9        | Valor Numérico <br><i>Largo máximo</i>: 9 </i> <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
+`LRC`                   |  1        | Resultado del calculo del `LRC` del mensaje
 
 ### Mensaje de Carga de Llaves
 
