@@ -74,7 +74,7 @@ Para acceder a la configuración, debes seguir los siguientes pasos:
 
 3. ¡Ya está! Estás en la pantalla de configuración del plugin, debes ingresar la siguiente información:
    - **Ambiente**: Ambiente hacia donde se realiza la transacción.
-   - **Código de comercio**: Es lo que te identifica como comercio.
+   - **Código de comercio**: Es lo que te identifica como comercio. Si el código que posees es de 8 dígitos debes anteponer `5970`.
    - **Llave Privada**: Llave secreta que te autoriza y valida a hacer transacciones.
    - **Certificado**: Llave pública que te autoriza y valida a hacer transacciones.
 

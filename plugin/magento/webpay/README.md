@@ -92,7 +92,7 @@ Para acceder a la configuración, debes seguir los siguientes pasos:
 
     - **Enable**: Al activarlo, Webpay estará disponible como medio de pago. Ten la precaución de que se encuentre marcada esta opción cuando quieras que los usuarios paguen con Webpay.
     - **Ambiente**: Ambiente hacia donde se realiza la transacción.
-    - **Código de comercio**: Es lo que te identifica como comercio.
+    - **Código de comercio**: Es lo que te identifica como comercio. Si el código que posees es de 8 dígitos debes anteponer `5970`.
     - **Llave Privada**: Llave secreta que te autoriza y valida a hacer transacciones.
     - **Certificado Público**: Llave pública que te autoriza y valida a hacer transacciones.
 
