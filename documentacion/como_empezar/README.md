@@ -96,9 +96,9 @@ tarjetas:
 genera transacciones aprobadas.
 - MASTERCARD 5186059559590568, CVV 123, cualquier fecha de expiración. Esta
 tarjeta genera transacciones rechazadas.
-- Redcompra 4051885600446623 genera transacciones aprobadas (para operaciones
+- Redcompra 4051884239937763 genera transacciones aprobadas (para operaciones
 que permiten débito Redcompra)
-- Redcompra 5186059559590568 genera transacciones rechazadas (para operaciones
+- Redcompra 5186008541233829 genera transacciones rechazadas (para operaciones
 que permiten débito Redcompra)
 
 Cuando aparece un formulario de autenticación con RUT y clave, se debe
