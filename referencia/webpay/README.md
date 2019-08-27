@@ -401,6 +401,11 @@ Nombre  <br> <i> tipo </i> | Descripción
 token  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 url  <br> <i> xs:string </i> | URL de formulario de pago Webpay. Largo máximo: 256.
 
+<aside class="warning">
+El número de orden de compra (`buyOrder`) debe ser único para cada transacción.
+Si un `buyOrder` es enviado dos o más veces se obtendrá el error ` Transaction already exists(21)`
+</aside>
+
 ### Confirmar una transacción Webpay Plus Normal
 
 Cuando el comercio retoma el control mediante `returnURL` puedes confirmar una
