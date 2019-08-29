@@ -368,11 +368,11 @@ public class IntegrationExample {
         String returnUrl = "https://domai.cl/webpay-return";
 
         try {
-            final CreateWebpayPlusTransactionResponse response = WebpayPlus.Transaction.create(buyOrder, sessionId, amount, returnUrl);
+            final WebpayPlusTransactionCreateResponse response = WebpayPlus.Transaction.create(buyOrder, sessionId, amount, returnUrl);
 
             final String token = response.getToken();
             final String url = response.getUrl();
-        } catch (CreateTransactionException e) {
+        } catch (TransactionCreateException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -466,7 +466,7 @@ public class IntegrationExample {
         String token = "ee24c0128dbe285415c55d6c9a704dd393eb8d477eda3346d9735de81a40d420";
         
         try {
-            final CommitWebpayPlusTransactionResponse response = WebpayPlus.Transaction.commit(token);
+            final WebpayPlusTransactionCommitResponse response = WebpayPlus.Transaction.commit(token);
 
             final String accountingDate = response.getAccountingDate();
             final double amount = response.getAmount();
@@ -483,7 +483,7 @@ public class IntegrationExample {
             final String status = response.getStatus();
             final String transactionDate = response.getTransactionDate();
             final String vci = response.getVci();
-        } catch (CommitTransactionException e) {
+        } catch (TransactionCommitException | IOException  e) {
             e.printStackTrace();
         }
     }
@@ -601,7 +601,7 @@ public class IntegrationExample {
         String token = "ee24c0128dbe285415c55d6c9a704dd393eb8d477eda3346d9735de81a40d420";
 
         try {
-            final StatusWebpayPlusTransactionResponse response = WebpayPlus.Transaction.status(token);
+            final WebpayPlusTransactionStatusResponse response = WebpayPlus.Transaction.status(token);
 
             final String accountingDate = response.getAccountingDate();
             final double amount = response.getAmount();
@@ -618,7 +618,7 @@ public class IntegrationExample {
             final String status = response.getStatus();
             final String transactionDate = response.getTransactionDate();
             final String vci = response.getVci();
-        } catch (StatusTransactionException e) {
+        } catch (TransactionStatusException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -758,7 +758,7 @@ public class IntegrationExample {
         double amount = 1000;
 
         try {
-            final RefundWebpayPlusTransactionResponse response = WebpayPlus.Transaction.refund(token, amount);
+            final WebpayPlusTransactionRefundResponse response = WebpayPlus.Transaction.refund(token, amount);
 
             final String authorizationCode = response.getAuthorizationCode();
             final String authorizationDate = response.getAuthorizationDate();
@@ -766,7 +766,7 @@ public class IntegrationExample {
             final double nullifiedAmount = response.getNullifiedAmount();
             final byte responseCode = response.getResponseCode();
             final String type = response.getType();
-        } catch (RefundTransactionException e) {
+        } catch (TransactionRefundException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -964,11 +964,11 @@ public class IntegrationExample {
                 .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo);
 
         try {
-            final CreateWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.create(buyOrder, sessionId, returnUrl, details);
-
+            final WebpayPlusMallTransactionCreateResponse response = WebpayPlus.MallTransaction.create(
+                                buyOrder, sessionId, returnUrl, mallDetails);
             final String token = response.getToken();
             final String url = response.getUrl();
-        } catch (CreateTransactionException e) {
+        } catch (TransactionCreateException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -1064,8 +1064,7 @@ public class IntegrationExample {
         String token = "ef6bf196cae9d38744974e4da61e004135ea2d8774a063d33d2c58ea5730a0d2";
 
         try {
-            final CommitWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.commit(token);
-
+            final WebpayPlusMallTransactionCommitResponse response = WebpayPlus.MallTransaction.commit(token);
             final String accountingDate = response.getAccountingDate();
             final String buyOrder = response.getBuyOrder();
             final CardDetail cardDetail = response.getCardDetail();
@@ -1085,7 +1084,7 @@ public class IntegrationExample {
                 final byte responseCode = detail.getResponseCode();
                 final String status = detail.getStatus();
             } 
-        } catch (CommitTransactionException e) {
+        } catch (TransactionCommitException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -1213,7 +1212,7 @@ public class IntegrationExample {
         String token = "ef6bf196cae9d38744974e4da61e004135ea2d8774a063d33d2c58ea5730a0d2";
 
         try {
-            final StatusWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.status(token);
+            final WebpayPlusMallTransactionStatusResponse response = WebpayPlus.MallTransaction.status(token);
 
             final String accountingDate = response.getAccountingDate();
             final String buyOrder = response.getBuyOrder();
@@ -1233,7 +1232,7 @@ public class IntegrationExample {
                 final String paymentTypeCode = detail.getPaymentTypeCode();
                 final String status = detail.getStatus();
             }
-        } catch (StatusTransactionException e) {
+        } catch (TransactionStatusException | IOException  e) {
             e.printStackTrace();
         }
     }
@@ -1393,15 +1392,15 @@ public class IntegrationExample {
         double amount = 1000;
 
         try {
-            final RefundWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.refund(token, buyOrder, commerceCode, amount);
-
+            final WebpayPlusMallTransactionRefundResponse response =
+                            WebpayPlus.MallTransaction.refund(token, buyOrder, commerceCode, amount);
             final String authorizationCode = response.getAuthorizationCode();
             final String authorizationDate = response.getAuthorizationDate();
             final double balance = response.getBalance();
             final double nullifiedAmount = response.getNullifiedAmount();
             final byte responseCode = response.getResponseCode();
             final String type = response.getType();
-        } catch (RefundTransactionException e) {
+        } catch (TransactionRefundException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -1559,13 +1558,13 @@ public class IntegrationExample {
         double amount = 1000;
 
         try {
-            final CaptureWebpayPlusTransactionResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
-
+            final WebpayPlusTransactionCaptureResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
+            
             final String authorizationCodeResp = response.getAuthorizationCode();
             final String authorizationDate = response.getAuthorizationDate();
             final double capturedAmount = response.getCapturedAmount();
             final byte responseCode = response.getResponseCode();
-        } catch (CaptureTransactionException e) {
+        } catch (TransactionCaptureException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -2365,11 +2364,10 @@ public class IntegrationExample {
         String responseUrl = "https://domain.com/oneclick-mall-return";
 
         try {
-            final StartOneclickMallInscriptionResponse response = OneclickMall.Inscription.start(userName, email, responseUrl);
-
+            final OneclickMallInscriptionStartResponse response = OneclickMall.Inscription.start(userName, email, responseUrl);
             final String token = response.getToken();
             final String urlWebpay = response.getUrlWebpay();
-        } catch (StartInscriptionException e) {
+        } catch (InscriptionStartException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -2482,13 +2480,14 @@ public class IntegrationExample {
         String token = "e95492790d1199edd91804eba46f94e92647b2afe76a98c99f7121ad5758f630";
 
         try {
-            final FinishOneclickMallInscriptionResponse response = OneclickMall.Inscription.finish(token);
+            final OneclickMallInscriptionFinishResponse response = OneclickMall.Inscription.finish(token);
+
             final String authorizationCode = response.getAuthorizationCode();
             final String creditCardType = response.getCreditCardType();
             final String lastFourCardDigits = response.getLastFourCardDigits();
             final byte responseCode = response.getResponseCode();
             final String tbkUser = response.getTbkUser();
-        } catch (FinishInscriptionException e) {
+        } catch (InscriptionFinishException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -2592,7 +2591,7 @@ public class IntegrationExample {
 
         try {
             OneclickMall.Inscription.delete(username, tbkUser);
-        } catch (DeleteInscriptionException e) {
+        } catch (InscriptionDeleteException | IOException e) {
             // si no hay excepción quiere decir que el proceso fue exitoso
             e.printStackTrace();
         }
@@ -2718,8 +2717,8 @@ public class IntegrationExample {
                 .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo, installmentsNumberMallTwo);
 
         try {
-            final AuthorizeOneclickMallTransactionResponse response = OneclickMall.Transaction.authorize(username, tbkUser, buyOrder, details);
-
+            final OneclickMallTransactionAuthorizeResponse response = OneclickMall.Transaction.authorize(username, tbkUser, buyOrder, details);
+            
             final String accountingDate = response.getAccountingDate();
             final String buyOrderResp = response.getBuyOrder();
             final String transactionDate = response.getTransactionDate();
@@ -2737,7 +2736,7 @@ public class IntegrationExample {
                 final String paymentTypeCode = detail.getPaymentTypeCode();
                 final String status = detail.getStatus();
             }
-        } catch (AuthorizeTransactionException e) {
+        } catch (TransactionAuthorizeException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -2866,7 +2865,7 @@ public class IntegrationExample {
         String buyOrder = "a_valid_buy_order";
 
         try {
-            final StatusOneclickMallTransactionResponse response = OneclickMall.Transaction.status(buyOrder);
+            final OneclickMallTransactionStatusResponse response = OneclickMall.Transaction.status(buyOrder);
 
             final String accountingDate = response.getAccountingDate();
             final String buyOrderResp = response.getBuyOrder();
@@ -2885,7 +2884,7 @@ public class IntegrationExample {
                 final String paymentTypeCode = detail.getPaymentTypeCode();
                 final String status = detail.getStatus();
             }
-        } catch (StatusTransactionException e) {
+        } catch (TransactionStatusException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -3042,7 +3041,7 @@ public class IntegrationExample {
         double amount = 1000;
 
         try {
-            final RefundOneclickMallTransactionResponse response = OneclickMall.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+            final OneclickMallTransactionRefundResponse response = OneclickMall.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 
             final String authorizationCode = response.getAuthorizationCode();
             final String authorizationDate = response.getAuthorizationDate();
@@ -3050,7 +3049,7 @@ public class IntegrationExample {
             final double nullifiedAmount = response.getNullifiedAmount();
             final byte responseCode = response.getResponseCode();
             final String type = response.getType();
-        } catch (RefundTransactionException e) {
+        } catch (TransactionRefundException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -3191,7 +3190,26 @@ card_expiration_date  <br> <i> String </i> | Fecha de expiración de la tarjeta 
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.RefundTransactionException;
+import cl.transbank.webpay.oneclick.OneclickMall;
+import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
+
+public class IntegrationExample {
+    public static void main(String[] args) {
+        String buyOrder = "a valid buy order";
+        String sessionId = "a valid session Id";
+        double amount = 10000; //example
+        String cardNumber= "a valid card number";
+        String cardExpirationDate= "a valid card expiration date ie: 23/03";
+        short cvv = 123; //example
+
+        try {
+            FullTransactionCreateResponse response = FullTransaction.Transaction.create(buyOrder, sessionId, amount, cardNumber, cardExpirationDate, cvv);
+        } catch (TransactionCreateException | IOException e) {
+            return new ErrorController().error();
+        }
+}
+}
 ```
 
 ```php
@@ -3235,7 +3253,7 @@ El id de la consulta que selecciona el tarjetahabiente debe ser informado en la
 invocación de la confirmación.
 
 ```java
-// Este SDK aún no se encuentra disponible
+
 ```
 
 ```php
@@ -3276,7 +3294,21 @@ installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.RefundTransactionException;
+import cl.transbank.webpay.oneclick.OneclickMall;
+import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
+
+public class IntegrationExample {
+    public static void main(String[] args) {
+        String token = "a token obtained through create transaction";
+        byte installmentsNumber = "a number between 2 and 12";
+        try {
+            final FullTransactionInstallmentResponse response = FullTransaction.Transaction.installment(token, installmentsNumber);
+        } catch ( IOException | TransactionInstallmentException e) {
+            return new ErrorController().error();
+        }
+    }
+}
 ```
 
 ```php
@@ -3331,7 +3363,7 @@ Operación que permite confirmar una transacción. Retorna el estado de la
 transacción.
 
 ```java
-// Este SDK aún no se encuentra disponible
+
 ```
 
 ```php
@@ -3377,7 +3409,23 @@ grace_period  <br> <i> Number </i> | (Opcional) Indicador de periodo de gracia.
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.RefundTransactionException;
+import cl.transbank.webpay.oneclick.OneclickMall;
+import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
+
+public class IntegrationExample {
+    public static void main(String[] args) {
+        byte deferredPeriodIndex= 1; //example
+        Boolean gracePeriod = false; //example
+        String token = "a token obtained through create transaction";
+        Long idQueryInstallments = 1262362L;//a valid id query installments obtained through Installments transaction 
+        try {
+            final FullTransactionCommitResponse response = FullTransaction.Transaction.commit(token,idQueryInstallments,deferredPeriodIndex,gracePeriod);
+        } catch (TransactionCommitException | IOException e) {
+            return new ErrorController().error();
+        }
+    }
+}
 ```
 
 ```php
@@ -3445,7 +3493,7 @@ Obtiene resultado de transacción a partir de un token.
 
 
 ```java
-// Este SDK aún no se encuentra disponible
+
 ```
 
 ```php
@@ -3480,7 +3528,20 @@ token  <br> <i> String </i> | Token identificador de la transacción. Largo: 6
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.RefundTransactionException;
+import cl.transbank.webpay.oneclick.OneclickMall;
+import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
+
+public class IntegrationExample {
+    public static void main(String[] args) {
+      String token = "a token obtained through create transaction";
+        try {
+            final FullTransactionStatusResponse response = FullTransaction.Transaction.status(token);
+        } catch (TransactionStatusException | IOException e) {
+            return new ErrorController().error();
+        }
+    }
+}
 ```
 
 ```php
@@ -3569,7 +3630,7 @@ Dependiendo de la siguiente lógica de negocio la invocación a esta operacio�
 Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentre vigente.
 
 ```java
-// Este SDK aún no se encuentra disponible
+
 ```
 
 ```php
@@ -3608,7 +3669,21 @@ amount  <br> <i> Decimal </i> | (Opcional) Monto que se desea anular de la trans
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.RefundTransactionException;
+import cl.transbank.webpay.oneclick.OneclickMall;
+import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
+
+public class IntegrationExample {
+    public static void main(String[] args) {
+    String token = "a token obtained through create transaction";
+    double amount = 10000; //example
+    try {
+            final FullTransactionRefundResponse response = FullTransaction.Transaction.refund(token,amount);
+        } catch (IOException | TransactionRefundException e) {
+            return new ErrorController().error();
+        }
+    }
+}
 ```
 
 ```php
@@ -3782,7 +3857,30 @@ details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda del m
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.RefundTransactionException;
+import cl.transbank.webpay.oneclick.OneclickMall;
+import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
+
+public class IntegrationExample {
+    public static void main(String[] args) {
+        String commerceCode ="597055555552";
+        String commerceCode2 ="597055555553";
+        String buyOrder1 = "a valid buy order used in create transaction";
+        String buyOrder2 = "a valid buy order used in create transaction";
+        String sessionId = "a valid session Id";
+        double amount = 10000; //example
+        String cardNumber= "a valid card number";
+        String cardExpirationDate= "a valid card expiration date ie: 23/03";
+        short cvv = 123; //example
+
+        try {
+            MallFullTransactionCreateResponse response = MallFullTransaction.Transaction.create(buyOrder, sessionId, cardNumber, cardExpirationDate, MallTransactionCreateDetails.build()
+                    .add(amount, commerceCode, buyOrder1).add(amount, commerceCode2, buyOrder2));
+        } catch (TransactionCreateException | IOException e) {
+            return new ErrorController().error();
+        }
+    }
+}
 ```
 
 ```php
@@ -3870,7 +3968,7 @@ installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+
 ```
 
 ```php
@@ -3923,7 +4021,33 @@ Operación que permite confirmar una transacción. Retorna el estado de la
 transacción.
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.RefundTransactionException;
+import cl.transbank.webpay.oneclick.OneclickMall;
+import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
+
+public class IntegrationExample {
+    public static void main(String[] args) {
+        String commerceCode ="597055555552";
+        String commerceCode2 ="597055555553";
+        String buyOrder1 = "a valid buy order used in create transaction";
+        String buyOrder2 = "a valid buy order used in create transaction";
+        byte installmentsNumber = 2;
+        String token ="a token obtained through create transaction";
+        MallFullTransactionInstallmentsDetails installmentsDetails = MallFullTransactionInstallmentsDetails.build().add(commerceCode, buyOrder1, installmentsNumber).add(commerceCode2, buyOrder2, installmentsNumber);
+
+        try {
+            MallFullTransactionInstallmentsResponse responseI = MallFullTransaction.Transaction.installment(token,installmentsDetails);
+            for (MallFullTransactionInstallmentResponse mftr : responseI.getResponseList()){
+                System.out.println(mftr.toString());
+            }
+
+        } catch (TransactionInstallmentException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+}
+}
 ```
 
 ```php
@@ -3977,7 +4101,28 @@ grace_period  <br> <i> Number </i> | (Opcional) Indicador de periodo de gracia.
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.RefundTransactionException;
+import cl.transbank.webpay.oneclick.OneclickMall;
+import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
+
+public class IntegrationExample {
+    public static void main(String[] args) {
+        byte deferredPeriodIndex= 1; //example
+        Boolean gracePeriod = false; //example
+        String token = "a token obtained through create transaction";
+        Long idQueryInstallments = 1262362L;//a valid id query installments obtained through Installments transaction
+        String childCommerceCode = "597055555548"; 
+        String childBuyOrder = "a_valid_child_buy_order";
+
+        MallTransactionCommitDetails details = MallTransactionCommitDetails.build().add(childCommerceCode,childBuyOrder,idQueryInstallments,deferredPeriodIndex,gracePeriod);
+
+        try {
+            final MallFullTransactionCommitResponse response = MallFullTransaction.Transaction.commit(token,details);
+        } catch (TransactionCommitException | IOException e) {
+            return new ErrorController().error();
+        }
+    }
+}
 ```
 
 ```php
@@ -4087,7 +4232,20 @@ token  <br> <i> String </i> | Token identificador de la transacción. Largo: 6
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.RefundTransactionException;
+import cl.transbank.webpay.oneclick.OneclickMall;
+import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
+
+public class IntegrationExample {
+    public static void main(String[] args) {
+    String token = "a token obtained through create transaction";
+    try {
+            final MallFullTransactionStatusResponse response = MallFullTransaction.Transaction.status(token);
+        } catch (TransactionStatusException | IOException e) {
+            return new ErrorController().error();
+        }
+    }
+}
 ```
 
 ```php
@@ -4208,7 +4366,23 @@ amount  <br> <i> Number </i> | Monto a anular. Largo máximo: 17
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.RefundTransactionException;
+import cl.transbank.webpay.oneclick.OneclickMall;
+import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
+
+public class IntegrationExample {
+    public static void main(String[] args) {
+        String token = "a token obtained through create transaction";
+        String childCommerceCode = "597055555548"; 
+        String childBuyOrder = "a_valid_child_buy_order";
+        double amount = 10000; //example
+        try {
+                final MallFullTransactionRefundResponse response = MallFullTransaction.Transaction.refund(token,amount,childCommerceCode,childBuyOrder);
+            } catch (IOException | TransactionRefundException e) {
+                return new ErrorController().error();
+            }
+    }
+}
 ```
 
 ```php
