@@ -168,7 +168,7 @@ deberás crear un formulario web con un campo `token_ws` hidden y enviarlo
 programáticamente para entregar el control a Webpay.
 
 <aside class="warning">
-Debido a la posibilidad que el formulario de WebPay no se despliegue, no se 
+Debido a la posibilidad que el formulario de WebPay no se despliegue, no se
 recomienda el uso de Iframe para WebPay Plus.
 </aside>
 
@@ -934,7 +934,7 @@ else
 webPayView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 ```
 
-2. Al momento de cerrar el webview 
+2. Al momento de cerrar el webview
 
 ```java
 // Remover Cookies

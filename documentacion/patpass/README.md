@@ -201,6 +201,38 @@ transacción. Tal como antes, recibirás el `token_ws` que te permitirá
 identificar la transacción y mostrar un comprobante o página de éxito a tu
 usuario.
 
+## Patpass Comercio
+
+<div class="pos-title-nav">
+<div tbk-link='/referencia/patpass' tbk-link-name='Referencia Api'></div>
+</div>
+
+### Crear una suscripción
+
+Para crear una transaccion **PatPass Comercio** que registre una suscripción, lo primero que necesitas es una instancia de `WebpayPatpassComercio`con la `Configuration`que incluye el código de comercio y el `Api Key` a usar.
+
+Una forma fácil de comenzar es utilizar la configuración para pruebas que viene incluida en el SDK.
+
+```java
+PENDIENTE
+```
+```php
+
+```
+```csharp
+
+```
+```ruby
+
+```
+```python
+
+```
+
+### Confirmar suscripción
+
+### Estado de la suscripción
+
 ## Credenciales y Ambiente
 
 Las credenciales de PatPass by Webpay se configuran de igual forma a las
