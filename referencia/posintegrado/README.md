@@ -149,7 +149,13 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta. L
 
 - `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
 - `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
-- `Enviar Mensaje`: Este parámetro indica al POS si debe enviar mensajes intermedios a la caja mientras se realiza el proceso de venta. Los mensajes intermedios que envía el POS y que deben ser mostrados por la Caja, deben corresponder según los siguientes códigos:
+- `Enviar Mensaje`: Este parámetro indica al POS si debe enviar mensajes intermedios a la caja mientras se realiza el proceso de venta.
+
+<aside class="warning">
+El SDK no soporta el envío de mensajes intermedios. Por esta razón el parámetro `Enviar Mensaje` sera siempre falso.
+</aside>
+  
+- Los mensajes intermedios que envía el POS y que deben ser mostrados por la Caja, deben corresponder según los siguientes códigos:
   - `78`: Lectura de Tarjeta.
   - `79`: Confirmación de Monto.
   - `80`: Selección de Cuotas.
@@ -196,7 +202,7 @@ El resultado de la venta se entrega en la forma de un objeto `SaleResponse` o un
 ```
 
 <aside class="warning">
-Actualmente no están soportados los mensajes intermedios. Por esta razón el 3º parámetro de la función en C debe ser siempre falso.
+El SDK no soporta el envío de mensajes intermedios. Por esta razón el 3º parámetro de la función en C es siempre falso.
 </aside>
 
 <img class="td_img-night" src="/images/referencia/posintegrado/diagrama-venta.png" alt="Diagrama de Secuencia Venta">
