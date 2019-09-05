@@ -209,7 +209,7 @@ usuario.
 
 ### Crear una suscripción
 
-Para crear una transaccion **PatPass Comercio** que registre una suscripción, lo primero que necesitas es una instancia de `WebpayPatpassComercio`con la `Configuration`que incluye el código de comercio y el `Api Key` a usar.
+Para crear una transaccion **PatPass Comercio** que registre una suscripción, lo primero que necesitas es una instancia de `WebpayPatpassComercio` con la `Configuration` que incluye el código de comercio y el `Api Key` a usar.
 
 Una forma fácil de comenzar es utilizar la configuración para pruebas que viene incluida en el SDK.
 
@@ -217,9 +217,21 @@ Una forma fácil de comenzar es utilizar la configuración para pruebas que vien
 PENDIENTE
 ```
 ```php
+use Transbank\PatpassComercio;
+use Transbank\PatpassComercio;
+
 
 ```
 ```csharp
+using Transbank.Common;
+using Transbank.Patpass.PatpassComercio;
+// ...
+
+
+PatpassComercio.CommerceCode = "codigo de comercio en String";
+PatpassComercio.ApiKey = "Api Key en String";
+PatpassComercio.IntegrationType = "TEST / LIVE dependiendo de tu ambiente de integracion";
+
 
 ```
 ```ruby
@@ -228,6 +240,66 @@ PENDIENTE
 ```python
 
 ```
+
+Te recomendamos encapsular estas asignaciones en una función para que puedas reutilizarlas en los demás métodos.
+
+Una vez este preparado el ambiente y la integracion, puedes iniciar la transacción sin problemas.
+
+```java
+
+```
+```php
+
+```
+```csharp
+using Transbank.Patpass.PatpassComercio;
+// ...
+
+var returnUrl = "https://callback_url/resultado/de/la/transaccion";
+var name = "Nombre";
+var lastname1 = "Primer Apellido";
+var lastname2 = "Segundo Apellido";
+var rut = "11111111-1";
+var serviceId = "Identificador del servicio unico de suscripción";
+var finalUrl = "https://callback/final/comprobante/transacción";
+var commerceCode = "Código de comercio";
+var maxAmount = 10000; # monto máximo de la suscripción
+var telephone = "numero telefono fijo de suscrito";
+var mobilePhone = "numero de telefono móvil de suscrito";
+var patpassName = "Nombre asignado a la suscripción";
+var clientEmail = "Correo de suscrito";
+var commerceEmail = "Correo de comercio";
+var address = "Dirección de Suscrito";
+var city = "Ciudad de suscrito";
+
+
+var response = PatpassComercio.Start(
+    returnUrl,
+    name,
+    lastname1,
+    lastname2,
+    rut,
+    serviceId,
+    finalUrl,
+    commerceCode,
+    maxAmount,
+    telephone,
+    mobilePhone,
+    patpassName,
+    clientEmail,
+    commerceEmail,
+    address,
+    city
+);
+
+```
+```ruby
+
+```
+```python
+
+```
+
 
 ### Confirmar suscripción
 
