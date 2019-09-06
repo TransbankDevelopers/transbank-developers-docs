@@ -9,13 +9,13 @@ El POS integrado permite realizar transacciones con tarjeta de Crédito/Débito 
 
 ## Transacciones Soportadas
 
-- [x] Carga de Llaves.
 - [x] Venta.
 - [x] Cierre.
 - [x] Anulación.
 - [x] Última Venta.
-- [ ] Detalle de Ventas.
+- [x] Detalle de Ventas.
 - [x] Totales.
+- [x] Carga de Llaves.
 - [x] Poll.
 - [x] Cambio a modalidad POS Normal.
 
