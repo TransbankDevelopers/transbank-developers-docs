@@ -426,15 +426,22 @@ PENDIENTE
 Una vez que el tarjetahabiente ha pagado (o declinado, o ha ocurrido un error), Webpay retornará el control vía POST a la URL que indicaste en el returnUrl. Recibirás también el parámetro token_ws que te permitirá conocer el resultado de la transacción:
 
 ```java
+import cl.transbank.patpass.model.PatpassComercioTransactionStatusResponse;
 
-
+final WebpayApiRequest request = new PatpassComercioTransactionStatusRequest(token);
 ```
 
 ```php
+use Transbank\Patpass\PatpassComercio;
 
+$response = PatpassComercio\Inscription::Status($token);
 ```
 
 ```csharp
+using Transbank.Patpass.PatpassComercio;
+
+var token = Request.Form["token_ws"];
+var result = Inscription.Status(token);
 
 ```
 
