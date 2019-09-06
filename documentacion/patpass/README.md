@@ -273,7 +273,7 @@ var address = "Dirección de Suscrito";
 var city = "Ciudad de suscrito";
 
 
-var response = PatpassComercio.Start(
+var response = Inscription.Start(
     returnUrl,
     name,
     lastname1,
@@ -303,7 +303,30 @@ var response = PatpassComercio.Start(
 
 ### Confirmar suscripción
 
+
 ### Estado de la suscripción
+
+Una vez que el tarjetahabiente ha pagado (o declinado, o ha ocurrido un error), Webpay retornará el control vía POST a la URL que indicaste en el returnUrl. Recibirás también el parámetro token_ws que te permitirá conocer el resultado de la transacción:
+
+```java
+
+```
+
+```php
+
+```
+
+```csharp
+
+```
+
+```ruby
+
+```
+
+```python
+
+```
 
 ## Credenciales y Ambiente
 
