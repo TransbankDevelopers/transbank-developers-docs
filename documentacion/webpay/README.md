@@ -589,6 +589,10 @@ if (output.responseCode == 0) {
 
 ```
 
+## Webpay Transacción Completa
+
+### Crear una transacción
+
 ## Credenciales y Ambiente
 
 Para Webpay, las credenciales del comercio (código de comercio y certificados)
