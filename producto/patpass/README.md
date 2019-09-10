@@ -56,6 +56,24 @@ Una vez completada la operación, el comercio podrá visualizar el detalle de la
 
 En caso que un cobro no sea exitoso o el pago automático sea dado de baja, el tarjetahabiente también recibirá una alerta por correo electrónico (tal como la recibe en la inscripción descrita anteriormente en el punto 7).
 
+## PatPass Comercio
+
+### Flujo de una transacción PatPass Commercio
+
+El flujo de transacción **PatPass Comercio** se puede resumir en los siguientes pasos:
+
+1. El tarjetahabiente navega dentro de la página del comercio.
+2. El tarjetahabiente selecciona la opción de pago PatPass Commercio y completa la información requerida por el comercio (RUT, nombre completo, email, direccion, telefonos móvil y fijo).
+3. Una vez enviada la información el cliente es redirigido a Webpay donde se le informa tanto el monto, como la fecha de término de la suscripción mensual, en este formulario debe ingresar la información de su tarjeta.
+4. El emisor de la tarjeta autentica al tarjetahabiente antes de realizar la transacción financiera, con el objetivo de validar que la tarjeta este siendo utilizada por el titular.
+5. Si la autenticación es exitosa, PatPass Comercio contrasta la información del cliente enviada por el emisor con la información provista por el comercio para asegurar que coincidan. De ser así, se procede con la autorización y captura del monto cobrado.
+6. Si dicha autorización y captura es exitosa, Transbank procede de forma automática y transparente (tanto para el comercio como para el tarjetahabiente) a realizar la inscripción de la recurrencia en la Plataforma PatPass.
+7. Finalmente se enviará un correo electrónico al comercio y otro correo electrónico al tarjetahabiente con la información del pago automático activado.
+
+Una vez completada toda la operacion el comericio podrá visualizar el detalle de las transacciones y consultar por los cobros recurrentes mediante Transadata.
+Por parte del tarjetahabiente, podrá visualizar la inscripción de este cobro mensual a través del PatPass Emisor (HomeBanking) en su respectivo Banco. Allí podrá observar el canal de origen que corresponde a “Webpay Mensual” y la fecha de término de este cobro recurrente.
+
+
 ## Anulaciones PatPass
 
 Una Anulación corresponde a la revocación de una venta ya autorizada y capturada por Transbank.
