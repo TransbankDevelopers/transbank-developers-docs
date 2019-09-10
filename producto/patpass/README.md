@@ -58,6 +58,12 @@ En caso que un cobro no sea exitoso o el pago automático sea dado de baja, el t
 
 ## PatPass Comercio
 
+<div class="pos-title-nav">
+  <div tbk-link='/documentacion/patpass' tbk-link-name='Documentación'></div>
+  <div tbk-link='/referencia/patpass' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/plugins/patpass' tbk-link-name='Plugins'></div>
+</div>
+
 ### Flujo de una transacción PatPass Commercio
 
 El flujo de transacción **PatPass Comercio** se puede resumir en los siguientes pasos:
