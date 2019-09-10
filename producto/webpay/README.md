@@ -85,6 +85,23 @@ De cara al comercio, Webpay OneClick Mall combina dos grupos de beneficios:
 
 Al no contar con sistema de autenticación bancaria en los cargos que se realizan después de la autorización, será el comercio el responsable de asumir el riesgo de fraude o desconocimientos de compra que realice un tarjetahabiente.
 
+### Webpay Transacción Completa
+
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#webpay-transaccion-completa' tbk-link-name='Referencia Api'></div>
+</div>
+
+Este producto permite realizar transacciones con Tarjetas de Crédito **sin utilizar el formulario standard de Webpay**. La mayor diferencia con Webpay Plus Tradicional es que el ingreso de los datos de la Tarjeta de Crédito, se realiza dentro del mismo sitio web del comercio, lo que permite al comercio personalizar a su criterio la manera en como pide y valida los datos del cliente.
+
+- Solo funciona con Tarjetas de Crédito.
+
+- Al seleccionar el medio de pago con Tarjeta de Crédito, el sitio puede desplegar un formulario personalizado solicitando los datos necesarios para la transacción.
+
+Transacción Completa esta enfocado en comercio con una **elevada infraestructura, que permita el manejo de data sensible, con altos estándares de seguridad**. El establecimiento es responsable de la administracion, autentificacion y almacenado de datos del tarjetahabiente asi como tambien el riesgo de fraude.
+
+Por este motivo este producto no se encuentra dentro de la oferta publica de Transbank.
+
+
 ## Tipos de Pago
 
 Los tipos de pago disponibles actualmente a través de Webpay dependen del tipo de tarjeta usada por el tarjetahabiente y los que tenga activado el comercio.
