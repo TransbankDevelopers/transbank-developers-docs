@@ -64,6 +64,26 @@ En caso que un cobro no sea exitoso o el pago automático sea dado de baja, el t
   <div tbk-link='/plugins/patpass' tbk-link-name='Plugins'></div>
 </div>
 
+Mediante PatPass Comercio el tarjetahabiente genera una suscripción de pago automatico con Tarjeta de Crédito por un producto o servicio por un monto fijo, efectuando **el primer pago en línea a través de Plataforma PatPass y luego efectuándose el cobro mensualmente de forma automática** a travez del mismo motor PatPass, con una fecha de término definida por el comercio.
+
+En cuanto a monedas, PatPass Comercio solo permite utilizar Peso Chileno. Para cobros en otras divisas, el comercio tiene que encargase de la conversión con las tasas que esto conlleva.
+
+PatPass Comercio es un canal utilizado sólo para dar de alta pagos automáticos. Si el comercio requiere dar de baja un pago automático, debe utilizar los otros canales existentes (como Transdata).
+
+**El comercio deberá almacenar la información de todas las transacciones efectuadas a través del producto PatPass Comercio**, debiendo mantener los respectivos registros a lo menos por el plazo de un año desde la fecha de cada operación, a modo de respaldo de las ventas efectuadas y de los servicios prestados. Esta información deberá ser puesta a disposición de Transbank cada vez y tan pronto éste la requiera. La información mínima que deberá almacenar el Establecimiento Comercial por cada una de las transacciones es la siguiente:
+
+- Código de Comercio asignado por Transbank.
+- Número de Orden de Pedido.
+- Fecha y hora de la transacción.
+- Monto y moneda de la operación.
+- Número de Código de Autorización entregado por Transbank.
+- Identificación de Servicio.
+- Descripción de bienes vendidos o servicios prestados.
+- Nombre del tarjetahabiente que efectúa la compra.
+- Campo de autenticación emisor.
+- Fecha de vencimiento de la suscripción.
+- Mail de contacto de Tarjetahabiente.
+
 ### Flujo de una transacción PatPass Commercio
 
 El flujo de transacción **PatPass Comercio** se puede resumir en los siguientes pasos:
