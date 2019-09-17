@@ -302,3 +302,11 @@ Dentro de los atributos más relevantes se puede mencionar:
 
 
 ### Flujo en caso de éxito
+
+De cara al tarjetahabiente, el flujo de páginas para la transacción es el siguiente:
+
+![Flujo de páginas PatPass Comercio](/images/flujo-paginas-webpay.png)
+
+Desde el punto de vista técnico, la secuencia es la siguiente:
+
+![Diagrama de secuencia PatPass Comercio](/images/referencia/patpasscomercio/flujo-patpass-normal.png)
