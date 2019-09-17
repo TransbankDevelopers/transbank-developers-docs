@@ -356,3 +356,17 @@ commercecode: codigo de comercio
 | Nombre <br> <i> tipo </i> | Descripción     |
 | :------------- | :------------- |
 | url <br> *String*       | URL del comerc io, a la cual Webpay redireccionará posterior al proceso de autorizacion. Largo máximo: 255       |
+| name <br> *String*| Nombre del tarjetahabiente. Largo máximo: 255 |
+| fLastname <br> *String*| Apellido paterno del tarjetahabiente. Largo màximo: 255|
+| sLastname <br> *String*| Apellido Materno del tarjetahabiente. Largo màximo: 255|
+|rut <br> *String*| RUT del tarjetahabiente. Largo maximo: 255. Formato: NNNNNNNNA |
+|serviceId <br> *String*| Corresponde al identificador de servicio con que el comercio identifica a su cliente. Largo màximo: 255|
+| finalUrl <br> *String* |Direccion de comercio donde Webpay redireccionara una vez terminada la inscripción. Largo Màximo: 255|
+|  <br> ** ||
+|  <br> ** ||
+|  <br> ** ||
+|  <br> ** ||
+|  <br> ** ||
+|  <br> ** ||
+|  <br> ** ||
+|  <br> ** ||
