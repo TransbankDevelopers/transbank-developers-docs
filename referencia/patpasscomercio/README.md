@@ -132,7 +132,74 @@ comercio](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/t
 
 ```
 
-### PatPass Comercio Start
+### PatPass Comercio
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+
+```
+
+Una suscripción de PatPass Comercio corresponde a una solicitud de pago recurrente con tarjeta de crédito, en donde el primer pago se resuelve al instante, y los subsiguientes quedan programados para ser ejecutados mes a mes, PatPass Comercio cuenta con fecha de caducidad o término, la cual debe ser proporcionada junto a otros datos para esta transacción. La transacción solo puede ser realizada en pesos.
+
+EL flujo de pago de PatPass Comercio se inicia desde el comercio, en donde el tarjetahabiente selecciona el producto o servicio. Una vez realizado esto, elige pagar con PatPass Comercio, en donde se despliega el formulario de pago y se completan los datos requeridos, una vez enviado los datos se realiza un proceso de autentificacion y confirmacion de datos de la suscripcion. Una vez resuelta la autentificacion, se procede a aprobar la suscripcion. Posterior a eso se genera un compobante de la suscripcion en si.
+
+Dentro de los atributos más relevantes se puede mencionar:
+
+- Permite realizar transacciones seguras y en línea a través de Internet.
+- En transacciones con PatPass Comercio se solicita al tarjetahabiente autenticarse con su emisor, protegiendo de esta forma al comercio por eventuales fraudes o desconocimientos de compra.
+- La seguridad es reforzada por medio de la utilización de servidores seguros, protegidos con TLS 1.2
+
+
+### Flujo en caso de éxito
+
+De cara al tarjetahabiente, el flujo de páginas para la transacción es el siguiente:
+
+![Flujo de páginas PatPass Comercio](/images/flujo-paginas-webpay.png)
+
+Desde el punto de vista técnico, la secuencia es la siguiente:
+
+![Diagrama de secuencia PatPass Comercio](/images/referencia/patpasscomercio/flujo-patpass-normal.png)
+
+1. Una vez seleccionados los bienes o servicios, el tarjetahabiente decide pagar a travez de PatPass Comercio.
+2. El comercio inicia la inscripcion solicitando a Webpay un token y url utilizando el metodo `Inscription.start()`.
+3. Webpay entrega ambos datos.
+4. El comercio envia el token a la URL entregada por Webpay mediante metodo post.
+5. Se despliega formulario con informacion del PatPass Comercio.
+6. El usuario rellena el formulario con la unformación restante.
+7. Se redirije a la URL de retorno.
+8. El comercio muestra el estado de la inscripcion.
+9. Se retorna el estado junto a la URL del voucher.
+10. Se realiza un POST desde el comercio para obtener el voucher
+11. Se Redirige a la URL final.
+
+<aside class="warning">
+En la versión anterior de WebPay, había que invocar `acknowledgeTransaction()`
+para informar a WebPay que se había recibido el resultado la transacción sin
+problemas. Ahora no es necesario, ya que ésto se realiza de forma automática
+una vez que se confirma la transacción.  Además ya no se debe mostrar el voucher
+de Transbank, solo debe mostrarse desde el sitio del comercio.
+</aside>
+
+#### `Inscription.start`
 
 ```java
 import cl.transbank.patpass.PatpassComercio;
@@ -146,7 +213,6 @@ String secondLastName = "sapellido";
 String rut = "14140066-5";
 String serviceId = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));;
 String finalUrl = request.getRequestURL().toString().replace("start","voucher-generated");
-String commerceCode = "28299257";
 double maxAmount = 1500;
 String phoneNumber = "123456734";
 String mobileNumber = "123456723";
@@ -163,7 +229,6 @@ final PatpassComercioInscriptionStartResponse response = PatpassComercio.Inscrip
                     rut,
                     serviceId,
                     finalUrl,
-                    commerceCode,
                     maxAmount,
                     phoneNumber,
                     mobileNumber,
@@ -184,7 +249,6 @@ $lastname2 = "Segundo Apellido";
 $rut = "11111111-1";
 $serviceId = "Identificador del servicio unico de suscripción";
 $finalUrl = "https://callback/final/comprobante/transacción";
-$commerceCode = "Código de comercio";
 $maxAmount = 10000; # monto máximo de la suscripción
 $telephone = "numero telefono fijo de suscrito";
 $mobilePhone = "numero de telefono móvil de suscrito";
@@ -202,7 +266,6 @@ $response = PatpassComercio\Inscription::Start(
   $rut,
   $serviceId,
   $finalUrl,
-  $commerceCode,
   $maxAmount,
   $telephone,
   $mobilePhone,
@@ -225,7 +288,6 @@ var lastname2 = "Segundo Apellido";
 var rut = "11111111-1";
 var serviceId = "Identificador del servicio unico de suscripción";
 var finalUrl = "https://callback/final/comprobante/transacción";
-var commerceCode = "Código de comercio";
 var maxAmount = 10000; # monto máximo de la suscripción
 var telephone = "numero telefono fijo de suscrito";
 var mobilePhone = "numero de telefono móvil de suscrito";
@@ -244,7 +306,6 @@ var response = Inscription.Start(
     rut,
     serviceId,
     finalUrl,
-    commerceCode,
     maxAmount,
     telephone,
     mobilePhone,
@@ -278,7 +339,6 @@ commercecode: codigo de comercio
     "rut": "14959787-6",
     "serviceId": "76654654654",
     "finalUrl": "/urlrfinal",
-    "commerceCode": "codigo de comerico",
     "montoMaximo": 1500,
     "telefonoFijo": "012356545",
     "telefonoCelular": "99999999",
@@ -290,23 +350,9 @@ commercecode: codigo de comercio
 }
 
 ```
-Una suscripción de PatPass Comercio corresponde a una solicitud de pago recurrente con tarjeta de crédito, en donde el primer pago se resuelve al instante, y los subsiguientes quedan programados para ser ejecutados mes a mes, PatPass Comercio cuenta con fecha de caducidad o término, la cual debe ser proporcionada junto a otros datos para esta transacción. La transacción solo puede ser realizada en pesos.
 
-EL flujo de pago de PatPass Comercio se inicia desde el comercio, en donde el tarjetahabiente selecciona el producto o servicio. Una vez realizado esto, elige pagar con PatPass Comercio, en donde se despliega el formulario de pago y se completan los datos requeridos, una vez enviado los datos se realiza un proceso de autentificacion y confirmacion de datos de la suscripcion. Una vez resuelta la autentificacion, se procede a aprobar la suscripcion. Posterior a eso se genera un compobante de la suscripcion en si.
+**Parámetros**
 
-Dentro de los atributos más relevantes se puede mencionar:
-
-- Permite realizar transacciones seguras y en línea a través de Internet.
-- En transacciones con PatPass Comercio se solicita al tarjetahabiente autenticarse con su emisor, protegiendo de esta forma al comercio por eventuales fraudes o desconocimientos de compra.
-- La seguridad es reforzada por medio de la utilización de servidores seguros, protegidos con TLS 1.2
-
-
-### Flujo en caso de éxito
-
-De cara al tarjetahabiente, el flujo de páginas para la transacción es el siguiente:
-
-![Flujo de páginas PatPass Comercio](/images/flujo-paginas-webpay.png)
-
-Desde el punto de vista técnico, la secuencia es la siguiente:
-
-![Diagrama de secuencia PatPass Comercio](/images/referencia/patpasscomercio/flujo-patpass-normal.png)
+| Nombre <br> <i> tipo </i> | Descripción     |
+| :------------- | :------------- |
+| url <br> *String*       | URL del comerc io, a la cual Webpay redireccionará posterior al proceso de autorizacion. Largo máximo: 255       |
