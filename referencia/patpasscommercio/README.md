@@ -62,9 +62,9 @@ PENDIENTE
 
 ## Set API key
 
-En cuanto a credenciales, todos los métodos del API requieren tres parámetros:
+En cuanto a credenciales, todos los métodos del API requieren dos parámetros:
 
-> Los SDKs manejan automáticamente el parámetro `appKey`.
+> Los SDKs manejan automáticamente el parámetro `appiKey`.
 
 | Lenguaje | Api-Key Test | Api-Key Live |
 | :------- | :----------- | :----------- |
@@ -115,7 +115,7 @@ Este endpoint permite el inicio de la transacción generando un token, a partir 
 | Parámetros   | Descripción                            |  Tipo  |
 | :----------- | :------------------------------------- | :----: |
 | commerceCode | codigo de comercio asociado al api-key | String |
-| apiKey       | api-key                                | String |
+| Authorization| api-key                                | String |
 
 #### Descripción Request Body
 
@@ -128,7 +128,6 @@ Este endpoint permite el inicio de la transacción generando un token, a partir 
 | rut           | Rut del tarjetahabiente                                   | String |
 | serviceId     | ID del servicio del tarjetahabiente                       | String |
 | finalUrl      | Url final de la inscripción                               | String |
-| commerceCode  | Código del comercio 8 dígitos                             | String |
 | maxAmount     | Monto máximo del PAT a inscribir                          | String |
 | phoneNumber   | Teléfono fijo del tarjetahabiente                         | String |
 | mobileNumber  | Teléfono celular del tarjetahabiente                      | String |
@@ -142,22 +141,21 @@ Este endpoint permite el inicio de la transacción generando un token, a partir 
 
 ```json
 {
-  "url":"https://www.comercio.com/urlretorno",
-  "firstName":"nombre",
-  "fLastname":"apellido",
-  "sLastname":"sapellido",
-  "rut":"14959787-6",
-  "serviceId":"76",
-  "finalUrl":"https://www.comercio.com/urlrfinal",
-  "commerceCode":"28546637",
-  "maxAmount":1500,
-  "phoneNumber":"012356545",
-  "mobileNumber":"99999999",
-  "patPassName":"nombre del patpass",
-  "userEmail":"persona@persona.cl",
-  "commerceEmail":"comercio@comercio.cl",
-  "userAddress":"huerfanos 101",
-  "userCity":"Santiago"
+"url": "http://localhost:8081/patpass-comercio/end-subscription",
+"nombre": "Diego",
+"pApellido": "Sanchez",
+"sApellido": "Valdovinos",
+"rut": "14140066-5",
+"serviceId": "323123",
+"finalUrl": "http://localhost:8081/patpass-comercio/voucher-generated",
+"montoMaximo": "",
+"telefonoFijo": "57508624",
+"telefonoCelular": "57508624",
+"nombrePatPass": "Help - 8050014",
+"correoPersona": "alba.cardenas@continuum.cl",
+"correoComercio": "alba.cardenas@continuum.cl",
+"direccion": "Merced 156, Santiago, Chile",
+"ciudad": "Santiago"
 }
 ```
 
@@ -212,7 +210,6 @@ try {
         rut,
         serviceId,
         finalUrl,
-        commerceCode,
         maxAmount,
         phoneNumber,
         mobileNumber,
@@ -246,7 +243,6 @@ $response = PatpassComercio\Inscription::start(
             $req['rut'],
             $req['serviceId'] ,
             $req['finalUrl'],
-            $req['commerceCode'],
             $req['montoMaximo'],
             $req['telefonoFijo'],
             $req['telefonoCelular'],
@@ -268,7 +264,6 @@ var response = Inscription.Start(
                 rut: rut,
                 serviceId: service_id,
                 finalUrl: final_url,
-                commerceCode: commerce_code,
                 maxAmount: max_amount,
                 phoneNumber: phone_number,
                 mobileNumber: mobile_number,
@@ -297,7 +292,6 @@ var response = Inscription.Start(
         address: @address,
         city: @city
         )
-render 'inscription_started'
 ```
 
 ```python
@@ -319,6 +313,11 @@ $response->url;
 ```csharp
 response.Token;
 response.Url;
+```
+
+```ruby
+response.token
+response.url
 ```
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -410,7 +409,6 @@ try{
 
 ```ruby
 @response = Transbank::Patpass::PatpassComercio::Inscription::status(token: @token)
-render 'inscription_status'
 ```
 
 ```python
@@ -435,8 +433,8 @@ response.UrlVoucher;
 ```
 
 ```ruby
-@response.voucher_url
-@response.voucher_url
+response.status
+response.voucher_url
 ```
 
 Nombre  <br> <i> tipo </i> | Descripción
