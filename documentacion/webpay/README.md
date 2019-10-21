@@ -589,7 +589,7 @@ if (output.responseCode == 0) {
 
 ```
 
-## Webpay Transacción Completa
+## Webpay Transacción Completa {data-submenuhidden=true}
 
 
 

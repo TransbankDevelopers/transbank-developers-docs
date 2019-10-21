@@ -85,7 +85,7 @@ De cara al comercio, Webpay OneClick Mall combina dos grupos de beneficios:
 
 Al no contar con sistema de autenticación bancaria en los cargos que se realizan después de la autorización, será el comercio el responsable de asumir el riesgo de fraude o desconocimientos de compra que realice un tarjetahabiente.
 
-### Webpay Transacción Completa
+### Webpay Transacción Completa {data-submenuhidden=true}
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-transaccion-completa' tbk-link-name='Referencia Api'></div>
