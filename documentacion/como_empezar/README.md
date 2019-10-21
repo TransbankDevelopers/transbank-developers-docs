@@ -112,6 +112,18 @@ como probar nuestros productos en este ambiente:
 - [Webpay OneClick](webpay#webpay-oneclick)
 - [Onepay Checkout](onepay#integracion-checkout)
 
+En el caso de requerir los códigos de comercio de integración son los siguientes:
+Producto | Código de comercio
+------   | -----------
+Webpay Plus | 597020000540
+webpay PLus Mall <br> <i>tienda 1</i> <br> <i>tienda 2</i> | 597044444401 <br> 597044444402 <br> 597044444403
+Webpay Plus Captura Diferida | 597044444404
+Oneclick | 597044444405
+Oneclick Mall <br> <i>tienda 1</i> <br> <i>tienda 2</i> | 597044444429 <br> 597044444430 <br> 597044444431
+
+Para mayor detalle de las credenciales puedes visitar [el repositorio GitHub
+`transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
+
 Después de haber realizado esas pruebas iniciales y antes del paso a producción
 tendrás que usar credenciales que identifiquen a tu comercio. De esa forma
 podrás realizar [la validación que te permitirá acceder a credenciales de
