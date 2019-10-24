@@ -597,6 +597,8 @@ if (output.responseCode == 0) {
 
 Antes de realizar cualquier transacción es necesario instanciar el producto.
 
+<div class="language-simple" data-multiple-language></div>
+
 ```java
 import cl.transbank.transaccioncompleta.FullTransaction;
 
@@ -625,7 +627,6 @@ TransaccionCompleta.CommerceCode = "Codigo de Comercio";
 TransaccionCompleta.ApiKey = "Apikey entregado por Transabank";
 TransaccionCompleta.IntegrationType = "TEST/LIVE"; //ambiente de integracion;
 
-
 ```
 
 ```ruby
@@ -638,6 +639,8 @@ TransaccionCompleta.IntegrationType = "TEST/LIVE"; //ambiente de integracion;
 Es recomendado encapsular la asignacion para utilizarla sin problemas en los demas metodos.
 
 Ahora se pueden realizar transacciones sin problemas
+
+<div class="language-simple" data-multiple-language></div>
 
 ```java
 import cl.transbank.transaccioncompleta.FullTransaction;
@@ -697,6 +700,8 @@ var result = FullTransaction.Create(
 
 Antes de confirmar una transaccion es necesario confirmar la cantidad de cuotas y entregar el valor de estas.
 
+<div class="language-simple" data-multiple-language></div>
+
 ```java
 import cl.transbank.transaccioncompleta.FullTransaction;
 
@@ -745,6 +750,8 @@ var result = FullTransaction.Installments(
 ### Confirmar Transaccion
 
 Una vez obtenido la respuesta de la consulta de cuotas, con los datos de esta se puede realizar commit de la transaccion:
+
+<div class="language-simple" data-multiple-language></div>
 
 ```java
 import cl.transbank.transaccioncompleta.FullTransaction;
@@ -809,6 +816,8 @@ var result = FullTransaction.Commit(
 ### Estado Transaccion
 
 Para obtener el resultado de la transaccion exite el siguiente metodo:
+
+<div class="language-simple" data-multiple-language></div>
 
 ```java
 import cl.transbank.transaccioncompleta.FullTransaction;
