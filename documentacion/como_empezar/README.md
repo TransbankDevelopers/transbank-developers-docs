@@ -112,6 +112,12 @@ como probar nuestros productos en este ambiente:
 - [Webpay OneClick](webpay#webpay-oneclick)
 - [Onepay Checkout](onepay#integracion-checkout)
 
+<aside class="notice">
+Tip: Los SDK y plugins provistos por Transbank tiene pre-configuradas
+las credenciales para el ambiente de integración. Puedes ver como usarlas
+en la sección de [documentación de los SDK](https://www.transbankdevelopers.cl/documentacion/webpay#webpay-plus) y [Plugins](https://www.transbankdevelopers.cl/plugin)
+</aside>
+
 En el caso de requerir los códigos de comercio de integración son los siguientes:
 Producto | Código de comercio
 ------   | -----------
