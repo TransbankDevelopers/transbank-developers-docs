@@ -50,12 +50,16 @@ Onepay puede ser utilizado como Cortafila o Caja Móvil en tus tiendas físicas;
 El flujo en este caso funciona así:
 
 1. El tarjetahabiente tiene la posibilidad de realizar su compra en un tótem de autoservicio o con la asistencia de un vendedor que posee un dispositivo móvil con la aplicación integrada para iniciar el proceso de cobro con Onepay.
+<img alt="onepay_step_1" src="/images/producto/onepay/onepay_venta_fisica_paso_1.png" class="rounded mx-auto d-block"/>
 
 2. El dispositivo o tótem se comunica con el backend del comercio para generar una transacción Onepay con canal tipo "mobile", recibiendo la información de la transacción creada y mostrando un QR en la pantalla del dispositivo.
+<img alt="onepay_step_2" src="/images/producto/onepay/onepay_venta_fisica_paso_2.png" class="rounded mx-auto d-block"/>
 
 3. El cliente escanea el código QR que se muestra en el dispositivo del comercio y paga confirmando la compra con su PIN Onepay.
+<img alt="onepay_step_3" src="/images/producto/onepay/onepay_venta_fisica_paso_3.png"  class="rounded mx-auto d-block"/>
 
 4. Para finalizar la transacción, el cliente ve en su teléfono el comprobante de compra. Al momento de generar ese comprobante, el backend del comercio notifica al dispositivo del vendedor o al tótem de autoservicio que la transacción ha sido completada con éxito.
+<img alt="onepay_step_4" src="/images/producto/onepay/onepay_venta_fisica_paso_4.png"  class="rounded mx-auto d-block"/>
 
 Esta integración de Onepay es una alternativa sencilla de implementar mediante SDKs, solo debes estar atento a las actualizaciones que Transbank realiza periódicamente.
 
