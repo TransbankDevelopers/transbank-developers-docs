@@ -181,7 +181,7 @@ tarjetas de prueba en la sección de
 Ambientes](/documentacion/como_empezar#ambientes).
 </aside>
 
-<div class='url-modal-embed' data-lenguaje-visible='php' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/YBy7DlQ-Bws" >
+<div class='url-modal-embed' data-lenguaje-visible='php' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/vx0ioz2bGVU" >
   <div class="container-embed">
     <div class="data-info-url">
       <b>Video tutorial de integración SDK PHP 1</b><br>
@@ -280,7 +280,7 @@ usuario. Con eso habrás completado el flujo "feliz" en que todo funciona.
 En [la referencia detallada de Webpay Plus puedes ver cada paso del flujo, incluyendo
 los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-plus-normal).
 
-<div class='url-modal-embed' data-lenguaje-visible='php' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/J0vTgY6jnnk" >
+<div class='url-modal-embed' data-lenguaje-visible='php' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/3NgVQmRyvM8" >
   <div class="container-embed">
     <div class="data-info-url">
       <b>Video tutorial de integración SDK PHP 2</b><br>
