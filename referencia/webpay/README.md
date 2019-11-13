@@ -1382,7 +1382,7 @@ result.tbkUser;
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de inscripción, donde 0 (cero) es aprobado. <br> -96: Se invocó finishInscription sin que el tarjetahabiente se haya autenticado correctamente con su banco en el flujo Webpay.
+responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de inscripción, donde 0 (cero) es aprobado. <br> -96: Inscripción no realizada previamente.
 authCode  <br> <i> xs:string </i> | Código que identifica la autorización de la inscripción.
 creditCardType  <br> <i> creditCardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna).
 last4CardDigits  <br> <i> xs:string </i> | Los últimos 4 dígitos de la tarjeta ingresada por el cliente en la inscripción.
