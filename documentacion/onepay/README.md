@@ -366,8 +366,8 @@ Onepay en el mismo teléfono del usuario.
 Existe un [Simulador de transacciones](/referencia/onepay#simulador-de-transacciones) que puedes utilizar para generar transacciones exitosas o fallidas.
 
 <aside class="notice">
-Una vez iniciada la transacción, tienes 10 minutos para ejecutar la confirmación.
-De lo contrario, se aplicará una reversa.
+Una vez iniciada la transacción, tienes 10 minutos para que se complete el flujo de pago, incluyendo la confirmación.
+De lo contrario, se rechazará o se aplicará una reversa según corresponda.
 </aside>
 
 ### 3. Back-end: Confirmar la Transacción
