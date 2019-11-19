@@ -277,6 +277,11 @@ transacción. Tal como antes, recibirás el `token_ws` que te permitirá
 identificar la transacción y mostrar un comprobante o página de éxito a tu
 usuario. Con eso habrás completado el flujo "feliz" en que todo funciona.
 
+<aside class="warning">
+En la confirmación es posible obtener dos excepciones de Timeout diferentes. Se obtendrá la excepción `Timeout error(272)` en caso de un fallo de _getTransactionResult_, si el fallo corresponda al _acknowledge_ la excepción que se obtendrá será `Timeout error (Transaction is REVERSED)(272)`
+</aside>
+
+
 En [la referencia detallada de Webpay Plus puedes ver cada paso del flujo, incluyendo
 los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-plus-normal).
 
