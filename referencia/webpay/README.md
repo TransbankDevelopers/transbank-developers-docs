@@ -1382,7 +1382,7 @@ result.tbkUser;
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de inscripción, donde 0 (cero) es aprobado. <br> -96: Se invocó finishInscription sin que el tarjetahabiente se haya autenticado correctamente con su banco en el flujo Webpay.
+responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de inscripción, donde 0 (cero) es aprobado.
 authCode  <br> <i> xs:string </i> | Código que identifica la autorización de la inscripción.
 creditCardType  <br> <i> creditCardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna).
 last4CardDigits  <br> <i> xs:string </i> | Los últimos 4 dígitos de la tarjeta ingresada por el cliente en la inscripción.
@@ -1456,7 +1456,7 @@ authorizationCode  <br> <i> xs:string </i> | Código de autorización de la tr
 creditCardType  <br> <i> creditCardType </i> | Indica el tipo de tarjeta que fue inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna).
 last4CardDigits  <br> <i> xs:string </i> | Los últimos 4 dígitos de la tarjeta usada en la transacción.
 transactionId  <br> <i> xs:long </i> | Identificador único de la transacción de pago.
-responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
+responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -96: No existe inscripción asociada. <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
 
 ### Reversar un pago Webpay OneClick
 
