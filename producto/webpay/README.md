@@ -91,13 +91,19 @@ Al no contar con sistema de autenticación bancaria en los cargos que se realiza
   <div tbk-link='/referencia/webpay#webpay-transaccion-completa' tbk-link-name='Referencia Api'></div>
 </div>
 
-Este producto permite realizar transacciones con Tarjetas de Crédito **sin utilizar el formulario standard de Webpay**. La mayor diferencia con Webpay Plus Tradicional es que el ingreso de los datos de la Tarjeta de Crédito, se realiza dentro del mismo sitio web del comercio, lo que permite al comercio personalizar a su criterio la manera en como pide y valida los datos del cliente.
+Este producto permite realizar transacciones con tarjetas de crédito sin utilizar el formulario standard de Webpay. La mayor diferencia con Webpay Plus Tradicional es que el ingreso de los datos de la tarjeta de crédito, se realiza dentro del mismo sitio web del comercio, lo que permite personalizar, a su criterio, la manera en como pide y valida los datos del cliente.
 
-- Solo funciona con Tarjetas de Crédito.
+- La modalidad de Transacción Completa solo funciona con tarjetas de crédito.
 
-- Al seleccionar el medio de pago con Tarjeta de Crédito, el sitio puede desplegar un formulario personalizado solicitando los datos necesarios para la transacción.
+- El Comercio puede personalizar el formulario en el que solicita los datos del tarjetahabiente para procesar una transacción.
+El comercio que desee comenzar a operar con la modalidad de Transacción Completa, debe contar con la certificación de Normas PCI DSS (Payment Card Industry-Data Security Standard) y renovarlas anualmente, debido al manejo de data sensible que pueden procesar y que serán utilizados exclusivamente en su relación con Transbank.
 
-Transacción Completa esta enfocado en comercio con una **elevada infraestructura, que permita el manejo de data sensible, con altos estándares de seguridad**. El establecimiento es responsable de la administracion, autentificacion y almacenado de datos del tarjetahabiente asi como tambien el riesgo de fraude.
+Transacción Completa, le ofrece al comercio elegir una o ambas de las siguientes funcionalidades:
+
+- Autorización en línea y captura simultánea, en la que se realiza el cargo al tarjetahabiente de inmediato.
+- Autorización en línea y captura diferida, en la que se efectúa una reserva de crédito sobre un valor estimado del producto y/o servicio a adquirir por el tarjetahabiente, posteriormente el comercio define el monto de la transacción el cual será menor o igual al autorizado, en caso de ser superior la transacción será rechazada.
+
+Para preveer transacciones desconocidas u otro tipo de operaciones u obligaciones del comercio que generen deudas a favor de Transbank, el comercio debe entregar una Boleta de Garantía que Transbank hará efectiva al tener la facultad de descontar o retener fondos contra abonos o pagos que debiera afectuar el comercio o que por incumplimiento de sus obligaciones deriven a daños en Transbank o a los emisores de tarjetas de crédito.
 
 Por este motivo este producto no se encuentra dentro de la oferta publica de Transbank.
 
