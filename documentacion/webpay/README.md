@@ -291,34 +291,6 @@ los casos de borde que también debes manejar](https://www.transbankdevelopers.c
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Webpay Plus Mall
 
 <div class="pos-title-nav">
@@ -327,7 +299,7 @@ los casos de borde que también debes manejar](https://www.transbankdevelopers.c
 
 ### Crear una transacción
 
-Para una transacción asociada a varios pagos, lo primero que necesitas es preparar una instancia de `WebpayMallNormal` con la `Configuration` que incluye los códigos de comercio de cada tienda incluida en la transacción y los certificados a usar.
+Para una transacción asociada a una tienda mall, lo primero que necesitas es preparar una instancia de `WebpayMallNormal` con la `Configuration` que incluye los códigos de comercio de cada tienda incluida y los certificados a usar.
 
 Una forma fácil de comenzar es usar la configuración para pruebas que viene incluida en el SDK:
 
@@ -340,7 +312,8 @@ import cl.transbank.webpay.WebpayMallNormal;
 // ...
 
 WebpayMallNormal transaction =
-    new Webpay(Configuration.forTestingWebpayPlusMall()).getMallNormalTransaction();
+    new Webpay(Configuration.forTestingWebpayPlusMall())
+                .getMallNormalTransaction();
 ```
 
 ```php
@@ -349,15 +322,16 @@ use Transbank\Webpay\Configuration;
 use Transbank\Webpay\Webpay;
 // ...
 
-$transaction = (new Webpay(Configuration::forTestingWebpayPlusMall()))->getMallNormalTransaction();
+$transaction = (new Webpay(Configuration::forTestingWebpayPlusMall()))
+                ->getMallNormalTransaction();
 ```
 
 ```csharp
 using Transbank.Webpay;
 //...
 
-var transaction =
-    new Webpay(Configuration.ForTestingWebpayPlusMall()).MallNormalTransaction;
+var transaction = new Webpay(Configuration.ForTestingWebpayPlusMall())
+            .MallNormalTransaction;
 ```
 
 ```ruby
@@ -411,6 +385,7 @@ storeTransaction.setCommerceCode(597044444403);
 // Identificador único de orden de compra generada por tienda 2
 storeTransaction.setBuyOrder(String.valueOf(Math.abs(new Random().nextLong())));
 transactions.add(storeTransaction);
+//...
 
 WsInitTransactionOutput initResult = transaction.initTransaction(buyOrder, sessionId, returnUrl, finalUrl, transactions);
 
@@ -428,16 +403,21 @@ $finalUrl = "https://callback/final/post/comprobante/webpay";
 
 // Lista con detalles de cada una de las transacciones:
 $transactions = array();
+// Detalles de transacción 1
 $transactions[] = array(
     "storeCode" => 597044444402,
     "amount" => 1000,
+    // Identificador único de orden de compra generada por tienda 1
     "buyOrder" => strval(rand(100000, 999999999))
 )
+// Detalles de transacción 2
 $transactions[] = array(
     "storeCode" => 597044444403,
     "amount" => 2000,
+    // Identificador único de orden de compra generada por tienda 2
     "buyOrder" => strval(rand(100000, 999999999))
 )
+//...
 
 $initResult = $transaction->initTransaction($buyOrder, $sessionId, $returnUrl, $finalUrl, $transactions);
 
@@ -456,10 +436,14 @@ var sessionId = "mi-id-de-sesion";
 var returnUrl = "https://callback/resultado/de/transaccion";
 var finalUrl = "https://callback/final/post/comprobante/webpay";
 
+// Lista con detalles de cada una de las transacciones:
 var transactions = new Dictionary<string, string[]>();
 
+// Detalles de transacción 1
 transactions.Add(597044444402, new string[] {597044444402, amount, new Random().Next(100000, 999999999).ToString()});
+// Detalles de transacción 2
 transactions.Add(597044444403, new string[] {597044444403, 2000, new Random().Next(100000, 999999999).ToString()});
+//...
 
 var initResult = transaction.initTransaction(buyOrder, sessionId, returnUrl, finalUrl, transactions);
 
@@ -599,44 +583,6 @@ En el caso exitoso deberás llevar el control vía `POST` nuevamente a Webpay pa
 Finalmente después del comprobante Webpay redirigirá otra vez (vía `POST`) a tu sitio, esta vez a la URL que indicaste en el `finalUrl` cuando iniciaste la transacción. Tal como antes, recibirás el `token_ws` que te permitirá identificar la transacción y mostrar un comprobante o página de éxito a tu usuario. Con eso habrás completado el flujo "feliz" en que todo funciona.
 
 En [la referencia detallada de Webpay Plus Mall puedes ver cada paso del flujo, incluyendo los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-plus-mall).
-
-<div class='url-modal-embed' data-lenguaje-visible='php' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/3NgVQmRyvM8" >
-  <div class="container-embed">
-    <div class="data-info-url">
-      <b>Video tutorial de integración SDK PHP 2</b><br>
-      Confirmar una transacción
-    </div>
-    <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ## Webpay OneClick
