@@ -290,6 +290,355 @@ los casos de borde que también debes manejar](https://www.transbankdevelopers.c
   </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Webpay Plus Mall
+
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#webpay-plus-mall' tbk-link-name='Referencia Api'></div>
+</div>
+
+### Crear una transacción
+
+Para una transacción asociada a varios pagos, lo primero que necesitas es preparar una instancia de `WebpayMallNormal` con la `Configuration` que incluye los códigos de comercio de cada tienda incluida en la transacción y los certificados a usar.
+
+Una forma fácil de comenzar es usar la configuración para pruebas que viene incluida en el SDK:
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+import cl.transbank.webpay.configuration.Configuration;
+import cl.transbank.webpay.Webpay;
+import cl.transbank.webpay.WebpayMallNormal;
+// ...
+
+WebpayMallNormal transaction =
+    new Webpay(Configuration.forTestingWebpayPlusMall()).getMallNormalTransaction();
+```
+
+```php
+use Transbank\Webpay\Configuration;
+
+use Transbank\Webpay\Webpay;
+// ...
+
+$transaction = (new Webpay(Configuration::forTestingWebpayPlusMall()))->getMallNormalTransaction();
+```
+
+```csharp
+using Transbank.Webpay;
+//...
+
+var transaction =
+    new Webpay(Configuration.ForTestingWebpayPlusMall()).MallNormalTransaction;
+```
+
+```ruby
+# Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+```
+
+```python
+# Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+```
+
+<aside class="notice">
+Como necesitarás ese objeto `transaction` en múltiples ocasiones, es buena idea encapsular la lógica que lo genera en algún método que puedas reutilizar.
+</aside>
+
+Una vez que ya cuentas con esa preparación, puedes iniciar transacciones:
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+import com.transbank.webpay.wswebpay.service.WsInitTransactionOutput;
+// ...
+// Identificador único de orden de compra generada por el comercio mall
+String buyOrder = String.valueOf(Math.abs(new Random().nextLong()));
+// Identificador que será retornado en el callback de resultado:
+String sessionId = "mi-id-de-sesion";
+String returnUrl = "https://callback/resultado/de/transaccion";
+String finalUrl = "https://callback/final/post/comprobante/webpay";
+
+// Lista con detalles de cada una de las transacciones:
+WsTransactionDetail storeTransaction = new WsTransactionDetail();
+List<WsTransactionDetail> transactions = new ArrayList<>();
+// Detalles de transacción 1
+storeTransaction.setAmount(1000);
+storeTransaction.setCommerceCode(597044444402);
+// Identificador único de orden de compra generada por tienda 1
+storeTransaction.setBuyOrder(String.valueOf(Math.abs(new Random().nextLong())));
+transactions.add(storeTransaction);
+// Detalles de transacción 2
+storeTransaction.setAmount(2000);
+storeTransaction.setCommerceCode(597044444403);
+// Identificador único de orden de compra generada por tienda 2
+storeTransaction.setBuyOrder(String.valueOf(Math.abs(new Random().nextLong())));
+transactions.add(storeTransaction);
+
+WsInitTransactionOutput initResult = transaction.initTransaction(buyOrder, sessionId, returnUrl, finalUrl, transactions);
+
+String tokenWs = initResult.getToken();
+String formAction = initResult.getUrl();
+```
+
+```php
+// Identificador único de orden de compra generada por el comercio mall:
+$buyOrder = strval(rand(100000, 999999999));
+// Identificador que será retornado en el callback de resultado:
+$sessionId = "mi-id-de-sesion";
+$returnUrl = "https://callback/resultado/de/transaccion";
+$finalUrl = "https://callback/final/post/comprobante/webpay";
+
+// Lista con detalles de cada una de las transacciones:
+$transactions = array();
+$transactions[] = array(
+    "storeCode" => 597044444402,
+    "amount" => 1000,
+    "buyOrder" => strval(rand(100000, 999999999))
+)
+$transactions[] = array(
+    "storeCode" => 597044444403,
+    "amount" => 2000,
+    "buyOrder" => strval(rand(100000, 999999999))
+)
+
+$initResult = $transaction->initTransaction($buyOrder, $sessionId, $returnUrl, $finalUrl, $transactions);
+
+$tokenWs = $initResult->token;
+$formAction = $initResult->url;
+```
+
+```csharp
+using Transbank.Webpay;
+//...
+
+// Identificador único de orden de compra:
+var buyOrder = new Random().Next(100000, 999999999).ToString();
+// Identificador que será retornado en el callback de resultado:
+var sessionId = "mi-id-de-sesion";
+var returnUrl = "https://callback/resultado/de/transaccion";
+var finalUrl = "https://callback/final/post/comprobante/webpay";
+
+var transactions = new Dictionary<string, string[]>();
+
+transactions.Add(597044444402, new string[] {597044444402, amount, new Random().Next(100000, 999999999).ToString()});
+transactions.Add(597044444403, new string[] {597044444403, 2000, new Random().Next(100000, 999999999).ToString()});
+
+var initResult = transaction.initTransaction(buyOrder, sessionId, returnUrl, finalUrl, transactions);
+
+var tokenWs = initResult.token;
+var formAction = initResult.url;
+```
+
+```ruby
+# Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
+```python
+# Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
+<aside class="notice">
+Observar que existe un `buyOrder` generado para el comercio mall y un `buyOrder` para cada una de las tiendas.
+</aside>
+
+La URL y el token retornados te indican donde debes redirigir al usuario para que comience el flujo de pago. Esta redirección debe ser vía `POST` por lo que deberás crear un formulario web con un campo `token_ws` hidden y enviarlo programáticamente para entregar el control a Webpay.
+
+<aside class="warning">
+Debido a la posibilidad que el formulario de WebPay no se despliegue, no se recomienda el uso de Iframe para WebPay Plus.
+</aside>
+
+<aside class="notice">
+Tip: En el ambiente de integración puedes usar la tarjeta VISA 4051885600446623 para hacer pruebas simples de éxito. El CVV es 123 y la fecha de vencimiento es cualquiera superior a la fecha actual. Luego para la autenticación bancaria usa el RUT 11.111.111-1 y la clave 123. Para pruebas exhaustivas [consulta todas las tarjetas de prueba en la sección de Ambientes](/documentacion/como_empezar#ambientes).
+</aside>
+
+### Confirmar una transacción
+
+Una vez que el tarjetahabiente ha pagado (o declinado, o ha ocurrido un error), Webpay retornará el control vía `POST` a la URL que indicaste en el `returnUrl`. Recibirás también el parámetro `token_ws` que te permitirá conocer el resultado de la transacción:
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+import com.transbank.webpay.wswebpay.service.TransactionResultOutput;
+import com.transbank.webpay.wswebpay.service.WsTransactionDetailOutput;
+// ...
+TransactionResultOutput result =
+    transaction.getTransactionResult(request.getParameter("token_ws"));
+for (WsTransactionDetailOutput output: result.getDetailOutput()) {
+  // Se debe chequear cada transacción de cada tienda del
+  // mall por separado:
+  if (output.getResponseCode() == 0) {
+    // Transaccion exitosa, puedes procesar el resultado
+    // con el contenido de las variables result y output.
+  }
+}
+```
+
+```php
+$result = $transaction->getTransactionResult($request->input("token_ws"));
+foreach ($result->detailOutput as $output) {
+  // Se debe chequear cada transacción de cada tienda del
+  // mall por separado:
+  if ($output->responseCode == 0) {
+    // Transaccion exitosa, puedes procesar el resultado
+    // con el contenido de las variables result y output.
+  }
+}
+```
+
+```csharp
+using Transbank.Webpay;
+//...
+
+var result = transaction.getTransactionResult(tokenWs);
+foreach (var output in result.detailOutput){
+  // Se debe chequear cada transacción de cada tienda del
+  // mall por separado:
+  if (output.responseCode == 0) {
+    // Transaccion exitosa, puedes procesar el resultado
+    // con el contenido de las variables result y output.
+  }
+}
+```
+
+```ruby
+# Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
+```
+
+```python
+# Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
+
+
+
+
+
+
+
+
+```
+
+> **Importante**: El SDK se encarga de que al mismo tiempo que se obtiene el resultado de la transacción se haga el _acknowledge_ a Transbank de manera que no haya posibilidad de que la transacción se revierta. Si luego necesitas que la transacción no se lleve a cabo (por ejemplo porque ya no tienes stock o porque se generó un error en tu lógica de negocio que entrega el producto o servicio), deberás [anular la transacción](/referencia/webpay#anulacion-webpay-plus).
+
+En el caso exitoso deberás llevar el control vía `POST` nuevamente a Webpay para que el tarjetahabiente vea el comprobante que le deja claro que se ha realizado el cargo en su tarjeta. Nuevamente deberás generar un formulario con el `token_ws` como un campo hidden. La URL para redirigir la debes obtener desde `result.getUrlRedirection()`.
+
+Finalmente después del comprobante Webpay redirigirá otra vez (vía `POST`) a tu sitio, esta vez a la URL que indicaste en el `finalUrl` cuando iniciaste la transacción. Tal como antes, recibirás el `token_ws` que te permitirá identificar la transacción y mostrar un comprobante o página de éxito a tu usuario. Con eso habrás completado el flujo "feliz" en que todo funciona.
+
+En [la referencia detallada de Webpay Plus Mall puedes ver cada paso del flujo, incluyendo los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-plus-mall).
+
+<div class='url-modal-embed' data-lenguaje-visible='php' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/3NgVQmRyvM8" >
+  <div class="container-embed">
+    <div class="data-info-url">
+      <b>Video tutorial de integración SDK PHP 2</b><br>
+      Confirmar una transacción
+    </div>
+    <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Webpay OneClick
 
 <div class="pos-title-nav">
@@ -321,6 +670,7 @@ WebpayOneClick transaction =
 
 ```php
 use Transbank\Webpay\Configuration;
+
 use Transbank\Webpay\Webpay;
 // ...
 
