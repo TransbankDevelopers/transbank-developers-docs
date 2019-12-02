@@ -152,6 +152,7 @@ Webpay Transacción Completa Diferida | `Próximamente...` | `Próximamente...`
 ```
 
 ```csharp
+
 // Este SDK aún no se encuentra disponible
 ```
 
@@ -186,7 +187,9 @@ Webpay Transacción Completa Diferida | `Próximamente...` | `Próximamente...`
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.webpay.webpay_plus.transaction import Transaction
+
+Transaction.create(buy_order, session_id, amount, return_url)
 ```
 
 ```http
@@ -323,7 +326,9 @@ token es caducado y no podrá ser utilizado en un pago.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.webpay.webpay_plus.transaction import Transaction
+
+Transaction.create(buy_order, session_id, amount, return_url)
 ```
 
 ```http
@@ -369,7 +374,10 @@ return_url  <br> <i> String </i> | URL del comercio, a la cual Webpay redireccio
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+TransactionCreateResponse(
+  token: ed730ebdb446fc8b837378dd7bd84fc9864e490162ad2714d50db2e0df192eef, 
+  url: https://webpay3gint.transbank.cl/webpayserver/initTransaction
+)
 ```
 
 ```http
@@ -414,7 +422,9 @@ Permite confirmar y obtener el resultado de la transacción una vez que Webpay 
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.webpay.webpay_plus.transaction import Transaction
+
+Transaction.commit(token=token)
 ```
 
 ```http
@@ -449,7 +459,17 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+vci: 'TSY', 
+amount: '516650.0',
+status: 'AUTHORIZED',
+buy_order: '46060746',
+session_id: '81761142 card_detail: CardDetail(card_number: 6623)',
+accounting_date: '1202',
+transaction_date: '2019-12-02T14:21:27.643Z',
+authorization_code: '1213',
+payment_type_code: 'VN',
+response_code: '0',
+installments_nmumber: '0',
 ```
 
 ```http
@@ -518,7 +538,9 @@ Obtiene resultado de transacción a partir de un token.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.webpay.webpay_plus.transaction import Transaction
+
+Transaction.status(token=token)
 ```
 
 ```http
@@ -553,7 +575,17 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+vci: 'TSY', 
+amount: '516650.0',
+status: 'AUTHORIZED',
+buy_order: '46060746',
+session_id: '81761142 card_detail: CardDetail(card_number: 6623)',
+accounting_date: '1202',
+transaction_date: '2019-12-02T14:21:27.643Z',
+authorization_code: '1213',
+payment_type_code: 'VN',
+response_code: '0',
+installments_nmumber: '0',
 ```
 
 ```http
@@ -645,7 +677,9 @@ El método `Transaction.refund()` debe ser invocado siempre indicando el códi
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.webpay.webpay_plus.transaction import Transaction
+
+Transaction.refund(token, amount)
 ```
 
 ```http
@@ -684,7 +718,16 @@ amount  <br> <i> Decimal </i> | (Opcional) Monto que se desea anular de la trans
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.webpay.webpay_plus.transaction import Transaction
+
+TransactionRefundResponse(
+    type: REVERSED,
+    balance: None,
+    authorization_code: None,
+    response_code: None,
+    authorization_date: None,
+    nullified_amount: None
+  )
 ```
 
 ```http
@@ -792,7 +835,14 @@ token es caducado y no podrá ser utilizado en un pago.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.webpay.webpay_plus.mall_transaction import MallTransaction
+
+MallTransaction.create(
+        buy_order=buy_order,
+        session_id=session_id,
+        return_url=return_url,
+        details = details,
+    )
 ```
 
 ```http
@@ -852,7 +902,10 @@ details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda del m
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+MallTransactionCreateResponse(
+  token: ebefb0b21117c1d9a9fc1c8a5700edf8958216f80f299af3eff1e8d0c7c5cefb,
+  url: https://webpay3gint.transbank.cl/webpayserver/initTransaction
+)
 ```
 
 ```http
