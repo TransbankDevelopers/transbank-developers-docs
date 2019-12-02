@@ -949,7 +949,9 @@ una vez que Webpay ha resueltosu autorización financiera.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.webpay.webpay_plus.mall_transaction import MallTransaction
+
+MallTransaction.commit(token=token)
 ```
 
 ```http
@@ -984,7 +986,37 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+MallTransactionCommitResponse(
+  vci: 'TSY', 
+  details: [
+    MallDetails(
+      amount: '1000.0',
+       status: 'AUTHORIZED',
+       authorization_code: '1213',
+      payment_type_code: 'VN',
+      response_code: '0',
+      installments_number: '0',
+      commerce_code: '597055555536',
+      buy_order: 'abcdef1575298768'
+    ), 
+    MallDetails(
+      amount: '2000.0',
+       status: 'AUTHORIZED',
+        authorization_code: '1213',
+        payment_type_code: 'VN',
+        response_code: '0',
+        installments_number: '0',
+        commerce_code: '597055555537',
+        buy_order: 'wxyz1575298768'
+    )],
+  buy_order: 'buyorder1575298768', 
+  self.session_id: 'session1575298768', 
+  card_detail: CardDetail(
+                  card_number: '6623'
+                ), 
+  accounting_date: '1202', 
+  transaction_date: '2019-12-02T14:59:32.506Z'
+)
 ```
 
 ```http
@@ -1060,7 +1092,9 @@ Obtiene resultado de transacción a partir de un token.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.webpay.webpay_plus.mall_transaction import MallTransaction
+
+MallTransaction.status(token)
 ```
 
 ```http
@@ -1095,7 +1129,37 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+MallTransactionCommitResponse(
+  vci: 'TSY', 
+  details: [
+    MallDetails(
+      amount: '1000.0',
+       status: 'AUTHORIZED',
+       authorization_code: '1213',
+      payment_type_code: 'VN',
+      response_code: '0',
+      installments_number: '0',
+      commerce_code: '597055555536',
+      buy_order: 'abcdef1575298768'
+    ), 
+    MallDetails(
+      amount: '2000.0',
+       status: 'AUTHORIZED',
+        authorization_code: '1213',
+        payment_type_code: 'VN',
+        response_code: '0',
+        installments_number: '0',
+        commerce_code: '597055555537',
+        buy_order: 'wxyz1575298768'
+    )],
+  buy_order: 'buyorder1575298768', 
+  self.session_id: 'session1575298768', 
+  card_detail: CardDetail(
+                  card_number: '6623'
+                ), 
+  accounting_date: '1202', 
+  transaction_date: '2019-12-02T14:59:32.506Z'
+)
 ```
 
 ```http
@@ -1193,7 +1257,13 @@ El método `Transaction.refund()` debe ser invocado siempre indicando el códi
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.webpay.webpay_plus.mall_transaction import MallTransaction
+
+MallTransaction.refund(token=token,
+                      amount=amount,
+                      child_commerce_code=commerce_code,
+                      child_buy_order=buy_order
+                      )
 ```
 
 ```http
@@ -1238,7 +1308,13 @@ commerce_id  <br> <i> Number </i> | (Opcional) Tienda mall que realizó la tran
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+TransactionRefundResponse(type: REVERSED,
+                          balance: None, 
+                          authorization_code: None, 
+                          response_code: None, 
+                          authorization_date: None, 
+                          nullified_amount: None
+                          )
 ```
 
 ```http
