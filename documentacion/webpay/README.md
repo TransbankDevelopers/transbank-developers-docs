@@ -374,14 +374,14 @@ String finalUrl = "https://callback/final/post/comprobante/webpay";
 WsTransactionDetail storeTransaction = new WsTransactionDetail();
 List<WsTransactionDetail> transactions = new ArrayList<>();
 // Detalles de transacción 1
-storeTransaction.setAmount(1000);
-storeTransaction.setCommerceCode(597044444402);
+storeTransaction.setAmount("1000");
+storeTransaction.setCommerceCode("597044444402");
 // Identificador único de orden de compra generada por tienda 1
 storeTransaction.setBuyOrder(String.valueOf(Math.abs(new Random().nextLong())));
 transactions.add(storeTransaction);
 // Detalles de transacción 2
-storeTransaction.setAmount(2000);
-storeTransaction.setCommerceCode(597044444403);
+storeTransaction.setAmount("2000");
+storeTransaction.setCommerceCode("597044444403");
 // Identificador único de orden de compra generada por tienda 2
 storeTransaction.setBuyOrder(String.valueOf(Math.abs(new Random().nextLong())));
 transactions.add(storeTransaction);
@@ -405,14 +405,14 @@ $finalUrl = "https://callback/final/post/comprobante/webpay";
 $transactions = array();
 // Detalles de transacción 1
 $transactions[] = array(
-    "storeCode" => 597044444402,
+    "storeCode" => "597044444402",
     "amount" => 1000,
     // Identificador único de orden de compra generada por tienda 1
     "buyOrder" => strval(rand(100000, 999999999))
 )
 // Detalles de transacción 2
 $transactions[] = array(
-    "storeCode" => 597044444403,
+    "storeCode" => "597044444403",
     "amount" => 2000,
     // Identificador único de orden de compra generada por tienda 2
     "buyOrder" => strval(rand(100000, 999999999))
@@ -440,9 +440,9 @@ var finalUrl = "https://callback/final/post/comprobante/webpay";
 var transactions = new Dictionary<string, string[]>();
 
 // Detalles de transacción 1
-transactions.Add(597044444402, new string[] {597044444402, amount, new Random().Next(100000, 999999999).ToString()});
+transactions.Add("597044444402", new string[] {"597044444402", "1000", new Random().Next(100000, 999999999).ToString()});
 // Detalles de transacción 2
-transactions.Add(597044444403, new string[] {597044444403, 2000, new Random().Next(100000, 999999999).ToString()});
+transactions.Add("597044444403", new string[] {"597044444403", "2000", new Random().Next(100000, 999999999).ToString()});
 //...
 
 var initResult = transaction.initTransaction(buyOrder, sessionId, returnUrl, finalUrl, transactions);
