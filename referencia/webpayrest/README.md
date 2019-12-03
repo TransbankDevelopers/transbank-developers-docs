@@ -152,7 +152,6 @@ Webpay Transacción Completa Diferida | `Próximamente...` | `Próximamente...`
 ```
 
 ```csharp
-
 // Este SDK aún no se encuentra disponible
 ```
 
