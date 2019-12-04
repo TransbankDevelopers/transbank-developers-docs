@@ -95,7 +95,7 @@ Este producto permite realizar transacciones con tarjetas de crédito sin utiliz
 
 - La modalidad de Transacción Completa solo funciona con tarjetas de crédito.
 
-- El Comercio puede personalizar el formulario en el que solicita los datos del tarjetahabiente para procesar una transacción.
+- El comercio puede personalizar el formulario en el que solicita los datos del tarjetahabiente para procesar una transacción.
 El comercio que desee comenzar a operar con la modalidad de Transacción Completa, debe contar con la certificación de Normas PCI DSS (Payment Card Industry-Data Security Standard) y renovarlas anualmente, debido al manejo de data sensible que pueden procesar y que serán utilizados exclusivamente en su relación con Transbank.
 
 Transacción Completa, le ofrece al comercio elegir una o ambas de las siguientes funcionalidades:
