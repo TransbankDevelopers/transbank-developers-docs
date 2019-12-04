@@ -103,8 +103,6 @@ Transacción Completa, le ofrece al comercio elegir una o ambas de las siguiente
 - Autorización en línea y captura simultánea, en la que se realiza el cargo al tarjetahabiente de inmediato.
 - Autorización en línea y captura diferida, en la que se efectúa una reserva de crédito sobre un valor estimado del producto y/o servicio a adquirir por el tarjetahabiente, posteriormente el comercio define el monto de la transacción el cual será menor o igual al autorizado, en caso de ser superior la transacción será rechazada.
 
-Para preveer transacciones desconocidas u otro tipo de operaciones u obligaciones del comercio que generen deudas a favor de Transbank, el comercio debe entregar una Boleta de Garantía que Transbank hará efectiva al tener la facultad de descontar o retener fondos contra abonos o pagos que debiera afectuar el comercio o que por incumplimiento de sus obligaciones deriven a daños en Transbank o a los emisores de tarjetas de crédito.
-
 Por este motivo este producto no se encuentra dentro de la oferta publica de Transbank.
 
 
