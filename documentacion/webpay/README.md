@@ -1,6 +1,6 @@
 # Webpay
 
-## Webpay Plus
+## Webpay Plus %<span class='tbk-tagTitleDesc'>SOAP</span>%
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-plus' tbk-link-name='Referencia Api'></div>
@@ -295,7 +295,7 @@ los casos de borde que también debes manejar](https://www.transbankdevelopers.c
   </div>
 </div>
 
-## Webpay OneClick
+## Webpay OneClick %<span class='tbk-tagTitleDesc'>SOAP</span>%
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-oneclick-normal' tbk-link-name='Referencia Api'></div>
@@ -594,7 +594,7 @@ if (output.responseCode == 0) {
 
 ```
 
-## Webpay Transacción Completa {data-submenuhidden=true}
+## Webpay Transacción Completa {data-submenuhidden=true} %<span class='tbk-tagTitleDesc'>REST</span>%
 
 
 
