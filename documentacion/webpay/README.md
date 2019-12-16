@@ -291,7 +291,7 @@ los casos de borde que también debes manejar](https://www.transbankdevelopers.c
 </div>
 
 
-## Webpay Plus Mall
+## Webpay Plus Mall %<span class='tbk-tagTitleDesc'>SOAP</span>%
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-plus-mall' tbk-link-name='Referencia Api'></div>
