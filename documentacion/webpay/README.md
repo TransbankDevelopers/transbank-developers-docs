@@ -695,6 +695,22 @@ var result = FullTransaction.Create(
 ```
 
 ```ruby
+buy_order = "Orden de compra de la transaccion"
+session_id = "Identificador del servicio unico de transacción"
+amount = 1000 /* monto en pesos */
+card_number = "Numero de Tarjeta"
+card_expiration_date = "Fecha de expiracion en formato AA/MM"
+cvv = 123 /* CVV de la tarjeta. */
+
+
+response = Transbank::TransaccionCompleta::Transaction::create(
+                                                            buy_order: buy_order,
+                                                            session_id: session_id,
+                                                            amount: amount,
+                                                            card_number: card_number,
+                                                            cvv: cvv,
+                                                            card_expiration_date: card_expiration_date
+                                                            )
 
 ```
 
@@ -761,7 +777,11 @@ var result = FullTransaction.Installments(
 ```
 
 ```ruby
+token = "token obtenido como respuesta de la creacion de transaccion"
+installments_number = 10 /* numero de cuotas */
 
+response = Transbank::TransaccionCompleta::Transaction::installments( token: token,
+                                                                      installments_number: installments_number )
 ```
 
 ```python
@@ -833,7 +853,15 @@ var result = FullTransaction.Commit(
 ```
 
 ```ruby
+token = var token = "token obtenido como respuesta de la creacion de transaccion"
+id_query_installments = 12345679 /* numero identificador de las cuotas. */
+deferred_period_index = 1
+grace_period = false
 
+response = Transbank::TransaccionCompleta::Transaction::commit( token: token,
+                                                            id_query_installments: id_query_installments,
+                                                            deferred_period_index:deferred_period_index,
+                                                            grace_period: grace_period )
 ```
 
 ```python
@@ -892,7 +920,9 @@ var result = FullTransaction.Status(
 ```
 
 ```ruby
+token = "token obtenido como respuesta de la creacion de transaccion"
 
+response = Transbank::TransaccionCompleta::Transaction::status(token: token)
 ```
 
 ```python
@@ -940,7 +970,10 @@ var result = FullTransaction.Refund(
 ```
 
 ```ruby
+token = "token obtenido como respuesta de la creacion de transaccion"
+amount = 1000 /* monto a reembolsar */
 
+response =  Transbank::TransaccionCompleta::Transaction::refund(token: token, amount: amount)
 ```
 
 ```python
