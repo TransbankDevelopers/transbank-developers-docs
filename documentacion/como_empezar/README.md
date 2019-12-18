@@ -97,9 +97,9 @@ genera transacciones aprobadas.
 - MASTERCARD 5186059559590568, CVV 123, cualquier fecha de expiración. Esta
 tarjeta genera transacciones rechazadas.
 - Redcompra 4051884239937763 genera transacciones aprobadas (para operaciones
-que permiten débito Redcompra)
+que permiten débito Redcompra y prepago)
 - Redcompra 5186008541233829 genera transacciones rechazadas (para operaciones
-que permiten débito Redcompra)
+que permiten débito Redcompra y prepago)
 
 Cuando aparece un formulario de autenticación con RUT y clave, se debe
 usar el RUT 11.111.111-1 y la clave 123.
@@ -203,11 +203,11 @@ valores entregados por el comercio al principio del flujo transaccional.
 
 ## Puesta en Producción
 
-1. Se debe realizar un [proceso de validación](#el-proceso-de-validacion-y-puesta-en-produccion) en el ambiente de integración con los códigos de comercios de integración disponibles [aquí](https://www.transbankdevelopers.cl/documentacion/como_empezar#ambientes). Durante este proceso se solicita evidencias de la integración, además, Transbank realizará pruebas directas en el sitio de prueba, estos datos serán enviados a Transbank en la planilla de integración que se debe enviar a soporte@transbank.cl.
+1. Se debe realizar un [proceso de validación](#el-proceso-de-validacion-y-puesta-en-produccion) en el ambiente de integración con los códigos de comercios de integración disponibles [aquí](https://www.transbankdevelopers.cl/documentacion/como_empezar#ambientes). Durante este proceso se solicita evidencias de la integración. Además, Transbank realizará tests directos en el sitio de prueba. Estos datos serán enviados a Transbank en la planilla de integración que se debe enviar a soporte@transbank.cl.
 
 2. Posterior a que Transbank confirme que la planilla de integración se encuentra correcta, se solicitará la [generación de las credenciales del comercio](#credenciales-en-onepay) (llave privada y certificado publico). El certificado público debe ser enviado junto al logo del comercio a soporte@transbank.cl para su registro.
 
-3. Transbank informará el correcto registro del certificado público del comercio, posterior a ello será necesario cambiar la configuración del e-commerce para funcionar en producción.
+3. Transbank informará el correcto registro del certificado público del comercio. Posterior a ello, será necesario cambiar la configuración del e-commerce para funcionar en producción.
 
 4. Con la configuración del ambiente de producción ya lista será necesario realizar una compra de $10 para validar el correcto funcionamiento.
 
