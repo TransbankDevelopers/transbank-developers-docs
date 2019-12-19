@@ -1,6 +1,6 @@
 # Webpay
 
-## Webpay Plus
+## Webpay Plus %<span class='tbk-tagTitleDesc'>SOAP</span>%
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-plus' tbk-link-name='Referencia Api'></div>
@@ -181,7 +181,7 @@ tarjetas de prueba en la sección de
 Ambientes](/documentacion/como_empezar#ambientes).
 </aside>
 
-<div class='url-modal-embed' data-lenguaje-visible='php' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/vx0ioz2bGVU" >
+<div class='url-modal-embed' data-lenguaje-visible='php' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/YBy7DlQ-Bws" >
   <div class="container-embed">
     <div class="data-info-url">
       <b>Video tutorial de integración SDK PHP 1</b><br>
@@ -285,7 +285,7 @@ En la confirmación es posible obtener dos excepciones de Timeout diferentes. Se
 En [la referencia detallada de Webpay Plus puedes ver cada paso del flujo, incluyendo
 los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-plus-normal).
 
-<div class='url-modal-embed' data-lenguaje-visible='php' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/3NgVQmRyvM8" >
+<div class='url-modal-embed' data-lenguaje-visible='php' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/J0vTgY6jnnk" >
   <div class="container-embed">
     <div class="data-info-url">
       <b>Video tutorial de integración SDK PHP 2</b><br>
@@ -295,7 +295,7 @@ los casos de borde que también debes manejar](https://www.transbankdevelopers.c
   </div>
 </div>
 
-## Webpay OneClick
+## Webpay OneClick %<span class='tbk-tagTitleDesc'>SOAP</span>%
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-oneclick-normal' tbk-link-name='Referencia Api'></div>
@@ -1081,8 +1081,7 @@ resp = MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, a
 
 ```
 
-## Webpay Transacción Completa {data-submenuhidden=true}
-
+## Webpay Transacción Completa {data-submenuhidden=true} %<span class='tbk-tagTitleDesc'>REST</span>%
 
 
 ### Crear una transacción
@@ -1127,6 +1126,7 @@ TransaccionCompleta.IntegrationType = "TEST/LIVE"; //ambiente de integracion;
 
 ```python
 
+
 ```
 Es recomendado encapsular la asignacion para utilizarla sin problemas en los demas metodos.
 
@@ -1166,7 +1166,7 @@ using Transbank.Webpay.TransaccionCompleta;
 
 var buy_order = "Orden de compra de la transaccion";
 var session_id = "Identificador del servicio unico de transacción";
-var amount = 10000; // mongo en pesos
+var amount = 10000; // monto en pesos
 var card_number = "Numero de Tarjeta";
 var card_expiration_date = "Fecha de expiracion en formato AA/MM";
 var cvv = 123; // CVV de la tarjeta.
@@ -1185,6 +1185,21 @@ var result = FullTransaction.Create(
 ```
 
 ```python
+
+from transbank.transaccion_completa.transaction import Transaction
+
+    # leyendo variables desde un formulario
+    buy_order = 'Orden de compra de la transaccion '
+    session_id = 'Identificador del servicio unico de transacción'
+    amount = 10000; #monto en pesos
+    card_number = 'Numero de Tarjeta'
+    cvv = 123 #CVV de la tarjeta.
+    card_expiration_date = 'Fecha de expiracion en formato AA/MM'
+
+    resp = Transaction.create(
+        buy_order=buy_order, session_id=session_id, amount=amount,
+        card_number=card_number, cvv=cvv, card_expiration_date=card_expiration_date
+    )
 
 ```
 
@@ -1236,6 +1251,13 @@ var result = FullTransaction.Installments(
 ```
 
 ```python
+from transbank.transaccion_completa.transaction import Transaction
+
+#obtener form desde el request
+    req = request.form
+    token = request.form.get('token') #token obtenido al iniciar la transaccion
+    installments_number = 10 #numero de cuotas
+    resp = Transaction.installments(token=token, installments_number=installments_number)
 
 ```
 
@@ -1301,6 +1323,18 @@ var result = FullTransaction.Commit(
 ```
 
 ```python
+    from transbank.transaccion_completa.transaction import Transaction
+    
+    #token obtenido como respuesta de la creacion de transaccion
+    token = request.form.get('token')
+    id_query_installments = 12345679 # numero identificador de las cuotas.
+    deferred_period_index = 1
+    grace_period = 'false'
+
+    resp = Transaction.commit(token=token,
+                              id_query_installments=id_query_installments,
+                              deferred_period_index=deferred_period_index,
+                              grace_period=grace_period)
 
 ```
 
@@ -1329,7 +1363,7 @@ use Transbank\TransaccionCompleta\Transaction;
 $token = "token obtenido como respuesta de la creacion de transaccion";
 
 $response = Transaction::status(
-    $token,
+    $token
 );
 ```
 
@@ -1339,7 +1373,7 @@ using Transbank.Webpay.TransaccionCompleta;
 var token = "token obtenido como respuesta de la creacion de transaccion";
 
 var result = FullTransaction.Status(
-  token:token,
+  token:token
 );
 ```
 
@@ -1348,6 +1382,61 @@ var result = FullTransaction.Status(
 ```
 
 ```python
+from transbank.transaccion_completa.transaction import Transaction
+
+    resp = Transaction.status(token=token) #token obtenido como respuesta de la creacion de transaccion
+
+```
+
+### Reembolso Transaccion
+
+Para procesar un reembolso de la transaccion exite el siguiente metodo:
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+import cl.transbank.transaccioncompleta.FullTransaction;
+  String tokenWs = //token obtenido al crear transaccion
+  double amount = 1000;
+
+  final FullTransactionRefundResponse response = FullTransaction.Transaction.refund(tokenWs,amount);
+
+```
+
+```php
+use Transbank\TransaccionCompleta\Transaction;
+
+$token = "token obtenido como respuesta de la creacion de transaccion";
+
+$response = Transaction::refund(
+    $token,
+    $amount
+);
+```
+
+```csharp
+using Transbank.Webpay.TransaccionCompleta;
+
+var token = "token obtenido como respuesta de la creacion de transaccion";
+
+var result = FullTransaction.Refund(
+  token:token,
+  amount:amount  
+);
+```
+
+```ruby
+
+```
+
+```python
+from transbank.transaccion_completa.transaction import Transaction
+
+   #obtener form desde el request
+    req = request.form
+    token = req.get('token') #token obtenido al crear la transaccion
+    amount = '1000' #monto a reembolsar
+    resp = Transaction.refund(token=token, amount=amount)
 
 ```
 
