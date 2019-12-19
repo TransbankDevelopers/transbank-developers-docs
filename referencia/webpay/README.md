@@ -401,6 +401,11 @@ Nombre  <br> <i> tipo </i> | Descripción
 token  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 url  <br> <i> xs:string </i> | URL de formulario de pago Webpay. Largo máximo: 256.
 
+<aside class="warning">
+El número de orden de compra (`buyOrder`) debe ser único para cada transacción.
+Si un `buyOrder` es enviado dos o más veces se obtendrá el error `Transaction already exists(21)`
+</aside>
+
 ### Confirmar una transacción Webpay Plus Normal
 
 Cuando el comercio retoma el control mediante `returnURL` puedes confirmar una
@@ -705,6 +710,11 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 url  <br> <i> xs:string </i> | URL de formulario de pago Webpay. Largo máximo: 256.
+
+<aside class="warning">
+El número de orden de compra (`buyOrder`) debe ser único para cada transacción.
+Si un `buyOrder` es enviado dos o más veces se obtendrá el error `Transaction already exists(21)`
+</aside>
 
 ### Confirmar una transacción Webpay Plus Mall
 
@@ -1446,7 +1456,7 @@ authorizationCode  <br> <i> xs:string </i> | Código de autorización de la tr
 creditCardType  <br> <i> creditCardType </i> | Indica el tipo de tarjeta que fue inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna).
 last4CardDigits  <br> <i> xs:string </i> | Los últimos 4 dígitos de la tarjeta usada en la transacción.
 transactionId  <br> <i> xs:long </i> | Identificador único de la transacción de pago.
-responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
+responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -96: No existe inscripción asociada. <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
 
 ### Reversar un pago Webpay OneClick
 

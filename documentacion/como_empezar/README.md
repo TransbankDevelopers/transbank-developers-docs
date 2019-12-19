@@ -96,9 +96,9 @@ tarjetas:
 genera transacciones aprobadas.
 - MASTERCARD 5186059559590568, CVV 123, cualquier fecha de expiración. Esta
 tarjeta genera transacciones rechazadas.
-- Redcompra 4051885600446623 genera transacciones aprobadas (para operaciones
+- Redcompra 4051884239937763 genera transacciones aprobadas (para operaciones
 que permiten débito Redcompra)
-- Redcompra 5186059559590568 genera transacciones rechazadas (para operaciones
+- Redcompra 5186008541233829 genera transacciones rechazadas (para operaciones
 que permiten débito Redcompra)
 
 Cuando aparece un formulario de autenticación con RUT y clave, se debe
@@ -111,6 +111,24 @@ como probar nuestros productos en este ambiente:
 - [Webpay Plus](webpay#webpay-plus)
 - [Webpay OneClick](webpay#webpay-oneclick)
 - [Onepay Checkout](onepay#integracion-checkout)
+
+<aside class="notice">
+Tip: Los SDK y plugins provistos por Transbank tiene pre-configuradas
+las credenciales para el ambiente de integración. Puedes ver como usarlas
+en la sección de [documentación de los SDK](https://www.transbankdevelopers.cl/documentacion/webpay#webpay-plus) y [Plugins](https://www.transbankdevelopers.cl/plugin)
+</aside>
+
+En el caso de requerir los códigos de comercio de integración son los siguientes:
+Producto | Código de comercio
+------   | -----------
+Webpay Plus | 597020000540
+webpay PLus Mall <br> <i>tienda 1</i> <br> <i>tienda 2</i> | 597044444401 <br> 597044444402 <br> 597044444403
+Webpay Plus Captura Diferida | 597044444404
+Oneclick | 597044444405
+Oneclick Mall <br> <i>tienda 1</i> <br> <i>tienda 2</i> | 597044444429 <br> 597044444430 <br> 597044444431
+
+Para mayor detalle de las credenciales puedes visitar [el repositorio GitHub
+`transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
 
 Después de haber realizado esas pruebas iniciales y antes del paso a producción
 tendrás que usar credenciales que identifiquen a tu comercio. De esa forma
@@ -185,10 +203,13 @@ valores entregados por el comercio al principio del flujo transaccional.
 
 ## Puesta en Producción
 
-Para el paso a producción el comercio debe realizar un [proceso de validación](#el-proceso-de-validacion-y-puesta-en-produccion)
-en el ambiente de integración. En este ambiente de integración Transbank le
-solicitará usar credenciales específicas para el comercio, de manera de simular
-lo mejor posible el ambiente productivo.
+1. Se debe realizar un [proceso de validación](#el-proceso-de-validacion-y-puesta-en-produccion) en el ambiente de integración con los códigos de comercios de integración disponibles [aquí](https://www.transbankdevelopers.cl/documentacion/como_empezar#ambientes). Durante este proceso se solicita evidencias de la integración, además, Transbank realizará pruebas directas en el sitio de prueba, estos datos serán enviados a Transbank en la planilla de integración que se debe enviar a soporte@transbank.cl.
+
+2. Posterior a que Transbank confirme que la planilla de integración se encuentra correcta, se solicitará la [generación de las credenciales del comercio](#credenciales-en-onepay) (llave privada y certificado publico). El certificado público debe ser enviado junto al logo del comercio a soporte@transbank.cl para su registro.
+
+3. Transbank informará el correcto registro del certificado público del comercio, posterior a ello será necesario cambiar la configuración del e-commerce para funcionar en producción.
+
+4. Con la configuración del ambiente de producción ya lista será necesario realizar una compra de $10 para validar el correcto funcionamiento.
 
 ### Credenciales en Onepay
 

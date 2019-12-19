@@ -85,6 +85,27 @@ De cara al comercio, Webpay OneClick Mall combina dos grupos de beneficios:
 
 Al no contar con sistema de autenticación bancaria en los cargos que se realizan después de la autorización, será el comercio el responsable de asumir el riesgo de fraude o desconocimientos de compra que realice un tarjetahabiente.
 
+### Webpay Transacción Completa {data-submenuhidden=true}
+
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#webpay-transaccion-completa' tbk-link-name='Referencia Api'></div>
+</div>
+
+Este producto permite realizar transacciones con tarjetas de crédito sin utilizar el formulario standard de Webpay. La mayor diferencia con Webpay Plus Tradicional es que el ingreso de los datos de la tarjeta de crédito, se realiza dentro del mismo sitio web del comercio, lo que permite personalizar, a su criterio, la manera en como pide y valida los datos del cliente.
+
+- La modalidad de Transacción Completa solo funciona con tarjetas de crédito.
+
+- El comercio puede personalizar el formulario en el que solicita los datos del tarjetahabiente para procesar una transacción.
+El comercio que desee comenzar a operar con la modalidad de Transacción Completa, debe contar con la certificación de Normas PCI DSS (Payment Card Industry-Data Security Standard) y renovarlas anualmente, debido al manejo de data sensible que pueden procesar y que serán utilizados exclusivamente en su relación con Transbank.
+
+Transacción Completa, le ofrece al comercio elegir una o ambas de las siguientes funcionalidades:
+
+- Autorización en línea y captura simultánea, en la que se realiza el cargo al tarjetahabiente de inmediato.
+- Autorización en línea y captura diferida, en la que se efectúa una reserva de crédito sobre un valor estimado del producto y/o servicio a adquirir por el tarjetahabiente, posteriormente el comercio define el monto de la transacción el cual será menor o igual al autorizado, en caso de ser superior la transacción será rechazada.
+
+Por este motivo este producto no se encuentra dentro de la oferta publica de Transbank.
+
+
 ## Tipos de Pago
 
 Los tipos de pago disponibles actualmente a través de Webpay dependen del tipo de tarjeta usada por el tarjetahabiente y los que tenga activado el comercio.

@@ -27,6 +27,15 @@
 
 Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente en tu comercio, basado en Woocommerce.
 
+<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/NrvBtGFgA-8" >
+  <div class="container-embed">
+    <div class="data-info-url">
+      <b>Video tutorial de integración WooCommerce</b>
+    </div>
+    <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
+  </div>
+</div>
+
 ## Requisitos
 
 Debes tener instalado previamente Woocommerce.
@@ -74,7 +83,7 @@ Para acceder a la configuración, debes seguir los siguientes pasos:
 
 4. ¡Ya está! Estás en la pantalla de configuración del plugin, debes ingresar la siguiente información:
    - **Ambiente**: Ambiente hacia donde se realiza la transacción.
-   - **Código de comercio**: Es lo que te identifica como comercio.
+   - **Código de comercio**: Es lo que te identifica como comercio. Si el código que posees es de 8 dígitos debes anteponer `5970`.
    - **Llave Privada**: Llave secreta que te autoriza y valida a hacer transacciones.
    - **Certificado**: Llave publica que te autoriza y valida a hacer transacciones.
 

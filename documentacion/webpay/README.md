@@ -1,6 +1,6 @@
 # Webpay
 
-## Webpay Plus
+## Webpay Plus %<span class='tbk-tagTitleDesc'>SOAP</span>%
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-plus' tbk-link-name='Referencia Api'></div>
@@ -168,7 +168,7 @@ deberás crear un formulario web con un campo `token_ws` hidden y enviarlo
 programáticamente para entregar el control a Webpay.
 
 <aside class="warning">
-Debido a la posibilidad que el formulario de WebPay no se despliegue, no se 
+Debido a la posibilidad que el formulario de WebPay no se despliegue, no se
 recomienda el uso de Iframe para WebPay Plus.
 </aside>
 
@@ -277,6 +277,11 @@ transacción. Tal como antes, recibirás el `token_ws` que te permitirá
 identificar la transacción y mostrar un comprobante o página de éxito a tu
 usuario. Con eso habrás completado el flujo "feliz" en que todo funciona.
 
+<aside class="warning">
+En la confirmación es posible obtener dos excepciones de Timeout diferentes. Se obtendrá la excepción `Timeout error(272)` en caso de un fallo de _getTransactionResult_, si el fallo corresponda al _acknowledge_ la excepción que se obtendrá será `Timeout error (Transaction is REVERSED)(272)`
+</aside>
+
+
 En [la referencia detallada de Webpay Plus puedes ver cada paso del flujo, incluyendo
 los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-plus-normal).
 
@@ -290,7 +295,7 @@ los casos de borde que también debes manejar](https://www.transbankdevelopers.c
   </div>
 </div>
 
-## Webpay OneClick
+## Webpay OneClick %<span class='tbk-tagTitleDesc'>SOAP</span>%
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-oneclick-normal' tbk-link-name='Referencia Api'></div>
@@ -588,6 +593,367 @@ if (output.responseCode == 0) {
 
 
 ```
+
+## Webpay Transacción Completa {data-submenuhidden=true} %<span class='tbk-tagTitleDesc'>REST</span>%
+
+
+
+### Crear una transacción
+
+Antes de realizar cualquier transacción es necesario instanciar el producto.
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+import cl.transbank.transaccioncompleta.FullTransaction;
+
+Transaction.setCommerceCode = "Codigo de Comercio";
+Transaction.setApiKey = "Apikey entregado por Transabank";
+Transaction.setIntegrationType = "TEST/LIVE"; //ambiente de integracion;
+```
+
+```php
+use Transbank\TransaccionCompleta;
+
+TransaccionCompleta::setCommerceCode = "Codigo de Comercio";
+TransaccionCompleta::setApiKey = "Apikey entregado por Transabank";
+TransaccionCompleta::setIntegrationType = "TEST/LIVE"; //ambiente de integracion;
+
+
+```
+
+```csharp
+...
+using Transbank.Webpay.Common;
+using Transbank.Webpay.TransaccionCompleta;
+...
+
+TransaccionCompleta.CommerceCode = "Codigo de Comercio";
+TransaccionCompleta.ApiKey = "Apikey entregado por Transabank";
+TransaccionCompleta.IntegrationType = "TEST/LIVE"; //ambiente de integracion;
+
+```
+
+```ruby
+
+```
+
+```python
+
+
+```
+Es recomendado encapsular la asignacion para utilizarla sin problemas en los demas metodos.
+
+Ahora se pueden realizar transacciones sin problemas
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+import cl.transbank.transaccioncompleta.FullTransaction;
+
+String buyOrder = "Orden de compra de la transaccion";
+String sessionId = "Identificador del servicio unico de transacción";
+double amount = 10000; // mongo en pesos
+String cardNumber= "Numero de Tarjeta";
+String cardExpirationDate= "Fecha de expiracion en formato AA/MM";
+short cvv = 123; // CVV de la tarjeta.
+
+FullTransactionCreateResponse response = FullTransaction.Transaction.create(buyOrder, sessionId, amount, cardNumber, cardExpirationDate, cvv);
+
+```
+
+```php
+use Transbank\TransaccionCompleta\Transaction;
+
+$buyOrder = "Orden de compra de la transaccion";
+$sessionId = "Identificador del servicio unico de transacción";
+$amount = 10000; // mongo en pesos
+$cardNumber= "Numero de Tarjeta";
+$cardExpirationDate= "Fecha de expiracion en formato AA/MM";
+$cvv = 123; // CVV de la tarjeta.
+
+$res = Transaction::create($buyOrder, $sessionId, $amount, $cardNumber, $cardExpirationDate, $cvv);
+```
+
+```csharp
+using Transbank.Webpay.TransaccionCompleta;
+
+var buy_order = "Orden de compra de la transaccion";
+var session_id = "Identificador del servicio unico de transacción";
+var amount = 10000; // monto en pesos
+var card_number = "Numero de Tarjeta";
+var card_expiration_date = "Fecha de expiracion en formato AA/MM";
+var cvv = 123; // CVV de la tarjeta.
+
+var result = FullTransaction.Create(
+                buyOrder: buy_order,
+                sessionId: session_id,
+                amount: amount,
+                cvv: cvv,
+                cardNumber: card_number,
+                cardExpirationDate: card_expiration_date);
+```
+
+```ruby
+
+```
+
+```python
+
+from transbank.transaccion_completa.transaction import Transaction
+
+    # leyendo variables desde un formulario
+    buy_order = 'Orden de compra de la transaccion '
+    session_id = 'Identificador del servicio unico de transacción'
+    amount = 10000; #monto en pesos
+    card_number = 'Numero de Tarjeta'
+    cvv = 123 #CVV de la tarjeta.
+    card_expiration_date = 'Fecha de expiracion en formato AA/MM'
+
+    resp = Transaction.create(
+        buy_order=buy_order, session_id=session_id, amount=amount,
+        card_number=card_number, cvv=cvv, card_expiration_date=card_expiration_date
+    )
+
+```
+
+### Consulta de Cuotas
+
+Antes de confirmar una transaccion es necesario confirmar la cantidad de cuotas y entregar el valor de estas.
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+import cl.transbank.transaccioncompleta.FullTransaction;
+
+
+String token = "token obtenido como respuesta de la creacion de transaccion";
+int installmentsNumber = 10; // numero de cuotas;
+
+FullTransactionInstallmentResponse response = FullTransaction.Transaction.installment(
+  token,
+  installmentsNumber
+);
+```
+
+```php
+use Transbank\TransaccionCompleta\Transaction;
+
+$token = "token obtenido como respuesta de la creacion de transaccion";
+$installmentsNumber = 10; // numero de cuotas;
+
+$response = Transaction::installments(
+    token,
+    installmentsNumber
+);
+```
+
+```csharp
+using Transbank.Webpay.TransaccionCompleta;
+
+var token = "token obtenido como respuesta de la creacion de transaccion";
+var installments_number = 10; // numero de cuotas;
+
+var result = FullTransaction.Installments(
+  token: token,
+  installmentsNumber: installments_number
+  );
+```
+
+```ruby
+
+```
+
+```python
+from transbank.transaccion_completa.transaction import Transaction
+
+#obtener form desde el request
+    req = request.form
+    token = request.form.get('token') #token obtenido al iniciar la transaccion
+    installments_number = 10 #numero de cuotas
+    resp = Transaction.installments(token=token, installments_number=installments_number)
+
+```
+
+### Confirmar Transaccion
+
+Una vez obtenido la respuesta de la consulta de cuotas, con los datos de esta se puede realizar commit de la transaccion:
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+import cl.transbank.transaccioncompleta.FullTransaction;
+
+
+String token = "token obtenido como respuesta de la creacion de transaccion";
+int idQueryInstallments = 12345679; // numero identificador de las cuotas.
+byte deferredPeriodIndex= 1;
+Boolean gracePeriod = false;
+
+FullTransactionCommitResponse response = FullTransaction.Transaction.commit(
+  token,
+  idQueryInstallments,
+  deferredPeriodIndex,
+  gracePeriod
+);
+
+```
+
+```php
+use Transbank\TransaccionCompleta\Transaction;
+
+$token = "token obtenido como respuesta de la creacion de transaccion";
+$idQueryInstallments = 12345679; // numero identificador de las cuotas.
+$deferredPeriodIndex= 1;
+$gracePeriod = false;
+
+
+$response = Transaction::commit(
+    $token,
+    $idQueryInstallments,
+    $deferredPeriodIndex,
+    $gracePeriod,
+);
+```
+
+```csharp
+using Transbank.Webpay.TransaccionCompleta;
+
+var token = "token obtenido como respuesta de la creacion de transaccion";
+var idQueryInstallments = 12345679; // numero identificador de las cuotas.
+var deferredPeriodsIndex = 1;
+var gracePeriods = false;
+
+var result = FullTransaction.Commit(
+  token:token,
+  idQueryInstallments: idQueryInstallments,
+  deferredPeriodsIndex: deferredPeriodsIndex,
+  gracePeriods: gracePeriods
+);
+```
+
+```ruby
+
+```
+
+```python
+    from transbank.transaccion_completa.transaction import Transaction
+    
+    #token obtenido como respuesta de la creacion de transaccion
+    token = request.form.get('token')
+    id_query_installments = 12345679 # numero identificador de las cuotas.
+    deferred_period_index = 1
+    grace_period = 'false'
+
+    resp = Transaction.commit(token=token,
+                              id_query_installments=id_query_installments,
+                              deferred_period_index=deferred_period_index,
+                              grace_period=grace_period)
+
+```
+
+
+### Estado Transaccion
+
+Para obtener el resultado de la transaccion exite el siguiente metodo:
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+import cl.transbank.transaccioncompleta.FullTransaction;
+
+
+String token = "token obtenido como respuesta de la creacion de transaccion";
+
+FullTransactionCommitResponse response = FullTransaction.Transaction.status(
+  token,
+);
+
+```
+
+```php
+use Transbank\TransaccionCompleta\Transaction;
+
+$token = "token obtenido como respuesta de la creacion de transaccion";
+
+$response = Transaction::status(
+    $token
+);
+```
+
+```csharp
+using Transbank.Webpay.TransaccionCompleta;
+
+var token = "token obtenido como respuesta de la creacion de transaccion";
+
+var result = FullTransaction.Status(
+  token:token
+);
+```
+
+```ruby
+
+```
+
+```python
+from transbank.transaccion_completa.transaction import Transaction
+
+    resp = Transaction.status(token=token) #token obtenido como respuesta de la creacion de transaccion
+
+```
+
+### Reembolso Transaccion
+
+Para procesar un reembolso de la transaccion exite el siguiente metodo:
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+import cl.transbank.transaccioncompleta.FullTransaction;
+  String tokenWs = //token obtenido al crear transaccion
+  double amount = 1000;
+
+  final FullTransactionRefundResponse response = FullTransaction.Transaction.refund(tokenWs,amount);
+
+```
+
+```php
+use Transbank\TransaccionCompleta\Transaction;
+
+$token = "token obtenido como respuesta de la creacion de transaccion";
+
+$response = Transaction::refund(
+    $token,
+    $amount
+);
+```
+
+```csharp
+using Transbank.Webpay.TransaccionCompleta;
+
+var token = "token obtenido como respuesta de la creacion de transaccion";
+
+var result = FullTransaction.Refund(
+  token:token,
+  amount:amount  
+);
+```
+
+```ruby
+
+```
+
+```python
+from transbank.transaccion_completa.transaction import Transaction
+
+   #obtener form desde el request
+    req = request.form
+    token = req.get('token') #token obtenido al crear la transaccion
+    amount = '1000' #monto a reembolsar
+    resp = Transaction.refund(token=token, amount=amount)
+
+```
+
 
 ## Credenciales y Ambiente
 
@@ -934,7 +1300,7 @@ else
 webPayView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 ```
 
-2. Al momento de cerrar el webview 
+2. Al momento de cerrar el webview
 
 ```java
 // Remover Cookies

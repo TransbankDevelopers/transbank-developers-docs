@@ -188,7 +188,7 @@ El resultado de la venta se entrega en la forma de un objeto `SaleResponse` o un
 ```
 
 <aside class="warning">
-Actualmente no están soportados los mensajes intermedios. Por esta razón el 3º parámetro de la función en C debe ser siempre falso.
+El SDK no soporta el envío de mensajes intermedios. Por esta razón el 3º parámetro de la función en C es siempre falso.
 </aside>
 
 ### Transacción de Última Venta
