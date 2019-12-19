@@ -156,8 +156,7 @@ Webpay Transacción Completa Diferida | `Próximamente...` | `Próximamente...`
 ```
 
 ```ruby
-::Transbank::Webpay::WebpayPlus::Base::configure_for_testing
-::Transbank::Webpay::WebpayPlus::Base::configure_mall_for_testing
+
 ```
 
 ```python
@@ -2541,10 +2540,10 @@ buy_order  <br> <i> String </i> | Orden de compra de la transacción a  consult
     @accounting_date="0902",
     @transaction_date="2019-09-02T14:59:58.934Z",
     @details=[
-    {"amount"=>1000, "status"=>"AUTHORIZED", "authorization_code"=>"1213",
-    "payment_type_code"=>"VN", "response_code"=>0, 
-    "installments_number"=>0, "commerce_code"=>"597055555542",
-    "buy_order"=>"abcdef1567432788"
+       {"amount"=>1000, "status"=>"AUTHORIZED", "authorization_code"=>"1213",
+       "payment_type_code"=>"VN", "response_code"=>0, 
+       "installments_number"=>0, "commerce_code"=>"597055555542",
+       "buy_order"=>"abcdef1567432788"
     }
 ]>
 ```
