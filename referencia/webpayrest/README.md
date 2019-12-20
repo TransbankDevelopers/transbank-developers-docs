@@ -2065,7 +2065,9 @@ Permite gatillar el inicio del proceso de inscripción.
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.Oneclick;
+
+Inscription.Start(userName, email, returnUrl);
 ```
 
 ```ruby
@@ -2109,7 +2111,10 @@ response_url  <br> <i> String </i> | URL del comercio a la cual Webpay redirecci
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+  Token: "e81380c1cbd6e56371ecf18306ff4d4c12a21aeb92408ced80f15565e4eb0f73",
+  Url: "https://webpay3gint.transbank.cl/webpayserver/bp_multicode_inscription.cgi"
+}
 ```
 
 ```ruby
@@ -2167,7 +2172,10 @@ Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.Oneclick;
+
+Inscription.Finish(token);
+
 ```
 
 ```ruby
@@ -2209,7 +2217,13 @@ token  <br> <i> String </i> | Identificador del proceso de inscripción. Es en
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+  ResponseCode: 0,
+  TransbankUser: "189a89d0-b914-49f6-bef7-0c998fc7c163",
+  AuthorizationCode: "1213",
+  CardType: "Visa",
+  CardNumber: "XXXXXXXXXXXX6623"
+}
 ```
 
 ```ruby
@@ -2257,7 +2271,9 @@ Permite eliminar un usuario enrolado a Oneclick Mall.
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.Oneclick;
+
+Inscription.Delete(userName, tbkUser);
 ```
 
 ```ruby
@@ -2311,7 +2327,7 @@ username  <br> <i> String </i> | Identificador del usuario en los sistemas del 
 ```
 
 ```http
-200 OK
+204 OK
 Content-Type: application/json
 ```
 
@@ -2333,7 +2349,10 @@ Permite autorizar un pago.
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.Oneclick;
+using Transbank.Webpay.Common;
+
+var result = MallTransaction.Authorize(userName, tbkUser, buyOrder, details);
 ```
 
 ```ruby
@@ -2389,7 +2408,26 @@ details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas de la
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+  BuyOrder: "CHHBITJZNI",
+  SessionId: "",
+  CardNumber: "",
+  ExpirationDate: "1/1/0001 12:00:00 AM",
+  AccountingDate: "1219",
+  TransactionDate: "12/20/2019 12:57:59 AM",
+  Details: [
+    {
+      InstallmentsAmount= 0,
+      AuthorizationCode= 1213,
+      PaymentTypeCode= "VN",
+      ResponseCode= 0,
+      Status= "AUTHORIZED",
+      CommerceCode= 597055555542,
+      BuyOrder= "8ZGBA3A7KV",
+      Amount= 1000,
+    }
+  ]
+}
 ```
 
 ```ruby
@@ -2465,7 +2503,10 @@ Retorna el resultado de la autorización.
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.Oneclick;
+using Transbank.Webpay.Common;
+
+var result = MallTransaction.Status(buyOrder);
 ```
 
 ```ruby
@@ -2501,7 +2542,26 @@ buy_order  <br> <i> String </i> | Orden de compra de la transacción a  consult
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+	AccountingDate: "1219",
+	BuyOrder: "VWOV78KBTQ",
+	CardDetail: {
+    CardNumber: 6623
+  },
+	TransactionDate: "2019-12-19T17:40:07.150Z",
+  Details:[
+    {
+      InstallmentsAmount= 0,
+      AuthorizationCode= 1213,
+      PaymentTypeCode= "VN",
+      ResponseCode= 0,
+      Status= "AUTHORIZED",
+      CommerceCode= 597055555542,
+      BuyOrder= "8ZGBA3A7KV",
+      Amount= 1000,
+    }
+  ]
+}
 ```
 
 ```ruby
@@ -2597,7 +2657,9 @@ Este método retorna como respuesta un identificador único de la transacció
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.Oneclick;
+
+MallTransaction.Refund(buyOrder, childCommerceCode,childBuyOrder,amount);
 ```
 
 ```ruby
@@ -2642,7 +2704,14 @@ amount  <br> <i> Number </i> | (Opcional) Monto a anular. Si está presente se
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+  Type: "REVERSED",
+  Balance: 0,
+  AuthorizationCode: "",
+  ResponseCode: 0,
+  AuthorizationDate: "",
+  NullifiedAmount: 0
+}
 ```
 
 ```ruby
@@ -2729,7 +2798,15 @@ token es caducado y no podrá ser utilizado en un pago.
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.TransaccionCompleta;
+
+FullTransaction.Create(
+                buyOrder: buy_order,
+                sessionId: session_id,
+                amount: amount,
+                cvv: cvv,
+                cardNumber: card_number,
+                cardExpirationDate: card_expiration_date);
 ```
 
 ```ruby
@@ -2779,7 +2856,9 @@ card_expiration_date  <br> <i> String </i> | Fecha de expiración de la tarjeta 
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+	Token: "e435cdc08cb6fdf98a67a636d79b955a0f5a872eb6d89c76364c58fac31c32d1"
+}
 ```
 
 ```ruby
@@ -2823,7 +2902,11 @@ invocación de la confirmación.
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.TransaccionCompleta;
+
+FullTransaction.Installments(
+                token,
+                installments_number);
 ```
 
 ```ruby
@@ -2864,7 +2947,11 @@ installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+  InstallmentsAmount: 1000,
+  IdQueryInstallments: 20783487,
+  DeferredPeriods: []
+}
 ```
 
 ```ruby
@@ -2919,7 +3006,9 @@ transacción.
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.TransaccionCompleta;
+
+FullTransaction.Commit(token, idQueryInstallments, deferredPeriodsIndex, gracePeriods);
 ```
 
 ```ruby
@@ -2965,9 +3054,22 @@ grace_period  <br> <i> Number </i> | (Opcional) Indicador de periodo de gracia.
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
-```
-
+{
+  AccountingDate: "1219",
+	Amount: 10000,
+	AuthorizationCode: "1213",
+	BuyOrder: "543769748",
+	CardDetail: {,
+    CardNumber: 6623
+  }
+	InstallmentsAmount: 1000,
+	InstallmentsNumber: 0,
+	PaymentTypeCode: "NC",
+	ResponseCode: 0,
+	SessionId: "105360",
+	Status: "AUTHORIZED",
+	TransactionDate: "2019-12-19T19:46:19.352Z"
+}
 ```ruby
 # Este SDK aún no se encuentra disponible
 ```
@@ -3033,7 +3135,9 @@ Obtiene resultado de transacción a partir de un token.
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.TransaccionCompleta;
+
+FullTransaction.Status(token);
 ```
 
 ```ruby
@@ -3068,7 +3172,20 @@ token  <br> <i> String </i> | Token identificador de la transacción. Largo: 6
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+	AccountingDate: "1219",
+	Amount: 10000,
+	AuthorizationCode: "1213",
+	BuyOrder: "327648047",
+	CardDetail: (null),
+	InstallmentsAmount: 1000,
+	InstallmentsNumber: 10,
+	PaymentTypeCode: "NC",
+	ResponseCode: 0,
+	SessionId: "750819",
+	Status: "AUTHORIZED",
+	TransactionDate: "2019-12-19T19:50:34.411Z"
+}
 ```
 
 ```ruby
@@ -3157,7 +3274,9 @@ Permite solicitar a Webpay la anulación de una transacción realizada previam
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.TransaccionCompleta;
+
+FullTransaction.Refund(token, amount);
 ```
 
 ```ruby
@@ -3196,7 +3315,14 @@ amount  <br> <i> Decimal </i> | (Opcional) Monto que se desea anular de la trans
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+	AuthorizationCode: (null),
+	AuthorizationDate: (null),
+	Balance: 0,
+	NullifiedAmount: 0,
+	ResponseCode: 0,
+	Type: "REVERSED"
+}
 ```
 
 ```ruby
