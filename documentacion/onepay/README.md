@@ -1123,7 +1123,7 @@ Para realizar la conciliación debes seguir los siguientes pasos:
 
 3. En la parte superior de la ventana puedes encontrar un buscador que te ayudará a filtrar, según los parámetros que gustes, las transacciones que quieras cuadrar. Para encontrar las transacciones de Onepay, en producto, debes seleccionar Webpay3G. Debes tener en cuenta que lamentablemente **el reporte no distingue entre Webpay y Onepay**. Bajo el producto Webpay3G encontraras transacciones de ambos productos. ![Paso 3](/images/documentacion/conciliacion2.png)
 
-4. Dentro de la tabla en la imagen anterior puedes presionar el número de orden de compra para abrir los detalles de la transacción. Es en esta sección donde podrás encontrar y conciliar la mayoría de los parámetros devueltos al confirmar una transacción utilizando `commit()`. 
+4. Dentro de la tabla en la imagen anterior puedes presionar el número de orden de compra para abrir los detalles de la transacción. Es en esta sección donde podrás encontrar y conciliar la mayoría de los parámetros devueltos al confirmar una transacción utilizando `commit()`.
 ![Paso 4](/images/documentacion/conciliacion3.png)
 
 5. Sólo queda realizar la conciliación. A continuación puedes ver una lista de parámetros que recibirás al momento de confirmar una transacción y a que fila de la tabla "Detalles de la transacción" corresponden (la lista completa de parámetros la puedes encontrar [acá](/referencia/onepay#confirmar-una-transaccion)).
@@ -1173,21 +1173,21 @@ Ponemos a tu disposición una serie de repositorios en nuestro Github para ayuda
   <div class='slate-after-footer'>
     <div class='row d-flex align-items-stretch'>
       <div class='col-12 col-lg-6'>
-        <h3 class='toc-ignore fo-size-22'>¿Tienes alguna duda de integración?</h3>
+        <h3 class='toc-ignore fo-size-22 text-center'>¿Tienes alguna duda de integración?</h3>
         <a href='https://join-transbankdevelopers-slack.herokuapp.com/' target='_blank'>
           <div class='td_block_gray'>
-            <img src="https://p9.zdassets.com/hc/theme_assets/138842/200037786/logo.png" alt="" style="width: 90px; min-width: 100px;">
+            <img src="https://p9.zdassets.com/hc/theme_assets/138842/200037786/logo.png" alt="" >
             <div class='td_pa-txt'>
               Únete a la comunidad de integradores en Slack y comparte buenos tips ayudando a los nuevos o buscando soluciones alternativas. Nuestro equipo está ahí para ayudarte.
             </div>
           </div>
         </a>
       </div>
-      <div class='col-12 col-lg-6'>
-        <h3 class='toc-ignore fo-size-22'>Si aún tienes dudas envíanos un mensaje</h3>
+      <div class='mt-3 mt-lg-0 col-12 col-lg-6'>
+        <h3 class='toc-ignore fo-size-22 text-center'>Si aún tienes dudas envíanos un mensaje</h3>
         <a class="pointer magenta" data-toggle='modal' data-target='#modalContactForm'>
           <div class='td_block_gray'>
-            <div class="fo-size-20"><i class="fas fa-envelope"></i> Envíanos un mensaje.</div>
+            <div class="fo-size-20 text-center sub-title_bloq"><i class="fas fa-envelope"></i> Envíanos un mensaje.</div>
             <div class='td_pa-txt'>
               Si necesitas resolver algún tipo de incidencia en el portal o si existe algún problema con tu integración y  que no has podido resolver, contáctanos a través de nuestro formulario.
             </div>
