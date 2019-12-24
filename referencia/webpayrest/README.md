@@ -2073,7 +2073,12 @@ Permite gatillar el inicio del proceso de inscripción.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.oneclick.mall_inscription import MallInscription
+
+MallInscription.start(
+        user_name=user_name,
+        email=email,
+        response_url=response_url)
 ```
 
 ```http
@@ -2117,7 +2122,9 @@ response_url  <br> <i> String </i> | URL del comercio a la cual Webpay redirecci
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  token: "e0937cf4a1007837068805edb58a45339d3ea09598ddd6c4c2cb999bebfb450b", url_webpay: "https://webpay3gint.transbank.cl/webpayserver/bp_multicode_inscription.cgi"
+}
 ```
 
 ```http
@@ -2175,7 +2182,9 @@ Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.oneclick.mall_inscription import MallInscription
+
+MallInscription.finish(token=token)
 ```
 
 ```http
@@ -2217,7 +2226,13 @@ token  <br> <i> String </i> | Identificador del proceso de inscripción. Es en
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  response_code: 0,
+  tbk_user: "5b74093d-abf8-448c-9dd8-f6cf7681ac39",
+  authorization_code: 1213,
+  card_type: "Visa",
+  card_number: "XXXXXXXXXXXX6623"
+}
 ```
 
 ```http
@@ -2265,7 +2280,9 @@ Permite eliminar un usuario enrolado a Oneclick Mall.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.oneclick.mall_inscription import MallInscription
+
+MallInscription.delete(tbk_user, user_name)
 ```
 
 ```http
@@ -2341,7 +2358,11 @@ Permite autorizar un pago.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.oneclick.mall_transaction import MallTransaction
+
+details = MallTransactionAuthorizeDetails(commerce_code, buy_order_child, installments_number, amount) \
+        .add(commerce_code2, buy_order_child2, installments_number2, amount2)
+MallTransaction.authorize(user_name=user_name, tbk_user=tbk_user, buy_order=buy_order, details=details)
 ```
 
 ```http
@@ -2397,7 +2418,23 @@ details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas de la
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  transaction_date: "2019-12-24T15:36:45.704Z",
+  accounting_date: 1224,
+  card_detail: {'card_number': '6623'},
+  buy_order: 31401629, 
+  details: [
+    {
+      'amount': 1000, 'status': 'AUTHORIZED', 'authorization_code': '1213',
+      'payment_type_code': 'VN', 'response_code': 0, 'installments_number': 0,
+      'commerce_code': '597055555542', 'buy_order': '22979937'
+    }, {
+      'amount': 1000, 'status': 'AUTHORIZED', 'authorization_code': '1213',
+      'payment_type_code': 'VN', 'response_code': 0, 'installments_number': 0,
+      'commerce_code': '597055555543', 'buy_order': '35668976'
+    }
+  ]
+}
 ```
 
 ```http
@@ -2473,7 +2510,9 @@ Retorna el resultado de la autorización.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.oneclick.mall_transaction import MallTransaction
+
+MallTransaction.status(buy_order)
 ```
 
 ```http
@@ -2509,7 +2548,23 @@ buy_order  <br> <i> String </i> | Orden de compra de la transacción a  consult
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  buy_order: 31401629, 
+  card_detail: {'card_number': '6623'}, 
+  accounting_date: 1224, 
+  transaction_date: "2019-12-24T15:36:45.704Z", 
+  details: [
+    {
+      'amount': 1000, 'status': 'REVERSED', 'authorization_code': '1213',
+      'payment_type_code': 'VN', 'response_code': 0, 'installments_number': 0,
+      'commerce_code': '597055555542', 'buy_order': '22979937'
+    }, {
+      'amount': 1000, 'status': 'AUTHORIZED', 'authorization_code': '1213',
+      'payment_type_code': 'VN', 'response_code': 0, 'installments_number': 0,
+      'commerce_code': '597055555543', 'buy_order': '35668976'
+    }
+  ]
+}
 ```
 
 ```http
@@ -2605,7 +2660,9 @@ Este método retorna como respuesta un identificador único de la transacció
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.oneclick.mall_transaction import MallTransaction
+
+MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, amount)
 ```
 
 ```http
@@ -2650,7 +2707,10 @@ amount  <br> <i> Number </i> | (Opcional) Monto a anular. Si está presente se
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  type: "REVERSED", balance: None, authorization_code: None,
+  response_code: None, authorization_date: None, nullified_amount: None
+}
 ```
 
 ```http
