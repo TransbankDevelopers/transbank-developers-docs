@@ -2229,8 +2229,8 @@ public class IntegrationExample {
             final OneclickMallInscriptionFinishResponse response = OneclickMall.Inscription.finish(token);
 
             final String authorizationCode = response.getAuthorizationCode();
-            final String creditCardType = response.getCreditCardType();
-            final String lastFourCardDigits = response.getLastFourCardDigits();
+            final String cardType = response.getCardType();
+            final String cardNumber = response.getCardNumber();
             final byte responseCode = response.getResponseCode();
             final String tbkUser = response.getTbkUser();
         } catch (InscriptionFinishException | IOException e) {
