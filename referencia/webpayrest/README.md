@@ -2753,7 +2753,7 @@ balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+
 ```
 
 ```http
@@ -2797,7 +2797,12 @@ token es caducado y no podrá ser utilizado en un pago.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.transaccion_completa.transaction import Transaction
+
+Transaction.create(
+    buy_order=buy_order, session_id=session_id, amount=amount,
+    card_number=card_number, cvv=cvv, card_expiration_date=card_expiration_date
+)
 ```
 
 ```http
@@ -2847,7 +2852,9 @@ card_expiration_date  <br> <i> String </i> | Fecha de expiración de la tarjeta 
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  token: "edb0458a3c487ceed362950385a0839bf137c026ab77070bf6bf2be5df6a1766"
+}
 ```
 
 ```http
@@ -2891,7 +2898,9 @@ invocación de la confirmación.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.transaccion_completa.transaction import Transaction
+
+Transaction.installments(token=token, installments_number=installments_number)
 ```
 
 ```http
@@ -2932,7 +2941,9 @@ installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  installments_amount: 334.0, id_query_installments: 20842559, deferred_periods: []
+}
 ```
 
 ```http
@@ -2987,7 +2998,12 @@ transacción.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.transaccion_completa.transaction import Transaction
+
+Transaction.commit( token=token,
+                    id_query_installments=id_query_installments,
+                    deferred_period_index=deferred_period_index,
+                    grace_period=grace_period )
 ```
 
 ```http
@@ -3033,7 +3049,13 @@ grace_period  <br> <i> Number </i> | (Opcional) Indicador de periodo de gracia.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  vci: None, amount: 1000.0, status: "AUTHORIZED", buy_order: "buyorder1577202376",
+  session_id: "session1577202376", card_detail: {'card_number': '6623'},
+  accounting_date: 1224, transaction_date: "2019-12-24T15:46:22.392Z", authorization_code: 1213,
+  payment_type_code: "VN", response_code: 0.0, installments_number: 0.0,
+  installments_amount: None balance:None
+}
 ```
 
 ```http
@@ -3101,7 +3123,9 @@ Obtiene resultado de transacción a partir de un token.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.transaccion_completa.transaction import Transaction
+
+Transaction.status(token=token)
 ```
 
 ```http
@@ -3136,7 +3160,13 @@ token  <br> <i> String </i> | Token identificador de la transacción. Largo: 6
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  vci: None, amount: 1000.0, status: "AUTHORIZED", buy_order: "buyorder1577202376",
+  session_id: "session1577202376", card_detail: {'card_number': '6623'},
+  accounting_date: 1224, transaction_date: "2019-12-24T15:46:22.392Z",
+  authorization_code: 1213, payment_type_code: "VN", response_code: 0.0,
+  installments_number: 0.0, installments_amount: None balance:None
+}
 ```
 
 ```http
@@ -3225,7 +3255,9 @@ Permite solicitar a Webpay la anulación de una transacción realizada previam
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.transaccion_completa.transaction import Transaction
+
+Transaction.refund(token=token, amount=amount)
 ```
 
 ```http
@@ -3264,7 +3296,9 @@ amount  <br> <i> Decimal </i> | (Opcional) Monto que se desea anular de la trans
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  type: "REVERSED", authorization_code: None, authorization_date: None, nullified_amount: None, balance: None, response_code: None
+}
 ```
 
 ```http
