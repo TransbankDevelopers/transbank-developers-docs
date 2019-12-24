@@ -2221,8 +2221,8 @@ token  <br> <i> String </i> | Identificador del proceso de inscripción. Es en
     @response_code=0,
     @tbk_user="5cef0f60-8da3-4912-bd48-758533145e22",
     @authorization_code="1213",
-    @credit_card_type="Visa",
-    @last_four_card_digits="6623">
+    @card_type="Visa",
+    @card_number="XXXXXXXXXXXX6623">
 ```
 
 ```python
