@@ -2239,8 +2239,8 @@ Nombre  <br> <i> tipo </i> | Descripción
 response_code  <br> <i> Number </i> | Código de retorno del proceso de inscripción, donde 0 (cero) es aprobado.
 tbk_user  <br> <i> String </i> | Identificador único de la inscripción del cliente en Webpay OneClick, que debe ser usado para realizar pagos o borrar la inscripción.
 authorization_code  <br> <i> String </i> | Código que identifica la autorización de la inscripción.
-credit_card_type  <br> <i> creditCardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna).
-last_four_card_digits  <br> <i> String </i> | Los últimos 4 dígitos de la tarjeta ingresada por el cliente en la inscripción.
+card_type  <br> <i> cardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna).
+card_number  <br> <i> String </i> | El número de la tarjeta ingresada por el cliente en la inscripción, con los últimos 4 dígitos de la tarjeta visibles.
 
 ### Eliminar una inscripción con Webpay Oneclick Mall
 Una vez finalizado el proceso de inscripción es posible eliminarla de ser necesario. Para esto debes usar el método llamado `Inscription.remove()`.
