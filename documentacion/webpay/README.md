@@ -672,7 +672,7 @@ $cardNumber= "Numero de Tarjeta";
 $cardExpirationDate= "Fecha de expiracion en formato AA/MM";
 $cvv = 123; // CVV de la tarjeta.
 
-$res = Transaction::create($buyOrder, $sessionId, $amount, $cardNumber, $cardExpirationDate, $cvv);
+$response = Transaction::create($buyOrder, $sessionId, $amount, $cardNumber, $cardExpirationDate, $cvv);
 ```
 
 ```csharp
@@ -685,7 +685,7 @@ var card_number = "Numero de Tarjeta";
 var card_expiration_date = "Fecha de expiracion en formato AA/MM";
 var cvv = 123; // CVV de la tarjeta.
 
-var result = FullTransaction.Create(
+var response = FullTransaction.Create(
                 buyOrder: buy_order,
                 sessionId: session_id,
                 amount: amount,
@@ -695,6 +695,22 @@ var result = FullTransaction.Create(
 ```
 
 ```ruby
+buy_order = "Orden de compra de la transaccion"
+session_id = "Identificador del servicio unico de transacción"
+amount = 1000 /* monto en pesos */
+card_number = "Numero de Tarjeta"
+card_expiration_date = "Fecha de expiracion en formato AA/MM"
+cvv = 123 /* CVV de la tarjeta. */
+
+
+response = Transbank::TransaccionCompleta::Transaction::create(
+                                                            buy_order: buy_order,
+                                                            session_id: session_id,
+                                                            amount: amount,
+                                                            card_number: card_number,
+                                                            cvv: cvv,
+                                                            card_expiration_date: card_expiration_date
+                                                            )
 
 ```
 
@@ -754,14 +770,18 @@ using Transbank.Webpay.TransaccionCompleta;
 var token = "token obtenido como respuesta de la creacion de transaccion";
 var installments_number = 10; // numero de cuotas;
 
-var result = FullTransaction.Installments(
+var response = FullTransaction.Installments(
   token: token,
   installmentsNumber: installments_number
   );
 ```
 
 ```ruby
+token = "token obtenido como respuesta de la creacion de transaccion"
+installments_number = 10 /* numero de cuotas */
 
+response = Transbank::TransaccionCompleta::Transaction::installments( token: token,
+                                                                      installments_number: installments_number )
 ```
 
 ```python
@@ -833,7 +853,15 @@ var result = FullTransaction.Commit(
 ```
 
 ```ruby
+token = var token = "token obtenido como respuesta de la creacion de transaccion"
+id_query_installments = 12345679 /* numero identificador de las cuotas. */
+deferred_period_index = 1
+grace_period = false
 
+response = Transbank::TransaccionCompleta::Transaction::commit( token: token,
+                                                            id_query_installments: id_query_installments,
+                                                            deferred_period_index:deferred_period_index,
+                                                            grace_period: grace_period )
 ```
 
 ```python
@@ -845,7 +873,7 @@ var result = FullTransaction.Commit(
     deferred_period_index = 1
     grace_period = 'false'
 
-    resp = Transaction.commit(token=token,
+    response = Transaction.commit(token=token,
                               id_query_installments=id_query_installments,
                               deferred_period_index=deferred_period_index,
                               grace_period=grace_period)
@@ -886,19 +914,21 @@ using Transbank.Webpay.TransaccionCompleta;
 
 var token = "token obtenido como respuesta de la creacion de transaccion";
 
-var result = FullTransaction.Status(
+var response = FullTransaction.Status(
   token:token
 );
 ```
 
 ```ruby
+token = "token obtenido como respuesta de la creacion de transaccion"
 
+response = Transbank::TransaccionCompleta::Transaction::status(token: token)
 ```
 
 ```python
 from transbank.transaccion_completa.transaction import Transaction
 
-    resp = Transaction.status(token=token) #token obtenido como respuesta de la creacion de transaccion
+    response = Transaction.status(token=token) #token obtenido como respuesta de la creacion de transaccion
 
 ```
 
@@ -921,6 +951,7 @@ import cl.transbank.transaccioncompleta.FullTransaction;
 use Transbank\TransaccionCompleta\Transaction;
 
 $token = "token obtenido como respuesta de la creacion de transaccion";
+$amount = 1000; // monto a reembolsar
 
 $response = Transaction::refund(
     $token,
@@ -932,15 +963,19 @@ $response = Transaction::refund(
 using Transbank.Webpay.TransaccionCompleta;
 
 var token = "token obtenido como respuesta de la creacion de transaccion";
+var amount = 1000; // monto a reembolsar
 
-var result = FullTransaction.Refund(
-  token:token,
-  amount:amount  
+var response = FullTransaction.Refund(
+  token: token,
+  amount: amount
 );
 ```
 
 ```ruby
+token = "token obtenido como respuesta de la creacion de transaccion"
+amount = 1000 /* monto a reembolsar */
 
+response =  Transbank::TransaccionCompleta::Transaction::refund(token: token, amount: amount)
 ```
 
 ```python
@@ -950,7 +985,7 @@ from transbank.transaccion_completa.transaction import Transaction
     req = request.form
     token = req.get('token') #token obtenido al crear la transaccion
     amount = '1000' #monto a reembolsar
-    resp = Transaction.refund(token=token, amount=amount)
+    response = Transaction.refund(token=token, amount=amount)
 
 ```
 
