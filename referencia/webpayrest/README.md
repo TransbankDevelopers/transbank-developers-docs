@@ -2224,8 +2224,8 @@ object(Transbank\Webpay\Oneclick\InscriptionFinishResponse)#268 (5)
     ["responseCode"]=> int(0)
     ["tbkUser"]=> string(36) "5ba90ccf-7990-46ea-8f38-9a04560d5386"
     ["authorizationCode"]=> string(4) "1213"
-    ["creditCardType"]=> string(4) "Visa"
-    ["lastFourCardDigits"]=> string(4) "6623"
+    ["cardType"]=> string(4) "Visa"
+    ["cardNumber"]=> string(4) "XXXXXXXXXXXX6623"
 }
 ```
 
