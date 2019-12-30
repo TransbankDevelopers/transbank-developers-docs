@@ -1027,7 +1027,7 @@ OneclickMallTransactionRefundResponse response = OneclickMall.Transaction.refund
 
 ```
 
-```php  escribir que no son datos random.
+```php
 //...
 
 $buyOrder = $buyOrderIndicadoEnTransactionAuthorize;
