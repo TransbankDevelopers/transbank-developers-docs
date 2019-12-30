@@ -2068,7 +2068,9 @@ $resp = MallInscription::start($userName, $email, $responseUrl);
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.Oneclick;
+
+Inscription.Start(userName, email, returnUrl);
 ```
 
 ```ruby
@@ -2137,7 +2139,10 @@ object(Transbank\Webpay\Oneclick\InscriptionStartResponse)#268 (2)
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+  Token: "e81380c1cbd6e56371ecf18306ff4d4c12a21aeb92408ced80f15565e4eb0f73",
+  Url: "https://webpay3gint.transbank.cl/webpayserver/bp_multicode_inscription.cgi"
+}
 ```
 
 ```ruby
@@ -2201,7 +2206,10 @@ $resp = MallInscription::finish($token);
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.Oneclick;
+
+Inscription.Finish(token);
+
 ```
 
 ```ruby
@@ -2270,7 +2278,13 @@ object(Transbank\Webpay\Oneclick\InscriptionFinishResponse)#268 (5)
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+  ResponseCode: 0,
+  TransbankUser: "189a89d0-b914-49f6-bef7-0c998fc7c163",
+  AuthorizationCode: "1213",
+  CardType: "Visa",
+  CardNumber: "XXXXXXXXXXXX6623"
+}
 ```
 
 ```ruby
@@ -2328,7 +2342,9 @@ $resp = MallInscription::delete($tbkUser, $userName, $options);
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.Oneclick;
+
+Inscription.Delete(userName, tbkUser);
 ```
 
 ```ruby
@@ -2404,7 +2420,7 @@ object(Transbank\Webpay\Oneclick\InscriptionDeleteResponse)#264 (2)
 ```
 
 ```http
-200 OK
+204 OK
 Content-Type: application/json
 ```
 
@@ -2441,7 +2457,10 @@ $resp = MallTransaction::authorize($userName, $tbkUser, $parentBuyOrder, $detail
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.Oneclick;
+using Transbank.Webpay.Common;
+
+var result = MallTransaction.Authorize(userName, tbkUser, buyOrder, details);
 ```
 
 ```ruby
@@ -2576,7 +2595,26 @@ object(Transbank\Webpay\Oneclick\AuthorizeMallTransactionResponse)#271 (7)
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+  BuyOrder: "CHHBITJZNI",
+  SessionId: "",
+  CardNumber: "",
+  ExpirationDate: "1/1/0001 12:00:00 AM",
+  AccountingDate: "1219",
+  TransactionDate: "12/20/2019 12:57:59 AM",
+  Details: [
+    {
+      InstallmentsAmount= 0,
+      AuthorizationCode= 1213,
+      PaymentTypeCode= "VN",
+      ResponseCode= 0,
+      Status= "AUTHORIZED",
+      CommerceCode= 597055555542,
+      BuyOrder= "8ZGBA3A7KV",
+      Amount= 1000,
+    }
+  ]
+}
 ```
 
 ```ruby
@@ -2669,7 +2707,10 @@ $resp = MallTransaction::getStatus($buyOrder);
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.Oneclick;
+using Transbank.Webpay.Common;
+
+var result = MallTransaction.Status(buyOrder);
 ```
 
 ```ruby
@@ -2761,7 +2802,26 @@ object(Transbank\Webpay\Oneclick\MallTransactionStatusResponse)#271 (7)
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+	AccountingDate: "1219",
+	BuyOrder: "VWOV78KBTQ",
+	CardDetail: {
+    CardNumber: 6623
+  },
+	TransactionDate: "2019-12-19T17:40:07.150Z",
+  Details:[
+    {
+      InstallmentsAmount= 0,
+      AuthorizationCode= 1213,
+      PaymentTypeCode= "VN",
+      ResponseCode= 0,
+      Status= "AUTHORIZED",
+      CommerceCode= 597055555542,
+      BuyOrder= "8ZGBA3A7KV",
+      Amount= 1000,
+    }
+  ]
+}
 ```
 
 ```ruby
@@ -2875,7 +2935,9 @@ $resp = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrder, $
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.Oneclick;
+
+MallTransaction.Refund(buyOrder, childCommerceCode,childBuyOrder,amount);
 ```
 
 ```ruby
@@ -2955,7 +3017,14 @@ object(Transbank\Webpay\Oneclick\MallRefundTransactionResponse)#273 (6)
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+  Type: "REVERSED",
+  Balance: 0,
+  AuthorizationCode: "",
+  ResponseCode: 0,
+  AuthorizationDate: "",
+  NullifiedAmount: 0
+}
 ```
 
 ```ruby
@@ -3056,7 +3125,15 @@ Transaction::create(
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.TransaccionCompleta;
+
+FullTransaction.Create(
+                buyOrder: buy_order,
+                sessionId: session_id,
+                amount: amount,
+                cvv: cvv,
+                cardNumber: card_number,
+                cardExpirationDate: card_expiration_date);
 ```
 
 ```ruby
@@ -3136,7 +3213,9 @@ object(Transbank\TransaccionCompleta\TransactionCreateResponse)#301 (1)
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+	Token: "e435cdc08cb6fdf98a67a636d79b955a0f5a872eb6d89c76364c58fac31c32d1"
+}
 ```
 
 ```ruby
@@ -3186,7 +3265,11 @@ Transaction::installments(
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.TransaccionCompleta;
+
+FullTransaction.Installments(
+                token,
+                installments_number);
 ```
 
 ```ruby
@@ -3251,7 +3334,11 @@ object(Transbank\TransaccionCompleta\TransactionInstallmentsResponse)#302 (3)
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+  InstallmentsAmount: 1000,
+  IdQueryInstallments: 20783487,
+  DeferredPeriods: []
+}
 ```
 
 ```ruby
@@ -3315,7 +3402,9 @@ Transaction::commit(
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.TransaccionCompleta;
+
+FullTransaction.Commit(token, idQueryInstallments, deferredPeriodsIndex, gracePeriods);
 ```
 
 ```ruby
@@ -3397,9 +3486,22 @@ object(Transbank\TransaccionCompleta\TransactionCommitResponse)#303 (13)
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
-```
-
+{
+  AccountingDate: "1219",
+	Amount: 10000,
+	AuthorizationCode: "1213",
+	BuyOrder: "543769748",
+	CardDetail: {,
+    CardNumber: 6623
+  }
+	InstallmentsAmount: 1000,
+	InstallmentsNumber: 0,
+	PaymentTypeCode: "NC",
+	ResponseCode: 0,
+	SessionId: "105360",
+	Status: "AUTHORIZED",
+	TransactionDate: "2019-12-19T19:46:19.352Z"
+}
 ```ruby
 <Transbank::TransaccionCompleta::TransactionCommitResponse:0x00007f90f80152f8
     @vci=nil,
@@ -3483,7 +3585,9 @@ Transaction::getStatus(
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.TransaccionCompleta;
+
+FullTransaction.Status(token);
 ```
 
 ```ruby
@@ -3548,7 +3652,20 @@ object(Transbank\TransaccionCompleta\TransactionStatusResponse)#303 (13)
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+	AccountingDate: "1219",
+	Amount: 10000,
+	AuthorizationCode: "1213",
+	BuyOrder: "327648047",
+	CardDetail: (null),
+	InstallmentsAmount: 1000,
+	InstallmentsNumber: 10,
+	PaymentTypeCode: "NC",
+	ResponseCode: 0,
+	SessionId: "750819",
+	Status: "AUTHORIZED",
+	TransactionDate: "2019-12-19T19:50:34.411Z"
+}
 ```
 
 ```ruby
@@ -3656,7 +3773,9 @@ Transaction::refund(
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.TransaccionCompleta;
+
+FullTransaction.Refund(token, amount);
 ```
 
 ```ruby
@@ -3717,7 +3836,14 @@ object(Transbank\TransaccionCompleta\TransactionRefundResponse)#305 (6)
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+{
+	AuthorizationCode: (null),
+	AuthorizationDate: (null),
+	Balance: 0,
+	NullifiedAmount: 0,
+	ResponseCode: 0,
+	Type: "REVERSED"
+}
 ```
 
 ```ruby
