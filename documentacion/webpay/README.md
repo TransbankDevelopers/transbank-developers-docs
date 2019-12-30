@@ -594,8 +594,494 @@ if (output.responseCode == 0) {
 
 ```
 
-## Webpay Transacción Completa {data-submenuhidden=true} %<span class='tbk-tagTitleDesc'>REST</span>%
+## Webpay OneClick Mall
 
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#webpay-oneclick-mall' tbk-link-name='Referencia Api'></div>
+</div>
+
+Para usar Webpay OneClick Mall en transacciones asociadas a varios comercios, lo primero que se debe hacer es definir las dependencias necesarias para poder realizar cualquier tipo de transacción.
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+
+import cl.transbank.webpay.oneclick.OneClickMall;
+
+// ...
+
+```
+
+```php
+
+use Transbank\Webpay\Oneclick\MallInscription;
+use Transbank\Webpay\Oneclick\MallTransaction;
+
+// ...
+
+```
+
+```csharp
+
+using Transbank.Webpay.Oneclick;
+
+// ...
+
+```
+
+```ruby
+
+// Incluir en el Gemfile
+gem 'transbank-sdk', git: "https://github.com/TransbankDevelopers/transbank-sdk-ruby.git"
+
+
+```
+
+```python
+
+from transbank.oneclick.mall_inscription import MallInscription
+from transbank.oneclick.mall_transaction import MallTransaction
+
+from transbank.oneclick.request import MallTransactionAuthorizeDetails
+
+// ...
+
+```
+
+Una vez que ya cuentas con esa preparación, puedes iniciar transacciones:
+
+
+### Crear una inscripción
+
+Te permite realizar la inscripción del tarjetahabiente:
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+//...
+
+
+// Identificador del usuario en el comercio
+String username = "nombre_de_usuario";
+// Correo electrónico del usuario
+String email = "nombre_de_usuario@gmail.com";
+String response_url = "https://callback/resultado/de/transaccion";
+
+OneclickMallInscriptionStartResponse response = OneclickMall.Inscription.start(username, email, response_url);
+
+String url_webpay = response.getUrlWebpay();
+String tbk_token = response.getToken();
+```
+
+```php
+//...
+
+
+// Identificador del usuario en el comercio
+$username = "nombre_de_usuario";
+// Correo electrónico del usuario
+$email = "nombre_de_usuario@gmail.com";
+$response_url = "https://callback/resultado/de/transaccion";
+
+$resp = MallInscription::start($username, $email, $response_url);
+
+$url_webpay = $resp->getUrlWebpay();
+$tbk_token = $resp->getToken();
+
+```
+
+```csharp
+//...
+
+
+// Identificador del usuario en el comercio
+var username = "nombre_de_usuario";
+// Correo electrónico del usuario
+var email = "nombre_de_usuario@gmail.com";
+var response_url = "https://callback/resultado/de/transaccion";
+
+var response = Inscription.start(username, email, response_url);
+
+var url_webpay = response.Url;
+var tbk_token = response.Token;
+
+```
+
+```ruby
+
+
+@username = "nombre_de_usuario"
+@email = "nombre_de_usuario@gmail.com"
+@response_url = "https://callback/resultado/de/transaccion"
+
+
+@resp = Transbank::Webpay::Oneclick::MallInscription::start(user_name: @username,email: @email,response_url: @response_url)
+
+@url_webpay = @resp.url_webpay
+@tbk_token = @resp.token
+
+```
+
+```python
+
+username = "nombre_de_usuario"
+email = "nombre_de_usuario@gmail.com"
+response_url = "https://callback/resultado/de/transaccion"
+
+resp = MallInscription.start(user_name=username,email=email,response_url=response_url)
+
+url_webpay = resp.url_webpay
+tbk_token = resp.token
+
+
+```
+
+Tal como en el caso de Webpay Oneclick Normal, debes redireccionar vía `POST` el navegador del usuario a la url retornada en `url_webpay`. **Recordando que el nombre del parámetro que contiene el token se debe llamar `TBK_TOKEN`**.
+
+### Confirmar una inscripción
+
+Una vez que se autorice la inscripción del usuario, se retornará el control al comercio vía `POST` en la url indicada en `response_url`, con el parámetro `TBK_TOKEN` identificando la transacción. Con esa información se puede finalizar la inscripción:
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+//...
+
+String tbk_token = "tbkTokenRetornadoPorInscriptionStart";
+
+OneclickMallInscriptionFinishResponse response = OneclickMall.Inscription.finish(tbk_token);
+
+String tbkUser = response.getTbkUser();
+
+```
+
+```php
+//...
+
+$tbk_token = "tbkTokenRetornadoPorInscriptionStart";
+
+$resp = MallInscription::finish($tbk_token);
+
+$tbkUser = $resp->getTbkUser();
+
+
+```
+
+```csharp
+//...
+
+var token = "tbkTokenRetornadoPorInscriptionStart";
+
+var result = Inscription.Finish(tbk_token);
+
+var tbkUser = result.TbkUser;
+
+```
+
+```ruby
+//...
+
+@tbk_token = "tbkTokenRetornadoPorInscriptionStart";
+
+@resp = Transbank::Webpay::Oneclick::MallInscription::finish(token: @tbk_token)
+
+@tbkUser = @resp.tbk_user
+
+```
+
+```python
+//...
+
+tbk_token = "tbkTokenRetornadoPorInscriptionStart"
+
+resp = MallInscription.finish(token=tbk_token)
+
+tbkUser = resp.tbk_user
+
+```
+
+Con eso habrás completado el flujo "feliz" en que todo funciona OK. En [la referencia detallada de Webpay OneClick Mall puedes ver cada paso del flujo, incluyendo los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-oneclick-mall).
+
+### Eliminar una inscripción
+
+Si en algún momento se quiere eliminar la inscripción de un usuario, se debe invocar a `Inscription.delete()`, con el identificador de inscripción `tbkUser` obtenido en `Inscription.finish()`.
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+//...
+
+// Identificador del usuario en el comercio
+String username = "nombre_de_usuario";
+String tbkUser = "tbkUserRetornadoPorInscriptionFinish";
+
+OneclickMall.Inscription.delete(username, tbkUser);
+
+
+```
+
+```php
+//...
+
+// Identificador del usuario en el comercio
+$username = "nombre_de_usuario";
+$tbkUser = $tbkUserRetornadoPorInscriptionFinish;
+
+//Parámetro opcional
+$options = new Options($apiKey, $parentCommerceCode);
+
+$resp = MallInscription::delete($tbkUser, $username, $options);
+
+
+```
+
+```csharp
+//...
+
+// Identificador del usuario en el comercio
+var username = "nombre_de_usuario";
+var tbkUser = "tbkUserRetornadoPorInscriptionFinish";
+
+var result = Inscription.Delete(username, tbkUser);
+
+```
+
+```ruby
+//...
+
+@username = "nombre_de_usuario"
+@tbkUser = "tbkUserRetornadoPorInscriptionFinish"
+
+@resp = Transbank::Webpay::Oneclick::MallInscription::delete(user_name: @username,tbk_user: @tbkUser)
+
+```
+
+```python
+//...
+
+tbkUser = "tbkUserRetornadoPorInscriptionFinish"
+username = "nombre_de_usuario"
+
+resp = MallInscription.delete(tbk_user=tbkUser, user_name=username)
+
+```
+
+Si se quiere comprobar si se eliminó correctamente, la función retorna un boolean, el cual será `true` en caso de éxito y `false` en otro caso.
+
+### Realizar transacciones
+
+Con el `tbkUser` retornado de `Inscription.finish()` puedes autorizar transacciones:
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+
+// Identificador único de orden de compra generado por el comercio:
+String username = "nombre_de_usuario";
+String tbkUser = "tbkUserRetornadoPorInscriptionFinish";
+String buyOrder = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
+
+
+double amountOne = 10000;
+String MallOneCommerceCode = "597055555542";
+String buyOrderMallOne = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
+int installmentNumberOne = 3;
+
+double amountTwo = 50000;
+String MallTwoCommerceCode = "597055555543";
+String buyOrderMallTwo = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
+int installmentNumberTwo = 3;
+
+MallTransactionCreateDetails details = MallTransactionCreateDetails.build()
+                .add(amountOne, MallOneCommerceCode, buyOrderMallOne, installmentNumberOne)
+                .add(amuntTwo, MallTwoCommerceCode, buyOrderMallTwo, installmentNumberTwo);
+
+
+OneclickMallTransactionAuthorizeResponse response = OneclickMall.Transaction.authorize(username, tbkUser, buyOrder, details);
+
+
+```
+
+```php
+
+// Identificador del usuario en el comercio
+$username = "nombre_de_usuario";
+$tbkUser = $tbkUserRetornadoPorInscriptionFinish;
+$parentBuyOrder = rand(100000, 999999999);
+
+$childCommerceCode1 = "597055555543";
+$childBuyOrder1 = strval(rand(100000, 999999999));
+$amount1 = 50000;
+$installmentsNumber1 = 1;
+
+$childCommerceCode2 = "597055555543";
+$childBuyOrder2 = strval(rand(100000, 999999999));
+$amount2 = 50000;
+$installmentsNumber2 = 1;
+
+$details = [
+    [
+        "commerce_code" => $childCommerceCode1,
+        "buy_order" => $childBuyOrder1,
+        "amount" => $amount1,
+        "installments_number" => $installmentsNumber1
+    ],
+    [
+        "commerce_code" => $childCommerceCode2,
+        "buy_order" => $childBuyOrder2,
+        "amount" => $amount2,
+        "installments_number" => $installmentsNumber2
+    ]
+];
+
+$resp = MallTransaction::authorize($username, $tbkUser, $parentBuyOrder, $details);
+
+
+```
+
+```csharp
+
+var username = "nombre_de_usuario";
+var tbkUser = "tbkUserRetornadoPorInscriptionFinish";
+var buyOrder = RandomString(10);
+
+var childCommerceCode = "597055555542";
+var childBuyOrder = RandomString(10);
+var amount = Decimal.Parse(Request.Form["amount"]);
+var installmentsNumber = 1;
+
+List<PaymentRequest> details = new List<PaymentRequest>();
+details.Add(new PaymentRequest(childCommerceCode, childBuyOrder, amount, installmentsNumber));
+
+var result = MallTransaction.Authorize(username, tbkUser, buyOrder, details);
+
+
+```
+
+```ruby
+
+@username = "nombre_de_usuario"
+@tbkUser = "tbkUserRetornadoPorInscriptionFinish"
+@buy_order = "12345" + Time.now.to_i.to_s
+
+@details =
+  [{
+    commerce_code: "597055555542",
+    buy_order: "abcdef" + Time.now.to_i.to_s,
+    amount: 10000,
+    installments_number: 3
+  },
+  {
+    commerce_code: "597055555543",
+    buy_order: "abcdef" + Time.now.to_i.to_s,
+    amount: 50000,
+    installments_number: 3
+  }]
+end
+
+
+@resp = Transbank::Webpay::Oneclick::MallTransaction::authorize(username: @username, tbk_user: @tbkUser, parent_buy_order: @buy_order, details: @details)
+
+
+```
+
+```python
+
+username = "nombre_de_usuario"
+tbkUser = "tbkUserRetornadoPorInscriptionFinish"
+buy_order = str(random.randrange(1000000, 99999999))
+
+commerce_code1 = "597055555542"
+buy_order_child1 = str(random.randrange(1000000, 99999999))
+installments_number1 = 3
+amount1 = 10000
+
+commerce_code2 = "597055555543"
+buy_order_child2 = str(random.randrange(1000000, 99999999))
+installments_number2 = 4
+amount2 = 50000
+
+details = MallTransactionAuthorizeDetails(commerce_code1, buy_order_child1, installments_number1, amount1) \
+    .add(commerce_code2, buy_order_child2, installments_number2, amount2)
+
+resp = MallTransaction.authorize(user_name=username, tbk_user=tbkUser, buy_order=buy_order, details=details)
+
+```
+
+### Anular una transacción
+
+En el caso de que se quiera anular alguna transacción, se invoca a `Transaction.refund()`.
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+//...
+
+
+String buyOrder = "buyOrderIndicadoEnTransactionAuthorize";
+String childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
+String childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
+double amount = (byte) 1;
+
+OneclickMallTransactionRefundResponse response = OneclickMall.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+
+```
+
+```php  escribir que no son datos random.
+//...
+
+$buyOrder = $buyOrderIndicadoEnTransactionAuthorize;
+$childCommerceCode = $childCommerceCodeIndicadoEnTransactionAuthorize;
+$childBuyOrder = $childBuyOrderIndicadoEnTransactionAuthorize;
+$amount = $amountIndicadoEnTransactionAuthorize;
+
+//Parámetro opcional
+$options = new Options($apiKey, $parentCommerceCode);
+
+$resp = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrder, $amount, $options);
+
+
+```
+
+```csharp
+//...
+
+var buyOrder = Request.Form["buy_order"];
+var childCommerceCode = Request.Form["child_commerce_code"];
+var childBuyOrder = Request.Form["child_buy_order"];
+var amount = decimal.Parse(Request.Form["amount"]);
+
+var result = MallTransaction.Refund(buyOrder, childCommerceCode,childBuyOrder,amount);
+
+
+```
+
+```ruby
+//...
+
+@buy_order = "12345" + Time.now.to_i.to_s
+@child_commerce_code = "597055555542"
+@child_buy_order = "abcdef" + Time.now.to_i.to_s
+@amount = 1000
+
+@resp = Transbank::Webpay::Oneclick::MallTransaction::refund(buy_order: @buy_order, child_commerce_code: @child_commerce_code, child_buy_order: @child_buy_order, amount: @amount)
+
+```
+
+```python
+//...
+
+
+buy_order = str(random.randrange(1000000, 99999999))
+child_commerce_code = '597055555542'
+child_buy_order = str(random.randrange(1000000, 99999999))
+amount = 10000
+
+resp = MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, amount)
+
+```
+
+## Webpay Transacción Completa {data-submenuhidden=true} %<span class='tbk-tagTitleDesc'>REST</span>%
 
 
 ### Crear una transacción
