@@ -134,8 +134,8 @@ Producto | Código de Comercio | Secreto |
 Webpay Plus | `Próximamente...` | `Próximamente...`
 Webpay Plus Mall | `Próximamente...` | `Próximamente...`
 Webpay Oneclick | `Próximamente...` | `Próximamente...`
-Webpay Oneclick Mall | `Próximamente...` | `Próximamente...`
-Webpay Transacción Completa | `Próximamente...` | `Próximamente...`
+Webpay Oneclick Mall | `597055555535` Mall <br> `597055555536` Tienda 1 <br> `597055555537` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+Webpay Transacción Completa | `597055555530` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
 Webpay Transacción Completa Diferida | `Próximamente...` | `Próximamente...`
 
 > Los SDKs ya incluyen esos códigos de comercio y llaves secretas
