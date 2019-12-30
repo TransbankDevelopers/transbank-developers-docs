@@ -156,7 +156,7 @@ Webpay Transacción Completa Diferida | `Próximamente...` | `Próximamente...`
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+
 ```
 
 ```python
@@ -182,7 +182,7 @@ Webpay Transacción Completa Diferida | `Próximamente...` | `Próximamente...`
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+::Transbank::Webpay::WebpayPlus::Transaction::create(buy_order: buy_order, session_id: session_id, amount: amount, return_url: return_url)
 ```
 
 ```python
@@ -1573,7 +1573,7 @@ realizar las transacciones de pago.
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+  # Este SDK aún no se encuentra disponible
 ```
 
 ```python
@@ -1663,7 +1663,7 @@ Permite eliminar un usuario enrolado a Oneclick.
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+#  Este SDK aún no se encuentra disponible
 ```
 
 ```python
@@ -2067,7 +2067,9 @@ Permite gatillar el inicio del proceso de inscripción.
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+Transbank::Webpay::Oneclick::MallInscription::start(user_name: user_name,
+                                                    email: email,
+                                                    response_url: response_url)
 ```
 
 ```python
@@ -2129,7 +2131,9 @@ public class IntegrationExample {
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+#<Transbank::Webpay::Oneclick::MallInscriptionStartResponse:0x00007f91000c0808
+    @token="eea483923a5b81dcb4ae4295c589d83cd0abd5ea5040d85aa397bcf44b7a1f89",
+    @url_webpay="https://webpay3gint.transbank.cl/webpayserver/bp_multicode_inscription.cgi">
 ```
 
 ```python
@@ -2187,7 +2191,7 @@ Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+  Transbank::Webpay::Oneclick::MallInscription::finish(token: token)
 ```
 
 ```python
@@ -2249,7 +2253,12 @@ public class IntegrationExample {
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+#<Transbank::Webpay::Oneclick::MallInscriptionFinishResponse:0x00007f90f56d7288
+    @response_code=0,
+    @tbk_user="5cef0f60-8da3-4912-bd48-758533145e22",
+    @authorization_code="1213",
+    @card_type="Visa",
+    @card_number="XXXXXXXXXXXX6623">
 ```
 
 ```python
@@ -2297,7 +2306,8 @@ Permite eliminar un usuario enrolado a Oneclick Mall.
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+Transbank::Webpay::Oneclick::MallInscription::delete(user_name: user_name,
+                                                     tbk_user: tbk_user)
 ```
 
 ```python
@@ -2354,7 +2364,9 @@ public class IntegrationExample {
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+#<Transbank::Webpay::Oneclick::MallInscriptionDeleteResponse:0x00007f90f5e3fa98
+    @code=204,
+    @status="OK">
 ```
 
 ```python
@@ -2388,7 +2400,10 @@ Permite autorizar un pago.
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+Transbank::Webpay::Oneclick::MallTransaction::authorize(username: username,
+                                                       tbk_user: tbk_user,
+                                                       parent_buy_order: buy_order,
+                                                       details: details)
 ```
 
 ```python
@@ -2498,7 +2513,19 @@ public class IntegrationExample {
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+#<Transbank::Webpay::Oneclick::MallTransactionAuthorizeResponse:0x00007f910001e968 
+    @buy_order="123451567432788",
+    @session_id=nil, 
+    @card_detail={"card_number"=>"6623"},
+    @expiration_date=nil, 
+    @accounting_date="0902",
+    @transaction_date="2019-09-02T14:59:58.934Z",
+    @details=[
+        {"amount"=>1000, "status"=>"AUTHORIZED", "authorization_code"=>"1213",
+         "payment_type_code"=>"VN", "response_code"=>0, "installments_number"=>0,
+         "commerce_code"=>"597055555542", "buy_order"=>"abcdef1567432788"
+        }
+    ]>
 ```
 
 ```python
@@ -2574,7 +2601,7 @@ Retorna el resultado de la autorización.
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+Transbank::Webpay::Oneclick::MallTransaction::status(buy_order: buy_order)
 ```
 
 ```python
@@ -2646,7 +2673,20 @@ public class IntegrationExample {
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+#<Transbank::Webpay::Oneclick::MallTransactionStatusResponse:0x00007f90f5c55868
+    @buy_order="123451567432788",
+    @session_id=nil,
+    @card_detail={"card_number"=>"6623"}, 
+    @expiration_date=nil,
+    @accounting_date="0902",
+    @transaction_date="2019-09-02T14:59:58.934Z",
+    @details=[
+       {"amount"=>1000, "status"=>"AUTHORIZED", "authorization_code"=>"1213",
+       "payment_type_code"=>"VN", "response_code"=>0, 
+       "installments_number"=>0, "commerce_code"=>"597055555542",
+       "buy_order"=>"abcdef1567432788"
+    }
+]>
 ```
 
 ```python
@@ -2742,7 +2782,10 @@ Este método retorna como respuesta un identificador único de la transacció
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+ Transbank::Webpay::Oneclick::MallTransaction::refund(buy_order: buy_order,
+                                                      child_commerce_code: child_commerce_code,
+                                                      child_buy_order: child_buy_order,
+                                                      amount: amount)
 ```
 
 ```python
@@ -2811,7 +2854,13 @@ public class IntegrationExample {
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+#<Transbank::Webpay::Oneclick::MallTransactionRefundResponse:0x00007f90ec037aa8
+    @type="REVERSED",
+    @authorization_code=nil,
+    @authorization_date=nil, 
+    @nullified_amount=nil,
+    @balance=nil,
+    @response_code=nil>
 ```
 
 ```python
@@ -2898,7 +2947,14 @@ token es caducado y no podrá ser utilizado en un pago.
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+Transbank::TransaccionCompleta::Transaction::create(
+                                                    buy_order: buy_order,
+                                                    session_id: session_id,
+                                                    amount: amount,
+                                                    card_number: card_number,
+                                                    cvv: cvv,
+                                                    card_expiration_date: card_expiration_date
+                                                   )
 ```
 
 ```python
@@ -2967,7 +3023,8 @@ public class IntegrationExample {
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+#<Transbank::TransaccionCompleta::TransactionCreateResponse:0x00007f90f814d198
+    @token="e039d0590f8c6468f1de4e236796ddffc98e8a343c4c2820f993423209b50737">
 ```
 
 ```python
@@ -3011,7 +3068,8 @@ invocación de la confirmación.
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+ Transbank::TransaccionCompleta::Transaction::installments(token: token,
+                                                           installments_number: installments_number)
 ```
 
 ```python
@@ -3066,7 +3124,10 @@ public class IntegrationExample {
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+<Transbank::TransaccionCompleta::TransactionInstallmentsResponse:0x00007f91000bd108
+    @installments_amount=334,
+    @id_query_installments=17717003,
+    @deferred_periods=[]>
 ```
 
 ```python
@@ -3121,7 +3182,10 @@ transacción.
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+Transbank::TransaccionCompleta::Transaction::commit(token: token,
+                                                    id_query_installments: id_query_installments,
+                                                    deferred_period_index: deferred_period_index,
+                                                    grace_period: grace_period)
 ```
 
 ```python
@@ -3183,7 +3247,21 @@ public class IntegrationExample {
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+<Transbank::TransaccionCompleta::TransactionCommitResponse:0x00007f90f80152f8
+    @vci=nil,
+    @amount=1000,
+    @status="AUTHORIZED",
+    @buy_order="buyorder1567451528",
+    @session_id="session1567451528",
+    @card_number=nil,
+    @accounting_date="0902",
+    @transaction_date="2019-09-02T20:20:39.377Z",
+    @authorization_code="1213",
+    @payment_type_code="VN",
+    @response_code=0,
+    @installments_number=0,
+    @installments_amount=nil,
+    @balance=nil>
 ```
 
 ```python
@@ -3251,7 +3329,7 @@ Obtiene resultado de transacción a partir de un token.
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+Transbank::TransaccionCompleta::Transaction::status(token: token)
 ```
 
 ```python
@@ -3299,7 +3377,21 @@ public class IntegrationExample {
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+<Transbank::TransaccionCompleta::TransactionStatusResponse:0x00007f90f5c395f0 
+    @vci=nil,
+    @amount=1000,
+    @status="AUTHORIZED",
+    @buy_order="buyorder1567451528",
+    @session_id="session1567451528",
+    @card_number=nil,
+    @accounting_date="0902",
+    @transaction_date="2019-09-02T20:20:39.377Z",
+    @authorization_code="1213",
+    @payment_type_code="VN",
+    @response_code=0, 
+    @installments_number=0,
+    @installments_amount=nil,
+    @balance=nil>
 ```
 
 ```python
@@ -3388,7 +3480,7 @@ Permite solicitar a Webpay la anulación de una transacción realizada previam
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+Transbank::TransaccionCompleta::Transaction::refund(token: token, amount: amount)
 ```
 
 ```python
@@ -3441,7 +3533,13 @@ public class IntegrationExample {
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+<Transbank::TransaccionCompleta::TransactionRefundResponse:0x00007f90f55f6468 
+    @type="REVERSED",
+    @authorization_code=nil,
+    @authorization_date=nil,
+    @nullified_amount=nil,
+    @balance=nil,
+    @response_code=nil>
 ```
 
 ```python
