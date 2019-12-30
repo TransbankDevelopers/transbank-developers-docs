@@ -2059,7 +2059,12 @@ Permite gatillar el inicio del proceso de inscripción.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\Webpay\Oneclick;
+use Transbank\Webpay\Oneclick\MallInscription;
+
+Oneclick::configureOneclickMallForTesting();
+
+$resp = MallInscription::start($userName, $email, $responseUrl);
 ```
 
 ```csharp
@@ -2123,7 +2128,12 @@ public class IntegrationExample {
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+object(Transbank\Webpay\Oneclick\InscriptionStartResponse)#268 (2) 
+{ 
+    ["token"]=> string(64) "e97d4ebbb2d36a535691ab171a6e40000cac1c2ae74bd6d620361e3581e1cc78"
+    ["urlWebpay"]=> string(74) "https://webpay3gint.transbank.cl/webpayserver/bp_multicode_inscription.cgi"
+}
+
 ```
 
 ```csharp
@@ -2183,7 +2193,11 @@ Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\Webpay\Oneclick;
+use Transbank\Webpay\Oneclick\MallInscription;
+
+Oneclick::configureOneclickMallForTesting();
+$resp = MallInscription::finish($token);
 ```
 
 ```csharp
@@ -2245,7 +2259,14 @@ public class IntegrationExample {
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+object(Transbank\Webpay\Oneclick\InscriptionFinishResponse)#268 (5)
+{
+    ["responseCode"]=> int(0)
+    ["tbkUser"]=> string(36) "5ba90ccf-7990-46ea-8f38-9a04560d5386"
+    ["authorizationCode"]=> string(4) "1213"
+    ["cardType"]=> string(4) "Visa"
+    ["cardNumber"]=> string(4) "XXXXXXXXXXXX6623"
+}
 ```
 
 ```csharp
@@ -2298,7 +2319,12 @@ Permite eliminar un usuario enrolado a Oneclick Mall.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\Webpay\Oneclick;
+use Transbank\Webpay\Oneclick\MallInscription;
+
+Oneclick::configureOneclickMallForTesting();
+
+$resp = MallInscription::delete($tbkUser, $userName, $options);
 ```
 
 ```csharp
@@ -2356,7 +2382,11 @@ public class IntegrationExample {
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+object(Transbank\Webpay\Oneclick\InscriptionDeleteResponse)#264 (2) 
+{
+    ["status"]=> string(2) "OK"
+    ["code"]=> int(204)
+}
 ```
 
 ```csharp
@@ -2392,7 +2422,22 @@ Permite autorizar un pago.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\Webpay\Oneclick\MallTransaction;
+use Transbank\Webpay\Oneclick;
+
+Oneclick::configureOneclickMallForTesting();
+
+$details = [
+    [
+        "commerce_code" => $childCommerceCode,
+        "buy_order" => $childBuyOrder,
+        "amount" => $amount,
+        "installments_number" => $installmentsNumber
+    ]
+];
+
+
+$resp = MallTransaction::authorize($userName, $tbkUser, $parentBuyOrder, $details);
 ```
 
 ```csharp
@@ -2505,7 +2550,29 @@ public class IntegrationExample {
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+object(Transbank\Webpay\Oneclick\AuthorizeMallTransactionResponse)#271 (7) 
+{ 
+    ["buyOrder"]=> string(8) "12345632"
+    ["sessionId"]=> NULL
+    ["cardNumber"]=> string(4) "6623"
+    ["expirationDate"]=> NULL
+    ["accountingDate"]=> string(4) "0719"
+    ["transactionDate"]=> string(24) "2019-07-19T12:12:15.022Z"
+    ["details"]=> array(1)
+        { 
+            [0]=> array(8) 
+                {
+                 ["amount"]=> int(1000)
+                 ["status"]=> string(10) "AUTHORIZED"
+                 ["authorization_code"]=> string(4) "1213"
+                 ["payment_type_code"]=> string(2) "VN"
+                 ["response_code"]=> int(0)
+                 ["installments_number"]=> int(0)
+                 ["commerce_code"]=> string(12) "597055555542"
+                 ["buy_order"]=> string(8) "abcdef76" 
+                }
+        }
+}
 ```
 
 ```csharp
@@ -2593,7 +2660,12 @@ Retorna el resultado de la autorización.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\Webpay\Oneclick\MallTransaction;
+use Transbank\Webpay\Oneclick;
+
+Oneclick::configureOneclickMallForTesting();
+
+$resp = MallTransaction::getStatus($buyOrder);
 ```
 
 ```csharp
@@ -2665,7 +2737,27 @@ public class IntegrationExample {
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+object(Transbank\Webpay\Oneclick\MallTransactionStatusResponse)#271 (7) 
+{
+    ["buyOrder"]=> string(8) "12345632"
+    ["sessionId"]=> NULL ["cardNumber"]=> string(4) "6623"
+    ["expirationDate"]=> NULL
+    ["accountingDate"]=> string(4) "0719"
+    ["transactionDate"]=> string(24) "2019-07-19T12:12:15.022Z"
+    ["details"]=> array(1) 
+        { [0]=> array(8) 
+            {
+                ["amount"]=> int(1000)
+                ["status"]=> string(10) "AUTHORIZED"
+                ["authorization_code"]=> string(4) "1213"
+                ["payment_type_code"]=> string(2) "VN"
+                ["response_code"]=> int(0)
+                ["installments_number"]=> int(0)
+                ["commerce_code"]=> string(12) "597055555542"
+                ["buy_order"]=> string(8) "abcdef76" 
+            }
+        }
+ }
 ```
 
 ```csharp
@@ -2774,7 +2866,12 @@ Este método retorna como respuesta un identificador único de la transacció
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\Webpay\Oneclick\MallTransaction;
+use Transbank\Webpay\Oneclick;
+
+Oneclick::configureOneclickMallForTesting();
+
+$resp = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrder, $amount);
 ```
 
 ```csharp
@@ -2846,7 +2943,15 @@ public class IntegrationExample {
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+object(Transbank\Webpay\Oneclick\MallRefundTransactionResponse)#273 (6) 
+{
+    ["type"]=> string(8) "REVERSED"
+    ["authorizationCode"]=> NULL
+    ["authorizationDate"]=> NULL
+    ["nullifiedAmount"]=> NULL
+    ["balance"]=> NULL
+    ["responseCode"]=> NULL
+}
 ```
 
 ```csharp
@@ -2887,7 +2992,6 @@ authorization_code  <br> <i> Boolean </i> | Código de autorización. Largo máx
 authorization_date  <br> <i> ISO8601 </i> | Fecha de la autorización de la transacción.
 nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
 balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
-
 ## Webpay Transacción Completa
 
 ```java
@@ -2939,7 +3043,16 @@ token es caducado y no podrá ser utilizado en un pago.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\TransaccionCompleta\Transaction;
+
+Transaction::create(
+            $buy_order,
+            $session_id,
+            $amount,
+            $cvv,
+            $card_number,
+            $card_expiration_date
+        );
 ```
 
 ```csharp
@@ -3015,7 +3128,11 @@ public class IntegrationExample {
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+object(Transbank\TransaccionCompleta\TransactionCreateResponse)#301 (1) 
+{
+  ["token"]=>
+  string(64) "e2dd3dd969eef829d99f05f240f82a6e98ef6b1635d1bf3f3daa02ee5509dad1"
+}
 ```
 
 ```csharp
@@ -3060,7 +3177,12 @@ invocación de la confirmación.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\TransaccionCompleta\Transaction;
+
+Transaction::installments(
+            $token_ws,
+            $installments_number
+        );
 ```
 
 ```csharp
@@ -3116,7 +3238,16 @@ public class IntegrationExample {
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+object(Transbank\TransaccionCompleta\TransactionInstallmentsResponse)#302 (3) 
+{
+  ["installmentsAmount"]=>
+  int(334)
+  ["idQueryInstallments"]=>
+  int(17717003)
+  ["deferredPeriods"]=>
+  array(0) {
+  }
+}
 ```
 
 ```csharp
@@ -3174,7 +3305,13 @@ transacción.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\TransaccionCompleta\Transaction;
+
+Transaction::commit(
+            $token_ws,
+            $id_query_installments,
+            $deferred_period_index,
+            $grace_period
 ```
 
 ```csharp
@@ -3239,7 +3376,24 @@ public class IntegrationExample {
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+object(Transbank\TransaccionCompleta\TransactionCommitResponse)#303 (13) 
+{
+  ["vci"]=> NULL
+  ["amount"]=> int(1000) 
+  ["status"]=> string(10) "AUTHORIZED"
+  ["buyOrder"]=> string(6) "123456"
+  ["sessionId"]=> string(13) "session123456"
+  ["cardDetail"]=> array(1) {
+    ["card_number"]=> string(4) "6623"
+  }
+  ["accountingDate"]=> string(4) "1219"
+  ["transactionDate"]=> string(24) "2019-12-19T14:52:54.699Z"
+  ["authorizationCode"]=> string(4) "1213"
+  ["paymentTypeCode"]=> string(2) "VN"
+  ["responseCode"]=> int(0)
+  ["installmentsNumber"]=> int(0)
+  ["installmentsAmount"]=> NULL
+}
 ```
 
 ```csharp
@@ -3321,7 +3475,11 @@ Obtiene resultado de transacción a partir de un token.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\TransaccionCompleta\Transaction;
+
+Transaction::getStatus(
+            $token_ws
+        );
 ```
 
 ```csharp
@@ -3369,7 +3527,24 @@ public class IntegrationExample {
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+object(Transbank\TransaccionCompleta\TransactionStatusResponse)#303 (13) 
+{
+  ["vci"]=> NULL
+  ["amount"]=> int(1000)
+  ["status"]=> string(10) "AUTHORIZED"
+  ["buyOrder"]=> string(6) "123456"
+  ["sessionId"]=> string(13) "session123456"
+  ["cardDetail"]=> array(1) {
+    ["card_number"]=> string(4) "6623"
+  }
+  ["accountingDate"]=> string(4) "1219"
+  ["transactionDate"]=> string(24) "2019-12-19T14:55:52.190Z"
+  ["authorizationCode"]=> string(4) "1213"
+  ["paymentTypeCode"]=> string(2) "VN"
+  ["responseCode"]=> int(0)
+  ["installmentsNumber"]=> int(0)
+  ["installmentsAmount"]=> NULL
+}
 ```
 
 ```csharp
@@ -3472,7 +3647,12 @@ Permite solicitar a Webpay la anulación de una transacción realizada previam
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\TransaccionCompleta\Transaction;
+
+Transaction::refund(
+            $token_ws,
+            $amount
+        );
 ```
 
 ```csharp
@@ -3525,7 +3705,15 @@ public class IntegrationExample {
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+object(Transbank\TransaccionCompleta\TransactionRefundResponse)#305 (6) 
+{
+  ["type"]=> string(8) "REVERSED"
+  ["authorizationCode"]=> NULL
+  ["authorizationDate"]=> NULL
+  ["nullifiedAmount"]=> NULL
+  ["balance"]=> NULL
+  ["responseCode"]=> NULL
+}
 ```
 
 ```csharp
