@@ -2080,7 +2080,12 @@ Transbank::Webpay::Oneclick::MallInscription::start(user_name: user_name,
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.oneclick.mall_inscription import MallInscription
+
+MallInscription.start(
+        user_name=user_name,
+        email=email,
+        response_url=response_url)
 ```
 
 ```http
@@ -2152,7 +2157,9 @@ object(Transbank\Webpay\Oneclick\InscriptionStartResponse)#268 (2)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  token: "e0937cf4a1007837068805edb58a45339d3ea09598ddd6c4c2cb999bebfb450b", url_webpay: "https://webpay3gint.transbank.cl/webpayserver/bp_multicode_inscription.cgi"
+}
 ```
 
 ```http
@@ -2217,7 +2224,9 @@ Inscription.Finish(token);
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.oneclick.mall_inscription import MallInscription
+
+MallInscription.finish(token=token)
 ```
 
 ```http
@@ -2297,7 +2306,13 @@ object(Transbank\Webpay\Oneclick\InscriptionFinishResponse)#268 (5)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  response_code: 0,
+  tbk_user: "5b74093d-abf8-448c-9dd8-f6cf7681ac39",
+  authorization_code: 1213,
+  card_type: "Visa",
+  card_number: "XXXXXXXXXXXX6623"
+}
 ```
 
 ```http
@@ -2319,8 +2334,8 @@ Nombre  <br> <i> tipo </i> | Descripción
 response_code  <br> <i> Number </i> | Código de retorno del proceso de inscripción, donde 0 (cero) es aprobado.
 tbk_user  <br> <i> String </i> | Identificador único de la inscripción del cliente en Webpay OneClick, que debe ser usado para realizar pagos o borrar la inscripción.
 authorization_code  <br> <i> String </i> | Código que identifica la autorización de la inscripción.
-credit_card_type  <br> <i> creditCardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna).
-last_four_card_digits  <br> <i> String </i> | Los últimos 4 dígitos de la tarjeta ingresada por el cliente en la inscripción.
+card_type  <br> <i> cardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna).
+card_number  <br> <i> String </i> | El número de la tarjeta ingresada por el cliente en la inscripción, con los últimos 4 dígitos de la tarjeta visibles.
 
 ### Eliminar una inscripción con Webpay Oneclick Mall
 Una vez finalizado el proceso de inscripción es posible eliminarla de ser necesario. Para esto debes usar el método llamado `Inscription.remove()`.
@@ -2353,7 +2368,9 @@ Transbank::Webpay::Oneclick::MallInscription::delete(user_name: user_name,
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.oneclick.mall_inscription import MallInscription
+
+MallInscription.delete(tbk_user, user_name)
 ```
 
 ```http
@@ -2471,7 +2488,11 @@ Transbank::Webpay::Oneclick::MallTransaction::authorize(username: username,
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.oneclick.mall_transaction import MallTransaction
+
+details = MallTransactionAuthorizeDetails(commerce_code, buy_order_child, installments_number, amount) \
+        .add(commerce_code2, buy_order_child2, installments_number2, amount2)
+MallTransaction.authorize(user_name=user_name, tbk_user=tbk_user, buy_order=buy_order, details=details)
 ```
 
 ```http
@@ -2634,7 +2655,23 @@ object(Transbank\Webpay\Oneclick\AuthorizeMallTransactionResponse)#271 (7)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  transaction_date: "2019-12-24T15:36:45.704Z",
+  accounting_date: 1224,
+  card_detail: {'card_number': '6623'},
+  buy_order: 31401629, 
+  details: [
+    {
+      'amount': 1000, 'status': 'AUTHORIZED', 'authorization_code': '1213',
+      'payment_type_code': 'VN', 'response_code': 0, 'installments_number': 0,
+      'commerce_code': '597055555542', 'buy_order': '22979937'
+    }, {
+      'amount': 1000, 'status': 'AUTHORIZED', 'authorization_code': '1213',
+      'payment_type_code': 'VN', 'response_code': 0, 'installments_number': 0,
+      'commerce_code': '597055555543', 'buy_order': '35668976'
+    }
+  ]
+}
 ```
 
 ```http
@@ -2718,7 +2755,9 @@ Transbank::Webpay::Oneclick::MallTransaction::status(buy_order: buy_order)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.oneclick.mall_transaction import MallTransaction
+
+MallTransaction.status(buy_order)
 ```
 
 ```http
@@ -2842,7 +2881,23 @@ object(Transbank\Webpay\Oneclick\MallTransactionStatusResponse)#271 (7)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  buy_order: 31401629, 
+  card_detail: {'card_number': '6623'}, 
+  accounting_date: 1224, 
+  transaction_date: "2019-12-24T15:36:45.704Z", 
+  details: [
+    {
+      'amount': 1000, 'status': 'REVERSED', 'authorization_code': '1213',
+      'payment_type_code': 'VN', 'response_code': 0, 'installments_number': 0,
+      'commerce_code': '597055555542', 'buy_order': '22979937'
+    }, {
+      'amount': 1000, 'status': 'AUTHORIZED', 'authorization_code': '1213',
+      'payment_type_code': 'VN', 'response_code': 0, 'installments_number': 0,
+      'commerce_code': '597055555543', 'buy_order': '35668976'
+    }
+  ]
+}
 ```
 
 ```http
@@ -2948,7 +3003,9 @@ MallTransaction.Refund(buyOrder, childCommerceCode,childBuyOrder,amount);
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.oneclick.mall_transaction import MallTransaction
+
+MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, amount)
 ```
 
 ```http
@@ -3038,7 +3095,10 @@ object(Transbank\Webpay\Oneclick\MallRefundTransactionResponse)#273 (6)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  type: "REVERSED", balance: None, authorization_code: None,
+  response_code: None, authorization_date: None, nullified_amount: None
+}
 ```
 
 ```http
@@ -3080,7 +3140,7 @@ balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+
 ```
 
 ```http
@@ -3148,7 +3208,12 @@ Transbank::TransaccionCompleta::Transaction::create(
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.transaccion_completa.transaction import Transaction
+
+Transaction.create(
+    buy_order=buy_order, session_id=session_id, amount=amount,
+    card_number=card_number, cvv=cvv, card_expiration_date=card_expiration_date
+)
 ```
 
 ```http
@@ -3224,7 +3289,9 @@ object(Transbank\TransaccionCompleta\TransactionCreateResponse)#301 (1)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  token: "edb0458a3c487ceed362950385a0839bf137c026ab77070bf6bf2be5df6a1766"
+}
 ```
 
 ```http
@@ -3278,7 +3345,9 @@ FullTransaction.Installments(
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.transaccion_completa.transaction import Transaction
+
+Transaction.installments(token=token, installments_number=installments_number)
 ```
 
 ```http
@@ -3349,7 +3418,9 @@ object(Transbank\TransaccionCompleta\TransactionInstallmentsResponse)#302 (3)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  installments_amount: 334.0, id_query_installments: 20842559, deferred_periods: []
+}
 ```
 
 ```http
@@ -3415,7 +3486,12 @@ Transbank::TransaccionCompleta::Transaction::commit(token: token,
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.transaccion_completa.transaction import Transaction
+
+Transaction.commit( token=token,
+                    id_query_installments=id_query_installments,
+                    deferred_period_index=deferred_period_index,
+                    grace_period=grace_period )
 ```
 
 ```http
@@ -3521,7 +3597,13 @@ object(Transbank\TransaccionCompleta\TransactionCommitResponse)#303 (13)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  vci: None, amount: 1000.0, status: "AUTHORIZED", buy_order: "buyorder1577202376",
+  session_id: "session1577202376", card_detail: {'card_number': '6623'},
+  accounting_date: 1224, transaction_date: "2019-12-24T15:46:22.392Z", authorization_code: 1213,
+  payment_type_code: "VN", response_code: 0.0, installments_number: 0.0,
+  installments_amount: None balance:None
+}
 ```
 
 ```http
@@ -3595,7 +3677,9 @@ Transbank::TransaccionCompleta::Transaction::status(token: token)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.transaccion_completa.transaction import Transaction
+
+Transaction.status(token=token)
 ```
 
 ```http
@@ -3687,7 +3771,13 @@ object(Transbank\TransaccionCompleta\TransactionStatusResponse)#303 (13)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  vci: None, amount: 1000.0, status: "AUTHORIZED", buy_order: "buyorder1577202376",
+  session_id: "session1577202376", card_detail: {'card_number': '6623'},
+  accounting_date: 1224, transaction_date: "2019-12-24T15:46:22.392Z",
+  authorization_code: 1213, payment_type_code: "VN", response_code: 0.0,
+  installments_number: 0.0, installments_amount: None balance:None
+}
 ```
 
 ```http
@@ -3783,7 +3873,9 @@ Transbank::TransaccionCompleta::Transaction::refund(token: token, amount: amount
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.transaccion_completa.transaction import Transaction
+
+Transaction.refund(token=token, amount=amount)
 ```
 
 ```http
@@ -3857,7 +3949,9 @@ object(Transbank\TransaccionCompleta\TransactionRefundResponse)#305 (6)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+{
+  type: "REVERSED", authorization_code: None, authorization_date: None, nullified_amount: None, balance: None, response_code: None
+}
 ```
 
 ```http
