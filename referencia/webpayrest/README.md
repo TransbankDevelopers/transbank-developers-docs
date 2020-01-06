@@ -3121,7 +3121,7 @@ authorization_code  <br> <i> Boolean </i> | Código de autorización. Largo máx
 authorization_date  <br> <i> ISO8601 </i> | Fecha de la autorización de la transacción.
 nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
 balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
-## Webpay Transacción Completa
+## Webpay Transacción Completa {data-submenuhidden=true}
 
 ```java
 // Este SDK aún no se encuentra disponible
@@ -3974,7 +3974,7 @@ authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
 nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17
 response_code  <br> <i> Number </i> | Código de resultado de la reversa/anulación. Si es exitoso es 0, de lo contrario la reversa/anulación no fue realizada. Largo máximo: 2
-## Webpay Transacción Mall Completa
+## Webpay Transacción Mall Completa {data-submenuhidden=true}
 
 ```java
 // Este SDK aún no se encuentra disponible
