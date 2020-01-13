@@ -890,7 +890,7 @@ if (output.responseCode == 0) {
 
 ```
 
-## Webpay OneClick Mall
+## Webpay OneClick Mall %<span class='tbk-tagTitleDesc'>REST</span>%
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-oneclick-mall' tbk-link-name='Referencia Api'></div>
