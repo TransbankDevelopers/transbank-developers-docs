@@ -208,7 +208,7 @@ valores entregados por el comercio al principio del flujo transaccional.
 
 2. Posterior a que Transbank confirme que la planilla de integración se encuentra correcta, se solicitará la [generación de las credenciales del comercio](#credenciales-en-onepay) (llave privada y certificado publico). El certificado público debe ser enviado junto al logo del comercio a soporte@transbank.cl para su registro.
 
-3. Transbank informará el correcto registro del certificado público del comercio. Posterior a ello, será necesario cambiar la configuración del e-commerce para funcionar en producción.
+3. Transbank informará el correcto registro del certificado público del comercio. Posterior a ello, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-para-produccion-utilizando-los-sdk)
 
 4. Con la configuración del ambiente de producción ya lista será necesario realizar una compra de $10 para validar el correcto funcionamiento.
 
@@ -343,6 +343,51 @@ resguardar su llave privada y su certificado público, como asimismo es
 responsable por reemplazar estos cuando caduquen.
 </aside>
 
+### Configuración para producción utilizando los SDK
+
+Para realizar la configuración del ambiente de producción utilizando los SDK oficiales
+de Transbank será remover la configuración para pruebas (ej. `Configuration.ForTestingWebpayPlusNormal()`)
+y en su remplazo seguir los siguiente pasos.
+
+1. Crear un nuevo elemento `Configuration`
+
+<img src="/images/documentacion/configuracion/1-configuration-php.gif" data-lenguaje-visible='php' class="rounded mx-auto d-block"/>
+<img src="/images/documentacion/configuracion/1-configuration-java.gif" data-lenguaje-visible='java' class="rounded mx-auto d-block"/>
+<img src="/images/documentacion/configuracion/1-configuration-net.gif" data-lenguaje-visible='csharp' class="rounded mx-auto d-block"/>
+
+2. Asignar el código de comercio productivo, entregado por Transbank al momento de contratar el producto.
+
+<img src="/images/documentacion/configuracion/2-codigo-comercio-php.gif" data-lenguaje-visible='php' class="rounded mx-auto d-block"/>
+<img src="/images/documentacion/configuracion/2-codigo-comercio-java.gif" data-lenguaje-visible='java' class="rounded mx-auto d-block"/>
+<img src="/images/documentacion/configuracion/2-codigo-comercio-net.gif" data-lenguaje-visible='csharp' class="rounded mx-auto d-block"/>
+
+3. Configuración de la llave privada (`.key` para Java y PHP `.pfx` o `.p12` para .NET) 
+generada por el comercio en la etapa previa.
+
+<img src="/images/documentacion/configuracion/3-private-key-php.gif" data-lenguaje-visible='php' class="rounded mx-auto d-block"/>
+<img src="/images/documentacion/configuracion/3-private-key-java.gif" data-lenguaje-visible='java' class="rounded mx-auto d-block"/>
+<img src="/images/documentacion/configuracion/3-private-key-net.gif" data-lenguaje-visible='csharp' class="rounded mx-auto d-block"/>
+
+4. Configuración del certificado público (`.crt`) enviado a Transbank para su registro. En el caso de .NET no es 
+necesario configurar el `.crt` pero se debe configurar el password asignado a la llave privada.
+
+<img src="/images/documentacion/configuracion/4-certificate-php.gif" data-lenguaje-visible='php' class="rounded mx-auto d-block"/>
+<img src="/images/documentacion/configuracion/4-certificate-java.gif" data-lenguaje-visible='java' class="rounded mx-auto d-block"/>
+<img src="/images/documentacion/configuracion/4-certificate-net(password).gif" data-lenguaje-visible='csharp' class="rounded mx-auto d-block"/>
+
+5. Selección del ambiente productivo.
+
+<img src="/images/documentacion/configuracion/5-environment-php.gif" data-lenguaje-visible='php' class="rounded mx-auto d-block"/>
+<img src="/images/documentacion/configuracion/5-environment-java.gif" data-lenguaje-visible='java' class="rounded mx-auto d-block"/>
+<img src="/images/documentacion/configuracion/5-environment-net.gif" data-lenguaje-visible='csharp' class="rounded mx-auto d-block"/>
+
+6. Crerar elemento Webpay utilizando la configuración de producción.
+
+<img src="/images/documentacion/configuracion/6-webpay-php.gif" data-lenguaje-visible='php' class="rounded mx-auto d-block"/>
+<img src="/images/documentacion/configuracion/6-webpay-java.gif" data-lenguaje-visible='java' class="rounded mx-auto d-block"/>
+<img src="/images/documentacion/configuracion/6-webpay-net.gif" data-lenguaje-visible='csharp' class="rounded mx-auto d-block"/>
+
+
 ## Requerimientos de páginas de transición y de fin de transacción
 
 ### Webpay
@@ -441,6 +486,7 @@ Pruebas de validación para Onepay
 - Reversa de pago sin cuotas
 - Pago cancelado
 - Anulación total (solo si integra el método)
+
 
 <div class="container slate">
   <div class='slate-after-footer'>
