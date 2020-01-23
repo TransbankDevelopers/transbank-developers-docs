@@ -380,7 +380,40 @@ var response = Inscription.Start(
 
 ```
 ```ruby
-PENDIENTE
+@req = params.as_json
+@url = @req['url']
+@name = @req['name']
+@first_last_name = @req['first_last_name']
+@second_last_name = @req['second_last_name']
+@rut = @req['rut']
+@service_id = @req['service_id']
+@final_url = @req['final_url']
+@max_amount = @req['max_amount']
+@phone_number = @req['phone_number']
+@mobile_number = @req['mobile_number']
+@patpass_name = @req['patpass_name']
+@person_email = @req['person_email']
+@commerce_email = @req['commerce_email']
+@address = @req['address']
+@city = @req['city']
+
+@resp  = Transbank::Patpass::PatpassComercio::Inscription::start(
+                                                    url: @url,
+                                                    name: @name,
+                                                    first_last_name: @first_last_name,
+                                                    second_last_name: @second_last_name,
+                                                    rut: @rut,
+                                                    service_id: @service_id,
+                                                    final_url: @final_url,
+                                                    max_amount: @max_amount,
+                                                    phone_number: @phone_number,
+                                                    mobile_number: @mobile_number,
+                                                    patpass_name: @patpass_name,
+                                                    person_email: @person_email,
+                                                    commerce_email: @commerce_email,
+                                                    address: @address,
+                                                    city: @city
+                                                    )
 ```
 ```python
 PENDIENTE
@@ -414,7 +447,10 @@ Para confirmar la suscripción se debe enviar el token generado en la respuesta 
 ```
 
 ```ruby
-PENDIENTE
+<form action="<%= @resp.url %>" method="post">
+  <input type="hidden" name="tokenComercio" value="<%= @resp.token %>">
+  <button type="submit">Finalizar La Inscripcion</button>
+</form>
 ```
 
 ```python
@@ -446,7 +482,9 @@ var result = Inscription.Status(token);
 ```
 
 ```ruby
-
+@req = params.as_json
+@token = @req['j_token']
+@resp = Transbank::Patpass::PatpassComercio::Inscription::status(token: @token)
 ```
 
 ```python
