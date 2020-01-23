@@ -380,22 +380,21 @@ var response = Inscription.Start(
 
 ```
 ```ruby
-@req = params.as_json
-@url = @req['url']
-@name = @req['name']
-@first_last_name = @req['first_last_name']
-@second_last_name = @req['second_last_name']
-@rut = @req['rut']
-@service_id = @req['service_id']
-@final_url = @req['final_url']
-@max_amount = @req['max_amount']
-@phone_number = @req['phone_number']
-@mobile_number = @req['mobile_number']
-@patpass_name = @req['patpass_name']
-@person_email = @req['person_email']
-@commerce_email = @req['commerce_email']
-@address = @req['address']
-@city = @req['city']
+@url = "https://callback_url/resultado/de/la/transaccion"
+@name = "Nombre"
+@first_last_name = "Primer Apellido"
+@second_last_name = "Segundo Apellido"
+@rut = "11111111-1"
+@service_id = "Identificador del servicio unico de suscripción"
+@final_url = "https://callback/final/comprobante/transacción"
+@max_amount = 10000; # monto máximo de la suscripció
+@phone_number = "numero telefono fijo de suscrito"
+@mobile_number = "numero de telefono móvil de suscrito"
+@patpass_name = "Nombre asignado a la suscripción"
+@person_email = "Correo de suscrito"
+@commerce_email = "Correo de comercio"
+@address = "Dirección de Suscrito"
+@city = "Ciudad de suscrito"
 
 @resp  = Transbank::Patpass::PatpassComercio::Inscription::start(
                                                     url: @url,
@@ -416,7 +415,29 @@ var response = Inscription.Start(
                                                     )
 ```
 ```python
-PENDIENTE
+from transbank.error.transbank_error import TransbankError
+from transbank.patpass_comercio.inscription import Inscription
+
+return_url = "https://callback_url/resultado/de/la/transaccion"
+name = "Nombre"
+first_last_name = "Primer Apellido"
+second_last_name = "Segundo Apellido"
+rut = "11111111-1"
+service_id = "Identificador del servicio unico de suscripción"
+final_url = "https://callback/final/comprobante/transacción"
+max_amount = 10000; # monto máximo de la suscripció
+phone_number = "numero telefono fijo de suscrito"
+mobile_number = "numero de telefono móvil de suscrito"
+patpass_name = "Nombre asignado a la suscripción"
+person_email = "Correo de suscrito"
+commerce_mail = "Correo de comercio"
+address = "Dirección de Suscrito"
+city = "Ciudad de suscrito"
+
+response = Inscription.start(return_url, name, first_last_name, second_last_name, rut, service_id, final_url,
+                                       max_amount, phone_number, mobile_number, patpass_name,
+                                       person_email, commerce_mail, address, city)
+
 ```
 
 
@@ -454,7 +475,10 @@ Para confirmar la suscripción se debe enviar el token generado en la respuesta 
 ```
 
 ```python
-PENDIENTE
+<form action="{{ response.url }}" method="POST">
+  <input type="hidden" name="tokenComercio" value="{{ response.token }}">
+  <input type="submit" value="Finalizar La Inscripcion">
+</form>
 ```
 
 ### Estado de la suscripción
@@ -488,7 +512,14 @@ var result = Inscription.Status(token);
 ```
 
 ```python
+from transbank.error.transbank_error import TransbankError
+from transbank.patpass_comercio.inscription import Inscription
 
+token = request.form.get("tokenComercio")
+try:
+    response = Inscription.status(token)
+except TransbankError as e:
+    print(e.message)
 ```
 
 
