@@ -381,7 +381,7 @@ necesario configurar el `.crt` pero se debe configurar el password asignado a la
 <img src="/images/documentacion/configuracion/5-environment-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
 <img src="/images/documentacion/configuracion/5-environment-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
 
-6. Crerar elemento Webpay utilizando la configuración de producción.
+6. Crear elemento Webpay utilizando la configuración de producción.
 
 <img src="/images/documentacion/configuracion/6-webpay-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
 <img src="/images/documentacion/configuracion/6-webpay-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
