@@ -17,7 +17,6 @@ De manera complementaria a esas plataformas, **PatPass by Webpay** permite a los
 <div class="pos-title-nav">
   <div tbk-link='/documentacion/patpass' tbk-link-name='Documentación'></div>
   <div tbk-link='/referencia/patpass' tbk-link-name='Referencia Api'></div>
-  <div tbk-link='/plugins/patpass' tbk-link-name='Plugins'></div>
 </div>
 
 Mediante PatPass by Webpay el tarjetahabiente genera un pago automático con Tarjeta de Crédito de un producto y/o servicio por un monto fijo, efectuando **el primer pago en línea a través de Webpay Plus y luego efectuándose el cobro mensualmente de forma automática** a través del motor de PatPass, con una fecha de término definida por el comercio.
@@ -55,6 +54,49 @@ El flujo de una transacción PatPass by Webpay se puede resumir en los siguiente
 Una vez completada la operación, el comercio podrá visualizar el detalle de las transacciones y consultar los cobros recurrentes mediante Transdata. Por parte del tarjetahabiente, podrá visualizar la inscripción de este cobro mensual a través del PatPass Emisor (HomeBanking) en su respectivo Banco. Allí podrá observar el canal de origen que corresponde a “Webpay Mensual” y la fecha de término de este cobro recurrente.
 
 En caso que un cobro no sea exitoso o el pago automático sea dado de baja, el tarjetahabiente también recibirá una alerta por correo electrónico (tal como la recibe en la inscripción descrita anteriormente en el punto 7).
+
+## PatPass Comercio
+
+<div class="pos-title-nav">
+  <div tbk-link='/documentacion/patpass' tbk-link-name='Documentación'></div>
+  <div tbk-link='referencia/patpass' tbk-link-name='Referencia Api'></div>
+</div>
+
+Mediante PatPass Comercio el tarjetahabiente genera una suscripción de pago automatico con Tarjeta de Crédito por un producto o servicio por un monto fijo, efectuando **el primer pago en línea a través de Plataforma PatPass y luego efectuándose el cobro mensualmente de forma automática** a travez del mismo motor PatPass, con una fecha de término definida por el comercio.
+
+En cuanto a monedas, PatPass Comercio solo permite utilizar Peso Chileno. Para cobros en otras divisas, el comercio tiene que encargase de la conversión con las tasas que esto conlleva.
+
+PatPass Comercio es un canal utilizado sólo para dar de alta pagos automáticos. Si el comercio requiere dar de baja un pago automático, debe utilizar los otros canales existentes (como Transdata).
+
+**El comercio deberá almacenar la información de todas las transacciones efectuadas a través del producto PatPass Comercio**, debiendo mantener los respectivos registros a lo menos por el plazo de un año desde la fecha de cada operación, a modo de respaldo de las ventas efectuadas y de los servicios prestados. Esta información deberá ser puesta a disposición de Transbank cada vez y tan pronto éste la requiera. La información mínima que deberá almacenar el Establecimiento Comercial por cada una de las transacciones es la siguiente:
+
+- Código de Comercio asignado por Transbank.
+- Número de Orden de Pedido.
+- Fecha y hora de la transacción.
+- Monto y moneda de la operación.
+- Número de Código de Autorización entregado por Transbank.
+- Identificación de Servicio.
+- Descripción de bienes vendidos o servicios prestados.
+- Nombre del tarjetahabiente que efectúa la compra.
+- Campo de autenticación emisor.
+- Fecha de vencimiento de la suscripción.
+- Mail de contacto de Tarjetahabiente.
+
+### Flujo de una transacción PatPass Commercio
+
+El flujo de transacción **PatPass Comercio** se puede resumir en los siguientes pasos:
+
+1. El tarjetahabiente navega dentro de la página del comercio.
+2. El tarjetahabiente selecciona la opción de pago PatPass Commercio y completa la información requerida por el comercio (RUT, nombre completo, email, direccion, telefonos móvil y fijo).
+3. Una vez enviada la información el cliente es redirigido a Webpay donde se le informa tanto el monto, como la fecha de término de la suscripción mensual, en este formulario debe ingresar la información de su tarjeta.
+4. El emisor de la tarjeta autentica al tarjetahabiente antes de realizar la transacción financiera, con el objetivo de validar que la tarjeta este siendo utilizada por el titular.
+5. Si la autenticación es exitosa, PatPass Comercio contrasta la información del cliente enviada por el emisor con la información provista por el comercio para asegurar que coincidan. De ser así, se procede con la autorización y captura del monto cobrado.
+6. Si dicha autorización y captura es exitosa, Transbank procede de forma automática y transparente (tanto para el comercio como para el tarjetahabiente) a realizar la inscripción de la recurrencia en la Plataforma PatPass.
+7. Finalmente se enviará un correo electrónico al comercio y otro correo electrónico al tarjetahabiente con la información del pago automático activado.
+
+Una vez completada toda la operacion el comericio podrá visualizar el detalle de las transacciones y consultar por los cobros recurrentes mediante Transadata.
+Por parte del tarjetahabiente, podrá visualizar la inscripción de este cobro mensual a través del PatPass Emisor (HomeBanking) en su respectivo Banco. Allí podrá observar el canal de origen que corresponde a “Webpay Mensual” y la fecha de término de este cobro recurrente.
+
 
 ## Anulaciones PatPass
 
