@@ -25,6 +25,15 @@
 
 Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente en tu comercio, basado en Prestashop.
 
+<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/SrBvspBWWtU" >
+  <div class="container-embed">
+    <div class="data-info-url">
+      <b>Video tutorial de integración Prestashop</b>
+    </div>
+    <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
+  </div>
+</div>
+
 ## Requisitos
 
 Debes tener instalado previamente Prestashop.
