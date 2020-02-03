@@ -305,10 +305,10 @@ En esta etapa, el comercio envía las evidencias a soporte@transbank.cl emplean
 producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones. Para integraciones 
 Webpay que utilicen algún [plugin oficial](/plugin) existe un formulario especial.
  
-Descargar formulario de envidencias: 
-- [**Para integraciones Webpay**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay.docx)
-- [**Para integraciones Webpay que usen un plugin oficial**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-plugins.docx)
-- [**Para integraciones Onepay**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx)
+Descargar el formulario de envidencias... 
+- Para integraciones Webpay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay.docx)
+- Para integraciones Webpay que usen un plugin oficial: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-plugins.docx)
+- Para integraciones Onepay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx)
 
 Soporte validará que los casos de prueba sean consistentes con los registrados
 en los sistemas de Webpay y, de estar todo correcto, se le notificará al
