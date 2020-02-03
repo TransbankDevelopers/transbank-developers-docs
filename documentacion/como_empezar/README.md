@@ -286,7 +286,7 @@ y guardar el certificado y también su llave privada (`597029124456.key`), los
 que junto a tu código de comercio te permitirán transaccionar. **Debes custodiar
 esa llave privada para evitar que caiga en manos de terceros**.
 
-### El proceso de Validación y puesta en Producción
+### El proceso de validación y puesta en producción
 
 Durante la validación de la integración se pretende verificar que el comercio
 transacciona de manera segura y sin problemas, por lo que se solicitarán una
@@ -300,11 +300,15 @@ no posea código de comercio productivo. Para obtenerlo, sigue las instruccione
 en cómo hacerse cliente en el portal <http://www.transbank.cl> o contacte a su
 ejecutivo comercial.
 
-En esta etapa, el comercio envía las evidencias a soporte@transbank.cl mediante
-el formulario correspondiente para [**Webpay**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay.docx)
-o [**Onepay**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx),
-indicando claramente las órdenes de compra, fecha
-y hora de las transacciones.
+
+En esta etapa, el comercio envía las evidencias a soporte@transbank.cl empleando el formulario correspondiente al 
+producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones. Para integraciones 
+Webpay que utilicen algún [plugin oficial](/plugin) existe un formulario especial.
+ 
+Descargar formulario de envidencias: 
+- [**Para integraciones Webpay**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay.docx)
+- [**Para integraciones Webpay que usen un plugin oficial**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-plugins.docx)
+- [**Para integraciones Onepay**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx)
 
 Soporte validará que los casos de prueba sean consistentes con los registrados
 en los sistemas de Webpay y, de estar todo correcto, se le notificará al
