@@ -295,9 +295,8 @@ integración. Esta validación es requisito necesario para dejar al comercio e
 producción y no se permitirá que un comercio utilice productivamente el
 servicio Webpay sin poseer una validación.
 
-Por otro lado, Transbank no validará ninguna integración a algún comercio que
-no posea código de comercio productivo. Para obtenerlo, sigue las instrucciones
-en cómo hacerse cliente en el portal <http://www.transbank.cl> o contacte a su
+Transbank solo validará las integraciones de aquellos comercios que tengan un código de comercio productivo. 
+Para obtenerlo, sigue las instrucciones en cómo hacerse cliente en el portal <http://www.transbank.cl> o contacte a su
 ejecutivo comercial.
 
 En esta etapa, el comercio envía las evidencias a soporte@transbank.cl mediante
