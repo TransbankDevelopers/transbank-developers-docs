@@ -15,7 +15,8 @@ específicos a Onepay, visita la sección dedicada a ese producto.
 
 ## Flujo de Integración
 
-Inicialmente el comercio tendrá algunas tareas necesarias que realizar mientras ocurre el proceso de intergación. Aquí puedes conocer el flujo completo a continuación
+Inicialmente el comercio tendrá algunas tareas necesarias que realizar mientras ocurre el proceso de integración. A continuación, puedes conocer el flujo completo.
+
 
 <img class="td_img-night" src="/images/documentacion/flujo-integracion.svg" alt="Flujo de integración">
 
@@ -83,11 +84,15 @@ Te recomendamos leer [las instrucciones de instalación detalladas para el SDK P
 
 ## Ambientes
 
-Transbank provee dos ambientes para todos sus productos:
+Transbank provee dos ambientes para todos sus productos: **Integración** y **Producción**.
 
-**Ambiente de Integración y Validación**: En este ambiente el comercio realiza
-la integración a Webpay y testea su solución de medio pago. Asimismo, en éste
-ambiente es que se valida la integración del comercio.
+**Ambiente de Integración**: En este ambiente el comercio realiza la integración del producto a contratar y testea 
+su solución de medio pago.
+
+**Ambiente de producción**: En este ambiente el comercio operará luego de finalizar el [proceso de puesta en producción](#puesta-en-produccion) y realizará transacciones 
+con tarjetas de crédito o débito **reales**.  
+
+### Ambiente de integración
 
 Para las transacciones Webpay en estos ambientes se deben usar estas
 tarjetas:
@@ -131,15 +136,6 @@ Oneclick Mall <br> <i>tienda 1</i> <br> <i>tienda 2</i> | 597044444429 <br> 5970
 Para mayor detalle de las credenciales puedes visitar [el repositorio GitHub
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
 
-Después de haber realizado esas pruebas iniciales y antes del paso a producción
-tendrás que usar credenciales que identifiquen a tu comercio. De esa forma
-podrás realizar [la validación que te permitirá acceder a credenciales de
-producción](#el-proceso-de-validacion-y-puesta-en-produccion).
-
-**Ambiente de producción**: Este ambiente es en el cual finalmente operará
-productivamente el comercio. En este ambiente puede hacer pruebas con tarjetas
-de crédito o débito reales. Las credenciales de este ambiente son entregadas
-al momento que se coordina el paso a producción.
 
 <aside class="notice">
 Tip: Cada uno de estos ambientes maneja distintas URLs (endpoints) y
@@ -204,13 +200,13 @@ valores entregados por el comercio al principio del flujo transaccional.
 
 ## Puesta en Producción
 
-1. Se debe realizar un [proceso de validación](#el-proceso-de-validacion-y-puesta-en-produccion) en el ambiente de integración con los códigos de comercios de integración disponibles [aquí](https://www.transbankdevelopers.cl/documentacion/como_empezar#ambientes). Durante este proceso se solicita evidencias de la integración. Además, Transbank realizará tests directos en el sitio de prueba. Estos datos serán enviados a Transbank en la planilla de integración que se debe enviar a soporte@transbank.cl.
+1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](#el-proceso-de-validacion-y-puesta-en-produccion).  Si realizaste la integración con un plugin, considera que junto con la planilla, debes [generar tus credenciales](#credenciales-en-onepay) y enviar el certificado público. 
 
-2. Posterior a que Transbank confirme que la planilla de integración se encuentra correcta, se solicitará la [generación de las credenciales del comercio](#credenciales-en-onepay) (llave privada y certificado publico). El certificado público debe ser enviado junto al logo del comercio a soporte@transbank.cl para su registro.
+2. Posterior a que Transbank confirme que la planilla de integración se encuentra correcta, se solicitará al comercio la [generación de las credenciales](#credenciales-en-onepay) (llave privada y certificado publico). El certificado público debe ser enviado junto al logo del comercio a soporte@transbank.cl para su registro. 
 
-3. Transbank informará via correo electrónico el correcto registro del certificado público del comercio. Posterior a ello, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-para-produccion-utilizando-los-sdk)
+3. Transbank informará via correo electrónico el correcto registro del certificado público enviado por el comercio. Posterior a ello, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-para-produccion-utilizando-los-sdk)
 
-4. Con la configuración del ambiente de producción ya lista será necesario realizar una compra de $10 para validar el correcto funcionamiento.
+4. Con la configuración del ambiente de producción ya lista, será necesario realizar una compra de $10 para validar el correcto funcionamiento.
 
 ### Credenciales en Onepay
 
@@ -429,69 +425,6 @@ Las posibles causas de este rechazo son:
 * Su tarjeta de Crédito o Débito no cuenta con saldo suficiente.
 * Tarjeta aún no habilitada en el sistema financiero.
 ```
-
-## Pruebas de validación efectuada por Transbank
-
-Pruebas de validación para Webpay Normal, modalidad plugin:
-
-- Pago crédito exitoso sin cuotas
-- Pago crédito exitoso con cuotas
-- Pago crédito denegado
-- Pago débito exitoso
-- Pago débito denegado
-- Pago cancelado (abortado en formulario Webpay)
-
-Pruebas de validación para Webpay Normal:
-
-- Pago crédito exitoso sin cuotas
-- Pago crédito exitoso con cuotas
-- Pago crédito denegado
-- Pago débito exitoso
-- Pago débito denegado
-- Anulación parcial (solo si integra el método)
-- Anulación total (solo si integra el método)
-- Pago cancelado (abortado en formulario Webpay)
-
-Pruebas de validación para Webpay Normal más captura diferida:
-
-- Pago crédito exitoso sin cuotas
-- Pago crédito exitoso con cuotas
-- Pago crédito denegado
-- Pago débito exitoso
-- Pago débito denegado
-- Anulación parcial (solo si integra el método)
-- Anulación total (solo si integra el método)
-- Pago cancelado (abortado en formulario Webpay)
-- Pago crédito con Captura Diferida por el total del monto autorizado en la transacción original
-- Pago crédito con Captura Diferida por monto menor al autorizado en la transacción original
-
-Pruebas de validación para Transacción Mall:
-
-- Pago crédito exitoso sin cuotas
-- Pago crédito exitoso con cuotas
-- Pago crédito denegado
-- Pago débito exitoso
-- Pago débito denegado
-- Anulación parcial (solo si integra el método)
-- Anulación total (solo si integra el método)
-- Pago cancelado (abortado en formulario Webpay)
-
-Pruebas de validación para Transacción OneClick:
-
-- Inscripción exitosa
-- Inscripción rechazada
-- Remover usuario
-- Venta Autorizada
-- Venta Rechazada (Para validar rechazo en Integración, debe realizar una transacción superior a 10 millones)
-- Venta Reversada
-
-Pruebas de validación para Onepay
-
-- Pago crédito exitoso sin cuotas
-- Pago crédito exitoso con cuotas
-- Reversa de pago sin cuotas
-- Pago cancelado
-- Anulación total (solo si integra el método)
 
 
 <div class="container slate">
