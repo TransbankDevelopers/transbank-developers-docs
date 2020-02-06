@@ -84,7 +84,7 @@ Te recomendamos leer [las instrucciones de instalación detalladas para el SDK P
 
 ## Ambientes
 
-Transbank provee dos ambientes para todos sus productos: **Integración** y **Producción**.
+Transbank provee dos ambientes: **Integración** y **Producción**.
 
 **Ambiente de Integración**: En este ambiente el comercio realiza la integración del producto a contratar y testea 
 su solución de medio pago.
@@ -200,9 +200,9 @@ valores entregados por el comercio al principio del flujo transaccional.
 
 ## Puesta en Producción
 
-1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](#el-proceso-de-validacion-y-puesta-en-produccion).  Si realizaste la integración con un plugin, considera que junto con la planilla, debes [generar tus credenciales](#credenciales-en-onepay) y enviar el certificado público. 
+1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](#el-proceso-de-validacion-y-puesta-en-produccion). Si realizaste la integracion con un puglin, considera que junto con la planilla de integración, debes generar tus credenciales y enviar el certificado público y el logo a soporte@transbank.cl. 
 
-2. Posterior a que Transbank confirme que la planilla de integración se encuentra correcta, se solicitará al comercio la [generación de las credenciales](#credenciales-en-onepay) (llave privada y certificado publico). El certificado público debe ser enviado junto al logo del comercio a soporte@transbank.cl para su registro. 
+2. Posterior a que Transbank confirme que la planilla de integración se encuentra correcta (no aplica para plugins), se solicitará al comercio la [generación de las credenciales](#credenciales-en-onepay) (llave privada y certificado publico). El certificado público debe ser enviado junto al logo del comercio a soporte@transbank.cl para su registro. 
 
 3. Transbank informará via correo electrónico el correcto registro del certificado público enviado por el comercio. Posterior a ello, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-para-produccion-utilizando-los-sdk)
 
