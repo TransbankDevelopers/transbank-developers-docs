@@ -7,7 +7,7 @@
     <h4>Compatibilidad</h4>
     <ul>
       <li>Woocommerce >= 3.2</li>
-      <li>PHP >= 5.6 y PHP <= 7.2</li>
+      <li>PHP >= 5.6</li>
     </ul>
     <h4>Recuerda</h4>
     <ol>
@@ -82,8 +82,8 @@ Para acceder a la configuración, debes seguir los siguientes pasos:
 4. ¡Ya está! Estás en la pantalla de configuración del plugin, debes ingresar la siguiente información:
    - **Ambiente**: Ambiente hacia donde se realiza la transacción.
    - **Código de comercio**: Es lo que te identifica como comercio. Si el código que posees es de 8 dígitos debes anteponer `5970`.
-   - **Llave Privada**: Llave secreta que te autoriza y valida a hacer transacciones.
-   - **Certificado**: Llave publica que te autoriza y valida a hacer transacciones.
+   - **Llave privada**: Llave secreta que te autoriza y valida a hacer transacciones.
+   - **Certificado**: Llave pública que te autoriza y valida a hacer transacciones.
 
   Las opciones disponibles para _Ambiente_ son: "Integración" para realizar pruebas y certificar la instalación con Transbank, y "Producción" para hacer transacciones reales una vez que Transbank ha aprobado el comercio.
 
@@ -97,7 +97,7 @@ Para el ambiente de Integración, puedes utilizar las siguientes credenciales pa
 
 - Código de comercio: `597020000540`
 - Llave Privada: Se puede encontrar [aquí - private_key](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/597020000540.key)
-- Certificado Publico: Se puede encontrar [aquí - public_cert](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/597020000540.crt)
+- Certificado público: Se puede encontrar [aquí - public_cert](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/blob/master/integracion/Webpay%20Plus%20-%20CLP/597020000540.crt)
 
 <aside class="notice">
   Tip: Al momento de pasar al ambiente de producción será necesario generar tu propia llave privada, puedes ver las instrucciones para crearlas [aquí](https://www.transbankdevelopers.cl/documentacion/como_empezar#credenciales-en-webpay)
