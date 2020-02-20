@@ -65,6 +65,15 @@ var transaction =
 
 ```
 
+```javascript
+const Transbank = require('tbk-node');
+
+const transaction = new Transbank.Webpay()
+  .withConfiguration(Transbank.Configuration.forTestingWebpayPlusNormal())
+  .getNormalTransaction();
+
+```
+
 <aside class="notice">
 Como necesitarás ese objeto `transaction` en múltiples ocasiones, es buena idea
 encapsular la lógica que lo genera en algún método que puedas reutilizar.
@@ -162,6 +171,27 @@ var tokenWs = initResult.token;
 
 ```
 
+```javascript
+const Transbank = require('tbk-node');
+
+const amount = 1000;
+// Identificador que será retornado en el callback de resultado:
+const sessionId = 'mi-id-de-sesion';
+// Identificador único de orden de compra:
+const buyOrder = Math.round(Math.random()*999999999);
+const returnUrl = 'https://callback/resultado/de/transaccion';
+var finalUrl = 'https://callback/final/post/comprobante/webpay';
+
+transaction.initTransaction(amount, buyOrder, sessionId, returnUrl, finalUrl)
+  .then((response) => {
+    // response tendrá el token de respuesta de esta transacción
+    const token = response.token;
+  })
+  .catch((tbkError) => {
+    // Cualquier error será recibido a través del método catch de la promesa
+  });
+```
+
 La URL y el token retornados te indican donde debes redirigir al usuario para
 que comience el flujo de pago. Esta redirección debe ser vía `POST` por lo que
 deberás crear un formulario web con un campo `token_ws` hidden y enviarlo
@@ -256,6 +286,21 @@ if (output.responseCode == 0) {
 
 
 
+```
+
+```javascript
+const Transbank = require('tbk-node');
+
+transaction.getTransactionResult(token)
+  .then((response) => {
+    const output = response.detailOutput[0];
+    if (output.responseCode === 0) {
+      // La transacción se ha realizado correctamente
+    }
+  })
+  .catch((tbkError) => {
+    // Cualquier error durante la transacción será recibido acá
+  });
 ```
 
 > **Importante**: El SDK se encarga de que al mismo tiempo que se obtiene el
@@ -355,6 +400,14 @@ var transaction = new Webpay(Configuration.ForTestingWebpayPlusMall())
 
 
 
+```
+
+```javascript
+const Transbank = require('tbk-node');
+
+const transaction = new Transbank.Webpay()
+  .withConfiguration(Transbank.Configuration.forTestingWebpayPlusMall())
+  .getMallNormalTransaction();
 ```
 
 <aside class="notice">
