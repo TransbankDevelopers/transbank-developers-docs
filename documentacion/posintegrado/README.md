@@ -523,7 +523,7 @@ Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en 
 
 ## Integración de Onepay para pagos con QR
 
-Ahora es posible realizar pagos con Onepay dentro de tu sistema de caja para esto ponemos a tu disposición, dentro del SDK, las herramientas necesarias para generar un QR de Onepay y procesar el pago en tu sistema de caja.
+Ahora es posible realizar pagos con Onepay dentro de tu sistema de caja. Para esto, ponemos a tu disposición, dentro del SDK, las herramientas necesarias para generar un QR de Onepay y procesar el pago en tu sistema de caja.
 
 Lo primero que debes hacer es importar `Transbank.POS` y `Transbank.POS.Model` en tu proyecto, crear un nuevo objeto `OnepayPayment` y suscribirte a los eventos que te notificaran del progreso del pago en el flujo de Onepay.
 
