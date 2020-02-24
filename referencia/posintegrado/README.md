@@ -956,6 +956,60 @@ Si el POS se encuentra en modo Integrado, podrás ver una imagen de Transbank en
 2. Seleccionar la opción `Desconectar Caja`.
 3. Luego de este el equipo volverá a modo Normal, y veras el menu de venta nuevamente.
 
+## Integración de Onepay para pagos con QR
+
+Ahora, es posible realizar pagos con Onepay dentro de tu sistema de caja, para esto ponemos a tu disposición dentro del SDK, las herramientas necesarias para generar un QR de Onepay y procesar el pago en tu sistema de caja.
+
+Lo primero que debes hacer es importar `Transbank.POS` y `Transbank.POS.Model` en tu proyecto, crear un nuevo objeto `OnepayPayment` y suscribirte a los eventos que te notificaran del progreso del pago en el flujo de Onepay.
+
+### Suscribirse a eventos y Crear una transacción
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Model;
+//...
+
+int ticket = new Random().Next(1, 999999);
+Pay = new OnepayPayment(ticket, total);
+
+//Subscribe to events
+Pay.OnConnect += (sender, e) => UpdateWSStatus("Web Socket Conectado");
+Pay.OnDisconnect += WsDisconnected;
+Pay.OnNewMessage += UpdateStatus;
+Pay.OnSuccessfulPayment += ProcessPaymentResult;
+```
+
+### Obtener el QR para iniciar el pago
+
+Luego de crear el objeto OnepayPayment, debes iniciar el pago, lo cual te entregara la imagen del QR en base64 y el numero de Ott, los cuales le permiten al usuario pagar escaneando la imagen o ingresando el Ott en la aplicación de Onepay.
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Model;
+//...
+
+OnepayCreateResponse response = Pay.StarPayment();
+
+//draw the base64 image
+byte[] imageBytes = Convert.FromBase64String(response.QrCodeAsBase64);
+using (MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length))
+{
+  img_qr.Image = Image.FromStream(ms);
+}
+txt_ott.Text = response.Ott;
+```
+
+### Esperar que el usuario termine el pago en la App de Onepay
+
+El ultimo paso es esperar a que el usuario termine el flujo en la app de Onepay. Cuando la transacción termine exitosamente en Onepay, se lanzara el evento `SuccessfulPaymentEventArgs`
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Model;
+//...
+Pay.WatchPayment();
+```
+
 ## Tabla de respuestas
 
 Respuesta                                               | Código
