@@ -566,7 +566,7 @@ txt_ott.Text = response.Ott;
 
 ### Esperar que el usuario termine el pago en la App de Onepay
 
-El ultimo paso es esperar a que el usuario termine el flujo en la app de Onepay. Cuando la transacción termine exitosamente en Onepay, se lanzara el evento `SuccessfulPaymentEventArgs`
+El último paso es esperar a que el usuario termine el flujo en la app de Onepay. Cuando la transacción termine exitosamente en Onepay, se lanzará el evento `SuccessfulPaymentEventArgs`
 
 ```csharp
 using Transbank.POS;
