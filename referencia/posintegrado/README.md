@@ -981,7 +981,7 @@ Pay.OnSuccessfulPayment += ProcessPaymentResult;
 
 ### Obtener el QR para iniciar el pago
 
-Luego de crear el objeto OnepayPayment debes iniciar el pago, lo cual te entregara la imagen del QR en base64 y el numero de Ott, estos le permiten al usuario pagar escaneando la imagen o ingresando el Ott en la aplicación de Onepay.
+Luego de crear el objeto OnepayPayment debes iniciar el pago, lo cual te entregará la imagen del QR en base64 y el numero de `ott`, estos le permiten al usuario pagar escaneando la imagen o ingresando el `ott` en la aplicación de Onepay.
 
 ```csharp
 using Transbank.POS;
