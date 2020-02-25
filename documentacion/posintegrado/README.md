@@ -527,7 +527,7 @@ Ahora es posible realizar pagos con Onepay dentro de tu sistema de caja. Para es
 
 Lo primero que debes hacer es importar `Transbank.POS` y `Transbank.POS.Model` en tu proyecto, crear un nuevo objeto `OnepayPayment` y suscribirte a los eventos que te notificaran del progreso del pago en el flujo de Onepay.
 
-### Suscribirse a eventos y Crear una transacción
+### Suscribirse a eventos y crear una transacción
 
 ```csharp
 using Transbank.POS;
