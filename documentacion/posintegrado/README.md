@@ -51,7 +51,7 @@ Para compilar en windows necesitarás lo siguiente:
 Procura seguir todos los pasos descritos en el sitio de msys2
 </aside>
 
-### Primeros pasos
+## Primeros pasos
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/posintegrado?csharp#primeros-pasos' tbk-link-name='Referencia'></div>
@@ -140,6 +140,8 @@ if(retval == SP_OK){
     //...
 }
 ```
+
+## Transacciones
 
 ### Transacción de Venta
 
@@ -518,6 +520,60 @@ if (retval == TBK_OK){
 <aside class="notice">
 Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en modo Integrado siguiendo las instrucciones disponibles descritas en [Cambio a POS Integrado](referencia/posintegrado#cambio-modalidad-pos-integrado)
 </aside>
+
+## Integración de Onepay para pagos con QR
+
+Ahora es posible realizar pagos con Onepay dentro de tu sistema de caja. Para esto, ponemos a tu disposición, dentro del SDK, las herramientas necesarias para generar un QR de Onepay y procesar el pago en tu sistema de caja.
+
+Lo primero que debes hacer es importar `Transbank.POS` y `Transbank.POS.Model` en tu proyecto, crear un nuevo objeto `OnepayPayment` y suscribirte a los eventos que te notificaran del progreso del pago en el flujo de Onepay.
+
+### Suscribirse a eventos y crear una transacción
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Model;
+//...
+
+int ticket = new Random().Next(1, 999999);
+Pay = new OnepayPayment(ticket, total);
+
+//Subscribe to events
+Pay.OnConnect += (sender, e) => UpdateWSStatus("Web Socket Conectado");
+Pay.OnDisconnect += WsDisconnected;
+Pay.OnNewMessage += UpdateStatus;
+Pay.OnSuccessfulPayment += ProcessPaymentResult;
+```
+
+### Obtener el QR para iniciar el pago
+
+Luego de crear el objeto OnepayPayment, debes iniciar el pago, lo que te entregará la imagen del QR en base64 y el número de `ott`. Estos le permiten al usuario pagar escaneando la imagen o ingresando el `ott` en la aplicación de Onepay.
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Model;
+//...
+
+OnepayCreateResponse response = Pay.StarPayment();
+
+//draw the base64 image
+byte[] imageBytes = Convert.FromBase64String(response.QrCodeAsBase64);
+using (MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length))
+{
+  img_qr.Image = Image.FromStream(ms);
+}
+txt_ott.Text = response.Ott;
+```
+
+### Esperar que el usuario termine el pago en la App de Onepay
+
+El último paso es esperar a que el usuario termine el flujo en la app de Onepay. Cuando la transacción termine exitosamente en Onepay, se lanzará el evento `SuccessfulPaymentEventArgs`
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Model;
+//...
+Pay.WatchPayment();
+```
 
 ## Ejemplos de integración
 
