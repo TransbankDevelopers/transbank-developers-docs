@@ -2167,7 +2167,8 @@ const transaction = new Transbank.Webpay(
   .withPrivateCert(/* pon tu certificado privado en forma de string */)
   .withPublicCert(/* pon tu certificado público en forma de string */)
   .withCommerceCode(/* pon tu código de comercio */)
-).setEnvironment(Transbank.environments.production); // Se fija el ambiente como producción
+  .setEnvironment(Transbank.environments.production) // Se fija el ambiente como producción
+);
 ```
 
 <aside class="warning">
