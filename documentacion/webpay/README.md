@@ -172,8 +172,6 @@ var tokenWs = initResult.token;
 ```
 
 ```javascript
-const Transbank = require('transbank-sdk');
-
 const amount = 1000;
 // Identificador que será retornado en el callback de resultado:
 const sessionId = 'mi-id-de-sesion';
@@ -184,11 +182,11 @@ var finalUrl = 'https://callback/final/post/comprobante/webpay';
 
 transaction.initTransaction(amount, buyOrder, sessionId, returnUrl, finalUrl)
   .then((response) => {
-    // response tendrá el token de respuesta de esta transacción
     const token = response.token;
+    const url = response.url;
   })
-  .catch((tbkError) => {
-    // Cualquier error será recibido a través del método catch de la promesa
+  .catch((error) => {
+      console.log(error.toString())
   });
 ```
 
@@ -289,7 +287,9 @@ if (output.responseCode == 0) {
 ```
 
 ```javascript
-const Transbank = require('transbank-sdk');
+// Obtener el token desde el paraemtro token_ws recibido por POST
+// Si usas express, sería algo como esto: 
+const token = req.body.token_ws; 
 
 transaction.getTransactionResult(token)
   .then((response) => {
@@ -298,7 +298,8 @@ transaction.getTransactionResult(token)
       // La transacción se ha realizado correctamente
     }
   })
-  .catch((tbkError) => {
+  .catch((error) => {
+    console.log(error.toString())
     // Cualquier error durante la transacción será recibido acá
   });
 ```
@@ -548,9 +549,6 @@ var formAction = initResult.url;
 ```
 
 ```javascript
-const Transbank = require('transbank-sdk');
-// ...
-
 // Identificador único de orden de compra:
 const buyOrder = Math.round(Math.random()*999999999);
 // Identificador que será retornado en el callback de resultado:
@@ -580,8 +578,8 @@ transaction.initTransaction(buyOrder, sessionId, returnUrl, finalUrl, transactio
     // response tendrá el token de respuesta de esta transacción
     const token = response.token;
   });
-  .catch((tbkError) => {
-    // Cualquier error será recibido a través del método catch de la promesa
+  .catch((error) => {
+    console.log(error.toString());
   });
 ```
 <aside class="notice">
@@ -672,21 +670,18 @@ foreach (var output in result.detailOutput){
 ```
 
 ```javascript
-const Transbank = require('transbank-sdk');
-
 transaction.getTransactionResult(token)
   .then((response) => {
     response.detailOutput.forEach((output) => {
-      // Se debe chequear cada transacción de cada tienda del
-      // mall por separado:
+      // Se debe verificar cada transacción de cada tienda del mall por separado:
       if (output.responseCode == 0) {
-        // Transaccion exitosa, puedes procesar el resultado
-        // con el contenido de las variables result y output.
+        // Transaccion exitosa, puedes procesar el resultado con el contenido de 
+        // las variables result y output.
       }
     });
   })
-  .catch((tbkError) => {
-    // Cualquier error durante la transacción será recibido acá
+  .catch((error) => {
+    console.log(error.toString());
   });
 ```
 
@@ -769,8 +764,6 @@ var transaction =
 ```
 
 ```javascript
-const Transbank = require('transbank-sdk');
-
 const transaction = new Transbank.Webpay(
   Transbank.Configuration.forTestingWebpayOneClickNormal()
 ).getOneClickTransaction();
@@ -855,8 +848,6 @@ var tbkToken = initResult.token;
 
 ```
 ```javascript
-const Transbank = require('transbank-sdk');
-//...
 
 // Identificador del usuario en el comercio
 const username = "pepito"
@@ -865,13 +856,11 @@ const email = "pepito@gmail.com";
 const urlReturn = "https://callback/resultado/de/transaccion";
 transaction.initInscription(username, email, urlReturn)
   .then((response) => {
-    // response tendrá el token de respuesta de esta transacción
     const token = response.token;
-    // También la URL de webpay
     const formAction = response.urlWebpay;
   });
-  .catch((tbkError) => {
-    // Cualquier error durante la transacción será recibido acá
+  .catch((error) => {
+    console.log(error.toString());
   });
 ```
 
@@ -948,8 +937,6 @@ if (result.responseCode == 0) {
 ```
 
 ```javascript
-const Transbank = require('transbank-sdk');
-//...
 transaction.finishInscription(token)
   .then((response) => {
     const output = response.detailOutput[0];
@@ -957,8 +944,8 @@ transaction.finishInscription(token)
       // La transacción se ha realizado correctamente
     }
   })
-  .catch((tbkError) => {
-    // Cualquier error durante la transacción será recibido acá
+  .catch((error) => {
+      console.log(error.toString());
   });
 ```
 
@@ -1043,9 +1030,6 @@ if (output.responseCode == 0) {
 ```
 
 ```javascript
-const Transbank = require('transbank-sdk');
-//...
-
 const buyOrder = Math.round(Math.random()*999999999);
 const tbkUser = tbkUserRetornadoPorFinishInscription;
 const username = "pepito"; // El mismo usado en initInscription.
@@ -1057,8 +1041,8 @@ transaction.authorize(buyOrder, tbkUser, username, amount)
       // La transacción se ha realizado correctamente
     }
   })
-  .catch((tbkError) => {
-    // Cualquier error durante la transacción será recibido acá
+  .catch((error) => {
+      console.log(error.toString());
   })
 ```
 
@@ -2161,14 +2145,13 @@ Configuration configuration = new Configuration()
 
 ```javascript
 const Transbank = require('transbank-sdk');
+const configuration = new Transbank.Configuration()
+                        .withPrivateCert(/* tu certificado privado en forma de string */)
+                        .withPublicCert(/* tu certificado público en forma de string */)
+                        .withCommerceCode(/* tu código de comercio */)
+                        .setEnvironment(Transbank.environments.production) // Se define el ambiente como producción
 
-const transaction = new Transbank.Webpay(
-  new Transbank.Configuration()
-  .withPrivateCert(/* pon tu certificado privado en forma de string */)
-  .withPublicCert(/* pon tu certificado público en forma de string */)
-  .withCommerceCode(/* pon tu código de comercio */)
-  .setEnvironment(Transbank.environments.production) // Se fija el ambiente como producción
-);
+const transaction = new Transbank.Webpay(configuration);
 ```
 
 <aside class="warning">
