@@ -65,6 +65,15 @@ var transaction =
 
 ```
 
+```javascript
+const Transbank = require('transbank-sdk');
+
+const transaction = new Transbank.Webpay(
+  Transbank.Configuration.forTestingWebpayPlusNormal()
+).getNormalTransaction();
+
+```
+
 <aside class="notice">
 Como necesitarás ese objeto `transaction` en múltiples ocasiones, es buena idea
 encapsular la lógica que lo genera en algún método que puedas reutilizar.
@@ -162,6 +171,27 @@ var tokenWs = initResult.token;
 
 ```
 
+```javascript
+const Transbank = require('transbank-sdk');
+
+const amount = 1000;
+// Identificador que será retornado en el callback de resultado:
+const sessionId = 'mi-id-de-sesion';
+// Identificador único de orden de compra:
+const buyOrder = Math.round(Math.random()*999999999);
+const returnUrl = 'https://callback/resultado/de/transaccion';
+var finalUrl = 'https://callback/final/post/comprobante/webpay';
+
+transaction.initTransaction(amount, buyOrder, sessionId, returnUrl, finalUrl)
+  .then((response) => {
+    // response tendrá el token de respuesta de esta transacción
+    const token = response.token;
+  })
+  .catch((tbkError) => {
+    // Cualquier error será recibido a través del método catch de la promesa
+  });
+```
+
 La URL y el token retornados te indican donde debes redirigir al usuario para
 que comience el flujo de pago. Esta redirección debe ser vía `POST` por lo que
 deberás crear un formulario web con un campo `token_ws` hidden y enviarlo
@@ -256,6 +286,21 @@ if (output.responseCode == 0) {
 
 
 
+```
+
+```javascript
+const Transbank = require('transbank-sdk');
+
+transaction.getTransactionResult(token)
+  .then((response) => {
+    const output = response.detailOutput[0];
+    if (output.responseCode === 0) {
+      // La transacción se ha realizado correctamente
+    }
+  })
+  .catch((tbkError) => {
+    // Cualquier error durante la transacción será recibido acá
+  });
 ```
 
 > **Importante**: El SDK se encarga de que al mismo tiempo que se obtiene el
@@ -355,6 +400,14 @@ var transaction = new Webpay(Configuration.ForTestingWebpayPlusMall())
 
 
 
+```
+
+```javascript
+const Transbank = require('transbank-sdk');
+
+const transaction = new Transbank.Webpay(
+  Transbank.Configuration.forTestingWebpayPlusMall()
+).getMallNormalTransaction();
 ```
 
 <aside class="notice">
@@ -494,6 +547,43 @@ var formAction = initResult.url;
 
 ```
 
+```javascript
+const Transbank = require('transbank-sdk');
+// ...
+
+// Identificador único de orden de compra:
+const buyOrder = Math.round(Math.random()*999999999);
+// Identificador que será retornado en el callback de resultado:
+const sessionId = 'mi-id-de-sesion';
+const returnUrl = 'https://callback/resultado/de/transaccion';
+var finalUrl = 'https://callback/final/post/comprobante/webpay';
+
+// Lista con detalles de cada una de las transacciones:
+const transactions = [];
+
+// Detalles de transacción 1
+transactions.push({
+  storeCode: "597044444402",
+  amount: 1000,
+  buyOrder: Math.round(Math.random()*999999999),
+});
+// Detalles de transacción 2
+transactions.push({
+  storeCode: "597044444403",
+  amount: 2000,
+  buyOrder: Math.round(Math.random()*999999999),
+});
+//...
+
+transaction.initTransaction(buyOrder, sessionId, returnUrl, finalUrl, transactions)
+  .then((response) => {
+    // response tendrá el token de respuesta de esta transacción
+    const token = response.token;
+  });
+  .catch((tbkError) => {
+    // Cualquier error será recibido a través del método catch de la promesa
+  });
+```
 <aside class="notice">
 Observar que existe un `buyOrder` generado para el comercio mall y un `buyOrder` para cada una de las tiendas.
 </aside>
@@ -581,6 +671,25 @@ foreach (var output in result.detailOutput){
 
 ```
 
+```javascript
+const Transbank = require('transbank-sdk');
+
+transaction.getTransactionResult(token)
+  .then((response) => {
+    response.detailOutput.forEach((output) => {
+      // Se debe chequear cada transacción de cada tienda del
+      // mall por separado:
+      if (output.responseCode == 0) {
+        // Transaccion exitosa, puedes procesar el resultado
+        // con el contenido de las variables result y output.
+      }
+    });
+  })
+  .catch((tbkError) => {
+    // Cualquier error durante la transacción será recibido acá
+  });
+```
+
 > **Importante**: El SDK se encarga de que al mismo tiempo que se obtiene el resultado de la transacción se haga el _acknowledge_ a Transbank de manera que no haya posibilidad de que la transacción se revierta. Si luego necesitas que la transacción no se lleve a cabo (por ejemplo porque ya no tienes stock o porque se generó un error en tu lógica de negocio que entrega el producto o servicio), deberás [anular la transacción](/referencia/webpay#anulacion-webpay-plus).
 
 En el caso exitoso deberás llevar el control vía `POST` nuevamente a Webpay para que el tarjetahabiente vea el comprobante que le deja claro que se ha realizado el cargo en su tarjeta. Nuevamente deberás generar un formulario con el `token_ws` como un campo hidden. La URL para redirigir la debes obtener desde `result.getUrlRedirection()`.
@@ -657,6 +766,14 @@ var transaction =
 
 
 
+```
+
+```javascript
+const Transbank = require('transbank-sdk');
+
+const transaction = new Transbank.Webpay(
+  Transbank.Configuration.forTestingWebpayOneClickNormal()
+).getOneClickTransaction();
 ```
 
 <aside class="notice">
@@ -737,6 +854,26 @@ var tbkToken = initResult.token;
 
 
 ```
+```javascript
+const Transbank = require('transbank-sdk');
+//...
+
+// Identificador del usuario en el comercio
+const username = "pepito"
+// Correo electrónico del usuario
+const email = "pepito@gmail.com";
+const urlReturn = "https://callback/resultado/de/transaccion";
+transaction.initInscription(username, email, urlReturn)
+  .then((response) => {
+    // response tendrá el token de respuesta de esta transacción
+    const token = response.token;
+    // También la URL de webpay
+    const formAction = response.urlWebpay;
+  });
+  .catch((tbkError) => {
+    // Cualquier error durante la transacción será recibido acá
+  });
+```
 
 Tal como en el caso de Webpay Plus, debes redireccionar vía `POST` el
 navegador del usuario a la url retornada en `initInscription`. **A diferencia
@@ -808,6 +945,21 @@ if (result.responseCode == 0) {
 
 
 
+```
+
+```javascript
+const Transbank = require('transbank-sdk');
+//...
+transaction.finishInscription(token)
+  .then((response) => {
+    const output = response.detailOutput[0];
+    if (output.responseCode === 0) {
+      // La transacción se ha realizado correctamente
+    }
+  })
+  .catch((tbkError) => {
+    // Cualquier error durante la transacción será recibido acá
+  });
 ```
 
 Con eso habrás completado el flujo "feliz" en que todo funciona OK. En [la
@@ -888,6 +1040,26 @@ if (output.responseCode == 0) {
 
 
 
+```
+
+```javascript
+const Transbank = require('transbank-sdk');
+//...
+
+const buyOrder = Math.round(Math.random()*999999999);
+const tbkUser = tbkUserRetornadoPorFinishInscription;
+const username = "pepito"; // El mismo usado en initInscription.
+const amount = 50000;
+transaction.authorize(buyOrder, tbkUser, username, amount)
+  .then((response) => {
+    const output = response.detailOutput[0];
+    if (output.responseCode === 0) {
+      // La transacción se ha realizado correctamente
+    }
+  })
+  .catch((tbkError) => {
+    // Cualquier error durante la transacción será recibido acá
+  })
 ```
 
 ## Webpay OneClick Mall %<span class='tbk-tagTitleDesc'>REST</span>%
@@ -1910,6 +2082,17 @@ var oneClickTransaction = webpay.OneClickTransaction;
 
 ```
 
+```javascript
+const Transbank = require('transbank-sdk');
+
+const transaction = new Transbank.Webpay(
+  new Transbank.Configuration()
+  .withPrivateCert(/* pon tu certificado privado en forma de string */)
+  .withPublicCert(/* pon tu certificado público en forma de string */)
+  .withCommerceCode(/* pon tu código de comercio */)
+);
+```
+
 <aside class="warning">
 A diferencia de otros SDK, en .NET debes especificar la ruta a un archivo pfx o p12
 el cual debes generar tu a partir de tu llave privada y certificado público.
@@ -1974,6 +2157,18 @@ Configuration configuration = new Configuration()
 
 
 
+```
+
+```javascript
+const Transbank = require('transbank-sdk');
+
+const transaction = new Transbank.Webpay(
+  new Transbank.Configuration()
+  .withPrivateCert(/* pon tu certificado privado en forma de string */)
+  .withPublicCert(/* pon tu certificado público en forma de string */)
+  .withCommerceCode(/* pon tu código de comercio */)
+  .setEnvironment(Transbank.environments.production) // Se fija el ambiente como producción
+);
 ```
 
 <aside class="warning">
