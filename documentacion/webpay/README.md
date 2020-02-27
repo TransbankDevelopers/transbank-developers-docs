@@ -675,7 +675,8 @@ transaction.getTransactionResult(token)
     response.detailOutput.forEach((output) => {
       // Se debe verificar cada transacción de cada tienda del mall por separado:
       if (output.responseCode == 0) {
-        // Transaccion exitosa, puedes procesar el resultado con el contenido de las variables result y output.
+        // Transaccion exitosa, puedes procesar el resultado con el contenido de 
+        // las variables result y output.
       }
     });
   })
