@@ -1186,7 +1186,7 @@ url_webpay = resp.url_webpay
 tbk_token = resp.token
 
 
-```s
+```
 
 Tal como en el caso de Webpay Oneclick Normal, debes redireccionar vía `POST` el navegador del usuario a la url retornada en `url_webpay`. **Recordando que el nombre del parámetro que contiene el token se debe llamar `TBK_TOKEN`**.
 
