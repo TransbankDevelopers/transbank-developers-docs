@@ -1099,6 +1099,10 @@ from transbank.oneclick.request import MallTransactionAuthorizeDetails
 // ...
 
 ```
+```javascript
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+```
+
 
 Una vez que ya cuentas con esa preparación, puedes iniciar transacciones:
 
@@ -1187,6 +1191,9 @@ tbk_token = resp.token
 
 
 ```
+```javascript
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+```
 
 Tal como en el caso de Webpay Oneclick Normal, debes redireccionar vía `POST` el navegador del usuario a la url retornada en `url_webpay`. **Recordando que el nombre del parámetro que contiene el token se debe llamar `TBK_TOKEN`**.
 
@@ -1250,6 +1257,9 @@ resp = MallInscription.finish(token=tbk_token)
 
 tbkUser = resp.tbk_user
 
+```
+```javascript
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
 ```
 
 Con eso habrás completado el flujo "feliz" en que todo funciona OK. En [la referencia detallada de Webpay OneClick Mall puedes ver cada paso del flujo, incluyendo los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-oneclick-mall).
@@ -1316,6 +1326,9 @@ username = "nombre_de_usuario"
 
 resp = MallInscription.delete(tbk_user=tbkUser, user_name=username)
 
+```
+```javascript
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
 ```
 
 Si se quiere comprobar si se eliminó correctamente, la función retorna un boolean, el cual será `true` en caso de éxito y `false` en otro caso.
@@ -1459,6 +1472,9 @@ details = MallTransactionAuthorizeDetails(commerce_code1, buy_order_child1, inst
 resp = MallTransaction.authorize(user_name=username, tbk_user=tbkUser, buy_order=buy_order, details=details)
 
 ```
+```javascript
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+```
 
 ### Anular una transacción
 
@@ -1532,6 +1548,9 @@ amount = 10000
 resp = MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, amount)
 
 ```
+```javascript
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+```
 
 ## Webpay Transacción Completa {data-submenuhidden=true} %<span class='tbk-tagTitleDesc'>REST</span>%
 
@@ -1579,6 +1598,9 @@ TransaccionCompleta.IntegrationType = "TEST/LIVE"; //ambiente de integracion;
 ```python
 
 
+```
+```javascript
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
 ```
 Es recomendado encapsular la asignacion para utilizarla sin problemas en los demas metodos.
 
@@ -1670,6 +1692,9 @@ from transbank.transaccion_completa.transaction import Transaction
     )
 
 ```
+```javascript
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+```
 
 ### Consulta de Cuotas
 
@@ -1731,6 +1756,9 @@ from transbank.transaccion_completa.transaction import Transaction
     installments_number = 10 #numero de cuotas
     resp = Transaction.installments(token=token, installments_number=installments_number)
 
+```
+```javascript
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
 ```
 
 ### Confirmar Transaccion
@@ -1817,6 +1845,9 @@ response = Transbank::TransaccionCompleta::Transaction::commit( token: token,
                               grace_period=grace_period)
 
 ```
+```javascript
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+```
 
 
 ### Estado Transaccion
@@ -1868,6 +1899,9 @@ from transbank.transaccion_completa.transaction import Transaction
 
     response = Transaction.status(token=token) #token obtenido como respuesta de la creacion de transaccion
 
+```
+```javascript
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
 ```
 
 ### Reembolso Transaccion
@@ -1925,6 +1959,9 @@ from transbank.transaccion_completa.transaction import Transaction
     amount = '1000' #monto a reembolsar
     response = Transaction.refund(token=token, amount=amount)
 
+```
+```javascript
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
 ```
 
 
@@ -2274,11 +2311,13 @@ cuando tus usuarios no quieren continuar con el servicio.
 
 ## Ejemplos de integración
 
-Ponemos a tu disposición una serie de repositorios en nuestro Github para ayudarte a entender la integración mejor.
+Ponemos a tu disposición una serie de repositorios en nuestro Github para ayudarte a entender la integración de mejor forma.
+
 
 - [Ejemplo de Webpay en PHP](https://github.com/TransbankDevelopers/transbank-sdk-php-webpay-example)
 - [Ejemplo de Webpay en .Net](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-example)
 - [Ejemplo de Webpay en Java](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-example)
+- [Ejemplo de Webpay en Node.js](https://github.com/TransbankDevelopers/transbank-sdk-nodejs-webpay-example)
 
 En el caso de integrar webpay en una aplicación móvil Android, usando webview, debes tener presente la siguiente configuración:
 
