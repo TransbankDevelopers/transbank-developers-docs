@@ -35,7 +35,6 @@ puerto serial o adaptador USB Serial.
 La comunicación con el POS Integrado se realiza mediante puerto serial RS232 y tú eres el responsable de instalar el driver correcto para tu tarjeta o adaptador serial.
 </aside>
 
-
 <aside class="success">
 Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilicen el [chip CH340](http://www.wch.cn/download/CH341SER_EXE.html). También puedes encontrar drivers para adaptadores con [chip Prolific](http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041)
 </aside>
