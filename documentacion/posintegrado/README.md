@@ -202,7 +202,7 @@ SaleResponse response = POS.Instance.Sale(ammount, ticket);
 char* response = sale(ammount, ticket, false);
 ```
 
-```Java
+```java
 import cl.transbank.pos.POS;
 //...
 SaleResponse saleResponse = POS.getInstance().sale(amount, ticket);
