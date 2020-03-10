@@ -141,7 +141,7 @@ if ( retval == TBK_OK ){
 }
 ```
 
-```Java
+```java
 import cl.transbank.pos.POS;
 
 POS pos = POS.getInstance();
