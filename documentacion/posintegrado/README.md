@@ -171,7 +171,7 @@ if(retval == SP_OK){
 }
 ```
 
-```Java
+```java
 import cl.transbank.pos.POS;
 //...
 pos.closePort();
