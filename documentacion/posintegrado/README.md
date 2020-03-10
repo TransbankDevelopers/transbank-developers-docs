@@ -380,8 +380,6 @@ import cl.transbank.pos.POS;
 CloseResponse cr = POS.getInstance().close();
 ```
 
-
-
 El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse` o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException`.
 
 ```json
