@@ -12,7 +12,7 @@ También puede probar las DLLs que se adjuntan en el [último release](https://g
 
 Esta librería y sus dependencias son requisitos para utilizar el SDK.
 
-Por el momento, el SDK está disponible para [.NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet) y Java. Para .NET lo puedes encontrar en [NuGet.org](https://www.nuget.org/packages/TransbankPosSDK/) para instalarlo puedes utilizar por ejemplo el package manager de VisualStudio.
+Por el momento, el SDK está disponible para [.NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet) y [Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java). Para .NET lo puedes encontrar en [NuGet.org](https://www.nuget.org/packages/TransbankPosSDK/) para instalarlo puedes utilizar por ejemplo el package manager de VisualStudio.
 
 ```bash
 PM> Install-Package TransbankPosSDK
