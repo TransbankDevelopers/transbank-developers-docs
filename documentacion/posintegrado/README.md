@@ -82,7 +82,7 @@ using Transbank.POS.Responses:
 #include "transbank_serial_utils.h"
 ```
 
-```Java
+```java
 import cl.transbank.pos.POS;
 import cl.transbank.pos.exceptions.*;
 import cl.transbank.pos.responses.*;
