@@ -209,8 +209,6 @@ import cl.transbank.pos.POS;
 SaleResponse saleResponse = POS.getInstance().sale(amount, ticket);
 ```
 
-
-
 El resultado de la venta se entrega en la forma de un objeto `SaleResponse` o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException` en .NET. En Java puede lanzar `TransbankPortNotConfiguredException`.
 
 El objeto SaleResponse retornará un objeto con los siguientes datos.
