@@ -217,7 +217,7 @@ El objeto SaleResponse retornará un objeto con los siguientes datos.
 "Response": "Aprobado"
 "Commerce Code": 550062700310
 "Terminal Id": "ABC1234C"
-"Ticket": "000123"
+"Ticket": "ABC123"
 "Autorization Code": "XZ123456"
 "Ammount": 15000
 "Shares Number": 3
