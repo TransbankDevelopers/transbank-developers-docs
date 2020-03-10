@@ -18,7 +18,7 @@ Por el momento, el SDK está disponible para [.NET](https://github.com/Transbank
 PM> Install-Package TransbankPosSDK
 ```
 
-Para Java se puede incluir el paquete por Maven.
+Para Java se puede incluir el paquete por [Maven.](https://search.maven.org/artifact/com.github.transbankdevelopers/transbank-pos-sdk-java/)
 
 ```pom.xml
 		<dependency>
