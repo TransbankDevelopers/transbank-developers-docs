@@ -261,7 +261,7 @@ char *lastSaleResponse = last_sale();
 }
 ```
 
-```Java
+```java
 import cl.transbank.pos.POS;
 //...
 SaleResponse saleResponse = POS.getInstance().getLastSale();
@@ -274,7 +274,7 @@ El resultado de la transacción última venta devuelve los mismos datos que una 
 "Response": "Aprobado"
 "Commerce Code": 550062700310
 "Terminal Id": "ABC1234C"
-"Ticket": "00086"
+"Ticket": "ABC086"
 "Autorization Code": "XZ123456"
 "Ammount": 15000
 "Shares Number": 3
@@ -320,7 +320,7 @@ RefundResp response = POS.Instance.Refund(21);
 RefundResponse response = refund(21);
 ```
 
-```Java
+```java
 import cl.transbank.pos.POS;
 //...
 RefundResponse response = POS.getInstance().refund(21);
@@ -368,7 +368,7 @@ BaseResponse response = register_close();
 }
 ```
 
-```Jav
+```java
 import cl.transbank.pos.POS;
 //...
 CloseResponse cr = POS.getInstance().close();
@@ -412,7 +412,7 @@ TotalsCResponse response = get_totals();
 }
 ```
 
-```Java
+```java
 import cl.transbank.pos.POS;
 //...
 TotalsResponse response = POS.getInstance().getTotals();
@@ -454,13 +454,11 @@ char *response = sales_detail(print_on_pos);
 }
 ```
 
-```Java
+```java
 import cl.transbank.pos.POS;
 //...
 List<DetailResponse> ldr = POS.getInstance().details(false);
 ```
-
-
 
 El resultado de la transacción entrega una lista de objetos  `DetailResponse` o un `char *` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSalesDetailException`.
 
@@ -534,7 +532,7 @@ BaseResponse response = load_keys();
 }
 ```
 
-```Jav
+```java
 import cl.transbank.pos.POS;
 //...
 KeysResponse kr = POS.getInstance().loadKeys();
@@ -578,13 +576,11 @@ if (retval == TBK_OK){
 }
 ```
 
-```Java
+```java
 import cl.transbank.pos.POS;
 //...
 boolean pollResult = POS.getInstance().poll();
 ```
-
-
 
 ### Transacción de Cambio a POS Normal
 
@@ -608,18 +604,15 @@ if (retval == TBK_OK){
 }
 ```
 
-```Java
+```java
 import cl.transbank.pos.POS;
 //...
 boolean normal = POS.getInstance().setNormalMode();
 ```
 
-
-
 <aside class="notice">
 Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en el POS para regresar al modo Integrado, siguiendo las instrucciones disponibles descritas en [Cambio a POS Integrado](referencia/posintegrado#cambio-modalidad-pos-integrado), pues no es posible realizar esta configuración a través del SDK.
 </aside>
-
 
 ## Integración de Onepay para pagos con QR
 
