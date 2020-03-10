@@ -329,8 +329,6 @@ import cl.transbank.pos.POS;
 RefundResponse response = POS.getInstance().refund(21);
 ```
 
-
-
 Como respuesta el **POS** enviará un código de aprobación, acompañado de un código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas. [Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas)
 
 ```json
