@@ -352,7 +352,6 @@ Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la
 Esta transacción también realiza el cambio de llaves.
 </aside>
 
-
 <aside class="warning">
 La transacción de cierre borra todas las transacciones almacenadas en la memoria del POS.
 </aside>
