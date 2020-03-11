@@ -20,7 +20,7 @@ PM> Install-Package TransbankPosSDK
 
 Para Java se puede incluir el paquete por [Maven.](https://search.maven.org/artifact/com.github.transbankdevelopers/transbank-pos-sdk-java/)
 
-```pom.xml
+```xml
 		<dependency>
 			<groupId>com.github.transbankdevelopers</groupId>
 			<artifactId>transbank-sdk-pos-java</artifactId>
