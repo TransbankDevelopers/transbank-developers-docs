@@ -136,8 +136,10 @@ Webpay Plus Mall | `Próximamente...` | `Próximamente...`
 Webpay Oneclick | `Próximamente...` | `Próximamente...`
 Webpay Oneclick Mall | `597055555541` Mall <br> `597055555542` Tienda 1 <br> `597055555543` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
 Webpay Transacción Completa | `597055555530` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Webpay Transacción Completa Diferida | `Próximamente...` | `Próximamente...`
-
+Webpay Transacción Completa sin CVV | `597055555557` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+Webpay Transacción Completa Diferida | `597055555531` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+Webpay Transacción Completa Diferida sin CVV | `597055555556` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+Webpay Transacción Completa Mall | `597055555551` Mall <br> `597055555552` Tienda 1 <br> `597055555553` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
 > Los SDKs ya incluyen esos códigos de comercio y llaves secretas
 > que funcionan en el ambiente de integración, por lo que puedes obtener
 > rápidamente una configuración lista para hacer tus primeras pruebas en dicho
@@ -1229,148 +1231,6 @@ Código | Descripción
 315 | Error del autorizador
 53 | La transacción no permite anulación parcial de transacciones con cuotas
 
-## Webpay Plus Captura Diferida
-
-### Ejecutar captura diferida Webpay Plus
-
-Este método permite a todo comercio habilitado realizar capturas de una
-transacción autorizada sin captura generada en Webpay Plus.
-El método contempla una única captura por cada autorización. Para ello se
-deberá indicar los datos asociados a la transacción de venta con autorización
-sin captura y el monto requerido para capturar el cual debe ser menor o igual al
-monto originalmente autorizado.
-
-Para capturar una transacción, ésta debe haber sido creada (según lo visto
-anteriormente para Webpay Plus o Webpay Plus Mall) por un código de
-comercio configurado para captura diferida. De esa forma la transacción estará
-autorizada pero requerirá una captura explícita posterior para confirmar la
-transacción.
-
-Puedes [leer más sobre la captura en la información del
-producto Webpay](/producto/webpay#autorizacion-y-captura)
-para conocer más detalles y restricciones.
-
-Para realizar esa captura explícita debe usarse el método `Transaction.capture()`
-
-#### `Transaction.capture()`
-
-Permite solicitar a Webpay la captura diferida de una transacción con
-autorización y sin captura simultánea.
-
-> Los SDKs permiten indicar opcionalmente el código de comercio de la
-> transacción a capturar, para soportar la captura en comercios Webpay Plus
-> Mall. En comercios Webpay Plus, no es necesario especificar el código
-> de comercio pues se usa el indicado en la configuración.
-
-<aside class="notice">
-El método `Transaction.capture()` debe ser invocado siempre indicando el código del
-comercio que realizó la transacción. En el caso de comercios Webpay Plus Mall,
-el código debe ser el código de la tienda virtual específica.
-</aside>
-
-```java
-// Este SDK aún no se encuentra disponible
-```
-
-```php
-// Este SDK aún no se encuentra disponible
-```
-
-```csharp
-// Este SDK aún no se encuentra disponible
-```
-
-```ruby
-# Este SDK aún no se encuentra disponible
-```
-
-```python
-# Este SDK aún no se encuentra disponible
-```
-
-```http
-PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
-Content-Type: application/json
-
-{
-  "commerce_code": "Próximamente...",
-  "buy_order": "415034240",
-  "authorization_code": "12345",
-  "capture_amount": 1000
-}
-```
-**Parámetros**
-
-Nombre  <br> <i> tipo </i> | Descripción
-------   | -----------
-token  <br> <i> String </i> | Token de la transacción. Largo: 64.
-commerce_code  <br> <i> Number </i> | (Opcional, solo usar en caso Mall) Tienda hija que realizó la transacción. Largo: 6.
-buy_order  <br> <i> String </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
-authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
-capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo máximo: 17.
-
-**Respuesta**
-
-```java
-// Este SDK aún no se encuentra disponible
-```
-
-```php
-// Este SDK aún no se encuentra disponible
-```
-
-```csharp
-// Este SDK aún no se encuentra disponible
-```
-
-```ruby
-# Este SDK aún no se encuentra disponible
-```
-
-```python
-# Este SDK aún no se encuentra disponible
-```
-
-```http
-200 OK
-Content-Type: application/json
-{
-  "token": "e074d38c628122c63e5c0986368ece22974d6fee1440617d85873b7b4efa48a3",
-  "authorization_code": "123456",
-  "authorization_date": "2019-03-20T20:18:20Z",
-  "captured_amount": 1000,
-  "response_code": 0
-}
-```
-
-Nombre  <br> <i> tipo </i> | Descripción
-------   | -----------
-token  <br> <i> String </i> | Token de la transacción. Largo máximo: 64
-authorization_code  <br> <i> String </i> | Código de autorización de la captura diferida. Largo máximo: 6
-authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
-captured_amount  <br> <i> Decimal </i> | Monto capturado. Largo máximo: 6
-response_code  <br> <i> Number </i> | Código de resultado de la captura. Si es exitoso es 0,de lo contrario la captura no fue realizada. Largo máximo: 2
-
-En caso de error pueden aparecer los siguientes códigos exclusivos del método
-`Transaction.capture()`:
-
-Código | Descripción
------- | -----------
-304 | Validación de campos de entrada nulos
-245 | Código de comercio no existe
-22 | El comercio no se encuentra activo
-316 | El comercio indicado no corresponde al certificado o no es hijo del comercio MALL en caso de transacciones MALL
-308 | Operación no permitida
-274 | Transacción no encontrada
-16 | La transacción no es de captura diferida
-292 | La transacción no está autorizada
-284 | Periodo de captura excedido
-310 | Transacción reversada previamente
-309 | Transacción capturada previamente
-311 | Monto a capturar excede el monto autorizado
-315 | Error del autorizador
 
 ## Webpay OneClick Normal
 
@@ -3149,7 +3009,7 @@ balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago
 
 Una transacción completa permite al comercio presentar al tarjetahabiente un
 formulario propio para almacenar los datos de la tarjeta, fecha de vencimiento
-y cvv.
+y cvv (no necesario para comercios con la opción `sin cvv` habilitada) . 
 
 
 ### Crear una Transacción Completa
@@ -3240,7 +3100,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 buy_order  <br> <i> String </i> | Orden de compra de la tienda. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code> Largo máximo: 26
 session_id  <br> <i> String </i> | (Opcional) Identificador de sesión, uso interno de comercio, este valor es devuelto al final de la transacción. Largo máximo: 61
 amount  <br> <i> Decimal </i> | Monto de la transacción. Máximo 2 decimales para USD. Largo máximo: 17
-cvv  <br> <i> String </i> | URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización. Largo máximo: 4
+cvv  <br> <i> String </i> | URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización. Largo máximo: 4. No se debe enviar para comercios con la opción `sin cvv` habilitada. 
 card_number  <br> <i> String </i> | Número de la tarjeta con la que se debe hacer la transacción. Largo máximo: 16
 card_expiration_date  <br> <i> String </i> | Fecha de expiración de la tarjeta con la que se realiza la transacción. Largo máximo: 5
 
@@ -3307,6 +3167,19 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 
+
+#### Modalidad `sin cvv`
+Para comercios que tengan la opción `sin cvv` habilitada, el campo `cvv` **no** debe ser enviado. 
+```json
+{
+  "buy_order": "ordenCompra12345678",
+  "session_id": "sesion1234564",
+  "amount": 10000,
+  "card_number": "4239000000000000",
+  "card_expiration_date": "22/10"
+}
+```
+
 ### Consulta de cuotas
 
 Para consultar el valor de las cuotas que pagará el tarjeta habiente en una
@@ -3325,10 +3198,7 @@ invocación de la confirmación.
 ```php
 use Transbank\TransaccionCompleta\Transaction;
 
-Transaction::installments(
-            $token_ws,
-            $installments_number
-        );
+$installments = Transaction::installments($token_ws, $installments_number);
 ```
 
 ```csharp
@@ -3366,7 +3236,6 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> String </i> | Número de orden de compra. Largo máximo: 64
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 
 **Respuesta**
@@ -3438,6 +3307,15 @@ Content-Type: application/json
   ]
 }
 ```
+Si el comercio no tiene configurado periodos diferidos, la respuesta de `deferred_periods` será `[]`:   
+```json
+{
+  "installments_amount": 20,
+  "id_query_installments": 2190124,
+  "deferred_periods": []
+}
+```
+
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -4187,7 +4065,6 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> String </i> | Número de orden de compra. Largo máximo: 64
 commerce_code  <br> <i> String </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12
 buy_order  <br> <i> String </i> | Orden de compra de la tienda del mall. Largo máximo: 26 
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
@@ -4573,3 +4450,184 @@ authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
 nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17
 response_code <br> <i> Number </i> | Código del resultado del pago. Si es exitoso es 0, de lo contrario el pago no fue realizado. Largo máximo: 2
+
+## Captura Diferida
+
+Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo el cargo al tarjetahabiente. 
+
+**Válido para :** 
+- Webpay Plus Captura Diferida
+- Webpay Transacción Completa Captura Diferida
+
+### Ejecutar captura diferida
+
+Este método permite a todo comercio habilitado realizar capturas de una
+transacción autorizada sin captura generada en Webpay Plus o Webpay Transacción Completa.
+El método contempla una única captura por cada autorización. Para ello se
+deberá indicar los datos asociados a la transacción de venta con autorización
+sin captura y el monto requerido para capturar el cual debe ser menor o igual al
+monto originalmente autorizado.
+
+Para capturar una transacción, ésta debe haber sido creada (según lo visto
+anteriormente para Webpay Plus o Webpay Plus Mall) por un código de
+comercio configurado para captura diferida. De esa forma la transacción estará
+autorizada pero requerirá una captura explícita posterior para confirmar la
+transacción.
+
+Puedes [leer más sobre la captura en la información del
+producto Webpay](/producto/webpay#autorizacion-y-captura)
+para conocer más detalles y restricciones.
+
+Para realizar esa captura explícita debe usarse el método `Transaction.capture()`
+
+#### `Transaction.capture()`
+
+Permite solicitar a Webpay la captura diferida de una transacción con
+autorización y sin captura simultánea.
+
+> Los SDKs permiten indicar opcionalmente el código de comercio de la
+> transacción a capturar, para soportar la captura en comercios Webpay Plus
+> Mall o Transacción Completa Mall. En comercios sin modalidad Mall no es necesario especificar el código
+> de comercio, ya que se usa el indicado en la configuración.
+
+<aside class="notice">
+El método `Transaction.capture()` debe ser invocado siempre indicando el código del
+comercio que realizó la transacción. En el caso de comercios modalidad Mall,
+el código debe ser el código de la tienda virtual específica.
+</aside>
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
+Tbk-Api-Key-Id: 597055555531 
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "commerce_code": "597055555531", 
+  "buy_order": "415034240",
+  "authorization_code": "12345",
+  "capture_amount": 1000
+}
+```
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+commerce_code  <br> <i> Number </i> | (Opcional, solo usar en caso Mall) Tienda hija que realizó la transacción. Largo: 6.
+buy_order  <br> <i> String </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
+authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
+capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo máximo: 17.
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+{
+  "token": "e074d38c628122c63e5c0986368ece22974d6fee1440617d85873b7b4efa48a3",
+  "authorization_code": "123456",
+  "authorization_date": "2019-03-20T20:18:20Z",
+  "captured_amount": 1000,
+  "response_code": 0
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> String </i> | Token de la transacción. Largo máximo: 64
+authorization_code  <br> <i> String </i> | Código de autorización de la captura diferida. Largo máximo: 6
+authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
+captured_amount  <br> <i> Decimal </i> | Monto capturado. Largo máximo: 6
+response_code  <br> <i> Number </i> | Código de resultado de la captura. Si es exitoso es 0,de lo contrario la captura no fue realizada. Largo máximo: 2
+
+En caso de error pueden aparecer los siguientes códigos exclusivos del método
+`Transaction.capture()`:
+
+Código | Descripción
+------ | -----------
+304 | Validación de campos de entrada nulos
+245 | Código de comercio no existe
+22 | El comercio no se encuentra activo
+316 | El comercio indicado no corresponde al certificado o no es hijo del comercio Mall en caso de transacciones MALL
+308 | Operación no permitida
+274 | Transacción no encontrada
+16 | La transacción no es de captura diferida
+292 | La transacción no está autorizada
+284 | Periodo de captura excedido
+310 | Transacción reversada previamente
+309 | Transacción capturada previamente
+311 | Monto a capturar excede el monto autorizado
+315 | Error del autorizador
+
+
+## Códigos y mensajes de error
+
+Al realizar cualquier solicitud al API REST, además de los datos de respuesta, se incluirá uno de los siguientes códigos de estado de respuesta HTTP dependiendo del resultado obtenido:  
+
+### Solicitud exitosa 
+Cuando la operación solcitada es ejecutada correctamente, se pueden recibir estos status HTTP:
+
+Código de estado HTTP | Descripción
+------ | -----------
+200 | La operación se ha ejecutado exitosamente
+204 | La operación DELETE se ha ejecutado exitosamente
+
+#### Códigos de error
+Todos los errores reportados por la API REST de Webpay despliegan un mensaje JSON con una descripción del error.
+
+```json
+{
+  "error_message": "token is required"
+}
+```
+
+Código de estado HTTP | Descripción
+------ | -----------
+400 | El mensaje JSON es inválido. Puedes ser que no corresponda a un mensaje bien estructurado o que contenga un campo no esperado. 
+401 | No autorizado. API Key y/o API Secret inválidos 
+404 | La transacción no ha sido encontrada.
+405 | Método no permitido. 
+406 | No fue posible procesar la respuesta en el formato que el cliente indica. 
+415 | Tipo de mensaje no permitido. 
+422 | El requerimiento no ha podido ser procesado ya sea por validaciones de datos o por lógica de negocios. 
+500 | Ha ocurrido un error inesperado. 
