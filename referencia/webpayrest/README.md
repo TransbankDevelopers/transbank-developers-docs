@@ -478,7 +478,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 vci  <br> <i> String </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure), ACS2 (Autenticación fallida extranjera). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)
 amount  <br> <i> Decimal </i> | Formato número entero para transacciones en peso y decimal para transacciones en dólares. Largo máximo: 17
-status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 64
+status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 buy_order  <br> <i> String </i> | Orden de compra de la tienda indicado en `Transaction.create()`. Largo máximo: 26
 session_id  <br> <i> String </i> | Identificador de sesión, el mismo enviado originalmente por el comercio en `Transaction.create()`. Largo máximo: 61.
 card_detail  <br> <i> carddetails </i> | Objeto que representa los datos de la tarjeta de crédito del tarjeta habiente.
@@ -582,7 +582,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 vci  <br> <i> String </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure), ACS2 (Autenticación fallida extranjera). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)
 amount  <br> <i> Formato número entero para transacciones en peso y decimal para transacciones en dólares. </i> | Monto de la transacción. Largo máximo: 17
-status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 64
+status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 buy_order  <br> <i> String </i> | Orden de compra de la tienda indicado en `Transaction.create()`. Largo máximo: 26
 session_id  <br> <i> String </i> | Identificador de sesión, el mismo enviado originalmente por el comercio en `Transaction.create()`. Largo máximo: 61.
 card_detail  <br> <i> carddetails </i> | Objeto que representa los datos de la tarjeta de crédito del tarjeta habiente.
@@ -979,7 +979,7 @@ details [].installments_amount  <br> <i> Number </i> | Monto de cada cuota. Larg
 details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 details [].commerce_code  <br> <i> String </i> | Código comercio de la tienda. Largo: 12
 details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda. Largo máximo: 26
-details [].status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 26
+details [].status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 26
 balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
 ### Obtener estado de una transacción Webpay Plus Mall
@@ -1089,7 +1089,7 @@ details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo
 details [].installments_amount  <br> <i> Number </i> | Monto de cada cuota. Largo máximo: 17
 details [].commerce_code  <br> <i> String </i> | Código comercio de la tienda. Largo: 12
 details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda. Largo máximo: 26
-details [].status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 26
+details [].status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 26
 balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
 ### Reversar o Anular un pago Webpay Plus Mall
@@ -1821,7 +1821,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 vci  <br> <i> String </i> | Código de respuesta de la autenticación bancaria
 amount  <br> <i> Number </i> | Monto de la transacción. Sólo en caso de dolar acepta dos decimales.
-status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED).
+status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED).
 buy_order  <br> <i> String </i> | Número de orden de compra.
 session_id  <br> <i> String </i> | ID de sesión de la compra.
 card_detail  <br> <i> cardDetail </i> | Objeto que contiene información de la tarjeta utilizado por el tarjetahabiente.
@@ -1925,7 +1925,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 vci  <br> <i> String </i> | Código de respuesta de la autenticación bancaria
 amount  <br> <i> Number </i> | Monto de la transacción. Sólo en caso de dolar acepta dos decimales.
-status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED).
+status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED).
 buy_order  <br> <i> String </i> | Número de orden de compra.
 session_id  <br> <i> String </i> | ID de sesión de la compra.
 card_detail  <br> <i> cardDetail </i> | Objeto que contiene información de la tarjeta utilizado por el tarjetahabiente.
@@ -2708,7 +2708,7 @@ accounting_date  <br> <i> String </i> | Fecha contable de la autorización del 
 transaction_date  <br> <i> DateTime </i> | Fecha completa (timestamp) de la autorización del pago.
 details  <br> <i> Array </i> | Lista con el resultado de cada transacción de las tiendas hijas.
 details [].amount  <br> <i> Decimal </i> | Monto de la sub-transacción de pago.
-details [].status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED).
+details [].status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED).
 details [].authorization_code  <br> <i> String </i> | Código de autorización de la sub-transacción de pago.
 details [].payment_type_code  <br> <i> String </i> | [Tipo](/producto/webpay#tipos-de-pago) (VC, NC, SI, etc.) de la sub-transacción de pago.
 details [].response_code  <br> <i> Number </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
@@ -2935,14 +2935,14 @@ accounting_date  <br> <i> String </i> | Fecha contable de la autorización del 
 transaction_date  <br> <i> DateTime </i> | Fecha completa (timestamp) de la autorización del pago.
 details  <br> <i> Array </i> | Lista con el resultado de cada transacción de las tiendas hijas.
 details [].amount  <br> <i> Decimal </i> | Monto de la sub-transacción de pago.
-details [].status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED).
+details [].status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED).
 details [].authorization_code  <br> <i> String </i> | Código de autorización de la sub-transacción de pago.
 details [].payment_type_code  <br> <i> String </i> | [Tipo](/producto/webpay#tipos-de-pago) (VC, NC, SI, etc.) de la sub-transacción de pago.
 details [].response_code  <br> <i> Number </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
 details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas de la sub-transacción de pago.
 details [].commerce_code  <br> <i> Number </i> | Código de comercio del comercio hijo (tienda).
 details [].buy_order  <br> <i> String </i> | Orden de compra generada por el comercio hijo para la sub-transacción de pago.
-status  <br> <i> Text </i> | Estado de la transacción (AUTHORIZED,FAILED). Largo máximo: 64
+status  <br> <i> Text </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
 
 
@@ -3632,7 +3632,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 vci  <br> <i> String </i> | Código de respuesta de la autenticación bancaria. Largo máximo: 64
 amount  <br> <i> Number </i> | Monto de la transacción. Sólo en caso de dolar acepta dos decimales. Largo máximo: 17
-status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 64
+status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 buy_order  <br> <i> String </i> | Número de orden de compra. Largo máximo: 26
 session_id  <br> <i> String </i> | ID de sesión de la compra. Largo máximo: 61
 card_detail  <br> <i> cardDetail </i> | Objeto que contiene información de la tarjeta utilizado por el tarjetahabiente.
@@ -3806,7 +3806,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 vci  <br> <i> String </i> | Código de respuesta de la autenticación bancaria. Largo máximo: 64
 amount  <br> <i> Number </i> | Monto de la transacción. Sólo en caso de dolar acepta dos decimales. Largo máximo: 17
-status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 64
+status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 buy_order  <br> <i> String </i> | Número de orden de compra. Largo máximo: 26
 session_id  <br> <i> String </i> | ID de sesión de la compra. Largo máximo: 61
 card_detail  <br> <i> cardDetail </i> | Objeto que contiene información de la tarjeta utilizado por el tarjetahabiente.
@@ -4356,7 +4356,7 @@ accouting_date  <br> <i> String </i> | Fecha de la autorización. Largo: 4, for
 transaction_date  <br> <i> String </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
 details  <br> <i> Array </i> | Lista con resultado de cada una de las transacciones enviadas.
 details [].amount  <br> <i> Number </i> | Monto de la transacción. Largo máximo: 17
-details [].status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 64
+details [].status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 details [].authorization_code  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
 details [].payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
 details [].responseCode  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado.
@@ -4364,7 +4364,7 @@ details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo
 details [].installments_amount  <br> <i> Number </i> | Monto de cada cuota. Largo máximo: 17
 details [].commerce_code  <br> <i> String </i> | Código comercio de la tienda. Largo: 6
 details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda. Largo máximo: 255
-status <br> <i> Text </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 17
+status <br> <i> Text </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 17
 balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 64
 
 ### Consultar estado de una transacción mall completa
@@ -4466,7 +4466,7 @@ accouting_date  <br> <i> String </i> | Fecha de la autorización. Largo: 4, for
 transaction_date  <br> <i> String </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
 details  <br> <i> Array </i> | Lista con resultado de cada una de las transacciones enviadas.
 details [].amount  <br> <i> Number </i> | Monto de la transacción. Largo máximo: 17
-details [].status  <br> <i> String </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 64
+details [].status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 details [].authorization_code  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
 details [].payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
 details [].responseCode  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado.
@@ -4474,7 +4474,7 @@ details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo
 details [].installments_amount  <br> <i> Number </i> | Monto de cada cuota. Largo máximo: 17
 details [].commerce_code  <br> <i> String </i> | Código comercio de la tienda. Largo: 6
 details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda. Largo máximo: 255
-status <br> <i> Text </i> | Estado de la transacción (AUTHORIZED, FAILED). Largo máximo: 17
+status <br> <i> Text </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 17
 balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 64
 
 ### Anulación Webpay Transacción Completa
