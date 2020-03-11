@@ -1,7 +1,7 @@
 # POS Integrado
 
 <aside class="success">
-El SDK y la Librería en C, se encargan de este protocolo de comunicación con el POS y de manejar el puerto serial configurado.
+El SDK de .NET o Java, y la Librería en C, se encargan del protocolo de comunicación con el POS y de manejar el puerto serial configurado.
 </aside>
 
 <aside class="notice">
@@ -81,8 +81,8 @@ import cl.transbank.pos.responses.*;
 ### Listar puertos disponibles
 
 Si los respectivos drivers están instalados, entonces puedes usar la función `ListPorts()` del paquete
-`Transbank.POS.Utils`para identificar los puertos que se encuentren disponibles y seleccionar el que
-corresponda con el puerto donde conectaste el POS Integrado.
+`Transbank.POS.Utils` en .NET, y el metodo `listPorts()` de la clase POS en Java, para identificar los puertos que se encuentren disponibles y seleccionar el que
+corresponda con el puerto donde conectaste el POS Integrado. 
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -107,9 +107,9 @@ List<String> ports = pos.listPorts();
 
 ### Abrir un puerto Serial
 
-Para abrir un puerto serial y comunicarte con el POS Integrado, necesitarás el nombre del puerto (El cual puedes identificar usando [la función mencionada en el apartado anterior](referencia/posintegrado#listar-puertos-disponibles)). También necesitarás el baudrate al cual esta configurado el puerto serial del POS Integrado (Por defecto es 115200), y puedes obtener los distintos valores desde la clase `TbkBaudrates` del paquete `Transbank.POS.Utils`.
+Para abrir un puerto serial y comunicarte con el POS Integrado, necesitarás el nombre del puerto (El cual puedes identificar usando [la función mencionada en el apartado anterior](referencia/posintegrado#listar-puertos-disponibles)). También necesitarás el baudrate al cual esta configurado el puerto serial del POS Integrado (Por defecto es 115200), y puedes obtener los distintos valores desde la clase `TbkBaudrates` del paquete `Transbank.POS.Utils` en .NET, y `cl.transbank.pos.utils.TbkBaudRate` en Java. 
 
-Si el puerto no puede ser abierto, se lanzará una exception `TransbankException`.
+Si el puerto no puede ser abierto, se lanzará una exception `TransbankException` en .NET y Java.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -211,7 +211,7 @@ import cl.transbank.pos.POS;
 SaleResponse saleResponse = POS.getInstance().sale(amount, ticket);
 ```
 
-El resultado de la venta se entrega en la forma de un objeto `SaleResponse` o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException`.
+El resultado de la venta se entrega en la forma de un objeto `SaleResponse` en .NET y Java, o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException` en .NET, o `TransbankException` en Java.
 
 ```json
 "Function": 210
@@ -334,7 +334,7 @@ import cl.transbank.pos.POS;
 SaleResponse saleResponse = POS.getInstance().getLastSale();
 ```
 
-El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `LastSaleResponse` o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLastSaleException`.
+El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `LastSaleResponse` en .NET, `SaleResponse` en Java, o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLastSaleException`.
 
 ```json
 "Function": 260
@@ -544,7 +544,7 @@ import cl.transbank.pos.POS;
 CloseResponse cr = POS.getInstance().close();
 ```
 
-El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse`o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException`.
+El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse` en .NET o Java, o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException`.
 
 ```json
 "FunctionCode": 510
@@ -627,7 +627,7 @@ import cl.transbank.pos.POS;
 TotalsResponse response = POS.getInstance().getTotals();
 ```
 
-El resultado de la transacción entrega en la forma de un objeto `TotalsResponse` o una estructura `TotalsCResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankTotalsException`.
+El resultado de la transacción entrega en la forma de un objeto `TotalsResponse` en .NET o Java, o una estructura `TotalsCResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankTotalsException` en .NET o `TransbankException` en Java.
 
 ```json
 "Function": 710
@@ -705,7 +705,7 @@ import cl.transbank.pos.POS;
 List<DetailResponse> ldr = POS.getInstance().details(false);
 ```
 
-El resultado de la transacción entrega una lista de objetos  `DetailResponse` o un `char *` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSalesDetailException`.
+El resultado de la transacción entrega una lista de objetos  `DetailResponse` en .NET y Java, o un `char *` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSalesDetailException` o `TransbankException` en Java.
 
 ```json
 [
@@ -847,7 +847,7 @@ import cl.transbank.pos.POS;
 KeysResponse kr = POS.getInstance().loadKeys();
 ```
 
-El resultado de la carga de llaves se entrega en la forma de un objeto `LoadKeysResponse`o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankLoadKeysException`.
+El resultado de la carga de llaves se entrega en la forma de un objeto `LoadKeysResponse` en .NET, o `KeysResponse` en Java, o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankLoadKeysException`.
 
 ```json
 "FunctionCode": 510
