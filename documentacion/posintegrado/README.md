@@ -32,7 +32,7 @@ Recuerda que necesitas tener instalados los drivers correspondientes a tu tarjet
 puerto serial o adaptador USB Serial.
 
 <aside class="notice">
-La comunicación con el POS Integrado se realiza mediante puerto serial RS232 y tú eres el responsable de instalar el driver correcto para tu tarjeta o adaptador serial.
+La comunicación con el POS Integrado se realiza mediante puerto serial RS232 y tú eres el/la responsable de instalar el driver correcto para tu tarjeta o adaptador serial.
 </aside>
 
 <aside class="success">
