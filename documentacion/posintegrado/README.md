@@ -118,7 +118,7 @@ List<String> ports = pos.listPorts();
 
 Para abrir un puerto serial y comunicarte con el POS Integrado, necesitarás el nombre del puerto (El cual puedes identificar usando [la función mencionada en el apartado anterior](/documentacion/posintegrado#listar-puertos-disponibles)). También necesitarás el baudrate al cual esta configurado el puerto serial del POS Integrado (Por defecto es 115200), y puedes obtener los distintos valores desde la clase `Transbank.POS.Utils.TbkBaudrates` en .NET y la clase`cl.transbank.pos.utils.TbkBaudRate` en Java.
 
-Si el puerto no puede ser abierto, se lanzará una exception `TransbankException` en .NET y Java.
+Si el puerto no puede ser abierto, se lanzará una excepción `TransbankException` en .NET y Java.
 
 <div class="language-simple" data-multiple-language></div>
 
