@@ -12,18 +12,27 @@ También puede probar las DLLs que se adjuntan en el [último release](https://g
 
 Esta librería y sus dependencias son requisitos para utilizar el SDK.
 
-Por el momento, el SDK está disponible para [.Net](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet) y lo puedes encontrar en [NuGet.org](https://www.nuget.org/packages/TransbankPosSDK/) para instalarlo puedes utilizar por ejemplo el package manager de VisualStudio.
+Por el momento, el SDK está disponible para [.NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet) y [Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java). Para .NET lo puedes encontrar en [NuGet.org](https://www.nuget.org/packages/TransbankPosSDK/) para instalarlo puedes utilizar por ejemplo el package manager de VisualStudio.
 
 ```bash
 PM> Install-Package TransbankPosSDK
+```
+
+Para Java se puede incluir el paquete por [Maven.](https://search.maven.org/artifact/com.github.transbankdevelopers/transbank-pos-sdk-java/)
+
+```xml
+		<dependency>
+			<groupId>com.github.transbankdevelopers</groupId>
+			<artifactId>transbank-sdk-pos-java</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 ```
 
 Recuerda que necesitas tener instalados los drivers correspondientes a tu tarjeta de
 puerto serial o adaptador USB Serial.
 
 <aside class="notice">
-La comunicación con el POS Integrado se realiza mediante puerto serial RS232 y
-que tú eres el responsable de instalar el driver correcto para tu tarjeta o adaptador serial.
+La comunicación con el POS Integrado se realiza mediante puerto serial RS232 y tú eres el/la responsable de instalar el driver correcto para tu tarjeta o adaptador serial.
 </aside>
 
 <aside class="success">
@@ -72,6 +81,12 @@ using Transbank.POS.Responses:
 #include "transbank_serial_utils.h"
 ```
 
+```java
+import cl.transbank.pos.POS;
+import cl.transbank.pos.exceptions.*;
+import cl.transbank.pos.responses.*;
+```
+
 ### Listar puertos disponibles
 
 Si los respectivos drivers están instalados, entonces puedes usar la función `ListPorts()` del paquete
@@ -92,11 +107,18 @@ List<string> ports = Serial.ListPorts();
 char *ports = list_ports();
 ```
 
+```java
+import cl.transbank.pos.POS;
+
+POS pos = POS.getInstance();
+List<String> ports = pos.listPorts();
+```
+
 ### Abrir un puerto Serial
 
-Para abrir un puerto serial y comunicarte con el POS Integrado, necesitarás el nombre del puerto (El cual puedes identificar usando [la función mencionada en el apartado anterior](/documentacion/posintegrado#listar-puertos-disponibles)). También necesitarás el baudrate al cual esta configurado el puerto serial del POS Integrado (Por defecto es 115200), y puedes obtener los distintos valores desde la clase `TbkBaudrates` del paquete `Transbank.POS.Utils`.
+Para abrir un puerto serial y comunicarte con el POS Integrado, necesitarás el nombre del puerto (el cual puedes identificar usando [la función mencionada en el apartado anterior](/documentacion/posintegrado#listar-puertos-disponibles)). También necesitarás el _baudrate_ al cual esta configurado el puerto serial del POS Integrado (por defecto es 115200), y puedes obtener los distintos valores desde la clase `Transbank.POS.Utils.TbkBaudrates` en .NET y la clase `cl.transbank.pos.utils.TbkBaudRate` en Java.
 
-Si el puerto no puede ser abierto, se lanzará una exception `TransbankException`.
+Si el puerto no puede ser abierto, se lanzará una excepción `TransbankException` en .NET y Java.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -119,6 +141,14 @@ if ( retval == TBK_OK ){
 }
 ```
 
+```java
+import cl.transbank.pos.POS;
+
+POS pos = POS.getInstance();
+String port = "COM4";
+pos.openPort(port);
+```
+
 ### Cerrar un puerto Serial
 
 Al finalizar el uso del POS, o si se desea desconectar de la Caja se debe liberar el puerto serial abierto anteriormente.
@@ -139,6 +169,12 @@ retval = close_port();
 if(retval == SP_OK){
     //...
 }
+```
+
+```java
+import cl.transbank.pos.POS;
+//...
+pos.closePort();
 ```
 
 ## Transacciones
@@ -166,14 +202,22 @@ SaleResponse response = POS.Instance.Sale(ammount, ticket);
 char* response = sale(ammount, ticket, false);
 ```
 
-El resultado de la venta se entrega en la forma de un objeto `SaleResponse` o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException`.
+```java
+import cl.transbank.pos.POS;
+//...
+SaleResponse saleResponse = POS.getInstance().sale(amount, ticket);
+```
+
+El resultado de la venta se entrega en la forma de un objeto `SaleResponse` o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException` en .NET. En Java puede lanzar `TransbankPortNotConfiguredException`.
+
+El objeto SaleResponse retornará un objeto con los siguientes datos.
 
 ```json
 "Function": 210
 "Response": "Aprobado"
 "Commerce Code": 550062700310
 "Terminal Id": "ABC1234C"
-"Ticket": "AB123"
+"Ticket": "ABC123"
 "Autorization Code": "XZ123456"
 "Ammount": 15000
 "Shares Number": 3
@@ -217,14 +261,20 @@ char *lastSaleResponse = last_sale();
 }
 ```
 
-El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `LastSaleResponse` o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLastSaleException`.
+```java
+import cl.transbank.pos.POS;
+//...
+SaleResponse saleResponse = POS.getInstance().getLastSale();
+```
+
+El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `LastSaleResponse` o un `char*` en el caso de la librería C, o un objeto `SaleResponse` en el caso de Java. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLastSaleException` en .NET o `TransbankException` en Java.
 
 ```json
 "Function": 260
 "Response": "Aprobado"
 "Commerce Code": 550062700310
 "Terminal Id": "ABC1234C"
-"Ticket": "AB123"
+"Ticket": "ABC086"
 "Autorization Code": "XZ123456"
 "Ammount": 15000
 "Shares Number": 3
@@ -270,6 +320,12 @@ RefundResp response = POS.Instance.Refund(21);
 RefundResponse response = refund(21);
 ```
 
+```java
+import cl.transbank.pos.POS;
+//...
+RefundResponse response = POS.getInstance().refund(21);
+```
+
 Como respuesta el **POS** enviará un código de aprobación, acompañado de un código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas. [Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas)
 
 ```json
@@ -288,7 +344,7 @@ Como respuesta el **POS** enviará un código de aprobación, acompañado de un 
 Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencia/posintegrado#tabla-de-respuestas))
 
 <aside class="success">
-Esta transacción también realiza el cambió de llaves.
+Esta transacción también realiza el cambio de llaves.
 </aside>
 
 <aside class="warning">
@@ -312,6 +368,12 @@ BaseResponse response = register_close();
 }
 ```
 
+```java
+import cl.transbank.pos.POS;
+//...
+CloseResponse cr = POS.getInstance().close();
+```
+
 El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse` o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException`.
 
 ```json
@@ -328,8 +390,7 @@ Para el cierre no se solicitará tarjeta supervisora.
 
 ### Transacción Totales
 
-Esta operación le permitirá a la caja obtener desde el _POS_ un resumen con el monto total y la cantidad de transacciones
-que se han realizado hasta el minuto y que aún permanecen en la memoria del _POS_.
+Esta operación le permitirá a la caja obtener desde el _POS_ un resumen con el monto total y la cantidad de transacciones que se han realizado hasta el minuto y que aún permanecen en la memoria del _POS_.
 
 Además la caja podrá determinar si existen transacciones que no fueron informadas desde el _POS_,
 haciendo una comparación de los totales entre la caja y el _POS_. La impresión del _Voucher_ con el resumen será realizada por el _POS_.
@@ -351,6 +412,12 @@ TotalsCResponse response = get_totals();
 }
 ```
 
+```java
+import cl.transbank.pos.POS;
+//...
+TotalsResponse response = POS.getInstance().getTotals();
+```
+
 El resultado de la transacción entrega en la forma de un objeto `TotalsResponse` o una estructura `TotalsCResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankTotalsException`.
 
 ```json
@@ -362,7 +429,7 @@ El resultado de la transacción entrega en la forma de un objeto `TotalsResponse
 
 ### Transacción de Detalle de Ventas
 
-Esta transacción solicita al POS **todas** las transacciones que se han realizado y permanecen en la memoria del POS. El parámetro que recibe esta función es de tipo booleano e indica si se realiza la impresión del detalle en el POS. En el caso de que no se solicite la impresión, el POS envía **todas** las transacciones a la caja, una por una.
+Esta transacción solicita al POS **todas** las transacciones que se han realizado y permanecen en la memoria del POS. El parámetro que recibe esta función es de tipo booleano e indica si se realiza la impresión del detalle en el POS. En el caso de que no se solicite la impresión, el POS envía **todas** las transacciones a la caja, una por una. Si se realiza la impresión, la caja recibira una lista vacia de transacciónes.
 
 <aside class="warning">
 Una transacción de cierre vacía la memoria del POS
@@ -385,6 +452,12 @@ List<DetailResponse> Details(printOnPOS)
 bool print_on_pos = false;
 char *response = sales_detail(print_on_pos);
 }
+```
+
+```java
+import cl.transbank.pos.POS;
+//...
+List<DetailResponse> ldr = POS.getInstance().details(false);
 ```
 
 El resultado de la transacción entrega una lista de objetos  `DetailResponse` o un `char *` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSalesDetailException`.
@@ -459,7 +532,15 @@ BaseResponse response = load_keys();
 }
 ```
 
-El resultado de la carga de llaves entrega en la forma de un objeto `LoadKeysResponse` o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLoadKeysException`.
+```java
+import cl.transbank.pos.POS;
+//...
+KeysResponse kr = POS.getInstance().loadKeys();
+```
+
+
+
+El resultado de la carga de llaves entrega en la forma de un objeto `LoadKeysResponse` o una estructura `BaseResponse` en el caso de la librería C, un objeto `KeysResponse` para Java. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLoadKeysException` en .NET o `TransbankException` en Java.
 
 ```json
 "FunctionCode": 810
@@ -495,6 +576,12 @@ if (retval == TBK_OK){
 }
 ```
 
+```java
+import cl.transbank.pos.POS;
+//...
+boolean pollResult = POS.getInstance().poll();
+```
+
 ### Transacción de Cambio a POS Normal
 
 Este comando le permitirá a la caja realizar el cambio de modalidad a través de un comando. El POS debe estar en modo integrado y al recibir el comando quedara en modo normal. El resultado de esta operación es un `Booleano` en el caso del SDK o un `0` representado en la constante `TBK_OK` en el caso de la librería en C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankException`.
@@ -517,8 +604,14 @@ if (retval == TBK_OK){
 }
 ```
 
+```java
+import cl.transbank.pos.POS;
+//...
+boolean normal = POS.getInstance().setNormalMode();
+```
+
 <aside class="notice">
-Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en modo Integrado siguiendo las instrucciones disponibles descritas en [Cambio a POS Integrado](referencia/posintegrado#cambio-modalidad-pos-integrado)
+Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en el POS para regresar al modo Integrado, siguiendo las instrucciones disponibles descritas en [Cambio a POS Integrado](referencia/posintegrado#cambio-modalidad-pos-integrado), pues no es posible realizar esta configuración a través del SDK.
 </aside>
 
 ## Integración de Onepay para pagos con QR
