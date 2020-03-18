@@ -673,6 +673,7 @@ Pay.WatchPayment();
 Ponemos a tu disposición un ejemplo en nuestro Github para ayudarte a entender mejor la integración.
 
 - [Ejemplo Windows Forms](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet-example)
+- [Ejemplo Java]([TransbankDevelopers/transbank-pos-sdk-java-example](https://github.com/TransbankDevelopers/transbank-pos-sdk-java-example))
 
 <div class="container slate">
   <div class='slate-after-footer'>
