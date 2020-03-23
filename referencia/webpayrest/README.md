@@ -150,7 +150,9 @@ Webpay Transacción Completa Mall | `597055555551` Mall <br> `597055555552` Tien
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+Transbank\Webpay\WebpayPlus::configureForTesting();
+Transbank\Webpay\WebpayPlus::configureMallForTesting();
+Transbank\Webpay\WebpayPlus::configureDeferredForTesting();
 ```
 
 ```csharp
@@ -176,7 +178,9 @@ Webpay Transacción Completa Mall | `597055555551` Mall <br> `597055555552` Tien
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\Webpay\WebpayPlus\Transaction;
+
+$response = Transaction::create($buy_order, $session_id, $amount, $return_url);
 ```
 
 ```csharp
@@ -313,7 +317,9 @@ token es caducado y no podrá ser utilizado en un pago.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\Webpay\WebpayPlus\Transaction;
+
+$response = Transaction::create($buy_order, $session_id, $amount, $return_url);
 ```
 
 ```csharp
@@ -404,7 +410,9 @@ Permite confirmar y obtener el resultado de la transacción una vez que Webpay 
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\Webpay\WebpayPlus\Transaction;
+
+$response = Transaction::commit($token);
 ```
 
 ```csharp
@@ -439,7 +447,23 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+object(Transbank\Webpay\WebpayPlus\TransactionCommitResponse)#250 (14) 
+ { 
+     ["vci"]=> string(3) "TSY" 
+     ["amount"]=> int(1000) 
+     ["status"]=> string(10) "AUTHORIZED" 
+     ["buyOrder"]=> string(6) "123456" 
+     ["sessionId"]=> string(13) "session123456" 
+     ["cardNumber"]=> string(4) "6623" 
+     ["accountingDate"]=> string(4) "0718"
+     ["transactionDate"]=> string(24) "2019-07-18T16:41:38.167Z"
+     ["authorizationCode"]=> string(4) "1213"
+     ["paymentTypeCode"]=> string(2) "VN"
+     ["responseCode"]=> int(0) 
+     ["installmentsAmount"]=> NULL
+     ["installmentsNumber"]=> NULL
+     ["balance"]=> NULL 
+ }
 ```
 
 ```csharp
@@ -508,7 +532,9 @@ Obtiene resultado de transacción a partir de un token.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\Webpay\WebpayPlus\Transaction;
+
+$response = Transaction::getStatus($token);  
 ```
 
 ```csharp
@@ -543,7 +569,24 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+  
+  object(Transbank\Webpay\WebpayPlus\TransactionStatusResponse)#252 (14) 
+  { 
+    ["vci"]=> string(3) "TSY"
+    ["amount"]=> int(1000)
+    ["status"]=> string(10) "AUTHORIZED"
+    ["buyOrder"]=> string(6) "123456"
+    ["sessionId"]=> string(13) "session123456"
+    ["cardNumber"]=> string(4) "6623"
+    ["accountingDate"]=> string(4) "0718"
+    ["transactionDate"]=> string(24) "2019-07-18T16:41:38.167Z"
+    ["authorizationCode"]=> string(4) "1213"
+    ["paymentTypeCode"]=> string(2) "VN"
+    ["responseCode"]=> int(0)
+    ["installmentsAmount"]=> NULL
+    ["installmentsNumber"]=> int(0)
+    ["balance"]=> NULL
+   }
 ```
 
 ```csharp
@@ -635,7 +678,9 @@ El método `Transaction.refund()` debe ser invocado siempre indicando el códi
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\Webpay\WebpayPlus\Transaction;
+
+$response = Transaction::refund($token, $amount);
 ```
 
 ```csharp
@@ -674,7 +719,15 @@ amount  <br> <i> Decimal </i> | (Opcional) Monto que se desea anular de la trans
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+object(Transbank\Webpay\WebpayPlus\TransactionRefundResponse)#252 (6) 
+  {
+    ["type"]=> string(8) "REVERSED"
+    ["authorizationCode"]=> NULL
+    ["authorizationDate"]=> NULL
+    ["nullifiedAmount"]=> NULL
+    ["balance"]=> NULL
+    ["responseCode"]=> NULL 
+  }
 ```
 
 ```csharp
@@ -782,7 +835,25 @@ token es caducado y no podrá ser utilizado en un pago.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\Webpay\WebpayPlus;
+use Transbank\Webpay\WebpayPlus\Transaction;
+
+WebpayPlus::configureMallForTesting();
+
+$details = [
+  {
+      "amount": 10000,
+      "commerce_code":597055555536,
+      "buy_order": "ordenCompraDetalle1234"
+  },
+  {     
+     "amount": 12000,
+     "commerce_code": 597055555537,
+     "buy_order": "ordenCompraDetalle4321"
+  },
+];
+  
+$response = Transaction::createMall($buy_order, $session_id, $return_url, $details);
 ```
 
 ```csharp
@@ -811,12 +882,12 @@ Content-Type: application/json
  "details": [
      {
          "amount": 10000,
-         "commerce_code": "Próximamente...",
+         "commerce_code": 597055555536,
          "buy_order": "ordenCompraDetalle1234"
      },
      {     
         "amount": 12000,
-        "commerce_code": "Próximamente...",
+        "commerce_code":  597055555537,
         "buy_order": "ordenCompraDetalle4321"
      },
  ]
@@ -842,7 +913,11 @@ details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda del m
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+Transbank\Webpay\WebpayPlus\TransactionCreateResponse Object
+(
+    [token] => e404373b9f44cd100a36badab380dd55d4cbc9ffdc99a273bca6bf4702b86ddd
+    [url] => https://webpay3gint.transbank.cl/webpayserver/initTransaction
+)
 ```
 
 ```csharp
@@ -886,7 +961,11 @@ una vez que Webpay ha resueltosu autorización financiera.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\Webpay\WebpayPlus;
+use Transbank\Webpay\WebpayPlus\Transaction;
+
+WebpayPlus::configureMallForTesting();
+$response = Transaction::commitMall($token);
 ```
 
 ```csharp
@@ -921,7 +1000,37 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+object(Transbank\Webpay\WebpayPlus\TransactionCommitMallResponse)#260 (7) 
+{ 
+    ["vci"]=> string(3) "TSY"
+    ["details"]=> array(2) 
+        { [0]=> array(8) { 
+            ["amount"]=> int(1000)
+            ["status"]=> string(10) "AUTHORIZED"
+            ["authorization_code"]=> string(4) "1213"
+            ["payment_type_code"]=> string(2) "VN"
+            ["response_code"]=> int(0)
+            ["installments_number"]=> int(0)
+            ["commerce_code"]=> string(12) "597055555537"
+            ["buy_order"]=> string(12) "123buyorder1" 
+           },
+          [1]=> array(8) {
+            ["amount"]=> int(2000)
+            ["status"]=> string(10) "AUTHORIZED"
+            ["authorization_code"]=> string(4) "1213"
+            ["payment_type_code"]=> string(2) "VN"
+            ["response_code"]=> int(0)
+            ["installments_number"]=> int(0)
+            ["commerce_code"]=> string(12) "597055555536"
+            ["buy_order"]=> string(12) "123buyorder2" 
+           }
+         }
+    ["buyOrder"]=> string(6) "222333"
+    ["sessionId"]=> string(17) "123session_parent"
+    ["cardNumber"]=> string(4) "6623"
+    ["accountingDate"]=> string(4) "0718"
+    ["transactionDate"]=> string(24) "2019-07-18T19:17:06.032Z" 
+}
 ```
 
 ```csharp
@@ -997,7 +1106,11 @@ Obtiene resultado de transacción a partir de un token.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\Webpay\WebpayPlus;
+use Transbank\Webpay\WebpayPlus\Transaction;
+
+WebpayPlus::configureMallForTesting();
+$response = Transaction::getMallStatus($token);
 ```
 
 ```csharp
@@ -1032,7 +1145,39 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+object(Transbank\Webpay\WebpayPlus\TransactionMallStatusResponse)#260 (7) 
+{ 
+    ["buyOrder"]=> string(6) "222333"
+    ["sessionId"]=> string(17) "123session_parent"
+    ["cardNumber"]=> string(4) "6623"
+    ["expirationDate"]=> NULL
+    ["accountingDate"]=> string(4) "0718"
+    ["transactionDate"]=> string(24) "2019-07-18T19:17:06.032Z"
+    ["details"]=> array(2) {
+        [0]=> array(8) 
+        {
+            ["amount"]=> int(1000)
+            ["status"]=> string(10) "AUTHORIZED"
+            ["authorization_code"]=> string(4) "1213"
+            ["payment_type_code"]=> string(2) "VN"
+            ["response_code"]=> int(0)
+            ["installments_number"]=> int(0)
+            ["commerce_code"]=> string(12) "597055555537"
+            ["buy_order"]=> string(12) "123buyorder1" 
+        }
+        [1]=> array(8) 
+        {
+            ["amount"]=> int(2000)
+            ["status"]=> string(10) "AUTHORIZED"
+            ["authorization_code"]=> string(4) "1213"
+            ["payment_type_code"]=> string(2) "VN"
+            ["response_code"]=> int(0)
+            ["installments_number"]=> int(0)
+            ["commerce_code"]=> string(12) "597055555536"
+            ["buy_order"]=> string(12) "123buyorder2" 
+        } 
+    }
+}
 ```
 
 ```csharp
@@ -1130,7 +1275,11 @@ El método `Transaction.refund()` debe ser invocado siempre indicando el códi
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\Webpay\WebpayPlus;
+use Transbank\Webpay\WebpayPlus\Transaction;
+
+WebpayPlus::configureMallForTesting();
+$response = Transaction::refundMall($token, $buy_order, $commerce_code, $amount);
 ```
 
 ```csharp
@@ -1175,7 +1324,15 @@ commerce_id  <br> <i> Number </i> | (Opcional) Tienda mall que realizó la tran
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+object(Transbank\Webpay\WebpayPlus\TransactionRefundResponse)#262 (6)
+{ 
+   ["type"]=> string(8) "REVERSED" 
+   ["authorizationCode"]=> NULL
+   ["authorizationDate"]=> NULL
+   ["nullifiedAmount"]=> NULL
+   ["balance"]=> NULL
+   ["responseCode"]=> NULL 
+}
 ```
 
 ```csharp
@@ -1924,7 +2081,7 @@ use Transbank\Webpay\Oneclick\MallInscription;
 
 Oneclick::configureOneclickMallForTesting();
 
-$resp = MallInscription::start($userName, $email, $responseUrl);
+$response = MallInscription::start($userName, $email, $responseUrl);
 ```
 
 ```csharp
@@ -2069,7 +2226,7 @@ use Transbank\Webpay\Oneclick;
 use Transbank\Webpay\Oneclick\MallInscription;
 
 Oneclick::configureOneclickMallForTesting();
-$resp = MallInscription::finish($token);
+$response = MallInscription::finish($token);
 ```
 
 ```csharp
@@ -2213,7 +2370,7 @@ use Transbank\Webpay\Oneclick\MallInscription;
 
 Oneclick::configureOneclickMallForTesting();
 
-$resp = MallInscription::delete($tbkUser, $userName, $options);
+$response = MallInscription::delete($tbkUser, $userName, $options);
 ```
 
 ```csharp
@@ -2330,7 +2487,7 @@ $details = [
 ];
 
 
-$resp = MallTransaction::authorize($userName, $tbkUser, $parentBuyOrder, $details);
+$response = MallTransaction::authorize($userName, $tbkUser, $parentBuyOrder, $details);
 ```
 
 ```csharp
@@ -2600,7 +2757,7 @@ use Transbank\Webpay\Oneclick;
 
 Oneclick::configureOneclickMallForTesting();
 
-$resp = MallTransaction::getStatus($buyOrder);
+$response = MallTransaction::getStatus($buyOrder);
 ```
 
 ```csharp
@@ -2846,7 +3003,7 @@ use Transbank\Webpay\Oneclick;
 
 Oneclick::configureOneclickMallForTesting();
 
-$resp = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrder, $amount);
+$response = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrder, $amount);
 ```
 
 ```csharp
@@ -3539,9 +3696,7 @@ Obtiene resultado de transacción a partir de un token.
 ```php
 use Transbank\TransaccionCompleta\Transaction;
 
-Transaction::getStatus(
-            $token_ws
-        );
+Transaction::getStatus($token_ws);
 ```
 
 ```csharp
@@ -3734,10 +3889,7 @@ Permite solicitar a Webpay la anulación de una transacción realizada previam
 ```php
 use Transbank\TransaccionCompleta\Transaction;
 
-Transaction::refund(
-            $token_ws,
-            $amount
-        );
+Transaction::refund($token_ws, $amount);
 ```
 
 ```csharp
