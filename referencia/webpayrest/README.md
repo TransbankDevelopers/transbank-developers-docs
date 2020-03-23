@@ -146,7 +146,7 @@ Webpay Transacción Completa Mall | `597055555551` Mall <br> `597055555552` Tien
 > ambiente:
 
 ```java
-// Este SDK aún no se encuentra disponible
+
 ```
 
 ```php
@@ -174,13 +174,11 @@ Transbank\Webpay\WebpayPlus::configureDeferredForTesting();
 ## Webpay Plus
 
 ```java
-// Este SDK aún no se encuentra disponible
+
 ```
 
 ```php
-use Transbank\Webpay\WebpayPlus\Transaction;
 
-$response = Transaction::create($buy_order, $session_id, $amount, $return_url);
 ```
 
 ```csharp
@@ -188,7 +186,7 @@ $response = Transaction::create($buy_order, $session_id, $amount, $return_url);
 ```
 
 ```ruby
-::Transbank::Webpay::WebpayPlus::Transaction::create(buy_order: buy_order, session_id: session_id, amount: amount, return_url: return_url)
+
 ```
 
 ```python
@@ -313,7 +311,25 @@ token es caducado y no podrá ser utilizado en un pago.
 </aside>
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.CreateTransactionException;
+import cl.transbank.webpay.webpayplus.WebpayPlus;
+import cl.transbank.webpay.webpayplus.model.CreateWebpayPlusTransactionResponse;
+import java.util.Random;
+public class IntegrationExample {
+    public static void main(String[] args) {
+        String buyOrder = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
+        String sessionId = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
+        double amount = 1000;
+        String returnUrl = "https://domai.cl/webpay-return";
+        try {
+            final WebpayPlusTransactionCreateResponse response = WebpayPlus.Transaction.create(buyOrder, sessionId, amount, returnUrl);
+            final String token = response.getToken();
+            final String url = response.getUrl();
+        } catch (TransactionCreateException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
 ```
 
 ```php
@@ -327,7 +343,12 @@ $response = Transaction::create($buy_order, $session_id, $amount, $return_url);
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+@resp = Transbank::Webpay::WebpayPlus::Transaction::create(
+                                                       buy_order: buy_order,
+                                                       session_id: session_id,
+                                                       amount: amount,
+                                                       return_url: return_url
+                                                      )
 ```
 
 ```python
@@ -361,7 +382,7 @@ return_url  <br> <i> String </i> | URL del comercio, a la cual Webpay redireccio
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+
 ```
 
 ```php
@@ -406,7 +427,25 @@ Permite confirmar y obtener el resultado de la transacción una vez que Webpay 
 
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.CreateTransactionException;
+import cl.transbank.webpay.webpayplus.WebpayPlus;
+import cl.transbank.webpay.webpayplus.model.CreateWebpayPlusTransactionResponse;
+import java.util.Random;
+public class IntegrationExample {
+    public static void main(String[] args) {
+        String buyOrder = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
+        String sessionId = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
+        double amount = 1000;
+        String returnUrl = "https://domai.cl/webpay-return";
+        try {
+            final CreateWebpayPlusTransactionResponse response = WebpayPlus.Transaction.create(buyOrder, sessionId, amount, returnUrl);
+            final String token = response.getToken();
+            final String url = response.getUrl();
+        } catch (CreateTransactionException e) {
+            e.printStackTrace();
+        }
+    }
+}
 ```
 
 ```php
@@ -420,7 +459,7 @@ $response = Transaction::commit($token);
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+@resp = Transbank::Webpay::WebpayPlus::Transaction::commit(token: @token)
 ```
 
 ```python
@@ -443,7 +482,7 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+
 ```
 
 ```php
@@ -528,7 +567,35 @@ Obtiene resultado de transacción a partir de un token.
 
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.StatusTransactionException;
+import cl.transbank.webpay.model.CardDetail;
+import cl.transbank.webpay.webpayplus.WebpayPlus;
+import cl.transbank.webpay.webpayplus.model.StatusWebpayPlusTransactionResponse;
+public class IntegrationExample {
+    public static void main(String[] args) {
+        String token = "ee24c0128dbe285415c55d6c9a704dd393eb8d477eda3346d9735de81a40d420";
+        try {
+            final StatusWebpayPlusTransactionResponse response = WebpayPlus.Transaction.status(token);
+            final String accountingDate = response.getAccountingDate();
+            final double amount = response.getAmount();
+            final String authorizationCode = response.getAuthorizationCode();
+            final double balance = response.getBalance();
+            final String buyOrder = response.getBuyOrder();
+            final CardDetail cardDetail = response.getCardDetail();
+            final String cardNumber = cardDetail != null ? cardDetail.getCardNumber() : null;
+            final double installmentsAmount = response.getInstallmentsAmount();
+            final byte installmentsNumber = response.getInstallmentsNumber();
+            final String paymentTypeCode = response.getPaymentTypeCode();
+            final byte responseCode = response.getResponseCode();
+            final String sessionId = response.getSessionId();
+            final String status = response.getStatus();
+            final String transactionDate = response.getTransactionDate();
+            final String vci = response.getVci();
+        } catch (StatusTransactionException e) {
+            e.printStackTrace();
+        }
+    }
+}
 ```
 
 ```php
@@ -542,7 +609,7 @@ $response = Transaction::getStatus($token);
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+@resp = Transbank::Webpay::WebpayPlus::Transaction::status(token: @token)
 ```
 
 ```python
@@ -565,7 +632,7 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+
 ```
 
 ```php
@@ -674,7 +741,26 @@ El método `Transaction.refund()` debe ser invocado siempre indicando el códi
 </aside>
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.RefundTransactionException;
+import cl.transbank.webpay.webpayplus.WebpayPlus;
+import cl.transbank.webpay.webpayplus.model.RefundWebpayPlusTransactionResponse;
+public class IntegrationExample {
+    public static void main(String[] args) {
+        String token = "ee24c0128dbe285415c55d6c9a704dd393eb8d477eda3346d9735de81a40d420";
+        double amount = 1000;
+        try {
+            final RefundWebpayPlusTransactionResponse response = WebpayPlus.Transaction.refund(token, amount);
+            final String authorizationCode = response.getAuthorizationCode();
+            final String authorizationDate = response.getAuthorizationDate();
+            final double balance = response.getBalance();
+            final double nullifiedAmount = response.getNullifiedAmount();
+            final byte responseCode = response.getResponseCode();
+            final String type = response.getType();
+        } catch (RefundTransactionException e) {
+            e.printStackTrace();
+        }
+    }
+}
 ```
 
 ```php
@@ -688,7 +774,8 @@ $response = Transaction::refund($token, $amount);
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+@resp = Transbank::Webpay::WebpayPlus::Transaction::refund(token: @token, amount: @amount)
+
 ```
 
 ```python
@@ -715,7 +802,7 @@ amount  <br> <i> Decimal </i> | (Opcional) Monto que se desea anular de la trans
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+
 ```
 
 ```php
