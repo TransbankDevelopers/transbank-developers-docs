@@ -918,7 +918,34 @@ token es caducado y no podrá ser utilizado en un pago.
 </aside>
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.CreateTransactionException;
+import cl.transbank.webpay.webpayplus.WebpayPlus;
+import cl.transbank.webpay.webpayplus.model.CreateMallTransactionDetails;
+import cl.transbank.webpay.webpayplus.model.CreateWebpayPlusMallTransactionResponse;
+import java.util.Random;
+public class IntegrationExample {
+    public static void main(String[] args) {
+        String buyOrder = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
+        String sessionId = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
+        String returnUrl = "https://domai.cl/webpay-mall-return";
+        double amountMallOne = 1000;
+        String commerceCodeMallOne = "597055555536";
+        String buyOrderMallOne = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
+        double amountMallTwo = 2000;
+        String commerceCodeMallTwo = "597055555537";
+        String buyOrderMallTwo = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
+        CreateMallTransactionDetails details = CreateMallTransactionDetails.build()
+                .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne)
+                .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo);
+        try {
+            final CreateWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.create(buyOrder, sessionId, returnUrl, details);
+            final String token = response.getToken();
+            final String url = response.getUrl();
+        } catch (CreateTransactionException e) {
+            e.printStackTrace();
+        }
+    }
+}
 ```
 
 ```php
@@ -996,7 +1023,7 @@ details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda del m
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+
 ```
 
 ```php
@@ -1044,7 +1071,40 @@ Permite confirmar una tranascción y obtener el resultado de la transacción
 una vez que Webpay ha resueltosu autorización financiera.
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.CommitTransactionException;
+import cl.transbank.webpay.model.CardDetail;
+import cl.transbank.webpay.webpayplus.WebpayPlus;
+import cl.transbank.webpay.webpayplus.model.CommitWebpayPlusMallTransactionResponse;
+import cl.transbank.webpay.webpayplus.model.CommitWebpayPlusMallTransactionResponse.Detail;
+import java.util.List;
+public class IntegrationExample {
+    public static void main(String[] args) {
+        String token = "ef6bf196cae9d38744974e4da61e004135ea2d8774a063d33d2c58ea5730a0d2";
+        try {
+            final CommitWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.commit(token);
+            final String accountingDate = response.getAccountingDate();
+            final String buyOrder = response.getBuyOrder();
+            final CardDetail cardDetail = response.getCardDetail();
+            final String cardNumber = cardDetail != null ? cardDetail.getCardNumber() : null;
+            final String sessionId = response.getSessionId();
+            final String transactionDate = response.getTransactionDate();
+            final String vci = response.getVci();
+            final List<Detail> details = response.getDetails();
+            for (Detail detail : details) {
+                final double amount = detail.getAmount();
+                final String authorizationCode = detail.getAuthorizationCode();
+                final String buyOrderMall = detail.getBuyOrder();
+                final String commerceCode = detail.getCommerceCode();
+                final byte installmentsNumber = detail.getInstallmentsNumber();
+                final String paymentTypeCode = detail.getPaymentTypeCode();
+                final byte responseCode = detail.getResponseCode();
+                final String status = detail.getStatus();
+            } 
+        } catch (CommitTransactionException e) {
+            e.printStackTrace();
+        }
+    }
+}
 ```
 
 ```php
@@ -1083,7 +1143,7 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+
 ```
 
 ```php
@@ -1189,7 +1249,40 @@ Esta operación permite obtener el estado de la transacción en cualquier mome
 Obtiene resultado de transacción a partir de un token.
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.StatusTransactionException;
+import cl.transbank.webpay.model.CardDetail;
+import cl.transbank.webpay.webpayplus.WebpayPlus;
+import cl.transbank.webpay.webpayplus.model.StatusWebpayPlusMallTransactionResponse;
+import cl.transbank.webpay.webpayplus.model.StatusWebpayPlusMallTransactionResponse.Detail;
+import java.util.List;
+public class IntegrationExample {
+    public static void main(String[] args) {
+        String token = "ef6bf196cae9d38744974e4da61e004135ea2d8774a063d33d2c58ea5730a0d2";
+        try {
+            final StatusWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.status(token);
+            final String accountingDate = response.getAccountingDate();
+            final String buyOrder = response.getBuyOrder();
+            final CardDetail cardDetail = response.getCardDetail();
+            final String cardNumber = cardDetail != null ? cardDetail.getCardNumber() : null;
+            final String sessionId = response.getSessionId();
+            final String transactionDate = response.getTransactionDate();
+            final String vci = response.getVci();
+            
+            final List<Detail> details = response.getDetails();
+            for (Detail detail : details) {
+                final double amount = detail.getAmount();
+                final String authorizationCode = detail.getAuthorizationCode();
+                final String buyOrderMall = detail.getBuyOrder();
+                final String commerceCode = detail.getCommerceCode();
+                final byte installmentsNumber = detail.getInstallmentsNumber();
+                final String paymentTypeCode = detail.getPaymentTypeCode();
+                final String status = detail.getStatus();
+            }
+        } catch (StatusTransactionException e) {
+            e.printStackTrace();
+        }
+    }
+}
 ```
 
 ```php
@@ -1228,7 +1321,7 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+
 ```
 
 ```php
@@ -1358,7 +1451,28 @@ El método `Transaction.refund()` debe ser invocado siempre indicando el códi
 </aside>
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.RefundTransactionException;
+import cl.transbank.webpay.webpayplus.WebpayPlus;
+import cl.transbank.webpay.webpayplus.model.RefundWebpayPlusMallTransactionResponse;
+public class IntegrationExample {
+    public static void main(String[] args) {
+        String token = "ef6bf196cae9d38744974e4da61e004135ea2d8774a063d33d2c58ea5730a0d2";
+        String buyOrder = "some_valid_buy_order";
+        String commerceCode = "597055555536";
+        double amount = 1000;
+        try {
+            final RefundWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.refund(token, buyOrder, commerceCode, amount);
+            final String authorizationCode = response.getAuthorizationCode();
+            final String authorizationDate = response.getAuthorizationDate();
+            final double balance = response.getBalance();
+            final double nullifiedAmount = response.getNullifiedAmount();
+            final byte responseCode = response.getResponseCode();
+            final String type = response.getType();
+        } catch (RefundTransactionException e) {
+            e.printStackTrace();
+        }
+    }
+}
 ```
 
 ```php
@@ -4736,7 +4850,27 @@ el código debe ser el código de la tienda virtual específica.
 </aside>
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.webpay.exception.CaptureTransactionException;
+import cl.transbank.webpay.webpayplus.WebpayPlus;
+import cl.transbank.webpay.webpayplus.model.CaptureWebpayPlusTransactionResponse;
+import java.util.Random;
+public class IntegrationExample {
+    public static void main(String[] args) {
+        String token = "ef6bf196cae9d38744974e4da61e004135ea2d8774a063d33d2c58ea5730a0d2";
+        String buyOrder = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
+        String authorizationCode = "some_valid_authorization_code";
+        double amount = 1000;
+        try {
+            final CaptureWebpayPlusTransactionResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
+            final String authorizationCodeResp = response.getAuthorizationCode();
+            final String authorizationDate = response.getAuthorizationDate();
+            final double capturedAmount = response.getCapturedAmount();
+            final byte responseCode = response.getResponseCode();
+        } catch (CaptureTransactionException e) {
+            e.printStackTrace();
+        }
+    }
+}
 ```
 
 ```php
@@ -4780,7 +4914,7 @@ capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo má
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+
 ```
 
 ```php
