@@ -348,7 +348,7 @@ Content-Type: application/json
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buy_order  <br> <i> String </i> | Orden de compra de la tienda. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>
-session_id  <br> <i> String </i> | (Opcional) Identificador de sesión, uso interno de comercio, este valor es devuelto al final de la transacción. Largo máximo: 61
+session_id  <br> <i> String </i> | Identificador de sesión, uso interno de comercio, este valor es devuelto al final de la transacción. Largo máximo: 61
 amount  <br> <i> Decimal </i> | Monto de la transacción. Máximo 2 decimales para USD. Largo máximo: 17
 return_url  <br> <i> String </i> | URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización. Largo máximo: 256
 
@@ -3097,11 +3097,11 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-buy_order  <br> <i> String </i> | Orden de compra de la tienda. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code> Largo máximo: 26
-session_id  <br> <i> String </i> | (Opcional) Identificador de sesión, uso interno de comercio, este valor es devuelto al final de la transacción. Largo máximo: 61
+buy_order  <br> <i> String </i> | Orden de compra de la tienda. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>
+session_id  <br> <i> String </i> | Identificador de sesión, uso interno de comercio, este valor es devuelto al final de la transacción. Largo máximo: 61
 amount  <br> <i> Decimal </i> | Monto de la transacción. Máximo 2 decimales para USD. Largo máximo: 17
-cvv  <br> <i> String </i> | URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización. Largo máximo: 4. No se debe enviar para comercios con la opción `sin cvv` habilitada. 
-card_number  <br> <i> String </i> | Número de la tarjeta con la que se debe hacer la transacción. Largo máximo: 16
+cvv  <br> <i> String </i> | (Opcional) Código que se utiliza como método de seguridad en transacciones en las que la tarjeta no está físicamente presente. Largo máximo: 4. No se debe enviar para comercios con la opción `sin cvv` habilitada. 
+card_number  <br> <i> String </i> | Número de tarjeta. Largo máximo: 16
 card_expiration_date  <br> <i> String </i> | Fecha de expiración de la tarjeta con la que se realiza la transacción. Largo máximo: 5
 
 **Respuesta**
@@ -3169,7 +3169,7 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 
 
 #### Modalidad `sin cvv`
-Para comercios que tengan la opción `sin cvv` habilitada, el campo `cvv` **no** debe ser enviado. 
+Para modalidad del producto Transacción completa `sin CVV`, este campo **no** debe ser enviado.
 ```json
 {
   "buy_order": "ordenCompra12345678",
@@ -3292,6 +3292,16 @@ object(Transbank\TransaccionCompleta\TransactionInstallmentsResponse)#302 (3)
 }
 ```
 
+Si el comercio no tiene configurado periodos diferidos, la respuesta de `deferred_periods` será `[]`:   
+```json
+{
+  "installments_amount": 20,
+  "id_query_installments": 2190124,
+  "deferred_periods": []
+}
+```
+
+
 ```http
 200 OK
 Content-Type: application/json
@@ -3305,14 +3315,6 @@ Content-Type: application/json
       "period": 1
     }
   ]
-}
-```
-Si el comercio no tiene configurado periodos diferidos, la respuesta de `deferred_periods` será `[]`:   
-```json
-{
-  "installments_amount": 20,
-  "id_query_installments": 2190124,
-  "deferred_periods": []
 }
 ```
 
@@ -3391,10 +3393,9 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> String </i> | Token identificador de la transacción. Largo máximo: 64
 id_query_installments  <br> <i> Number </i> | (Opcional) Identificador de cuota. Largo máximo: 2
 deferred_period_index  <br> <i> Number </i> | (Opcional) Cantidad de periodo diferido. Largo máximo: 2
-grace_period  <br> <i> Number </i> | (Opcional) Indicador de periodo de gracia.
+grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia.
 
 **Respuesta**
 
@@ -3502,7 +3503,8 @@ Content-Type: application/json
   "authorization_code": "877550",
   "payment_type_code": "VN",
   "response_code": 0,
-  "installments_number": 0
+  "installments_number": 0,
+  "installmentsAmount": 0
 }
 ```
 
@@ -3514,14 +3516,13 @@ status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZ
 buy_order  <br> <i> String </i> | Número de orden de compra. Largo máximo: 26
 session_id  <br> <i> String </i> | ID de sesión de la compra. Largo máximo: 61
 card_detail  <br> <i> cardDetail </i> | Objeto que contiene información de la tarjeta utilizado por el tarjetahabiente.
-card_number  <br> <i> String </i> | Los últimos 4 dígitos de la tarjeta usada en la transacción. Largo máximo: 19
+card_number  <br> <i> String </i> | Los últimos 4 dígitos de la tarjeta usada en la transacción, solo si el comercio tiene configurado el poder recibir el número de tarjeta. Largo máximo: 19
 accounting_date  <br> <i> String </i> | Fecha contable de la transacción.
 transactionD_date  <br> <i> ISO8601 </i> | Fecha de la transacción.
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción de pago. Largo máximo: 6
 payment_type_code  <br> <i> String </i> | Indica el tipo de tarjeta utilizada. Largo máximo: 2
-response_code  <br> <i> Number </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
+response_code  <br> <i> Number </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado..
 installments_number <br> <i> Number </i> | Número de cuotas de la transacción. Largo máximo: 2
-balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
 ### Consultar estado de una transacción completa
 
@@ -3693,7 +3694,7 @@ accounting_date  <br> <i> String </i> | Fecha contable de la transacción.
 transaction_date  <br> <i> ISO8601 </i> | Fecha de la transacción.
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción de pago. Largo máximo: 6
 payment_type_code  <br> <i> String </i> | Indica el tipo de tarjeta utilizada.
-response_code  <br> <i> Number </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
+response_code  <br> <i> Number </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado.
 installments_number <br> <i> Number </i> | Número de cuotas de la transacción. Largo máximo: 2
 balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
@@ -4168,13 +4169,12 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> String </i> | Token identificador de la transacción. Largo máximo: 64
 details <br> <i> details </i> | Listado con las transacciones mall. 
 commerce_code  <br> <i> String </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo máximo: 12
 buy_order  <br> <i> String </i> | Orden de compra de la tienda del mall. Largo máximo: 26
 id_query_installments  <br> <i> Number </i> | (Opcional) Identificador de cuota. Largo máximo: 2
 deferred_period_index  <br> <i> Number </i> | (Opcional) Cantidad de periodo diferido. Largo máximo: 2
-grace_period  <br> <i> Number </i> | (Opcional) Indicador de periodo de gracia.
+grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia.
 
 **Respuesta**
 
@@ -4228,21 +4228,20 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buy_order  <br> <i> String </i> | Orden de compra del mall. Largo máximo: 26
 card_detail  <br> <i> carddetails </i> | Objeto que representa los datos de la tarjeta de crédito del tarjeta habiente.
-card_detail.card_number  <br> <i> String </i> | 4 últimos números de la tarjeta de crédito del tarjetahabiente.Solo para comercios autorizados por Transbank se envía el número completo. Largo máximo: 19.
+card_detail.card_number  <br> <i> String </i> | 4 últimos números de la tarjeta de crédito del tarjetahabiente. Solo para comercios autorizados por Transbank se envía el número completo. Largo máximo: 19.
 accouting_date  <br> <i> String </i> | Fecha de la autorización. Largo: 4, formato MMDD
 transaction_date  <br> <i> String </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
 details  <br> <i> Array </i> | Lista con resultado de cada una de las transacciones enviadas.
 details [].amount  <br> <i> Number </i> | Monto de la transacción. Largo máximo: 17
 details [].status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 details [].authorization_code  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
-details [].payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
+details [].payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés.
 details [].responseCode  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado.
 details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 details [].installments_amount  <br> <i> Number </i> | Monto de cada cuota. Largo máximo: 17
 details [].commerce_code  <br> <i> String </i> | Código comercio de la tienda. Largo: 6
 details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda. Largo máximo: 255
 status <br> <i> Text </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 17
-balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 64
 
 ### Consultar estado de una transacción mall completa
 
@@ -4338,14 +4337,14 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buy_order  <br> <i> String </i> | Orden de compra del mall. Largo máximo: 26
 card_detail  <br> <i> carddetails </i> | Objeto que representa los datos de la tarjeta de crédito del tarjeta habiente.
-card_detail.card_number  <br> <i> String </i> | 4 últimos números de la tarjeta de crédito del tarjetahabiente.Solo para comercios autorizados por Transbank se envía el número completo. Largo máximo: 19.
+card_detail.card_number  <br> <i> String </i> | 4 últimos números de la tarjeta de crédito del tarjetahabiente. Solo para comercios autorizados por Transbank se envía el número completo. Largo máximo: 19.
 accouting_date  <br> <i> String </i> | Fecha de la autorización. Largo: 4, formato MMDD
 transaction_date  <br> <i> String </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
 details  <br> <i> Array </i> | Lista con resultado de cada una de las transacciones enviadas.
 details [].amount  <br> <i> Number </i> | Monto de la transacción. Largo máximo: 17
 details [].status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 details [].authorization_code  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
-details [].payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
+details [].payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés.
 details [].responseCode  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado.
 details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 details [].installments_amount  <br> <i> Number </i> | Monto de cada cuota. Largo máximo: 17
