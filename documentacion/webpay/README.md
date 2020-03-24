@@ -1139,7 +1139,7 @@ $username = "nombre_de_usuario";
 $email = "nombre_de_usuario@gmail.com";
 $response_url = "https://callback/resultado/de/transaccion";
 
-$resp = MallInscription::start($username, $email, $response_url);
+$response = MallInscription::start($username, $email, $response_url);
 
 $url_webpay = $resp->getUrlWebpay();
 $tbk_token = $resp->getToken();
@@ -1219,7 +1219,7 @@ String tbkUser = response.getTbkUser();
 
 $tbk_token = "tbkTokenRetornadoPorInscriptionStart";
 
-$resp = MallInscription::finish($tbk_token);
+$response = MallInscription::finish($tbk_token);
 
 $tbkUser = $resp->getTbkUser();
 
@@ -1292,7 +1292,7 @@ $tbkUser = $tbkUserRetornadoPorInscriptionFinish;
 //Parámetro opcional
 $options = new Options($apiKey, $parentCommerceCode);
 
-$resp = MallInscription::delete($tbkUser, $username, $options);
+$response = MallInscription::delete($tbkUser, $username, $options);
 
 
 ```
@@ -1399,7 +1399,7 @@ $details = [
     ]
 ];
 
-$resp = MallTransaction::authorize($username, $tbkUser, $parentBuyOrder, $details);
+$response = MallTransaction::authorize($username, $tbkUser, $parentBuyOrder, $details);
 
 
 ```
@@ -1506,7 +1506,7 @@ $amount = $amountIndicadoEnTransactionAuthorize;
 //Parámetro opcional
 $options = new Options($apiKey, $parentCommerceCode);
 
-$resp = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrder, $amount, $options);
+$response = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrder, $amount, $options);
 
 
 ```
