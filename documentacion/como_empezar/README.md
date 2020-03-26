@@ -40,7 +40,7 @@ Te recomendamos leer [las instrucciones de instalación detalladas para el SDK J
 
 [En
 **PHP**](https://github.com/TransbankDevelopers/transbank-sdk-php#instalaci%C3%B3n)
-puedes usar composer para descargar la última versión del SDK,
+puedes usar composer (si no lo tienes, puedes instalarlo desde [acá](https://getcomposer.org/)) para descargar la última versión del SDK,
 ejecutando esto en la línea de comandos cuando estés en la raíz de tu proyecto:
 
 ```bash
