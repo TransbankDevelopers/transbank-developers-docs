@@ -2500,7 +2500,7 @@ object(Transbank\Webpay\Oneclick\InscriptionFinishResponse)#268 (5)
     ["tbkUser"]=> string(36) "5ba90ccf-7990-46ea-8f38-9a04560d5386"
     ["authorizationCode"]=> string(4) "1213"
     ["cardType"]=> string(4) "Visa"
-    ["cardNumber"]=> string(4) "XXXXXXXXXXXX6623"
+    ["cardNumber"]=> string(16) "XXXXXXXXXXXX6623"
 }
 ```
 
@@ -2540,9 +2540,9 @@ Content-Type: application/json
 {
   "response_code": 0,
   "tbk_user": "b6bd6ba3-e718-4107-9386-d2b099a8dd42",
-  "authorization_code": 123456,
-  "credit_card_type": "Visa",
-  "last_four_card_digits": "4092"
+  "authorization_code": "123456",
+  "card_type": "Visa",
+  "card_number": "XXXXXXXXXXXX6623"
 }
 
 ```
