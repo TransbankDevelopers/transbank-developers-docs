@@ -4803,6 +4803,126 @@ nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17
 response_code <br> <i> Number </i> | Código del resultado del pago. Si es exitoso es 0, de lo contrario el pago no fue realizado. Largo máximo: 2
 
+
+### Captura Diferida Webpay OneClick Mall
+
+Una transacción OneClick Mall permite que el tarjetahabiente registre su
+tarjeta de la misma forma en que ocurre con una transacción OneClick, asociando
+dicha inscripción a un comercio padre. Ahora, una vez realizada la inscripción, 
+el comercio padre tiene permitido autorizar transacciones sin captura para
+los comercios “hijo” registrados que tengan habilitado captura diferida.
+Además posterior a la autorización tiene permitido capturar dicho monto reservado.
+La autorización se encarga de validar si es posible realizar el cargo a la
+cuenta asociada a la tarjeta de crédito realizando en el mismo acto la reserva
+de monto de la transacción.
+La captura hace efectiva la reserva hecha previamente o cargo en la cuenta de
+crédito asociada a la tarjeta del titular.
+Estas modalidades, por separado, solo son válidas para tarjetas de crédito.
+
+Para realizar esa captura explícita debe usarse el método `capture()`
+
+#### `capture()`
+
+Este método permite a los comercios OneClick Mall habilitados, poder
+realizar capturas diferidas de una transacción previamente autorizada. El método
+contempla una única captura por cada autorización. Para ello se deberá indicar los
+datos asociados a la transacción de venta y el monto requerido para capturar, el cual
+debe ser menor o igual al monto originalmente autorizado.
+Para capturar una transacción, ésta debe haber sido creada por un código de
+comercio configurado para captura diferida. De esta forma la transacción estará
+autorizada pero requerirá una captura explícita posterior para confirmar la
+transacción.
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+POST /rswebpaytransaction/api/oneclick/mall/v1_0/transactions/capture
+Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Secret: Próximamente...
+Content-Type: application/json
+{
+    "commerce_code": 597055555542,
+    "buy_order": "OCDT12345678",
+    "capture_amount": 50,
+    "authorization_code": "1213"
+}
+```
+**Parámetros**
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+commerce_code  <br> <i> Number </i> | (Opcional, solo usar en caso Mall) Tienda hija que realizó la transacción. Largo: 6.
+buy_order  <br> <i> String </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
+capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo máximo: 17.
+authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
+
+<aside class="notice">
+El método `capture()` debe ser invocado siempre indicando el código del
+comercio de la tienda virtual específica.
+</aside>
+
+**Respuesta**
+
+```java
+// Este SDK aún no se encuentra disponible
+```
+
+```php
+// Este SDK aún no se encuentra disponible
+```
+
+```csharp
+// Este SDK aún no se encuentra disponible
+```
+
+```ruby
+# Este SDK aún no se encuentra disponible
+```
+
+```python
+# Este SDK aún no se encuentra disponible
+```
+
+```http
+200 OK
+Content-Type: application/json
+{
+    "authorization_code": "152759",
+    "authorization_date": "2020-04-03T01:49:50.181Z",
+    "captured_amount": 50,
+    "response_code": 0
+}
+```
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+authorization_code  <br> <i> String </i> | Código de autorización de la captura diferida. Largo máximo: 6
+authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
+captured_amount  <br> <i> Decimal </i> | Monto capturado. Largo máximo: 6
+response_code  <br> <i> Number </i> | Código de resultado de la captura. Si es exitoso es 0,de lo contrario la captura no fue realizada. Largo máximo: 2
+
+<aside class="notice">
+En caso de error apareceran los mismos códigos exclusivos del método `capture()`
+para captura simpultanea.
+</aside>
+
 ## Captura Diferida
 
 Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo el cargo al tarjetahabiente. 
