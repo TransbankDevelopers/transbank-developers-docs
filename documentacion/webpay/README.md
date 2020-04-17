@@ -1049,7 +1049,7 @@ transaction.authorize(buyOrder, tbkUser, username, amount)
 ## Webpay OneClick Mall %<span class='tbk-tagTitleDesc'>REST</span>%
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#webpay-oneclick-mall' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/webpayrest#webpay-oneclick-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
 Para usar Webpay OneClick Mall en transacciones asociadas a varios comercios, lo primero que se debe hacer es definir las dependencias necesarias para poder realizar cualquier tipo de transacción.
