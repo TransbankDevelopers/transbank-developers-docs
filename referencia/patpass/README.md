@@ -156,7 +156,7 @@ var transaction = new Webpay(configuration).PatPassByWebpayTransaction;
 
 WSDL: `/WSWebpayTransaction/cxf/WSWebpayService?wsdl`
 
-Una transacción de autorización de PatPass by WebPay corresponde a una solicitud de inscripción de pago recurrente con tarjetas de crédito, en donde el primer pago se resuelve al instante, y los subsiguientes quedan programados para ser ejecutados mes a mes. PatPass by WebPay cuenta con fecha de caducidad o termino, la cual debe ser proporcionada junto a otros datos para esta transacción. La transacción puede ser realizada en Dólares y Pesos, para este último caso es posible enviar el monto en UF y WebPay realizará la conversión a pesos al momento de realizar el cargo al tarjetahabiente.
+Una transacción de autorización de PatPass by WebPay corresponde a una solicitud de inscripción de pago recurrente con tarjetas de crédito, en donde el primer pago se resuelve al instante, y los subsiguientes quedan programados para ser ejecutados mes a mes. PatPass by WebPay cuenta con fecha de caducidad o termino, la cual debe ser proporcionada junto a otros datos para esta transacción. La transacción puede ser realizada en pesos y es posible enviar el monto en UF. WebPay realizará la conversión a pesos al momento de realizar el cargo al tarjetahabiente.
 
 El flujo de pago en PatPass by WebPay se inicia desde el comercio, en donde el Tarjetahabiente selecciona el producto o servicio. Una vez realizado esto, elige pagar con PatPass by WebPay, en donde se despliega el formulario de pago y se completan los datos requeridos, dando paso al proceso de autenticación del Tarjetahabiente con el objetivo de validar que la tarjeta este siendo utilizada por el titular. Una vez resuelta la autenticación se procede a autorizar el pago y si esta es aprobada, se emite un comprobante electrónico de pago y el sistema procede a generar la inscripción encargada de la recurrencia mensual.
 
@@ -281,7 +281,7 @@ wPMDetail.cardHolderMail <br><i> xs:string </i> | Correo electrónico tarjetaha
 wPMDetail.cellPhoneNumber <br><i> xs:string </i> | Número teléfono celular tarjetahabiente. Largo máximo: 12
 wPMDetail.expirationDate <br><i> xs:dateTime </i> | Fecha expiración de PatPass by WebPay, corresponde al último pago. Largo: 10. Formato AAAA-MM-DD
 wPMDetail.commerceMail <br><i> xs:string </i> | Correo electrónico comercio. Largo máximo: 50. Los SDKs se encargan automáticamente de este parámetro a partir del email de comercio ingresado en la configuración usada para iniciar la transacción
-wPMDetail.ufFlag <br><i> xs:boolean </i> | Valor en true indica que el monto enviado está expresado en UF, valor en false indica que valor esta expresado en Pesos o dólar según corresponda. Los SDKs se encargan automáticamente de este parámetro a partir de la configuración de moneda y certificados/llaves usada para iniciar la transacción
+wPMDetail.ufFlag <br><i> xs:boolean </i> | Valor en true indica que el monto enviado está expresado en UF, valor en false indica que valor esta expresado en pesos. Los SDKs se encargan automáticamente de este parámetro a partir de la configuración de moneda y certificados/llaves usada para iniciar la transacción
 
 ##### Respuesta
 
@@ -398,7 +398,7 @@ detailsOutput  <br> <i> wsTransactionDetailOutput </i> | Lista con resultado de 
 detailsOutput[0].authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción Largo máximo: 6
 detailsOutput[0].paymentTypeCode   <br> <i> xs:string </i> | Tipo de pago de la transacción. <br> VN = Venta Normal <br> Largo máximo: 2
 detailsOutput[0].responseCode  <br> <i> xs:string </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada.<br> -1 = Rechazo de transacción.<br> -2 =  Transacción debe reintentarse. <br> -3 = Error en transacción. <br> -4 = Rechazo de transacción.<br> -5 = Rechazo por error de tasa. <br> -6 = Excede cupo máximo mensual. <br> -7 = Excede límite diario por transacción. <br> -8 = Rubro no autorizado. <br> -100 Rechazo por inscripción de PatPass by Webpay.
-detailsOutput[0].amount  <br> <i> xs:decimal </i> | Monto de la transacción. Formato número entero para transacciones en peso y decimal para transacciones en dólares y UF máximo 2 decimales. Largo máximo: 10
+detailsOutput[0].amount  <br> <i> xs:decimal </i> | Monto de la transacción. Formato número entero para transacciones en pesos y UF máximo 2 decimales. Largo máximo: 10
 detailsOutput[0].sharesNumber  <br> <i> xs:int </i> | Cantidad de cuotas. Valor por defecto 0. Largo máximo: 2
 detailsOutput[0].commerceCode  <br> <i> xs:string </i> | Código comercio de la tienda. Largo: 12
 detailsOutput[0].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Largo máximo: 26
