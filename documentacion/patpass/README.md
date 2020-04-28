@@ -556,7 +556,7 @@ configuration.setPublicCert( // pega acá tu certificado público
     //....
     "-----END CERTIFICATE-----");
 
-// Default significa usar pesos o dólares (dependiendo del código de comercio).
+// Default significa usar pesos o UF (dependiendo del código de comercio).
 configuration.setPatPassCurency(PatPassByWebpayNormal.Currency.DEFAULT);
 // Si se quiere usar UFs, especificar PatPassByWebpayNormal.Currency.UF.
 configuration.commerceMail("mail-para-notificaciones-patpass@micomercio.cl");
