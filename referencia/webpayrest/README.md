@@ -1589,11 +1589,11 @@ Código | Descripción
 315 | Error del autorizador
 53 | La transacción no permite anulación parcial de transacciones con cuotas
 
-## Webpay OneClick Mall
+## OneClick Mall
 
 #### Flujo de inscripción y pago
 
-El flujo de Webpay OneClick Mall es en general el mismo que el de [Webpay
+El flujo de OneClick Mall es en general el mismo que el de [Webpay
 OneClick Normal](#webpay-oneclick-normal) tanto de cara al tarjeta habiente como
 de cara al integrador.
 
@@ -1606,7 +1606,7 @@ Las diferencias son:
   individualmente, pues es posible que el emisor de la tarjeta autorice algunas
   y otras no.
 
-### Crear una inscripción Webpay OneClick Mall
+### Crear una inscripción OneClick Mall
 
 Para iniciar la inscripción debe usarse el método `Inscription.start()`
 
@@ -1651,8 +1651,8 @@ MallInscription.start(
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/inscriptions
 
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
@@ -1666,9 +1666,9 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-username  <br> <i> String </i> | Identificador del usuario registrado en el comercio. Largo máximo: 256.
-email  <br> <i> String </i> | Email del usuario registrado en el comercio. Largo máximo: 256.
-response_url  <br> <i> String </i> | URL del comercio a la cual Webpay redireccionará posterior al proceso de inscripción. Largo máximo: 256.
+username  <br> <i> String </i> | Identificador del usuario registrado en el comercio. Largo máximo: 40.
+email  <br> <i> String </i> | Email del usuario registrado en el comercio. Largo máximo: 100.
+response_url  <br> <i> String </i> | URL del comercio a la cual Webpay redireccionará posterior al proceso de inscripción. Largo máximo: 255.
 
 **Respuesta**
 
@@ -1734,15 +1734,15 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> String </i> | Identificador, único, del proceso de inscripción. Debe ser enviado por parámetro (`TBK_TOKEN`) a la URL `urlWebpay`.
-url_webpay  <br> <i> String </i> | URL de Webpay para iniciar la inscripción.
+token  <br> <i> String </i> | Identificador, único, del proceso de inscripción. Largo: 64.
+url_webpay  <br> <i> String </i> | URL de Webpay para iniciar la inscripción. Largo: 255.
 
 <aside class="notice">
 Una vez que se llama a este webservice el usuario debe ser redireccionado vía
 POST a `urlInscriptionForm` con parámetro `TBK_TOKEN` igual al token.
 </aside>
 
-### Confirmar una inscripción Webpay OneClick Mall
+### Confirmar una inscripción OneClick Mall
 
 Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a
 la URL de fin de inscripción que definió el comercio (`responseURL`). En ese
@@ -1792,8 +1792,8 @@ MallInscription.finish(token=token)
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/inscriptions/{token}
 
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
@@ -1891,11 +1891,11 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-response_code  <br> <i> Number </i> | Código de retorno del proceso de inscripción, donde 0 (cero) es aprobado.
-tbk_user  <br> <i> String </i> | Identificador único de la inscripción del cliente en Webpay OneClick, que debe ser usado para realizar pagos o borrar la inscripción.
-authorization_code  <br> <i> String </i> | Código que identifica la autorización de la inscripción.
-card_type  <br> <i> cardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna).
-card_number  <br> <i> String </i> | El número de la tarjeta ingresada por el cliente en la inscripción, con los últimos 4 dígitos de la tarjeta visibles.
+response_code  <br> <i> Number </i> | Código de retorno del proceso de la autorización, donde 0 (cero) es aprobado. Largo: 2.
+tbk_user  <br> <i> String </i> | Identificador único de la inscripción del cliente en OneClick, que debe ser usado para realizar pagos o borrar la inscripción. Largo: 40.
+authorization_code  <br> <i> String </i> | Código que identifica la autorización de la inscripción. Largo: 6.
+card_type  <br> <i> cardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna). Largo: 10.
+card_number  <br> <i> String </i> | Últimos 4 dígitos de la tarjeta inscrito: Largo: 4.
 
 ### Eliminar una inscripción con Webpay Oneclick Mall
 Una vez finalizado el proceso de inscripción es posible eliminarla de ser necesario. Para esto debes usar el método llamado `Inscription.remove()`.
@@ -1936,9 +1936,10 @@ MallInscription.delete(tbk_user, user_name)
 ```http
 DELETE /rswebpaytransaction/api/oneclick/v1.0/inscriptions
 
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
+
 
 {
   "tbk_user": "b6bd6ba3-e718-4107-9386-d2b099a8dd42",
@@ -1950,8 +1951,8 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-tbk_user  <br> <i> String </i> | Identificador único de la inscripción del cliente (devuelto por `Inscription.finish()`).
-username  <br> <i> String </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `Inscription.start()`).
+tbk_user  <br> <i> String </i> | Identificador único de la inscripción del cliente (devuelto por `Inscription.finish()`). Largo: 40.
+username  <br> <i> String </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `Inscription.start()`). Largo máximo: 40.
 
 **Respuesta**
 
@@ -2001,7 +2002,7 @@ object(Transbank\Webpay\Oneclick\InscriptionDeleteResponse)#264 (2)
 Content-Type: application/json
 ```
 
-### Autorizar un pago con Webpay OneClick Mall
+### Autorizar un pago con OneClick Mall
 
 Una vez realizada la inscripción, el comercio puede usar el `tbkUser` recibido
 para realizar transacciones. Para eso debes usar el método `Transaction.authorize()`.
@@ -2058,8 +2059,8 @@ MallTransaction.authorize(user_name=user_name, tbk_user=tbk_user, buy_order=buy_
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/transactions
 
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
@@ -2068,7 +2069,7 @@ Content-Type: application/json
   "buy_order": "ordenCompra123456789",
   "details": [
     {
-      "commerce_code": Próximamente...,
+      "commerce_code": "597055555542",
       "buy_order": "ordenCompra123445",
       "amount": 1000,
       "installments_number": 5
@@ -2080,14 +2081,14 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-username  <br> <i> String </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `Inscription.start()`).
-tbk_user  <br> <i> String </i> | Identificador único de la inscripción del cliente (devuelto por `Inscription.finish()`).
-buy_order  <br> <i> Number </i> | Identificador único de la compra generado por el comercio.
-details  <br> <i> Array </i> | Lista de objetos, uno por cada tienda diferente del mall que participa en la transacción.
+username  <br> <i> String </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `Inscription.start()`). Largo máximo: 40.
+tbk_user  <br> <i> String </i> | Identificador único de la inscripción del cliente (devuelto por `Inscription.finish()`). Largo: 40.
+buy_order  <br> <i> Number </i> | Identificador único de la compra generado por el comercio. Largo máximo: 26.
+details  <br> <i> Array </i> | Lista de objetos, uno por cada tienda diferente del mall que participa en la transacción. 
 details [].commerce_code  <br> <i>String </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
-details [].buy_order  <br> <i> String </i> | Identificador único de la compra generado por el comercio hijo (tienda).
-details [].amount  <br> <i> Decimal </i> | Monto de la sub-transacción de pago. En pesos o dólares según configuración comercio mall padre.
-details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas de la sub-transacción de pago.
+details [].buy_order  <br> <i> String </i> | Identificador único de la compra generado por el comercio hijo (tienda). Largo máximo: 26.
+details [].amount  <br> <i> Decimal </i> | Monto de la transacción de pago. Largo máximo: 17.
+details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas de la transacción de pago. Largo 2. No obligatorio.
 
 **Respuesta**
 
@@ -2265,23 +2266,23 @@ buy_order  <br> <i> String </i> | Orden de compra generada por el comercio padre
 card_detail  <br> <i> cardDetail </i> | Objeto que contiene información de la tarjeta utilizado por el tarjetahabiente.
 card_detail.card_number  <br> <i> String </i> | Los últimos 4 dígitos de la tarjeta usada en la transacción.
 accounting_date  <br> <i> String </i> | Fecha contable de la autorización del pago.
-transaction_date  <br> <i> DateTime </i> | Fecha completa (timestamp) de la autorización del pago.
+transaction_date  <br> <i> DateTime </i> | Fecha completa (timestamp) de la autorización del pago. ISO 8601
 details  <br> <i> Array </i> | Lista con el resultado de cada transacción de las tiendas hijas.
-details [].amount  <br> <i> Decimal </i> | Monto de la sub-transacción de pago.
+details [].amount  <br> <i> Decimal </i> | Monto de la transacción de pago.
 details [].status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED).
-details [].authorization_code  <br> <i> String </i> | Código de autorización de la sub-transacción de pago.
-details [].payment_type_code  <br> <i> String </i> | [Tipo](/producto/webpay#tipos-de-pago) (VC, NC, SI, etc.) de la sub-transacción de pago.
-details [].response_code  <br> <i> Number </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
-details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas de la sub-transacción de pago.
+details [].authorization_code  <br> <i> String </i> | Código de autorización de la transacción de pago.
+details [].payment_type_code  <br> <i> String </i> | [Tipo](/producto/webpay#tipos-de-pago) de pago de la transaccion. <br> VD = Venta Débito.<br>VN = Venta Normal.<br>VC = Venta en cuotas.<br>SI = 3 cuotas sin interés.<br>S2 = 2 cuotas sin interés.<br>NC = N Cuotas sin interés<br>
+details [].response_code  <br> <i> Number </i> | Código del resultado del pago, donde: 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
+details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas de la transacción de pago.
 details [].commerce_code  <br> <i> Number </i> | Código de comercio del comercio hijo (tienda).
-details [].buy_order  <br> <i> String </i> | Orden de compra generada por el comercio hijo para la sub-transacción de pago.
+details [].buy_order  <br> <i> String </i> | Orden de compra generada por el comercio hijo para la transacción de pago.
 
 <aside class="warning">
 Cualquier valor distinto de número en `installmentsNumber` (incluyendo letras,
 inexistencia del campo o nulo) será asumido como cero, es decir "Sin cuotas".
 </aside>
 
-### Consultar un pago realizado con Webpay OneClick Mall
+### Consultar un pago realizado con OneClick Mall
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
@@ -2323,8 +2324,8 @@ MallTransaction.status(buy_order)
 ```http
 GET /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}
 
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 ```
 
@@ -2332,7 +2333,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-buy_order  <br> <i> String </i> | Orden de compra de la transacción a  consultar.
+buy_order  <br> <i> String </i> | Orden de compra de la transacción a consultar (se envía por parámetro GET, no en el body).
 
 **Respuesta**
 
@@ -2506,9 +2507,9 @@ status  <br> <i> Text </i> | Estado de la transacción (INITIALIZED, AUTHORIZED,
 balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
 
 
-### Reversar o Anular un pago Webpay OneClick Mall
+### Reversar o Anular un pago OneClick Mall
 
-Para Webpay OneClick Mall hay dos operaciones diferentes para dejar sin efecto
+Para OneClick Mall hay dos operaciones diferentes para dejar sin efecto
 transacciones autorizadas: La reversa y la anulación.
 
 **La reversa** se aplica para **problemas operacionales (lado comercio) o de
@@ -2517,15 +2518,14 @@ respuesta de una autorización**. En tal caso el comercio **debe** intentar
 reversar la transacción de autorización para evitar un posible descuadre entre
 comercio y Transbank. La reversa funciona sobre la operación completa del mall,
 lo que significa que **todas las transacciones realizadas en la operación mall
-serán reversadas**. Y sólo puede ser usada hasta 30 segundos después de la
-llamada a `Transaction.authorize()`
+serán reversadas**. 
 
 **La anulación**, en cambio, actúa individualmente sobre las transacciones de
 las _tiendas_ de un mall. Por ende, **la anulación es la operación correcta a
 utilizar para fines financieros**, de manera de anular un cargo ya realizado.
-También es posible *reversar una anulación* debido a problemas operacionales
-(por ejemplo un error de comunicación al momento de anular, que le impida al
-comercio saber si Transbank recibió la anulación).
+Permite generar el reembolso del total o parte del monto de una transacción completa. 
+Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una 
+reversa o una anulación:
 
 Para llevar a cabo la reversa, el comercio debe usar el método para este caso
 sin indicar el monto. Para la anulación, se debe usar el método indicando el monto
@@ -2571,12 +2571,12 @@ MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, amount)
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}/refunds
 
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
-  "commerce_code": Próximamente...,
+  "commerce_code": "597055555542",
   "detail_buy_order": "ordenCompra12345",
   "amount": 1000
 }
@@ -2586,9 +2586,9 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-buy_order  <br> <i> String </i> | Orden de compra de la transacción a  reversar o anular.
-commerce_code  <br> <i> String </i> | Código de comercio hijo.
-detail_buy_order  <br> <i> String </i> | Orden de compra hija de la transacción a  reversar o anular.
+buy_order  <br> <i> String </i> | Orden de compra de la transacción a  reversar o anular. Se envía por GET. Largo máximo: 26. 
+commerce_code  <br> <i> String </i> | Código de comercio hijo. Largo máximo: 12.
+detail_buy_order  <br> <i> String </i> | Orden de compra hija de la transacción a  reversar o anular. Largo máximo: 26.
 amount  <br> <i> Number </i> | (Opcional) Monto a anular. Si está presente se ejecuta una anulación, en caso contrario se ejecuta una reversa (a menos que haya pasado el tiempo máximo para reversar).
 
 **Respuesta**
@@ -2680,10 +2680,11 @@ type  <br> <i> String </i> | Tipo de reembolso (REVERSE. NULLIFY). Largo máximo
 authorization_code  <br> <i> Boolean </i> | Código de autorización. Largo máximo: 6
 authorization_date  <br> <i> ISO8601 </i> | Fecha de la autorización de la transacción.
 nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
-balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
+balance  <br> <i> Decimal </i> | Monto restante de la transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
+response_code <br> <i> Number </i> | Código del resultado del pago, donde: 0 (cero) es aprobado. Largo máximo: 2
+buy_order  <br> <i> String </i> | Orden de compra generada por el comercio hijo para la transacción de pago. Largo máximo: 26.
 
-
-### Captura Diferida Webpay OneClick Mall
+### Captura Diferida OneClick Mall
 
 Una transacción OneClick Mall permite que el tarjetahabiente registre su
 tarjeta de la misma forma en que ocurre con una transacción OneClick, asociando
