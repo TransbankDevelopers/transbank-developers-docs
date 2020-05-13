@@ -36,7 +36,7 @@ debes agregar esta entrada en tu archivo `pom.xml` de Maven:
 </dependency>
 ```
 
-Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Java](https://github.com/TransbankDevelopers/transbank-sdk-java#instalaci%C3%B3n) para mas opciones e información de la última versión disponible.
+Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Java](https://github.com/TransbankDevelopers/transbank-sdk-java#instalaci%C3%B3n) para más opciones e información de la última versión disponible.
 
 [En
 **PHP**](https://github.com/TransbankDevelopers/transbank-sdk-php#instalaci%C3%B3n)
@@ -47,7 +47,7 @@ ejecutando esto en la línea de comandos cuando estés en la raíz de tu proyect
 composer require transbank/transbank-sdk
 ```
 
-Te recomendamos leer [las instrucciones de instalación detalladas para el SDK PHP](https://github.com/TransbankDevelopers/transbank-sdk-php#instalaci%C3%B3n) para mas opciones de instalación.
+Te recomendamos leer [las instrucciones de instalación detalladas para el SDK PHP](https://github.com/TransbankDevelopers/transbank-sdk-php#instalaci%C3%B3n) para más opciones de instalación.
 
 [En
 **Node.js**](https://github.com/TransbankDevelopers/transbank-sdk-nodejs#instalaci%C3%B3n)
@@ -63,7 +63,7 @@ Yarn
 yarn add transbank-sdk
 ```
 
-Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Node.js](https://github.com/TransbankDevelopers/transbank-sdk-nodejs#instalaci%C3%B3n) para mas opciones de instalación.
+Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Node.js](https://github.com/TransbankDevelopers/transbank-sdk-nodejs#instalaci%C3%B3n) para más opciones de instalación.
 
 [En
 **.NET**](https://github.com/TransbankDevelopers/transbank-sdk-dotnet#instalaci%C3%B3n)
@@ -74,7 +74,7 @@ Studio:
 PM> Install-Package TransbankSDK
 ```
 
-Te recomendamos leer [las instrucciones de instalación detalladas para el SDK .NET](https://github.com/TransbankDevelopers/transbank-sdk-dotnet#instalaci%C3%B3n) para mas opciones de instalación.
+Te recomendamos leer [las instrucciones de instalación detalladas para el SDK .NET](https://github.com/TransbankDevelopers/transbank-sdk-dotnet#instalaci%C3%B3n) para más opciones de instalación.
 
 [En
 **Ruby**](https://github.com/TransbankDevelopers/transbank-sdk-ruby#instalaci%C3%B3n) puedes instalar el SDK como una gema:
@@ -83,7 +83,7 @@ Te recomendamos leer [las instrucciones de instalación detalladas para el SDK .
 gem install transbank-sdk
 ```
 
-Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Ruby](https://github.com/TransbankDevelopers/transbank-sdk-ruby#instalaci%C3%B3n) para mas opciones de instalación.
+Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Ruby](https://github.com/TransbankDevelopers/transbank-sdk-ruby#instalaci%C3%B3n) para más opciones de instalación.
 
 (Para Webpay en Ruby puedes seguir usando [libwebpay](https://github.com/TransbankDevelopers/libwebpay-ruby) u otra alternativa)
 
@@ -94,7 +94,7 @@ Te recomendamos leer [las instrucciones de instalación detalladas para el SDK R
 pip install transbank-sdk
 ```
 
-Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Python](https://github.com/TransbankDevelopers/transbank-sdk-python#instalaci%C3%B3n) para mas opciones de instalación.
+Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Python](https://github.com/TransbankDevelopers/transbank-sdk-python#instalaci%C3%B3n) para más opciones de instalación.
 
 (Para Webpay en Python puedes seguir usando [libwebpay](https://github.com/TransbankDevelopers/libwebpay-python), pero te recomendamos usar [python-tbk, creada por Cornershop](https://github.com/cornershop/python-tbk) que será la base de lo que integremos finalmente en transbank-sdk)
 
