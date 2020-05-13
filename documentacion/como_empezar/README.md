@@ -47,6 +47,8 @@ ejecutando esto en la línea de comandos cuando estés en la raíz de tu proyect
 composer require transbank/transbank-sdk
 ```
 
+Te recomendamos leer [las instrucciones de instalación detalladas para el SDK PHP](https://github.com/TransbankDevelopers/transbank-sdk-php#instalaci%C3%B3n) para mas opciones de instalación.
+
 [En
 **Node.js**](https://github.com/TransbankDevelopers/transbank-sdk-nodejs#instalaci%C3%B3n)
 se debe instalar por NPM o Yarn, ejecutando esto en la línea de comandos cuando estés en la raíz de tu proyecto:
