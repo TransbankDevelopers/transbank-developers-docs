@@ -53,8 +53,14 @@ Te recomendamos leer [las instrucciones de instalación detalladas para el SDK P
 **Node.js**](https://github.com/TransbankDevelopers/transbank-sdk-nodejs#instalaci%C3%B3n)
 se debe instalar por NPM o Yarn, ejecutando esto en la línea de comandos cuando estés en la raíz de tu proyecto:
 
+NPM
 ```bash
 npm install transbank-sdk --save
+```
+
+Yarn
+```bash
+yarn add transbank-sdk
 ```
 
 Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Node.js](https://github.com/TransbankDevelopers/transbank-sdk-nodejs#instalaci%C3%B3n) para mas opciones de instalación.
