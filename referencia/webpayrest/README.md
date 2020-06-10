@@ -2521,9 +2521,9 @@ Permite generar el reembolso del total o parte del monto de una transacción co
 Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una 
 reversa o una anulación:
 
-Para llevar a cabo la reversa, el comercio debe usar el método para este caso
-sin indicar el monto. Para la anulación, se debe usar el método indicando el monto
-de la anulación.
+<strong>Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
+
+Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.</strong>
 
 #### `Transaction.refund()`
 
