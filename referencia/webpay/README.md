@@ -887,7 +887,7 @@ WSDL: `/WSWebpayTransaction/cxf/WSCommerceIntegrationService?wsdl`
 ### Captura diferida Webpay Plus
 
 Este método permite a todo comercio habilitado realizar capturas de una
-transacción autorizada sin captura generada en Webpay Plus o Webpay OneClick.
+transacción autorizada sin captura generada en Webpay Plus o OneClick.
 El método contempla una única captura por cada autorización. Para ello se
 deberá indicar los datos asociados a la transacción de venta con autorización
 sin captura y el monto requerido para capturar el cual debe ser menor o igual al
@@ -1023,7 +1023,7 @@ Código | Descripción
 ### Anulación Webpay Plus
 
 Este método permite a todo comercio habilitado anular una transacción que fue
-generada en Webpay Plus (Normal y Mall) o Webpay OneClick Normal. El método
+generada en Webpay Plus (Normal y Mall) o OneClick Normal. El método
 contempla anular total o parcialmente una transacción. Para ello se deberá
 indicar los datos asociados a la transacción de venta en línea que se desea
 anular y los montos requeridos para anular. Se considera totalmente anulada una
@@ -1164,7 +1164,12 @@ Código | Descripción
 315 | Error del autorizador
 53 | La transacción no permite anulación parcial de transacciones con cuotas
 
-## Webpay OneClick Normal
+## OneClick Normal
+
+<aside class="warning">
+Este producto se encuentra deprecado y ya no está disponible para su contración. Como alternativa puedes utilizar OneClick Mall REST 
+[click aquí](https://www.transbankdevelopers.cl/referencia/webpayrest#oneclick-mall)
+</aside>
 
 ```java
 WebpayOneClick transaction =
@@ -1190,7 +1195,7 @@ comercio, que desee utilizar el servicio. Este tipo de pago facilita la venta,
 disminuye el tiempo de la transacción y reduce los riesgos de ingreso erróneo
 de los datos del medio de pago.
 
-El proceso de integración con Webpay OneClick consiste en desarrollar por parte
+El proceso de integración con OneClick consiste en desarrollar por parte
 del comercio las llamadas a los servicios web dispuestos por Transbank para la
 inscripción de los tarjetahabientes, así como para la realización de los
 pagos.
@@ -1198,7 +1203,7 @@ pagos.
 #### Flujo de inscripción y pago
 
 La inscripción es el proceso en el cual el tarjetahabiente registra los datos
-de su tarjeta en Webpay OneClick para usarlo en compras futuras. Estos datos son
+de su tarjeta en OneClick para usarlo en compras futuras. Estos datos son
 almacenados de forma segura en Transbank, y nunca son conocidos por el comercio.
 Este proceso debe ser iniciado por la tienda del comercio y es requisito que el
 cliente esté autenticado en la página del comercio antes de iniciar la
@@ -1246,14 +1251,14 @@ Proceso:
 
 - El cliente se conecta y autentica en la página o aplicación del comercio
   mediante su nombre de usuario y clave.
-- El cliente selecciona la opción de pagar con Webpay Oneclick.
+- El cliente selecciona la opción de pagar con Oneclick.
 - El comercio usa el servicio web de pago, publicado por Transbank, entregando
   el identificador de usuario (que se obtuvo en la inscripción), el monto del
   pago y la orden de compra. Obtiene la respuesta con el código de
   autorización.
 - El comercio presenta el resultado del pago al cliente.
 
-### Crear una inscripción Webpay OneClick
+### Crear una inscripción OneClick
 
 Para realizar el primero de los procesos descritos (la inscripción), debe llamarse al método `initInscription()`
 
@@ -1269,7 +1274,7 @@ vía POST a `urlWebpay` con parámetro `TBK_TOKEN` igual al token obtenido.
 
 <aside class="notice">
 Nota que a diferencia de Webpay Plus, donde el parámetro se llama `token_ws`, en
-Webpay OneClick el parámetro se llama `TBK_TOKEN`.
+OneClick el parámetro se llama `TBK_TOKEN`.
 </aside>
 
 ```java
@@ -1323,7 +1328,7 @@ Una vez que se llama a este webservice el usuario debe ser redireccionado vía
 POST a `urlWebpay` con parámetro `TBK_TOKEN` igual al token.
 </aside>
 
-### Confirmar una inscripción Webpay OneClick
+### Confirmar una inscripción OneClick
 
 Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a
 la URL de fin de inscripción que definió el comercio. En ese instante el
@@ -1386,9 +1391,9 @@ responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de inscripc
 authCode  <br> <i> xs:string </i> | Código que identifica la autorización de la inscripción.
 creditCardType  <br> <i> creditCardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna).
 last4CardDigits  <br> <i> xs:string </i> | Los últimos 4 dígitos de la tarjeta ingresada por el cliente en la inscripción.
-tbkUser  <br> <i> xs:string </i> | Identificador único de la inscripción del cliente en Webpay OneClick, que debe ser usado para realizar pagos o borrar la inscripción.
+tbkUser  <br> <i> xs:string </i> | Identificador único de la inscripción del cliente en OneClick, que debe ser usado para realizar pagos o borrar la inscripción.
 
-### Autorizar un pago con Webpay OneClick
+### Autorizar un pago con OneClick
 
 Una vez realizada la inscripción, el comercio puede usar el `tbkUser` recibido
 para realizar transacciones. Para eso debe usar el método `authorize()`.
@@ -1458,7 +1463,7 @@ last4CardDigits  <br> <i> xs:string </i> | Los últimos 4 dígitos de la tarje
 transactionId  <br> <i> xs:long </i> | Identificador único de la transacción de pago.
 responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de pago, donde: <br> 0 (cero) es aprobado. <br> -1, -2, -3, -4, -5, -6, -7, -8: Rechazo <br> -96: No existe inscripción asociada. <br> -97: Límites Oneclick, máximo monto diario de pago excedido. <br> -98: Límites Oneclick, máximo monto de pago excedido <br> -99: Límites Oneclick, máxima cantidad de pagos diarios excedido.
 
-### Reversar un pago Webpay OneClick
+### Reversar un pago OneClick
 
 Este proceso permite reversar una venta cuando esta no pudo concretarse, dentro del mismo día contable, con la finalidad de anular un cargo realizado al cliente. Para esto se debe consumir el método `codeReverseOneClick()` con la orden de compra de la transacción a reversar.
 
@@ -1508,16 +1513,16 @@ Nombre  <br> <i> tipo </i> | Descripción
 reversed  <br> <i> xs:boolean </i> | Indica si tuvo éxito la reversa.
 reverseCode  <br> <i> xs:long </i> | Identificador único de la transacción de reversa.
 
-### Anular un pago Webpay OneClick
+### Anular un pago OneClick
 
 En caso que ya no sea el mismo día contable y se requiera dejar sin efecto una
-venta, es posible anular un pago realizado con Webpay OneClick Normal usando [el
+venta, es posible anular un pago realizado con OneClick Normal usando [el
 mismo método de anulación Webpay Plus](#anulacion-webpay-plus).
 
-### Eliminar una inscripción Webpay OneClick
+### Eliminar una inscripción OneClick
 
 En el caso que el comercio requiera eliminar la inscripción de un usuario en
-Webpay OneClick ya sea por la eliminación de un cliente en su sistema o por la
+OneClick ya sea por la eliminación de un cliente en su sistema o por la
 solicitud de este para no operar con esta forma de pago, el comercio deberá
 invocar a `removeUser()` con el identificador de usuario entregado en la
 inscripción.
@@ -1549,15 +1554,15 @@ username  <br> <i> xs:string </i> | Identificador del usuario en los sistemas d
 
 El boolean de respuesta será `true` en caso de éxito y `false` en caso contrario.
 
-## Webpay OneClick Mall
+## OneClick Mall
 
-> Los SDKs no soportan aún los servicios Webpay OneClick Mall.
+> Los SDKs no soportan aún los servicios OneClick Mall.
 
 WSDL: `/WSWebpayTransaction/cxf/WSOneClickMulticodeService?wsdl`
 
 #### Flujo de inscripción y pago
 
-El flujo de Webpay OneClick Mall es en general el mismo que el de [Webpay
+El flujo de OneClick Mall es en general el mismo que el de [Webpay
 OneClick Normal](#webpay-oneclick-normal) tanto de cara al tarjeta habiente como
 de cara al integrador.
 
@@ -1570,7 +1575,7 @@ Las diferencias son:
   individualmente, pues es posible que el emisor de la tarjeta autorice algunas
   y otras no.
 
-### Crear una inscripción Webpay OneClick Mall
+### Crear una inscripción OneClick Mall
 
 Para iniciar la inscripción debe usarse el método `initInscription()`
 
@@ -1578,7 +1583,7 @@ Para iniciar la inscripción debe usarse el método `initInscription()`
 
 Permite gatillar el inicio del proceso de inscripción.
 
-> Los SDKs no soportan aún los servicios Webpay OneClick Mall.
+> Los SDKs no soportan aún los servicios OneClick Mall.
 
 **Parámetros**
 
@@ -1600,7 +1605,7 @@ Una vez que se llama a este webservice el usuario debe ser redireccionado vía
 POST a `urlInscriptionForm` con parámetro `TBK_TOKEN` igual al token.
 </aside>
 
-### Confirmar una inscripción Webpay OneClick Mall
+### Confirmar una inscripción OneClick Mall
 
 Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a
 la URL de fin de inscripción que definió el comercio (`returnUrl`). En ese
@@ -1617,7 +1622,7 @@ el usuario serán eliminados.
 
 Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
 
-> Los SDKs no soportan aún los servicios Webpay OneClick Mall.
+> Los SDKs no soportan aún los servicios OneClick Mall.
 
 **Parámetros**
 
@@ -1637,7 +1642,7 @@ cardExpirationDate  <br> <i> xs:string </i> | Indica la fecha de expiración de
 cardOrigin  <br> <i> cardOrigin </i> | Indica si la tarjeta de crédito utilizada es nacional (NATIONAL_CARD) o extranjera (FOREIGN_CARD).
 tbkUser  <br> <i> xs:string </i> | Identificador único de la inscripción del cliente, este debe ser usado para realizar pagos o eliminar la inscripción.
 
-### Autorizar un pago con Webpay OneClick Mall
+### Autorizar un pago con OneClick Mall
 
 Una vez realizada la inscripción, el comercio puede usar el `tbkUser` recibido
 para realizar transacciones. Para eso debes usar el método `authorize()`.
@@ -1646,7 +1651,7 @@ para realizar transacciones. Para eso debes usar el método `authorize()`.
 
 Permite autorizar un pago.
 
-> Los SDKs no soportan aún los servicios Webpay OneClick Mall.
+> Los SDKs no soportan aún los servicios OneClick Mall.
 
 **Parámetros**
 
@@ -1684,9 +1689,9 @@ storesOutput[].responseCode  <br> <i> xs:int </i> | Código de retorno del proc
 storesOutput[].sharesNumber  <br> <i> xs:int </i> | Cantidad de cuotas de la sub-transacción de pago.
 storesOutput[].shareAmount  <br> <i> xs:decimal </i> | Monto por cuota de la sub-transacción de pago.
 
-### Reversar o Anular un pago Webpay OneClick Mall
+### Reversar o Anular un pago OneClick Mall
 
-Para Webpay OneClick Mall hay dos operaciones diferentes para dejar sin efecto
+Para OneClick Mall hay dos operaciones diferentes para dejar sin efecto
 transacciones autorizadas: La reversa y la anulación.
 
 **La reversa** se aplica para **problemas operacionales (lado comercio) o de
@@ -1711,7 +1716,7 @@ Para llevar a cabo la reversa, el comercio debe usar el método `reverse()`. Par
 
 Permite reversar una operación de autorización.
 
-> Los SDKs no soportan aún los servicios Webpay OneClick Mall.
+> Los SDKs no soportan aún los servicios OneClick Mall.
 
 **Parámetros**
 
@@ -1735,7 +1740,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 
 Permite anular un pago.
 
-> Los SDKs no soportan aún los servicios Webpay OneClick Mall.
+> Los SDKs no soportan aún los servicios OneClick Mall.
 
 **Parámetros**
 
@@ -1763,7 +1768,7 @@ balance   <br> <i> xs:decimal </i> | Monto restante de la sub-transacción de p
 
 Permite reversar una anulación.
 
-> Los SDKs no soportan aún los servicios Webpay OneClick Mall.
+> Los SDKs no soportan aún los servicios OneClick Mall.
 
 **Parámetros**
 
@@ -1786,15 +1791,15 @@ sólo será válida dentro de los 30 segundos posteriores a la llamada del
 método `nullify()`.
 </aside>
 
-### Eliminar una inscripción Webpay OneClick Mall
+### Eliminar una inscripción OneClick Mall
 
-En el caso que el comercio requiera eliminar la inscripción de un usuario en Webpay OneClick Mall ya sea por la eliminación de un cliente en su sistema o por la solicitud de este para no operar con esta forma de pago, el comercio deberá invocar a `removeInscription()` con el identificador de usuario entregado en la inscripción.
+En el caso que el comercio requiera eliminar la inscripción de un usuario en OneClick Mall ya sea por la eliminación de un cliente en su sistema o por la solicitud de este para no operar con esta forma de pago, el comercio deberá invocar a `removeInscription()` con el identificador de usuario entregado en la inscripción.
 
 #### `removeInscription()`
 
-Permite eliminar una inscripción de usuario en Webpay OneClick Mall
+Permite eliminar una inscripción de usuario en OneClick Mall
 
-> Los SDKs no soportan aún los servicios Webpay OneClick Mall.
+> Los SDKs no soportan aún los servicios OneClick Mall.
 
 **Parámetros**
 
@@ -1809,8 +1814,8 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 result  <br> <i> xs:boolean </i> | Indica si la eliminación se realizó correctamente o no.
 
-### Captura Diferida Webpay OneClick Mall
-> Los SDKs no soportan aún los servicios Webpay OneClick Mall.
+### Captura Diferida OneClick Mall
+> Los SDKs no soportan aún los servicios OneClick Mall.
 
 Una transacción OneClick Mall permite que el tarjetahabiente registre su
 tarjeta de la misma forma en que ocurre con una transacción OneClick, asociando

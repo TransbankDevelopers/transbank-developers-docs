@@ -694,15 +694,20 @@ Finalmente después del comprobante Webpay redirigirá otra vez (vía `POST`) a 
 En [la referencia detallada de Webpay Plus Mall puedes ver cada paso del flujo, incluyendo los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-plus-mall).
 
 
-## Webpay OneClick %<span class='tbk-tagTitleDesc'>SOAP</span>%
+## OneClick %<span class='tbk-tagTitleDesc'>SOAP</span>%
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-oneclick-normal' tbk-link-name='Referencia Api'></div>
 </div>
 
+<aside class="warning">
+Este producto se encuentra deprecado y ya no está disponible para su contración. Como alternativa puedes utilizar OneClick Mall REST 
+[click aquí](https://www.transbankdevelopers.cl/documentacion/webpay#webpay-oneclick-mall)
+</aside>
+
 ### Crear una inscripción
 
-Para usar Webpay OneClick en transacciones asociadas a un único comercio, lo
+Para usar OneClick en transacciones asociadas a un único comercio, lo
 primero que necesitas es preparar una instancia de `WebpayOneClick` con la
 `Configuration` que incluye el código de comercio y los certificados a
 usar
@@ -950,7 +955,7 @@ transaction.finishInscription(token)
 ```
 
 Con eso habrás completado el flujo "feliz" en que todo funciona OK. En [la
-referencia detallada de Webpay OneClick puedes ver cada paso del flujo,
+referencia detallada de OneClick puedes ver cada paso del flujo,
 incluyendo los casos de borde que también debes
 manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-oneclick-normal).
 
@@ -1046,13 +1051,13 @@ transaction.authorize(buyOrder, tbkUser, username, amount)
   })
 ```
 
-## Webpay OneClick Mall %<span class='tbk-tagTitleDesc'>REST</span>%
+## OneClick Mall %<span class='tbk-tagTitleDesc'>REST</span>%
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpayrest#webpay-oneclick-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
-Para usar Webpay OneClick Mall en transacciones asociadas a varios comercios, lo primero que se debe hacer es definir las dependencias necesarias para poder realizar cualquier tipo de transacción.
+Para usar OneClick Mall en transacciones asociadas a varios comercios, lo primero que se debe hacer es definir las dependencias necesarias para poder realizar cualquier tipo de transacción.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -1195,7 +1200,7 @@ tbk_token = resp.token
 // No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
 ```
 
-Tal como en el caso de Webpay Oneclick Normal, debes redireccionar vía `POST` el navegador del usuario a la url retornada en `url_webpay`. **Recordando que el nombre del parámetro que contiene el token se debe llamar `TBK_TOKEN`**.
+Tal como en el caso de Oneclick Normal, debes redireccionar vía `POST` el navegador del usuario a la url retornada en `url_webpay`. **Recordando que el nombre del parámetro que contiene el token se debe llamar `TBK_TOKEN`**.
 
 ### Confirmar una inscripción
 
@@ -1262,7 +1267,7 @@ tbkUser = resp.tbk_user
 // No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
 ```
 
-Con eso habrás completado el flujo "feliz" en que todo funciona OK. En [la referencia detallada de Webpay OneClick Mall puedes ver cada paso del flujo, incluyendo los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-oneclick-mall).
+Con eso habrás completado el flujo "feliz" en que todo funciona OK. En [la referencia detallada de OneClick Mall puedes ver cada paso del flujo, incluyendo los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-oneclick-mall).
 
 ### Eliminar una inscripción
 
@@ -1968,8 +1973,8 @@ from transbank.transaccion_completa.transaction import Transaction
 ## Credenciales y Ambiente
 
 Para Webpay, las credenciales del comercio (código de comercio y certificados)
-varían según el subproducto usado (Webpay Plus, Webpay Plus Mall, Webpay OneClick,
-Webpay OneClick Mall). Asimismo, varían las credenciales si la captura es
+varían según el subproducto usado (Webpay Plus, Webpay Plus Mall, OneClick,
+OneClick Mall). Asimismo, varían las credenciales si la captura es
 diferida. Y también varían si la moneda a manejar es pesos chilenos (CLP) o
 dólares (USD).
 
@@ -2282,7 +2287,7 @@ responseCode  <br> <i> xs:int </i> | Código de respuesta
 ## Más Funcionalidades
 
 Consulta la referencia del API para más funcionalidades ofrecidas por Webpay
-Plus y Webpay OneClick:
+Plus y OneClick:
 
 - [Transacciones Webpay Plus Mall](/referencia/webpay#webpay-plus-mall) para
   realizar cargos atribuibles a múltiples comercios dentro de una agrupación
@@ -2296,7 +2301,7 @@ realizar posteriormente.
 - [Anular Transacciones Webpay Plus](/referencia/webpay#anulacion-webpay-plus) para devolver dinero parcial o
 totalmente.
 
-- [Reversar Transacciones Webpay OneClick](/referencia/webpay#reversar-un-pago-webpay-oneclick) para dejar sin efecto una
+- [Reversar Transacciones OneClick](/referencia/webpay#reversar-un-pago-webpay-oneclick) para dejar sin efecto una
 transacción realizada durante el día contable actual.
 
 - [Anular Transacciones Webpay
@@ -2304,10 +2309,10 @@ transacción realizada durante el día contable actual.
   efecto una transacción realizada en otra fecha distinta al día contable
   actual.
 
-- [Eliminar Inscripciones Webpay OneClick](/referencia/webpay#eliminar-una-inscripcion-webpay-oneclick) para eliminar el `tbkUser`
+- [Eliminar Inscripciones OneClick](/referencia/webpay#eliminar-una-inscripcion-webpay-oneclick) para eliminar el `tbkUser`
 cuando tus usuarios no quieren continuar con el servicio.
 
-- [Transacciones Webpay OneClick Mall](/referencia/webpay#webpay-oneclick-mall).
+- [Transacciones OneClick Mall](/referencia/webpay#webpay-oneclick-mall).
 
 ## Ejemplos de integración
 

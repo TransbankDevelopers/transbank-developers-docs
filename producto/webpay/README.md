@@ -44,40 +44,17 @@ El concepto de "mall" agrupa múltiples tiendas. Son dichas tiendas las que pued
 
 El tipo de transacción Mall es útil para proveedores de servicios tecnológicos (PST) que pueden realizar una única integración con Transbank y realizar cobros a nombre de los clientes de dichos servicios tecnológicos. Por ejemplo una plataforma SaaS puede ser un mall y las empresas clientes de la plataforma pueden ser las tiendas de dicho mall. De esa manera, la recaudación que la plataforma realice irá directo al cliente a nombre del cual realizó cada cobro.
 
-### Webpay OneClick
-
-<div class="pos-title-nav">
-  <div tbk-link='/documentacion/webpay#webpay-oneclick' tbk-link-name='Documentación'></div>
-  <div tbk-link='/referencia/webpay#webpay-oneclick-normal' tbk-link-name='Referencia Api'></div>
-</div>
-
-La modalidad de pago OneClick permite al tarjetahabiente realizar pagos en el mismo comercio sin la necesidad de ingresar cada vez información de la tarjeta de crédito al momento de realizar la compra. Este tipo de pago facilita la venta, disminuye el tiempo de la transacción y reduce los riesgos de ingreso erróneo de los datos del medio de pago.
-
-**Webpay OneClick sólo opera con tarjetas de crédito.** No aplica para tarjetas de débito Redcompra.
-
-El modelo de pago contempla un proceso previo de inscripción o enrolamiento del tarjetahabiente, a través del comercio que desee utilizar el servicio. Este enrolamiento sigue 4 pasos muy similares a los anteriormente descriptos en el flujo general de Webpay:
-
-1. En lugar de ofrecer productos o servicios, el comercio ofrece al tarjetahabiente una explicación de la inscripción.
-
-2. El tarjetahabiente selecciona la opción de inscripción, que es similar al formulario de pago de Webpay Plus.
-
-3. El tarjetahabiente es autenticado por el banco emisor. El proceso incluye una autorización por $1 (un peso chileno) la cual no se captura y por ende no se verá reflejada en el estado de cuenta del tarjetahabiente.
-
-4. Finalizada la autorización, Webpay entrega al comercio la información que le permitirá realizar realizar cobros a futuro usando [otro servicio web provisto para ese fin](/documentacion/webpay#realizar-transacciones).
-
- Al no contar con sistema de autenticación bancaria en los cargos que se realizan después de la autorización, será el comercio el responsable de asumir el riesgo de fraude o desconocimientos de compra que realice un tarjetahabiente.
-
-### Webpay OneClick Mall
+### OneClick Mall
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-oneclick-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
-Webpay OneClick Mall permite agrupar pagos en una única transacción OneClick hacia múltiples códigos de comercios (similar a una transacción Mall). En una transacción de este tipo, al igual que en Webpay OneClick, el tarjetahabiente podrá realizar pagos sin la necesidad de ingresar la información de su tarjeta de crédito en cada uno de ellos. Este tipo de pago facilita la venta, centraliza los pagos, disminuye el tiempo de la transacción y reduce los riesgos de ingreso erróneo de los datos del medio de pago.
+OneClick Mall permite agrupar pagos en una única transacción OneClick hacia múltiples códigos de comercios (similar a una transacción Mall). En una transacción de este tipo, al igual que en OneClick, el tarjetahabiente podrá realizar pagos sin la necesidad de ingresar la información de su tarjeta de crédito en cada uno de ellos. Este tipo de pago facilita la venta, centraliza los pagos, disminuye el tiempo de la transacción y reduce los riesgos de ingreso erróneo de los datos del medio de pago.
 
-**Webpay OneClick Mall sólo opera con tarjetas de crédito.** No aplica para tarjetas de débito Redcompra. El modelo de pago contempla el mismo proceso de enrolamiento que la transacción OneClick.
+**OneClick Mall sólo opera con tarjetas de crédito.** No aplica para tarjetas de débito Redcompra. El modelo de pago contempla el mismo proceso de enrolamiento que la transacción OneClick.
 
-De cara al comercio, Webpay OneClick Mall combina dos grupos de beneficios:
+De cara al comercio, OneClick Mall combina dos grupos de beneficios:
 
 - Permite que un tarjetahabiente registre su tarjeta una única vez y pague frecuentemente en cualquiera de las tiendas del mall.
 
