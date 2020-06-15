@@ -47,7 +47,7 @@ El tipo de transacción Mall es útil para proveedores de servicios tecnológico
 ### OneClick Mall
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#webpay-oneclick-mall' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/webpayrest#webpay-oneclick-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
 OneClick Mall permite agrupar pagos en una única transacción OneClick hacia múltiples códigos de comercios (similar a una transacción Mall). En una transacción de este tipo, al igual que en OneClick, el tarjetahabiente podrá realizar pagos sin la necesidad de ingresar la información de su tarjeta de crédito en cada uno de ellos. Este tipo de pago facilita la venta, centraliza los pagos, disminuye el tiempo de la transacción y reduce los riesgos de ingreso erróneo de los datos del medio de pago.
