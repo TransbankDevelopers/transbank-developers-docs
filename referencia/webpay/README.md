@@ -1556,6 +1556,11 @@ El boolean de respuesta será `true` en caso de éxito y `false` en caso contrar
 
 ## OneClick Mall
 
+<aside class="warning">
+Este producto se encuentra deprecado y ya no está disponible para su contración. Como alternativa puedes utilizar OneClick Mall REST 
+[click aquí](https://www.transbankdevelopers.cl/referencia/webpayrest#oneclick-mall)
+</aside>
+
 > Los SDKs no soportan aún los servicios OneClick Mall.
 
 WSDL: `/WSWebpayTransaction/cxf/WSOneClickMulticodeService?wsdl`
