@@ -284,8 +284,7 @@ de comercio que te entregó Transbank.
 3. Crear certificado autofirmado:
 
 ```bash
-openssl x509 -req -days 1460 -in 597029124456.csr \
-             -signkey 597029124456.key -out 597029124456.crt
+openssl x509 -req -days 1460 -in 597029124456.csr -signkey 597029124456.key -out 597029124456.crt
 ```
 
 <aside class="notice">
