@@ -2191,7 +2191,7 @@ const configuration = new Transbank.Configuration()
                         .withPrivateCert(/* tu certificado privado en forma de string */)
                         .withPublicCert(/* tu certificado público en forma de string */)
                         .withCommerceCode(/* tu código de comercio */)
-                        .setEnvironment(Transbank.environments.production) // Se define el ambiente como producción
+                        .usingEnvironment(Transbank.environments.production) // Se define el ambiente como producción
 
 const transaction = new Transbank.Webpay(configuration);
 ```
