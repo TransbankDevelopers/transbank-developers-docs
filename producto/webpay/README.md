@@ -52,7 +52,7 @@ El tipo de transacción Mall es útil para proveedores de servicios tecnológico
 
 OneClick Mall permite agrupar pagos en una única transacción OneClick hacia múltiples códigos de comercios (similar a una transacción Mall). En una transacción de este tipo, al igual que en OneClick, el tarjetahabiente podrá realizar pagos sin la necesidad de ingresar la información de su tarjeta de crédito en cada uno de ellos. Este tipo de pago facilita la venta, centraliza los pagos, disminuye el tiempo de la transacción y reduce los riesgos de ingreso erróneo de los datos del medio de pago.
 
-**OneClick Mall sólo opera con tarjetas de crédito.** No aplica para tarjetas de débito Redcompra. El modelo de pago contempla el mismo proceso de enrolamiento que la transacción OneClick.
+**OneClick Mall opera con tarjetas de crédito y débito Redcompra.** El modelo de pago contempla el mismo proceso de enrolamiento que la transacción OneClick.
 
 De cara al comercio, OneClick Mall combina dos grupos de beneficios:
 
