@@ -702,7 +702,7 @@ En [la referencia detallada de Webpay Plus Mall puedes ver cada paso del flujo, 
 
 <aside class="warning">
 Este producto se encuentra deprecado y ya no está disponible para su contración. Como alternativa puedes utilizar OneClick Mall REST 
-[click aquí](https://www.transbankdevelopers.cl/documentacion/webpay#webpay-oneclick-mall)
+[click aquí](#webpay-oneclick-mall)
 </aside>
 
 ### Crear una inscripción
