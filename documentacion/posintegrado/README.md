@@ -6,18 +6,20 @@
 
 ## Cómo empezar
 
-Primero, debes instalar en tu máquina la librería/SDK en C, puedes encontrar el código fuente en [GitHub](https://github.com/TransbankDevelopers/transbank-pos-sdk-c) y seguir las instrucciones.
+Primero, debes instalar en tu máquina la librería/SDK en C, puedes encontrar el código fuente en [GitHub](https://github.com/TransbankDevelopers/transbank-pos-sdk-c) y seguir las instrucciones para compilarlo. También puede usar las DLLs ya compiladas que se adjuntan en el [último release](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest)
 
-También puede probar las DLLs que se adjuntan en el [último release](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest)
+Esta librería y sus dependencias (libserialport) son requisitos para utilizar el SDK.
 
-Esta librería y sus dependencias son requisitos para utilizar el SDK.
+Por el momento, hay un SDK para [.NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet), [Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java) y [Javascript (tecnologías web)](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js). 
 
-Por el momento, el SDK está disponible para [.NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet) y [Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java). Para .NET lo puedes encontrar en [NuGet.org](https://www.nuget.org/packages/TransbankPosSDK/) para instalarlo puedes utilizar por ejemplo el package manager de VisualStudio.
 
+### SDK .NET
+Para .NET lo puedes encontrar en [NuGet.org](https://www.nuget.org/packages/TransbankPosSDK/) para instalarlo puedes utilizar por ejemplo el package manager de VisualStudio.
 ```bash
 PM> Install-Package TransbankPosSDK
 ```
 
+### SDK Java
 Para Java se puede incluir el paquete por [Maven.](https://search.maven.org/artifact/com.github.transbankdevelopers/transbank-pos-sdk-java/)
 
 ```xml
@@ -27,6 +29,45 @@ Para Java se puede incluir el paquete por [Maven.](https://search.maven.org/arti
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 ```
+
+### SDK Web
+El SDK Web consta de dos partes: [SDK Javacript](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js) y [Cliente Desktop](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-client). 
+
+Cliente Desktop](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-client): Este cliente se debe instalar e inicializar en el computador que tendrá el equipo POS conectado físicamente. Al instalar e inicializar este servicio, se creará un servidor de websockets local en el puerto 8090, que permitirá, a través del SDK de javascript, poder enviar y recibir mensajes al equipo POS, de manera simple y transparente.
+
+[SDK Javacript](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js): Este SDK se debe instalar en el software de caja (o cualquier software web que presente HTML, CSS y JS en un navegador web). Este SDK entrega una interfaz simple para conectarse con el cliente desktop, de manera que se puedan mandar instrucciones al POS con un API fácil de usar directamente desde el browser.
+
+Dentro de cada repositorio se encuentra la documentación más detallada. 
+
+
+Instalar el SDK en el software web donde se realizará la integración
+```bash
+npm install transbank-pos-sdk-web
+```
+
+#### Variable de ambiente
+Para utilizar el SDK del POS es necesario el archivo Transbank.dll, o Transbank.dylib del SDK de C.
+Para que el cliente pueda encontrar la librería nativa, utiliza una variable de ambiente llamada **NATIVE_TRANSBANK_WRAP** que debe apuntar al archivo de esta variable.
+
+Por ejemplo en MacOS se debe correr el comando export en el mismo Shell en que se ejecutará el programa que utiliza la librería.
+```bash
+export NATIVE_TRANSBANK_WRAP=/usr/local/lib/libTransbankWrap.dylib
+```
+
+En Windows, se debe correr este comando en la ventana de Command.com antes de ejecutar el programa que utiliza la librería.
+`setx NATIVE_TRANSBANK_WRAP=c:\TransbankLib\TransbankWrapJava.dll`
+
+**Instalar el cliente desktop:** 
+Se debe [descargar el las DLL](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest) mencionadas anteriormente (libserialport-0.dll) e instalarla idealmente en la carpeta system32 (en windows). En OSX se puede instalar como `brew install libserialport` o [con estas instrucciones](https://sigrok.org/wiki/Libserialport). 
+
+Se debe descargar el archivo .jar del [último release del repositorio](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-client/releases/latest) y ejecutar: 
+```bash
+java -jar transbank-pos-sdk-web-client.jar
+```  
+
+Este cliente desktop debe estar ejecutándose siempre para que el SDK Javascript funcione correctamente. Se ejecutarlo automáticamente de alguna manera cuando se inicie el computador. 
+
+### Drivers
 
 Recuerda que necesitas tener instalados los drivers correspondientes a tu tarjeta de
 puerto serial o adaptador USB Serial.
@@ -41,7 +82,7 @@ Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilice
 
 ### LibSerialPort
 
-El SDK depende de [libSerialPort](https://sigrok.org/wiki/Libserialport) para la comunicación serial.
+Los SDK dependen de [libSerialPort](https://sigrok.org/wiki/Libserialport) para la comunicación serial.
 
 Incluimos una DLL compilada en el [release de la librería en C](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest), pero puedes obtener el código desde el repositorio oficial usando git:
 
@@ -59,6 +100,15 @@ Para compilar en windows necesitarás lo siguiente:
 <aside class="notice">
 Procura seguir todos los pasos descritos en el sitio de msys2
 </aside>
+
+## Proyectos de ejemplo
+Para cada SDK se creó un proyecto de ejemplo: 
+
+- [Proyecto de ejemplo SDK Web](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-example)
+- [Proyecto de ejemplo SDK Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java-example)
+- [Proyecto de ejemplo SDK .NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet-example)
+
+
 
 ## Primeros pasos
 
@@ -87,6 +137,11 @@ import cl.transbank.pos.exceptions.*;
 import cl.transbank.pos.responses.*;
 ```
 
+```javascript
+import POS from "transbank-pos-sdk-web";
+```
+
+
 ### Listar puertos disponibles
 
 Si los respectivos drivers están instalados, entonces puedes usar la función `ListPorts()` del paquete
@@ -112,6 +167,16 @@ import cl.transbank.pos.POS;
 
 POS pos = POS.getInstance();
 List<String> ports = pos.listPorts();
+```
+
+```javascript
+import POS from "transbank-pos-sdk-web";
+
+POS.getPorts().then((ports) => {
+    console.log('ports');
+}).catch(() => {
+    alert("No se pudo obtener puertos. ¿Está corriendo el servicio Transbank POS?");
+})
 ```
 
 ### Abrir un puerto Serial
@@ -149,6 +214,17 @@ String port = "COM4";
 pos.openPort(port);
 ```
 
+```javascript
+import POS from "transbank-pos-sdk-web";
+POS.openPort("COM4").then((result) => {
+    if (result === true) {
+	alert("Conectado satisfactoriamente")
+    } else {
+	alert("No se pudo conectar conectado")
+    }
+}).catch(error => console.log(error))
+```
+
 ### Cerrar un puerto Serial
 
 Al finalizar el uso del POS, o si se desea desconectar de la Caja se debe liberar el puerto serial abierto anteriormente.
@@ -175,6 +251,11 @@ if(retval == SP_OK){
 import cl.transbank.pos.POS;
 //...
 pos.closePort();
+```
+
+```javascript
+import POS from "transbank-pos-sdk-web";
+POS.closePort();
 ```
 
 ## Transacciones
@@ -206,6 +287,20 @@ char* response = sale(ammount, ticket, false);
 import cl.transbank.pos.POS;
 //...
 SaleResponse saleResponse = POS.getInstance().sale(amount, ticket);
+```
+
+```javascript
+import POS from "transbank-pos-sdk-web";
+
+POS.doSale(this.total, "ticket1").then((saleDetails) => {
+    console.log(saleDetails);
+    //Acá llega la respuesta de la venta. Si saleDetails.responseCode es 0, entonces la comproa fue aprobada
+    if (saleDetails.responseCode===0) {
+	alert("Transacción aprobada", "", "success");
+    } else {
+	alert("Transacción rechazada o fallida")
+    }
+});
 ```
 
 El resultado de la venta se entrega en la forma de un objeto `SaleResponse` o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException` en .NET. En Java puede lanzar `TransbankPortNotConfiguredException`.
@@ -267,6 +362,16 @@ import cl.transbank.pos.POS;
 SaleResponse saleResponse = POS.getInstance().getLastSale();
 ```
 
+```javascript
+import POS from "transbank-pos-sdk-web";
+
+POS.getLastSale().then((response) => {
+    console.log(response)
+}).catch(() => {
+    alert('Error al obtener última venta');
+})
+```
+
 El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `LastSaleResponse` o un `char*` en el caso de la librería C, o un objeto `SaleResponse` en el caso de Java. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLastSaleException` en .NET o `TransbankException` en Java.
 
 ```json
@@ -326,6 +431,12 @@ import cl.transbank.pos.POS;
 RefundResponse response = POS.getInstance().refund(21);
 ```
 
+```javascript
+import POS from "transbank-pos-sdk-web";
+
+POS.refund(21).then(response => console.log(response));
+```
+
 Como respuesta el **POS** enviará un código de aprobación, acompañado de un código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas. [Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas)
 
 ```json
@@ -374,6 +485,12 @@ import cl.transbank.pos.POS;
 CloseResponse cr = POS.getInstance().close();
 ```
 
+```javascript
+import POS from "transbank-pos-sdk-web";
+
+POS.close()
+```
+
 El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse` o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException`.
 
 ```json
@@ -418,6 +535,12 @@ import cl.transbank.pos.POS;
 TotalsResponse response = POS.getInstance().getTotals();
 ```
 
+```javascript
+import POS from "transbank-pos-sdk-web";
+
+POS.getTotals().then(response => console.log(response));
+```
+
 El resultado de la transacción entrega en la forma de un objeto `TotalsResponse` o una estructura `TotalsCResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankTotalsException`.
 
 ```json
@@ -459,6 +582,14 @@ import cl.transbank.pos.POS;
 //...
 List<DetailResponse> ldr = POS.getInstance().details(false);
 ```
+
+```javascript
+import POS from "transbank-pos-sdk-web";
+
+let printOnPOS = false;
+POS.details(printOnPOS).then(response => console.log(response));
+```
+
 
 El resultado de la transacción entrega una lista de objetos  `DetailResponse` o un `char *` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSalesDetailException`.
 
@@ -538,6 +669,14 @@ import cl.transbank.pos.POS;
 KeysResponse kr = POS.getInstance().loadKeys();
 ```
 
+```javascript
+import POS from "transbank-pos-sdk-web";
+
+let printOnPOS = false;
+POS.loadKeys();
+```
+
+
 
 
 El resultado de la carga de llaves entrega en la forma de un objeto `LoadKeysResponse` o una estructura `BaseResponse` en el caso de la librería C, un objeto `KeysResponse` para Java. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLoadKeysException` en .NET o `TransbankException` en Java.
@@ -582,6 +721,14 @@ import cl.transbank.pos.POS;
 boolean pollResult = POS.getInstance().poll();
 ```
 
+
+```javascript
+import POS from "transbank-pos-sdk-web";
+
+let printOnPOS = false;
+POS.poll().then(result => console.log(result));
+```
+
 ### Transacción de Cambio a POS Normal
 
 Este comando le permitirá a la caja realizar el cambio de modalidad a través de un comando. El POS debe estar en modo integrado y al recibir el comando quedara en modo normal. El resultado de esta operación es un `Booleano` en el caso del SDK o un `0` representado en la constante `TBK_OK` en el caso de la librería en C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankException`.
@@ -608,6 +755,14 @@ if (retval == TBK_OK){
 import cl.transbank.pos.POS;
 //...
 boolean normal = POS.getInstance().setNormalMode();
+```
+
+
+```javascript
+import POS from "transbank-pos-sdk-web";
+
+let printOnPOS = false;
+POS.setNormalMode().then(result => console.log(result));
 ```
 
 <aside class="notice">
