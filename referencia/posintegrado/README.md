@@ -1,7 +1,7 @@
 # POS Integrado
 
 <aside class="success">
-El SDK de .NET o Java, y la Librería en C, se encargan del protocolo de comunicación con el POS y de manejar el puerto serial configurado.
+El SDK de .NET, Java o Web, y la Librería en C, se encargan del protocolo de comunicación con el POS y de manejar el puerto serial configurado.
 </aside>
 
 <aside class="notice">
@@ -78,6 +78,11 @@ import cl.transbank.pos.exceptions.*;
 import cl.transbank.pos.responses.*;
 ```
 
+
+```js
+import POS from "transbank-pos-sdk-web";
+```
+
 ### Listar puertos disponibles
 
 Si los respectivos drivers están instalados, entonces puedes usar la función `ListPorts()` del paquete
@@ -103,6 +108,16 @@ import cl.transbank.pos.POS;
 
 POS pos = POS.getInstance();
 List<String> ports = pos.listPorts();
+```
+
+```js
+import POS from "transbank-pos-sdk-web";
+
+POS.getPorts().then((ports) => {
+    console.log('ports');
+}).catch(() => {
+    alert("No se pudo obtener puertos. ¿Está corriendo el servicio Transbank POS?");
+})
 ```
 
 ### Abrir un puerto Serial
@@ -140,6 +155,17 @@ String port = "COM4";
 pos.openPort(port);
 ```
 
+```js
+import POS from "transbank-pos-sdk-web";
+POS.openPort("COM4").then((result) => {
+    if (result === true) {
+	alert("Conectado satisfactoriamente")
+    } else {
+	alert("No se pudo conectar conectado")
+    }
+}).catch(error => console.log(error))
+```
+
 ### Cerrar un puerto Serial
 
 Al finalizar el uso del POS, o si se desea desconectar de la Caja se debe liberar el puerto serial abierto anteriormente.
@@ -166,6 +192,11 @@ if(retval == SP_OK){
 import cl.transbank.pos.POS;
 //...
 pos.closePort();
+```
+
+```js
+import POS from "transbank-pos-sdk-web";
+POS.closePort();
 ```
 
 ## Mensajes
@@ -209,6 +240,20 @@ char* response = sale(ammount, ticket, false);
 import cl.transbank.pos.POS;
 //...
 SaleResponse saleResponse = POS.getInstance().sale(amount, ticket);
+```
+
+```js
+import POS from "transbank-pos-sdk-web";
+
+POS.doSale(this.total, "ticket1").then((saleDetails) => {
+    console.log(saleDetails);
+    //Acá llega la respuesta de la venta. Si saleDetails.responseCode es 0, entonces la comproa fue aprobada
+    if (saleDetails.responseCode===0) {
+	alert("Transacción aprobada", "", "success");
+    } else {
+	alert("Transacción rechazada o fallida")
+    }
+});
 ```
 
 El resultado de la venta se entrega en la forma de un objeto `SaleResponse` en .NET y Java, o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException` en .NET, o `TransbankException` en Java.
@@ -332,6 +377,16 @@ char* response = last_sale();
 import cl.transbank.pos.POS;
 //...
 SaleResponse saleResponse = POS.getInstance().getLastSale();
+```
+
+```js
+import POS from "transbank-pos-sdk-web";
+
+POS.getLastSale().then((response) => {
+    console.log(response)
+}).catch(() => {
+    alert('Error al obtener última venta');
+})
 ```
 
 El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `LastSaleResponse` en .NET, `SaleResponse` en Java, o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLastSaleException`.
@@ -458,6 +513,12 @@ import cl.transbank.pos.POS;
 RefundResponse response = POS.getInstance().refund(21);
 ```
 
+```js
+import POS from "transbank-pos-sdk-web";
+
+POS.refund(21).then(response => console.log(response));
+```
+
 Como respuesta el **POS** enviará un código de aprobación, acompañado de un código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas. [Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas)
 
 ```json
@@ -544,6 +605,12 @@ import cl.transbank.pos.POS;
 CloseResponse cr = POS.getInstance().close();
 ```
 
+```js
+import POS from "transbank-pos-sdk-web";
+
+POS.close()
+```
+
 El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse` en .NET o Java, o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException`.
 
 ```json
@@ -627,6 +694,12 @@ import cl.transbank.pos.POS;
 TotalsResponse response = POS.getInstance().getTotals();
 ```
 
+```js
+import POS from "transbank-pos-sdk-web";
+
+POS.getTotals().then(response => console.log(response));
+```
+
 El resultado de la transacción entrega en la forma de un objeto `TotalsResponse` en .NET o Java, o una estructura `TotalsCResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankTotalsException` en .NET o `TransbankException` en Java.
 
 ```json
@@ -704,6 +777,14 @@ import cl.transbank.pos.POS;
 //...
 List<DetailResponse> ldr = POS.getInstance().details(false);
 ```
+
+```js
+import POS from "transbank-pos-sdk-web";
+
+let printOnPOS = false;
+POS.details(printOnPOS).then(response => console.log(response));
+```
+
 
 El resultado de la transacción entrega una lista de objetos  `DetailResponse` en .NET y Java, o un `char *` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSalesDetailException` o `TransbankException` en Java.
 
@@ -847,6 +928,14 @@ import cl.transbank.pos.POS;
 KeysResponse kr = POS.getInstance().loadKeys();
 ```
 
+```js
+import POS from "transbank-pos-sdk-web";
+
+let printOnPOS = false;
+POS.loadKeys();
+```
+
+
 El resultado de la carga de llaves se entrega en la forma de un objeto `LoadKeysResponse` en .NET, o `KeysResponse` en Java, o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankLoadKeysException`.
 
 ```json
@@ -925,6 +1014,14 @@ import cl.transbank.pos.POS;
 boolean pollResult = POS.getInstance().poll();
 ```
 
+```js
+import POS from "transbank-pos-sdk-web";
+
+let printOnPOS = false;
+POS.poll().then(result => console.log(result));
+```
+
+
 <img class="td_img-night" src="/images/referencia/posintegrado/diagrama-poll.png" alt="Diagrama de Secuencia Poll">
 
 1. La caja envía el requerimiento y espera como respuesta `<ACK>`, en caso de recibir `<ACK>`, esto indica que el POS se encuentra operativo y listo para recibir comandos. si no se recibe respuesta o es `<NAK>` se debe reintentar el envío del comando 2 veces.
@@ -974,6 +1071,13 @@ if (retval == TBK_OK){
 import cl.transbank.pos.POS;
 //...
 boolean normal = POS.getInstance().setNormalMode();
+```
+
+```js
+import POS from "transbank-pos-sdk-web";
+
+let printOnPOS = false;
+POS.setNormalMode().then(result => console.log(result));
 ```
 
 <img class="td_img-night" src="/images/referencia/posintegrado/diagrama-cambio-pos-normal.png" alt="Diagrama de Secuencia Cambio a POS Normal">
