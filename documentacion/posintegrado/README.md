@@ -39,7 +39,6 @@ El SDK Web consta de dos partes: [SDK Javacript](https://github.com/TransbankDev
 
 Dentro de cada repositorio se encuentra la documentación más detallada. 
 
-
 Instalar el SDK en el software web donde se realizará la integración
 ```bash
 npm install transbank-pos-sdk-web
