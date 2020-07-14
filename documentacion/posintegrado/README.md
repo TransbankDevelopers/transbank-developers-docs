@@ -65,7 +65,7 @@ Se debe descargar el archivo .jar del [último release del repositorio](https://
 java -jar transbank-pos-sdk-web-client.jar
 ```  
 
-Este cliente desktop debe estar ejecutándose siempre para que el SDK Javascript funcione correctamente. Se ejecutarlo automáticamente de alguna manera cuando se inicie el computador. 
+Este cliente desktop debe estar ejecutándose siempre para que el SDK Javascript funcione correctamente. Puedes ejecutarlo automáticamente cuando se inicie el computador. Este paso depende de tu sistema operativo
 
 ### Drivers
 
