@@ -54,7 +54,7 @@ Por ejemplo en MacOS se debe correr el comando export en el mismo Shell en que s
 export NATIVE_TRANSBANK_WRAP=/usr/local/lib/libTransbankWrap.dylib
 ```
 
-En Windows, se debe correr este comando en la ventana de Command.com antes de ejecutar el programa que utiliza la librería.
+En Windows, se debe correr este comando en la ventana de `CMD` antes de ejecutar el programa que utiliza la librería.
 `setx NATIVE_TRANSBANK_WRAP=c:\TransbankLib\TransbankWrapJava.dll`
 
 **Instalar el cliente desktop:** 
@@ -137,7 +137,7 @@ import cl.transbank.pos.exceptions.*;
 import cl.transbank.pos.responses.*;
 ```
 
-```javascript
+```js
 import POS from "transbank-pos-sdk-web";
 ```
 
@@ -169,7 +169,7 @@ POS pos = POS.getInstance();
 List<String> ports = pos.listPorts();
 ```
 
-```javascript
+```js
 import POS from "transbank-pos-sdk-web";
 
 POS.getPorts().then((ports) => {
@@ -214,7 +214,7 @@ String port = "COM4";
 pos.openPort(port);
 ```
 
-```javascript
+```js
 import POS from "transbank-pos-sdk-web";
 POS.openPort("COM4").then((result) => {
     if (result === true) {
@@ -253,7 +253,7 @@ import cl.transbank.pos.POS;
 pos.closePort();
 ```
 
-```javascript
+```js
 import POS from "transbank-pos-sdk-web";
 POS.closePort();
 ```
@@ -289,7 +289,7 @@ import cl.transbank.pos.POS;
 SaleResponse saleResponse = POS.getInstance().sale(amount, ticket);
 ```
 
-```javascript
+```js
 import POS from "transbank-pos-sdk-web";
 
 POS.doSale(this.total, "ticket1").then((saleDetails) => {
@@ -362,7 +362,7 @@ import cl.transbank.pos.POS;
 SaleResponse saleResponse = POS.getInstance().getLastSale();
 ```
 
-```javascript
+```js
 import POS from "transbank-pos-sdk-web";
 
 POS.getLastSale().then((response) => {
@@ -431,7 +431,7 @@ import cl.transbank.pos.POS;
 RefundResponse response = POS.getInstance().refund(21);
 ```
 
-```javascript
+```js
 import POS from "transbank-pos-sdk-web";
 
 POS.refund(21).then(response => console.log(response));
@@ -485,7 +485,7 @@ import cl.transbank.pos.POS;
 CloseResponse cr = POS.getInstance().close();
 ```
 
-```javascript
+```js
 import POS from "transbank-pos-sdk-web";
 
 POS.close()
@@ -535,7 +535,7 @@ import cl.transbank.pos.POS;
 TotalsResponse response = POS.getInstance().getTotals();
 ```
 
-```javascript
+```js
 import POS from "transbank-pos-sdk-web";
 
 POS.getTotals().then(response => console.log(response));
@@ -583,7 +583,7 @@ import cl.transbank.pos.POS;
 List<DetailResponse> ldr = POS.getInstance().details(false);
 ```
 
-```javascript
+```js
 import POS from "transbank-pos-sdk-web";
 
 let printOnPOS = false;
@@ -669,7 +669,7 @@ import cl.transbank.pos.POS;
 KeysResponse kr = POS.getInstance().loadKeys();
 ```
 
-```javascript
+```js
 import POS from "transbank-pos-sdk-web";
 
 let printOnPOS = false;
@@ -722,7 +722,7 @@ boolean pollResult = POS.getInstance().poll();
 ```
 
 
-```javascript
+```js
 import POS from "transbank-pos-sdk-web";
 
 let printOnPOS = false;
@@ -757,8 +757,7 @@ import cl.transbank.pos.POS;
 boolean normal = POS.getInstance().setNormalMode();
 ```
 
-
-```javascript
+```js
 import POS from "transbank-pos-sdk-web";
 
 let printOnPOS = false;
