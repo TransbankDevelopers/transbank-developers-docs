@@ -12,7 +12,7 @@ Las URLs de endpoints de producción están alojados dentro de
 <https://www.pagoautomaticocontarjetas.cl//>.
 
 ```java
-// Host: PAGO CON  TARJETAS:CL
+// Host: https://www.pagoautomaticocontarjetas.cl/
 ```
 
 ```php
