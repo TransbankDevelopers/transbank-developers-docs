@@ -3327,7 +3327,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-vci  <br> <i> String </i> | Código de respuesta de la autenticación bancaria. Largo máximo: 64
+vci  <br> <i> String </i> | Código de respuesta de la autenticación bancaria. Largo máximo: 4. Este campo solo se recibe cuando la transacción es autenticada.
 amount  <br> <i> Number </i> | Monto de la transacción. Sólo en caso de dolar acepta dos decimales. Largo máximo: 17
 status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 buy_order  <br> <i> String </i> | Número de orden de compra. Largo máximo: 26
