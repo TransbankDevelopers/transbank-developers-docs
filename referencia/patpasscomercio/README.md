@@ -70,38 +70,38 @@ Host: https://pagoautomaticocontarjetasint.transbank.cl/
 ### Credenciales del Comercio
 
 ```java
-// Tbk-Api-Key-Id: Próximamente...
-// Tbk-Api-Key-Secret: Próximamente...
+// Tbk-Api-Key-Id: 27082157
+// Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
 // Content-Type: application/json
 ```
 
 ```php
-// Tbk-Api-Key-Id: Próximamente...
-// Tbk-Api-Key-Secret: Próximamente...
+// Tbk-Api-Key-Id: 27082157
+// Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
 // Content-Type: application/json
 ```
 
 ```csharp
-// Tbk-Api-Key-Id: Próximamente...
-// Tbk-Api-Key-Secret: Próximamente...
+// Tbk-Api-Key-Id: 27082157
+// Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
 // Content-Type: application/json
 ```
 
 ```ruby
-# Tbk-Api-Key-Id: Próximamente...
-# Tbk-Api-Key-Secret: Próximamente...
+# Tbk-Api-Key-Id: 27082157
+# Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
 # Content-Type: application/json
 ```
 
 ```python
-# Tbk-Api-Key-Id: Próximamente...
-# Tbk-Api-Key-Secret: Próximamente...
+# Tbk-Api-Key-Id: 27082157
+# Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
 # Content-Type: application/json
 ```
 
 ```http
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 27082157
+Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
 Content-Type: application/json
 ```
 
@@ -201,8 +201,8 @@ var response = Inscription.Start(
 
 ```http
 POST restpatpass/v1/services/patInscription
-Tbk-Api-Key-Id: 597028299257
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: 27082157
+Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
 Content-Type: application/json
 {
     "url": "http://localhost:8081/patpass-comercio/end-subscription",
@@ -331,8 +331,8 @@ La respuesta del método contiene el estado y la URL para desplegar el voucher.
 
 ```http
 POST restpatpass/v1/services/status
-Tbk-Api-Key-Id: 597028299257
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Tbk-Api-Key-Id: 27082157
+Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
 Content-Type: application/json
 {
 	"token": "21383fe8ba4c4cdd9e18518daf4e9bcbaffd9e8e3ad4ec36f66ae2b4e80cc4b5"
