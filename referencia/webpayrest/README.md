@@ -3210,9 +3210,9 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-id_query_installments  <br> <i> Number </i> | (Opcional) Identificador de cuota. Largo máximo: 2
-deferred_period_index  <br> <i> Number </i> | (Opcional) Cantidad de periodo diferido. Largo máximo: 2
-grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia.
+id_query_installments  <br> <i> Number </i> | (Opcional) Identificador de cuota. Largo máximo: 2. Solo enviar si el pago es en cuotas
+deferred_period_index  <br> <i> Number </i> | (Opcional) Cantidad de periodo diferido. Largo máximo: 2. Solo enviar si el pago es en cuotas
+grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia. Solo enviar si el pago es en cuotas
 
 **Respuesta**
 
@@ -3327,14 +3327,14 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-vci  <br> <i> String </i> | Código de respuesta de la autenticación bancaria. Largo máximo: 64
+vci  <br> <i> String </i> | Código de respuesta de la autenticación bancaria. Largo máximo: 4. Este campo solo se recibe cuando la transacción es autenticada.
 amount  <br> <i> Number </i> | Monto de la transacción. Sólo en caso de dolar acepta dos decimales. Largo máximo: 17
 status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 buy_order  <br> <i> String </i> | Número de orden de compra. Largo máximo: 26
 session_id  <br> <i> String </i> | ID de sesión de la compra. Largo máximo: 61
 card_detail  <br> <i> cardDetail </i> | Objeto que contiene información de la tarjeta utilizado por el tarjetahabiente.
 card_number  <br> <i> String </i> | Los últimos 4 dígitos de la tarjeta usada en la transacción, solo si el comercio tiene configurado el poder recibir el número de tarjeta. Largo máximo: 19
-accounting_date  <br> <i> String </i> | Fecha contable de la transacción.
+accounting_date  <br> <i> String </i> | Fecha contable de la transacción en formato MMYY.
 transactionD_date  <br> <i> ISO8601 </i> | Fecha de la transacción.
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción de pago. Largo máximo: 6
 payment_type_code  <br> <i> String </i> | Indica el tipo de tarjeta utilizada. Largo máximo: 2
@@ -3511,7 +3511,7 @@ authorization_code  <br> <i> String </i> | Código de autorización de la tran
 payment_type_code  <br> <i> String </i> | Indica el tipo de tarjeta utilizada.
 response_code  <br> <i> Number </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br> 
 installments_number <br> <i> Number </i> | Número de cuotas de la transacción. Largo máximo: 2
-balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
+balance <br> <i> Number </i> | Monto restante. Largo máximo: 17. Este campo solo viene cuando la transacción fue anulada
 
 ### Reversar o Anular un pago Transaccion Completa
 
@@ -3660,11 +3660,11 @@ Content-Type: application/json
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 type  <br> <i> String </i> | Tipo de reembolso (REVERSE. NULLIFY). Largo máximo: 10
-authorization_code  <br> <i> String </i> | Código de autorización de la anulación. Largo máximo: 6
-authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
-nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
-balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17
-response_code  <br> <i> Number </i> | Código de resultado de la reversa/anulación. Si es exitoso es 0, de lo contrario la reversa/anulación no fue realizada. Largo máximo: 2
+authorization_code  <br> <i> String </i> | Código de autorización de la anulación. Largo máximo: 6. Solo viene en caso de anulación.
+authorization_date  <br> <i> String </i> | Fecha y hora de la autorización. Solo viene en caso de anulación.
+nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17. Solo viene en caso de anulación.
+balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17. Solo viene en caso de anulación.
+response_code  <br> <i> Number </i> | Código de resultado de la anulación. Si es exitoso es 0, de lo contrario la anulación no fue realizada. Largo máximo: 2. Solo viene en caso de anulación.
 ## Webpay Transacción Mall Completa {data-submenuhidden=true}
 
 ```java
@@ -3984,9 +3984,9 @@ Nombre  <br> <i> tipo </i> | Descripción
 details <br> <i> details </i> | Listado con las transacciones mall. 
 commerce_code  <br> <i> String </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo máximo: 12
 buy_order  <br> <i> String </i> | Orden de compra de la tienda del mall. Largo máximo: 26
-id_query_installments  <br> <i> Number </i> | (Opcional) Identificador de cuota. Largo máximo: 2
-deferred_period_index  <br> <i> Number </i> | (Opcional) Cantidad de periodo diferido. Largo máximo: 2
-grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia.
+id_query_installments  <br> <i> Number </i> | (Opcional) Identificador de cuota. Largo máximo: 2. Solo enviar si el pago es en cuotas
+deferred_period_index  <br> <i> Number </i> | (Opcional) Cantidad de periodo diferido. Largo máximo: 2. Solo enviar si el pago es en cuotas
+grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia. Solo enviar si el pago es en cuotas
 
 **Respuesta**
 
@@ -4041,7 +4041,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 buy_order  <br> <i> String </i> | Orden de compra del mall. Largo máximo: 26
 card_detail  <br> <i> carddetails </i> | Objeto que representa los datos de la tarjeta de crédito del tarjeta habiente.
 card_detail.card_number  <br> <i> String </i> | 4 últimos números de la tarjeta de crédito del tarjetahabiente. Solo para comercios autorizados por Transbank se envía el número completo. Largo máximo: 19.
-accouting_date  <br> <i> String </i> | Fecha de la autorización. Largo: 4, formato MMDD
+accounting_date  <br> <i> String </i> | Fecha de la autorización. Largo: 4, formato MMYY
 transaction_date  <br> <i> String </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
 details  <br> <i> Array </i> | Lista con resultado de cada una de las transacciones enviadas.
 details [].amount  <br> <i> Number </i> | Monto de la transacción. Largo máximo: 17
@@ -4256,11 +4256,11 @@ Content-Type: application/json
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 type  <br> <i> String </i> | Tipo de reembolso (REVERSE. NULLIFY). Largo máximo: 10
-authorization_code  <br> <i> String </i> | Código de autorización de la anulación. Largo máximo: 6
-authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
-nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
-balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17
-response_code <br> <i> Number </i> | Código del resultado del pago. Si es exitoso es 0, de lo contrario el pago no fue realizado. Largo máximo: 2
+authorization_code  <br> <i> String </i> | Código de autorización de la anulación. Largo máximo: 6. Solo viene en caso de anulación.
+authorization_date  <br> <i> String </i> | Fecha y hora de la autorización. Solo viene en caso de anulación.
+nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17. Solo viene en caso de anulación.
+balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17. Solo viene en caso de anulación.
+response_code <br> <i> Number </i> | Código del resultado del pago. Si es exitoso es 0, de lo contrario el pago no fue realizado. Largo máximo: 2. Solo viene en caso de anulación.
 
 
 ## Captura Diferida
