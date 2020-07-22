@@ -845,7 +845,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-type  <br> <i> String </i> | Tipo de reembolso (REVERSE. NULLIFY). Largo máximo: 10
+type  <br> <i> String </i> | Tipo de reembolso (REVERSE o NULLIFY). Largo máximo: 10
 authorization_code  <br> <i> String </i> | Código de autorización de la anulación. Largo máximo: 6
 authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17
@@ -2665,13 +2665,14 @@ Content-Type: application/json
   "authorization_code": "123456",
   "authorization_date": "2019-03-20T20:18:20Z",
   "nullified_amount": 1000.00,
-  "balance": 0.00
+  "balance": 0.00,
+  "response_code": 0
 }
 ```
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-type  <br> <i> String </i> | Tipo de reembolso (REVERSE. NULLIFY). Largo máximo: 10
+type  <br> <i> String </i> | Tipo de reembolso (REVERSE o NULLIFY). Largo máximo: 10
 authorization_code  <br> <i> Boolean </i> | Código de autorización. Largo máximo: 6
 authorization_date  <br> <i> ISO8601 </i> | Fecha de la autorización de la transacción.
 nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
@@ -4257,7 +4258,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-type  <br> <i> String </i> | Tipo de reembolso (REVERSE. NULLIFY). Si es REVERSE no se devolverán datos de la transacción. Largo máximo: 10
+type  <br> <i> String </i> | Tipo de reembolso (REVERSE o NULLIFY). Si es REVERSE no se devolverán datos de la transacción. Largo máximo: 10
 authorization_code  <br> <i> String </i> | Código de autorización de la anulación. Largo máximo: 6. Solo viene en caso de anulación.
 authorization_date  <br> <i> String </i> | Fecha y hora de la autorización. Solo viene en caso de anulación.
 nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17. Solo viene en caso de anulación.
