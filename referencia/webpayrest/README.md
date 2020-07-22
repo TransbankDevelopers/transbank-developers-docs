@@ -478,7 +478,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> String </i> | Token de la transacción. Largo: 64.
+token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
 **Respuesta**
 
@@ -628,7 +628,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> String </i> | Token de la transacción. Largo: 64.
+token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
 **Respuesta**
 
@@ -797,7 +797,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> String </i> | Token de la transacción. Largo: 64.
+token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 amount  <br> <i> Decimal </i> | (Opcional) Monto que se desea anular de la transacción. Largo máximo: 10.
 
 **Respuesta**
@@ -1139,7 +1139,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> String </i> | Token de la transacción. Largo: 64.
+token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
 **Respuesta**
 
@@ -1317,7 +1317,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> String </i> | Token de la transacción. Largo: 64.
+token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
 **Respuesta**
 
@@ -1513,7 +1513,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> String </i> | Token de la transacción. Largo: 64.
+token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere anular. Si la transacción es de captura diferida, se debe usar el código obtenido al llamar a `Transaction.capture()`. Largo máximo: 6.
 buy_order  <br> <i> String </i> | Orden de compra de la transacción que se requiere anular. Largo máximo: 26.
 amount  <br> <i> Decimal </i> | (Opcional) Monto que se desea anular de la transacción. Largo máximo: 10.
@@ -1802,7 +1802,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> String </i> | Identificador del proceso de inscripción. Es entregado por Webpay en la respuesta del método `Inscription.start()`.
+token  <br> <i> String </i> | Identificador del proceso de inscripción. Es entregado por Webpay en la respuesta del método `Inscription.start()`. (See envía en la URL, no en el body)
 
 **Respuesta**
 
@@ -2328,7 +2328,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-buy_order  <br> <i> String </i> | Orden de compra de la transacción a consultar (se envía por parámetro GET, no en el body).
+buy_order  <br> <i> String </i> | Orden de compra de la transacción a consultar (se envía en la URL, no en el body).
 
 **Respuesta**
 
@@ -2581,7 +2581,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-buy_order  <br> <i> String </i> | Orden de compra de la transacción a  reversar o anular. Se envía por GET. Largo máximo: 26. 
+buy_order  <br> <i> String </i> | Orden de compra de la transacción a  reversar o anular. Se envía en la URL, no en el body. Largo máximo: 26. 
 commerce_code  <br> <i> String </i> | Código de comercio hijo. Largo máximo: 12.
 detail_buy_order  <br> <i> String </i> | Orden de compra hija de la transacción a  reversar o anular. Largo máximo: 26.
 amount  <br> <i> Number </i> | (Opcional) Monto a anular. Si está presente se ejecuta una anulación, en caso contrario se ejecuta una reversa (a menos que haya pasado el tiempo máximo para reversar).
@@ -2805,15 +2805,13 @@ para captura simpultanea.
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
 ```
 
 ```python
@@ -3053,6 +3051,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
+token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 
 **Respuesta**
@@ -3138,8 +3137,8 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-installments_amount  <br> <i> String </i> | Monto de cada cuota. Largo: 64.
-id_query_installments  <br> <i> String </i> | Identificador de las cuotas. Largo: 2.
+installments_amount  <br> <i> String </i> | Monto de cada cuota. Largo: 17.
+id_query_installments  <br> <i> String </i> | Identificador de las cuotas. Largo: 19.
 deferred_periods  <br> <i> Array </i> | Arreglo con periodos diferidos.
 deferred_periods [].amount  <br> <i> String </i> | Monto. Largo: 17.
 deferred_periods [].period  <br> <i> String </i> | Índice de periodo. Largo: 2.
@@ -3210,7 +3209,8 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-id_query_installments  <br> <i> Number </i> | (Opcional) Identificador de cuota. Largo máximo: 2. Solo enviar si el pago es en cuotas
+token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
+id_query_installments  <br> <i> Number </i> | (Opcional) Identificador de cuota. Largo máximo: 19. Solo enviar si el pago es en cuotas
 deferred_period_index  <br> <i> Number </i> | (Opcional) Cantidad de periodo diferido. Largo máximo: 2. Solo enviar si el pago es en cuotas
 grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia. Solo enviar si el pago es en cuotas
 
@@ -3387,7 +3387,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> String </i> | Token identificador de la transacción. Largo: 64.
+token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
 **Respuesta**
 
@@ -3498,7 +3498,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-vci  <br> <i> String </i> | Código de respuesta de la autenticación bancaria. Largo máximo: 64
+vci  <br> <i> String </i> | Código de respuesta de la autenticación bancaria. Largo máximo: 4
 amount  <br> <i> Number </i> | Monto de la transacción. Sólo en caso de dolar acepta dos decimales. Largo máximo: 17
 status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 buy_order  <br> <i> String </i> | Número de orden de compra. Largo máximo: 26
@@ -3513,7 +3513,7 @@ response_code  <br> <i> Number </i> | Código de respuesta de la autorización
 installments_number <br> <i> Number </i> | Número de cuotas de la transacción. Largo máximo: 2
 balance <br> <i> Number </i> | Monto restante. Largo máximo: 17. Este campo solo viene cuando la transacción fue anulada
 
-### Reversar o Anular un pago Transaccion Completa
+### Reversar o Anular un pago Transacción Completa
 
 Este método permite a todo comercio habilitado reversar o anular una transacción
 completa. El método permite generar el reembolso del total o parte del monto de
@@ -3583,7 +3583,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> String </i> | Token de la transacción. Largo: 64.
+token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 amount  <br> <i> Decimal </i> | (Opcional) Monto que se desea anular de la transacción. Largo máximo: 17.
 
 **Respuesta**
@@ -3878,6 +3878,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
+token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 commerce_code  <br> <i> String </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12
 buy_order  <br> <i> String </i> | Orden de compra de la tienda del mall. Largo máximo: 26 
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
@@ -3922,8 +3923,8 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-installments_amount  <br> <i> String </i> | Monto de cada cuota. Largo: 64.
-id_query_installments  <br> <i> String </i> | Identificador de las cuotas. Largo: 2.
+installments_amount  <br> <i> String </i> | Monto de cada cuota. Largo: 17.
+id_query_installments  <br> <i> String </i> | Identificador de las cuotas. Largo: 19.
 deferred_periods  <br> <i> Array </i> | Arreglo con periodos diferidos.
 deferred_periods [].amount  <br> <i> String </i> | Monto. Largo: 17.
 deferred_periods [].period  <br> <i> String </i> | Índice de periodo. Largo: 2.
@@ -3981,10 +3982,11 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
+token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 details <br> <i> details </i> | Listado con las transacciones mall. 
 commerce_code  <br> <i> String </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo máximo: 12
 buy_order  <br> <i> String </i> | Orden de compra de la tienda del mall. Largo máximo: 26
-id_query_installments  <br> <i> Number </i> | (Opcional) Identificador de cuota. Largo máximo: 2. Solo enviar si el pago es en cuotas
+id_query_installments  <br> <i> Number </i> | (Opcional) Identificador de cuota. Largo máximo: 19. Solo enviar si el pago es en cuotas
 deferred_period_index  <br> <i> Number </i> | (Opcional) Cantidad de periodo diferido. Largo máximo: 2. Solo enviar si el pago es en cuotas
 grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia. Solo enviar si el pago es en cuotas
 
@@ -4095,7 +4097,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> String </i> | Token identificador de la transacción. Largo: 64.
+token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
 **Respuesta**
 
@@ -4214,7 +4216,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> String </i> | Token de la transacción. Largo: 64.
+token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 amount  <br> <i> Number </i> | Monto a anular. Largo máximo: 17
 
 
@@ -4255,7 +4257,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-type  <br> <i> String </i> | Tipo de reembolso (REVERSE. NULLIFY). Largo máximo: 10
+type  <br> <i> String </i> | Tipo de reembolso (REVERSE. NULLIFY). Si es REVERSE no se devolverán datos de la transacción. Largo máximo: 10
 authorization_code  <br> <i> String </i> | Código de autorización de la anulación. Largo máximo: 6. Solo viene en caso de anulación.
 authorization_date  <br> <i> String </i> | Fecha y hora de la autorización. Solo viene en caso de anulación.
 nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17. Solo viene en caso de anulación.
@@ -4365,6 +4367,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
+token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 commerce_code  <br> <i> Number </i> | (Opcional, solo usar en caso Mall) Tienda hija que realizó la transacción. Largo: 6.
 buy_order  <br> <i> String </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
