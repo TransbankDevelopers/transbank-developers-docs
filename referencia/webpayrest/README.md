@@ -3654,7 +3654,8 @@ Content-Type: application/json
   "authorization_code": "123456",
   "authorization_date": "2019-03-20T20:18:20Z",
   "nullified_amount": 1000.00,
-  "balance": 0.00
+  "balance": 0.00,
+  "response_code": 0
 }
 ```
 
