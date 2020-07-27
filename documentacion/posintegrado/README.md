@@ -43,8 +43,16 @@ Instalar el SDK en el software web donde se realizará la integración
 ```bash
 npm install transbank-pos-sdk-web
 ```
+También se puede incluir directamente el tag script
+```html 
+<script src="https://unpkg.com/transbank-pos-sdk-web@1/dist/pos.js"></script>
+<script>
+// En este caso, el objeto en vez de ser POS, es Transbank.POS
+// Ej: Transbank.POS.connect(...); en vez de POS.connect(...) como se especifica en los ejemplos de mas abajo. 
+</script>
+```
 
-#### Variable de ambiente
+### Variable de entorno
 Para utilizar el SDK del POS es necesario el archivo Transbank.dll, o Transbank.dylib del SDK de C.
 Para que el cliente pueda encontrar la librería nativa, utiliza una variable de ambiente llamada **NATIVE_TRANSBANK_WRAP** que debe apuntar al archivo de esta variable.
 
@@ -137,7 +145,9 @@ import cl.transbank.pos.responses.*;
 ```
 
 ```js
-import POS from "transbank-pos-sdk-web";
+import POS from "transbank-pos-sdk-web"; // Si se instala por NPM
+// <script src="https://unpkg.com/transbank-pos-sdk-web@1/dist/pos.js"></script> si se inserta directamente el script en el HTML
+// En el caso de incrustar el script, recordar que el objeto se llama Transbank.POS en vez de POS como se menciona en los siguientes ejemplos. 
 ```
 
 
