@@ -147,7 +147,7 @@ import cl.transbank.pos.responses.*;
 ```js
 import POS from "transbank-pos-sdk-web"; // Si se instala por NPM
 // <script src="https://unpkg.com/transbank-pos-sdk-web@1/dist/pos.js"></script> si se inserta directamente el script en el HTML
-// En el caso de incriustar el script, recordar que el obejto se llama Transbank.POS en vez de POS como se menciona en los siguientes ejemplos. 
+// En el caso de incrustar el script, recordar que el objeto se llama Transbank.POS en vez de POS como se menciona en los siguientes ejemplos. 
 ```
 
 
