@@ -248,7 +248,7 @@ con la condición de que el common name del certificado debe coincidir con el
 código de comercio indicado por Transbank.
 
 Para generar estas credenciales tendrás que estar en una línea de comandos y
-disponer de OpenSSL. Los pasos son los siguientes (debes reemplazar
+disponer de OpenSSL versión 1.0. Los pasos son los siguientes (debes reemplazar
 "597029124456" por tu código de comercio):
 
 1. Crear llave privada:
@@ -278,7 +278,7 @@ An optional company name []:
 <aside class="notice">
 Tip: Nota como en el ejemplo se ha ingresado un código de comercio en el
 momento en que openssl solicita un "Common Name". Acá debes ingresar el código
-de comercio que te entregó Transbank.
+de comercio que te entregó Transbank. Asegurate de que el código de comercio tenga antepuesto el número 5970, como en el ejemplo. Además, asegurate de no ingresar caracteres especiales.
 </aside>
 
 3. Crear certificado autofirmado:
