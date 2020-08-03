@@ -133,14 +133,13 @@ Producto | Código de Comercio | Secreto |
 -------- | ------------ | -------------|
 Webpay Plus | `Próximamente...` | `Próximamente...`
 Webpay Plus Mall | `Próximamente...` | `Próximamente...`
-Webpay Oneclick | `Próximamente...` | `Próximamente...`
-Webpay Oneclick Mall | `597055555541` Mall <br> `597055555542` Tienda 1 <br> `597055555543` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Webpay Oneclick Mall Captura Diferida | `597055555547` Mall <br> `597055555548` Tienda 1 <br> `597055555549` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Webpay Transacción Completa | `597055555530` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Webpay Transacción Completa sin CVV | `597055555557` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Webpay Transacción Completa Diferida | `597055555531` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Webpay Transacción Completa Diferida sin CVV | `597055555556` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Webpay Transacción Completa Mall | `597055555551` Mall <br> `597055555552` Tienda 1 <br> `597055555553` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+Oneclick Mall | `597055555541` Mall <br> `597055555542` Tienda 1 <br> `597055555543` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+Oneclick Mall Captura Diferida | `597055555547` Mall <br> `597055555548` Tienda 1 <br> `597055555549` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+Transacción Completa | `597055555530` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+Transacción Completa sin CVV | `597055555557` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+Transacción Completa Diferida | `597055555531` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+Transacción Completa Diferida sin CVV | `597055555556` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+Transacción Completa Mall | `597055555551` Mall <br> `597055555552` Tienda 1 <br> `597055555553` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
 > Los SDKs ya incluyen esos códigos de comercio y llaves secretas
 > que funcionan en el ambiente de integración, por lo que puedes obtener
 > rápidamente una configuración lista para hacer tus primeras pruebas en dicho
@@ -1892,7 +1891,7 @@ authorization_code  <br> <i> String </i> | Código que identifica la autorizaci
 card_type  <br> <i> cardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna). Largo: 10.
 card_number  <br> <i> String </i> | Últimos 4 dígitos de la tarjeta inscrito: Largo: 4.
 
-### Eliminar una inscripción con Webpay Oneclick Mall
+### Eliminar una inscripción con Oneclick Mall
 Una vez finalizado el proceso de inscripción es posible eliminarla de ser necesario. Para esto debes usar el método llamado `Inscription.remove()`.
 
 #### `Inscription.remove()`
@@ -2283,7 +2282,7 @@ Esta operación permite obtener el estado de la transacción en cualquier mome
 
 #### `Transaction.status()`
 
-Permite consultar el estado de pago realizado a través de Webpay Oneclick.
+Permite consultar el estado de pago realizado a través de Oneclick.
 Retorna el resultado de la autorización.
 
 ```java
@@ -2730,7 +2729,7 @@ transacción.
 ```
 
 ```http
-POST /rswebpaytransaction/api/oneclick/mall/v1_0/transactions/capture
+PUT /rswebpaytransaction/api/oneclick/mall/v1_0/transactions/capture
 Tbk-Api-Key-Id: Próximamente...
 Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
@@ -2799,7 +2798,7 @@ En caso de error apareceran los mismos códigos exclusivos del método `capture
 para captura simpultanea.
 </aside>
 
-## Webpay Transacción Completa {data-submenuhidden=true}
+## Transacción Completa {data-submenuhidden=true}
 
 ```java
 // Este SDK aún no se encuentra disponible
@@ -3666,7 +3665,7 @@ authorization_date  <br> <i> String </i> | Fecha y hora de la autorización. S
 nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17. Solo viene en caso de anulación.
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17. Solo viene en caso de anulación.
 response_code  <br> <i> Number </i> | Código de resultado de la anulación. Si es exitoso es 0, de lo contrario la anulación no fue realizada. Largo máximo: 2. Solo viene en caso de anulación.
-## Webpay Transacción Mall Completa {data-submenuhidden=true}
+## Transacción Mall Completa {data-submenuhidden=true}
 
 ```java
 // Este SDK aún no se encuentra disponible
@@ -3705,9 +3704,9 @@ El Mall Webpay agrupa múltiples tiendas, son estas últimas las que pueden
 generar transacciones. Tanto el mall como las tiendas asociadas son
 identificadas a través de un número denominado código de comercio.
 
-#### Flujo Webpay Transacción Mall Completa
+#### Flujo Transacción Mall Completa
 
-El flujo de Transacción Mall Completa es en general el mismo que el de [Webpay Transacción Completa](#webpay-transaccion-completa) tanto de cara al tarjeta habiente como de cara al integrador.
+El flujo de Transacción Mall Completa es en general el mismo que el de [Transacción Completa](#webpay-transaccion-completa) tanto de cara al tarjeta habiente como de cara al integrador.
 
 Las diferencias son:
 
@@ -4168,7 +4167,7 @@ details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda. Largo
 status <br> <i> Text </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 17
 balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 64
 
-### Anulación Webpay Transacción Completa
+### Anulación Transacción Completa
 
 Permite generar el reembolso del total o parte del monto de una transacción completa.
 Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una reversa o una anulación:
@@ -4274,12 +4273,12 @@ Los comercios que están configurados para operar con captura diferida deben eje
 
 **Válido para :** 
 - Webpay Plus Captura Diferida
-- Webpay Transacción Completa Captura Diferida
+- Transacción Completa Captura Diferida
 
 ### Ejecutar captura diferida
 
 Este método permite a todo comercio habilitado realizar capturas de una
-transacción autorizada sin captura generada en Webpay Plus o Webpay Transacción Completa.
+transacción autorizada sin captura generada en Webpay Plus o Transacción Completa.
 El método contempla una única captura por cada autorización. Para ello se
 deberá indicar los datos asociados a la transacción de venta con autorización
 sin captura y el monto requerido para capturar el cual debe ser menor o igual al
