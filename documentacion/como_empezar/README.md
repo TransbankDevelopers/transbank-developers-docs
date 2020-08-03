@@ -278,7 +278,7 @@ An optional company name []:
 <aside class="notice">
 Tip: Nota como en el ejemplo se ha ingresado un código de comercio en el
 momento en que openssl solicita un "Common Name". Acá debes ingresar el código
-de comercio que te entregó Transbank. Asegurate de que el código de comercio tenga antepuesto el número 5970, como en el ejemplo. Además, asegurate de no ingresar caracteres especiales.
+de comercio de **producción** que te entregó Transbank. Asegúrate de que el código de comercio tenga antepuesto el número 5970, como en el ejemplo superior. Además, es importante no ingresar caracteres especiales en los otros campos ("Organization Name", "Locality Name", etc).
 </aside>
 
 3. Crear certificado autofirmado:
