@@ -2730,11 +2730,11 @@ transacción.
 
 ```http
 PUT /rswebpaytransaction/api/oneclick/mall/v1_0/transactions/capture
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555547
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 {
-    "commerce_code": 597055555542,
+    "commerce_code": 597055555548,
     "buy_order": "OCDT12345678",
     "capture_amount": 50,
     "authorization_code": "1213"
