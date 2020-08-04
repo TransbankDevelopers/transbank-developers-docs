@@ -2730,11 +2730,11 @@ transacción.
 
 ```http
 PUT /rswebpaytransaction/api/oneclick/mall/v1_0/transactions/capture
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555547
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 {
-    "commerce_code": 597055555542,
+    "commerce_code": 597055555548,
     "buy_order": "OCDT12345678",
     "capture_amount": 50,
     "authorization_code": "1213"
@@ -2894,8 +2894,8 @@ Transaction.create(
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions
 
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555530
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
@@ -3038,8 +3038,8 @@ Transaction.installments(token=token, installments_number=installments_number)
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/installments
 
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555530
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
@@ -3193,8 +3193,8 @@ Transaction.commit( token=token,
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
 
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555530
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
@@ -3377,8 +3377,8 @@ Transaction.status(token=token)
 
 ```http
 GET /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555530
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 ```
 
@@ -3569,9 +3569,9 @@ Transaction.refund(token=token, amount=amount)
 ```
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refund
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refund
+Tbk-Api-Key-Id: 597055555530
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
