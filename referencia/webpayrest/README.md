@@ -985,7 +985,7 @@ $response = Transaction::createMall($buy_order, $session_id, $return_url, $detai
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions
 
-Tbk-Api-Key-Id: 597055555535
+Tbk-Api-Key-Id: Próximamente...
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
@@ -1129,7 +1129,7 @@ $response = Transaction::commitMall($token);
 
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: 597055555535
+Tbk-Api-Key-Id: Próximamente...
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 ```
@@ -1497,7 +1497,7 @@ $response = Transaction::refundMall($token, $buy_order, $commerce_code, $amount)
 
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refunds
-Tbk-Api-Key-Id: 597055555535
+Tbk-Api-Key-Id: Próximamente...
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
