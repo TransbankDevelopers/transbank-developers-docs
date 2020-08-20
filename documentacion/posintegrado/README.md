@@ -76,6 +76,48 @@ Este cliente desktop debe estar ejecutándose siempre para que el SDK Javascript
 
 ### Drivers
 
+Actualmente contamos con 2 equipos POS Integrado en circulación.
+
+#### Verifone VX520 y VX520C
+
+Este equipo esta certificado para operar mediante conexión serial, utilizando el puerto RS232.
+En este caso solo debes tener instalados los drivers de tu adaptador USB-Serial o tu tarjeta RS232.
+
+<aside class="warning">
+Existe la posibilida que puedas utilizar el puerto USB incluido en este equipo, sinembargo Transbank no puede garantizar el correcto funcionamiento de este.
+</aside>
+
+<aside class="notice">
+La comunicación con el POS Integrado se realiza mediante puerto serial RS232 y tú eres el/la responsable de instalar el driver correcto para tu tarjeta o adaptador serial.
+</aside>
+
+<aside class="success">
+Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilicen el [chip CH340](http://www.wch.cn/download/CH341SER_EXE.html). También puedes encontrar drivers para adaptadores con [chip Prolific](http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041)
+</aside>
+
+#### Ingenico Desk 3500
+
+Estos equipos funcionan tanto con puerto serial RS232 y USB (Generalmente plug and play), para el cual puedes necesitar instalar un driver de Ingenico.
+
+Este driver es compatible con los siguiente sistemas operativos.
+
+Sistemas Windows Soportados |
+------                      |
+Windows XP                  |
+Windows Vista               |
+Windows 7                   |
+Windows 2008 Server         |
+Windows 2008 Server R2      |
+Windows 8 and 8.1           |
+Windows XP Embedded         |
+Windows 2012 Server         |
+Windows 2016 Server         |
+Windows 10                  |
+
+<aside class="warning">
+Ingenico no proporciona drivers para otros sistemas operativos, sinembargo es posible que de todas maneras puedas utilizar el POS en sistemas operativos distintos a los mencionados. En este caso la responsabilidad del correcto funcionamiento es del comercio.
+</aside>
+
 Recuerda que necesitas tener instalados los drivers correspondientes a tu tarjeta de
 puerto serial o adaptador USB Serial.
 
