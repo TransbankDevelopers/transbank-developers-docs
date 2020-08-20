@@ -84,7 +84,7 @@ Este equipo esta certificado para operar mediante conexión serial, utilizando e
 En este caso solo debes tener instalados los drivers de tu adaptador USB-Serial o tu tarjeta RS232.
 
 <aside class="warning">
-Existe la posibilida que puedas utilizar el puerto USB incluido en este equipo, sinembargo Transbank no puede garantizar el correcto funcionamiento de este.
+Existe la posibilidad que puedas utilizar el puerto USB incluido en este equipo, sin embargo Transbank no puede garantizar el correcto funcionamiento de este.
 </aside>
 
 <aside class="notice">
@@ -115,7 +115,7 @@ Windows 2016 Server         |
 Windows 10                  |
 
 <aside class="warning">
-Ingenico no proporciona drivers para otros sistemas operativos, sinembargo es posible que de todas maneras puedas utilizar el POS en sistemas operativos distintos a los mencionados. En este caso la responsabilidad del correcto funcionamiento es del comercio.
+Ingenico no proporciona drivers para otros sistemas operativos, sin embargo es posible que de todas maneras puedas utilizar el POS en sistemas operativos distintos a los mencionados. En este caso la responsabilidad del correcto funcionamiento es del comercio.
 </aside>
 
 Recuerda que necesitas tener instalados los drivers correspondientes a tu tarjeta de
