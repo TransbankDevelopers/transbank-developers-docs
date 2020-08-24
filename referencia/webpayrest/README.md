@@ -4505,14 +4505,22 @@ Nunca dejes tu codigo de comercio y secreto compartido directamente en tu codigo
 
 1. Remover la configuración para el ambiente de integración.
 
-Antes de crear la nueva configuración para el ambiente de producción será necesario eliminar la actual comfiguración para el ambiente de pruebas que cumple con el siguiente formato `Configuration.ForTestingWebpayPlusNormal()`
+Antes de crear la nueva configuración para el ambiente de producción será necesario eliminar la actual comfiguración para el ambiente de pruebas.
 
-2. Crear un nuevo elemento `Configuration`
+2. Asignar el código de comercio productivo, entregado por Transbank al momento de contratar el producto.
 
-3. Asignar el código de comercio productivo, entregado por Transbank al momento de contratar el producto.
+```java
+OneclickMall.setCommerceCode(config.getOneclickMallCommerceCode());
+```
 
-4. Configuración del secreto compartido.
+3. Configuración del secreto compartido.
+
+```java
+OneclickMall.setApiKey(config.getOneclickMallApiKey());
+```
 
 5. Selección del ambiente productivo.
 
-6. Crear elemento Webpay utilizando la configuración de producción.
+```java
+OneclickMall.setIntegrationType(IntegrationType.LIVE);
+```
