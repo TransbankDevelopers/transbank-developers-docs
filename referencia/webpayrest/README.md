@@ -4468,7 +4468,7 @@ Código de estado HTTP | Descripción
 
 ## Puesta en Producción
 
-1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](/referencia/webpayrest#proceso-de-validación).
+1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](/referencia/webpayrest#proceso-de-validacion).
 
 2. Una vez que Transbank confirme que la planilla de integración se encuentra correcta (no aplica para plugins), se enviara al comercio la confirmación y se generara su secreto compartido, el cual en conjunto con el codigo de comercio, permiten operar en producción.
 
@@ -4480,25 +4480,28 @@ Código de estado HTTP | Descripción
 
 Durante la validación de la integración se pretende verificar que el comercio transacciona de manera segura y sin problemas, por lo que se solicitarán una serie de pruebas y su posterior envío de evidencias para validar la integración. Esta validación es requisito necesario para dejar al comercio en producción y no se permitirá que un comercio utilice productivamente el servicio sin poseer una validación.
 
-Transbank solo validará las integraciones de aquellos comercios que tengan un código de comercio productivo. Para obtenerlo, sigue las instrucciones en cómo hacerse cliente en el portal [http://www.transbank.cl](http://www.transbank.cl) o contacte a su ejecutivo comercial.
+Transbank solo validará las integraciones de aquellos comercios que tengan un código de comercio productivo. Para obtenerlo, sigue las instrucciones para hacerte cliente en el portal [http://www.transbank.cl](http://www.transbank.cl) o contacta a tu ejecutivo comercial.
 
-En esta etapa, el comercio envía las evidencias a soporte@transbank.cl empleando el formulario correspondiente al producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones. Para integraciones Webpay que utilicen algún [plugin oficial](https://transbankdevelopers.cl/plugin) existe un formulario especial.
+En esta etapa, el comercio envía las evidencias a [soporte@transbank.cl](mailto:soporte@transbank.cl) empleando el formulario correspondiente al producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones. Para integraciones Webpay que utilicen algún [plugin oficial](https://transbankdevelopers.cl/plugin) existe un formulario especial.
 
-[Descargar el formulario de envidencias](www.transbankdevelopers.cl)
+[Descargar el formulario de envidencias](some/url)
 
 Soporte validará que los casos de prueba sean consistentes con los registrados en los sistemas de Webpay y, de estar todo correcto, se le notificará al comercio la conformidad para pasar a producción, recibiendo las instrucciones para ello. De no estar consistentes las pruebas, se le hará alcances al comercio respecto de su integración, para que realices las correcciones correspondientes y vuelvas a enviar las evidencias una vez terminadas dichas correcciones.
 
-En el proceso de contratación reciviste tu codigo de comercio, y junto con el secreto compartido que se te entrego luedo de la certificacion puedes completar tus credenciales, las cuales **Debes custodiar y evitar que caigan en manos de terceros** ya que permiten hacer transacciones en nombre de tu comercio.
+En el proceso de contratación reciviste tu codigo de comercio, y junto con el secreto compartido que se te entrego luego de la certificacion puedes completar tus credenciales, las cuales **Debes custodiar y evitar que caigan en manos de terceros** ya que permiten hacer transacciones en nombre de tu comercio.
 
 - Codigo de comercio (*API Key*)
 - Secreto Compartido (*Shared Secret*))
 
 Luego que el proceso de validación de tu ingegración está terminado, debes realizar la configuración para que tu sitio se encuentre en producción.
 
-
 ### Configuración para producción utilizando los SDK
 
 Si estas utilizando algún SDK ofifcial de Transbank, entonces debes seguir los siguientes pasos.
+
+<aside class="warning">
+Nunca dejes tu codigo de comercio y secreto compartido directamente en tu codigo, te recomendamos utilizar variables de entorno u otro metodo que te permita mantener tus credenciales seguras.
+</aside>
 
 1. Remover la configuración para el ambiente de integración.
 
@@ -4506,40 +4509,10 @@ Antes de crear la nueva configuración para el ambiente de producción será nec
 
 2. Crear un nuevo elemento `Configuration`
 
-<div class="language-simple" data-multiple-language></div>
-
-<img src="/images/documentacion/configuracion/1-configuration-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/1-configuration-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/1-configuration-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
-
 3. Asignar el código de comercio productivo, entregado por Transbank al momento de contratar el producto.
 
-<img src="/images/documentacion/configuracion/2-codigo-comercio-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/2-codigo-comercio-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/2-codigo-comercio-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
+4. Configuración del secreto compartido.
 
-4. Configuración de la llave privada (`.key` para Java y PHP `.pfx` o `.p12` para .NET) 
-generada por el comercio en la etapa previa.
+5. Selección del ambiente productivo.
 
-<img src="/images/documentacion/configuracion/3-private-key-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/3-private-key-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/3-private-key-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
-
-5. Configuración del certificado público (`.crt`) enviado a Transbank para su registro. En el caso de .NET no es 
-necesario configurar el `.crt` pero se debe configurar el password asignado a la llave privada.
-
-<img src="/images/documentacion/configuracion/4-certificate-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/4-certificate-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/4-certificate-net(password).gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
-
-6. Selección del ambiente productivo.
-
-<img src="/images/documentacion/configuracion/5-environment-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/5-environment-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/5-environment-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
-
-7. Crear elemento Webpay utilizando la configuración de producción.
-
-<img src="/images/documentacion/configuracion/6-webpay-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/6-webpay-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/6-webpay-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
+6. Crear elemento Webpay utilizando la configuración de producción.
