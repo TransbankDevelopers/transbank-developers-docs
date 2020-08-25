@@ -58,6 +58,12 @@ NPM
 npm install transbank-sdk --save
 ```
 
+además, necesitar tener intalado openssl de manera global
+
+```bash
+npm install -g openssl
+```
+
 Yarn
 ```bash
 yarn add transbank-sdk
