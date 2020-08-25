@@ -431,20 +431,20 @@ response.getBalance();
 ```
 
 ```php
-response.getVci();
-response.getAmount();
-response.getStatus();
-response.getBuyOrder();
-response.getSessionId();
-response.getCardDetail();
-response.getAccountingDate();
-response.getTransactionDate();
-response.getAuthorizationCode();
-response.getPaymentTypeCode();
-response.getResponseCode();
-response.getInstallmentsAmount();
-response.getInstallmentsNumber();
-response.getBalance();
+response->getVci();
+response->getAmount();
+response->getStatus();
+response->getBuyOrder();
+response->getSessionId();
+response->getCardDetail();
+response->getAccountingDate();
+response->getTransactionDate();
+response->getAuthorizationCode();
+response->getPaymentTypeCode();
+response->getResponseCode();
+response->getInstallmentsAmount();
+response->getInstallmentsNumber();
+response->getBalance();
 ```
 
 ```csharp
@@ -600,20 +600,20 @@ response.getBalance();
 ```
 
 ```php
-response.getVci();
-response.getAmount();
-response.getStatus();
-response.getBuyOrder();
-response.getSessionId();
-response.getCardDetail();
-response.getAccountingDate();
-response.getTransactionDate();
-response.getAuthorizationCode();
-response.getPaymentTypeCode();
-response.getResponseCode();
-response.getInstallmentsAmount();
-response.getInstallmentsNumber();
-response.getBalance();
+response->getVci();
+response->getAmount();
+response->getStatus();
+response->getBuyOrder();
+response->getSessionId();
+response->getCardDetail();
+response->getAccountingDate();
+response->getTransactionDate();
+response->getAuthorizationCode();
+response->getPaymentTypeCode();
+response->getResponseCode();
+response->getInstallmentsAmount();
+response->getInstallmentsNumber();
+response->getBalance();
 ```
 
 ```csharp
@@ -788,12 +788,12 @@ response.getType();
 ```
 
 ```php
-response.getAuthorizationCode();
-response.getAuthorizationDate();
-response.getBalance();
-response.getNullifiedAmount();
-response.getResponseCode();
-response.getType();
+response->getAuthorizationCode();
+response->getAuthorizationDate();
+response->getBalance();
+response->getNullifiedAmount();
+response->getResponseCode();
+response->getType();
 ```
 
 ```csharp
