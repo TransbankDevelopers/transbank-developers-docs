@@ -912,34 +912,11 @@ token es caducado y no podrá ser utilizado en un pago.
 </aside>
 
 ```java
-import cl.transbank.webpay.exception.CreateTransactionException;
-import cl.transbank.webpay.webpayplus.WebpayPlus;
-import cl.transbank.webpay.webpayplus.model.CreateMallTransactionDetails;
-import cl.transbank.webpay.webpayplus.model.CreateWebpayPlusMallTransactionResponse;
-import java.util.Random;
-public class IntegrationExample {
-    public static void main(String[] args) {
-        String buyOrder = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
-        String sessionId = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
-        String returnUrl = "https://domai.cl/webpay-mall-return";
-        double amountMallOne = 1000;
-        String commerceCodeMallOne = "597055555536";
-        String buyOrderMallOne = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
-        double amountMallTwo = 2000;
-        String commerceCodeMallTwo = "597055555537";
-        String buyOrderMallTwo = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
-        CreateMallTransactionDetails details = CreateMallTransactionDetails.build()
-                .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne)
-                .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo);
-        try {
-            final CreateWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.create(buyOrder, sessionId, returnUrl, details);
-            final String token = response.getToken();
-            final String url = response.getUrl();
-        } catch (CreateTransactionException e) {
-            e.printStackTrace();
-        }
-    }
-}
+CreateMallTransactionDetails transactionDetails = CreateMallTransactionDetails.build()
+    .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne)
+    .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo);
+
+final CreateWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.create(buyOrder, sessionId, returnUrl, transactionDetails);
 ```
 
 ```php
@@ -948,32 +925,70 @@ use Transbank\Webpay\WebpayPlus\Transaction;
 
 WebpayPlus::configureMallForTesting();
 
-$details = [
+$transaction_details = [
   {
       "amount": 10000,
-      "commerce_code":597055555536,
+      "commerce_code": Próximamente,
       "buy_order": "ordenCompraDetalle1234"
   },
   {     
      "amount": 12000,
-     "commerce_code": 597055555537,
+     "commerce_code": Próximamente,
      "buy_order": "ordenCompraDetalle4321"
   },
 ];
   
-$response = Transaction::createMall($buy_order, $session_id, $return_url, $details);
+$response = Transaction::createMall($buy_order, $session_id, $return_url, $transaction_details);
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+var transactionDetails = new List<TransactionDetail>();
+transactions.Add(new TransactionDetail(
+    amountMallOne,
+    commerceCodeMallOne,
+    buyOrderMallOne
+));
+transactions.Add(new TransactionDetail(
+    amountMallTwo,
+    comerceCodeMallTwo,
+    buyOrderMallTwo
+));
+
+var result = MallTransaction.Create(buyOrder, sessionId, returnUrl, transactionDetails);
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+transaction_details = [
+  {
+      amount: 10000,
+      commerce_code: Próximamente,
+      buy_order: "ordenCompraDetalle1234"
+  },
+  {     
+     amount: 12000,
+     commerce_code: Próximamente,
+     buy_order: "ordenCompraDetalle4321"
+  },
+]
+
+response = = Transbank::Webpay::WebpayPlus::MallTransaction::create(
+  buy_order: @buy_order,
+  session_id: @session_id,
+  return_url: @return_url,
+  details: transaction_details
+)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+transaction_details = MallTransactionCreateDetails(amount_child_1, commerce_code_child_1, buy_order_child_1) \
+            .add(amount_child_2, commerce_code_child_2, buy_order_child_2)
+
+response = MallTransaction.create(
+    buy_order=buy_order,
+    session_id=session_id,
+    return_url=return_url,
+    details = transaction_details,
+)
 ```
 
 ```http
@@ -1017,27 +1032,28 @@ details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda del m
 **Respuesta**
 
 ```java
-
+response.getToken();
+response.getUrl();
 ```
 
 ```php
-Transbank\Webpay\WebpayPlus\TransactionCreateResponse Object
-(
-    [token] => e404373b9f44cd100a36badab380dd55d4cbc9ffdc99a273bca6bf4702b86ddd
-    [url] => https://webpay3gint.transbank.cl/webpayserver/initTransaction
-)
+response->getToken();
+response->getUrl();
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+response.Token;
+response.Url;
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+response.token
+response.url
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response.token
+response.url
 ```
 
 ```http
@@ -1065,60 +1081,23 @@ Permite confirmar una tranascción y obtener el resultado de la transacción
 una vez que Webpay ha resueltosu autorización financiera.
 
 ```java
-import cl.transbank.webpay.exception.CommitTransactionException;
-import cl.transbank.webpay.model.CardDetail;
-import cl.transbank.webpay.webpayplus.WebpayPlus;
-import cl.transbank.webpay.webpayplus.model.CommitWebpayPlusMallTransactionResponse;
-import cl.transbank.webpay.webpayplus.model.CommitWebpayPlusMallTransactionResponse.Detail;
-import java.util.List;
-public class IntegrationExample {
-    public static void main(String[] args) {
-        String token = "ef6bf196cae9d38744974e4da61e004135ea2d8774a063d33d2c58ea5730a0d2";
-        try {
-            final CommitWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.commit(token);
-            final String accountingDate = response.getAccountingDate();
-            final String buyOrder = response.getBuyOrder();
-            final CardDetail cardDetail = response.getCardDetail();
-            final String cardNumber = cardDetail != null ? cardDetail.getCardNumber() : null;
-            final String sessionId = response.getSessionId();
-            final String transactionDate = response.getTransactionDate();
-            final String vci = response.getVci();
-            final List<Detail> details = response.getDetails();
-            for (Detail detail : details) {
-                final double amount = detail.getAmount();
-                final String authorizationCode = detail.getAuthorizationCode();
-                final String buyOrderMall = detail.getBuyOrder();
-                final String commerceCode = detail.getCommerceCode();
-                final byte installmentsNumber = detail.getInstallmentsNumber();
-                final String paymentTypeCode = detail.getPaymentTypeCode();
-                final byte responseCode = detail.getResponseCode();
-                final String status = detail.getStatus();
-            } 
-        } catch (CommitTransactionException e) {
-            e.printStackTrace();
-        }
-    }
-}
+final CommitWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.commit(token);
 ```
 
 ```php
-use Transbank\Webpay\WebpayPlus;
-use Transbank\Webpay\WebpayPlus\Transaction;
-
-WebpayPlus::configureMallForTesting();
 $response = Transaction::commitMall($token);
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+var response = MallTransaction.commit(token);
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+response = MallTransaction.commit(token)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response = MallTransaction.commit(token)
 ```
 
 ```http
@@ -1137,53 +1116,107 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía e
 **Respuesta**
 
 ```java
-
+response.getAccountingDate();
+response.getBuyOrder();
+final CardDetail cardDetail = response.getCardDetail();
+cardDetail.getCardNumber();
+response.getSessionId();
+response.getTransactionDate();
+response.getVci();
+final List<Detail> details = response.getDetails();
+for (Detail detail : details) {
+    detail.getAmount();
+    detail.getAuthorizationCode();
+    detail.getBuyOrder();
+    detail.getCommerceCode();
+    detail.getInstallmentsNumber();
+    detail.getPaymentTypeCode();
+    detail.getResponseCode();
+    detail.getStatus();
+}
 ```
 
 ```php
-object(Transbank\Webpay\WebpayPlus\TransactionCommitMallResponse)#260 (7) 
-{ 
-    ["vci"]=> string(3) "TSY"
-    ["details"]=> array(2) 
-        { [0]=> array(8) { 
-            ["amount"]=> int(1000)
-            ["status"]=> string(10) "AUTHORIZED"
-            ["authorization_code"]=> string(4) "1213"
-            ["payment_type_code"]=> string(2) "VN"
-            ["response_code"]=> int(0)
-            ["installments_number"]=> int(0)
-            ["commerce_code"]=> string(12) "597055555537"
-            ["buy_order"]=> string(12) "123buyorder1" 
-           },
-          [1]=> array(8) {
-            ["amount"]=> int(2000)
-            ["status"]=> string(10) "AUTHORIZED"
-            ["authorization_code"]=> string(4) "1213"
-            ["payment_type_code"]=> string(2) "VN"
-            ["response_code"]=> int(0)
-            ["installments_number"]=> int(0)
-            ["commerce_code"]=> string(12) "597055555536"
-            ["buy_order"]=> string(12) "123buyorder2" 
-           }
-         }
-    ["buyOrder"]=> string(6) "222333"
-    ["sessionId"]=> string(17) "123session_parent"
-    ["cardNumber"]=> string(4) "6623"
-    ["accountingDate"]=> string(4) "0718"
-    ["transactionDate"]=> string(24) "2019-07-18T19:17:06.032Z" 
+$response->getAccountingDate();
+$response->getBuyOrder();
+$card_detail = response->getCardDetail();
+$card_detail->getCardNumber();
+$response->getSessionId();
+$response->getTransactionDate();
+$response->getVci();
+$details = response->getDetails();
+foreach($details as $detail){
+    detail->getAmount();
+    detail->getAuthorizationCode();
+    detail->getBuyOrder();
+    detail->getCommerceCode();
+    detail->getInstallmentsNumber();
+    detail->getPaymentTypeCode();
+    detail->getResponseCode();
+    detail->getStatus();
 }
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+response.AccountingDate;
+response.BuyOrder;
+var cardDetail = response.CardDetail;
+cardDetail.CardNumber;
+response.SessionId;
+response.TransactionDate;
+response.Vci;
+var details = response.Details;
+foreach (var detail in details) {
+    detail.Amount;
+    detail.AuthorizationCode;
+    detail.BuyOrder;
+    detail.CommerceCode;
+    detail.InstallmentsNumber;
+    detail.PaymentTypeCode;
+    detail.ResponseCode;
+    detail.Status;
+}
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+response.accounting_date
+response.buy_order
+card_detail = response.card_detail
+card_detail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+details.each do |detail|
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+end
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response.accounting_date
+response.buy_order
+card_detail = response.card_detail
+card_detail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+for detail in details:
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
 ```
 
 ```http
@@ -1243,60 +1276,23 @@ Esta operación permite obtener el estado de la transacción en cualquier mome
 Obtiene resultado de transacción a partir de un token.
 
 ```java
-import cl.transbank.webpay.exception.StatusTransactionException;
-import cl.transbank.webpay.model.CardDetail;
-import cl.transbank.webpay.webpayplus.WebpayPlus;
-import cl.transbank.webpay.webpayplus.model.StatusWebpayPlusMallTransactionResponse;
-import cl.transbank.webpay.webpayplus.model.StatusWebpayPlusMallTransactionResponse.Detail;
-import java.util.List;
-public class IntegrationExample {
-    public static void main(String[] args) {
-        String token = "ef6bf196cae9d38744974e4da61e004135ea2d8774a063d33d2c58ea5730a0d2";
-        try {
-            final StatusWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.status(token);
-            final String accountingDate = response.getAccountingDate();
-            final String buyOrder = response.getBuyOrder();
-            final CardDetail cardDetail = response.getCardDetail();
-            final String cardNumber = cardDetail != null ? cardDetail.getCardNumber() : null;
-            final String sessionId = response.getSessionId();
-            final String transactionDate = response.getTransactionDate();
-            final String vci = response.getVci();
-            
-            final List<Detail> details = response.getDetails();
-            for (Detail detail : details) {
-                final double amount = detail.getAmount();
-                final String authorizationCode = detail.getAuthorizationCode();
-                final String buyOrderMall = detail.getBuyOrder();
-                final String commerceCode = detail.getCommerceCode();
-                final byte installmentsNumber = detail.getInstallmentsNumber();
-                final String paymentTypeCode = detail.getPaymentTypeCode();
-                final String status = detail.getStatus();
-            }
-        } catch (StatusTransactionException e) {
-            e.printStackTrace();
-        }
-    }
-}
+final StatusWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.status(token);
 ```
 
 ```php
-use Transbank\Webpay\WebpayPlus;
-use Transbank\Webpay\WebpayPlus\Transaction;
-
-WebpayPlus::configureMallForTesting();
 $response = Transaction::getMallStatus($token);
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+var response = MallTransaction.status(token)
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+response = MallTransaction.status(token)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response = MallTransaction.status(token)
 ```
 
 ```http
@@ -1315,55 +1311,107 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía e
 **Respuesta**
 
 ```java
-
+response.getAccountingDate();
+response.getBuyOrder();
+final CardDetail cardDetail = response.getCardDetail();
+cardDetail.getCardNumber();
+response.getSessionId();
+response.getTransactionDate();
+response.getVci();
+final List<Detail> details = response.getDetails();
+for (Detail detail : details) {
+    detail.getAmount();
+    detail.getAuthorizationCode();
+    detail.getBuyOrder();
+    detail.getCommerceCode();
+    detail.getInstallmentsNumber();
+    detail.getPaymentTypeCode();
+    detail.getResponseCode();
+    detail.getStatus();
+}
 ```
 
 ```php
-object(Transbank\Webpay\WebpayPlus\TransactionMallStatusResponse)#260 (7) 
-{ 
-    ["buyOrder"]=> string(6) "222333"
-    ["sessionId"]=> string(17) "123session_parent"
-    ["cardNumber"]=> string(4) "6623"
-    ["expirationDate"]=> NULL
-    ["accountingDate"]=> string(4) "0718"
-    ["transactionDate"]=> string(24) "2019-07-18T19:17:06.032Z"
-    ["details"]=> array(2) {
-        [0]=> array(8) 
-        {
-            ["amount"]=> int(1000)
-            ["status"]=> string(10) "AUTHORIZED"
-            ["authorization_code"]=> string(4) "1213"
-            ["payment_type_code"]=> string(2) "VN"
-            ["response_code"]=> int(0)
-            ["installments_number"]=> int(0)
-            ["commerce_code"]=> string(12) "597055555537"
-            ["buy_order"]=> string(12) "123buyorder1" 
-        }
-        [1]=> array(8) 
-        {
-            ["amount"]=> int(2000)
-            ["status"]=> string(10) "AUTHORIZED"
-            ["authorization_code"]=> string(4) "1213"
-            ["payment_type_code"]=> string(2) "VN"
-            ["response_code"]=> int(0)
-            ["installments_number"]=> int(0)
-            ["commerce_code"]=> string(12) "597055555536"
-            ["buy_order"]=> string(12) "123buyorder2" 
-        } 
-    }
+$response->getAccountingDate();
+$response->getBuyOrder();
+$card_detail = response->getCardDetail();
+$card_detail->getCardNumber();
+$response->getSessionId();
+$response->getTransactionDate();
+$response->getVci();
+$details = response->getDetails();
+foreach($details as $detail){
+    detail->getAmount();
+    detail->getAuthorizationCode();
+    detail->getBuyOrder();
+    detail->getCommerceCode();
+    detail->getInstallmentsNumber();
+    detail->getPaymentTypeCode();
+    detail->getResponseCode();
+    detail->getStatus();
 }
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+response.AccountingDate;
+response.BuyOrder;
+var cardDetail = response.CardDetail;
+cardDetail.CardNumber;
+response.SessionId;
+response.TransactionDate;
+response.Vci;
+var details = response.Details;
+foreach (var detail in details) {
+    detail.Amount;
+    detail.AuthorizationCode;
+    detail.BuyOrder;
+    detail.CommerceCode;
+    detail.InstallmentsNumber;
+    detail.PaymentTypeCode;
+    detail.ResponseCode;
+    detail.Status;
+}
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+response.accounting_date
+response.buy_order
+card_detail = response.card_detail
+card_detail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+details.each do |detail|
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+end
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response.accounting_date
+response.buy_order
+card_detail = response.card_detail
+card_detail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+for detail in details:
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
 ```
 
 ```http
@@ -1445,48 +1493,23 @@ El método `Transaction.refund()` debe ser invocado siempre indicando el códi
 </aside>
 
 ```java
-import cl.transbank.webpay.exception.RefundTransactionException;
-import cl.transbank.webpay.webpayplus.WebpayPlus;
-import cl.transbank.webpay.webpayplus.model.RefundWebpayPlusMallTransactionResponse;
-public class IntegrationExample {
-    public static void main(String[] args) {
-        String token = "ef6bf196cae9d38744974e4da61e004135ea2d8774a063d33d2c58ea5730a0d2";
-        String buyOrder = "some_valid_buy_order";
-        String commerceCode = "597055555536";
-        double amount = 1000;
-        try {
-            final RefundWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.refund(token, buyOrder, commerceCode, amount);
-            final String authorizationCode = response.getAuthorizationCode();
-            final String authorizationDate = response.getAuthorizationDate();
-            final double balance = response.getBalance();
-            final double nullifiedAmount = response.getNullifiedAmount();
-            final byte responseCode = response.getResponseCode();
-            final String type = response.getType();
-        } catch (RefundTransactionException e) {
-            e.printStackTrace();
-        }
-    }
-}
+final RefundWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.refund(token, buyOrder, commerceCode, amount);
 ```
 
 ```php
-use Transbank\Webpay\WebpayPlus;
-use Transbank\Webpay\WebpayPlus\Transaction;
-
-WebpayPlus::configureMallForTesting();
 $response = Transaction::refundMall($token, $buy_order, $commerce_code, $amount);
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+var response = Transaction.refund(token, buyOrder, commerceCode, amount);
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+response = Transaction.refund(token, buy_order, commerce_code, amount)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response = Transaction.refund(token, buy_order, commerce_code, amount)
 ```
 
 ```http
@@ -1515,31 +1538,48 @@ commerce_id  <br> <i> Number </i> | (Opcional) Tienda mall que realizó la tran
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getBalance();
+response.getNullifiedAmount();
+response.getResponseCode();
+response.getType();
 ```
 
 ```php
-object(Transbank\Webpay\WebpayPlus\TransactionRefundResponse)#262 (6)
-{ 
-   ["type"]=> string(8) "REVERSED" 
-   ["authorizationCode"]=> NULL
-   ["authorizationDate"]=> NULL
-   ["nullifiedAmount"]=> NULL
-   ["balance"]=> NULL
-   ["responseCode"]=> NULL 
-}
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getBalance();
+$response->getNullifiedAmount();
+$response->getResponseCode();
+$response->getType();
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+response.AuthorizationCode;
+response.AuthorizationDate;
+response.Balance;
+response.NullifiedAmount;
+response.ResponseCode;
+response.Type;
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+response.authorization_code
+response.authorization_date
+response.balance
+response.nullified_amount
+response.response_code
+response.type
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response.authorization_code
+response.authorization_date
+response.balance
+response.nullified_amount
+response.response_code
+response.type
 ```
 
 ```http
