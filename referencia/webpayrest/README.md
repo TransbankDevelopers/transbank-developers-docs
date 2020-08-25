@@ -46,6 +46,9 @@ Host: https://webpay3g.transbank.cl
 
 ### Ambiente de Integración
 
+Las URLs de endpoints de integración están alojados dentro de
+<https://webpay3gint.transbank.cl/>.
+
 ```java
 // Host: https://webpay3gint.transbank.cl
 ```
@@ -69,9 +72,6 @@ Host: https://webpay3g.transbank.cl
 ```http
 Host: https://webpay3gint.transbank.cl
 ```
-
-Las URLs de endpoints de integración están alojados dentro de
-<https://webpay3gint.transbank.cl/>.
 
 Consulta [la documentación para conocer las tarjetas de prueba que funcionan en
 el ambiente de integración](/documentacion/como_empezar#ambientes).
@@ -123,11 +123,7 @@ Ten en cuenta que tu(s) código(s) de comercio en ambiente de producción no son
 iguales a los entregados para el ambiente de integración.
 </aside>
 
-En [el repositorio GitHub
-`transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
-podrás encontrar [códigos de comercios y llaves secretas para probar
-en integración aunque aún no tengas tu propio código de
-comercio](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/tree/master/integracion). Alternativamente puedes revisar la siguiente tabla con credenciales de integración para hacer pruebas.
+Puedes revisar la siguiente tabla con credenciales de integración para hacer pruebas.
 
 Producto | Código de Comercio | Secreto |
 -------- | ------------ | -------------|
@@ -140,6 +136,7 @@ Transacción Completa sin CVV | `597055555557` | `579B532A7440BB0C9079DED94D31EA
 Transacción Completa Diferida | `597055555531` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
 Transacción Completa Diferida sin CVV | `597055555556` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
 Transacción Completa Mall | `597055555551` Mall <br> `597055555552` Tienda 1 <br> `597055555553` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+
 > Los SDKs ya incluyen esos códigos de comercio y llaves secretas
 > que funcionan en el ambiente de integración, por lo que puedes obtener
 > rápidamente una configuración lista para hacer tus primeras pruebas en dicho
@@ -174,11 +171,11 @@ Transbank\Webpay\WebpayPlus::configureDeferredForTesting();
 ## Webpay Plus
 
 ```java
-
+// Este SDK aún no se encuentra disponible
 ```
 
 ```php
-
+// Este SDK aún no se encuentra disponible
 ```
 
 ```csharp
@@ -186,7 +183,7 @@ Transbank\Webpay\WebpayPlus::configureDeferredForTesting();
 ```
 
 ```ruby
-
+// Este SDK aún no se encuentra disponible
 ```
 
 ```python
@@ -194,7 +191,7 @@ Transbank\Webpay\WebpayPlus::configureDeferredForTesting();
 ```
 
 ```http
-
+// Este SDK aún no se encuentra disponible
 ```
 
 Una transacción de autorización normal (o transacción normal), corresponde a
@@ -2826,7 +2823,6 @@ Una transacción completa permite al comercio presentar al tarjetahabiente un
 formulario propio para almacenar los datos de la tarjeta, fecha de vencimiento
 y cvv (no necesario para comercios con la opción `sin cvv` habilitada) . 
 
-
 ### Crear una Transacción Completa
 
 Para crear una transacción completa basta llamar al método `Transaction.create()`
@@ -3665,6 +3661,7 @@ authorization_date  <br> <i> String </i> | Fecha y hora de la autorización. S
 nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17. Solo viene en caso de anulación.
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17. Solo viene en caso de anulación.
 response_code  <br> <i> Number </i> | Código de resultado de la anulación. Si es exitoso es 0, de lo contrario la anulación no fue realizada. Largo máximo: 2. Solo viene en caso de anulación.
+
 ## Transacción Mall Completa {data-submenuhidden=true}
 
 ```java
@@ -4468,3 +4465,62 @@ Código de estado HTTP | Descripción
 415 | Tipo de mensaje no permitido. 
 422 | El requerimiento no ha podido ser procesado ya sea por validaciones de datos o por lógica de negocios. 
 500 | Ha ocurrido un error inesperado. 
+
+## Puesta en Producción
+
+1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](/referencia/webpayrest#proceso-de-validacion).
+
+2. Una vez que Transbank confirme que la planilla de integración se encuentra correcta (no aplica para plugins), se enviara al comercio la confirmación y se generara su secreto compartido, el cual en conjunto con el codigo de comercio, permiten operar en producción.
+
+3. Cuando recivas el correo, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-para-produccion-utilizando-los-sdk)
+
+4. Con la configuración del ambiente de producción ya lista, será necesario realizar una compra de $10 para validar el correcto funcionamiento.
+
+### Proceso de validación
+
+Durante la validación de la integración se pretende verificar que el comercio transacciona de manera segura y sin problemas, por lo que se solicitarán una serie de pruebas y su posterior envío de evidencias para validar la integración. Esta validación es requisito necesario para dejar al comercio en producción y no se permitirá que un comercio utilice productivamente el servicio sin poseer una validación.
+
+Transbank solo validará las integraciones de aquellos comercios que tengan un código de comercio productivo. Para obtenerlo, sigue las instrucciones para hacerte cliente en el portal [http://www.transbank.cl](http://www.transbank.cl) o contacta a tu ejecutivo comercial.
+
+En esta etapa, el comercio envía las evidencias a [soporte@transbank.cl](mailto:soporte@transbank.cl) empleando el formulario correspondiente al producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones. Para integraciones Webpay que utilicen algún [plugin oficial](https://transbankdevelopers.cl/plugin) existe un formulario especial.
+
+[Descargar el formulario de envidencias](some/url)
+
+Soporte validará que los casos de prueba sean consistentes con los registrados en los sistemas de Webpay y, de estar todo correcto, se le notificará al comercio la conformidad para pasar a producción, recibiendo las instrucciones para ello. De no estar consistentes las pruebas, se le hará alcances al comercio respecto de su integración, para que realices las correcciones correspondientes y vuelvas a enviar las evidencias una vez terminadas dichas correcciones.
+
+En el proceso de contratación reciviste tu codigo de comercio, y junto con el secreto compartido que se te entrego luego de la certificacion puedes completar tus credenciales, las cuales **Debes custodiar y evitar que caigan en manos de terceros** ya que permiten hacer transacciones en nombre de tu comercio.
+
+- Codigo de comercio (*API Key*)
+- Secreto Compartido (*Shared Secret*))
+
+Luego que el proceso de validación de tu ingegración está terminado, debes realizar la configuración para que tu sitio se encuentre en producción.
+
+### Configuración para producción utilizando los SDK
+
+Si estas utilizando algún SDK ofifcial de Transbank, entonces debes seguir los siguientes pasos.
+
+<aside class="warning">
+Nunca dejes tu codigo de comercio y secreto compartido directamente en tu codigo, te recomendamos utilizar variables de entorno u otro metodo que te permita mantener tus credenciales seguras.
+</aside>
+
+1. Remover la configuración para el ambiente de integración.
+
+Antes de crear la nueva configuración para el ambiente de producción será necesario eliminar la actual comfiguración para el ambiente de pruebas.
+
+2. Asignar el código de comercio productivo, entregado por Transbank al momento de contratar el producto.
+
+```java
+OneclickMall.setCommerceCode(config.getOneclickMallCommerceCode());
+```
+
+3. Configuración del secreto compartido.
+
+```java
+OneclickMall.setApiKey(config.getOneclickMallApiKey());
+```
+
+5. Selección del ambiente productivo.
+
+```java
+OneclickMall.setIntegrationType(IntegrationType.LIVE);
+```

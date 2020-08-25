@@ -367,6 +367,8 @@ Antes de crear la nueva configuración para el ambiente de producción será nec
 
 2. Crear un nuevo elemento `Configuration`
 
+<div class="language-simple" data-multiple-language></div>
+
 <img src="/images/documentacion/configuracion/1-configuration-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
 <img src="/images/documentacion/configuracion/1-configuration-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
 <img src="/images/documentacion/configuracion/1-configuration-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
