@@ -97,7 +97,7 @@ Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilice
 
 #### Ingenico Desk 3500
 
-Estos equipos funcionan tanto con puerto serial RS232 y USB (Generalmente plug and play), para el cual puedes necesitar instalar un driver de Ingenico.
+Estos equipos funcionan tanto con puerto serial RS232 y USB (Generalmente plug and play), para el cual puedes necesitar instalar un [driver de Ingenico](http://transbankdevelopers.cl/files/Ingenico-USB-driver-3.10.zip).
 
 Este driver es compatible con los siguiente sistemas operativos.
 
