@@ -2798,11 +2798,9 @@ para captura simpultanea.
 ## Transacción Completa {data-submenuhidden=true}
 
 ```java
-// Este SDK aún no se encuentra disponible
 ```
 
 ```php
-
 ```
 
 ```csharp
@@ -2812,11 +2810,9 @@ para captura simpultanea.
 ```
 
 ```python
-
 ```
 
 ```http
-
 ```
 
 Una transacción completa permite al comercio presentar al tarjetahabiente un
@@ -2839,12 +2835,22 @@ token es caducado y no podrá ser utilizado en un pago.
 </aside>
 
 ```java
-// Este SDK aún no se encuentra disponible
+import cl.transbank.transaccioncompleta.FullTransaction;
+import cl.transbank.transaccioncompleta.model.*;
+import cl.transbank.webpay.exception.*;
+//...
+FullTransaction.Transaction.create(
+                            buyOrder,
+                            sessionId,
+                            amount,
+                            cardNumber,
+                            cardExpirationDate,
+                            cvv);
 ```
 
 ```php
 use Transbank\TransaccionCompleta\Transaction;
-
+//...
 Transaction::create(
             $buy_order,
             $session_id,
@@ -2857,7 +2863,7 @@ Transaction::create(
 
 ```csharp
 using Transbank.Webpay.TransaccionCompleta;
-
+//...
 FullTransaction.Create(
                 buyOrder: buy_order,
                 sessionId: session_id,
@@ -2880,7 +2886,7 @@ Transbank::TransaccionCompleta::Transaction::create(
 
 ```python
 from transbank.transaccion_completa.transaction import Transaction
-
+#...
 Transaction.create(
     buy_order=buy_order, session_id=session_id, amount=amount,
     card_number=card_number, cvv=cvv, card_expiration_date=card_expiration_date
@@ -2918,30 +2924,13 @@ card_expiration_date  <br> <i> String </i> | Fecha de expiración de la tarjeta 
 **Respuesta**
 
 ```java
-import cl.transbank.webpay.exception.RefundTransactionException;
-import cl.transbank.webpay.oneclick.OneclickMall;
-import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
-
-public class IntegrationExample {
-    public static void main(String[] args) {
-        String buyOrder = "a valid buy order";
-        String sessionId = "a valid session Id";
-        double amount = 10000; //example
-        String cardNumber= "a valid card number";
-        String cardExpirationDate= "a valid card expiration date ie: 23/03";
-        short cvv = 123; //example
-
-        try {
-            FullTransactionCreateResponse response = FullTransaction.Transaction.create(buyOrder, sessionId, amount, cardNumber, cardExpirationDate, cvv);
-        } catch (TransactionCreateException | IOException e) {
-            return new ErrorController().error();
-        }
-}
+{
+  Token: "e435cdc08cb6fdf98a67a636d79b955a0f5a872eb6d89c76364c58fac31c32d1"
 }
 ```
 
 ```php
-object(Transbank\TransaccionCompleta\TransactionCreateResponse)#301 (1) 
+object(Transbank\TransaccionCompleta\TransactionCreateResponse)#301 (1)
 {
   ["token"]=>
   string(64) "e2dd3dd969eef829d99f05f240f82a6e98ef6b1635d1bf3f3daa02ee5509dad1"
@@ -2950,7 +2939,7 @@ object(Transbank\TransaccionCompleta\TransactionCreateResponse)#301 (1)
 
 ```csharp
 {
-	Token: "e435cdc08cb6fdf98a67a636d79b955a0f5a872eb6d89c76364c58fac31c32d1"
+  Token: "e435cdc08cb6fdf98a67a636d79b955a0f5a872eb6d89c76364c58fac31c32d1"
 }
 ```
 
@@ -2978,10 +2967,13 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 
-
 #### Modalidad `sin cvv`
+
 Para modalidad del producto Transacción completa `sin CVV`, este campo **no** debe ser enviado.
-```json
+
+```http
+200 OK
+Content-Type: application/json
 {
   "buy_order": "ordenCompra12345678",
   "session_id": "sesion1234564",
@@ -3003,18 +2995,22 @@ El id de la consulta que selecciona el tarjetahabiente debe ser informado en la
 invocación de la confirmación.
 
 ```java
-
+import cl.transbank.transaccioncompleta.FullTransaction;
+import cl.transbank.transaccioncompleta.model.*;
+import cl.transbank.webpay.exception.*;
+//...
+FullTransactionInstallmentResponse response = FullTransaction.Transaction.installment(token, installmentsNumber);
 ```
 
 ```php
 use Transbank\TransaccionCompleta\Transaction;
-
+//...
 $installments = Transaction::installments($token_ws, $installments_number);
 ```
 
 ```csharp
 using Transbank.Webpay.TransaccionCompleta;
-
+//...
 FullTransaction.Installments(
                 token,
                 installments_number);
@@ -3027,7 +3023,7 @@ FullTransaction.Installments(
 
 ```python
 from transbank.transaccion_completa.transaction import Transaction
-
+#...
 Transaction.installments(token=token, installments_number=installments_number)
 ```
 
@@ -3053,25 +3049,15 @@ installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 
 **Respuesta**
 
 ```java
-import cl.transbank.webpay.exception.RefundTransactionException;
-import cl.transbank.webpay.oneclick.OneclickMall;
-import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
-
-public class IntegrationExample {
-    public static void main(String[] args) {
-        String token = "a token obtained through create transaction";
-        byte installmentsNumber = "a number between 2 and 12";
-        try {
-            final FullTransactionInstallmentResponse response = FullTransaction.Transaction.installment(token, installmentsNumber);
-        } catch ( IOException | TransactionInstallmentException e) {
-            return new ErrorController().error();
-        }
-    }
+{
+  InstallmentsAmount: 1000,
+  IdQueryInstallments: 20783487,
+  DeferredPeriods: []
 }
 ```
 
 ```php
-object(Transbank\TransaccionCompleta\TransactionInstallmentsResponse)#302 (3) 
+object(Transbank\TransaccionCompleta\TransactionInstallmentsResponse)#302 (3)
 {
   ["installmentsAmount"]=>
   int(334)
@@ -3104,15 +3090,7 @@ object(Transbank\TransaccionCompleta\TransactionInstallmentsResponse)#302 (3)
 }
 ```
 
-Si el comercio no tiene configurado periodos diferidos, la respuesta de `deferred_periods` será `[]`:   
-```json
-{
-  "installments_amount": 20,
-  "id_query_installments": 2190124,
-  "deferred_periods": []
-}
-```
-
+Si el comercio no tiene configurado periodos diferidos, la respuesta de `deferred_periods` será `[]`:
 
 ```http
 200 OK
@@ -3129,7 +3107,6 @@ Content-Type: application/json
   ]
 }
 ```
-
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -3151,23 +3128,35 @@ Operación que permite confirmar una transacción. Retorna el estado de la
 transacción.
 
 ```java
-
+import cl.transbank.transaccioncompleta.FullTransaction;
+import cl.transbank.transaccioncompleta.model.*;
+import cl.transbank.webpay.exception.*;
+//...
+FullTransaction.Transaction.commit(
+                            token,
+                            idQueryInstallments,
+                            deferredPeriodIndex,
+                            gracePeriod);
 ```
 
 ```php
 use Transbank\TransaccionCompleta\Transaction;
-
+//...
 Transaction::commit(
             $token_ws,
             $id_query_installments,
             $deferred_period_index,
-            $grace_period
+            $grace_period)
 ```
 
 ```csharp
 using Transbank.Webpay.TransaccionCompleta;
-
-FullTransaction.Commit(token, idQueryInstallments, deferredPeriodsIndex, gracePeriods);
+//...
+FullTransaction.Commit(
+                  token,
+                  idQueryInstallments,
+                  deferredPeriodsIndex,
+                  gracePeriods);
 ```
 
 ```ruby
@@ -3179,7 +3168,7 @@ Transbank::TransaccionCompleta::Transaction::commit(token: token,
 
 ```python
 from transbank.transaccion_completa.transaction import Transaction
-
+#...
 Transaction.commit( token=token,
                     id_query_installments=id_query_installments,
                     deferred_period_index=deferred_period_index,
@@ -3212,29 +3201,27 @@ grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia.
 **Respuesta**
 
 ```java
-import cl.transbank.webpay.exception.RefundTransactionException;
-import cl.transbank.webpay.oneclick.OneclickMall;
-import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
-
-public class IntegrationExample {
-    public static void main(String[] args) {
-        byte deferredPeriodIndex= 1; //example
-        Boolean gracePeriod = false; //example
-        String token = "a token obtained through create transaction";
-        Long idQueryInstallments = 1262362L;//a valid id query installments obtained through Installments transaction 
-        try {
-            final FullTransactionCommitResponse response = FullTransaction.Transaction.commit(token,idQueryInstallments,deferredPeriodIndex,gracePeriod);
-        } catch (TransactionCommitException | IOException e) {
-            return new ErrorController().error();
-        }
-    }
+{
+  AccountingDate: "1219",
+  Amount: 10000,
+  AuthorizationCode: "1213",
+  BuyOrder: "543769748",
+  CardDetail: {,
+    CardNumber: 6623
+  }
+  InstallmentsAmount: 1000,
+  InstallmentsNumber: 0,
+  PaymentTypeCode: "NC",
+  ResponseCode: 0,
+  SessionId: "105360",
+  Status: "AUTHORIZED",
+  TransactionDate: "2019-12-19T19:46:19.352Z"
 }
 ```
 
 ```php
-object(Transbank\TransaccionCompleta\TransactionCommitResponse)#303 (13) 
+object(Transbank\TransaccionCompleta\TransactionCommitResponse)#303 (13)
 {
-  ["vci"]=> NULL
   ["amount"]=> int(1000) 
   ["status"]=> string(10) "AUTHORIZED"
   ["buyOrder"]=> string(6) "123456"
@@ -3255,23 +3242,24 @@ object(Transbank\TransaccionCompleta\TransactionCommitResponse)#303 (13)
 ```csharp
 {
   AccountingDate: "1219",
-	Amount: 10000,
-	AuthorizationCode: "1213",
-	BuyOrder: "543769748",
-	CardDetail: {,
+  Amount: 10000,
+  AuthorizationCode: "1213",
+  BuyOrder: "543769748",
+  CardDetail: {,
     CardNumber: 6623
   }
-	InstallmentsAmount: 1000,
-	InstallmentsNumber: 0,
-	PaymentTypeCode: "NC",
-	ResponseCode: 0,
-	SessionId: "105360",
-	Status: "AUTHORIZED",
-	TransactionDate: "2019-12-19T19:46:19.352Z"
+  InstallmentsAmount: 1000,
+  InstallmentsNumber: 0,
+  PaymentTypeCode: "NC",
+  ResponseCode: 0,
+  SessionId: "105360",
+  Status: "AUTHORIZED",
+  TransactionDate: "2019-12-19T19:46:19.352Z"
 }
+```
+
 ```ruby
 <Transbank::TransaccionCompleta::TransactionCommitResponse:0x00007f90f80152f8
-    @vci=nil,
     @amount=1000,
     @status="AUTHORIZED",
     @buy_order="buyorder1567451528",
@@ -3289,11 +3277,21 @@ object(Transbank\TransaccionCompleta\TransactionCommitResponse)#303 (13)
 
 ```python
 {
-  vci: None, amount: 1000.0, status: "AUTHORIZED", buy_order: "buyorder1577202376",
-  session_id: "session1577202376", card_detail: {'card_number': '6623'},
-  accounting_date: 1224, transaction_date: "2019-12-24T15:46:22.392Z", authorization_code: 1213,
-  payment_type_code: "VN", response_code: 0.0, installments_number: 0.0,
-  installments_amount: None balance:None
+  amount: 1000.0,
+  status: "AUTHORIZED",
+  buy_order: "buyorder1577202376",
+  session_id: "session1577202376",
+  card_detail: {
+    'card_number': '6623'
+    },
+  accounting_date: 1224,
+  transaction_date: "2019-12-24T15:46:22.392Z",
+  authorization_code: 1213,
+  payment_type_code: "VN",
+  response_code: 0.0,
+  installments_number: 0.0,
+  installments_amount: None,
+  balance:None
 }
 ```
 
@@ -3302,7 +3300,6 @@ object(Transbank\TransaccionCompleta\TransactionCommitResponse)#303 (13)
 Content-Type: application/json
 
 {
-  "vci": "TSY",
   "amount": 10000,
   "status": "AUTHORIZED",
   "buy_order": "ordenCompra12345678",
@@ -3322,7 +3319,6 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-vci  <br> <i> String </i> | Código de respuesta de la autenticación bancaria. Largo máximo: 4. Este campo solo se recibe cuando la transacción es autenticada.
 amount  <br> <i> Number </i> | Monto de la transacción. Sólo en caso de dolar acepta dos decimales. Largo máximo: 17
 status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 buy_order  <br> <i> String </i> | Número de orden de compra. Largo máximo: 26
@@ -3330,11 +3326,13 @@ session_id  <br> <i> String </i> | ID de sesión de la compra. Largo máximo: 6
 card_detail  <br> <i> cardDetail </i> | Objeto que contiene información de la tarjeta utilizado por el tarjetahabiente.
 card_number  <br> <i> String </i> | Los últimos 4 dígitos de la tarjeta usada en la transacción, solo si el comercio tiene configurado el poder recibir el número de tarjeta. Largo máximo: 19
 accounting_date  <br> <i> String </i> | Fecha contable de la transacción en formato MMYY.
-transactionD_date  <br> <i> ISO8601 </i> | Fecha de la transacción.
+transaction_date  <br> <i> ISO8601 </i> | Fecha de la transacción.
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción de pago. Largo máximo: 6
-payment_type_code  <br> <i> String </i> | Indica el tipo de tarjeta utilizada. Largo máximo: 2
-response_code  <br> <i> Number </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br> 
-installments_number <br> <i> Number </i> | Número de cuotas de la transacción. Largo máximo: 2
+payment_type_code  <br> <i> String </i> | Indica el tipo de tarjeta utilizada. Largo máximo: 2 <br> VD = Venta Débito. <i> (Próximamente) </i> <br> VN = Venta Normal. <br> VP = Venta Prepago.<br> <i> (Próximamente)</i> <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés
+response_code  <br> <i> Number </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br>
+installments_amount <br> <i> Number </i> | Monto de la cuota. Se envía solo si tiene valor cuota. <br> <i> Largo máximo: 17 </i>
+installments_number <br> <i> Number </i> | Número de cuotas de la transacción. <br> <i>Largo máximo: 2 </i>
+prepaid_balance <br> <i> Number </i> | Saldo de la tarjeta de prepago. Se envía solo si se informa saldo. <br> <i> Largo máximo: 17 </i>
 
 ### Consultar estado de una transacción completa
 
@@ -3344,20 +3342,23 @@ Esta operación permite obtener el estado de la transacción en cualquier mome
 
 Obtiene resultado de transacción a partir de un token.
 
-
 ```java
-
+import cl.transbank.transaccioncompleta.FullTransaction;
+import cl.transbank.transaccioncompleta.model.*;
+import cl.transbank.webpay.exception.*;
+//...
+FullTransaction.Transaction.status(token);
 ```
 
 ```php
 use Transbank\TransaccionCompleta\Transaction;
-
+//...
 Transaction::getStatus($token_ws);
 ```
 
 ```csharp
 using Transbank.Webpay.TransaccionCompleta;
-
+//...
 FullTransaction.Status(token);
 ```
 
@@ -3367,7 +3368,7 @@ Transbank::TransaccionCompleta::Transaction::status(token: token)
 
 ```python
 from transbank.transaccion_completa.transaction import Transaction
-
+//...
 Transaction.status(token=token)
 ```
 
@@ -3387,26 +3388,25 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía e
 **Respuesta**
 
 ```java
-import cl.transbank.webpay.exception.RefundTransactionException;
-import cl.transbank.webpay.oneclick.OneclickMall;
-import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
-
-public class IntegrationExample {
-    public static void main(String[] args) {
-      String token = "a token obtained through create transaction";
-        try {
-            final FullTransactionStatusResponse response = FullTransaction.Transaction.status(token);
-        } catch (TransactionStatusException | IOException e) {
-            return new ErrorController().error();
-        }
-    }
+{
+  AccountingDate: "1219",
+  Amount: 10000,
+  AuthorizationCode: "1213",
+  BuyOrder: "327648047",
+  CardDetail: (null),
+  InstallmentsAmount: 1000,
+  InstallmentsNumber: 10,
+  PaymentTypeCode: "NC",
+  ResponseCode: 0,
+  SessionId: "750819",
+  Status: "AUTHORIZED",
+  TransactionDate: "2019-12-19T19:50:34.411Z"
 }
 ```
 
 ```php
 object(Transbank\TransaccionCompleta\TransactionStatusResponse)#303 (13) 
 {
-  ["vci"]=> NULL
   ["amount"]=> int(1000)
   ["status"]=> string(10) "AUTHORIZED"
   ["buyOrder"]=> string(6) "123456"
@@ -3426,24 +3426,23 @@ object(Transbank\TransaccionCompleta\TransactionStatusResponse)#303 (13)
 
 ```csharp
 {
-	AccountingDate: "1219",
-	Amount: 10000,
-	AuthorizationCode: "1213",
-	BuyOrder: "327648047",
-	CardDetail: (null),
-	InstallmentsAmount: 1000,
-	InstallmentsNumber: 10,
-	PaymentTypeCode: "NC",
-	ResponseCode: 0,
-	SessionId: "750819",
-	Status: "AUTHORIZED",
-	TransactionDate: "2019-12-19T19:50:34.411Z"
+  AccountingDate: "1219",
+  Amount: 10000,
+  AuthorizationCode: "1213",
+  BuyOrder: "327648047",
+  CardDetail: (null),
+  InstallmentsAmount: 1000,
+  InstallmentsNumber: 10,
+  PaymentTypeCode: "NC",
+  ResponseCode: 0,
+  SessionId: "750819",
+  Status: "AUTHORIZED",
+  TransactionDate: "2019-12-19T19:50:34.411Z"
 }
 ```
 
 ```ruby
-<Transbank::TransaccionCompleta::TransactionStatusResponse:0x00007f90f5c395f0 
-    @vci=nil,
+<Transbank::TransaccionCompleta::TransactionStatusResponse:0x00007f90f5c395f0
     @amount=1000,
     @status="AUTHORIZED",
     @buy_order="buyorder1567451528",
@@ -3461,11 +3460,19 @@ object(Transbank\TransaccionCompleta\TransactionStatusResponse)#303 (13)
 
 ```python
 {
-  vci: None, amount: 1000.0, status: "AUTHORIZED", buy_order: "buyorder1577202376",
-  session_id: "session1577202376", card_detail: {'card_number': '6623'},
-  accounting_date: 1224, transaction_date: "2019-12-24T15:46:22.392Z",
-  authorization_code: 1213, payment_type_code: "VN", response_code: 0.0,
-  installments_number: 0.0, installments_amount: None balance:None
+  amount: 1000.0,
+  status: "AUTHORIZED",
+  buy_order: "buyorder1577202376",
+  session_id: "session1577202376",
+  card_detail: {'card_number': '6623'},
+  accounting_date: 1224,
+  transaction_date: "2019-12-24T15:46:22.392Z",
+  authorization_code: 1213,
+  payment_type_code: "VN",
+  response_code: 0.0,
+  installments_number: 0.0,
+  installments_amount: None,
+  balance:None
 }
 ```
 
@@ -3474,7 +3481,6 @@ object(Transbank\TransaccionCompleta\TransactionStatusResponse)#303 (13)
 Content-Type: application/json
 
 {
-  "vci": "TSY",
   "amount": 10000,
   "status": "AUTHORIZED",
   "buy_order": "ordenCompra12345678",
@@ -3493,7 +3499,6 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-vci  <br> <i> String </i> | Código de respuesta de la autenticación bancaria. Largo máximo: 4
 amount  <br> <i> Number </i> | Monto de la transacción. Sólo en caso de dolar acepta dos decimales. Largo máximo: 17
 status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 buy_order  <br> <i> String </i> | Número de orden de compra. Largo máximo: 26
@@ -3503,10 +3508,12 @@ card_detail.card_number  <br> <i> String </i> | Los últimos 4 dígitos de la 
 accounting_date  <br> <i> String </i> | Fecha contable de la transacción.
 transaction_date  <br> <i> ISO8601 </i> | Fecha de la transacción.
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción de pago. Largo máximo: 6
-payment_type_code  <br> <i> String </i> | Indica el tipo de tarjeta utilizada.
-response_code  <br> <i> Number </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br> 
+payment_type_code  <br> <i> String </i> | Indica el tipo de tarjeta utilizada. Largo máximo: 2 <br> VD = Venta Débito. <i> (Próximamente) </i> <br> VN = Venta Normal. <br> VP = Venta Prepago.<br> <i> (Próximamente)</i> <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés
+response_code  <br> <i> Number </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br>
 installments_number <br> <i> Number </i> | Número de cuotas de la transacción. Largo máximo: 2
+installments_amount <br> <i> Number </i> | Monto de la cuota. Se envía solo si tiene valor cuota. <br> <i> Largo máximo 17 </i>
 balance <br> <i> Number </i> | Monto restante. Largo máximo: 17. Este campo solo viene cuando la transacción fue anulada
+prepaid_balance <br> <i> Number </i> | Saldo de la tarjeta de prepago. Se envía solo si se informa saldo. <br> <i> Largo máximo: 17 </i>
 
 ### Reversar o Anular un pago Transacción Completa
 
@@ -3514,8 +3521,9 @@ Este método permite a todo comercio habilitado reversar o anular una transacci
 completa. El método permite generar el reembolso del total o parte del monto de
 una transacción dependiendo de la siguiente lógica de negocio la invocación a
 esta operación generará una reversa o una anulación:
-- Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
-- Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
+
+* Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
+* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
 
 La anulación puede realizarse máximo 90 días después de la fecha de la
 transacción original.
@@ -3525,7 +3533,6 @@ producto Webpay](/producto/webpay#anulaciones) para conocer
 más detalles y restricciones.
 
 Para anular una transacción se debe invocar al método `Transaction.refund()`.
-
 
 Permite generar el reembolso del total o parte del monto de una transacción completa.
 Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una reversa o una anulación:
@@ -3539,18 +3546,22 @@ Dependiendo de la siguiente lógica de negocio la invocación a esta operacio�
 Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentre vigente.
 
 ```java
-
+import cl.transbank.transaccioncompleta.FullTransaction;
+import cl.transbank.transaccioncompleta.model.*;
+import cl.transbank.webpay.exception.*;
+//...
+FullTransaction.Transaction.refund(token, amount);
 ```
 
 ```php
 use Transbank\TransaccionCompleta\Transaction;
-
+//...
 Transaction::refund($token_ws, $amount);
 ```
 
 ```csharp
 using Transbank.Webpay.TransaccionCompleta;
-
+//...
 FullTransaction.Refund(token, amount);
 ```
 
@@ -3560,7 +3571,7 @@ Transbank::TransaccionCompleta::Transaction::refund(token: token, amount: amount
 
 ```python
 from transbank.transaccion_completa.transaction import Transaction
-
+#...
 Transaction.refund(token=token, amount=amount)
 ```
 
@@ -3574,6 +3585,7 @@ Content-Type: application/json
  "amount": 1000
 }
 ```
+
 **Parámetros**
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -3584,20 +3596,13 @@ amount  <br> <i> Decimal </i> | (Opcional) Monto que se desea anular de la trans
 **Respuesta**
 
 ```java
-import cl.transbank.webpay.exception.RefundTransactionException;
-import cl.transbank.webpay.oneclick.OneclickMall;
-import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
-
-public class IntegrationExample {
-    public static void main(String[] args) {
-    String token = "a token obtained through create transaction";
-    double amount = 10000; //example
-    try {
-            final FullTransactionRefundResponse response = FullTransaction.Transaction.refund(token,amount);
-        } catch (IOException | TransactionRefundException e) {
-            return new ErrorController().error();
-        }
-    }
+{
+  AuthorizationCode: (null),
+  AuthorizationDate: (null),
+  Balance: 0,
+  NullifiedAmount: 0,
+  ResponseCode: 0,
+  Type: "REVERSED"
 }
 ```
 
@@ -3615,12 +3620,12 @@ object(Transbank\TransaccionCompleta\TransactionRefundResponse)#305 (6)
 
 ```csharp
 {
-	AuthorizationCode: (null),
-	AuthorizationDate: (null),
-	Balance: 0,
-	NullifiedAmount: 0,
-	ResponseCode: 0,
-	Type: "REVERSED"
+  AuthorizationCode: (null),
+  AuthorizationDate: (null),
+  Balance: 0,
+  NullifiedAmount: 0,
+  ResponseCode: 0,
+  Type: "REVERSED"
 }
 ```
 
@@ -3665,27 +3670,21 @@ response_code  <br> <i> Number </i> | Código de resultado de la anulación. Si 
 ## Transacción Mall Completa {data-submenuhidden=true}
 
 ```java
-// Este SDK aún no se encuentra disponible
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
 ```
 
 ```http
-
 ```
 
 Una transacción Mall Completa corresponde a una solicitud de transacciones completas
@@ -3701,21 +3700,20 @@ El Mall Webpay agrupa múltiples tiendas, son estas últimas las que pueden
 generar transacciones. Tanto el mall como las tiendas asociadas son
 identificadas a través de un número denominado código de comercio.
 
-#### Flujo Transacción Mall Completa
+### Flujo Transacción Mall Completa
 
 El flujo de Transacción Mall Completa es en general el mismo que el de [Transacción Completa](#webpay-transaccion-completa) tanto de cara al tarjeta habiente como de cara al integrador.
 
 Las diferencias son:
 
-- Se debe usar un código de comercio configurado para modalidad Mall en
+* Se debe usar un código de comercio configurado para modalidad Mall en
   Transbank, el cual debe ser indicado al iniciar la transacción.
-- Se pueden indicar múltiples transacciones, cada una asociada a un código de
+* Se pueden indicar múltiples transacciones, cada una asociada a un código de
   comercio de tienda (que debe estar configurada en Transbank como perteneciente
   al mall).
-- Se debe verificar por separado el resultado de cada una de esas transacciones
+* Se debe verificar por separado el resultado de cada una de esas transacciones
   individualmente, pues es posible que el emisor de la tarjeta autorice algunas
   y otras no.
-
 
 ### Crear una Transacción Mall Completa
 
@@ -4041,18 +4039,18 @@ buy_order  <br> <i> String </i> | Orden de compra del mall. Largo máximo: 26
 card_detail  <br> <i> carddetails </i> | Objeto que representa los datos de la tarjeta de crédito del tarjeta habiente.
 card_detail.card_number  <br> <i> String </i> | 4 últimos números de la tarjeta de crédito del tarjetahabiente. Solo para comercios autorizados por Transbank se envía el número completo. Largo máximo: 19.
 accounting_date  <br> <i> String </i> | Fecha de la autorización. Largo: 4, formato MMYY
-transaction_date  <br> <i> String </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
+transaction_date  <br> <i> String </i> | Fecha y hora de la autorización. formato: ISO8601
 details  <br> <i> Array </i> | Lista con resultado de cada una de las transacciones enviadas.
-details [].amount  <br> <i> Number </i> | Monto de la transacción. Largo máximo: 17
+details [].amount  <br> <i> Number </i> | Monto de la transacción. Largo máximo: 17 <br> <i> Acepta decimales en caso de ser operación en dolares </i>
 details [].status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
-details [].authorization_code  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
-details [].payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés.
-details [].responseCode  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br> 
+details [].authorization_code  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 2
+details [].payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés. <br> VD = Venta Débito. <i> (Próximamente) </i> <br> VP = Venta Prepago. <i> (Próximamente) </i>
+details [].responseCode  <br> <i> Number </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br>
 details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 details [].installments_amount  <br> <i> Number </i> | Monto de cada cuota. Largo máximo: 17
-details [].commerce_code  <br> <i> String </i> | Código comercio de la tienda. Largo: 6
-details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda. Largo máximo: 255
-status <br> <i> Text </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 17
+details [].commerce_code  <br> <i> String </i> | Código comercio de la tienda. Largo: 12
+details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda. Largo máximo: 26
+prepaid_balance <br> <i> Number </i> | Saldo de la tarjeta de prepago. Se envía solo si se informa saldo. <br> <i> Largo máximo 17 </i>
 
 ### Consultar estado de una transacción mall completa
 
@@ -4061,7 +4059,6 @@ Esta operación permite obtener el estado de la transacción mall completa en 
 #### `Transaction.status()`
 
 Obtiene resultado de transacción a partir de un token.
-
 
 ```java
 // Este SDK aún no se encuentra disponible
@@ -4150,28 +4147,28 @@ buy_order  <br> <i> String </i> | Orden de compra del mall. Largo máximo: 26
 card_detail  <br> <i> carddetails </i> | Objeto que representa los datos de la tarjeta de crédito del tarjeta habiente.
 card_detail.card_number  <br> <i> String </i> | 4 últimos números de la tarjeta de crédito del tarjetahabiente. Solo para comercios autorizados por Transbank se envía el número completo. Largo máximo: 19.
 accouting_date  <br> <i> String </i> | Fecha de la autorización. Largo: 4, formato MMDD
-transaction_date  <br> <i> String </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
+transaction_date  <br> <i> String </i> | Fecha y hora de la autorización. Largo: 6, formato: ISO8601
 details  <br> <i> Array </i> | Lista con resultado de cada una de las transacciones enviadas.
-details [].amount  <br> <i> Number </i> | Monto de la transacción. Largo máximo: 17
+details [].amount  <br> <i> Number </i> | Monto de la transacción. Largo máximo: 17 <br> <i> Acepta decimales en caso de ser operación en dolares </i>
 details [].status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 details [].authorization_code  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
-details [].payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés.
-details [].responseCode  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br> 
+details [].payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés. <br> VD = Venta Débito. <i> (Próximamente) </i> <br> VP = Venta Prepago. <i> (Próximamente) </i>
+details [].responseCode  <br> <i> Number </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br>
 details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 details [].installments_amount  <br> <i> Number </i> | Monto de cada cuota. Largo máximo: 17
-details [].commerce_code  <br> <i> String </i> | Código comercio de la tienda. Largo: 6
-details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda. Largo máximo: 255
-status <br> <i> Text </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 17
-balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 64
+details [].commerce_code  <br> <i> String </i> | Código comercio de la tienda. Largo: 12
+details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda. Largo máximo: 26
+balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
+prepaid_balance <br> <i> Number </i> | Saldo de la tarjeta de prepago. Se envía solo si se informa saldo. <br> <i> Largo máximo 17 </i>
 
 ### Anulación Transacción Completa
 
 Permite generar el reembolso del total o parte del monto de una transacción completa.
 Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una reversa o una anulación:
 
-- Si se especifica un valor en el campo “amount” se ejecutará siempre una anulación.
-- Si se supera el tiempo máximo para ejecutar una reversa se ejecutará una anulación.
-- Si no se ha dado ninguno de los casos anteriores se ejecutará una reversa.
+* Si se especifica un valor en el campo “amount” se ejecutará siempre una anulación.
+* Si se supera el tiempo máximo para ejecutar una reversa se ejecutará una anulación.
+* Si no se ha dado ninguno de los casos anteriores se ejecutará una reversa.
 
 #### `Transaction.refund()`
 
