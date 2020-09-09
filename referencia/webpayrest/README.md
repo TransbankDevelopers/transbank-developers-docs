@@ -1882,7 +1882,14 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-response_code  <br> <i> Number </i> | Código de retorno del proceso de la autorización, donde 0 (cero) es aprobado. Largo: 2.
+response_code  <br> <i> Number </i> | Código de respuesta de la autorización.  Largo: 2.
+Valores posibles:
+0 = Transacción aprobada
+-1 = Rechazo de transacción - Reintente (Posible error en el ingreso de datos de la transacción)
+-2 = Rechazo de transacción (Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)
+-3 = Error en transacción (Interno Transbank)
+-4 = Rechazo emisor (Rechazada por parte del emisor)
+-5 = Rechazo - Posible Fraude (Transacción con riesgo de posible fraude)
 tbk_user  <br> <i> String </i> | Identificador único de la inscripción del cliente en OneClick, que debe ser usado para realizar pagos o borrar la inscripción. Largo: 40.
 authorization_code  <br> <i> String </i> | Código que identifica la autorización de la inscripción. Largo: 6.
 card_type  <br> <i> cardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna). Largo: 10.
