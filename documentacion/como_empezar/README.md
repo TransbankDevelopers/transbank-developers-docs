@@ -303,6 +303,17 @@ y guardar el certificado y también su llave privada (`597029124456.key`), los
 que junto a tu código de comercio te permitirán transaccionar. **Debes custodiar
 esa llave privada para evitar que caiga en manos de terceros**.
 
+<aside class="warning">
+A diferencia de otros SDK, en .NET debes especificar la ruta a un archivo `.pfx` o `.p12`
+el cual debes generar tu a partir de tu llave privada y certificado público.
+
+Puedes mirar el siguiente enlace para obtener una guía rápida de como generar tu
+propio archivo: [Crear archivo pfx usando openssl](https://www.ssl.com/how-to/create-a-pfx-p12-certificate-file-using-openssl/)
+```bash
+openssl pkcs12 -export -out 597029124456.pfx -inkey 597029124456.key -in 597029124456.crt
+```
+</aside>
+
 ### El proceso de validación y puesta en producción
 
 Durante la validación de la integración se pretende verificar que el comercio
