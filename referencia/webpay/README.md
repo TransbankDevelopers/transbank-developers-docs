@@ -297,7 +297,7 @@ para no entregar el producto o servicio en caso que ocurra.
     initTransaction.
 18. Sitio del comercio despliega página final de pago
 
-#### Flujo si usuario aborta el pago
+### Flujo si usuario aborta el pago
 
 <img class="td_img-night" src="/images/diagrama-secuencia-webpay-abortar.png" alt="Diagrama de secuencia si usuario aborta el pago">
 
