@@ -309,9 +309,7 @@ el cual debes generar tu a partir de tu llave privada y certificado público.
 
 Puedes mirar el siguiente enlace para obtener una guía rápida de como generar tu
 propio archivo: [Crear archivo pfx usando openssl](https://www.ssl.com/how-to/create-a-pfx-p12-certificate-file-using-openssl/)
-```bash
-openssl pkcs12 -export -out 597029124456.pfx -inkey 597029124456.key -in 597029124456.crt
-```
+`openssl pkcs12 -export -out 597029124456.pfx -inkey 597029124456.key -in 597029124456.crt`
 </aside>
 
 ### El proceso de validación y puesta en producción
