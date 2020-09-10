@@ -1882,18 +1882,11 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-response_code  <br> <i> Number </i> | Código de respuesta de la autorización.  Largo: 2.
-Valores posibles:
-0 = Transacción aprobada
--1 = Rechazo de transacción - Reintente (Posible error en el ingreso de datos de la transacción)
--2 = Rechazo de transacción (Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)
--3 = Error en transacción (Interno Transbank)
--4 = Rechazo emisor (Rechazada por parte del emisor)
--5 = Rechazo - Posible Fraude (Transacción con riesgo de posible fraude)
-tbk_user  <br> <i> String </i> | Identificador único de la inscripción del cliente en OneClick, que debe ser usado para realizar pagos o borrar la inscripción. Largo: 40.
-authorization_code  <br> <i> String </i> | Código que identifica la autorización de la inscripción. Largo: 6.
-card_type  <br> <i> cardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna). Largo: 10.
-card_number  <br> <i> String </i> | Últimos 4 dígitos de la tarjeta inscrito: Largo: 4.
+response_code <br> <i> Number </i> | Código de respuesta de la autorización. <br> Largo: 2. <br> Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente (Posible error en el ingreso de datos de la transacción) <br> -2 = Rechazo de transacción (Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada) <br> -3 = Error en transacción (Interno Transbank) <br> -4 = Rechazo emisor (Rechazada por parte del emisor) <br> -5 = Rechazo - Posible Fraude (Transacción con riesgo de posible fraude)
+tbk_user <br> <i> String </i> | Identificador único de la inscripción del cliente en OneClick, que debe ser usado para realizar pagos o borrar la inscripción. <br> Largo: 40.
+authorization_code  <br> <i> String </i> | Código que identifica la autorización de la inscripción. <br> Largo: 6.
+card_type <br> <i> cardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna). <br> Largo: 10.
+card_number <br> <i> String </i> | Últimos 4 dígitos de la tarjeta inscrito: <br> Largo: 4.
 
 ### Eliminar una inscripción con Oneclick Mall
 Una vez finalizado el proceso de inscripción es posible eliminarla de ser necesario. Para esto debes usar el método llamado `Inscription.remove()`.
