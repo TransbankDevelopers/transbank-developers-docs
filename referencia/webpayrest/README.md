@@ -794,7 +794,7 @@ Content-Type: application/json
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
-amount  <br> <i> Decimal </i> | Monto que se desea anular o reversar de la transacción. Largo máximo: 10.
+amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> | Monto que se desea anular o reversar de la transacción. Largo máximo: 17.
 
 **Respuesta**
 
@@ -1501,8 +1501,7 @@ Content-Type: application/json
 {
   "commerce_code": "Próximamente...",
   "buy_order": "ordenCompra12345678",
-  "authorization_code": "123456",
-  "capture_mount": 1000
+  "amount": 1000
 }
 ```
 **Parámetros**
@@ -1510,10 +1509,9 @@ Content-Type: application/json
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
-authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere anular. Si la transacción es de captura diferida, se debe usar el código obtenido al llamar a `Transaction.capture()`. Largo máximo: 6.
 buy_order  <br> <i> String </i> | Orden de compra de la transacción que se requiere anular. Largo máximo: 26.
-amount  <br> <i> Decimal </i> | Monto que se desea anular o reversar de la transacción. Largo máximo: 10.
-commerce_id  <br> <i> Number </i> | (Opcional) Tienda mall que realizó la transacción. Largo: 12.
+amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> | Monto que se desea anular o reversar de la transacción. Largo máximo: 17.
+commerce_code  <br> <i> Number </i> | Código de comercio de la tienda mall que realizó la transacción. Largo: 12.
 
 **Respuesta**
 
@@ -2580,7 +2578,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 buy_order  <br> <i> String </i> | Orden de compra de la transacción a  reversar o anular. Se envía en la URL, no en el body. Largo máximo: 26. 
 commerce_code  <br> <i> String </i> | Código de comercio hijo. Largo máximo: 12.
 detail_buy_order  <br> <i> String </i> | Orden de compra hija de la transacción a  reversar o anular. Largo máximo: 26.
-amount  <br> <i> Number </i> | Monto que se desea anular o reversar de la transacción
+amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> | Monto que se desea anular o reversar de la transacción. Largo máximo: 17
 
 **Respuesta**
 
@@ -3591,7 +3589,7 @@ Content-Type: application/json
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
-amount  <br> <i> Decimal </i> |  Monto que se desea anular o reversar de la transacción. Largo máximo: 17.
+amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> |  Monto que se desea anular o reversar de la transacción. Largo máximo: 17.
 
 **Respuesta**
 
@@ -4213,7 +4211,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 buy_order  <br> <i> String </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
 commerce_code  <br> <i> Number </i> | Tienda hija que realizó la transacción. Largo: 12.
-amount  <br> <i> Number </i> |  Monto que se desea anular o reversar de la transacción. Largo máximo: 17
+amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> |  Monto que se desea anular o reversar de la transacción. Largo máximo: 17
 
 
 **Respuesta**
