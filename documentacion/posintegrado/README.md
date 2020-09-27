@@ -33,9 +33,9 @@ Para Java se puede incluir el paquete por [Maven.](https://search.maven.org/arti
 ### SDK Web
 El SDK Web consta de dos partes: [SDK Javacript](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js) y [Cliente Desktop](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-client). 
 
-[Cliente Desktop](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-client): Este cliente se debe instalar e inicializar en el computador que tendrá el equipo POS conectado físicamente. Al instalar e inicializar este servicio, se creará un servidor de websockets local en el puerto 8090, que permitirá, a través del SDK de javascript, poder enviar y recibir mensajes al equipo POS, de manera simple y transparente.
+[Agente Desktop](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent): Este agente es un programa que se debe instalar e inicializar en el computador que tendrá el equipo POS conectado físicamente. Al instalar e inicializar este servicio, se creará un servidor de websockets local en el puerto `8090` que permitirá, a través del [SDK de Javascript](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js), poder enviar y recibir mensajes del equipo POS, de manera simple y transparente.
 
-[SDK Javacript](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js): Este SDK se debe instalar en el software de caja (o cualquier software web que presente HTML, CSS y JS en un navegador web). Este SDK entrega una interfaz simple para conectarse con el cliente desktop, de manera que se puedan mandar instrucciones al POS con un API fácil de usar directamente desde el browser.
+[SDK Javascript](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js): Este SDK se debe instalar en el software de caja (o cualquier software web que presente HTML, CSS y JS en un navegador web). Este SDK entrega una interfaz simple para conectarse con el cliente desktop, de manera que se puedan mandar instrucciones al POS con un API fácil de usar directamente desde el browser.
 
 Dentro de cada repositorio se encuentra la documentación más detallada. 
 
@@ -43,36 +43,21 @@ Instalar el SDK en el software web donde se realizará la integración
 ```bash
 npm install transbank-pos-sdk-web
 ```
+
 También se puede incluir directamente el tag script
 ```html 
-<script src="https://unpkg.com/transbank-pos-sdk-web@1/dist/pos.js"></script>
+<script src="https://unpkg.com/transbank-pos-sdk-web@2/dist/pos.js"></script>
 <script>
 // En este caso, el objeto en vez de ser POS, es Transbank.POS
 // Ej: Transbank.POS.connect(...); en vez de POS.connect(...) como se especifica en los ejemplos de mas abajo. 
 </script>
 ```
 
-### Variable de entorno
-Para utilizar el SDK del POS es necesario el archivo Transbank.dll, o Transbank.dylib del SDK de C.
-Para que el cliente pueda encontrar la librería nativa, utiliza una variable de ambiente llamada **NATIVE_TRANSBANK_WRAP** que debe apuntar al archivo de esta variable.
+**Instalar el agente desktop:** 
+Revisa la lista de versiones públicadas y [descarga la última versión](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent/releases). Verás que hay un archivo .exe que debes bajar si usas windows, o un archivo .zip si usas MacOS. Luego, solo debes de instalar y ejecutar el programa. 
 
-Por ejemplo en MacOS se debe correr el comando export en el mismo Shell en que se ejecutará el programa que utiliza la librería.
-```bash
-export NATIVE_TRANSBANK_WRAP=/usr/local/lib/libTransbankWrap.dylib
-```
-
-En Windows, se debe correr este comando en la ventana de `CMD` antes de ejecutar el programa que utiliza la librería.
-`setx NATIVE_TRANSBANK_WRAP=c:\TransbankLib\TransbankWrapJava.dll`
-
-**Instalar el cliente desktop:** 
-Se debe [descargar el las DLL](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest) mencionadas anteriormente (libserialport-0.dll) e instalarla idealmente en la carpeta system32 (en windows). En OSX se puede instalar como `brew install libserialport` o [con estas instrucciones](https://sigrok.org/wiki/Libserialport). 
-
-Se debe descargar el archivo .jar del [último release del repositorio](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-client/releases/latest) y ejecutar: 
-```bash
-java -jar transbank-pos-sdk-web-client.jar
-```  
-
-Este cliente desktop debe estar ejecutándose siempre para que el SDK Javascript funcione correctamente. Puedes ejecutarlo automáticamente cuando se inicie el computador. Este paso depende de tu sistema operativo
+Este agente debe estar ejecutándose siempre para que el SDK Javascript funcione correctamente. Puedes ejecutarlo automáticamente cuando se inicie el computador. 
+La primera vez que se ejecuta el agente, este se configura automáticamente para iniciar en el startup del computador. 
 
 ### Drivers
 
