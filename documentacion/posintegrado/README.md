@@ -59,6 +59,8 @@ Revisa la lista de versiones públicadas y [descarga la última versión](https:
 Este agente debe estar ejecutándose siempre para que el SDK Javascript funcione correctamente. Puedes ejecutarlo automáticamente cuando se inicie el computador. 
 La primera vez que se ejecuta el agente, este se configura automáticamente para iniciar en el startup del computador. 
 
+Una vez instalado, ya puedes usar el SDK Javascript. Pruebes probar la conexión con tu POS usando el [proyecto web de ejemplo](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-example)
+
 ### Drivers
 
 Actualmente contamos con 2 equipos POS Integrado en circulación.
