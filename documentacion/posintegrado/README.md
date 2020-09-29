@@ -326,8 +326,12 @@ SaleResponse saleResponse = POS.getInstance().sale(amount, ticket);
 ```js
 import POS from "transbank-pos-sdk-web";
 
-POS.doSale(this.total, "ticket1").then((saleDetails) => {
+POS.doSale(this.total, "ticket1", (data) => {
+	//Este tercer parametro es opcional. Si está presente, se ejecutará cada vez que llegue un mensaje de status de la venta. 
+	console.log('Mensaje de status recibido', data);
+}).then((saleDetails) => {
     console.log(saleDetails);
+    
     //Acá llega la respuesta de la venta. Si saleDetails.responseCode es 0, entonces la comproa fue aprobada
     if (saleDetails.responseCode===0) {
 	alert("Transacción aprobada", "", "success");
@@ -366,7 +370,7 @@ El objeto SaleResponse retornará un objeto con los siguientes datos.
 El SDK no soporta el envío de mensajes intermedios. Por esta razón el 3º parámetro de la función en C es siempre falso.
 </aside>
 
-### Transacción de Última Venta
+### Transacción de última venta
 
 Este comando es enviado por la caja, solicitando al POS la re-impresión de la última venta realizada.
 
