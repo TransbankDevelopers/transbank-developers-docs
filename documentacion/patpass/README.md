@@ -1,6 +1,6 @@
 # PatPass
 
-## PatPass by Webpay %<span class='tbk-tagTitleDesc'>SOAP</span>%
+## PatPass by Webpay %<span class='tbk-tagTitleDesc'>SOAP</span>%  {data-submenuhidden=true}
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/patpass' tbk-link-name='Referencia Api'></div>
