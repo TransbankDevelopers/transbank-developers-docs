@@ -203,10 +203,6 @@ usuario.
 
 ## Patpass Comercio %<span class='tbk-tagTitleDesc'>REST</span>%
 
-<div class="pos-title-nav">
-<div tbk-link='/referencia/patpass' tbk-link-name='Referencia Api'></div>
-</div>
-
 ### Crear una suscripción
 
 Para crear una transaccion **PatPass Comercio** que registre una suscripción, lo primero que necesitas es una instancia de `WebpayPatpassComercio` con la `Configuration` que incluye el código de comercio y el `Api Key` a usar.
