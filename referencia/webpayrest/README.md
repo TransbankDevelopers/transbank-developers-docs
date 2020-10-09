@@ -4465,7 +4465,7 @@ Código de estado HTTP | Descripción
 
 1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](/referencia/webpayrest#proceso-de-validacion).
 
-2. Una vez que Transbank confirme que la planilla de integración se encuentra correcta (no aplica para plugins), se enviara al comercio la confirmación y se generara su secreto compartido, el cual en conjunto con el codigo de comercio, permiten operar en producción.
+2. Una vez que Transbank confirme que la planilla de integración se encuentra correcta (no aplica para plugins), se enviará al comercio la confirmación y se generará su **secreto compartido**, que en conjunto con el código de comercio, permiten operar en producción.
 
 3. Cuando recivas el correo, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-para-produccion-utilizando-los-sdk)
 
@@ -4473,49 +4473,48 @@ Código de estado HTTP | Descripción
 
 ### Proceso de validación
 
-Durante la validación de la integración se pretende verificar que el comercio transacciona de manera segura y sin problemas, por lo que se solicitarán una serie de pruebas y su posterior envío de evidencias para validar la integración. Esta validación es requisito necesario para dejar al comercio en producción y no se permitirá que un comercio utilice productivamente el servicio sin poseer una validación.
+Durante la validación de la integración se pretende verificar que el comercio transacciona de manera segura y sin problemas, por lo que se solicitarán una serie de pruebas y su posterior envío de evidencias para validar la integración. Esta validación es un requisito para que el comercio pueda operar en el ambiente de producción (bancos y dinero real) y no se permitirá que un comercio utilice productivamente el servicio sin poseer una validación.
 
 Transbank solo validará las integraciones de aquellos comercios que tengan un código de comercio productivo. Para obtenerlo, sigue las instrucciones para hacerte cliente en el portal [http://www.transbank.cl](http://www.transbank.cl) o contacta a tu ejecutivo comercial.
 
-En esta etapa, el comercio envía las evidencias a [soporte@transbank.cl](mailto:soporte@transbank.cl) empleando el formulario correspondiente al producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones. Para integraciones Webpay que utilicen algún [plugin oficial](https://transbankdevelopers.cl/plugin) existe un formulario especial.
+En esta etapa, el comercio envía las evidencias a [soporte@transbank.cl](mailto:soporte@transbank.cl) en **formato PDF** empleando el formulario correspondiente al producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones. Para integraciones Webpay que utilicen algún [plugin oficial](https://transbankdevelopers.cl/plugin) existe un formulario especial.
 
 [Descargar el formulario de envidencias](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-rest.docx)
 
 Soporte validará que los casos de prueba sean consistentes con los registrados en los sistemas de Webpay y, de estar todo correcto, se le notificará al comercio la conformidad para pasar a producción, recibiendo las instrucciones para ello. De no estar consistentes las pruebas, se le hará alcances al comercio respecto de su integración, para que realices las correcciones correspondientes y vuelvas a enviar las evidencias una vez terminadas dichas correcciones.
 
-En el proceso de contratación reciviste tu codigo de comercio, y junto con el secreto compartido que se te entrego luego de la certificacion puedes completar tus credenciales, las cuales **Debes custodiar y evitar que caigan en manos de terceros** ya que permiten hacer transacciones en nombre de tu comercio.
+En el proceso de contratación recibiste tu código de comercio, y junto con el **secreto compartido** que se te entregó luego de la certificación puedes completar tus credenciales, las cuales **debes custodiar y evitar que estén en manos de terceros** ya que permiten hacer (o anular) transacciones en nombre de tu comercio.
 
-- Codigo de comercio (*API Key*)
-- Secreto Compartido (*Shared Secret*))
+- Código de comercio (*API Key*)
+- Secreto compartido (*Shared Secret*)
 
-Luego que el proceso de validación de tu ingegración está terminado, debes realizar la configuración para que tu sitio se encuentre en producción.
+Luego que el proceso de validación de tu integración está terminado, debes realizar la configuración para que tu sitio se encuentre en producción.
 
 ### Configuración para producción utilizando los SDK
 
-Si estas utilizando algún SDK ofifcial de Transbank, entonces debes seguir los siguientes pasos.
+Si estas utilizando algún SDK oficial de Transbank, entonces debes seguir los siguientes pasos.
 
 <aside class="warning">
-Nunca dejes tu codigo de comercio y secreto compartido directamente en tu codigo, te recomendamos utilizar variables de entorno u otro metodo que te permita mantener tus credenciales seguras.
+Nunca dejes tu código de comercio y secreto compartido directamente en tu código, te recomendamos utilizar variables de entorno u otro método que te permita mantener tus credenciales seguras.
 </aside>
 
-1. Remover la configuración para el ambiente de integración.
-
-Antes de crear la nueva configuración para el ambiente de producción será necesario eliminar la actual comfiguración para el ambiente de pruebas.
-
-2. Asignar el código de comercio productivo, entregado por Transbank al momento de contratar el producto.
+1. Asignar el código de comercio productivo, entregado por Transbank al momento de contratar el producto.
 
 ```java
-OneclickMall.setCommerceCode(config.getOneclickMallCommerceCode());
+// Para OneClick
+OneclickMall.setCommerceCode('TU_CODIGO_DE_COMERCIO'); 
 ```
 
 3. Configuración del secreto compartido.
 
 ```java
-OneclickMall.setApiKey(config.getOneclickMallApiKey());
+// Para OneClick
+OneclickMall.setApiKey('TU_API_KEY');
 ```
 
 5. Selección del ambiente productivo.
 
 ```java
+// Para OneClick
 OneclickMall.setIntegrationType(IntegrationType.LIVE);
 ```
