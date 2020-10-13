@@ -12,7 +12,7 @@ PatPass se relaciona con los comercios y emisores mediante las siguientes plataf
 
 De manera complementaria a esas plataformas, **PatPass by Webpay** permite a los comercios disponibilizar las inscripciones de clientes de manera directa al tarjetahabiente, aprovechando la infraestructura y seguridad ofrecida por la pasarela Webpay.
 
-## PatPass by Webpay
+## PatPass by Webpay {data-submenuhidden=true}
 
 <div class="pos-title-nav">
   <div tbk-link='/documentacion/patpass' tbk-link-name='Documentación'></div>
