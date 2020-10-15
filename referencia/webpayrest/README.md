@@ -111,8 +111,8 @@ comercio](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/t
 
 Producto | Código de Comercio | Secreto |
 -------- | ------------ | -------------|
-Webpay Plus | `Próximamente...` | `Próximamente...`
-Webpay Plus Mall | `Próximamente...` | `Próximamente...`
+Webpay Plus | `597055555532` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+Webpay Plus Mall | `597055555535 ` Mall <br> `597055555536` Tienda 1 <br> `597055555537 ` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
 Oneclick Mall | `597055555541` Mall <br> `597055555542` Tienda 1 <br> `597055555543` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
 Oneclick Mall Captura Diferida | `597055555547` Mall <br> `597055555548` Tienda 1 <br> `597055555549` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
 Transacción Completa | `597055555530` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
@@ -126,8 +126,8 @@ Transacción Completa Mall | `597055555551` Mall <br> `597055555552` Tienda 1 <b
 > ambiente:
 
 ```java
-WebpayPlus.Transaction.setCommerceCode(Próximamente);
-WebpayPlus.Transaction.setApiKey("Próximamente");
+WebpayPlus.Transaction.setCommerceCode(597055555532);
+WebpayPlus.Transaction.setApiKey('579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C');
 WebpayPlus.Transaction.setIntegrationType(IntegrationType.TEST);
 ```
 
@@ -140,26 +140,27 @@ Transbank\Webpay\WebpayPlus::configureDeferredForTesting();
 
 ```csharp
 // El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
-Oneclick.CommerceCode = Próximamente;
-Oneclick.ApiKey = "Próximamente";
-Oneclick.IntegrationType = WebpayIntegrationType.Test;
+WebpayPlus.CommerceCode = 597055555532;
+WebpayPlus.ApiKey = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C";
+WebpayPlus.IntegrationType = WebpayIntegrationType.Test;
 ```
 
 ```ruby
-Transbank::Webpay::WebpayPlus.commerce_code = Próximamente;
-Transbank::Webpay::WebpayPlus.api_key = "Próximamente";
+Transbank::Webpay::WebpayPlus.commerce_code = 597055555532;
+Transbank::Webpay::WebpayPlus.api_key = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C";
 Transbank::Webpay::WebpayPlus.integration_type = "TEST";
 
 ```
 
 ```python
-transbank.webpay.webpay_plus.webpay_plus_default_commerce_code = Próximamente
-transbank.webpay.webpay_plus.default_api_key = "Próximamente"
+transbank.webpay.webpay_plus.webpay_plus_default_commerce_code = 597055555532
+transbank.webpay.webpay_plus.default_api_key = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C"
 transbank.webpay.webpay_plus.default_integration_type = IntegrationType.TEST
 ```
 
 ```http
-
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 ```
 
 ## Webpay Plus
@@ -278,7 +279,9 @@ token es caducado y no podrá ser utilizado en un pago.
 </aside>
 
 ```java
-final WebpayPlusTransactionCreateResponse response = WebpayPlus.Transaction.create(buyOrder, sessionId, amount, returnUrl);
+final WebpayPlusTransactionCreateResponse response = WebpayPlus.Transaction.create(
+  buyOrder, sessionId, amount, returnUrl
+);
 ```
 
 ```php
@@ -291,11 +294,11 @@ var response = Transaction.Create(buyOrder, sessionId, amount, returnUrl);
 
 ```ruby
 response = Transbank::Webpay::WebpayPlus::Transaction::create(
-                                                    buy_order: buy_order,
-                                                    session_id: session_id,
-                                                    amount: amount,
-                                                    return_url: return_url
-                                                  )
+  buy_order: buy_order,
+  session_id: session_id,
+  amount: amount,
+  return_url: return_url
+)
 ```
 
 ```python
@@ -305,8 +308,8 @@ response = transbank.webpay.webpay_plus.create(buy_order, session_id, amount, re
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions
 
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
@@ -400,8 +403,8 @@ response = transbank.webpay.webpay_plus.transaction.commit(token)
 
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 ```
 
@@ -569,8 +572,8 @@ response = transbank.webpay.webpay_plus.transaction.status(token)
 
 ```http
 GET /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555532
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 ```
 
@@ -928,12 +931,12 @@ WebpayPlus::configureMallForTesting();
 $transaction_details = [
   {
       "amount": 10000,
-      "commerce_code": Próximamente,
+      "commerce_code": 597055555536,
       "buy_order": "ordenCompraDetalle1234"
   },
   {     
      "amount": 12000,
-     "commerce_code": Próximamente,
+     "commerce_code": 597055555537,
      "buy_order": "ordenCompraDetalle4321"
   },
 ];
@@ -961,27 +964,30 @@ var result = MallTransaction.Create(buyOrder, sessionId, returnUrl, transactionD
 transaction_details = [
   {
       amount: 10000,
-      commerce_code: Próximamente,
+      commerce_code: 597055555536,
       buy_order: "ordenCompraDetalle1234"
   },
   {     
      amount: 12000,
-     commerce_code: Próximamente,
+     commerce_code: 597055555537,
      buy_order: "ordenCompraDetalle4321"
   },
 ]
 
 response = = Transbank::Webpay::WebpayPlus::MallTransaction::create(
-  buy_order: @buy_order,
-  session_id: @session_id,
-  return_url: @return_url,
+  buy_order: buy_order,
+  session_id: session_id,
+  return_url: return_url,
   details: transaction_details
 )
 ```
 
 ```python
-transaction_details = MallTransactionCreateDetails(amount_child_1, commerce_code_child_1, buy_order_child_1) \
-            .add(amount_child_2, commerce_code_child_2, buy_order_child_2)
+transaction_details = MallTransactionCreateDetails(
+  amount_child_1, commerce_code_child_1, buy_order_child_1
+).add(
+  amount_child_2, commerce_code_child_2, buy_order_child_2
+)
 
 response = MallTransaction.create(
     buy_order=buy_order,
@@ -994,7 +1000,7 @@ response = MallTransaction.create(
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions
 
-Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Id: 597055555535
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
@@ -1102,7 +1108,7 @@ response = MallTransaction.commit(token)
 
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Id: 597055555535
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 ```
@@ -1297,8 +1303,8 @@ response = MallTransaction.status(token)
 
 ```http
 GET /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
-Tbk-Api-Key-Id: Próximamente...
-Tbk-Api-Key-Secret: Próximamente...
+Tbk-Api-Key-Id: 597055555535
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 ```
 
@@ -1514,12 +1520,12 @@ response = Transaction.refund(token, buy_order, commerce_code, amount)
 
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refunds
-Tbk-Api-Key-Id: Próximamente...
+Tbk-Api-Key-Id: 597055555535
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
-  "commerce_code": "Próximamente...",
+  "commerce_code": "597055555536",
   "buy_order": "ordenCompra12345678",
   "authorization_code": "123456",
   "capture_mount": 1000
