@@ -126,6 +126,7 @@ Transacción Completa Mall | `597055555551` Mall <br> `597055555552` Tienda 1 <b
 > ambiente:
 
 ```java
+// El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
 WebpayPlus.Transaction.setCommerceCode(597055555532);
 WebpayPlus.Transaction.setApiKey('579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C');
 WebpayPlus.Transaction.setIntegrationType(IntegrationType.TEST);
@@ -146,6 +147,7 @@ WebpayPlus.IntegrationType = WebpayIntegrationType.Test;
 ```
 
 ```ruby
+# El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
 Transbank::Webpay::WebpayPlus.commerce_code = 597055555532;
 Transbank::Webpay::WebpayPlus.api_key = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C";
 Transbank::Webpay::WebpayPlus.integration_type = "TEST";
@@ -153,6 +155,7 @@ Transbank::Webpay::WebpayPlus.integration_type = "TEST";
 ```
 
 ```python
+# El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
 transbank.webpay.webpay_plus.webpay_plus_default_commerce_code = 597055555532
 transbank.webpay.webpay_plus.default_api_key = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C"
 transbank.webpay.webpay_plus.default_integration_type = IntegrationType.TEST
