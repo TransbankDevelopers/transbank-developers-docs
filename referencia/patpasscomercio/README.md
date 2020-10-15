@@ -72,31 +72,26 @@ Host: https://pagoautomaticocontarjetasint.transbank.cl/
 ```java
 // Tbk-Api-Key-Id: 27082157
 // Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
-// Content-Type: application/json
 ```
 
 ```php
 // Tbk-Api-Key-Id: 27082157
 // Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
-// Content-Type: application/json
 ```
 
 ```csharp
 // Tbk-Api-Key-Id: 27082157
 // Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
-// Content-Type: application/json
 ```
 
 ```ruby
 # Tbk-Api-Key-Id: 27082157
 # Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
-# Content-Type: application/json
 ```
 
 ```python
 # Tbk-Api-Key-Id: 27082157
 # Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
-# Content-Type: application/json
 ```
 
 ```http
@@ -118,85 +113,103 @@ Es importante considerar que una vez invocado este método, el token que es ent
 </aside>
 
 ```java
-    final PatpassComercioInscriptionStartResponse response = PatpassComercio.Inscription.start(url,
-        name,
-        firstLastName,
-        secondLastName,
-        rut,
-        serviceId,
-        finalUrl,
-        maxAmount,
-        phoneNumber,
-        mobileNumber,
-        patpassName,
-        personEmail,
-        commerceEmail,
-        address,
-        city);
+final PatpassComercioInscriptionStartResponse response = PatpassComercio.Inscription.start(
+    'http://misitio.cl/finalizar_suscripcion',          // URL
+    'Diego',                                            // Nombre
+    'Sanchez',                                          // Primer apellido
+    'Valdovinos',                                       // Segundo apellido
+    '12345678-9',                                       // Rut
+    '323123',                                           // Id de servicio
+    'http://misitio.cl/voucher',                        // URL Final
+    0,                                                  // Monto máximo
+    '57508624',                                         // Teléfono fijo
+    '57508624',                                         // Teléfono celular
+    'Help - 8050014',                                   // Nombre PatPass
+    'persona@test.cl',                                  // Email Persona
+    'comercio@test.cl',                                 // Email Comercio
+    'Merced 156, Santiago, Chile',                      // Dirección
+    'Santiago'                                          // Ciudad
+);
 ``` 
 ```php
-$response = PatpassComercio\Inscription::start(
-                    
-            $req['url'],
-            $req['nombre'],
-            $req['pApellido'],
-            $req['sApellido'],
-            $req['rut'],
-            $req['serviceId'] ,
-            $req['finalUrl'],
-            $req['montoMaximo'],
-            $req['telefonoFijo'],
-            $req['telefonoCelular'],
-            $req['nombrePatPass'],
-            $req['correoPersona'],
-            $req['correoComercio'],
-            $req['direccion'],
-            $req['ciudad']
+$response = PatpassComercio\Inscription::start(  
+    'http://misitio.cl/finalizar_suscripcion',          // URL
+    'Diego',                                            // Nombre
+    'Sanchez',                                          // Primer apellido
+    'Valdovinos',                                       // Segundo apellido
+    '12345678-9',                                       // Rut
+    '323123',                                           // Id de servicio
+    'http://misitio.cl/voucher',                        // URL Final
+    0,                                                  // Monto máximo
+    '57508624',                                         // Teléfono fijo
+    '57508624',                                         // Teléfono celular
+    'Help - 8050014',                                   // Nombre PatPass
+    'persona@test.cl',                                  // Email Persona
+    'comercio@test.cl',                                 // Email Comercio
+    'Merced 156, Santiago, Chile',                      // Dirección
+    'Santiago'                                          // Ciudad
 );
                
 ```
 
 ```csharp
 var response = Inscription.Start(
-                url: url,
-                name: name,
-                fLastname: f_lastname,
-                sLastname: s_lastname,
-                rut: rut,
-                serviceId: service_id,
-                finalUrl: final_url,
-                maxAmount: max_amount,
-                phoneNumber: phone_number,
-                mobileNumber: mobile_number,
-                patpassName: patpass_name,
-                personEmail: client_email,
-                commerceEmail: commerce_email,
-                address: address,
-                city: city);
+    url: 'http://misitio.cl/finalizar_suscripcion',
+    name: 'Diego',
+    fLastname: 'Sanchez',
+    sLastname: 'Valdovinos',
+    rut: '12345678-9',
+    serviceId: '323123',
+    finalUrl: 'http://misitio.cl/voucher',
+    maxAmount: 0,
+    phoneNumber: '57508624',
+    mobileNumber: '57508624',
+    patpassName: 'Help - 8050014',
+    personEmail: 'persona@test.cl',
+    commerceEmail: 'comercio@test.cl',
+    address: 'Merced 156, Santiago, Chile',
+    city: 'Santiago'
+);
 ```
 
 ```ruby
 @resp  = Transbank::Patpass::PatpassComercio::Inscription::start(
-        url: @url,
-        name: @name,
-        first_last_name: @first_last_name,
-        second_last_name: @second_last_name,
-        rut: @rut,
-        service_id: @service_id,
-        final_url: @final_url,
-        max_amount: @max_amount,
-        phone_number: @phone_number,
-        mobile_number: @mobile_number,
-        patpass_name: @patpass_name,
-        person_email: @person_email,
-        commerce_email: @commerce_email,
-        address: @address,
-        city: @city
-        )
+    url: 'http://misitio.cl/finalizar_suscripcion',
+    name: 'Diego',
+    first_last_name: 'Sanchez',
+    second_last_name: 'Valdovinos',
+    rut: '12345678-9',
+    service_id: '323123',
+    final_url: 'http://misitio.cl/voucher',
+    max_amount: 0,
+    phone_number: '57508624',
+    mobile_number: '57508624',
+    patpass_name: 'Help - 8050014',
+    person_email: 'persona@test.cl',
+    commerce_email: 'comercio@test.cl',
+    address: 'Merced 156, Santiago, Chile',
+    city: 'Santiago'
+)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response = Inscription.start(
+    url = 'http://misitio.cl/finalizar_suscripcion',
+    name = 'Diego',
+    first_last_name = 'Sanchez',
+    second_last_name = 'Valdovinos',
+    rut = '12345678-9',
+    service_id = '323123',
+    final_url = 'http://misitio.cl/voucher',
+    max_amount = 0,
+    phone_number = '57508624',
+    mobile_number = '57508624',
+    patpass_name = 'Help - 8050014',
+    person_email = 'persona@test.cl',
+    commerce_email = 'comercio@test.cl',
+    address = 'Merced 156, Santiago, Chile',
+    city = 'Santiago'
+)
 ```
 
 ```http
@@ -205,19 +218,19 @@ Tbk-Api-Key-Id: 27082157
 Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
 Content-Type: application/json
 {
-    "url": "http://localhost:8081/patpass-comercio/end-subscription",
+    "url": "http://misitio.cl/finalizar_suscripcion",
     "nombre": "Diego",
     "pApellido": "Sanchez",
     "sApellido": "Valdovinos",
-    "rut": "14140066-5",
+    "rut": "12345678-9",
     "serviceId": "323123",
-    "finalUrl": "http://localhost:8081/patpass-comercio/voucher-generated",
+    "finalUrl": "http://misitio.cl/voucher",
     "montoMaximo": "",
     "telefonoFijo": "57508624",
     "telefonoCelular": "57508624",
     "nombrePatPass": "Help - 8050014",
-    "correoPersona": "test@test.cl",
-    "correoComercio": "test@test.cl",
+    "correoPersona": "persona@test.cl",
+    "correoComercio": "comercio@test.cl",
     "direccion": "Merced 156, Santiago, Chile",
     "ciudad": "Santiago"
 }
@@ -265,7 +278,8 @@ response.url
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response.token
+respone.url
 ```
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -310,15 +324,15 @@ token que se generó en la inscripción
 La respuesta del método contiene el estado y la URL para desplegar el voucher.
 
 ```java
-    final PatpassComercioTransactionStatusResponse response = 
-        PatpassComercio.Transaction.status(token);
+final PatpassComercioTransactionStatusResponse response = 
+    PatpassComercio.Transaction.status(token);
 ``` 
 ```php
-    $response = PatpassComercio\Inscription::getStatus($token);
+$response = PatpassComercio\Inscription::getStatus($token);
 ```
 
 ```csharp
-    var response = Inscription.Status(token);
+var response = Inscription.Status(token);
 ```
 
 ```ruby
@@ -326,7 +340,7 @@ La respuesta del método contiene el estado y la URL para desplegar el voucher.
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response = Inscription.status(token)
 ```
 
 ```http
@@ -367,7 +381,8 @@ response.voucher_url
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response.status
+response.voucher_url
 ```
 
 Nombre  <br> <i> tipo </i> | Descripción
