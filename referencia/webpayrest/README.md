@@ -1916,19 +1916,19 @@ username  <br> <i> String </i> | Identificador del usuario en los sistemas del 
 **Respuesta**
 
 ```java
-// Solo devuelve un 204 sin body
+// 204 OK
 ```
 
 ```php
-// Solo devuelve un 204 sin body
+// 204 OK
 ```
 
 ```csharp
-// Solo devuelve un 204 sin body
+// 204 OK
 ```
 
 ```ruby
-# Solo devuelve un 204 sin body
+# 204 OK
 ```
 
 ```python
