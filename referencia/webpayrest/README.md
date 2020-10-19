@@ -2006,10 +2006,10 @@ use Transbank\Webpay\Oneclick;
 
 $details = [
     [
-        "commerce_code" => $childCommerceCode,
-        "buy_order" => $childBuyOrder,
-        "amount" => $amount,
-        "installments_number" => $installmentsNumber
+        "commerce_code" => "597055555542",
+        "buy_order" => "ordenCompra123445",
+        "amount" => 1000,
+        "installments_number" => 5
     ]
 ];
 
@@ -2021,8 +2021,12 @@ $response = MallTransaction::authorize($userName, $tbkUser, $parentBuyOrder, $de
 using Transbank.Webpay.Oneclick;
 
 List<PaymentRequest> details = new List<PaymentRequest>();
-details.Add(new PaymentRequest(commerceCodeMallOne, buyOrderMallOne, amountMallOne, installmentsNumber));
-details.Add(new PaymentRequest(childCommerceCode, childBuyOrder, amountMallTwo, installmentsNumber));
+details.Add(new PaymentRequest(
+  childCommerceCodeOne, buyOrderMallOne, amountMallOne, installmentsNumber
+));
+details.Add(new PaymentRequest(
+  childCommerceCodeTwo, buyOrderMallTwo, amountMallTwo, installmentsNumber
+));
 
 var result = MallTransaction.Authorize(userName, tbkUser, buyOrder, details);
 ```
@@ -2050,9 +2054,18 @@ Transbank::Webpay::Oneclick::MallTransaction::authorize(username: username,
 ```
 
 ```python
-details = MallTransactionAuthorizeDetails(commerce_code, buy_order_child, installments_number, amount) \
-        .add(commerce_code2, buy_order_child2, installments_number2, amount2)
-MallTransaction.authorize(user_name=user_name, tbk_user=tbk_user, buy_order=buy_order, details=details)
+details = MallTransactionAuthorizeDetails(
+  commerce_code, buy_order_child, installments_number, amount
+).add(
+  commerce_code2, buy_order_child2, installments_number2, amount2
+)
+
+MallTransaction.authorize(
+  user_name=user_name,
+  tbk_user=tbk_user,
+  buy_order=buy_order,
+  details=details
+)
 ```
 
 ```http
@@ -2248,7 +2261,8 @@ Permite consultar el estado de pago realizado a través de Oneclick.
 Retorna el resultado de la autorización.
 
 ```java
-final OneclickMallTransactionStatusResponse response = OneclickMall.Transaction.status(buyOrder);
+final OneclickMallTransactionStatusResponse response =
+  OneclickMall.Transaction.status(buyOrder);
 ```
 
 ```php
@@ -2463,7 +2477,8 @@ Permite reversar o anular una transacción de venta autorizada con anterioridad
 Este método retorna como respuesta un identificador único de la transacción de reversa/anulación.
 
 ```java
-final OneclickMallTransactionRefundResponse response = OneclickMall.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+final OneclickMallTransactionRefundResponse response =
+  OneclickMall.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
 
 ```php
