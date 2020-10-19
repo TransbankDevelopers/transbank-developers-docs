@@ -282,16 +282,23 @@ token es caducado y no podrá ser utilizado en un pago.
 </aside>
 
 ```java
+import cl.transbank.webpay.webpayplus.WebpayPlus;	  buyOrder, sessionId, amount, returnUrl
+import cl.transbank.webpay.webpayplus.model.CreateWebpayPlusTransactionResponse;
+
 final WebpayPlusTransactionCreateResponse response = WebpayPlus.Transaction.create(
   buyOrder, sessionId, amount, returnUrl
 );
 ```
 
 ```php
+use Transbank\Webpay\WebpayPlus\Transaction;
+
 $response = Transaction::create($buy_order, $session_id, $amount, $return_url);
 ```
 
 ```csharp
+using Transbank.Webpay.WebpayPlus;
+
 var response = Transaction.Create(buyOrder, sessionId, amount, returnUrl);
 ```
 
@@ -389,10 +396,14 @@ final CreateWebpayPlusTransactionResponse response = WebpayPlus.Transaction.comm
 ```
 
 ```php
+use Transbank\Webpay\WebpayPlus\Transaction;
+
 $response = Transaction::commit($token);
 ```
 
 ```csharp
+using Transbank.Webpay.WebpayPlus;
+
 var response = Transaction.Commit(token);
 ```
 
@@ -558,10 +569,14 @@ final StatusWebpayPlusTransactionResponse response = WebpayPlus.Transaction.stat
 ```
 
 ```php
+use Transbank\Webpay\WebpayPlus\Transaction;
+
 $response = Transaction::getStatus($token);  
 ```
 
 ```csharp
+using Transbank.Webpay.WebpayPlus;
+
 var response = Transaction.Status(token);
 ```
 
@@ -750,10 +765,14 @@ final RefundWebpayPlusTransactionResponse response = WebpayPlus.Transaction.refu
 ```
 
 ```php
+use Transbank\Webpay\WebpayPlus\Transaction;
+
 $response = Transaction::refund($token, $amount);
 ```
 
 ```csharp
+using Transbank.Webpay.WebpayPlus;
+
 var response = Transaction.Refund(token, amount);
 ```
 
@@ -948,6 +967,8 @@ $response = Transaction::createMall($buy_order, $session_id, $return_url, $trans
 ```
 
 ```csharp
+using Transbank.Webpay.WebpayPlus;
+
 var transactionDetails = new List<TransactionDetail>();
 transactions.Add(new TransactionDetail(
     amountMallOne,
@@ -1094,10 +1115,14 @@ final CommitWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransact
 ```
 
 ```php
+use Transbank\Webpay\WebpayPlus\Transaction;
+
 $response = Transaction::commitMall($token);
 ```
 
 ```csharp
+using Transbank.Webpay.WebpayPlus;
+
 var response = MallTransaction.commit(token);
 ```
 
@@ -1289,10 +1314,14 @@ final StatusWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransact
 ```
 
 ```php
+use Transbank\Webpay\WebpayPlus\Transaction;
+
 $response = Transaction::getMallStatus($token);
 ```
 
 ```csharp
+using Transbank.Webpay.WebpayPlus;
+
 var response = MallTransaction.status(token)
 ```
 
@@ -1662,10 +1691,14 @@ OneclickMallInscriptionStartResponse response = OneclickMall.Inscription.start(u
 ```
 
 ```php
+use Transbank\Webpay\Oneclick;
+
 $response = MallInscription::start($userName, $email, $responseUrl);
 ```
 
 ```csharp
+using Transbank.Webpay.Oneclick;
+
 var response = Inscription.Start(userName, email, returnUrl);
 ```
 
@@ -1775,10 +1808,14 @@ final OneclickMallInscriptionFinishResponse response = OneclickMall.Inscription.
 ```
 
 ```php
+use Transbank\Webpay\Oneclick;
+
 $response = MallInscription::finish($token);
 ```
 
 ```csharp
+using Transbank.Webpay.Oneclick;
+
 var response = Inscription.Finish(token);
 
 ```
@@ -1880,10 +1917,14 @@ Oneclick.MallInscription.delete(tbkUser, userName)
 ```
 
 ```php
+use Transbank\Webpay\Oneclick;
+
 MallInscription::delete($tbkUser, $userName);
 ```
 
 ```csharp
+using Transbank.Webpay.Oneclick;
+
 Inscription.Delete(userName, tbkUser);
 ```
 
@@ -1961,6 +2002,8 @@ final OneclickMallTransactionAuthorizeResponse response = OneclickMall.Transacti
 ```
 
 ```php
+use Transbank\Webpay\Oneclick;
+
 $details = [
     [
         "commerce_code" => $childCommerceCode,
@@ -1975,6 +2018,8 @@ $response = MallTransaction::authorize($userName, $tbkUser, $parentBuyOrder, $de
 ```
 
 ```csharp
+using Transbank.Webpay.Oneclick;
+
 List<PaymentRequest> details = new List<PaymentRequest>();
 details.Add(new PaymentRequest(commerceCodeMallOne, buyOrderMallOne, amountMallOne, installmentsNumber));
 details.Add(new PaymentRequest(childCommerceCode, childBuyOrder, amountMallTwo, installmentsNumber));
@@ -2207,10 +2252,14 @@ final OneclickMallTransactionStatusResponse response = OneclickMall.Transaction.
 ```
 
 ```php
+use Transbank\Webpay\Oneclick;
+
 $response = MallTransaction::getStatus($buyOrder);
 ```
 
 ```csharp
+using Transbank.Webpay.Oneclick;
+
 var result = MallTransaction.Status(buyOrder);
 ```
 
@@ -2418,10 +2467,14 @@ final OneclickMallTransactionRefundResponse response = OneclickMall.Transaction.
 ```
 
 ```php
+use Transbank\Webpay\Oneclick;
+
 $response = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrder, $amount);
 ```
 
 ```csharp
+using Transbank.Webpay.Oneclick;
+
 var response = MallTransaction.Refund(buyOrder, childCommerceCode,childBuyOrder,amount);
 ```
 
