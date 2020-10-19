@@ -2665,7 +2665,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-commerce_code  <br> <i> Number </i> | (Opcional, solo usar en caso Mall) Tienda hija que realizó la transacción. Largo: 6.
+commerce_code  <br> <i> Number </i> | Tienda hija que realizó la transacción. Largo: 6.
 buy_order  <br> <i> String </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
 capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo máximo: 17.
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
@@ -2743,12 +2743,12 @@ token es caducado y no podrá ser utilizado en un pago.
 
 ```java
 final FullTransactionCreateResponse response =  FullTransaction.Transaction.create(
-  buyOrder,
-  sessionId,
-  amount,
-  cardNumber,
-  cardExpirationDate,
-  cvv
+  buyOrder,                         // ordenCompra12345678
+  sessionId,                        // sesion1234564
+  amount,                           // 10000
+  cardNumber,                       // 123
+  cardExpirationDate,               // 4239000000000000
+  cvv                               // 22/10
 );
 ```
 
@@ -2756,34 +2756,34 @@ final FullTransactionCreateResponse response =  FullTransaction.Transaction.crea
 use Transbank\TransaccionCompleta\Transaction;
 
 $response = Transaction::create(
-            $buy_order,
-            $session_id,
-            $amount,
-            $cvv,
-            $card_number,
-            $card_expiration_date
-        );
+  $buy_order,                       // ordenCompra12345678
+  $session_id,                      // sesion1234564
+  $amount,                          // 10000
+  $cvv,                             // 123
+  $card_number,                     // 4239000000000000
+  $card_expiration_date             // 22/10
+);
 ```
 
 ```csharp
 FullTransaction.Create(
-  buyOrder: buy_order,
-  sessionId: session_id,
-  amount: amount,
-  cvv: cvv,
-  cardNumber: card_number,
-  cardExpirationDate: card_expiration_date
+  buyOrder: buy_order,                        // ordenCompra12345678
+  sessionId: session_id,                      // sesion1234564
+  amount: amount,                             // 10000
+  cvv: cvv,                                   // 123
+  cardNumber: card_number,                    // 4239000000000000
+  cardExpirationDate: card_expiration_date    // 22/10
 );
 ```
 
 ```ruby
 Transbank::TransaccionCompleta::Transaction::create(
-  buy_order: buy_order,
-  session_id: session_id,
-  amount: amount,
-  card_number: card_number,
-  cvv: cvv,
-  card_expiration_date: card_expiration_date
+  buy_order: 'ordenCompra12345678',                 
+  session_id: 'sesion1234564',
+  amount: 10000,
+  card_number: 4239000000000000,
+  cvv: 123,
+  card_expiration_date: '22/10'
 )
 ```
 
@@ -2791,8 +2791,12 @@ Transbank::TransaccionCompleta::Transaction::create(
 from transbank.transaccion_completa.transaction import Transaction
 
 Transaction.create(
-    buy_order=buy_order, session_id=session_id, amount=amount,
-    card_number=card_number, cvv=cvv, card_expiration_date=card_expiration_date
+    buy_order = 'ordenCompra12345678',
+    session_id = 'sesion1234564',
+    amount = 10000,
+    card_number = 4239000000000000,
+    cvv = 123,
+    card_expiration_date = '22/10'
 )
 ```
 
@@ -2884,7 +2888,7 @@ El id de la consulta que selecciona el tarjetahabiente debe ser informado en la
 invocación de la confirmación.
 
 ```java
-
+final FullTransactionInstallmentsResponse response =  FullTransaction.Transaction.installment(token, installments_number);
 ```
 
 ```php
@@ -2934,55 +2938,35 @@ installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 
 **Respuesta**
 
 ```java
-import cl.transbank.webpay.exception.RefundTransactionException;
-import cl.transbank.webpay.oneclick.OneclickMall;
-import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
-
-public class IntegrationExample {
-    public static void main(String[] args) {
-        String token = "a token obtained through create transaction";
-        byte installmentsNumber = "a number between 2 and 12";
-        try {
-            final FullTransactionInstallmentResponse response = FullTransaction.Transaction.installment(token, installmentsNumber);
-        } catch ( IOException | TransactionInstallmentException e) {
-            return new ErrorController().error();
-        }
-    }
-}
+response.getInstallmentsAmount();
+response.getIdQueryInstallments();
+DeferredPeriod deferredPeriod = response.getDeferredPeriods()[0];
+deferredPeriod.getAmount();
+deferredPeriod.getPeriod();
 ```
 
 ```php
-object(Transbank\TransaccionCompleta\TransactionInstallmentsResponse)#302 (3) 
-{
-  ["installmentsAmount"]=>
-  int(334)
-  ["idQueryInstallments"]=>
-  int(17717003)
-  ["deferredPeriods"]=>
-  array(0) {
-  }
-}
+response->getInstallmentsAmount();
+response->getIdQueryInstallments();
+response->getDeferredPeriods();
 ```
 
 ```csharp
-{
-  InstallmentsAmount: 1000,
-  IdQueryInstallments: 20783487,
-  DeferredPeriods: []
-}
+response.InstallmentsAmount;
+respone.IdQueryInstallments;
+response.DeferredPeriods;
 ```
 
 ```ruby
-<Transbank::TransaccionCompleta::TransactionInstallmentsResponse:0x00007f91000bd108
-    @installments_amount=334,
-    @id_query_installments=17717003,
-    @deferred_periods=[]>
+response.installments_amount
+response.id_query_installments
+response.deferred_periods
 ```
 
 ```python
-{
-  installments_amount: 334.0, id_query_installments: 20842559, deferred_periods: []
-}
+response.installments_amount
+response.id_query_installments
+response.deferred_periods
 ```
 
 Si el comercio no tiene configurado periodos diferidos, la respuesta de `deferred_periods` será `[]`:   
@@ -3032,39 +3016,48 @@ Operación que permite confirmar una transacción. Retorna el estado de la
 transacción.
 
 ```java
-
+final FullTransactionCommitResponse response = FullTransaction.Transaction.commit(
+  token, idQueryInstallments, deferredPeriodIndex, gracePeriod
+);
 ```
 
 ```php
 use Transbank\TransaccionCompleta\Transaction;
 
 Transaction::commit(
-            $token_ws,
-            $id_query_installments,
-            $deferred_period_index,
-            $grace_period
+  $token_ws,
+  $id_query_installments,
+  $deferred_period_index,
+  $grace_period
+);
 ```
 
 ```csharp
 using Transbank.Webpay.TransaccionCompleta;
 
-FullTransaction.Commit(token, idQueryInstallments, deferredPeriodsIndex, gracePeriods);
+FullTransaction.Commit(
+  token, idQueryInstallments, deferredPeriodsIndex, gracePeriods
+);
 ```
 
 ```ruby
-Transbank::TransaccionCompleta::Transaction::commit(token: token,
-                                                    id_query_installments: id_query_installments,
-                                                    deferred_period_index: deferred_period_index,
-                                                    grace_period: grace_period)
+Transbank::TransaccionCompleta::Transaction::commit(
+  token: token,
+  id_query_installments: id_query_installments,
+  deferred_period_index: deferred_period_index,
+  grace_period: grace_period
+)
 ```
 
 ```python
 from transbank.transaccion_completa.transaction import Transaction
 
-Transaction.commit( token=token,
-                    id_query_installments=id_query_installments,
-                    deferred_period_index=deferred_period_index,
-                    grace_period=grace_period )
+Transaction.commit(
+  token=token,
+  id_query_installments=id_query_installments,
+  deferred_period_index=deferred_period_index,
+  grace_period=grace_period
+)
 ```
 
 ```http
@@ -3093,48 +3086,40 @@ grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia.
 **Respuesta**
 
 ```java
-import cl.transbank.webpay.exception.RefundTransactionException;
-import cl.transbank.webpay.oneclick.OneclickMall;
-import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
-
-public class IntegrationExample {
-    public static void main(String[] args) {
-        byte deferredPeriodIndex= 1; //example
-        Boolean gracePeriod = false; //example
-        String token = "a token obtained through create transaction";
-        Long idQueryInstallments = 1262362L;//a valid id query installments obtained through Installments transaction 
-        try {
-            final FullTransactionCommitResponse response = FullTransaction.Transaction.commit(token,idQueryInstallments,deferredPeriodIndex,gracePeriod);
-        } catch (TransactionCommitException | IOException e) {
-            return new ErrorController().error();
-        }
-    }
-}
+response.getVci();
+response.getAccountingDate();
+response.getAmount();
+response.getAuthorizationCode();
+response.getBuyOrder();
+CardDetail cardDetail = response.getCardDetail();
+cardDetail.getCardNumber();
+response.getInstallmentsAmount();
+response.getInstallmentsNumber();
+response.getPaymentCodeType();
+response.getResponseCode();
+response.getSessionId();
+response.getTransactionDate();
 ```
 
 ```php
-object(Transbank\TransaccionCompleta\TransactionCommitResponse)#303 (13) 
-{
-  ["vci"]=> NULL
-  ["amount"]=> int(1000) 
-  ["status"]=> string(10) "AUTHORIZED"
-  ["buyOrder"]=> string(6) "123456"
-  ["sessionId"]=> string(13) "session123456"
-  ["cardDetail"]=> array(1) {
-    ["card_number"]=> string(4) "6623"
-  }
-  ["accountingDate"]=> string(4) "1219"
-  ["transactionDate"]=> string(24) "2019-12-19T14:52:54.699Z"
-  ["authorizationCode"]=> string(4) "1213"
-  ["paymentTypeCode"]=> string(2) "VN"
-  ["responseCode"]=> int(0)
-  ["installmentsNumber"]=> int(0)
-  ["installmentsAmount"]=> NULL
-}
+response->getVci();
+response->getAccountingDate();
+response->getAmount();
+response->getAuthorizationCode();
+response->getBuyOrder();
+cardDetail = response->getCardDetail();
+cardDetail->getCardNumber();
+response->getInstallmentsAmount();
+response->getInstallmentsNumber();
+response->getPaymentCodeType();
+response->getResponseCode();
+response->getSessionId();
+response->getTransactionDate();
 ```
 
 ```csharp
 {
+  Vci: "123",
   AccountingDate: "1219",
 	Amount: 10000,
 	AuthorizationCode: "1213",
@@ -3151,31 +3136,37 @@ object(Transbank\TransaccionCompleta\TransactionCommitResponse)#303 (13)
 	TransactionDate: "2019-12-19T19:46:19.352Z"
 }
 ```ruby
-<Transbank::TransaccionCompleta::TransactionCommitResponse:0x00007f90f80152f8
-    @vci=nil,
-    @amount=1000,
-    @status="AUTHORIZED",
-    @buy_order="buyorder1567451528",
-    @session_id="session1567451528",
-    @card_number=nil,
-    @accounting_date="0902",
-    @transaction_date="2019-09-02T20:20:39.377Z",
-    @authorization_code="1213",
-    @payment_type_code="VN",
-    @response_code=0,
-    @installments_number=0,
-    @installments_amount=nil,
-    @balance=nil>
+response.vci
+response.amount
+response.status
+response.buy_order
+response.session_id
+response.card_number
+response.accounting_date
+response.transaction_date
+response.authorization_code
+response.payment_type_code
+response.response_code
+response.installments_number
+response.installments_amount
+response.balance
 ```
 
 ```python
-{
-  vci: None, amount: 1000.0, status: "AUTHORIZED", buy_order: "buyorder1577202376",
-  session_id: "session1577202376", card_detail: {'card_number': '6623'},
-  accounting_date: 1224, transaction_date: "2019-12-24T15:46:22.392Z", authorization_code: 1213,
-  payment_type_code: "VN", response_code: 0.0, installments_number: 0.0,
-  installments_amount: None balance:None
-}
+response.vci
+response.amount
+response.status
+response.buy_order
+response.session_id
+response.card_number
+response.accounting_date
+response.transaction_date
+response.authorization_code
+response.payment_type_code
+response.response_code
+response.installments_number
+response.installments_amount
+response.balance
 ```
 
 ```http
