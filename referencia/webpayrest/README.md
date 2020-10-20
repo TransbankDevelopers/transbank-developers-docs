@@ -998,7 +998,7 @@ transaction_details = [
   },
 ]
 
-response = = Transbank::Webpay::WebpayPlus::MallTransaction::create(
+response = Transbank::Webpay::WebpayPlus::MallTransaction::create(
   buy_order: buy_order,
   session_id: session_id,
   return_url: return_url,
@@ -1559,8 +1559,7 @@ Content-Type: application/json
 {
   "commerce_code": "597055555536",
   "buy_order": "ordenCompra12345678",
-  "authorization_code": "123456",
-  "capture_mount": 1000
+  "amount": 1000
 }
 ```
 **Parámetros**
@@ -3406,7 +3405,7 @@ final FullTransactionRefundResponse response = FullTransaction.Transaction.refun
 ```php
 use Transbank\TransaccionCompleta\Transaction;
 
-Transaction::refund($token_ws, $amount);
+Transaction::refund($token, $amount);
 ```
 
 ```csharp
@@ -3514,30 +3513,6 @@ response_code  <br> <i> Number </i> | Código de resultado de la anulación. Si 
 
 ## Transacción Mall Completa {data-submenuhidden=true}
 
-```java
-// Este SDK aún no se encuentra disponible
-```
-
-```php
-// Este SDK aún no se encuentra disponible
-```
-
-```csharp
-// Este SDK aún no se encuentra disponible
-```
-
-```ruby
-# Este SDK aún no se encuentra disponible
-```
-
-```python
-# Este SDK aún no se encuentra disponible
-```
-
-```http
-
-```
-
 Una transacción Mall Completa corresponde a una solicitud de transacciones completas
 de un conjunto de pagos con tarjetas de crédito, en donde quién realiza el pago
 ingresa al sitio del comercio, selecciona productos o
@@ -3583,11 +3558,17 @@ token es caducado y no podrá ser utilizado en un pago.
 </aside>
 
 ```java
-CreateMallTransactionDetails transactionDetails = CreateMallTransactionDetails.build()
-    .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne)
-    .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo);
+MallTransactionCreateDetails transactionDetails = MallTransactionCreateDetails.build()
+  .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne, installmentsNumberMallOne)
+  .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo, installmentsNumberMallTwo);
 
-final CreateWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.create(buyOrder, sessionId, returnUrl, transactionDetails);
+final MallFullTransactionCreateResponse response = MallFullTransaction.Transaction.create(
+  buyOrder,                           // ordenCompra12345678
+  sessionId,                          // sesion1234564
+  cardNumber,                         // 4239000000000000
+  cardExpirationDate,                 // 22/10
+  transactionDetails
+);
 ```
 
 ```php
@@ -3606,7 +3587,7 @@ $transaction_details = [
   },
 ];
 
-MallTransaction::create(
+$response = MallTransaction::create(
   $buy_order,                         // ordenCompra12345678
   $session_id,                        // sesion1234564
   $card_number,                       // 4239000000000000
@@ -3616,15 +3597,70 @@ MallTransaction::create(
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.TransaccionCompletaMall;
+
+var transactionDetails = new List<CreateDetails>();
+transactionDetails.Add(new CreateDetails(
+    amountMallOne,
+    commerceCodeMallOne,
+    buyOrderMallOne
+));
+transactionDetails.Add(new CreateDetails(
+    amountMallTwo,
+    comerceCodeMallTwo,
+    buyOrderMallTwo
+));
+
+var response = MallFullTransaction.Create(
+  buyOrder,
+  sessionId,
+  cardNumber,
+  cardExpirationDate,
+  transactionDetails
+);
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+details = [
+  {
+    amount: 10000,
+    commerce_code: 597055555552,
+    buy_order: '123456789'
+  },
+  {
+    amount: 12000,
+    commerce_code: 597055555553,
+    buy_order: '123456790'
+  }
+]
+response = Transbank::TransaccionCompleta::MallTransaction::create(
+  buy_order: 'ordenCompra12345678',
+  session_id: 'sesion1234564',
+  card_number: 4239000000000000,
+  card_expiration_date: '22/10',
+  details: details
+)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+details = [
+  {
+      'commerce_code': 597055555552,
+      'buy_order': '123456789',
+      'amount': 10000
+  },
+  {
+      'commerce_code': 597055555553,
+      'buy_order': '123456790',
+      'amount': 12000
+  }
+]
+
+response = Transaction.create(
+  buy_order=buy_order,
+  session_id=session_id,
+  card_number=card_number, card_expiration_date=card_expiration_date, details=details
+)
 ```
 
 ```http
@@ -3670,23 +3706,23 @@ details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda del m
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+response.getToken();
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+response->getToken();
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+response.Token;
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+response.token
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response.token
 ```
 
 ```http
@@ -3713,23 +3749,84 @@ El id de la consulta que selecciona el tarjetahabiente debe ser informado en la
 invocación de la confirmación.
 
 ```java
-// Este SDK aún no se encuentra disponible
+MallFullTransactionInstallmentsDetails installmentsDetails = MallFullTransactionInstallmentsDetails.build().add(commerceCode, buyOrder, installmentsNumber);
+final MallFullTransactionInstallmentsResponse response = MallFullTransaction.Transaction.installment(token, installmentsDetails);
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+$installments_details = [
+  {
+    "commerce_code": 597055555552,
+    "buy_order": "123456789",
+    "installments_number": 2
+  },
+  {     
+    "commerce_code": 597055555553,
+    "buy_order": "123456790",
+    "installments_number": 2
+  },
+];
+
+$res = MallTransaction::installments(
+  $token,
+  $installments_details
+);
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.TransaccionCompletaMall;
+
+var installmentsDetails = new List<MallInstallmentsDetails>();
+installmentsDetails.Add(new CreateDetails(
+    commerceCodeMallOne,
+    buyOrderMallOne,
+    installmentsNumberMallOne
+));
+installmentsDetails.Add(new CreateDetails(
+    comerceCodeMallTwo,
+    buyOrderMallTwo,
+    installmentsNumberMallTwo
+));
+
+var response = MallFullTransaction.Installments(
+  token, installmentDetails
+);
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+installment_details = [
+  {
+    commerce_code: 597055555552,
+    buy_order: '123456789',
+    installments_number: 2
+  },
+  {     
+    commerce_code: 597055555553,
+    buy_order: '123456790',
+    installments_number: 2
+  },
+]
+
+response = Transbank::TransaccionCompleta::MallTransaction::installments(token, installment_details)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.transaccion_completa_mall.transaction import Transaction
+
+details = [
+  {
+    'commerce_code': 597055555552,
+    'buy_order': '123456789',
+    'installments_number': 2
+  },
+  {
+    'commerce_code': 597055555553,
+    'buy_order': '123456790',
+    'installments_number': 2
+  }
+]
+
+response = Transaction.installments(token=token, details=details)
 ```
 
 ```http
@@ -3758,23 +3855,43 @@ installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+response.getInstallmentsAmount();
+response.getIdQueryInstallments();
+DeferredPeriod deferredPeriod = response.getDeferredPeriods()[0];
+deferredPeriod.getAmount();
+deferredPeriod.getPeriod();
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+$response->getInstallmentsAmount();
+$response->getIdQueryInstallments();
+$deferredPeriod = response->getDeferredPeriods()[0];
+$deferredPeriod->getAmount();
+$deferredPeriod->getPeriod();
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+response.InstallmentsAmount;
+response.IdQueryInstallments;
+var deferredPeriod = response.DeferredPeriods[0];
+deferredPeriod.Amount;
+deferredPeriod.Period;
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+response.installments_amount
+response.id_query_installments
+deferred_period = response.deferred_periods[0]
+deferred_period.amount
+deferred_period.period
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response.installments_amount
+response.id_query_installments
+deferred_period = response.deferred_periods[0]
+deferred_period.amount
+deferred_period.period
 ```
 
 ```http
@@ -3811,23 +3928,107 @@ Operación que permite confirmar una transacción. Retorna el estado de la
 transacción.
 
 ```java
-// Este SDK aún no se encuentra disponible
+MallTransactionCommitDetails details = MallTransactionCommitDetails.build().add(
+  commerceCode,buyOrder,idQueryInstallments,deferredPeriodIndex,gracePeriod
+);
+
+final MallFullTransactionCommitResponse response = MallFullTransaction.Transaction.commit(token, details);
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\TransaccionCompleta\Transaction;
+
+$details = [
+  {
+    "commerce_code": '597055555552',
+    "buy_order": 'ordenCompra1234',
+    "id_query_installments": 12,
+    "deferred_period_index": 1,
+    "grace_period": false
+  },
+  {
+    "commerce_code": '597055555553',
+    "buy_order": 'ordenCompra12345',
+    "id_query_installments": 12,
+    "deferred_period_index": 1,
+    "grace_period": false
+  }
+]
+
+$res = MallTransaction::commit(
+  $token,
+  $details
+);
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.TransaccionCompletaMall;
+
+var transactionDetails = new List<MallCommitDetails>();
+transactionDetails.Add(new MallCommitDetails(
+    commerceCodeMallOne,
+    buyOrderMallOne,
+    idQueryInstallmentsOne,
+    deferredPeriodIndexOne,
+    gracePeriodOne
+));
+transactionDetails.Add(new MallCommitDetails(
+    commerceCodeMallTwo,
+    buyOrderMallTwo,
+    idQueryInstallmentsTwo,
+    deferredPeriodIndexTwo,
+    gracePeriodTwo
+));
+
+var response = MallFullTransaction.Commit(
+  token, transactionDetails
+);
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+details = [
+  {
+    commerce_code: '597055555552',
+    buy_order: 'ordenCompra1234',
+    id_query_installments: 12,
+    deferred_period_index: 1,
+    grace_period: false
+  },
+  {
+    commerce_code: '597055555553',
+    buy_order: 'ordenCompra12345',
+    id_query_installments: 12,
+    deferred_period_index: 1,
+    grace_period: false
+  }
+]
+
+response = Transbank::TransaccionCompleta::MallTransaction::commit(
+  token: token, details: details
+)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+details = [
+  {
+    "commerce_code": '597055555552',
+    "buy_order": 'ordenCompra1234',
+    "id_query_installments": 12,
+    "deferred_period_index": 1,
+    "grace_period": false
+  },
+  {
+    "commerce_code": '597055555553',
+    "buy_order": 'ordenCompra12345',
+    "id_query_installments": 12,
+    "deferred_period_index": 1,
+    "grace_period": false
+  }
+]
+
+response = Transaction.commit(
+  token=token, details=details
+)
 ```
 
 ```http
@@ -3865,23 +4066,93 @@ grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia.
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+response.getBuyOrder();
+response.getCardNumber();
+response.getAccountingDate();
+response.getTransactionDate();
+Detail detail = response.getDetails()[0];
+detail.getAuthorizationCode();
+detail.getPaymentCodeType();
+detail.getResponseCode();
+detail.getInstallmentsAmount();
+detail.getInstallmentsNumber();
+detail.getAmount();
+detail.getCommerceCode();
+detail.getBuyOrder();
+detail.getStatus();
+detail.getBalance();
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+$response.getBuyOrder();
+$response.getCardNumber();
+$response.getAccountingDate();
+$response.getTransactionDate();
+$detail = response.getDetails()[0];
+$detail.getAuthorizationCode();
+$detail.getPaymentCodeType();
+$detail.getResponseCode();
+$detail.getInstallmentsAmount();
+$detail.getInstallmentsNumber();
+$detail.getAmount();
+$detail.getCommerceCode();
+$detail.getBuyOrder();
+$detail.getStatus();
+$detail.getBalance();
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+response.BuyOrder;
+response.CardNumber;
+response.AccountingDate;
+response.TransactionDate;
+detail = response.Details[0];
+detail.AuthorizationCode;
+detail.PaymentCodeType;
+detail.ResponseCode;
+detail.InstallmentsAmount;
+detail.InstallmentsNumber;
+detail.Amount;
+detail.CommerceCode;
+detail.BuyOrder;
+detail.Status;
+detail.Balance;
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+response.buy_order
+response.card_number
+response.accounting_date
+response.transaction_date
+detail = response.details[0]
+detail.authorization_code
+detail.payment_code_type
+detail.response_code
+detail.installments_amount
+detail.installments_number
+detail.amount
+detail.commerce_code
+detail.buy_order
+detail.status
+detail.balance
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response.buy_order
+response.card_number
+response.accounting_date
+response.transaction_date
+detail = response.details[0]
+detail.authorization_code
+detail.payment_code_type
+detail.response_code
+detail.installments_amount
+detail.installments_number
+detail.amount
+detail.commerce_code
+detail.buy_order
+detail.status
+detail.balance
 ```
 
 ```http
@@ -3939,23 +4210,27 @@ Obtiene resultado de transacción a partir de un token.
 
 
 ```java
-// Este SDK aún no se encuentra disponible
+MallFullTransaction.Transaction.status(token)
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\TransaccionCompleta\Transaction;
+
+$response = MallTransaction::status(token)
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.TransaccionCompletaMall;
+
+MallFullTransaction.Status(token);
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+Transbank::TransaccionCompleta::MallTransaction::status(token)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+Transaction.status(token)
 ```
 
 ```http
@@ -3974,23 +4249,93 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía e
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+response.getBuyOrder();
+response.getCardNumber();
+response.getAccountingDate();
+response.getTransactionDate();
+Detail detail = response.getDetails()[0];
+detail.getAuthorizationCode();
+detail.getPaymentCodeType();
+detail.getResponseCode();
+detail.getInstallmentsAmount();
+detail.getInstallmentsNumber();
+detail.getAmount();
+detail.getCommerceCode();
+detail.getBuyOrder();
+detail.getStatus();
+detail.getBalance();
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+$response.getBuyOrder();
+$response.getCardNumber();
+$response.getAccountingDate();
+$response.getTransactionDate();
+$detail = response.getDetails()[0];
+$detail.getAuthorizationCode();
+$detail.getPaymentCodeType();
+$detail.getResponseCode();
+$detail.getInstallmentsAmount();
+$detail.getInstallmentsNumber();
+$detail.getAmount();
+$detail.getCommerceCode();
+$detail.getBuyOrder();
+$detail.getStatus();
+$detail.getBalance();
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+response.BuyOrder;
+response.CardNumber;
+response.AccountingDate;
+response.TransactionDate;
+detail = response.Details[0];
+detail.AuthorizationCode;
+detail.PaymentCodeType;
+detail.ResponseCode;
+detail.InstallmentsAmount;
+detail.InstallmentsNumber;
+detail.Amount;
+detail.CommerceCode;
+detail.BuyOrder;
+detail.Status;
+detail.Balance;
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+response.buy_order
+response.card_number
+response.accounting_date
+response.transaction_date
+detail = response.details[0]
+detail.authorization_code
+detail.payment_code_type
+detail.response_code
+detail.installments_amount
+detail.installments_number
+detail.amount
+detail.commerce_code
+detail.buy_order
+detail.status
+detail.balance
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response.buy_order
+response.card_number
+response.accounting_date
+response.transaction_date
+detail = response.details[0]
+detail.authorization_code
+detail.payment_code_type
+detail.response_code
+detail.installments_amount
+detail.installments_number
+detail.amount
+detail.commerce_code
+detail.buy_order
+detail.status
+detail.balance
 ```
 
 ```http
@@ -4053,23 +4398,48 @@ Dependiendo de la siguiente lógica de negocio la invocación a esta operacio�
 Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentre vigente.
 
 ```java
-// Este SDK aún no se encuentra disponible
+final MallFullTransactionRefundResponse response = MallFullTransaction.Transaction.refund(
+  token, amount, commerceCode, buyOrder
+);
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\TransaccionCompleta\Transaction;
+
+MallTransaction::refund(
+  token,
+  child_buy_order,
+  child_commerce_code,
+  amount
+);
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+using Transbank.Webpay.TransaccionCompletaMall;
+
+MallRefundRequest(
+  token,
+  childBuyOrder,
+  childCommerceCode,
+  amount
+);
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+Transbank::TransaccionCompleta::MallTransaction::refund(
+  token: token,
+  child_buy_order: child_buy_order,
+  child_commerce_code: child_commerce_code,
+  amount: amount
+)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+from transbank.transaccion_completa_mall.transaction import Transaction
+
+Transaction.refund(
+  token=token, amount=amount, child_commerce_code=child_commerce_code, child_buy_order=child_buy_order
+)
 ```
 
 ```http
@@ -4097,23 +4467,48 @@ amount  <br> <i> Number </i> | Monto a anular. Largo máximo: 17
 **Respuesta**
 
 ```java
-// Este SDK aún no se encuentra disponible
+response.getType();
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getNullifiedAmount();
+response.getBalance();
+response.getResponseCode();
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+response->getType();
+response->getAuthorizationCode();
+response->getAuthorizationDate();
+response->getNullifiedAmount();
+response->getBalance();
+response->getResponseCode();
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+response.Type;
+response.AuthorizationCode;
+response.AuthorizationDate;
+response.NullifiedAmount;
+response.Balance;
+response.ResponseCode;
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+response.type
+response.authorization_code
+response.authorization_date
+response.nullified_amount
+response.balance
+response.response_code
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response.type
+response.authorization_code
+response.authorization_date
+response.nullified_amount
+response.balance
+response.response_code
 ```
 
 ```http
@@ -4185,43 +4580,33 @@ el código debe ser el código de la tienda virtual específica.
 </aside>
 
 ```java
-import cl.transbank.webpay.exception.CaptureTransactionException;
-import cl.transbank.webpay.webpayplus.WebpayPlus;
-import cl.transbank.webpay.webpayplus.model.CaptureWebpayPlusTransactionResponse;
-import java.util.Random;
-public class IntegrationExample {
-    public static void main(String[] args) {
-        String token = "ef6bf196cae9d38744974e4da61e004135ea2d8774a063d33d2c58ea5730a0d2";
-        String buyOrder = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
-        String authorizationCode = "some_valid_authorization_code";
-        double amount = 1000;
-        try {
-            final CaptureWebpayPlusTransactionResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
-            final String authorizationCodeResp = response.getAuthorizationCode();
-            final String authorizationDate = response.getAuthorizationDate();
-            final double capturedAmount = response.getCapturedAmount();
-            final byte responseCode = response.getResponseCode();
-        } catch (CaptureTransactionException e) {
-            e.printStackTrace();
-        }
-    }
-}
+final CaptureWebpayPlusTransactionResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\Webpay\WebpayPlus;
+
+$response = Transaction::capture($token, $buyOrder, $authCode, $amount);
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+var response = DeferredTransaction.Capture(token, buyOrder, authorizationCode, captureAmount);
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+response = Transbank::Webpay::WebpayPlus::DeferredTransaction::capture(
+  token: @token,
+  buy_order: @buy_order,
+  authorization_code: @auth_code,
+  capture_amount: @amount
+)
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response = MallDeferredTransaction.capture(
+  token=token, capture_amount=amount, commerce_code=commerce_code,
+  buy_order=buy_order, authorization_code=authorization_code
+)
 ```
 
 ```http
@@ -4250,23 +4635,38 @@ capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo má
 **Respuesta**
 
 ```java
-
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getCapturedAmount();
+response.getResponseCode();
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+response->getAuthorizationCode();
+response->getAuthorizationDate();
+response->getCapturedAmount();
+response->getResponseCode();
 ```
 
 ```csharp
-// Este SDK aún no se encuentra disponible
+response.AuthorizationCode;
+response.AuthorizationDate;
+response.CapturedAmount;
+response.ResponseCode;
 ```
 
 ```ruby
-# Este SDK aún no se encuentra disponible
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
 ```
 
 ```python
-# Este SDK aún no se encuentra disponible
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
 ```
 
 ```http
