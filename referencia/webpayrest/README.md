@@ -3086,7 +3086,6 @@ grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia.
 **Respuesta**
 
 ```java
-response.getVci();
 response.getAccountingDate();
 response.getAmount();
 response.getAuthorizationCode();
@@ -3102,7 +3101,6 @@ response.getTransactionDate();
 ```
 
 ```php
-response->getVci();
 response->getAccountingDate();
 response->getAmount();
 response->getAuthorizationCode();
@@ -3118,25 +3116,22 @@ response->getTransactionDate();
 ```
 
 ```csharp
-{
-  Vci: "123",
-  AccountingDate: "1219",
-	Amount: 10000,
-	AuthorizationCode: "1213",
-	BuyOrder: "543769748",
-	CardDetail: {,
-    CardNumber: 6623
-  }
-	InstallmentsAmount: 1000,
-	InstallmentsNumber: 0,
-	PaymentTypeCode: "NC",
-	ResponseCode: 0,
-	SessionId: "105360",
-	Status: "AUTHORIZED",
-	TransactionDate: "2019-12-19T19:46:19.352Z"
-}
+response.AccountingDate;
+response.Amount;
+response.AuthorizationCoda;
+response.BuyOrder;
+var cardDetail = response.CardDetail;
+cardDetail.CardNumber;
+response.InstallmentsAmount;
+response.InstallmentsNumber;
+response.PaymentTypeCode;
+response.ResponseCode;
+response.SessionId;
+response.Status;
+response.TransactionDate;
+```
+
 ```ruby
-response.vci
 response.amount
 response.status
 response.buy_order
@@ -3153,7 +3148,6 @@ response.balance
 ```
 
 ```python
-response.vci
 response.amount
 response.status
 response.buy_order
@@ -3218,7 +3212,7 @@ Obtiene resultado de transacción a partir de un token.
 
 
 ```java
-
+final FullTransactionStatusResponse response = FullTransaction.Transaction.status(token);
 ```
 
 ```php
@@ -3259,86 +3253,81 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía e
 **Respuesta**
 
 ```java
-import cl.transbank.webpay.exception.RefundTransactionException;
-import cl.transbank.webpay.oneclick.OneclickMall;
-import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
-
-public class IntegrationExample {
-    public static void main(String[] args) {
-      String token = "a token obtained through create transaction";
-        try {
-            final FullTransactionStatusResponse response = FullTransaction.Transaction.status(token);
-        } catch (TransactionStatusException | IOException e) {
-            return new ErrorController().error();
-        }
-    }
-}
+response.getAccountingDate();
+response.getAmount();
+response.getAuthorizationCode();
+response.getBuyOrder();
+CardDetail cardDetail = response.getCardDetail();
+cardDetail.getCardNumber();
+response.getInstallmentsAmount();
+response.getInstallmentsNumber();
+response.getPaymentCodeType();
+response.getResponseCode();
+response.getSessionId();
+response.getTransactionDate();
 ```
 
 ```php
-object(Transbank\TransaccionCompleta\TransactionStatusResponse)#303 (13) 
-{
-  ["vci"]=> NULL
-  ["amount"]=> int(1000)
-  ["status"]=> string(10) "AUTHORIZED"
-  ["buyOrder"]=> string(6) "123456"
-  ["sessionId"]=> string(13) "session123456"
-  ["cardDetail"]=> array(1) {
-    ["card_number"]=> string(4) "6623"
-  }
-  ["accountingDate"]=> string(4) "1219"
-  ["transactionDate"]=> string(24) "2019-12-19T14:55:52.190Z"
-  ["authorizationCode"]=> string(4) "1213"
-  ["paymentTypeCode"]=> string(2) "VN"
-  ["responseCode"]=> int(0)
-  ["installmentsNumber"]=> int(0)
-  ["installmentsAmount"]=> NULL
-}
+response->getAccountingDate();
+response->getAmount();
+response->getAuthorizationCode();
+response->getBuyOrder();
+cardDetail = response->getCardDetail();
+cardDetail->getCardNumber();
+response->getInstallmentsAmount();
+response->getInstallmentsNumber();
+response->getPaymentCodeType();
+response->getResponseCode();
+response->getSessionId();
+response->getTransactionDate();
 ```
 
 ```csharp
-{
-	AccountingDate: "1219",
-	Amount: 10000,
-	AuthorizationCode: "1213",
-	BuyOrder: "327648047",
-	CardDetail: (null),
-	InstallmentsAmount: 1000,
-	InstallmentsNumber: 10,
-	PaymentTypeCode: "NC",
-	ResponseCode: 0,
-	SessionId: "750819",
-	Status: "AUTHORIZED",
-	TransactionDate: "2019-12-19T19:50:34.411Z"
-}
+response.AccountingDate;
+response.Amount;
+response.AuthorizationCoda;
+response.BuyOrder;
+var cardDetail = response.CardDetail;
+cardDetail.CardNumber;
+response.InstallmentsAmount;
+response.InstallmentsNumber;
+response.PaymentTypeCode;
+response.ResponseCode;
+response.SessionId;
+response.Status;
+response.TransactionDate;
 ```
 
 ```ruby
-<Transbank::TransaccionCompleta::TransactionStatusResponse:0x00007f90f5c395f0 
-    @vci=nil,
-    @amount=1000,
-    @status="AUTHORIZED",
-    @buy_order="buyorder1567451528",
-    @session_id="session1567451528",
-    @card_number=nil,
-    @accounting_date="0902",
-    @transaction_date="2019-09-02T20:20:39.377Z",
-    @authorization_code="1213",
-    @payment_type_code="VN",
-    @response_code=0, 
-    @installments_number=0,
-    @installments_amount=nil,
-    @balance=nil>
+response.amount
+response.status
+response.buy_order
+response.session_id
+response.card_number
+response.accounting_date
+response.transaction_date
+response.authorization_code
+response.payment_type_code
+response.response_code
+response.installments_number
+response.installments_amount
+response.balance
 ```
 
 ```python
-{
-  vci: None, amount: 1000.0, status: "AUTHORIZED", buy_order: "buyorder1577202376",
-  session_id: "session1577202376", card_detail: {'card_number': '6623'},
-  accounting_date: 1224, transaction_date: "2019-12-24T15:46:22.392Z",
-  authorization_code: 1213, payment_type_code: "VN", response_code: 0.0,
-  installments_number: 0.0, installments_amount: None balance:None
-}
+response.amount
+response.status
+response.buy_order
+response.session_id
+response.card_number
+response.accounting_date
+response.transaction_date
+response.authorization_code
+response.payment_type_code
+response.response_code
+response.installments_number
+response.installments_amount
+response.balance
 ```
 
 ```http
@@ -3411,7 +3400,7 @@ Dependiendo de la siguiente lógica de negocio la invocación a esta operacio�
 Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentre vigente.
 
 ```java
-
+final FullTransactionRefundResponse response = FullTransaction.Transaction.refund(token,amount);
 ```
 
 ```php
@@ -3456,60 +3445,48 @@ amount  <br> <i> Decimal </i> | (Opcional) Monto que se desea anular de la trans
 **Respuesta**
 
 ```java
-import cl.transbank.webpay.exception.RefundTransactionException;
-import cl.transbank.webpay.oneclick.OneclickMall;
-import cl.transbank.webpay.oneclick.model.RefundOneclickMallTransactionResponse;
-
-public class IntegrationExample {
-    public static void main(String[] args) {
-    String token = "a token obtained through create transaction";
-    double amount = 10000; //example
-    try {
-            final FullTransactionRefundResponse response = FullTransaction.Transaction.refund(token,amount);
-        } catch (IOException | TransactionRefundException e) {
-            return new ErrorController().error();
-        }
-    }
-}
+response.getType();
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getNullifiedAmount();
+response.getBalance();
+response.getResponse();
 ```
 
 ```php
-object(Transbank\TransaccionCompleta\TransactionRefundResponse)#305 (6) 
-{
-  ["type"]=> string(8) "REVERSED"
-  ["authorizationCode"]=> NULL
-  ["authorizationDate"]=> NULL
-  ["nullifiedAmount"]=> NULL
-  ["balance"]=> NULL
-  ["responseCode"]=> NULL
-}
+response->getType();
+response->getAuthorizationCode();
+response->getAuthorizationDate();
+response->getNullifiedAmount();
+response->getBalance();
+response->getResponse();
 ```
 
 ```csharp
-{
-	AuthorizationCode: (null),
-	AuthorizationDate: (null),
-	Balance: 0,
-	NullifiedAmount: 0,
-	ResponseCode: 0,
-	Type: "REVERSED"
-}
+response.AuthorizationCode;
+response.AuthorizationDate;
+response.Balance;
+response.NullifiedAmount;
+response.ResponseCode;
+response.Type;
 ```
 
 ```ruby
-<Transbank::TransaccionCompleta::TransactionRefundResponse:0x00007f90f55f6468 
-    @type="REVERSED",
-    @authorization_code=nil,
-    @authorization_date=nil,
-    @nullified_amount=nil,
-    @balance=nil,
-    @response_code=nil>
+response.type
+response.authorization_code
+response.authorization_date
+response.nullified_amount
+response.balance
+response.response_code
 ```
 
 ```python
-{
-  type: "REVERSED", authorization_code: None, authorization_date: None, nullified_amount: None, balance: None, response_code: None
-}
+response.type
+response.authorization_code
+response.authorization_date
+response.nullified_amount
+response.balance
+response.response_code
 ```
 
 ```http
@@ -3533,6 +3510,8 @@ authorization_date  <br> <i> String </i> | Fecha y hora de la autorización. S
 nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17. Solo viene en caso de anulación.
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17. Solo viene en caso de anulación.
 response_code  <br> <i> Number </i> | Código de resultado de la anulación. Si es exitoso es 0, de lo contrario la anulación no fue realizada. Largo máximo: 2. Solo viene en caso de anulación.
+
+
 ## Transacción Mall Completa {data-submenuhidden=true}
 
 ```java
@@ -3604,11 +3583,36 @@ token es caducado y no podrá ser utilizado en un pago.
 </aside>
 
 ```java
-// Este SDK aún no se encuentra disponible
+CreateMallTransactionDetails transactionDetails = CreateMallTransactionDetails.build()
+    .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne)
+    .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo);
+
+final CreateWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.create(buyOrder, sessionId, returnUrl, transactionDetails);
 ```
 
 ```php
-// Este SDK aún no se encuentra disponible
+use Transbank\TransaccionCompleta\MallTransaccionCompleta;
+
+$transaction_details = [
+  {
+      "amount": 10000,
+      "commerce_code": 597055555552,
+      "buy_order": "123456789"
+  },
+  {     
+     "amount": 12000,
+     "commerce_code": 597055555553,
+     "buy_order": "123456790"
+  },
+];
+
+MallTransaction::create(
+  $buy_order,                         // ordenCompra12345678
+  $session_id,                        // sesion1234564
+  $card_number,                       // 4239000000000000
+  $card_expiration_date,              // 22/10
+  $transaction_details
+);
 ```
 
 ```csharp
