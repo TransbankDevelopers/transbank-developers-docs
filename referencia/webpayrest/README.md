@@ -152,16 +152,18 @@ WebpayPlus.Transaction.setIntegrationType(IntegrationType.TEST);
 
 ```php
 // El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
-Transbank\Webpay\WebpayPlus::configureForTesting();
-Transbank\Webpay\WebpayPlus::configureMallForTesting();
-Transbank\Webpay\WebpayPlus::configureDeferredForTesting();
+Transbank\Webpay\WebpayPlus::setCommerceCode(597055555532);
+Transbank\Webpay\WebpayPlus::setApiKey(
+  "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C"
+);
+Transbank\Webpay\WebpayPlus::setIntegrationType("TEST");
 ```
 
 ```csharp
 // El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
-WebpayPlus.CommerceCode = 597055555532;
-WebpayPlus.ApiKey = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C";
-WebpayPlus.IntegrationType = WebpayIntegrationType.Test;
+WebpayPlus.Transaction.CommerceCode = 597055555532;
+WebpayPlus.Transaction.ApiKey = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C";
+WebpayPlus.Transaction.IntegrationType = WebpayIntegrationType.Test;
 ```
 
 ```ruby
