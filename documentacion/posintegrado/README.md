@@ -33,9 +33,9 @@ Para Java se puede incluir el paquete por [Maven.](https://search.maven.org/arti
 ### SDK Web
 El SDK Web consta de dos partes: [SDK Javacript](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js) y [Cliente Desktop](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-client). 
 
-[Cliente Desktop](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-client): Este cliente se debe instalar e inicializar en el computador que tendrá el equipo POS conectado físicamente. Al instalar e inicializar este servicio, se creará un servidor de websockets local en el puerto 8090, que permitirá, a través del SDK de javascript, poder enviar y recibir mensajes al equipo POS, de manera simple y transparente.
+[Agente Desktop](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent): Este agente es un programa que se debe instalar e inicializar en el computador que tendrá el equipo POS conectado físicamente. Al instalar e inicializar este servicio, se creará un servidor de websockets local en el puerto `8090` que permitirá, a través del [SDK de Javascript](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js), poder enviar y recibir mensajes del equipo POS, de manera simple y transparente.
 
-[SDK Javacript](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js): Este SDK se debe instalar en el software de caja (o cualquier software web que presente HTML, CSS y JS en un navegador web). Este SDK entrega una interfaz simple para conectarse con el cliente desktop, de manera que se puedan mandar instrucciones al POS con un API fácil de usar directamente desde el browser.
+[SDK Javascript](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js): Este SDK se debe instalar en el software de caja (o cualquier software web que presente HTML, CSS y JS en un navegador web). Este SDK entrega una interfaz simple para conectarse con el cliente desktop, de manera que se puedan mandar instrucciones al POS con un API fácil de usar directamente desde el browser.
 
 Dentro de cada repositorio se encuentra la documentación más detallada. 
 
@@ -43,38 +43,65 @@ Instalar el SDK en el software web donde se realizará la integración
 ```bash
 npm install transbank-pos-sdk-web
 ```
+
 También se puede incluir directamente el tag script
 ```html 
-<script src="https://unpkg.com/transbank-pos-sdk-web@1/dist/pos.js"></script>
+<script src="https://unpkg.com/transbank-pos-sdk-web@2/dist/pos.js"></script>
 <script>
 // En este caso, el objeto en vez de ser POS, es Transbank.POS
 // Ej: Transbank.POS.connect(...); en vez de POS.connect(...) como se especifica en los ejemplos de mas abajo. 
 </script>
 ```
 
-### Variable de entorno
-Para utilizar el SDK del POS es necesario el archivo Transbank.dll, o Transbank.dylib del SDK de C.
-Para que el cliente pueda encontrar la librería nativa, utiliza una variable de ambiente llamada **NATIVE_TRANSBANK_WRAP** que debe apuntar al archivo de esta variable.
+**Instalar el agente desktop:** 
+Revisa la lista de versiones públicadas y [descarga la última versión](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent/releases). Verás que hay un archivo .exe que debes bajar si usas windows, o un archivo .zip si usas MacOS. Luego, solo debes de instalar y ejecutar el programa. 
 
-Por ejemplo en MacOS se debe correr el comando export en el mismo Shell en que se ejecutará el programa que utiliza la librería.
-```bash
-export NATIVE_TRANSBANK_WRAP=/usr/local/lib/libTransbankWrap.dylib
-```
+Este agente debe estar ejecutándose siempre para que el SDK Javascript funcione correctamente. Puedes ejecutarlo automáticamente cuando se inicie el computador. 
+La primera vez que se ejecuta el agente, este se configura automáticamente para iniciar en el startup del computador. 
 
-En Windows, se debe correr este comando en la ventana de `CMD` antes de ejecutar el programa que utiliza la librería.
-`setx NATIVE_TRANSBANK_WRAP=c:\TransbankLib\TransbankWrapJava.dll`
-
-**Instalar el cliente desktop:** 
-Se debe [descargar el las DLL](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest) mencionadas anteriormente (libserialport-0.dll) e instalarla idealmente en la carpeta system32 (en windows). En OSX se puede instalar como `brew install libserialport` o [con estas instrucciones](https://sigrok.org/wiki/Libserialport). 
-
-Se debe descargar el archivo .jar del [último release del repositorio](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-client/releases/latest) y ejecutar: 
-```bash
-java -jar transbank-pos-sdk-web-client.jar
-```  
-
-Este cliente desktop debe estar ejecutándose siempre para que el SDK Javascript funcione correctamente. Puedes ejecutarlo automáticamente cuando se inicie el computador. Este paso depende de tu sistema operativo
+Una vez instalado, ya puedes usar el SDK Javascript. Pruebes probar la conexión con tu POS usando el [proyecto web de ejemplo](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-example)
 
 ### Drivers
+
+Actualmente contamos con 2 equipos POS Integrado en circulación.
+
+#### Verifone VX520 y VX520C
+
+Este equipo esta certificado para operar mediante conexión serial, utilizando el puerto RS232.
+En este caso solo debes tener instalados los drivers de tu adaptador USB-Serial o tu tarjeta RS232.
+
+<aside class="warning">
+Existe la posibilidad que puedas utilizar el puerto USB incluido en este equipo, sin embargo Transbank no puede garantizar el correcto funcionamiento de este.
+</aside>
+
+<aside class="notice">
+La comunicación con el POS Integrado se realiza mediante puerto serial RS232 y tú eres el/la responsable de instalar el driver correcto para tu tarjeta o adaptador serial.
+</aside>
+
+<aside class="success">
+Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilicen el [chip CH340](http://www.wch.cn/download/CH341SER_EXE.html). También puedes encontrar drivers para adaptadores con [chip Prolific](http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041)
+</aside>
+
+#### Ingenico Desk 3500
+
+Estos equipos funcionan tanto con puerto serial RS232 y USB (Generalmente plug and play), para el cual puedes necesitar instalar un [driver de Ingenico](http://transbankdevelopers.cl/files/Ingenico-USB-driver-3.10.zip).
+
+Este driver es compatible con los siguiente sistemas operativos.
+
+- Windows XP
+- Windows Vista
+- Windows 7
+- Windows 2008 Server
+- Windows 2008 Server R2
+- Windows 8 and 8.1
+- Windows XP Embedded
+- Windows 2012 Server
+- Windows 2016 Server
+- Windows 10
+  
+<aside class="warning">
+Ingenico no proporciona drivers para otros sistemas operativos, sin embargo es posible que de todas maneras puedas utilizar el POS en sistemas operativos distintos a los mencionados. En este caso la responsabilidad del correcto funcionamiento es del comercio.
+</aside>
 
 Recuerda que necesitas tener instalados los drivers correspondientes a tu tarjeta de
 puerto serial o adaptador USB Serial.
@@ -301,8 +328,12 @@ SaleResponse saleResponse = POS.getInstance().sale(amount, ticket);
 ```js
 import POS from "transbank-pos-sdk-web";
 
-POS.doSale(this.total, "ticket1").then((saleDetails) => {
+POS.doSale(this.total, "ticket1", (data) => {
+	//Este tercer parametro es opcional. Si está presente, se ejecutará cada vez que llegue un mensaje de status de la venta. 
+	console.log('Mensaje de status recibido', data);
+}).then((saleDetails) => {
     console.log(saleDetails);
+    
     //Acá llega la respuesta de la venta. Si saleDetails.responseCode es 0, entonces la comproa fue aprobada
     if (saleDetails.responseCode===0) {
 	alert("Transacción aprobada", "", "success");
@@ -341,7 +372,7 @@ El objeto SaleResponse retornará un objeto con los siguientes datos.
 El SDK no soporta el envío de mensajes intermedios. Por esta razón el 3º parámetro de la función en C es siempre falso.
 </aside>
 
-### Transacción de Última Venta
+### Transacción de última venta
 
 Este comando es enviado por la caja, solicitando al POS la re-impresión de la última venta realizada.
 

@@ -1,6 +1,6 @@
 # PatPass
 
-## PatPass by Webpay %<span class='tbk-tagTitleDesc'>SOAP</span>%
+## PatPass by Webpay %<span class='tbk-tagTitleDesc'>SOAP</span>%  {data-submenuhidden=true}
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/patpass' tbk-link-name='Referencia Api'></div>
@@ -202,10 +202,6 @@ identificar la transacción y mostrar un comprobante o página de éxito a tu
 usuario.
 
 ## Patpass Comercio %<span class='tbk-tagTitleDesc'>REST</span>%
-
-<div class="pos-title-nav">
-<div tbk-link='/referencia/patpass' tbk-link-name='Referencia Api'></div>
-</div>
 
 ### Crear una suscripción
 

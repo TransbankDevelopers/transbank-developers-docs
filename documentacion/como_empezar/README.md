@@ -58,6 +58,12 @@ NPM
 npm install transbank-sdk --save
 ```
 
+además, necesitar tener intalado openssl de manera global
+
+```bash
+npm install -g openssl
+```
+
 Yarn
 ```bash
 yarn add transbank-sdk
@@ -297,6 +303,15 @@ y guardar el certificado y también su llave privada (`597029124456.key`), los
 que junto a tu código de comercio te permitirán transaccionar. **Debes custodiar
 esa llave privada para evitar que caiga en manos de terceros**.
 
+<aside class="warning">
+A diferencia de otros SDK, en .NET debes especificar la ruta a un archivo `.pfx` o `.p12`
+el cual debes generar tu a partir de tu llave privada y certificado público.
+
+Puedes mirar el siguiente enlace para obtener una guía rápida de como generar tu
+propio archivo: [Crear archivo pfx usando openssl](https://www.ssl.com/how-to/create-a-pfx-p12-certificate-file-using-openssl/)
+`openssl pkcs12 -export -out 597029124456.pfx -inkey 597029124456.key -in 597029124456.crt`
+</aside>
+
 ### El proceso de validación y puesta en producción
 
 Durante la validación de la integración se pretende verificar que el comercio
@@ -367,15 +382,26 @@ Antes de crear la nueva configuración para el ambiente de producción será nec
 
 2. Crear un nuevo elemento `Configuration`
 
+<div class="language-simple" data-multiple-language></div>
+
 <img src="/images/documentacion/configuracion/1-configuration-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
 <img src="/images/documentacion/configuracion/1-configuration-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
 <img src="/images/documentacion/configuracion/1-configuration-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
+
+```javascript
+const configuration = new Transbank.Configuration()
+```
 
 3. Asignar el código de comercio productivo, entregado por Transbank al momento de contratar el producto.
 
 <img src="/images/documentacion/configuracion/2-codigo-comercio-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
 <img src="/images/documentacion/configuracion/2-codigo-comercio-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
 <img src="/images/documentacion/configuracion/2-codigo-comercio-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
+
+```javascript
+const configuration = new Transbank.Configuration()
+                        .withCommerceCode(/* tu código de comercio */)
+```
 
 4. Configuración de la llave privada (`.key` para Java y PHP `.pfx` o `.p12` para .NET) 
 generada por el comercio en la etapa previa.
@@ -384,6 +410,12 @@ generada por el comercio en la etapa previa.
 <img src="/images/documentacion/configuracion/3-private-key-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
 <img src="/images/documentacion/configuracion/3-private-key-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
 
+```javascript
+const configuration = new Transbank.Configuration()
+                        .withCommerceCode(/* tu código de comercio */)
+                        .withPrivateCert(/* tu certificado privado en forma de string */)
+```
+
 5. Configuración del certificado público (`.crt`) enviado a Transbank para su registro. En el caso de .NET no es 
 necesario configurar el `.crt` pero se debe configurar el password asignado a la llave privada.
 
@@ -391,11 +423,26 @@ necesario configurar el `.crt` pero se debe configurar el password asignado a la
 <img src="/images/documentacion/configuracion/4-certificate-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
 <img src="/images/documentacion/configuracion/4-certificate-net(password).gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
 
+```javascript
+const configuration = new Transbank.Configuration()
+                        .withCommerceCode(/* tu código de comercio */)
+                        .withPrivateCert(/* tu certificado privado en forma de string */)
+                        .withPublicCert(/* tu certificado público en forma de string */)
+```
+
 6. Selección del ambiente productivo.
 
 <img src="/images/documentacion/configuracion/5-environment-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
 <img src="/images/documentacion/configuracion/5-environment-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
 <img src="/images/documentacion/configuracion/5-environment-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
+
+```javascript
+const configuration = new Transbank.Configuration()
+                        .withCommerceCode(/* tu código de comercio */)
+                        .withPrivateCert(/* tu certificado privado en forma de string */)
+                        .withPublicCert(/* tu certificado público en forma de string */)
+                        .usingEnvironment(Transbank.environments.production) // Se define el ambiente como producción
+```
 
 7. Crear elemento Webpay utilizando la configuración de producción.
 
@@ -403,6 +450,15 @@ necesario configurar el `.crt` pero se debe configurar el password asignado a la
 <img src="/images/documentacion/configuracion/6-webpay-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
 <img src="/images/documentacion/configuracion/6-webpay-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
 
+```javascript
+const configuration = new Transbank.Configuration()
+                        .withCommerceCode(/* tu código de comercio */)
+                        .withPrivateCert(/* tu certificado privado en forma de string */)
+                        .withPublicCert(/* tu certificado público en forma de string */)
+                        .usingEnvironment(Transbank.environments.production) // Se define el ambiente como producción
+
+const transaction = new Transbank.Webpay(configuration);
+```
 
 ## Requerimientos de páginas de transición y de fin de transacción
 

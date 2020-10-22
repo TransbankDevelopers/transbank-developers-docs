@@ -297,7 +297,7 @@ para no entregar el producto o servicio en caso que ocurra.
     initTransaction.
 18. Sitio del comercio despliega página final de pago
 
-#### Flujo si usuario aborta el pago
+### Flujo si usuario aborta el pago
 
 <img class="td_img-night" src="/images/diagrama-secuencia-webpay-abortar.png" alt="Diagrama de secuencia si usuario aborta el pago">
 
@@ -332,8 +332,16 @@ Nota que el nombre de las variables recibidas es diferente. En lugar de `token_w
 
 9. El comercio con la variable `TBK_TOKEN` debe invocar el método
    `getTransactionResult()`, para obtener el resultado de la autorización. En
-   este caso debe obtener una excepción, pues el pago fue abortado.
+   este caso debe obtener una excepción (Timeout 272), pues el pago fue abortado.
 10. El comercio debe informar al tarjetahabiente que su pago no se completó.
+
+### Otros flujos
+Es importante destacar los siguientes flujos adicionales que se deben contemplar: 
+
+1. Una vez que el tarjetahabiente es redirigido al formulario de pago, tiene **10 minutos** para completarlo. Pasado ese tiempo, Webpay cierra la transacción automáticamente y redirecciona al usuario de vuelta al comercio, enviándolo a la URL de _finish_ (página **final del comercio**). Esta vez, a diferencia del flujo al abortar con el botón 'Anular transacción', no llega el parametro `TBK_TOKEN`, y solo llega `TBK_ID_SESION` y `TBK_ORDEN_COMPRA`. 
+
+2. Si ocurre un error mientras el tarjetahabiente está en el formulario de pago (por ejemplo, si cierra la pestaña del navegador y tratar de recuperarla o en otros casos de borde), se le despliega una pantalla de error informando que no se le han realizado cobros y adicionalmente presenta un enlace para volver al sitio del comercio. Al hacer click sobre ese enlace, es redirigido a la URL de _finish_ (página **final del comercio**). Esta vez, a diferencia de los casos anteriores, enviando `TBK_TOKEN` y `token_ws` (ambos campos con el mismo token). 
+Este caso es importante de destacar, ya que si se configura la misma URL para `returnUrl` y `finishUrl` en el `initTransaction`, no es posible saber si se trata de un flujo de pago fallido que llega directo a `finishUrl`, o si es un flujo normal y llegó al `returnUrl` con un éxito/rechazo. **Por esto, se recomienda siempre tener URLs diferentes para `returnUrl` y `finishUrl`.**
 
 ### Crear una transacción Webpay Plus Normal
 
