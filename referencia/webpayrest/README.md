@@ -64,6 +64,12 @@ Las URLs de endpoints de integración están alojados dentro de
 ```ruby
 # Host: https://webpay3gint.transbank.cl
 ```
+
+```python
+# Host: https://webpay3g.transbank.cl
+```
+
+```http
 Host: https://webpay3gint.transbank.cl
 ```
 
