@@ -55,7 +55,7 @@ Para obtenerla necesitas pasar un proceso de validación, que está [explicado a
 
 Al finalizar este proceso de validación, obtendrás tu **llave secreta**.
 
-Nota: Esta **llave secreta** es como la contraseña de tu código de comercio, por lo que no debes compartirla. Se usa para identificar que tu comercio es quién realmente está realizando cada operación (transacción, anulación de un pago, etc). 
+Nota: Esta **llave secreta** es como la contraseña de tu código de comercio, por lo que **no debes compartirla**. Se usa para identificar que tu comercio es quién realmente está realizando cada operación (transacción, anulación de un pago, etc). 
 
 
 ## Puesta en producción
