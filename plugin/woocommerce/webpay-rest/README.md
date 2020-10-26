@@ -28,8 +28,7 @@ Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente e
 ## Requisitos
 
 Debes tener instalado previamente [Woocommerce](https://woocommerce.com/).
-
-Habilitar los siguientes módulos / extensiones para PHP:
+Asegúrante de tener habilitados los siguientes módulos / extensiones para PHP:
 
 - Soap
 - OpenSSL 1.0.1 o superior
@@ -37,19 +36,21 @@ Habilitar los siguientes módulos / extensiones para PHP:
 - DOM 2.7.8 o superior
 - PHP 5.6 o superior
 
+Al instalar el plugin, podrás revisar si todas estos requisitos se cumplen, a través de la pantalla de diágnostico que se incluye.
+
 ## Instalación
 
-Descargar la últiuma versión disponible del plugin:
+Descargar la última versión disponible del plugin:
 <a class="td_btn-more" target="_blank"  href="https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest/releases/latest">Descargar Plugin</a>
 
 Las instrucciones detalladas de instalación las puedes encontrar en el [siguiente link](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest). 
 
 ## Ambiente de pruebas
-Una vez instalado el plugin, este viene configurado en el ambiente de **Integración** de Transbank, por lo que puedes realizar todas las pruebas de pago quee necesites. 
+Una vez instalado el plugin, este viene configurado en el ambiente de **Integración** de Transbank, por lo que puedes realizar todas las pruebas de pago quee necesites, ya que no se usa dinero real. 
 En este ambiente solo funcionan las tarjetas de crédito y débito de prueba que puedes [encontrar acá](/documentacion/como_empezar#ambiente-de-integracion).
 
 ## Obtener tu llave secreta (proceso de validación)
-Para usar el plugin en el ambiente de producción (donde se utiliza dinero real), necesitas tener tu **llave secreta**, que es un código secreto que está asociado a tu código de comercio. 
+Para usar el plugin en el ambiente de producción (donde se utiliza dinero real), necesitas tener tu **llave secreta**, que es un código especial que está asociado a tu código de comercio. 
 Para obtenerla necesitas pasar un proceso de validación, que está [explicado acá](https://transbankdevelopers.cl/documentacion/como_empezar#puesta-en-produccion). 
 
 Al finalizar este proceso de validación, obtendrás tu **llave secreta**.
@@ -66,11 +67,7 @@ Si ya tienes tu código de comercio de producción y llave secreta, solo debes e
 
 Al guardar, el plugin funcionará inmediatamente en ambiente de producción y podrás operar con tarjetas y transacciones reales. 
 
-
 ## ¿Problemas? ¿Dudas?
 Si tienes algun problema, duda o sugerencia, puedes contactarnos en nuestra comunidad de Slack, a la que puedes [unirte acá](https://join-transbankdevelopers-slack.herokuapp.com/)
 
 Adicionalmente, puedes revisar si más comercios han presentado algun error/dudas similares en los [_issues_ del repositorio github](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest/issues). Si nadie ha comentado algo similar, puedes [crear un nuevo _issue_](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest/issues/new) con tu sugerencia, bug, problema, etc. 
-
-
-
