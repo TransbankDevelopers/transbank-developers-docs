@@ -18,6 +18,13 @@
   </div>
 </div>
 
+___
+
+<aside class="notice">
+Estás viendo la <strong>nueva documentación REST</strong> de este plugin. Si quieres ver referencia de la versión anterior
+(SOAP) haz [click aquí](/plugin/woocommerce/webpay-soap)
+</aside>
+
 <h1 class="toc-ignore">Webpay REST WooCommerce</h1>
 <h1 style="display: none;">Webpay REST</h1>
 

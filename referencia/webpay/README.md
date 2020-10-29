@@ -1,7 +1,7 @@
 ___
 
 <aside class="notice">
-Estás viendo la <strong>nueva referencia REST</strong>. Si quieres volver a la referencia anterior
+Estás viendo la <strong>nueva referencia REST</strong>. Si quieres ver la referencia anterior
 (SOAP) haz [click aquí](/referencia/webpay-soap)
 </aside>
 
