@@ -307,6 +307,7 @@ los siguientes pasos:
 Definir que se usará el ambiente de producción y pasar el Api Key (Código de comercio) y el Api Key Secret (Llave secreta)
 
 <div class="language-simple" data-multiple-language></div>
+
 ```php
 // Webpay Plus
 \Transbank\Webpay\WebpayPlus::setIntegrationType("LIVE");
@@ -323,6 +324,7 @@ Definir que se usará el ambiente de producción y pasar el Api Key (Código de 
 \Transbank\TransaccionCompleta::setCommerceCode("{commerce-code}");
 \Transbank\TransaccionCompleta::setApiKey("{llave-secreta}");
 ```
+
 ```dotnet
 using Transbank.Webpay.Common;
 // Webpay Plus
@@ -346,9 +348,11 @@ TransaccionCompleta.Webpay.CommerceCode = "5970TuCodigo";
 TransaccionCompleta.Webpay.ApiKey = "VeryLongKey";
 TransaccionCompleta.Webpay.IntegrationType = WebpayIntegrationType.Live;
 ```
+
 ```java
 
 ```
+
 ```ruby
 # Webpay Plus
 Transbank::Webpay::WebpayPlus::Base.commerce_code = "commercecode"
@@ -360,6 +364,7 @@ Transbank::Webpay::OneClick::Base.commerce_code = "commercecode"
 Transbank::Webpay::OneClick::Base.api_key = "apikey"
 Transbank::Webpay::OneClick::Base.integration_type = :LIVE
 ```
+
 ```python
 
 ```
