@@ -325,7 +325,7 @@ Definir que se usará el ambiente de producción y pasar el Api Key (Código de 
 \Transbank\TransaccionCompleta::setApiKey("{llave-secreta}");
 ```
 
-```dotnet
+```csharp
 using Transbank.Webpay.Common;
 // Webpay Plus
 using Transbank.Webpay.WebpayPlus;
@@ -350,7 +350,36 @@ TransaccionCompleta.Webpay.IntegrationType = WebpayIntegrationType.Live;
 ```
 
 ```java
+import cl.transbank.common.IntegrationType;
+import cl.transbank.patpass.PatpassComercio;
+import cl.transbank.transaccioncompleta.FullTransaction;
+import cl.transbank.webpay.oneclick.OneclickMall;
+import cl.transbank.webpay.webpayplus.WebpayPlus;
 
+//WebpayPlus Live config
+WebpayPlus.Transaction.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+WebpayPlus.Transaction.setApiKey("pon-tu-llave-secreta-aca");
+WebpayPlus.Transaction.setIntegrationType(IntegrationType.LIVE);
+
+//WebpayPlus.MallTransaction Live config
+WebpayPlus.MallTransaction.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+WebpayPlus.MallTransaction.setApiKey("pon-tu-llave-secreta-aca");
+WebpayPlus.MallTransaction.setIntegrationType(IntegrationType.LIVE);
+
+// OneclickMall Live Config
+OneclickMall.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+OneclickMall.setApiKey("pon-tu-llave-secreta-aca");
+OneclickMall.setIntegrationType(IntegrationType.LIVE);
+
+//PatpassComercio Live Config
+PatpassComercio.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+PatpassComercio.setApiKey("pon-tu-llave-secreta-aca");
+PatpassComercio.setIntegrationType(IntegrationType.LIVE);
+
+//FullTransaction Live Config
+FullTransaction.Transaction.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+FullTransaction.Transaction.setApiKey("pon-tu-llave-secreta-aca");
+FullTransaction.Transaction.setIntegrationType(IntegrationType.LIVE);
 ```
 
 ```ruby
@@ -366,7 +395,7 @@ Transbank::Webpay::OneClick::Base.integration_type = :LIVE
 ```
 
 ```python
-
+// Pendiente de documentar
 ```
 
 ### Configuración para producción utilizando el API 
