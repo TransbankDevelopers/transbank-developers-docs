@@ -2328,7 +2328,7 @@ En el caso de integrar webpay en una aplicación móvil Android, usando webview,
 
 1. Al momento de abrir el webview.
 
-```java--android
+```js
 // habilitar el Cookie Manager. Depende del nivel de la API de Android que se utilice se habilita de diferente forma
 if (android.os.Build.VERSION.SDK_INT >= 21)
     CookieManager.getInstance().setAcceptThirdPartyCookies(myWebPayView, true); // myWebPayView es el WebView
@@ -2341,7 +2341,7 @@ webPayView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
 2. Al momento de cerrar el webview
 
-```java--android
+```js
 // Remover Cookies
 if (android.os.Build.VERSION.SDK_INT >= 21)
     CookieManager.getInstance().removeAllCookies(null);
