@@ -1,4 +1,3 @@
----
 <aside class="notice">
 Esta nueva documentación hace referencia a los nuevos servicios REST de Transbank. 
 Si deseas revisar la documentación de los productos SOAP, 
@@ -30,7 +29,7 @@ A continuación, puedes conocer el flujo completo.
 
 ## Proceso técnico de integración
 Este proceso contempla todas las tareas necesarias que debe realizar el comercio para integrar el producto contratado 
-dentro de sus sistemas (carrito de compra, aplicación móvil, erp, etc...).
+dentro de sus sistemas (carrito de compra, aplicación móvil, ERP, etc.).
 
 ### A) Usando un plugin
 Si quieres implementar Webpay Plus con alguno de nuestros plugins oficiales, 
@@ -93,8 +92,10 @@ pip install transbank-sdk
 Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Python](https://github.com/TransbankDevelopers/transbank-sdk-python#instalaci%C3%B3n) para más opciones de instalación.
 
 ### C) Usando el API REST
-También puedes consumir el API REST directamente. 
-Puedes usar el API RES: lInk a referencia en el tab de HTTP
+También puedes consumir el API REST de los productos directamente. 
+Si usas un lenguaje de programación que no tiene un SDK oficial o si 
+simplemente quieres conectarte directamente al API, debes revisar la [Referencia del API REST](/referencia/webpay?l=http) 
+en el tab "http" para conocer los diferentes endpoints de cada producto, sus parámetros de entrada y parámetros de respuesta . 
 
 
 ## Ambientes
@@ -130,10 +131,8 @@ las credenciales para el ambiente de integración. Puedes ver como usarlas
 en la sección de [documentación de los SDK](/documentacion/webpay#webpay-plus) y [Plugins](/plugin)
 </aside>
 
-En el caso de requerir los códigos de comercio de integración son los siguientes:
-
+A continuación encontrarás todos los códigos de comercio disponibles en el ambiente de integración. 
 Para todos los código de comercio, la **llave secreta (Api Key Secret)** es `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`  
-
 
 Producto | Código de Comercio |
 -------- | ------------ |
@@ -232,7 +231,6 @@ En el caso de Webpay, las credenciales consisten en:
 
 - Un código de comercio (Api-Key-Id).
 - Una llave secreta (Api-Key-Secret).
-
 
 ### Obtener tu llave secreta (proceso de validación)
 Para usar el ambiente de producción (donde se utiliza dinero real), necesitas tener tu **llave secreta**, que es un código especial que está asociado a tu código de comercio. 

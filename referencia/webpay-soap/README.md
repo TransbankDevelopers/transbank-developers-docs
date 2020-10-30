@@ -1,8 +1,8 @@
 ___
 
 <aside class="warning">
-Acabamos de publicar la nueva y futura referencia REST para los servicios 
-de Transbank que ya es la referencia oficial. Te invitamos a conocerla [aquí](/referencia/webpay)
+Acabamos de publicar la nueva referencia REST para los servicios 
+de Transbank. Te invitamos a conocerla  [aquí](/referencia/webpay)
 </aside>
 
 # Webpay 

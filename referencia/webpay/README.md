@@ -123,7 +123,7 @@ iguales a los entregados para el ambiente de integración.
 </aside>
 
 ### Códigos de comercio
-En la documentación puedes revisar [todos los códigos de comercio](/documentacion/como_empezar#códigos-de-comercio) del ambiente de integración 
+En la documentación puedes revisar [todos los códigos de comercio](/documentacion/como_empezar#codigos-de-comercio) del ambiente de integración 
 
 > Los SDKs ya incluyen esos códigos de comercio y llaves secretas
 > que funcionan en el ambiente de integración, por lo que puedes obtener
@@ -177,7 +177,7 @@ Una transacción de autorización normal (o transacción normal), corresponde
 una solicitud de autorización financiera de un pago con tarjetas de crédito o
 débito, en donde quién realiza el pago ingresa al sitio del comercio,
 selecciona productos o servicio, y el ingreso asociado a los datos de la tarjeta
-de crédito o débito lo realiza en forma segura en Webpay.
+de crédito, débito o prepago lo realiza en forma segura en Webpay.
 
 ### Flujo en caso de éxito
 
@@ -190,7 +190,7 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
 
 <img class="td_img-night" src="/images/referencia/webpayrest/diagrama-secuencia-webpayrest.png" alt="Diagrama de secuencia Webpay Plus">
 
-1. Una vez seleccionado los bienes o servicios, tarjetahabiente decide pagar a
+1. Una vez seleccionado los bienes o servicios, el tarjetahabiente decide pagar a
    través de Webpay.
 2. El comercio inicia una transacción en Webpay.
 3. Webpay procesa el requerimiento y entrega como resultado de la operación el
@@ -212,9 +212,9 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
    y luego la autorización de la transacción).
 9. Una vez resuelta la autorización, Webpay retorna el control al comercio,
    realizando un redireccionamiento HTTPS hacia la página de transición
-   del comercio, en donde se envía por método POST el token de la transacción
-   en la variable `token_ws`. El comercio debe implementar la recepción de esta
-   variable.
+   del comercio, en donde se envía por método POST el token de la transacción  
+   en la variable `token_ws` (en la versión 1.1 y superior del API la redirección 
+   es por GET). El comercio debe implementar la recepción de esta variable.
 10. El navegador Web del tarjetahabiente realiza una petición HTTPS al
     sitio del comercio, en base a la redirección generada por Webpay en el
     punto 9.
