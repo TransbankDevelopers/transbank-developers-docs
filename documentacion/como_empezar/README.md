@@ -32,13 +32,13 @@ A continuación, puedes conocer el flujo completo.
 Este proceso contempla todas las tareas necesarias que debe realizar el comercio para integrar el producto contratado 
 dentro de sus sistemas (carrito de compra, aplicación móvil, erp, etc...).
 
-## Usando un plugin
+### A) Usando un plugin
 Si quieres implementar Webpay Plus con alguno de nuestros plugins oficiales, 
 revisa [su documentación](/plugin) específica. En ese caso, el proceso es más simple y no requiere escribir 
 código como en el caso de los SDK, ya que basta con realizar la instalación y configuración del plugin en la plataforma
 que estés utilizando. 
 
-## Usando un SDK
+### B) Usando un SDK
 Para instalar el SDK, debes agregarlo al gestor de dependencias de tu lenguaje:
 
 [En 
@@ -92,16 +92,22 @@ pip install transbank-sdk
 ```
 Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Python](https://github.com/TransbankDevelopers/transbank-sdk-python#instalaci%C3%B3n) para más opciones de instalación.
 
+### C) Usando el API REST
+También puedes consumir el API REST directamente. 
+Puedes usar el API RES: lInk a referencia en el tab de HTTP
+
+
 ## Ambientes
 
 Transbank provee dos ambientes: **Integración** y **Producción**.
 
 **Ambiente de integración**: En este ambiente el comercio realiza la integración del producto a contratar y testea 
 su solución de medio pago.
-``
+`HOST: https://webpay3gint.transbank.cl`
 
 **Ambiente de producción**: En este ambiente el comercio operará luego de finalizar el [proceso de puesta en producción](#puesta-en-produccion) y realizará transacciones 
 con tarjetas de crédito, débito o prepago **reales**.  
+`HOST: https://webpay3g.transbank.cl`
 
 ### Ambiente de integración
 Para las transacciones Webpay en este ambiente se deben usar estas
@@ -125,18 +131,25 @@ en la sección de [documentación de los SDK](/documentacion/webpay#webpay-plus)
 </aside>
 
 En el caso de requerir los códigos de comercio de integración son los siguientes:
-Producto | Código de Comercio | Secreto |
--------- | ------------ | -------------|
-Webpay Plus | `597055555532` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Webpay Plus Mall | `597055555535 ` Mall <br> `597055555536` Tienda 1 <br> `597055555537 ` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Oneclick Mall | `597055555541` Mall <br> `597055555542` Tienda 1 <br> `597055555543` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Oneclick Mall Captura Diferida | `597055555547` Mall <br> `597055555548` Tienda 1 <br> `597055555549` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Transacción Completa | `597055555530` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Transacción Completa sin CVV | `597055555557` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Transacción Completa Diferida | `597055555531` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Transacción Completa Diferida sin CVV | `597055555556` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Transacción Completa Mall | `597055555551` Mall <br> `597055555552` Tienda 1 <br> `597055555553` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Transacción Completa Mall Captura Diferida sin CVV | `597055555561` Mall <br> `597055555562` Tienda 1 <br> `597055555563` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+
+Para todos los código de comercio, la **llave secreta (Api Key Secret)** es `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`  
+
+
+Producto | Código de Comercio |
+-------- | ------------ |
+Webpay Plus | `597055555532`
+Webpay Plus Mall | `597055555535 ` Mall <br> `597055555536` Tienda 1 <br> `597055555537 ` Tienda 2
+Oneclick Mall | `597055555541` Mall <br> `597055555542` Tienda 1 <br> `597055555543` Tienda 2
+Oneclick Mall Captura Diferida | `597055555547` Mall <br> `597055555548` Tienda 1 <br> `597055555549` Tienda 2
+Transacción Completa | `597055555530`
+Transacción Completa sin CVV | `597055555557`
+Transacción Completa Diferida | `597055555531`
+Transacción Completa Diferida sin CVV | `597055555556`
+Transacción Completa Mall | `597055555573` Mall <br> `597055555574` Tienda 1 <br> `597055555575` Tienda 2
+Transacción Completa Mall sin CVV| `597055555551` Mall <br> `597055555552` Tienda 1 <br> `597055555553` Tienda 2
+Transacción Completa Mall Captura Diferida | `597055555576` Mall <br> `597055555577` Tienda 1 <br> `597055555578` Tienda 2
+Transacción Completa Mall Captura Diferida sin CVV | `597055555561` Mall <br> `597055555562` Tienda 1 <br> `597055555563` Tienda 2
+
 
 ## Productos disponibles
  Los siguientes productos están disponibles para que puedas realizar la integración. Revisa su documentación acá:
@@ -217,8 +230,8 @@ evitar que caigan en manos de terceros**.
 ### Webpay, OneClick y Transacción Completa
 En el caso de Webpay, las credenciales consisten en:
 
-- Un código de comercio.
-- Una llave secreta.
+- Un código de comercio (Api-Key-Id).
+- Una llave secreta (Api-Key-Secret).
 
 
 ### Obtener tu llave secreta (proceso de validación)
@@ -275,12 +288,7 @@ Durante el paso a producción se te exigirá realizar, al menos, una
 transacción de prueba real, con la que finalizará oficialmente la puesta en
 producción.
 
-<aside class="warning">
-Importante: El comercio es responsable por
-resguardar su llave secreta. 
-</aside>
-
-
+## Configuración de producción
 ### Configuración para producción utilizando Plugins
 Si ya tienes tu código de comercio de producción y llave secreta, solo debes entrar a la configuración de tu plugin ([ver documentacion de plugins](/plugin)) y colocar: 
 
@@ -289,8 +297,6 @@ Si ya tienes tu código de comercio de producción y llave secreta, solo debes e
 - Api Key: Tu llave secreta
 
 Al guardar, el plugin funcionará inmediatamente en ambiente de producción y podrás operar con tarjetas y transacciones reales.
- 
-
 
 ### Configuración para producción utilizando los SDK
 
@@ -358,44 +364,18 @@ Transbank::Webpay::OneClick::Base.integration_type = :LIVE
 
 ```
 
-6. Selección del ambiente productivo.
+### Configuración para producción utilizando el API 
+Si estás consumiendo el API directamente, solo debes de preocuparte de usar el 
+[host correspondiente al ambiente de producción](/referencia/webpay#ambiente-de-produccion), el código de comercio productivo y llave 
+secreta obtenida en el proceso de validación.  
+ 
 
-<img src="/images/documentacion/configuracion/5-environment-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/5-environment-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/5-environment-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
+## Requerimientos de página de resultado 
 
-```javascript
-const configuration = new Transbank.Configuration()
-                        .withCommerceCode(/* tu código de comercio */)
-                        .withPrivateCert(/* tu certificado privado en forma de string */)
-                        .withPublicCert(/* tu certificado público en forma de string */)
-                        .usingEnvironment(Transbank.environments.production) // Se define el ambiente como producción
-```
+### Webpay Plus
 
-7. Crear elemento Webpay utilizando la configuración de producción.
-
-<img src="/images/documentacion/configuracion/6-webpay-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/6-webpay-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/6-webpay-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
-
-```javascript
-const configuration = new Transbank.Configuration()
-                        .withCommerceCode(/* tu código de comercio */)
-                        .withPrivateCert(/* tu certificado privado en forma de string */)
-                        .withPublicCert(/* tu certificado público en forma de string */)
-                        .usingEnvironment(Transbank.environments.production) // Se define el ambiente como producción
-
-const transaction = new Transbank.Webpay(configuration);
-```
-
-## Requerimientos de páginas de transición y de fin de transacción
-
-### Webpay
-
-**La página de transición** de comercio, es la página que muestra el comercio
-cuando Webpay le entrega el control, después del proceso de autorización y
-previo a redirigir al tarjeta habiente al comprobante de éxito de la
-transacción. Aplica para todos los tipos de transacciones.
+**La página de resultado** de comercio, es la página que muestra el comercio
+cuando Webpay le entrega el control, después del proceso de autorización. Aplica para todos los tipos de transacciones.
 
 **Una vez finalizada a transacción**, el comercio debe presentar una página al
 tarjetahabiente para que este se informe del resultado de la transacción. La
@@ -411,16 +391,18 @@ Se recomienda, como mínimo, que posea:
 - Tipo de pago realizado (Débito o Crédito)
 - Tipo de cuota
 - Cantidad de cuotas
-- 4 últimos dígitos de la tarjeta bancaria
+- Monto de cada cuota
+- Cuatro últimos dígitos de la tarjeta bancaria
 - Descripción de los bienes y/o servicios
 
 **Cuando la transacción no sea autorizada**, se recomienda informar al tarjetahabiente al respecto. Puede presentar un texto explicativo como:
 
 ```bash
 Orden de Compra XXXXXXX rechazada
+
 Las posibles causas de este rechazo son:
-* Error en el ingreso de los datos de su tarjeta de Crédito o Débito (fecha y/o código de seguridad).
-* Su tarjeta de Crédito o Débito no cuenta con saldo suficiente.
+* Error en el ingreso de los datos de su tarjeta de crédito o débito (fecha y/o código de seguridad).
+* Su tarjeta de crédito o débito no cuenta con saldo suficiente.
 * Tarjeta aún no habilitada en el sistema financiero.
 ```
 

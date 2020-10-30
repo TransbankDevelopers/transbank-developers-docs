@@ -12,7 +12,7 @@ Estás viendo la <strong>nueva referencia REST</strong>. Si quieres ver la refer
 La API REST de Webpay está protegida para garantizar que solamente comercios autorizados por Transbank hagan uso de las operaciones disponibles. La seguridad esta implementada mediante los siguientes mecanismos:
 
 * Canal seguro a través de TLSv1.2 para la comunicación del cliente con Webpay.
-* Autenticación y autorización mediante el intercambio de headers `Tbk-Api-Key-Id` y `Tbk-Api-Key-Secret`.
+* Autenticación y autorización mediante el intercambio de headers `Tbk-Api-Key-Id` (código de comercio) y `Tbk-Api-Key-Secret` (llave secreta).
 
 ### Ambiente de Producción
 
@@ -79,37 +79,37 @@ el ambiente de integración](/documentacion/como_empezar#ambientes).
 
 ```java
 // Tbk-Api-Key-Id: Código de comercio
-// Tbk-Api-Key-Secret: Secreto
+// Tbk-Api-Key-Secret: Llave secreta
 // Content-Type: application/json
 ```
 
 ```php
 // Tbk-Api-Key-Id: Código de comercio
-// Tbk-Api-Key-Secret: Secreto
+// Tbk-Api-Key-Secret: Llave secreta
 // Content-Type: application/json
 ```
 
 ```csharp
 // Tbk-Api-Key-Id: Código de comercio
-// Tbk-Api-Key-Secret: Secreto
+// Tbk-Api-Key-Secret: Llave secreta
 // Content-Type: application/json
 ```
 
 ```ruby
 # Tbk-Api-Key-Id: Código de comercio
-# Tbk-Api-Key-Secret: Secreto
+# Tbk-Api-Key-Secret: Llave secreta
 # Content-Type: application/json
 ```
 
 ```python
 # Tbk-Api-Key-Id: Código de comercio
-# Tbk-Api-Key-Secret: Secreto
+# Tbk-Api-Key-Secret: Llave secreta
 # Content-Type: application/json
 ```
 
 ```http
 Tbk-Api-Key-Id: Código de comercio
-Tbk-Api-Key-Secret: Secreto
+Tbk-Api-Key-Secret: Llave secreta
 Content-Type: application/json
 ```
 
@@ -122,20 +122,8 @@ Ten en cuenta que tu(s) código(s) de comercio en ambiente de producción no son
 iguales a los entregados para el ambiente de integración.
 </aside>
 
-Puedes revisar la siguiente tabla con credenciales de integración para hacer pruebas.
-
-Producto | Código de Comercio | Secreto |
--------- | ------------ | -------------|
-Webpay Plus | `597055555532` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Webpay Plus Mall | `597055555535 ` Mall <br> `597055555536` Tienda 1 <br> `597055555537 ` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Oneclick Mall | `597055555541` Mall <br> `597055555542` Tienda 1 <br> `597055555543` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Oneclick Mall Captura Diferida | `597055555547` Mall <br> `597055555548` Tienda 1 <br> `597055555549` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Transacción Completa | `597055555530` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Transacción Completa sin CVV | `597055555557` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Transacción Completa Diferida | `597055555531` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Transacción Completa Diferida sin CVV | `597055555556` | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Transacción Completa Mall | `597055555551` Mall <br> `597055555552` Tienda 1 <br> `597055555553` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
-Transacción Completa Mall Captura Diferida sin CVV | `597055555561` Mall <br> `597055555562` Tienda 1 <br> `597055555563` Tienda 2 | `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+### Códigos de comercio
+En la documentación puedes revisar [todos los códigos de comercio](/documentacion/como_empezar#códigos-de-comercio) del ambiente de integración 
 
 > Los SDKs ya incluyen esos códigos de comercio y llaves secretas
 > que funcionan en el ambiente de integración, por lo que puedes obtener
@@ -151,11 +139,9 @@ WebpayPlus.Transaction.setIntegrationType(IntegrationType.TEST);
 
 ```php
 // El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
-Transbank\Webpay\WebpayPlus::setCommerceCode(597055555532);
-Transbank\Webpay\WebpayPlus::setApiKey(
-  "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C"
-);
-Transbank\Webpay\WebpayPlus::setIntegrationType("TEST");
+Transbank\Webpay\WebpayPlus::setCommerceCode('597055555532');
+Transbank\Webpay\WebpayPlus::setApiKey('579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C');
+Transbank\Webpay\WebpayPlus::setIntegrationType('TEST');
 ```
 
 ```csharp
@@ -2736,7 +2722,12 @@ En caso de error apareceran los mismos códigos exclusivos del método `capture
 para captura simpultanea.
 </aside>
 
-## Transacción Completa {data-submenuhidden=true}
+## Transacción Completa
+
+<aside class="warning">
+Este producto tiene requerimientos comerciales más estrictos que el resto de los productos.  
+No inicies la integración si aún no completan la afiliación comercial.
+</aside>
 
 Una transacción completa permite al comercio presentar al tarjetahabiente un
 formulario propio para almacenar los datos de la tarjeta, fecha de vencimiento
@@ -3526,14 +3517,20 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-type  <br> <i> String </i> | Tipo de reembolso (REVERSE. NULLIFY). Largo máximo: 10
+type  <br> <i> String </i> | Tipo de reembolso (REVERSE. NULLIFY). Largo máximo: 10
 authorization_code  <br> <i> String </i> | Código de autorización de la anulación. Largo máximo: 6. Solo viene en caso de anulación.
-authorization_date  <br> <i> String </i> | Fecha y hora de la autorización. Solo viene en caso de anulación.
+authorization_date  <br> <i> String </i> | Fecha y hora de la autorización. Solo viene en caso de anulación.
 nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17. Solo viene en caso de anulación.
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17. Solo viene en caso de anulación.
 response_code  <br> <i> Number </i> | Código de resultado de la anulación. Si es exitoso es 0, de lo contrario la anulación no fue realizada. Largo máximo: 2. Solo viene en caso de anulación.
 
-## Transacción Mall Completa {data-submenuhidden=true}
+## Transacción Mall Completa
+
+<aside class="warning">
+Este producto tiene requerimientos comerciales más estrictos que el resto de los productos.  
+No inicies la integración si aún no completan la afiliación comercial.
+</aside>
+
 
 Una transacción Mall Completa corresponde a una solicitud de transacciones completas
 de un conjunto de pagos con tarjetas de crédito, en donde quién realiza el pago
