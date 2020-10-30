@@ -97,6 +97,16 @@ Si usas un lenguaje de programación que no tiene un SDK oficial o si
 simplemente quieres conectarte directamente al API, debes revisar la [Referencia del API REST](/referencia/webpay?l=http) 
 en el tab "http" para conocer los diferentes endpoints de cada producto, sus parámetros de entrada y parámetros de respuesta . 
 
+### Ejemplos
+
+Ponemos a tu disposición una serie de repositorios en nuestro Github para ayudarte a entender la integración de mejor forma.
+- [Ejemplo en PHP](https://github.com/TransbankDevelopers/transbank-sdk-php-webpay-rest-example)
+- [Ejemplo en .Net](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-rest-example)
+- [Ejemplo en Java](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-rest-example)
+- [Ejemplo en Ruby](https://github.com/TransbankDevelopers/transbank-sdk-ruby-webpay-rest-example)
+- [Ejemplo en Python](https://github.com/TransbankDevelopers/transbank-sdk-python-webpay-rest-example)
+
+Adicionalmente, puedes revisar el proyecto de ejemplo de PHP [funcionando acá](https://transbank-rest-demo.herokuapp.com/)
 
 ## Ambientes
 

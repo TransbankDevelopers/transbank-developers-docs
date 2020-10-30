@@ -2075,35 +2075,10 @@ var oneClickTransaction = webpay.OneClickTransaction;
 ```ruby
 # Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ```
 
 ```python
 # Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ```
