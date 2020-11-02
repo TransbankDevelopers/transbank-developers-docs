@@ -46,11 +46,10 @@ Asegúrate de tener habilitados los siguientes módulos / extensiones para PHP:
 Al instalar el plugin, podrás revisar si todas estos requisitos se cumplen, a través de la pantalla de diagnóstico que se incluye.
 
 ## Instalación
+1. [Descargar el archivo .zip del plugin](https://github.com/TransbankDevelopers/transbank-plugin-opencart-webpay-rest/releases/latest)
+2. Sube el archivo zip en la sección Extensions > Installer en el administrador de tu Wordpress
 
-Descargar la última versión disponible del plugin:
-<a class="td_btn-more" target="_blank"  href="https://github.com/TransbankDevelopers/transbank-plugin-opencart-webpay-rest/releases/latest">Descargar Plugin</a>
-
-Las instrucciones detalladas de instalación las puedes encontrar en el [siguiente link](https://github.com/TransbankDevelopers/transbank-plugin-opencart-webpay-rest). 
+Las instrucciones detalladas de instalación las puedes encontrar en el [siguiente link](https://github.com/TransbankDevelopers/transbank-plugin-opencart-webpay-rest/blob/master/docs/INSTALLATION.md)). 
 
 ## Ambiente de pruebas
 Una vez instalado el plugin, este viene configurado en el ambiente de **Integración** de Transbank, por lo que puedes realizar todas las pruebas de pago quee necesites, ya que no se usa dinero real. 
