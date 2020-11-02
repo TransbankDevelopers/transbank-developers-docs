@@ -309,7 +309,7 @@ transaction.getTransactionResult(token)
 > no haya posibilidad de que la transacción se revierta. Si luego necesitas que
 > la transacción no se lleve a cabo (por ejemplo porque ya no tienes stock o
 > porque se generó un error en tu lógica de negocio que entrega el producto o
-> servicio), deberás [anular la transacción](/referencia/webpay#anulacion-webpay-plus).
+> servicio), deberás [anular la transacción](/referencia/webpay-soap#anulacion-webpay-plus).
 
 En el caso exitoso deberás llevar el control vía `POST` nuevamente a Webpay para
 que el tarjetahabiente vea el comprobante que le deja claro que se ha realizado
@@ -685,7 +685,7 @@ transaction.getTransactionResult(token)
   });
 ```
 
-> **Importante**: El SDK se encarga de que al mismo tiempo que se obtiene el resultado de la transacción se haga el _acknowledge_ a Transbank de manera que no haya posibilidad de que la transacción se revierta. Si luego necesitas que la transacción no se lleve a cabo (por ejemplo porque ya no tienes stock o porque se generó un error en tu lógica de negocio que entrega el producto o servicio), deberás [anular la transacción](/referencia/webpay#anulacion-webpay-plus).
+> **Importante**: El SDK se encarga de que al mismo tiempo que se obtiene el resultado de la transacción se haga el _acknowledge_ a Transbank de manera que no haya posibilidad de que la transacción se revierta. Si luego necesitas que la transacción no se lleve a cabo (por ejemplo porque ya no tienes stock o porque se generó un error en tu lógica de negocio que entrega el producto o servicio), deberás [anular la transacción](/referencia/webpay-soap#anulacion-webpay-plus).
 
 En el caso exitoso deberás llevar el control vía `POST` nuevamente a Webpay para que el tarjetahabiente vea el comprobante que le deja claro que se ha realizado el cargo en su tarjeta. Nuevamente deberás generar un formulario con el `token_ws` como un campo hidden. La URL para redirigir la debes obtener desde `result.getUrlRedirection()`.
 
@@ -2075,35 +2075,10 @@ var oneClickTransaction = webpay.OneClickTransaction;
 ```ruby
 # Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ```
 
 ```python
 # Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ```
@@ -2235,7 +2210,7 @@ compra para abrir los detalles de la transacción. Es en esta sección donde pod
 parámetros que recibirás al momento de confirmar una transacción y a que fila
 de la tabla "Detalles de la transacción" corresponden (la lista completa de
 parámetros de Webpay Plus la puedes encontrar
-[acá](/referencia/webpay#confirmar-una-transaccion-webpay-plus-normal))
+[acá](/referencia/webpay-soap#confirmar-una-transaccion-webpay-plus-normal))
 
 Nombre parámetro   <br> <i> tipo </i> | Fila en tabla
 ------   | -----------
@@ -2275,7 +2250,7 @@ encontrar y conciliar los parámetros devueltos por el SDK al confirmar una tran
 parámetros que recibirás al momento de confirmar una transacción y a que fila
 de la tabla "Detalles de la transacción" corresponden (la lista completa de
 parámetros de OneClick la puedes encontrar
-[acá](/referencia/webpay#autorizar-un-pago-con-webpay-oneclick))
+[acá](/referencia/webpay-soap#autorizar-un-pago-con-webpay-oneclick))
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -2289,30 +2264,30 @@ responseCode  <br> <i> xs:int </i> | Código de respuesta
 Consulta la referencia del API para más funcionalidades ofrecidas por Webpay
 Plus y OneClick:
 
-- [Transacciones Webpay Plus Mall](/referencia/webpay#webpay-plus-mall) para
+- [Transacciones Webpay Plus Mall](/referencia/webpay-soap#webpay-plus-mall) para
   realizar cargos atribuibles a múltiples comercios dentro de una agrupación
   denominada _mall_. Con esto puedes realizar una sola integración y cobrar a
   nombre de tus clientes o partners.
 
-- [Realizar Captura Diferida](/referencia/webpay#captura-diferida-webpay-plus) de manera que la autorización de
+- [Realizar Captura Diferida](/referencia/webpay-soap#captura-diferida-webpay-plus) de manera que la autorización de
 Webpay Plus Normal solo reserve el cupo y la captura de la transacción se pueda
 realizar posteriormente.
 
-- [Anular Transacciones Webpay Plus](/referencia/webpay#anulacion-webpay-plus) para devolver dinero parcial o
+- [Anular Transacciones Webpay Plus](/referencia/webpay-soap#anulacion-webpay-plus) para devolver dinero parcial o
 totalmente.
 
-- [Reversar Transacciones OneClick](/referencia/webpay#reversar-un-pago-webpay-oneclick) para dejar sin efecto una
+- [Reversar Transacciones OneClick](/referencia/webpay-soap#reversar-un-pago-webpay-oneclick) para dejar sin efecto una
 transacción realizada durante el día contable actual.
 
 - [Anular Transacciones Webpay
-  OneClick](/referencia/webpay#anular-un-pago-webpay-oneclick) para dejar sin
+  OneClick](/referencia/webpay-soap#anular-un-pago-webpay-oneclick) para dejar sin
   efecto una transacción realizada en otra fecha distinta al día contable
   actual.
 
-- [Eliminar Inscripciones OneClick](/referencia/webpay#eliminar-una-inscripcion-webpay-oneclick) para eliminar el `tbkUser`
+- [Eliminar Inscripciones OneClick](/referencia/webpay-soap#eliminar-una-inscripcion-webpay-oneclick) para eliminar el `tbkUser`
 cuando tus usuarios no quieren continuar con el servicio.
 
-- [Transacciones OneClick Mall](/referencia/webpay#webpay-oneclick-mall).
+- [Transacciones OneClick Mall](/referencia/webpay-soap#webpay-oneclick-mall).
 
 ## Ejemplos de integración
 
@@ -2328,7 +2303,7 @@ En el caso de integrar webpay en una aplicación móvil Android, usando webview,
 
 1. Al momento de abrir el webview.
 
-```java--android
+```js
 // habilitar el Cookie Manager. Depende del nivel de la API de Android que se utilice se habilita de diferente forma
 if (android.os.Build.VERSION.SDK_INT >= 21)
     CookieManager.getInstance().setAcceptThirdPartyCookies(myWebPayView, true); // myWebPayView es el WebView
@@ -2341,7 +2316,7 @@ webPayView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
 2. Al momento de cerrar el webview
 
-```java--android
+```js
 // Remover Cookies
 if (android.os.Build.VERSION.SDK_INT >= 21)
     CookieManager.getInstance().removeAllCookies(null);
