@@ -1,3 +1,8 @@
+<aside class="warning">
+Esta documentación hace referencia a los servicios SOAP. Encuentra la nueva [documentación REST acá](/documentacion/como_empezar)
+</aside>
+
+
 # Cómo empezar
 
 Para empezar a integrar los productos de Transbank, te recomendamos usar
@@ -6,8 +11,7 @@ plataformas. En general, existe un único Transbank SDK para el _backend_
 de tu e-commerce, el cual te permite operar con todos nuestros productos.
 
 Adicionalmente, existen SDKs especializados para algunos productos y
-plataformas que requieren integraciones más allá del _backend_, como pasa por
-ejemplo con Onepay.
+plataformas que requieren integraciones más allá del _backend_, como en el caso de Onepay.
 
 En esta sección veremos los pasos para comenzar con el SDK que corresponda al
 lenguaje de programación que utilices en tu backend. Para los SDKs

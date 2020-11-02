@@ -1277,7 +1277,7 @@ Content-Type: application/json
       "payment_type_code": "VN",
       "response_code": 0,
       "installments_number": 0,
-      "commerce_code": "Próximamente...",
+      "commerce_code": "597055555536",
       "buy_order": "505479072",
       "status": "AUTHORIZED"
   }]
@@ -1476,7 +1476,7 @@ Content-Type: application/json
       "payment_type_code": "VN",
       "response_code": 0,
       "installments_number": 0,
-      "commerce_code": "Próximamente...",
+      "commerce_code": "597055555536",
       "buy_order": "505479072",
       "status": "AUTHORIZED"
   }]
@@ -2226,7 +2226,7 @@ Content-Type: application/json
       "payment_type_code": "VN",
       "response_code": 0,
       "installments_number": 0,
-      "commerce_code": "Próximamente...",
+      "commerce_code": "597055555542",
       "buy_order": "505479072"
   }]
 }
@@ -2423,7 +2423,7 @@ Content-Type: application/json
       "payment_type_code": "VN",
       "response_code": 0,
       "installments_number": 0,
-      "commerce_code": "Próximamente...",
+      "commerce_code": "597055555542",
       "buy_order": "505479072"
   }]
 }

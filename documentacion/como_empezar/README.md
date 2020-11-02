@@ -29,7 +29,7 @@ A continuación, puedes conocer el flujo completo.
 
 ## Proceso técnico de integración
 Este proceso contempla todas las tareas necesarias que debe realizar el comercio para integrar el producto contratado 
-dentro de sus sistemas (carrito de compra, aplicación móvil, ERP, etc.).
+dentro de sus sistemas.
 
 ### A) Usando un plugin
 Si quieres implementar Webpay Plus con alguno de nuestros plugins oficiales, 
@@ -93,7 +93,7 @@ Te recomendamos leer [las instrucciones de instalación detalladas para el SDK P
 
 ### C) Usando el API REST
 También puedes consumir el API REST de los productos directamente. 
-Si usas un lenguaje de programación que no tiene un SDK oficial o si 
+Si usas un lenguaje de programación que no tiene un SDK oficial o 
 simplemente quieres conectarte directamente al API, debes revisar la [Referencia del API REST](/referencia/webpay?l=http) 
 en el tab "http" para conocer los diferentes endpoints de cada producto, sus parámetros de entrada y parámetros de respuesta . 
 
@@ -138,7 +138,7 @@ usar el RUT **11.111.111-1** y la clave **123**.
 <aside class="notice">
 Tip: Los SDK y plugins provistos por Transbank tiene pre-configuradas
 las credenciales para el ambiente de integración. Puedes ver como usarlas
-en la sección de [documentación de los SDK](/documentacion/webpay#webpay-plus) y [Plugins](/plugin)
+en la sección de [documentación de los SDK](/referencia/webpay#webpay) y [Plugins](/plugin)
 </aside>
 
 A continuación encontrarás todos los códigos de comercio disponibles en el ambiente de integración. 
@@ -163,14 +163,11 @@ Transacción Completa Mall Captura Diferida sin CVV | `597055555561` Mall <br> `
 ## Productos disponibles
  Los siguientes productos están disponibles para que puedas realizar la integración. Revisa su documentación acá:
   
-- [Webpay Plus](webpay#webpay-plus)
-- [OneClick Mall](webpay#oneclick-mall)
-- [Transacción Completa](webpay#transaccion-completa)
-- [Onepay Checkout](onepay#integracion-checkout)
-
+- [Webpay Plus](/referencia/webpay#webpay-plus)
+- [OneClick Mall](/referencia/webpay#oneclick-mall)
+- [Transacción Completa](/referencia/webpay#transaccion-completa)
 
 ## Seguridad
-
 Los servicios Web de Transbank están protegidos para garantizar que solamente
 miembros autorizados por Transbank hagan uso de las operaciones disponibles.
 
@@ -220,10 +217,10 @@ valores entregados por el comercio al principio del flujo transaccional.
 
 ## Puesta en Producción
 
-1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](#el-proceso-de-validacion-y-puesta-en-produccion). Si realizaste la integración con un plugin, considera que junto con la planilla de integración debes enviar el logo (GIF, 130x59) a soporte@transbank.cl. 
-2. Transbank informará via correo electrónico el resultado de la validación enviado por el comercio. Posterior a ello, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-para-produccion-utilizando-los-sdk)
+1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](#el-proceso-de-validacion). Si realizaste la integración con un plugin, considera que junto con la planilla de integración debes enviar el logo (GIF, 130x59) a soporte@transbank.cl. 
+2. Transbank informará via correo electrónico el resultado de la validación enviado por el comercio. En caso de que la validación sea aprobada, Transbank indicará la **llave secreta** (_API Key Secret_) para poder usar el ambiente de producción. Posterior a ello, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-de-produccion)
 3. Con la configuración del ambiente de producción ya lista, será necesario realizar una compra de $50 para validar el correcto funcionamiento.
-4. Ya estás operando en producción
+4. Ya estás operando en producción. 
 
 
 ### Onepay
@@ -244,7 +241,7 @@ En el caso de Webpay, las credenciales consisten en:
 
 ### Obtener tu llave secreta (proceso de validación)
 Para usar el ambiente de producción (donde se utiliza dinero real), necesitas tener tu **llave secreta**, que es un código especial que está asociado a tu código de comercio. 
-Para obtenerla necesitas pasar un proceso de validación, que está [explicado acá](https://transbankdevelopers.cl/documentacion/como_empezar#puesta-en-produccion). 
+Para obtenerla necesitas pasar un proceso de validación, que está [explicado a continuación](#el-proceso-de-validacion). 
 
 Al finalizar este proceso de validación, obtendrás tu **llave secreta**.
 <aside class="notice">
@@ -281,23 +278,12 @@ comercio respecto de su integración, para que realices las correcciones
 correspondientes y vuelvas a enviar las evidencias una vez terminadas dichas
 correcciones.
 
-<aside class="notice">
-Sabemos que este proceso manual puede ser tedioso y consumir más tiempo del
-estrictamente necesario mientras una parte espera las respuestas o feedback de
-la otra. **Por eso próximamente lanzaremos un portal de validación completamente
-online** y auto-atendido en que podrás realizar este proceso mucho más rápido.
-</aside>
-
-Una vez que el equipo de soporte te comunique formalmente que la integración está aprobada,
-deberá seguir los pasos que le indican para pasar a producción y poder
-comenzar a transaccionar de manera real.
-
 Durante el paso a producción se te exigirá realizar, al menos, una
 transacción de prueba real, con la que finalizará oficialmente la puesta en
 producción.
 
 ## Configuración de producción
-### Configuración para producción utilizando Plugins
+### A) Utilizando Plugins
 Si ya tienes tu código de comercio de producción y llave secreta, solo debes entrar a la configuración de tu plugin ([ver documentacion de plugins](/plugin)) y colocar: 
 
 - Ambiente: Producción
@@ -306,7 +292,7 @@ Si ya tienes tu código de comercio de producción y llave secreta, solo debes e
 
 Al guardar, el plugin funcionará inmediatamente en ambiente de producción y podrás operar con tarjetas y transacciones reales.
 
-### Configuración para producción utilizando los SDK
+### B) Utilizando los SDK
 
 Si ya tienes tu código de comercio de producción y llave secreta, ahora solo debes configurar tu proyecto para que use 
 el ambiente de producción, proporcionándole tus credenciales. Te explicamos como hacerlo en los diferentes SDK realizando  
@@ -406,7 +392,7 @@ Transbank::Webpay::OneClick::Base.integration_type = :LIVE
 // Pendiente de documentar
 ```
 
-### Configuración para producción utilizando el API 
+### C) Utilizando el API 
 Si estás consumiendo el API directamente, solo debes de preocuparte de usar el 
 [host correspondiente al ambiente de producción](/referencia/webpay#ambiente-de-produccion), el código de comercio productivo y llave 
 secreta obtenida en el proceso de validación.  
@@ -415,6 +401,11 @@ secreta obtenida en el proceso de validación.
 ## Requerimientos de página de resultado 
 
 ### Webpay Plus
+<aside class="notice">
+Para Webpay Plus REST, a diferencia de la versión anteior (SOAP), ya no se cuenta con una página de Voucher de Transbank.
+De esta forma, al finalizar el proceso de pago, el usuario llega directamente al sitio del comercio, en donde este último 
+debe presentarle un comprobante de pago (una pantalla donde quede claro que el pago fue exitoso o fallido).  
+</aside>
 
 **La página de resultado** de comercio, es la página que muestra el comercio
 cuando Webpay le entrega el control, después del proceso de autorización. Aplica para todos los tipos de transacciones.
@@ -425,7 +416,7 @@ información a presentar dependerá de si la transacción fue autorizada o no
 
 Se recomienda, como mínimo, que posea:
 
-- Número de orden de Pedido
+- Número de orden de pedido
 - Nombre del comercio (Tienda de Mall)
 - Monto y moneda de la transacción
 - Código de autorización de la transacción
