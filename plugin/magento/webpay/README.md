@@ -20,6 +20,11 @@
 
 ## Descripción
 
+<aside class="notice">
+Estás viendo la versión SOAP de este plugin. 
+Próximamente estará disponible para Webpay Plus REST. 
+</aside>
+
 Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente en tu comercio, basado en Magento2.
 
 
