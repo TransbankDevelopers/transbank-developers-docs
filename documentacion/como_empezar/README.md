@@ -136,7 +136,7 @@ usar el RUT **11.111.111-1** y la clave **123**.
 
 ### Códigos de comercio 
 <aside class="notice">
-Tip: Los SDK y plugins provistos por Transbank tiene pre-configuradas
+Tip: Los SDK y plugins provistos por Transbank tienen pre-configuradas
 las credenciales para el ambiente de integración. Puedes ver como usarlas
 en la sección de [documentación de los SDK](/referencia/webpay#webpay) y [Plugins](/plugin)
 </aside>
@@ -402,7 +402,7 @@ secreta obtenida en el proceso de validación.
 
 ### Webpay Plus
 <aside class="notice">
-Para Webpay Plus REST, a diferencia de la versión anteior (SOAP), ya no se cuenta con una página de Voucher de Transbank.
+Para Webpay Plus REST, a diferencia de la versión anterior (SOAP), ya no se cuenta con una página de Voucher de Transbank.
 De esta forma, al finalizar el proceso de pago, el usuario llega directamente al sitio del comercio, en donde este último 
 debe presentarle un comprobante de pago (una pantalla donde quede claro que el pago fue exitoso o fallido).  
 </aside>
