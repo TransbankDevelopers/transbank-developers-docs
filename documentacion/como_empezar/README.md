@@ -390,7 +390,21 @@ Transbank::Webpay::OneClick::Base.integration_type = :LIVE
 ```
 
 ```python
-// Pendiente de documentar
+# OneClick
+from transbank import oneclick as BaseOneClick
+from transbank.common.integration_type import IntegrationType
+
+BaseOneClick.commerce_code = "597034926328"
+BaseOneClick.api_key = "e943ea51392bda3685d8a6c2891a1e6f"
+BaseOneClick.integration_type = IntegrationType.LIVE
+
+# Transaccion Completa
+from transbank import transaccion_completa as BaseTransaccionCompleta
+from transbank.common.integration_type import IntegrationType
+
+BaseTransaccionCompleta.commerce_code = "597034926328"
+BaseTransaccionCompleta.api_key = "e943ea51392bda3685d8a6c2891a1e6f"
+BaseTransaccionCompleta.integration_type = IntegrationType.LIVE
 ```
 
 ### C) Utilizando el API 
