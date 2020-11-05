@@ -84,7 +84,7 @@ Si ya tienes tu código de comercio de producción y llave secreta, solo debes e
 
 Al guardar, el plugin funcionará inmediatamente en ambiente de producción y podrás operar con tarjetas y transacciones reales. Se te solicitará realizar una transacción real en este ambiente de producción por $50 para finalizar tu proceso. 
 
-## ¿Problemas? ¿Dudas?
+## ¿Problemas? ¿Dudas? ¿Sugerencias?
 Si tienes algún problema, duda o sugerencia, puedes contactarnos en nuestra comunidad de Slack, a la que puedes [unirte acá](https://join-transbankdevelopers-slack.herokuapp.com/)
 
-Adicionalmente, puedes revisar si más comercios han presentado algun error/dudas similares en los [_issues_ del repositorio github](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest/issues). Si nadie ha comentado algo similar, puedes [crear un nuevo _issue_](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest/issues/new) con tu sugerencia, bug, problema, etc. 
+Adicionalmente, puedes revisar si más comercios han presentado algún error o dudas similares en los [_issues_ del repositorio github](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest/issues). Si nadie ha comentado algo similar, puedes [crear un nuevo _issue_](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest/issues/new) con tu sugerencia, bug, problema, etc. 
