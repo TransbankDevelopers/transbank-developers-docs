@@ -21,7 +21,7 @@
 ___
 
 <aside class="notice">
-Estás viendo la <strong>nueva documentación REST</strong> de este plugin. Si quieres ver referencia de la versión anterior
+Estás viendo la <strong>nueva documentación REST</strong> de este plugin. Si quieres ver la documentación de la versión anterior
 (SOAP) haz [click aquí](/plugin/virtuemart/webpay-soap)
 </aside>
 
