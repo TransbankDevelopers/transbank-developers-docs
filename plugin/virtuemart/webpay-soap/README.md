@@ -23,6 +23,11 @@
 
 ## Descripción
 
+<aside class="notice">
+Estás viendo la antigua documentación <strong>SOAP</strong> de este plugin. Si quieres ver referencia de la versión actual
+(REST) haz [click aquí](/plugin/virtuemart/)
+</aside>
+
 Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente en tu comercio, basado en Virtuemart.
 
 ## Requisitos
