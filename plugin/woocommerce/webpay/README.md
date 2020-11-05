@@ -60,12 +60,19 @@ En este ambiente solo funcionan las tarjetas de crédito y débito de prueba que
 
 ## Obtener tu llave secreta (proceso de validación)
 Para usar el plugin en el ambiente de producción (donde se utiliza dinero real), necesitas tener tu **llave secreta**, que es un código especial que está asociado a tu código de comercio. 
-Para obtenerla necesitas pasar un proceso de validación, que está [explicado acá](https://transbankdevelopers.cl/documentacion/como_empezar#puesta-en-produccion). 
+Para obtenerla necesitas pasar un proceso de validación, que está [explicado acá](/documentacion/como_empezar#el-proceso-de-validacion). 
 
 Al finalizar este proceso de validación, obtendrás tu **llave secreta**.
 
 Nota: Esta **llave secreta** es como la contraseña de tu código de comercio, por lo que no debes compartirla. Se usa para identificar que tu comercio es quién realmente está realizando cada operación (transacción, anulación de un pago, etc). 
 
+## El proceso de validación
+Este proceso pretende verificar que el comercio transacciona de manera segura y sin problemas. Esta validación es un requisito para dejar al comercio en producción y no se permitirá que un comercio utilice productivamente el servicio Webpay sin poseer esta validación.
+
+En esta etapa, debes envíar las evidencias a [soporte@transbank.cl](mailto:soporte@transbank.cl).
+Planilla de validación para plugins oficiales: [Descargar](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-plugins-rest.docx)
+
+Soporte validará el formulario enviado y, de estar todo correcto, se te notificará la conformidad para pasar a producción, recibiendo tu **llave secreta** (_Api Key Secret_) de producción y algunas intrucciones. 
 
 ## Puesta en producción
 Si ya tienes tu código de comercio de producción y llave secreta, solo debes entrar a la configuración de tu plugin ([instrucciones en este link](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest/blob/master/docs/INSTALLATION.md#configuraci%C3%B3n)) y colocar: 
@@ -74,7 +81,7 @@ Si ya tienes tu código de comercio de producción y llave secreta, solo debes e
 - Código de comercio: tu código de comercio de producción
 - Api Key: Tu llave secreta
 
-Al guardar, el plugin funcionará inmediatamente en ambiente de producción y podrás operar con tarjetas y transacciones reales. 
+Al guardar, el plugin funcionará inmediatamente en ambiente de producción y podrás operar con tarjetas y transacciones reales. Se te solicitará realizar una transacción real en este ambiente de producción por $50 para finalizar tu proceso. 
 
 ## ¿Problemas? ¿Dudas?
 Si tienes algún problema, duda o sugerencia, puedes contactarnos en nuestra comunidad de Slack, a la que puedes [unirte acá](https://join-transbankdevelopers-slack.herokuapp.com/)
