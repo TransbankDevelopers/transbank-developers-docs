@@ -56,7 +56,7 @@ Esta es la opción recomendada para instalar el paquete en Magento.
 Primero, entrar con la terminal al directorio raíz de Magento e instalar el paquete usando [Composer](https://getcomposer.org/).
 
 ```bash
-composer require transbank/webpay-magento2
+composer require transbank/webpay-magento2-rest
 ```
 
 Cuando finalice, ejecutar el comando:
