@@ -61,3 +61,32 @@ Los archivos de cuadratura (conciliación) son archivos planos que contienen los
 
 - **Manual para enlazar Pinpad Bluetooth** - _v3.0_ | [Descargar](/files/manual-enlazar-pinpad-bluetooth-3-0.pdf) <br />
 _Procedimiento enlace y conexión Pinpad Bluetooth e355_
+
+<div class="container slate">
+  <div class='slate-after-footer'>
+    <div class='row d-flex align-items-stretch'>
+      <div class='col-12 col-lg-6'>
+        <h3 class='toc-ignore fo-size-22 text-center'>¿Tienes alguna duda de integración?</h3>
+        <a href='https://join-transbankdevelopers-slack.herokuapp.com/' target='_blank'>
+          <div class='td_block_gray'>
+            <img src="https://p9.zdassets.com/hc/theme_assets/138842/200037786/logo.png" alt="" >
+            <div class='td_pa-txt'>
+              Únete a la comunidad de integradores en Slack y comparte buenos tips ayudando a los nuevos o buscando soluciones alternativas. Nuestro equipo está ahí para ayudarte.
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class='mt-3 mt-lg-0 col-12 col-lg-6'>
+        <h3 class='toc-ignore fo-size-22 text-center'>Si aún tienes dudas envíanos un mensaje</h3>
+        <a class="pointer magenta" data-toggle='modal' data-target='#modalContactForm'>
+          <div class='td_block_gray'>
+            <div class="fo-size-20 text-center sub-title_bloq"><i class="fas fa-envelope"></i> Envíanos un mensaje.</div>
+            <div class='td_pa-txt'>
+              Si necesitas resolver algún tipo de incidencia en el portal o si existe algún problema con tu integración y  que no has podido resolver, contáctanos a través de nuestro formulario.
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
