@@ -41,7 +41,15 @@ Y si la operación es aprobada, imprimirá su comprobante.
 Una vez realizada la venta, el terminal entregará toda la información del comprobante de venta al sistema de caja, 
 quedando registrada sin necesidad de digitación.
 
-## Cómo empezar
+## Documentación disponible
+A continuación encontrarás la documentación en formato PDF: 
+
+- **Manual de integración POS Autoservicio UX100/300/400** - _20.1_ | [Descargar](/files/manual-integracion-pos-autoservicio-20-1.pdf)
+_Este documento tiene por objetivo explicar las funcionalidades que debe implementar el
+Cliente o su proveedor de caja para el desarrollo del módulo de autoservicio (en este caso los
+ejemplos se efectuaran con el teclado Verifone UX100, el lector de tarjeta Verifone UX300 y el
+lector de tarjetas Contactless Verifone UX400 (pago sin contacto)), permitiendo realizar
+transacciones bancarias de Crédito o Débito (redcompra)_
 
 
 
