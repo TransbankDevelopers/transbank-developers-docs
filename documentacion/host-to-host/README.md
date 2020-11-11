@@ -20,7 +20,7 @@ servidores de tu negocio y de Transbank funcionen coordinadamente.
 
 3. **Certificación**
 Transbank certificará que la integración entre el equipo y la caja del comercio cumple con las especificaciones y 
-estándares mínimos para que pueda operar.
+estándares para que pueda operar.
 
 
 4. **Etapa piloto**
@@ -43,7 +43,7 @@ De momento, ponemos a tu disposición los siguientes documentación en formato P
 
 ## Documentos disponibles
 - **Manual de comandos HOST** - _RS20.1_ | [Descargar](/files/host-to-host/manual-comandos-2-9.pdf) <br />
-_Este documento describe la forma de operar, la funcionalidad y el detalle de la mensajería de un PINPAD TRANSBANK mediante protocolo TCP/IP._
+_Este documento describe la forma de operar, la funcionalidad y el detalle de la mensajería entre el PINPAD de TRANSBANK y tu sistema de caja mediante comandos por puerto USB o SERIAL._
 
 - **Manual de comandos ONUS HOST** - _2018.06.01 v1.6_ | [Descargar](/files/host-to-host/manual-comandos-pinpad-anexo-onus-1-6.pdf) <br />
 _Este documento describe la forma de operar, la funcionalidad y el detalle de la mensajería de un PINPAD TRANSBANK trabajando bajo la modalidad OnUs._
