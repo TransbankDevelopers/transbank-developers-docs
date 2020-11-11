@@ -42,22 +42,22 @@ Estamos trabajando en integrar la documentación en un formato más amigable en 
 De momento, ponemos a tu disposición los siguientes documentación en formato PDF: 
 
 ## Documentos disponibles
-- **Manual de comandos HOST** - _RS20.1_ | [Descargar](/files/host-to-host/manual-comandos-2-9.pdf) <br />
+- **Manual de comandos HOST** - _RS20.1_ | [Descargar](/files/manual-comandos-2-9.pdf) <br />
 _Este documento describe la forma de operar, la funcionalidad y el detalle de la mensajería entre el PINPAD de TRANSBANK y tu sistema de caja mediante comandos por puerto USB o SERIAL._
 
-- **Manual de comandos ONUS HOST** - _2018.06.01 v1.6_ | [Descargar](/files/host-to-host/manual-comandos-pinpad-anexo-onus-1-6.pdf) <br />
+- **Manual de comandos ONUS HOST** - _2018.06.01 v1.6_ | [Descargar](/files/manual-comandos-pinpad-anexo-onus-1-6.pdf) <br />
 _Este documento describe la forma de operar, la funcionalidad y el detalle de la mensajería de un PINPAD TRANSBANK trabajando bajo la modalidad OnUs._
 
-- **Manual de comandos HOST Wifi** - _18.2 v2.4_ | [Descargar](/files/host-to-host/manual-comandos-pinpad-host-wifi.pdf) <br />
+- **Manual de comandos HOST Wifi** - _18.2 v2.4_ | [Descargar](/files/manual-comandos-pinpad-host-wifi.pdf) <br />
 _Este documento describe la forma de operar, la funcionalidad y el detalle de la mensajería de un PINPAD TRANSBANK mediante protocolo TCP/IP._
 
-- **Manual de voucher HOST** - _RS20.1_ | [Descargar](/files/host-to-host/manual-voucher-con-surcharge.pdf) <br />
+- **Manual de voucher HOST** - _RS20.1_ | [Descargar](/files/manual-voucher-con-surcharge.pdf) <br />
 _El pinpad entregará el voucher listo para imprimir, pero también entregará todos los datos necesarios para que la misma caja construya el voucher por sí misma._
 
-- **Manual de especificaciones técnicas de salidas especiales** - _20191212_ | [Descargar](/files/host-to-host/manual-especificaciones-tecnicas-20191212.pdf) <br />
+- **Manual de especificaciones técnicas de salidas especiales** - _20191212_ | [Descargar](/files/manual-especificaciones-tecnicas-20191212.pdf) <br />
 _En este anexo se describen los archivos de cuadratura (conciliación) y liquidación que se entregan al cliente Host. 
 Los archivos de cuadratura (conciliación) son archivos planos que contienen los registros de las transacciones 
 (de venta y anulación)_
 
-- **Manual para enlazar Pinpad Bluetooth** - _v3.0_ | [Descargar](/files/host-to-host/manual-enlazar-pinpad-bluetooth-3-0.pdf) <br />
+- **Manual para enlazar Pinpad Bluetooth** - _v3.0_ | [Descargar](/files/manual-enlazar-pinpad-bluetooth-3-0.pdf) <br />
 _Procedimiento enlace y conexión Pinpad Bluetooth e355_
