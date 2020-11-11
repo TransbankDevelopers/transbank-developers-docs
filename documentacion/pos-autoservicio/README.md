@@ -4,7 +4,7 @@ de un dependiente de tu establecimiento, sino que permite que los mismos cliente
 manera completa y autónoma. Ideal para negocios como estacionamientos, bencineras y cines, entre otros.
 
 
-## ¿cómo funciona?
+## ¿Cómo funciona?
 El paso a paso para su implementación:
 1. **Auditoría de factibilidad técnica**
 Establecerá si tu comercio tiene las facultades para realizar el desarrollo tecnológico que requiere esta 
