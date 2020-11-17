@@ -6,6 +6,7 @@ manera completa y autónoma. Ideal para negocios como estacionamientos, benciner
 
 ## ¿Cómo funciona?
 El paso a paso para su implementación:
+
 1. **Auditoría de factibilidad técnica**
 Establecerá si tu comercio tiene las facultades para realizar el desarrollo tecnológico que requiere esta 
 integración. En caso de aprobación, se te entregará un Documento Técnico con las indicaciones a seguir.
@@ -15,31 +16,23 @@ Tu comercio deberá realizar el desarrollo según las especificaciones que te en
 
 
 3. **Control de Calidad**
-Este proceso verificará si es que está correcto el desarrollo tecnológico, 
-requiere cambios o necesita un mayor desarrollo.
-
+Este proceso verificará que el desarrollo de integración que hiciste, 
+cumple con los que te entregamos en las especificaciones, o si requiere alguna corrección o mejora.
 
 4. **Etapa piloto**
-En la que se probará que la integración está realizada correctamente y que el producto cumple con las 
-especificaciones deseadas.
+En un lugar que acordemos juntos, llevamos a producción tu punto de venta autoservicio, donde con cliente reales haremos monitoreo en conjunto de su funcionamiento, por un periodo acordado 2 semanas o 1 mes. Evaluamos los resultados, y acordamos masificación, tambien si se requiere algún ajuste.
 
 
-5. **Instalación de equipos**
-Los pasos a seguir para su operación
+5. **Masificación**
+Construimos en conjunto un plan de instalación de los puntos de ventas.
 
-5.1. **En el kiosco**
-El proceso de venta se realizará directamente en el kiosco de tu comercio, generando la comunicación automática 
-con el terminal.
-
-
-5.2. **Autonomía**
-Tu cliente elegirá el medio de pago, operará su tarjeta, confirmará el monto e ingresará su clave. 
-Y si la operación es aprobada, imprimirá su comprobante.
-
-
-5.3. **Información detallada**
-Una vez realizada la venta, el terminal entregará toda la información del comprobante de venta al sistema de caja, 
-quedando registrada sin necesidad de digitación.
+**Flujo de venta en POS autoservicio:** 
+1. El cliente realiza la selección del producto o servicio a comprar
+2. El cliente selecciona la forma de pago que disponga el kiosko, efectivo o tarjeta crédito, tarjeta débito.
+3. El kiosco invoca al POS pasándole el monto a cobrar.
+4. El cliente opera tarjeta, selecciona cuotas si corresponde, e ingresa su pin.
+5. El POS informa al kiosco el resultado de la venta (aprobada o rechazada).
+6. El kiosko libera el producto e imprime los comprobantes.
 
 ## Documentación disponible
 A continuación encontrarás la documentación en formato PDF: 
