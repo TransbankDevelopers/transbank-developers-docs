@@ -9,33 +9,36 @@ gran velocidad al proceso de pago y flujo de información.
 Host to Host requiere de un nivel de integración alto, que consta de las siguientes etapas:
 
 1. **Auditoría de factibilidad técnica**
-Proceso que establece si tu comercio tiene las facultades para realizar el desarrollo tecnológico que requiere esta 
+Establecerá si tu comercio tiene las facultades para realizar el desarrollo tecnológico que requiere esta 
 integración. En caso de aprobación, se te entregará un Documento Técnico con las indicaciones a seguir.
 
-
 2. **Desarrollo**
-Este desarrollo, efectuado por tu comercio, deberá asegurar que los terminales de venta, el sistema de caja y los 
-servidores de tu negocio y de Transbank funcionen coordinadamente.
+Tu comercio deberá realizar el desarrollo según las especificaciones que te entregará Transbank.
 
 
-3. **Certificación**
-Transbank certificará que la integración entre el equipo y la caja del comercio cumple con las especificaciones y 
-estándares para que pueda operar.
-
+3. **Control de Calidad**
+Este proceso verificará que el desarrollo de integración que hiciste, 
+cumple con los que te entregamos en las especificaciones, o si requiere alguna corrección o mejora.
 
 4. **Etapa piloto**
-Fase en la que se probará in situ -en tu comercio-, durante un periodo acordado, que la integración se ha realizado 
-correctamente y que se podrán realizar pagos de manera exitosa.
+En un lugar que acordemos juntos, llevamos a producción tu punto de venta autoservicio, donde con cliente reales haremos monitoreo en conjunto de su funcionamiento, por un periodo acordado 2 semanas o 1 mes. Evaluamos los resultados, y acordamos masificación, tambien si se requiere algún ajuste.
 
 
-5. **Instalación de equipos**
-En todos los frentes de caja que requieras. Host to Host opera de manera integrada con el sistema de caja de tu comercio:
+5. **Masificación**
+Construimos en conjunto un plan de instalación de los puntos de ventas.
 
-    1. Deberás ingresar el monto de venta y medio de pago en tu sistema de caja.
-    2. El Pinpad (terminal de digitación y lectura de tarjeta) recibirá automáticamente la información desde tu sistema de caja.
-    3. Tu cliente operará su tarjeta, confirmará el monto e ingresará su clave.
-    4. Una vez realizada la venta, el Pinpad entregará toda la información del comprobante de venta al sistema de caja, 
-    quedando registrada sin necesidad de digitación.
+
+### **Flujo de venta en POS autoservicio:** 
+1. El cliente entrega los productos o servicio que desea comprar al vendedor.
+2. El vendedor realiza la venta en su sistema de caja.
+3. El vendedor pregunta al cliente como desea pagar, efectivo, tarjeta crédito, tarjeta débito y lo selecciona en la caja.
+4. La caja invoca al pinpad, pasándole el monto de la venta y la forma de pago crédito o débito
+5. El cliente opera tarjeta, selecciona cuotas si corresponde, e ingresa su pin
+6. El pinpad arma el mensaje de requerimiento de venta y lo entrega a la caja.
+7. La caja toma el mensaje lo entrega al host de comercio y este a su vez al host de Transbank (te ahí su nombre de host to host)
+8. El mensaje de respuesta recorre el camino inverso hasta llegar al pinpad
+9. El pinpad verifica la respuesta aprobada o rechaza e integridad del mensaje y entrega resultado a la caja
+10. La caja imprime los comprobantes de venta.
 
 ## Cómo empezar
 Estamos trabajando en integrar la documentación en un formato más amigable en esta misma sección. 
