@@ -21,14 +21,14 @@ Este proceso verificará que el desarrollo de integración que hiciste,
 cumple con los que te entregamos en las especificaciones, o si requiere alguna corrección o mejora.
 
 4. **Etapa piloto**
-En un lugar que acordemos juntos, llevamos a producción tu punto de venta autoservicio, donde con cliente reales haremos monitoreo en conjunto de su funcionamiento, por un periodo acordado 2 semanas o 1 mes. Evaluamos los resultados, y acordamos masificación, tambien si se requiere algún ajuste.
+En un lugar que acordemos juntos, llevamos a producción tu punto de venta pinpad host, donde con cliente reales haremos monitoreo en conjunto de su funcionamiento, por un periodo acordado 2 semanas o 1 mes. Evaluamos los resultados, y acordamos masificación, tambien si se requiere algún ajuste.
 
 
 5. **Masificación**
 Construimos en conjunto un plan de instalación de los puntos de ventas.
 
 
-### **Flujo de venta en POS autoservicio:** 
+### **Flujo de venta en Pinpad Host:** 
 1. El cliente entrega los productos o servicio que desea comprar al vendedor.
 2. El vendedor realiza la venta en su sistema de caja.
 3. El vendedor pregunta al cliente como desea pagar, efectivo, tarjeta crédito, tarjeta débito y lo selecciona en la caja.
