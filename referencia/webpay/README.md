@@ -1669,7 +1669,7 @@ Código | Descripción
 #### Flujo de inscripción y pago
 
 El flujo de OneClick Mall es en general el mismo que el de [Webpay
-OneClick Normal](#webpay-oneclick-normal) tanto de cara al tarjeta habiente como
+OneClick Normal](/referencia/webpay-soap#oneclick-normal) tanto de cara al tarjeta habiente como
 de cara al integrador.
 
 Las diferencias son:
