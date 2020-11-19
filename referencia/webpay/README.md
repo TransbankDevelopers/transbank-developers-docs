@@ -4764,7 +4764,7 @@ Código de estado HTTP | Descripción
 
 2. Una vez que Transbank confirme que la planilla de integración se encuentra correcta (no aplica para plugins), se enviará al comercio la confirmación y se generará su **secreto compartido**, que en conjunto con el código de comercio, permiten operar en producción.
 
-3. Cuando recivas el correo, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-para-produccion-utilizando-los-sdk)
+3. Cuando recibas el correo, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-para-produccion-utilizando-los-sdk)
 
 4. Con la configuración del ambiente de producción ya lista, será necesario realizar una compra de $10 para validar el correcto funcionamiento.
 

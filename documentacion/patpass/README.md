@@ -4,7 +4,7 @@
 
 ### Crear una suscripción
 
-Para crear una transaccion **PatPass Comercio** que registre una suscripción, lo primero que necesitas es una instancia de `WebpayPatpassComercio` con la `Configuration` que incluye el código de comercio y el `Api Key` a usar.
+Para crear una transacción **PatPass Comercio** que registre una suscripción, lo primero que necesitas es una instancia de `WebpayPatpassComercio` con la `Configuration` que incluye el código de comercio y el `Api Key` a usar.
 
 Una forma fácil de comenzar es utilizar la configuración para pruebas que viene incluida en el SDK.
 
@@ -50,7 +50,7 @@ PatpassComercio.IntegrationType = "TEST / LIVE dependiendo de tu ambiente de int
 
 Te recomendamos encapsular estas asignaciones en una función para que puedas reutilizarlas en los demás métodos.
 
-Una vez este preparado el ambiente y la integracion, puedes iniciar la transacción sin problemas.
+Una vez este preparado el ambiente y la integración, puedes iniciar la transacción sin problemas.
 
 ```java
 import cl.transbank.patpass.PatpassComercio;
