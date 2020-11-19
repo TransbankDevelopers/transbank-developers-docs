@@ -1,4 +1,4 @@
-# OneClick
+# OneClick Mall
 
 ## OneClick Mall %<span class='tbk-tagTitleDesc'>REST</span>%
 
@@ -6,7 +6,97 @@
   <div tbk-link='/referencia/webpay#oneclick-mall' tbk-link-name='Referencia API'></div>
 </div>
 
-Para usar OneClick Mall en transacciones asociadas a varios comercios, lo primero que se debe hacer es definir las dependencias necesarias para poder realizar cualquier tipo de transacción.
+La modalidad de pago OneClick permite al tarjetahabiente realizar pagos en el
+comercio sin la necesidad de ingresar cada vez información de la tarjeta de
+crédito al momento de realizar la compra. El modelo de pago contempla un
+proceso previo de inscripción o enrolamiento del tarjetahabiente, a través del
+comercio, que desee utilizar el servicio. Este tipo de pago facilita la venta,
+disminuye el tiempo de la transacción y reduce los riesgos de ingreso erróneo
+de los datos del medio de pago.
+
+El proceso de integración con OneClick consiste en desarrollar por parte
+del comercio las llamadas a los servicios web dispuestos por Transbank para la
+inscripción de los tarjetahabientes, así como para la realización de los
+pagos.
+
+#### Flujo de inscripción y pago
+
+La inscripción es el proceso en el cual el tarjetahabiente registra los datos
+de su tarjeta en OneClick para usarlo en compras futuras. Estos datos son
+almacenados de forma segura en Transbank, y nunca son conocidos por el comercio.
+Este proceso debe ser iniciado por la tienda del comercio y es requisito que el
+cliente esté autenticado (haya iniciado sesión) en la página del comercio antes de iniciar la
+inscripción.
+
+
+<img class="td_img-night" src="/images/diagrama-secuencia-oneclick-inscripcion.png" alt="Diagrama de secuencia inscripción Oneclick">
+
+1. El cliente se conecta y autentica en la página del comercio, mediante su
+  nombre de usuario y clave.
+2. El cliente selecciona la opción de inscripción, la cual debe estar explicada
+  en la página del comercio.
+3. El comercio consume un servicio web publicado por Transbank (`initInscription`), donde entrega los
+  datos del cliente y la URL de término; obtiene un token y URL de Webpay.
+4. El comercio envía el browser del cliente a la URL y pasa por
+  parámetro el token (método POST).
+5. Webpay presenta el formulario de inscripción, este es similar al formulario
+  de pago actual de Webpay Plus, para que el cliente ingrese los datos de su
+  tarjeta.
+6. El cliente será autenticado por su banco emisor, de forma similar al flujo
+  normal de pago. En este punto se realiza una transacción de $50 pesos, la cual
+  no se captura (no se verá reflejada en su estado de cuenta).
+7. Finalizada la inscripción, Webpay envía el browser del cliente a la URL
+  entregada por el comercio, pasando por parámetro el token.
+8. El comercio debe consumir otro servicio web de Transbank (`finishInscription`), con el token, para
+  obtener el resultado de la inscripción y el identificador de usuario (`tbkUser`), que
+  debe utilizar en el futuro para realizar los pagos.
+9. El comercio presenta al cliente el resultado de la inscripción.
+
+### Autorización (proceso de pago)
+Después de realizado el proceso de inscripción, el comercio puede iniciar el proceso de pago cuando corresponda.
+
+El pago es el proceso donde el comercio solicita el cargo de una compra a la
+tarjeta de crédito de un usuario inscrito anteriormente, usando el
+identificador entregado por Transbank al momento de la inscripción.
+
+Los pagos en esta modalidad no requieren necesariamente la intervención del
+usuario. 
+
+El monto del pago debe estar dentro de los límites establecidos para este tipo
+de transacciones, el proceso interno es similar a un cargo normal de Webpay.
+Existe un máximo de transacciones diarias que puede realizar un solo usuario, 
+además de un monto máximo por transacción y un monto máximo acumulado diario. 
+Estos valores se definen en el proceso de afiliación comercial del producto.  
+
+
+<img class="td_img-night" src="/images/diagrama-secuencia-oneclick-pago.png" alt="Diagrama de secuencia inscripción Oneclick">
+
+1. El cliente se conecta y autentica en la página o aplicación del comercio
+  mediante su nombre de usuario y clave.
+2. El cliente selecciona la opción de pagar con Oneclick.
+3. El comercio usa el servicio web de pago, publicado por Transbank (`authorize`), entregando
+  el identificador de usuario (que se obtuvo durante la inscripción: `tbkUser`), el monto del
+  pago y la orden de compra. Obtiene la respuesta con el código de
+  respuesta.
+4. El comercio presenta el resultado del pago al cliente.
+
+Adicionalmente, este proceso puede suceder sin la intervención directa del usuario: 
+1. El comercio, teniendo el identificador del usuario (`tbkUser`), puede usar el 
+servicio web de pago (`authorize`) en un `cronjob` o algún proceso programado que 
+tenga el comercio en sus sistemas. Ejemplo: El comercio puede crear un proceso que 
+corre automáticamente una vez al mes por cada cliente, donde se realiza la llamada 
+al servicio web de pago (`authorize`) para cobrar una mensualidad. 
+
+### Modalidad Mall
+En la modalidad OneClick Mall, existe un código de comercio "mall" que agrupa una serie de códigos de comercio "tienda". 
+
+- El usuario inscribe su tarjeta en la página del comercio "mall" agrupador, pero las transacciones son a nombre de las "tiendas" del mall.
+- Se pueden indicar múltiples transacciones a autorizar en una misma operación con diferentes códigos de comercio tienda.
+- Se debe verificar por separado el resultado de cada una de esas transacciones individualmente, pues es posible que el emisor de la tarjeta autorice algunas y otras no.
+
+Para usar OneClick **Mall** en transacciones asociadas a varios comercios, 
+lo primero que se debe hacer es definir las dependencias necesarias para poder 
+realizar cualquier tipo de transacción.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -63,7 +153,21 @@ Una vez que ya cuentas con esa preparación, puedes iniciar transacciones:
 
 ### Crear una inscripción
 
-Te permite realizar la inscripción del tarjetahabiente:
+Para realizar el primero de los procesos descritos (la inscripción), debe llamarse al método `initInscription()`
+
+Este permite realizar la inscripción del tarjetahabiente e información de su
+tarjeta de crédito. Retorna como respuesta un token que representa la
+transacción de inscripción y una URL (`urlWebpay`), que corresponde a la URL
+de inscripción de OneClick.
+
+Una vez que se llama a este servicio Web, el usuario debe ser redireccionado
+vía POST a `urlWebpay` con parámetro `TBK_TOKEN` igual al token obtenido.
+
+<aside class="notice">
+Nota que a diferencia de Webpay Plus, donde el parámetro se llama `token_ws`, en
+OneClick el parámetro se llama `TBK_TOKEN`.
+</aside>
+
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -75,7 +179,8 @@ Te permite realizar la inscripción del tarjetahabiente:
 String username = "nombre_de_usuario";
 // Correo electrónico del usuario
 String email = "nombre_de_usuario@gmail.com";
-String response_url = "https://callback/resultado/de/transaccion";
+// URL donde llegará el usuario con su token luego de finalizar la inscripción
+String response_url = "https://callback/resultado/de/inscripcion";
 
 OneclickMallInscriptionStartResponse response = OneclickMall.Inscription.start(username, email, response_url);
 
@@ -91,7 +196,8 @@ String tbk_token = response.getToken();
 $username = "nombre_de_usuario";
 // Correo electrónico del usuario
 $email = "nombre_de_usuario@gmail.com";
-$response_url = "https://callback/resultado/de/transaccion";
+// URL donde llegará el usuario con su token luego de finalizar la inscripción
+$response_url = "https://callback/resultado/de/inscripcion";
 
 $response = MallInscription::start($username, $email, $response_url);
 
@@ -108,7 +214,7 @@ $tbk_token = $resp->getToken();
 var username = "nombre_de_usuario";
 // Correo electrónico del usuario
 var email = "nombre_de_usuario@gmail.com";
-var response_url = "https://callback/resultado/de/transaccion";
+var response_url = "https://callback/resultado/de/inscripcion";
 
 var response = Inscription.start(username, email, response_url);
 
@@ -122,7 +228,7 @@ var tbk_token = response.Token;
 
 @username = "nombre_de_usuario"
 @email = "nombre_de_usuario@gmail.com"
-@response_url = "https://callback/resultado/de/transaccion"
+@response_url = "https://callback/resultado/de/inscripcion"
 
 
 @resp = Transbank::Webpay::Oneclick::MallInscription::start(user_name: @username,email: @email,response_url: @response_url)
@@ -136,7 +242,7 @@ var tbk_token = response.Token;
 
 username = "nombre_de_usuario"
 email = "nombre_de_usuario@gmail.com"
-response_url = "https://callback/resultado/de/transaccion"
+response_url = "https://callback/resultado/de/inscripcion"
 
 resp = MallInscription.start(user_name=username,email=email,response_url=response_url)
 
@@ -149,9 +255,21 @@ tbk_token = resp.token
 // No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
 ```
 
-Tal como en el caso de Oneclick Normal, debes redireccionar vía `POST` el navegador del usuario a la url retornada en `url_webpay`. **Recordando que el nombre del parámetro que contiene el token se debe llamar `TBK_TOKEN`**.
+Tal como en el caso de OneClick Normal, debes redireccionar vía `POST` el navegador del usuario a la url retornada en `url_webpay`. **Recordando que el nombre del parámetro que contiene el token se debe llamar `TBK_TOKEN`**.
 
 ### Confirmar una inscripción
+
+Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a
+la URL de fin de inscripción que definió el comercio (`responseURL`). En ese
+instante el comercio debe llamar a `Inscription.finish()`.
+
+<aside class="warning">
+El comercio tendrá un máximo de 60 segundos para llamar a este método luego
+de recibir el token en la URL de fin de inscripción (`returnUrl`). Pasados los
+60 segundos sin llamada a finishInscription, la inscripción en curso junto con
+el usuario serán eliminados.
+</aside>
+
 
 Una vez que se autorice la inscripción del usuario, se retornará el control al comercio vía `POST` en la url indicada en `response_url`, con el parámetro `TBK_TOKEN` identificando la transacción. Con esa información se puede finalizar la inscripción:
 
@@ -160,7 +278,7 @@ Una vez que se autorice la inscripción del usuario, se retornará el control al
 ```java
 //...
 
-String tbk_token = "tbkTokenRetornadoPorInscriptionStart";
+String tbk_token = "elTokenQueLlegaPorPOST"; // token que llega por POST en el parámetro "TBK_TOKEN" 
 
 OneclickMallInscriptionFinishResponse response = OneclickMall.Inscription.finish(tbk_token);
 
@@ -171,7 +289,7 @@ String tbkUser = response.getTbkUser();
 ```php
 //...
 
-$tbk_token = "tbkTokenRetornadoPorInscriptionStart";
+$tbk_token = "tbkToken"; // token que llega por POST en el parámetro "TBK_TOKEN" 
 
 $response = MallInscription::finish($tbk_token);
 
@@ -183,7 +301,7 @@ $tbkUser = $resp->getTbkUser();
 ```csharp
 //...
 
-var token = "tbkTokenRetornadoPorInscriptionStart";
+var token = "tbkToken"; // token que llega por POST en el parámetro "TBK_TOKEN" 
 
 var result = Inscription.Finish(tbk_token);
 
@@ -194,7 +312,7 @@ var tbkUser = result.TbkUser;
 ```ruby
 //...
 
-@tbk_token = "tbkTokenRetornadoPorInscriptionStart";
+@tbk_token = "tbkToken"; # // token que llega por POST en el parámetro "TBK_TOKEN" 
 
 @resp = Transbank::Webpay::Oneclick::MallInscription::finish(token: @tbk_token)
 
@@ -205,7 +323,7 @@ var tbkUser = result.TbkUser;
 ```python
 //...
 
-tbk_token = "tbkTokenRetornadoPorInscriptionStart"
+tbk_token = "tbkToken" // token que llega por POST en el parámetro "TBK_TOKEN" 
 
 resp = MallInscription.finish(token=tbk_token)
 
@@ -216,7 +334,7 @@ tbkUser = resp.tbk_user
 // No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
 ```
 
-Con eso habrás completado el flujo "feliz" en que todo funciona OK. En [la referencia detallada de OneClick Mall puedes ver cada paso del flujo, incluyendo los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-oneclick-mall).
+Con eso habrás completado el flujo "feliz" en que todo funciona sin problema. En [la referencia detallada de OneClick Mall puedes ver cada paso del flujo, incluyendo los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#oneclick-mall).
 
 ### Eliminar una inscripción
 
@@ -240,8 +358,8 @@ OneclickMall.Inscription.delete(username, tbkUser);
 //...
 
 // Identificador del usuario en el comercio
-$username = "nombre_de_usuario";
-$tbkUser = $tbkUserRetornadoPorInscriptionFinish;
+$username = 'nombre_de_usuario';
+$tbkUser = 'tbkUserRetornadoPorInscriptionFinish';
 
 //Parámetro opcional
 $options = new Options($apiKey, $parentCommerceCode);
@@ -286,6 +404,8 @@ resp = MallInscription.delete(tbk_user=tbkUser, user_name=username)
 ```
 
 Si se quiere comprobar si se eliminó correctamente, la función retorna un boolean, el cual será `true` en caso de éxito y `false` en otro caso.
+Recuerda que por cada transacción que hayas enviado en el arreglo (array de `details`) recibiras una respuesta. 
+Debes validarlas de manera independiente, ya que unas podrías estar aprobadas y otras no. 
 
 ### Realizar transacciones
 
@@ -433,6 +553,8 @@ resp = MallTransaction.authorize(user_name=username, tbk_user=tbkUser, buy_order
 ### Anular una transacción
 
 En el caso de que se quiera anular alguna transacción, se invoca a `Transaction.refund()`.
+En este caso, la anulación requiere del `buyOrder` padre, el `childBuyOrder` de la _sub-transacción_, el 
+código de comercio "tienda" de la _sub-transacción_ y del monto que se desea anular/reversar.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -505,6 +627,44 @@ resp = MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, a
 ```javascript
 // No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
 ```
+
+### Capturar una transacción
+En el caso de que tengas contratada la modalidad de Captura diferida, necesitas llamar al método `capture` después 
+de llamar a `authorize` para aprobar completamente la transacción.
+
+Una transacción OneClick Mall permite que el tarjetahabiente registre su
+tarjeta de la misma forma en que ocurre con una transacción OneClick, asociando
+dicha inscripción a un comercio padre. Ahora, una vez realizada la inscripción, 
+el comercio padre tiene permitido autorizar transacciones sin captura para
+los comercios “hijo” registrados que tengan habilitado captura diferida.
+Además posterior a la autorización tiene permitido capturar dicho monto reservado.
+La autorización se encarga de validar si es posible realizar el cargo a la
+cuenta asociada a la tarjeta de crédito realizando en el mismo acto la reserva
+de monto de la transacción.
+La captura hace efectiva la reserva hecha previamente o cargo en la cuenta de
+crédito asociada a la tarjeta del titular.
+Estas modalidades, por separado, solo son válidas para tarjetas de crédito.
+
+Para realizar esa captura explícita debe usarse el método `capture()`
+
+#### `capture()`
+
+Este método permite a los comercios OneClick Mall habilitados, poder
+realizar capturas diferidas de una transacción previamente autorizada. El método
+contempla una única captura por cada autorización. Para ello se deberá indicar los
+datos asociados a la transacción de venta y el monto requerido para capturar, el cual
+debe ser menor o igual al monto originalmente autorizado.
+Para capturar una transacción, ésta debe haber sido creada por un código de
+comercio configurado para captura diferida. De esta forma la transacción estará
+autorizada pero requerirá una captura explícita posterior para confirmar la
+transacción.
+ 
+ 
+<aside class="notice">
+Rn esta modalidad no se aceptan tarjetas de débito ni prepago. 
+Tampoco se aceptan cuotas, solo ventas con tarjeta de crédito normales sin cuotas. 
+</aside>
+
 
 ## Credenciales y Ambiente
 
