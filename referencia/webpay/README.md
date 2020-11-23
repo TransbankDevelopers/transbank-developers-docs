@@ -2633,7 +2633,9 @@ autorizada pero requerirá una captura explícita posterior para confirmar la
 transacción.
 
 ```java
-// Esta funcion aun no se encuentra disponible en el SDK
+final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTransaction.capture(
+  childCommerceCode, childBuyOrder, amount, authorizationCode
+);
 ```
 
 ```php
@@ -2684,7 +2686,10 @@ comercio de la tienda virtual específica.
 **Respuesta**
 
 ```java
-// Esta función aun no se encuentra disponible en el SDK
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getCapturedAmount();
+response.getResponseCode();
 ```
 
 ```php
