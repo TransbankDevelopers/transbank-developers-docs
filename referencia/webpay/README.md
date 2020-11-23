@@ -2701,7 +2701,10 @@ response.getResponseCode();
 ```
 
 ```ruby
-# Esta función aun no se encuentra disponible en el SDK
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
 ```
 
 ```python
