@@ -2633,7 +2633,9 @@ autorizada pero requerirá una captura explícita posterior para confirmar la
 transacción.
 
 ```java
-// Esta funcion aun no se encuentra disponible en el SDK
+final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTransaction.capture(
+  childCommerceCode, childBuyOrder, amount, authorizationCode
+);
 ```
 
 ```php
@@ -2645,7 +2647,10 @@ transacción.
 ```
 
 ```ruby
-# Esta funcion aun no se encuentra disponible en el SDK
+@response = Transbank::Webpay::Oneclick::MallDeferredTransaction::capture(
+  child_commerce_code: @commerce_code, child_buy_order: @buy_order,
+  amount: @capture_amount, authorization_code: @authorization_code
+)
 ```
 
 ```python
@@ -2653,7 +2658,7 @@ transacción.
 ```
 
 ```http
-PUT /rswebpaytransaction/api/oneclick/mall/v1_0/transactions/capture
+PUT /rswebpaytransaction/api/oneclick/v1.0/transactions/capture
 Tbk-Api-Key-Id: 597055555547
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -2681,7 +2686,10 @@ comercio de la tienda virtual específica.
 **Respuesta**
 
 ```java
-// Esta función aun no se encuentra disponible en el SDK
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getCapturedAmount();
+response.getResponseCode();
 ```
 
 ```php
@@ -2693,7 +2701,10 @@ comercio de la tienda virtual específica.
 ```
 
 ```ruby
-# Esta función aun no se encuentra disponible en el SDK
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
 ```
 
 ```python
