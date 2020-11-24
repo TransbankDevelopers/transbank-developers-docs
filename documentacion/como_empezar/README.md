@@ -420,16 +420,16 @@ Transbank::Webpay::OneClick::Base.integration_type = :LIVE
 from transbank import oneclick as BaseOneClick
 from transbank.common.integration_type import IntegrationType
 
-BaseOneClick.commerce_code = "597034926328"
-BaseOneClick.api_key = "e943ea51392bda3685d8a6c2891a1e6f"
+BaseOneClick.commerce_code = "commercecode"
+BaseOneClick.api_key = "apikey"
 BaseOneClick.integration_type = IntegrationType.LIVE
 
 # Transaccion Completa
 from transbank import transaccion_completa as BaseTransaccionCompleta
 from transbank.common.integration_type import IntegrationType
 
-BaseTransaccionCompleta.commerce_code = "597034926328"
-BaseTransaccionCompleta.api_key = "e943ea51392bda3685d8a6c2891a1e6f"
+BaseTransaccionCompleta.commerce_code = "commercecode"
+BaseTransaccionCompleta.api_key = "apikey"
 BaseTransaccionCompleta.integration_type = IntegrationType.LIVE
 ```
 

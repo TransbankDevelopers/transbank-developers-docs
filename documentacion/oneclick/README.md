@@ -1,6 +1,6 @@
 # OneClick Mall
 
-## OneClick Mall %<span class='tbk-tagTitleDesc'>REST</span>%
+## OneClick Mall
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#oneclick-mall' tbk-link-name='Referencia API'></div>
@@ -92,68 +92,14 @@ En la modalidad OneClick Mall, existe un código de comercio "mall" que agrupa u
 
 - El usuario inscribe su tarjeta en la página del comercio "mall" agrupador, pero las transacciones son a nombre de las "tiendas" del mall.
 - Se pueden indicar múltiples transacciones a autorizar en una misma operación con diferentes códigos de comercio tienda.
-- Se debe verificar por separado el resultado de cada una de esas transacciones individualmente, pues es posible que el emisor de la tarjeta autorice algunas y otras no.
+- Se debe verificar por separado el resultado de cada una de esas transacciones, validando el código de respuesta (`responseCode`), 
+pues es posible que el emisor de la tarjeta autorice algunas y otras no.
 
-Para usar OneClick **Mall** en transacciones asociadas a varios comercios, 
-lo primero que se debe hacer es definir las dependencias necesarias para poder 
-realizar cualquier tipo de transacción.
-
-<div class="language-simple" data-multiple-language></div>
-
-```java
-
-import cl.transbank.webpay.oneclick.OneClickMall;
-
-// ...
-
-```
-
-```php
-
-use Transbank\Webpay\Oneclick\MallInscription;
-use Transbank\Webpay\Oneclick\MallTransaction;
-
-// ...
-
-```
-
-```csharp
-
-using Transbank.Webpay.Oneclick;
-
-// ...
-
-```
-
-```ruby
-
-// Incluir en el Gemfile
-gem 'transbank-sdk', git: "https://github.com/TransbankDevelopers/transbank-sdk-ruby.git"
-
-
-```
-
-```python
-
-from transbank.oneclick.mall_inscription import MallInscription
-from transbank.oneclick.mall_transaction import MallTransaction
-
-from transbank.oneclick.request import MallTransactionAuthorizeDetails
-
-// ...
-
-```
-```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
-```
-
-
-Una vez que ya cuentas con esa preparación, puedes iniciar transacciones:
-
-### Referencia
-Puedes ver la referencia técnica los siguientes métodos que ofrece el API REST, en la [Referencia API de OneClick](/referencia/oneclick).
-  
 ### Crear una inscripción
+
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/oneclick#crear-una-inscripcion-oneclick-mall' tbk-link-name='Referencia API'></div>
+</div>
 
 Para realizar el primero de los procesos descritos (la inscripción), debe llamarse al método `POST /inscriptions`
 
@@ -261,6 +207,11 @@ Tal como en el caso de OneClick Normal, debes redireccionar vía `POST` el naveg
 
 ### Confirmar una inscripción
 
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/oneclick#confirmar-una-inscripcion-oneclick-mall' tbk-link-name='Referencia API'></div>
+</div>
+
+
 Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a
 la URL de fin de inscripción que definió el comercio (`responseURL`). En ese
 instante el comercio debe llamar a `PUT /inscriptions/{token}`.
@@ -336,9 +287,12 @@ tbkUser = resp.tbk_user
 // No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
 ```
 
-Con eso habrás completado el flujo "feliz" en que todo funciona sin problema. En [la referencia detallada de OneClick Mall puedes ver cada paso del flujo, incluyendo los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#oneclick-mall).
-
 ### Eliminar una inscripción
+
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/oneclick#eliminar-una-inscripcion-oneclick-mall' tbk-link-name='Referencia API'></div>
+</div>
+
 
 En el caso que el comercio requiera eliminar la inscripción de un usuario en OneClick Mall ya sea por la eliminación 
 de un cliente en su sistema o por la solicitud de este para no operar con esta forma de pago, 
@@ -411,9 +365,9 @@ Si se quiere comprobar si se eliminó correctamente, la función retorna un bool
 Recuerda que por cada transacción que hayas enviado en el arreglo (array de `details`) recibiras una respuesta. 
 Debes validarlas de manera independiente, ya que unas podrías estar aprobadas y otras no. 
 
-### Realizar transacciones
+### Autorizar un pago
 
-Con el `tbkUser` retornado de la confirmacion (`PUT /inscriptions/{token}`) puedes autorizar transacciones:
+Con el `tbkUser` retornado de la confirmación (`PUT /inscriptions/{token}`) puedes autorizar transacciones:
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -554,7 +508,7 @@ resp = MallTransaction.authorize(user_name=username, tbk_user=tbkUser, buy_order
 // No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
 ```
 
-### Consultar un pago realizado
+### Obtener estado de una transacción
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 Revisa la [referencia](/referencia/oneclick#consultar-un-pago-realizado-con-oneclick-mall) de este método para mayor detalle en los parámetros de entrada y respuesta.
@@ -590,7 +544,7 @@ var response = MallTransaction.status(buy_order)
 ```
 
 
-### Anular una transacción
+### Reversar o anular una transacción
 
 
 Para OneClick Mall hay dos operaciones diferentes para dejar sin efecto
@@ -754,16 +708,14 @@ final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTra
 //Este SDK aún no tiene implementada esta funcionalidad. Se puede consumir el método del API REST directamente, sin usar el SDK de momento. 
 ```
 
-## Credenciales y Ambiente
+## Credenciales y Ambientes
 
 ### Ambiente de integración
 En el ambiente de integración existen códigos de comercio previamente creados para todos los productos (Webpay Plus, 
 OneClick, etc), para cada una de sus variaciones (Captura Diferida, Mall, Mall Captura Diferida, etc) y dependiendo de 
 la moneda que acepten (USD o CLP).
 
-Esto permite que puedas operar en el ambiente de pruebas con un código de comercio que tenga la misma configuración contratada
-en tu código de comercio productivo. (Si contrataste OneClick Mall Captura Diferida, debes usar ese código de comercio 
-en integración para realizar las pruebas) 
+Asegúrate de que estés usando el código de comercio de integración que tenga la misma configuración del producto que contrataste. 
 
 Puedes revisar los códigos de comercio del ambiente de integración de todos nuestros productos y variaciones 
 [en este link](/documentacion/como_empezar#ambiente-de-integracion).
