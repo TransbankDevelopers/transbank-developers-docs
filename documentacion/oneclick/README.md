@@ -35,7 +35,7 @@ inscripción.
   nombre de usuario y clave.
 2. El cliente selecciona la opción de inscripción, la cual debe estar explicada
   en la página del comercio.
-3. El comercio consume un servicio web publicado por Transbank (`initInscription`), donde entrega los
+3. El comercio consume un servicio web publicado por Transbank (`POST /inscriptions`), donde entrega los
   datos del cliente y la URL de término; obtiene un token y URL de Webpay.
 4. El comercio envía el browser del cliente a la URL y pasa por
   parámetro el token (método POST).
@@ -47,7 +47,7 @@ inscripción.
   no se captura (no se verá reflejada en su estado de cuenta).
 7. Finalizada la inscripción, Webpay envía el browser del cliente a la URL
   entregada por el comercio, pasando por parámetro el token.
-8. El comercio debe consumir otro servicio web de Transbank (`finishInscription`), con el token, para
+    8. El comercio debe consumir otro servicio web de Transbank (`PUT /inscriptions/{token}`), con el token, para
   obtener el resultado de la inscripción y el identificador de usuario (`tbkUser`), que
   debe utilizar en el futuro para realizar los pagos.
 9. El comercio presenta al cliente el resultado de la inscripción.
@@ -74,7 +74,7 @@ Estos valores se definen en el proceso de afiliación comercial del producto.
 1. El cliente se conecta y autentica en la página o aplicación del comercio
   mediante su nombre de usuario y clave.
 2. El cliente selecciona la opción de pagar con Oneclick.
-3. El comercio usa el servicio web de pago, publicado por Transbank (`authorize`), entregando
+3. El comercio usa el servicio web de pago, publicado por Transbank (`POST /transactions`), entregando
   el identificador de usuario (que se obtuvo durante la inscripción: `tbkUser`), el monto del
   pago y la orden de compra. Obtiene la respuesta con el código de
   respuesta.
@@ -82,10 +82,10 @@ Estos valores se definen en el proceso de afiliación comercial del producto.
 
 Adicionalmente, este proceso puede suceder sin la intervención directa del usuario: 
 1. El comercio, teniendo el identificador del usuario (`tbkUser`), puede usar el 
-servicio web de pago (`authorize`) en un `cronjob` o algún proceso programado que 
+servicio web de pago (`POST /transactions`) en un `cronjob` o algún proceso programado que 
 tenga el comercio en sus sistemas. Ejemplo: El comercio puede crear un proceso que 
 corre automáticamente una vez al mes por cada cliente, donde se realiza la llamada 
-al servicio web de pago (`authorize`) para cobrar una mensualidad. 
+al servicio web de pago (`POST /transactions`) para cobrar una mensualidad. 
 
 ### Modalidad Mall
 En la modalidad OneClick Mall, existe un código de comercio "mall" que agrupa una serie de códigos de comercio "tienda". 
@@ -150,10 +150,12 @@ from transbank.oneclick.request import MallTransactionAuthorizeDetails
 
 Una vez que ya cuentas con esa preparación, puedes iniciar transacciones:
 
-
+### Referencia
+Puedes ver la referencia técnica los siguientes métodos que ofrece el API REST, en la [Referencia API de OneClick](/referencia/oneclick).
+  
 ### Crear una inscripción
 
-Para realizar el primero de los procesos descritos (la inscripción), debe llamarse al método `initInscription()`
+Para realizar el primero de los procesos descritos (la inscripción), debe llamarse al método `POST /inscriptions`
 
 Este permite realizar la inscripción del tarjetahabiente e información de su
 tarjeta de crédito. Retorna como respuesta un token que representa la
@@ -261,12 +263,12 @@ Tal como en el caso de OneClick Normal, debes redireccionar vía `POST` el naveg
 
 Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a
 la URL de fin de inscripción que definió el comercio (`responseURL`). En ese
-instante el comercio debe llamar a `Inscription.finish()`.
+instante el comercio debe llamar a `PUT /inscriptions/{token}`.
 
 <aside class="warning">
 El comercio tendrá un máximo de 60 segundos para llamar a este método luego
 de recibir el token en la URL de fin de inscripción (`returnUrl`). Pasados los
-60 segundos sin llamada a finishInscription, la inscripción en curso junto con
+60 segundos sin llamada a el método de confirmar una inscripción (`PUT /inscriptions/{token}`), la inscripción en curso junto con
 el usuario serán eliminados.
 </aside>
 
@@ -338,7 +340,9 @@ Con eso habrás completado el flujo "feliz" en que todo funciona sin problema. E
 
 ### Eliminar una inscripción
 
-Si en algún momento se quiere eliminar la inscripción de un usuario, se debe invocar a `Inscription.delete()`, con el identificador de inscripción `tbkUser` obtenido en `Inscription.finish()`.
+En el caso que el comercio requiera eliminar la inscripción de un usuario en OneClick Mall ya sea por la eliminación 
+de un cliente en su sistema o por la solicitud de este para no operar con esta forma de pago, 
+el comercio deberá invocar a removeInscription() con el identificador de usuario entregado en la inscripción.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -409,7 +413,7 @@ Debes validarlas de manera independiente, ya que unas podrías estar aprobadas y
 
 ### Realizar transacciones
 
-Con el `tbkUser` retornado de `Inscription.finish()` puedes autorizar transacciones:
+Con el `tbkUser` retornado de la confirmacion (`PUT /inscriptions/{token}`) puedes autorizar transacciones:
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -550,11 +554,71 @@ resp = MallTransaction.authorize(user_name=username, tbk_user=tbkUser, buy_order
 // No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
 ```
 
+### Consultar un pago realizado
+
+Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
+Revisa la [referencia](/referencia/oneclick#consultar-un-pago-realizado-con-oneclick-mall) de este método para mayor detalle en los parámetros de entrada y respuesta.
+
+#### `Transaction.status()`
+
+Permite consultar el estado de pago realizado a través de OneClick.
+Retorna el resultado de la autorización.
+
+```java
+final OneclickMallTransactionStatusResponse response =
+  OneclickMall.Transaction.status(buyOrder);
+```
+
+```php
+use Transbank\Webpay\Oneclick;
+
+$response = MallTransaction::getStatus($buyOrder);
+```
+
+```csharp
+using Transbank.Webpay.Oneclick;
+
+var result = MallTransaction.Status(buyOrder);
+```
+
+```ruby
+response = Transbank::Webpay::Oneclick::MallTransaction::status(buy_order: buy_order)
+```
+
+```python
+var response = MallTransaction.status(buy_order)
+```
+
+
 ### Anular una transacción
 
-En el caso de que se quiera anular alguna transacción, se invoca a `Transaction.refund()`.
-En este caso, la anulación requiere del `buyOrder` padre, el `childBuyOrder` de la _sub-transacción_, el 
-código de comercio "tienda" de la _sub-transacción_ y del monto que se desea anular/reversar.
+
+Para OneClick Mall hay dos operaciones diferentes para dejar sin efecto
+transacciones autorizadas: La reversa y la anulación.
+
+**La reversa** se aplica para **problemas operacionales (lado comercio) o de
+comunicación entre comercio y Transbank que impidan recibir a tiempo la
+respuesta de una autorización**. En tal caso el comercio **debe** intentar
+reversar la transacción de autorización para evitar un posible descuadre entre
+comercio y Transbank. La reversa funciona sobre la operación completa del mall,
+lo que significa que **todas las transacciones realizadas en la operación mall
+serán reversadas**. 
+
+**La anulación**, en cambio, actúa individualmente sobre las transacciones de
+las _tiendas_ de un mall. Por ende, **la anulación es la operación correcta a
+utilizar para fines financieros**, de manera de anular un cargo ya realizado.
+Permite generar el reembolso del total o parte del monto de una transacción completa. 
+Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una 
+reversa o una anulación:
+
+<strong>Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
+
+Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.</strong>
+
+#### `Transaction.refund()`
+
+Permite reversar o anular una transacción de venta autorizada con anterioridad.
+Este método retorna como respuesta un identificador único de la transacción de reversa/anulación.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -629,25 +693,28 @@ resp = MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, a
 ```
 
 ### Capturar una transacción
-En el caso de que tengas contratada la modalidad de Captura diferida, necesitas llamar al método `capture` después 
-de llamar a `authorize` para aprobar completamente la transacción.
 
-Una transacción OneClick Mall permite que el tarjetahabiente registre su
-tarjeta de la misma forma en que ocurre con una transacción OneClick, asociando
-dicha inscripción a un comercio padre. Ahora, una vez realizada la inscripción, 
-el comercio padre tiene permitido autorizar transacciones sin captura para
-los comercios “hijo” registrados que tengan habilitado captura diferida.
-Además posterior a la autorización tiene permitido capturar dicho monto reservado.
-La autorización se encarga de validar si es posible realizar el cargo a la
-cuenta asociada a la tarjeta de crédito realizando en el mismo acto la reserva
-de monto de la transacción.
-La captura hace efectiva la reserva hecha previamente o cargo en la cuenta de
-crédito asociada a la tarjeta del titular.
-Estas modalidades, por separado, solo son válidas para tarjetas de crédito.
+En el caso de que tengas contratada la modalidad de Captura diferida, necesitas llamar al método `capture` después 
+de llamar a `authorize` para finalizar la transacción.
+
+Para capturar una transacción, esta debe haber sido creada por un código de
+comercio configurado para captura diferida. De esa forma la transacción estará
+autorizada pero requerirá una captura explícita posterior para confirmar la
+transacción.
 
 Para realizar esa captura explícita debe usarse el método `capture()`
 
+Una inscripción OneClick Mall permite que el tarjetahabiente registre su
+tarjeta, asociando dicha inscripción a un comercio **padre**. Una vez realizada la inscripción, 
+el comercio padre autoriza transacciones para los comercios “hijo” que tiene registrados. 
+La autorización se encarga de validar si es posible realizar el cargo a la tarjeta de crédito, débtio o prepago realizando 
+en el mismo acto la reserva del monto de la transacción.
+La posterior captura hace efectiva dicha reserva y "captura" el monto "reservado" previamente.
+
+
+
 #### `capture()`
+
 
 Este método permite a los comercios OneClick Mall habilitados, poder
 realizar capturas diferidas de una transacción previamente autorizada. El método
@@ -658,13 +725,34 @@ Para capturar una transacción, ésta debe haber sido creada por un código de
 comercio configurado para captura diferida. De esta forma la transacción estará
 autorizada pero requerirá una captura explícita posterior para confirmar la
 transacción.
- 
+
  
 <aside class="notice">
-Rn esta modalidad no se aceptan tarjetas de débito ni prepago. 
+En esta modalidad no se aceptan tarjetas de débito ni prepago. 
 Tampoco se aceptan cuotas, solo ventas con tarjeta de crédito normales sin cuotas. 
 </aside>
 
+```java
+final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTransaction.capture(
+  childCommerceCode, childBuyOrder, amount, authorizationCode
+);
+```
+
+```php
+//Este SDK aún no tiene implementada esta funcionalidad. Se puede consumir el método del API REST directamente, sin usar el SDK de momento. 
+```
+
+```csharp
+// Este SDK aún no tiene implementada esta funcionalidad. Se puede consumir el método del API REST directamente, sin usar el SDK de momento. 
+```
+
+```ruby
+//Este SDK aún no tiene implementada esta funcionalidad. Se puede consumir el método del API REST directamente, sin usar el SDK de momento. 
+```
+
+```python
+//Este SDK aún no tiene implementada esta funcionalidad. Se puede consumir el método del API REST directamente, sin usar el SDK de momento. 
+```
 
 ## Credenciales y Ambiente
 
@@ -682,7 +770,7 @@ Puedes revisar los códigos de comercio del ambiente de integración de todos nu
 
 ### OneClick: Configuración SDK 
 Los SDK vienen preconfigurados para operar con OneClick Mall captura simultanea. Si necesitas operar con otra modalidad, 
-como captura diferida, debes configuirar explicitamente el [código de comercio que usarás](/documentacion/como_empezar#ambiente-de-integracion).
+como captura diferida, debes configurar explícitamente el [código de comercio que usarás](/documentacion/como_empezar#ambiente-de-integracion).
 No es necesario definir el Api Key Secret (llave secreta) ya que en este ambiente, todos los productos usan la misma y 
 ya viene preconfigurada. 
 
@@ -762,66 +850,11 @@ creditCardType  <br> <i> creditCardType </i> | Medio de Pago
 last4CardDigits  <br> <i> xs:string </i> | Final número tarjeta
 responseCode  <br> <i> xs:int </i> | Código de respuesta
 
-## Más Funcionalidades
-
-Consulta la referencia del API para más funcionalidades ofrecidas por Webpay
-Plus y OneClick:
-
-- [Transacciones Webpay Plus Mall](/referencia/webpay-soap#webpay-plus-mall) para
-  realizar cargos atribuibles a múltiples comercios dentro de una agrupación
-  denominada _mall_. Con esto puedes realizar una sola integración y cobrar a
-  nombre de tus clientes o partners.
-
-- [Realizar Captura Diferida](/referencia/webpay-soap#captura-diferida-webpay-plus) de manera que la autorización de
-Webpay Plus Normal solo reserve el cupo y la captura de la transacción se pueda
-realizar posteriormente.
-
-- [Anular Transacciones Webpay Plus](/referencia/webpay-soap#anulacion-webpay-plus) para devolver dinero parcial o
-totalmente.
-
-- [Reversar Transacciones OneClick](/referencia/webpay-soap#reversar-un-pago-webpay-oneclick) para dejar sin efecto una
-transacción realizada durante el día contable actual.
-
-- [Anular Transacciones Webpay
-  OneClick](/referencia/webpay-soap#anular-un-pago-webpay-oneclick) para dejar sin
-  efecto una transacción realizada en otra fecha distinta al día contable
-  actual.
-
-- [Eliminar Inscripciones OneClick](/referencia/webpay-soap#eliminar-una-inscripcion-webpay-oneclick) para eliminar el `tbkUser`
-cuando tus usuarios no quieren continuar con el servicio.
-
-- [Transacciones OneClick Mall](/referencia/webpay-soap#webpay-oneclick-mall).
-
 ## Ejemplos de integración
 
 Ponemos a tu disposición una serie de repositorios en nuestro Github para ayudarte a entender la integración de mejor forma.
 Puedes encontrar una lista de [proyectos de ejemplo acá](/documentacion/como_empezar#ejemplos). 
 
-En el caso de integrar webpay en una aplicación móvil Android, usando webview, debes tener presente la siguiente configuración:
-1. Al momento de abrir el webview.
-
-```js
-// habilitar el Cookie Manager. Depende del nivel de la API de Android que se utilice se habilita de diferente forma
-if (android.os.Build.VERSION.SDK_INT >= 21)
-    CookieManager.getInstance().setAcceptThirdPartyCookies(myWebPayView, true); // myWebPayView es el WebView
-else
-    CookieManager.getInstance().setAcceptCookie(true);
-
-// Asignar el caché en el webview
-webPayView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-```
-
-2. Al momento de cerrar el webview
-
-```js
-// Remover Cookies
-if (android.os.Build.VERSION.SDK_INT >= 21)
-    CookieManager.getInstance().removeAllCookies(null);
-else
-    CookieManager.getInstance().removeAllCookie();
-
-// Borrar caché
-myWebPayView.clearCache(true);
 ```
 
 <div class="container slate">
