@@ -1,17 +1,21 @@
 # Webpay Plus
 
+Webpay Plus permite realizar una solicitud de autorización financiera de un pago con tarjetas de crédito o débito Redcompra en donde quién realiza el pago ingresa al sitio del comercio, selecciona productos o servicio, y el ingreso asociado a los datos de la tarjeta de crédito o débito Redcompra lo realiza en forma segura en Webpay Plus. El comercio que recibe pagos mediante Webpay Plus es identificado mediante un código de comercio.
+
+## Webpay Plus
+
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-plus' tbk-link-name='Referencia Api'></div>
   <div tbk-link='/plugin/webpay' tbk-link-name='Plugins'></div>
 </div>
 
-Webpay Plus permite realizar una solicitud de autorización financiera de un pago con tarjetas de crédito o débito Redcompra en donde quién realiza el pago ingresa al sitio del comercio, selecciona productos o servicio, y el ingreso asociado a los datos de la tarjeta de crédito o débito Redcompra lo realiza en forma segura en Webpay. El comercio que recibe pagos mediante Webpay Plus es identificado mediante un código de comercio.
+Webpay Plus permite realizar una solicitud de autorización financiera de un pago con tarjetas de crédito o débito Redcompra en donde quién realiza el pago ingresa al sitio del comercio, selecciona productos o servicio, y el ingreso asociado a los datos de la tarjeta de crédito o débito Redcompra lo realiza en forma segura en Webpay Plus. El comercio que recibe pagos mediante Webpay Plus es identificado mediante un código de comercio.
 
 Es el tipo de transacción mas común, usada para un pago puntual en una tienda simple. Se generará un único cobro para todos los productos o servicios adquiridos por el tarjetahabiente.
 
 Los SDK pueden ser configurados para apuntar a un ambiente por defecto, estos ya vienen apuntados al ambiente de integración. Si quieres apuntar a producción tienes dos opciones; puedes re-configurar el SDK para que apunte a producción utilizando el código de comercio y API Key. O puedes configurar cada llamada a las operaciones siguientes para pasar un objeto `Options` en el cual configuras donde quieres apuntar.
 
-### Flujo en caso de éxito
+#### Flujo en caso de éxito
 
 De cara al tarjetahabiente, el flujo de páginas para la transacción es el
 siguiente:
@@ -66,7 +70,7 @@ de Transbank, solo debe mostrarse desde el sitio del comercio.
 
 13. Sitio del comercio despliega voucher con los datos de la transacción.
 
-### Flujo si usuario aborta el pago
+#### Flujo si usuario aborta el pago
 
 <img class="td_img-night" src="/images/referencia/webpayrest/diagrama-secuencia-webpayrest-abortar.png" alt="Diagrama de secuencia si usuario aborta el pago">
 
@@ -103,7 +107,7 @@ Nota que el nombre de las variables recibidas es diferente. En lugar de `token_w
    este caso debe obtener una excepción, pues el pago fue abortado.
 10. El comercio debe informar al tarjetahabiente que su pago no se completó.
 
-## Crear una transacción
+### Crear una transacción
 
 Esta operación te permite iniciar o crear una transacción, Webpay Plus procesa el requerimiento y entrega 
 como resultado de la operación el token de la transacción y URL de redireccionamiento a la cual 
@@ -206,7 +210,7 @@ el RUT 11.111.111-1 y la clave 123. Para pruebas exhaustivas <a href="https://ww
 tarjetas de prueba en la sección de Ambientes</a>.
 </aside>
 
-## Confirmar una transacción
+### Confirmar una transacción
 
 Una vez que el tarjetahabiente ha pagado, Webpay Plus retornará 
 el control vía `POST` a la `URL` que indicaste en el `return_url`. 
@@ -333,7 +337,7 @@ response.installments_number
 response.balance
 ```
 
-## Obtener estado de una transacción
+### Obtener estado de una transacción
 
 Esta operación permite obtener el estado de la transacción en los siguientes 7 días desde su creación. 
 En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error 
@@ -456,7 +460,7 @@ response.installments_number
 response.balance
 ```
 
-## Reversar o Anular una transacción
+### Reversar o Anular una transacción
 
 Esta operación permite a todo comercio habilitado, reembolsar o anular una
 transacción que fue generada en Webpay Plus. 
@@ -549,7 +553,7 @@ response.response_code;
 response.type;
 ```
 
-# Webpay Plus Mall
+## Webpay Plus Mall
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-plus' tbk-link-name='Referencia Api'></div>
@@ -562,7 +566,7 @@ Este tipo de pago se utiliza para recibir pagos en distintas tiendas de una sola
 
 Los SDK pueden ser configurados para apuntar a un ambiente por defecto, estos ya vienen apuntados al ambiente de integración. Si quieres apuntar a producción tienes dos opciones; puedes re-configurar el SDK para que apunte a producción utilizando el código de comercio y API Key. O puedes configurar cada llamada a las operaciones siguientes para pasar un objeto `Options` en el cual configuras donde quieres apuntar.
 
-### Flujo Webpay Plus Mall
+#### Flujo Webpay Plus Mall
 
 El flujo de Webpay Plus Mall es en general el mismo que el de [Webpay Plus](#webpay-plus-normal) 
 tanto de cara al tarjeta habiente como de cara al integrador.
@@ -578,7 +582,7 @@ Las diferencias son:
   individualmente, pues es posible que el emisor de la tarjeta autorice algunas
   y otras no.
 
-## Crear una transacción
+### Crear una transacción
 
 Esta operación te permite iniciar o crear varias transacciones de una sola vez, Webpay Plus Mall procesa el requerimiento y entrega 
 como resultado de la operación el token de la transacción y URL de redireccionamiento a la cual 
@@ -734,7 +738,7 @@ el RUT 11.111.111-1 y la clave 123. Para pruebas exhaustivas <a href="https://ww
 tarjetas de prueba en la sección de Ambientes</a>.
 </aside>
 
-## Confirmar una transacción
+### Confirmar una transacción
 
 Una vez que el tarjetahabiente ha pagado, Webpay Plus retornará 
 el control vía `POST` a la `URL` que indicaste en el `return_url`. 
@@ -881,7 +885,7 @@ for detail in details:
 ```
 
 
-## Obtener estado de una transacción
+### Obtener estado de una transacción
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
@@ -911,7 +915,7 @@ response = MallTransaction.status(token)
 response = MallTransaction.status(token)
 ```
 
-## Reversar o Anular una transacción
+### Reversar o Anular una transacción
 
 Esta operación permite a todo comercio habilitado reversar o anular una transacción
 que fue generada en Webpay Plus Mall. El método permite generar el reembolso del
