@@ -287,7 +287,7 @@ token es caducado y no podrá ser utilizado en un pago.
 </aside>
 
 ```java
-import cl.transbank.webpay.webpayplus.WebpayPlus;	  buyOrder, sessionId, amount, returnUrl
+import cl.transbank.webpay.webpayplus.WebpayPlus;
 import cl.transbank.webpay.webpayplus.model.CreateWebpayPlusTransactionResponse;
 
 final WebpayPlusTransactionCreateResponse response = WebpayPlus.Transaction.create(
