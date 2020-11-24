@@ -132,47 +132,6 @@ En la documentación puedes revisar [todos los códigos de comercio](/documentac
 > rápidamente una configuración lista para hacer tus primeras pruebas en dicho
 > ambiente:
 
-```java
-// El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
-WebpayPlus.Transaction.setCommerceCode(597055555532);
-WebpayPlus.Transaction.setApiKey('579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C');
-WebpayPlus.Transaction.setIntegrationType(IntegrationType.TEST);
-```
-
-```php
-// El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
-Transbank\Webpay\WebpayPlus::setCommerceCode('597055555532');
-Transbank\Webpay\WebpayPlus::setApiKey('579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C');
-Transbank\Webpay\WebpayPlus::setIntegrationType('TEST');
-```
-
-```csharp
-// El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
-WebpayPlus.Transaction.CommerceCode = 597055555532;
-WebpayPlus.Transaction.ApiKey = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C";
-WebpayPlus.Transaction.IntegrationType = WebpayIntegrationType.Test;
-```
-
-```ruby
-# El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
-Transbank::Webpay::WebpayPlus.commerce_code = 597055555532;
-Transbank::Webpay::WebpayPlus.api_key = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C";
-Transbank::Webpay::WebpayPlus.integration_type = "TEST";
-
-```
-
-```python
-# El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
-transbank.webpay.webpay_plus.webpay_plus_default_commerce_code = 597055555532
-transbank.webpay.webpay_plus.default_api_key = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C"
-transbank.webpay.webpay_plus.default_integration_type = IntegrationType.TEST
-```
-
-```http
-Tbk-Api-Key-Id: 597055555532
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
-```
-
 ## OneClick Mall
 Revisa la [documentación de OneClick Mall](/documentacion/oneclick) para tener más información sobre como funciona 
 el producto y tener más detalles sobre como realizar tu integración. 
