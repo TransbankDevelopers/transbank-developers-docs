@@ -108,6 +108,32 @@ Ponemos a tu disposición una serie de repositorios en nuestro Github para ayuda
 
 Adicionalmente, puedes revisar el proyecto de ejemplo de PHP [funcionando acá](https://transbank-rest-demo.herokuapp.com/)
 
+En el caso de integrar webpay en una aplicación móvil Android, usando webview, debes tener presente la siguiente configuración:
+1. Al momento de abrir el webview.
+
+```js
+// habilitar el Cookie Manager. Depende del nivel de la API de Android que se utilice se habilita de diferente forma
+if (android.os.Build.VERSION.SDK_INT >= 21)
+    CookieManager.getInstance().setAcceptThirdPartyCookies(myWebPayView, true); // myWebPayView es el WebView
+else
+    CookieManager.getInstance().setAcceptCookie(true);
+
+// Asignar el caché en el webview
+webPayView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+```
+
+2. Al momento de cerrar el webview
+
+```js
+// Remover Cookies
+if (android.os.Build.VERSION.SDK_INT >= 21)
+    CookieManager.getInstance().removeAllCookies(null);
+else
+    CookieManager.getInstance().removeAllCookie();
+
+// Borrar caché
+myWebPayView.clearCache(true);
+
 ## Ambientes
 
 Transbank provee dos ambientes: **Integración** y **Producción**.
