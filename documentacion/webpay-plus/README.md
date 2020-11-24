@@ -1022,11 +1022,8 @@ balance | Monto restante para un detalle anulado.
 
 Ponemos a tu disposición una serie de repositorios en nuestro Github para ayudarte a entender la integración de mejor forma.
 
-- [Ejemplo de Webpay en Java](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-example)
-- [Ejemplo de Webpay en PHP](https://github.com/TransbankDevelopers/transbank-sdk-php-webpay-example)
-- [Ejemplo de Webpay en .Net](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-example)
-- [Ejemplo de Webpay en Ruby](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-example)
-- [Ejemplo de Webpay en Python](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-example)
+[Puedes verlos acá](/documentacion/como_empezar#ejemplos)
+
 
 <div class="container slate">
   <div class='slate-after-footer'>
