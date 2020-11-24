@@ -1,9 +1,3 @@
-<aside class="notice">
-Esta nueva documentación hace referencia a los nuevos servicios REST de Transbank. 
-Si deseas revisar la documentación de los productos SOAP, 
-[haz click aquí](/documentacion/como_empezar_soap)
-</aside>
-
 # Cómo empezar
 Para empezar a integrar los productos de Transbank, te recomendamos usar
 nuestros SDK y plugins, disponibles para múltiples lenguajes de programación y
@@ -107,6 +101,33 @@ Ponemos a tu disposición una serie de repositorios en nuestro Github para ayuda
 - [Ejemplo en Python](https://github.com/TransbankDevelopers/transbank-sdk-python-webpay-rest-example)
 
 Adicionalmente, puedes revisar el proyecto de ejemplo de PHP [funcionando acá](https://transbank-rest-demo.herokuapp.com/)
+
+En el caso de integrar webpay en una aplicación móvil Android, usando webview, debes tener presente la siguiente configuración:
+1. Al momento de abrir el webview.
+
+```js
+// habilitar el Cookie Manager. Depende del nivel de la API de Android que se utilice se habilita de diferente forma
+if (android.os.Build.VERSION.SDK_INT >= 21)
+    CookieManager.getInstance().setAcceptThirdPartyCookies(myWebPayView, true); // myWebPayView es el WebView
+else
+    CookieManager.getInstance().setAcceptCookie(true);
+
+// Asignar el caché en el webview
+webPayView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+```
+
+2. Al momento de cerrar el webview
+
+```js
+// Remover Cookies
+if (android.os.Build.VERSION.SDK_INT >= 21)
+    CookieManager.getInstance().removeAllCookies(null);
+else
+    CookieManager.getInstance().removeAllCookie();
+
+// Borrar caché
+myWebPayView.clearCache(true);
+```
 
 ## Ambientes
 
@@ -394,16 +415,16 @@ Transbank::Webpay::OneClick::Base.integration_type = :LIVE
 from transbank import oneclick as BaseOneClick
 from transbank.common.integration_type import IntegrationType
 
-BaseOneClick.commerce_code = "597034926328"
-BaseOneClick.api_key = "e943ea51392bda3685d8a6c2891a1e6f"
+BaseOneClick.commerce_code = "commercecode"
+BaseOneClick.api_key = "apikey"
 BaseOneClick.integration_type = IntegrationType.LIVE
 
 # Transaccion Completa
 from transbank import transaccion_completa as BaseTransaccionCompleta
 from transbank.common.integration_type import IntegrationType
 
-BaseTransaccionCompleta.commerce_code = "597034926328"
-BaseTransaccionCompleta.api_key = "e943ea51392bda3685d8a6c2891a1e6f"
+BaseTransaccionCompleta.commerce_code = "commercecode"
+BaseTransaccionCompleta.api_key = "apikey"
 BaseTransaccionCompleta.integration_type = IntegrationType.LIVE
 ```
 
@@ -454,6 +475,11 @@ Las posibles causas de este rechazo son:
 * Tarjeta aún no habilitada en el sistema financiero.
 ```
 
+<aside class="notice">
+Esta nueva documentación hace referencia a los nuevos servicios REST de Transbank. 
+Si deseas revisar la documentación de los productos SOAP, 
+[haz click aquí](/documentacion/como_empezar_soap)
+</aside>
 
 <div class="container slate">
   <div class='slate-after-footer'>

@@ -287,7 +287,7 @@ token es caducado y no podrá ser utilizado en un pago.
 </aside>
 
 ```java
-import cl.transbank.webpay.webpayplus.WebpayPlus;	  buyOrder, sessionId, amount, returnUrl
+import cl.transbank.webpay.webpayplus.WebpayPlus;
 import cl.transbank.webpay.webpayplus.model.CreateWebpayPlusTransactionResponse;
 
 final WebpayPlusTransactionCreateResponse response = WebpayPlus.Transaction.create(
@@ -1665,29 +1665,13 @@ Código | Descripción
 53 | La transacción no permite anulación parcial de transacciones con cuotas
 
 ## OneClick Mall
-
-#### Flujo de inscripción y pago
-
-El flujo de OneClick Mall es en general el mismo que el de [Webpay
-OneClick Normal](/referencia/webpay-soap#oneclick-normal) tanto de cara al tarjeta habiente como
-de cara al integrador.
-
-Las diferencias son:
-
-- El usuario debe estar registrado en la página del comercio "mall" agrupador,
-  pero las transacciones son a nombre de las "tiendas" del mall.
-- Se pueden indicar múltiples transacciones a autorizar en una misma operación.
-- Se debe verificar por separado el resultado de cada una de esas transacciones
-  individualmente, pues es posible que el emisor de la tarjeta autorice algunas
-  y otras no.
+Revisa la [documentación de OneClick Mall](/documentacion/oneclick) para tener más información sobre como funciona 
+el producto y tener más detalles sobre como realizar tu integración. 
 
 ### Crear una inscripción OneClick Mall
 
-Para iniciar la inscripción debe usarse el método `Inscription.start()`
-
-#### `Inscription.start()`
-
-Permite gatillar el inicio del proceso de inscripción.
+Permite gatillar el inicio del proceso de inscripción. 
+Más información en [la documentación](/documentacion/oneclick).
 
 ```java
 OneclickMallInscriptionStartResponse response = OneclickMall.Inscription.start(userName, email, responseUrl);
@@ -1791,20 +1775,8 @@ POST a `urlInscriptionForm` con parámetro `TBK_TOKEN` igual al token.
 
 ### Confirmar una inscripción OneClick Mall
 
-Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a
-la URL de fin de inscripción que definió el comercio (`responseURL`). En ese
-instante el comercio debe llamar a `Inscription.finish()`.
-
-<aside class="warning">
-El comercio tendrá un máximo de 60 segundos para llamar a este método luego
-de recibir el token en la URL de fin de inscripción (`returnUrl`). Pasados los
-60 segundos sin llamada a finishInscription, la inscripción en curso junto con
-el usuario serán eliminados.
-</aside>
-
-#### `Inscription.finish()`
-
 Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
+Más información en [la documentación](/documentacion/oneclick).
 
 ```java
 final OneclickMallInscriptionFinishResponse response = OneclickMall.Inscription.finish(token);
@@ -4775,7 +4747,7 @@ Código de estado HTTP | Descripción
 
 2. Una vez que Transbank confirme que la planilla de integración se encuentra correcta (no aplica para plugins), se enviará al comercio la confirmación y se generará su **secreto compartido**, que en conjunto con el código de comercio, permiten operar en producción.
 
-3. Cuando recivas el correo, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-para-produccion-utilizando-los-sdk)
+3. Cuando recibas el correo, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-para-produccion-utilizando-los-sdk)
 
 4. Con la configuración del ambiente de producción ya lista, será necesario realizar una compra de $10 para validar el correcto funcionamiento.
 
