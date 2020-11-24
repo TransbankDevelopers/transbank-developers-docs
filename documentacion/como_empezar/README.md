@@ -127,6 +127,7 @@ else
 
 // Borrar caché
 myWebPayView.clearCache(true);
+```
 
 ## Ambientes
 
