@@ -1,9 +1,3 @@
-<aside class="notice">
-Esta nueva documentación hace referencia a los nuevos servicios REST de Transbank. 
-Si deseas revisar la documentación de los productos SOAP, 
-[haz click aquí](/documentacion/como_empezar_soap)
-</aside>
-
 # Cómo empezar
 Para empezar a integrar los productos de Transbank, te recomendamos usar
 nuestros SDK y plugins, disponibles para múltiples lenguajes de programación y
@@ -480,6 +474,11 @@ Las posibles causas de este rechazo son:
 * Tarjeta aún no habilitada en el sistema financiero.
 ```
 
+<aside class="notice">
+Esta nueva documentación hace referencia a los nuevos servicios REST de Transbank. 
+Si deseas revisar la documentación de los productos SOAP, 
+[haz click aquí](/documentacion/como_empezar_soap)
+</aside>
 
 <div class="container slate">
   <div class='slate-after-footer'>

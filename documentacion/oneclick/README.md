@@ -35,7 +35,7 @@ inscripción.
   nombre de usuario y clave.
 2. El cliente selecciona la opción de inscripción, la cual debe estar explicada
   en la página del comercio.
-3. El comercio consume un servicio web publicado por Transbank (`POST /inscriptions`), donde entrega los
+3. El comercio consume un servicio web para crear una inscripción, donde entrega los
   datos del cliente y la URL de término; obtiene un token y URL de Webpay.
 4. El comercio envía el browser del cliente a la URL y pasa por
   parámetro el token (método POST).
@@ -47,7 +47,7 @@ inscripción.
   no se captura (no se verá reflejada en su estado de cuenta).
 7. Finalizada la inscripción, Webpay envía el browser del cliente a la URL
   entregada por el comercio, pasando por parámetro el token.
-    8. El comercio debe consumir otro servicio web de Transbank (`PUT /inscriptions/{token}`), con el token, para
+    8. El comercio debe consumir otro servicio web de Transbank para finalizar la inscripción enviando el token, para
   obtener el resultado de la inscripción y el identificador de usuario (`tbkUser`), que
   debe utilizar en el futuro para realizar los pagos.
 9. El comercio presenta al cliente el resultado de la inscripción.
@@ -74,7 +74,7 @@ Estos valores se definen en el proceso de afiliación comercial del producto.
 1. El cliente se conecta y autentica en la página o aplicación del comercio
   mediante su nombre de usuario y clave.
 2. El cliente selecciona la opción de pagar con Oneclick.
-3. El comercio usa el servicio web de pago, publicado por Transbank (`POST /transactions`), entregando
+3. El comercio usa el servicio web de pago para autorizar pagos, entregando
   el identificador de usuario (que se obtuvo durante la inscripción: `tbkUser`), el monto del
   pago y la orden de compra. Obtiene la respuesta con el código de
   respuesta.
@@ -82,10 +82,10 @@ Estos valores se definen en el proceso de afiliación comercial del producto.
 
 Adicionalmente, este proceso puede suceder sin la intervención directa del usuario: 
 1. El comercio, teniendo el identificador del usuario (`tbkUser`), puede usar el 
-servicio web de pago (`POST /transactions`) en un `cronjob` o algún proceso programado que 
+servicio web de pago en un `cronjob` o algún proceso programado que 
 tenga el comercio en sus sistemas. Ejemplo: El comercio puede crear un proceso que 
 corre automáticamente una vez al mes por cada cliente, donde se realiza la llamada 
-al servicio web de pago (`POST /transactions`) para cobrar una mensualidad. 
+al servicio web de pago para cobrar una mensualidad. 
 
 ### Modalidad Mall
 En la modalidad OneClick Mall, existe un código de comercio "mall" que agrupa una serie de códigos de comercio "tienda". 
@@ -95,13 +95,13 @@ En la modalidad OneClick Mall, existe un código de comercio "mall" que agrupa u
 - Se debe verificar por separado el resultado de cada una de esas transacciones, validando el código de respuesta (`responseCode`), 
 pues es posible que el emisor de la tarjeta autorice algunas y otras no.
 
+## Operaciones
+
 ### Crear una inscripción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/oneclick#crear-una-inscripcion-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/webpay#crear-una-inscripcion-oneclick-mall' tbk-link-name='Referencia API'></div>
 </div>
-
-Para realizar el primero de los procesos descritos (la inscripción), debe llamarse al método `POST /inscriptions`
 
 Este permite realizar la inscripción del tarjetahabiente e información de su
 tarjeta de crédito. Retorna como respuesta un token que representa la
@@ -208,21 +208,20 @@ Tal como en el caso de OneClick Normal, debes redireccionar vía `POST` el naveg
 ### Confirmar una inscripción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/oneclick#confirmar-una-inscripcion-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/webpay#confirmar-una-inscripcion-oneclick-mall' tbk-link-name='Referencia API'></div>
 </div>
 
 
 Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a
 la URL de fin de inscripción que definió el comercio (`responseURL`). En ese
-instante el comercio debe llamar a `PUT /inscriptions/{token}`.
+momento el comercio debe confirmar la inscripción.
 
 <aside class="warning">
 El comercio tendrá un máximo de 60 segundos para llamar a este método luego
 de recibir el token en la URL de fin de inscripción (`returnUrl`). Pasados los
-60 segundos sin llamada a el método de confirmar una inscripción (`PUT /inscriptions/{token}`), la inscripción en curso junto con
+60 segundos sin llamada a el método de confirmar una inscripción, la inscripción en curso junto con
 el usuario serán eliminados.
 </aside>
-
 
 Una vez que se autorice la inscripción del usuario, se retornará el control al comercio vía `POST` en la url indicada en `response_url`, con el parámetro `TBK_TOKEN` identificando la transacción. Con esa información se puede finalizar la inscripción:
 
@@ -290,7 +289,7 @@ tbkUser = resp.tbk_user
 ### Eliminar una inscripción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/oneclick#eliminar-una-inscripcion-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/webpay#eliminar-una-inscripcion-oneclick-mall' tbk-link-name='Referencia API'></div>
 </div>
 
 
@@ -366,6 +365,9 @@ Recuerda que por cada transacción que hayas enviado en el arreglo (array de `de
 Debes validarlas de manera independiente, ya que unas podrías estar aprobadas y otras no. 
 
 ### Autorizar un pago
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#autorizar-un-pago-con-oneclick-mall' tbk-link-name='Referencia API'></div>
+</div>
 
 Con el `tbkUser` retornado de la confirmación (`PUT /inscriptions/{token}`) puedes autorizar transacciones:
 
@@ -509,9 +511,12 @@ resp = MallTransaction.authorize(user_name=username, tbk_user=tbkUser, buy_order
 ```
 
 ### Obtener estado de una transacción
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#consultar-un-pago-realizado-con-oneclick-mall' tbk-link-name='Referencia API'></div>
+</div>
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
-Revisa la [referencia](/referencia/oneclick#consultar-un-pago-realizado-con-oneclick-mall) de este método para mayor detalle en los parámetros de entrada y respuesta.
+Revisa la [referencia](/referencia/webpay#consultar-un-pago-realizado-con-oneclick-mall) de este método para mayor detalle en los parámetros de entrada y respuesta.
 
 #### `Transaction.status()`
 
@@ -545,7 +550,9 @@ var response = MallTransaction.status(buy_order)
 
 
 ### Reversar o anular una transacción
-
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#reversar-o-anular-un-pago-oneclick-mall' tbk-link-name='Referencia API'></div>
+</div>
 
 Para OneClick Mall hay dos operaciones diferentes para dejar sin efecto
 transacciones autorizadas: La reversa y la anulación.
@@ -647,6 +654,9 @@ resp = MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, a
 ```
 
 ### Capturar una transacción
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#captura-diferida-oneclick-mall' tbk-link-name='Referencia API'></div>
+</div>
 
 En el caso de que tengas contratada la modalidad de Captura diferida, necesitas llamar al método `capture` después 
 de llamar a `authorize` para finalizar la transacción.
@@ -664,10 +674,6 @@ el comercio padre autoriza transacciones para los comercios “hijo” que tiene
 La autorización se encarga de validar si es posible realizar el cargo a la tarjeta de crédito, débtio o prepago realizando 
 en el mismo acto la reserva del monto de la transacción.
 La posterior captura hace efectiva dicha reserva y "captura" el monto "reservado" previamente.
-
-
-
-#### `capture()`
 
 
 Este método permite a los comercios OneClick Mall habilitados, poder
@@ -808,6 +814,10 @@ Ponemos a tu disposición una serie de repositorios en nuestro Github para ayuda
 Puedes encontrar una lista de [proyectos de ejemplo acá](/documentacion/como_empezar#ejemplos). 
 
 ```
+
+<aside class="notice">
+Si deseas revisar la documentación anterior (SOAP), puedes hacerlo revisarla [acá](/documentacion/webpay)
+</aside>
 
 <div class="container slate">
   <div class='slate-after-footer'>
