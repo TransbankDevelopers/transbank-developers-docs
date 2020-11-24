@@ -136,7 +136,7 @@ En la documentación puedes revisar [todos los códigos de comercio](/documentac
 Revisa la [documentación de OneClick Mall](/documentacion/oneclick) para tener más información sobre como funciona 
 el producto y tener más detalles sobre como realizar tu integración. 
 
-### Crear una inscripción OneClick Mall
+### Crear una inscripción
 
 Permite gatillar el inicio del proceso de inscripción. 
 Más información en [la documentación](/documentacion/oneclick).
@@ -241,7 +241,7 @@ Una vez que se llama a este webservice el usuario debe ser redireccionado vía
 POST a `urlInscriptionForm` con parámetro `TBK_TOKEN` igual al token.
 </aside>
 
-### Confirmar una inscripción OneClick Mall
+### Confirmar una inscripción
 
 Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
 Más información en [la documentación](/documentacion/oneclick).
@@ -349,7 +349,7 @@ authorization_code  <br> <i> String </i> | Código que identifica la autorizaci
 card_type <br> <i> cardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna, Redcompra). <br> Largo: 10.
 card_number <br> <i> String </i> | Últimos 4 dígitos de la tarjeta inscrito: <br> Largo: 4.
 
-### Eliminar una inscripción con Oneclick Mall
+### Eliminar una inscripción
 Una vez finalizado el proceso de inscripción es posible eliminarla de ser necesario. Para esto debes usar el método llamado `Inscription.remove()`.
 
 #### `Inscription.remove()`
@@ -427,7 +427,7 @@ username  <br> <i> String </i> | Identificador del usuario en los sistemas del 
 Content-Type: application/json
 ```
 
-### Autorizar un pago con OneClick Mall
+### Autorizar un pago
 
 Una vez realizada la inscripción, el comercio puede usar el `tbkUser` recibido
 para realizar transacciones. Para eso debes usar el método `Transaction.authorize()`.
@@ -694,7 +694,7 @@ Cualquier valor distinto de número en `installmentsNumber` (incluyendo letras,
 inexistencia del campo o nulo) será asumido como cero, es decir "Sin cuotas".
 </aside>
 
-### Consultar un pago realizado con OneClick Mall
+### Consultar un pago realizado
 
 Permite consultar el estado de pago realizado a través de Oneclick.
 Retorna el resultado de la autorización.
