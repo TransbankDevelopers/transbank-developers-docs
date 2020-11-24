@@ -13,7 +13,7 @@ Webpay Plus permite realizar una solicitud de autorización financiera de un pag
 
 Es el tipo de transacción mas común, usada para un pago puntual en una tienda simple. Se generará un único cobro para todos los productos o servicios adquiridos por el tarjetahabiente.
 
-Los SDK pueden ser configurados para apuntar a un ambiente por defecto, estos ya vienen apuntados al ambiente de integración. Si quieres apuntar a producción tienes dos opciones; puedes re-configurar el SDK para que apunte a producción utilizando el código de comercio y API Key. O puedes configurar cada llamada a las operaciones siguientes para pasar un objeto `Options` en el cual configuras donde quieres apuntar.
+
 
 #### Flujo en caso de éxito
 
@@ -72,10 +72,10 @@ de Transbank, solo debe mostrarse desde el sitio del comercio.
 
 #### Flujo si usuario aborta el pago
 
-<img class="td_img-night" src="/images/referencia/webpayrest/diagrama-secuencia-webpayrest-abortar.png" alt="Diagrama de secuencia si usuario aborta el pago">
-
 Si el tarjetahabiente anula la transacción en el formulario de pago de Webpay,
 el flujo cambia y los pasos son los siguientes:
+
+<img class="td_img-night" src="/images/referencia/webpayrest/diagrama-secuencia-webpayrest-abortar.png" alt="Diagrama de secuencia si usuario aborta el pago">
 
 1. Una vez seleccionado los bienes o servicios, tarjetahabiente decide pagar a
    través de Webpay.
@@ -371,6 +371,8 @@ response = Transbank::Webpay::WebpayPlus::Transaction::status(token: @token)
 response = transbank.webpay.webpay_plus.transaction.status(token)
 ```
 
+**Respuesta**
+
 Para obtener la información contenida en la respuesta puedes hacerlo de la siguiente manera.
 
 <div class="language-simple" data-multiple-language></div>
@@ -560,11 +562,14 @@ response.type;
   <div tbk-link='/plugin/webpay' tbk-link-name='Plugins'></div>
 </div>
 
-Webpay Plus Mall permite realizar una solicitud de autorización financiera de varios pagos con tarjetas de crédito o débito Redcompra en donde quién realiza el pago ingresa al sitio del comercio, selecciona productos o servicio, y el ingreso asociado a los datos de la tarjeta de crédito o débito Redcompra lo realiza en forma segura en Webpay Plus Mall. Los comercios que reciben pagos mediante Webpay Plus Mall son identificados mediante un código de comercio.
+Una transacción Mall Normal corresponde a una solicitud de autorización financiera de un conjunto de pagos con tarjetas de crédito o débito, en donde quién realiza el pago ingresa al sitio del comercio, selecciona productos o servicios, y el ingreso asociado a los datos de la tarjeta de crédito o débito lo realiza una única vez en forma segura en Webpay para el conjunto de pagos. Cada pago tendrá su propio resultado, autorizado o rechazado.
 
-Este tipo de pago se utiliza para recibir pagos en distintas tiendas de una sola vez.
+![Desagregación de un pago Webpay Mall](/images/pago-webpay-mall.png)
 
-Los SDK pueden ser configurados para apuntar a un ambiente por defecto, estos ya vienen apuntados al ambiente de integración. Si quieres apuntar a producción tienes dos opciones; puedes re-configurar el SDK para que apunte a producción utilizando el código de comercio y API Key. O puedes configurar cada llamada a las operaciones siguientes para pasar un objeto `Options` en el cual configuras donde quieres apuntar.
+Es la tienda Mall la que agrupa múltiples tiendas, son estas últimas las que pueden
+generar transacciones. Tanto el mall como las tiendas asociadas son
+identificadas a través de un número denominado código de comercio.
+
 
 #### Flujo Webpay Plus Mall
 
@@ -952,3 +957,102 @@ response = Transaction.refund(token, buy_order, commerce_code, amount)
 ```python
 response = Transaction.refund(token, buy_order, commerce_code, amount)
 ```
+
+## Credenciales y Ambiente
+
+Para Webpay Plus, las credenciales del comercio (código de comercio y API Key) varían según el la modalidad del producto usado (Webpay Plus, Webpay Plus Mall. Webpay Plus Diferido, Webpay Plus Mall Diferido). También varían si la moneda a manejar es pesos chilenos (CLP) o dólares (USD).
+
+Por lo tanto, es clave que antes de operar con las clases que permiten realizar transacciones se configure correctamente el SDK para con estas credenciales para utilizar el producto correcto
+
+Los SDK pueden ser configurados para apuntar a un ambiente por defecto, estos ya vienen apuntados al ambiente de integración. Si quieres apuntar a producción tienes dos opciones; puedes re-configurar el SDK para que apunte a producción utilizando el código de comercio y API Key. O puedes configurar cada llamada a las operaciones siguientes para pasar un objeto `Options` en el cual configuras donde quieres apuntar.
+
+Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#b-utilizando-los-sdk)
+
+## Conciliación de Transacciones
+
+Una vez hayas realizado transacciones en producción quedará un historial de
+transacciones que puedes revisar entrando a
+[www.transbank.cl](https://www.transbank.cl/). Si lo deseas  puedes realizar una
+conciliación entre tu sistema y el reporte que entrega el portal.
+
+### Webpay Plus
+
+Para realizar la conciliación debes seguir los siguientes pasos:
+
+1. Iniciar sesión con tu usuario y contraseña en [www.transbank.cl](https://www.transbank.cl)
+
+2. Una vez entras al portal, en el menú principal presiona "Webpay", y luego "Reporte Transaccional"
+![Paso 2](/images/documentacion/conciliacion1.png)
+
+3. En la parte superior de la ventana puedes encontrar un buscador que te ayudará
+a filtrar, según los parámetros que gustes, las transacciones que quieras cuadrar.
+Para filtrar por las transacciones de Webpay Plus, en el campo "Producto" debes
+seleccionar **Webpay3G**. Debes tener en cuenta que lamentablemente
+**el reporte no distingue entre Webpay y Onepay**, debido a esto, bajo el producto "Webpay3G" encontrarás transacciones de ambos productos.
+![Paso 3](/images/documentacion/conciliacion2.png)
+
+4. Dentro de la tabla en la imagen anterior puedes presionar el número de orden de
+compra para abrir los detalles de la transacción. Es en esta sección donde podrás encontrar y conciliar los parámetros devueltos por el SDK al confirmar una transacción.
+![Paso 4](/images/documentacion/conciliacion3.png)
+
+5. Sólo queda realizar la conciliación. A continuación puedes ver una lista de
+parámetros que recibirás al momento de confirmar una transacción y a que fila
+de la tabla "Detalles de la transacción" corresponden (la lista detallada de
+parámetros de Webpay Plus la puedes encontrar
+[acá](/referencia/webpay#obtener-estado-de-una-transaccion-webpay-plus))
+
+Nombre | Descripción
+------ | -----------
+vci | Resultado de la autenticación del tarjetahabiente. 
+amount | Monto de la transacción.
+status | Estado de la transacción
+buy_order | Orden de compra de la tienda
+session_id | Identificador de sesión
+card_detail | Objeto que representa los datos de la tarjeta de crédito del tarjeta habiente.
+card_detail.card_number | 4 últimos números de la tarjeta de crédito del tarjetahabiente. Solo para comercios autorizados por Transbank se envía el número completo.
+accounting_date | Fecha de la autorización.
+transaction_date | Fecha y hora de la autorización.
+authorization_code | Código de autorización de la transacción
+payment_type_code  | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.
+installments_amount | Monto de las cuotas. 
+installments_number | Cantidad de cuotas.
+balance | Monto restante para un detalle anulado. 
+
+## Ejemplos de integración
+
+Ponemos a tu disposición una serie de repositorios en nuestro Github para ayudarte a entender la integración de mejor forma.
+
+- [Ejemplo de Webpay en Java](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-example)
+- [Ejemplo de Webpay en PHP](https://github.com/TransbankDevelopers/transbank-sdk-php-webpay-example)
+- [Ejemplo de Webpay en .Net](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-example)
+- [Ejemplo de Webpay en Ruby](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-example)
+- [Ejemplo de Webpay en Python](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-example)
+
+<div class="container slate">
+  <div class='slate-after-footer'>
+    <div class='row d-flex align-items-stretch'>
+      <div class='col-12 col-lg-6'>
+        <h3 class='toc-ignore fo-size-22 text-center'>¿Tienes alguna duda de integración?</h3>
+        <a href='https://join-transbankdevelopers-slack.herokuapp.com/' target='_blank'>
+          <div class='td_block_gray'>
+            <img src="https://p9.zdassets.com/hc/theme_assets/138842/200037786/logo.png" alt="" >
+            <div class='td_pa-txt'>
+              Únete a la comunidad de integradores en Slack y comparte buenos tips ayudando a los nuevos o buscando soluciones alternativas. Nuestro equipo está ahí para ayudarte.
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class='mt-3 mt-lg-0 col-12 col-lg-6'>
+        <h3 class='toc-ignore fo-size-22 text-center'>Si aún tienes dudas envíanos un mensaje</h3>
+        <a class="pointer magenta" data-toggle='modal' data-target='#modalContactForm'>
+          <div class='td_block_gray'>
+            <div class="fo-size-20 text-center sub-title_bloq"><i class="fas fa-envelope"></i> Envíanos un mensaje.</div>
+            <div class='td_pa-txt'>
+              Si necesitas resolver algún tipo de incidencia en el portal o si existe algún problema con tu integración y  que no has podido resolver, contáctanos a través de nuestro formulario.
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
