@@ -3,7 +3,7 @@
 ## Transacción Completa
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/transaccion-completa' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/webpay#transaccion-completa' tbk-link-name='Referencia API'></div>
 </div>
 
 Una transacción completa permite al comercio presentar al tarjetahabiente un
