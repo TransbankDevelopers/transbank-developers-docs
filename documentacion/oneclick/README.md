@@ -289,7 +289,7 @@ tbkUser = resp.tbk_user
 ### Eliminar una inscripción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#eliminar-una-inscripcion-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/webpay##eliminar-una-inscripcion-con-oneclick-mall' tbk-link-name='Referencia API'></div>
 </div>
 
 
@@ -816,7 +816,7 @@ Puedes encontrar una lista de [proyectos de ejemplo acá](/documentacion/como_em
 ```
 
 <aside class="notice">
-Si deseas revisar la documentación anterior (SOAP), puedes hacerlo revisarla [acá](/documentacion/webpay)
+Si deseas revisar la documentación anterior (SOAP), puedes revisarla [acá](/documentacion/webpay)
 </aside>
 
 <div class="container slate">

@@ -430,25 +430,23 @@ from transbank.transaccion_completa.transaction import Transaction
 ## Credenciales y Ambiente
 
 ### Ambiente de integración
-En el ambiente de integración existen códigos de comercio previamente creados para todos los productos (Webpay Plus, 
+En el ambiente de integración existen códigos de comercio previamente creados para todos los productos (Transacción Completa, Webpay Plus, 
 OneClick, etc), para cada una de sus variaciones (Captura Diferida, Mall, Mall Captura Diferida, etc) y dependiendo de 
 la moneda que acepten (USD o CLP).
 
-Esto permite que puedas operar en el ambiente de pruebas con un código de comercio que tenga la misma configuración contratada
-en tu código de comercio productivo. (Si contrataste OneClick Mall Captura Diferida, debes usar ese código de comercio 
-en integración para realizar las pruebas) 
+Asegúrate de que estés usando el código de comercio de integración que tenga la misma configuración del producto que contrataste. 
+
 
 Puedes revisar los códigos de comercio del ambiente de integración de todos nuestros productos y variaciones 
 [en este link](/documentacion/como_empezar#ambiente-de-integracion).
 
-### OneClick: Configuración SDK 
-Los SDK vienen preconfigurados para operar con OneClick Mall captura simultanea. Si necesitas operar con otra modalidad, 
-como captura diferida, debes configurar explícitamente el [código de comercio que usarás](/documentacion/como_empezar#ambiente-de-integracion).
+### Transacción Completa: Configuración SDK 
+Los SDK vienen preconfigurados para operar con Transacción Completa captura simultanea. Si necesitas operar con otra modalidad, 
+como captura diferida, mall, captura diferida sin cvv o cualquiera, debes configurar explícitamente el [código de comercio que usarás](/documentacion/como_empezar#ambiente-de-integracion).
 No es necesario definir el Api Key Secret (llave secreta) ya que en este ambiente, todos los productos usan la misma y 
 ya viene preconfigurada. 
 
 ```java
-// OneclickMall Live Config
 FullTransaction.Transaction.setCommerceCode("pon-tu-codigo-de-comercio-aca");
 ``` 
 
@@ -485,6 +483,9 @@ Si ya tienes tu llave secreta, puedes revisar como configurar el SDK para usar e
 Ponemos a tu disposición una serie de repositorios en nuestro Github para ayudarte a entender la integración de mejor forma.
 Puedes encontrar una lista de [proyectos de ejemplo acá](/documentacion/como_empezar#ejemplos). 
 
+<aside class="notice">
+Si deseas revisar la documentación anterior (SOAP), puedes revisarla [acá](/documentacion/webpay)
+</aside>
 
 <div class="container slate">
   <div class='slate-after-footer'>
