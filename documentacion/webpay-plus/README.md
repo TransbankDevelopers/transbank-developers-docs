@@ -109,6 +109,10 @@ Nota que el nombre de las variables recibidas es diferente. En lugar de `token_w
 
 ### Crear una transacción
 
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#crear-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
+</div>
+
 Esta operación te permite iniciar o crear una transacción, Webpay Plus procesa el requerimiento y entrega 
 como resultado de la operación el token de la transacción y URL de redireccionamiento a la cual 
 se deberá redirigir al tarjetahabiente.
@@ -211,6 +215,10 @@ tarjetas de prueba en la sección de Ambientes</a>.
 </aside>
 
 ### Confirmar una transacción
+
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#confirmar-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
+</div>
 
 Una vez que el tarjetahabiente ha pagado, Webpay Plus retornará 
 el control vía `POST` a la `URL` que indicaste en el `return_url`. 
@@ -339,6 +347,10 @@ response.balance
 
 ### Obtener estado de una transacción
 
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#obtener-estado-de-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
+</div>
+
 Esta operación permite obtener el estado de la transacción en los siguientes 7 días desde su creación. 
 En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error 
 inesperado permite conocer el estado y tomar las acciones que correspondan.
@@ -464,6 +476,10 @@ response.balance
 
 ### Reversar o Anular una transacción
 
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#reversar-o-anular-un-pago-webpay-plus' tbk-link-name='Referencia Api'></div>
+</div>
+
 Esta operación permite a todo comercio habilitado, reembolsar o anular una
 transacción que fue generada en Webpay Plus. 
 Puedes generar el reembolso del total o parte del monto de una transacción, dependiendo de la 
@@ -558,7 +574,7 @@ response.type;
 ## Webpay Plus Mall
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#webpay-plus' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/webpay#webpay-plus-mall' tbk-link-name='Referencia Api'></div>
   <div tbk-link='/plugin/webpay' tbk-link-name='Plugins'></div>
 </div>
 
@@ -588,6 +604,10 @@ Las diferencias son:
   y otras no.
 
 ### Crear una transacción
+
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#crear-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
+</div>
 
 Esta operación te permite iniciar o crear varias transacciones de una sola vez, Webpay Plus Mall procesa el requerimiento y entrega 
 como resultado de la operación el token de la transacción y URL de redireccionamiento a la cual 
@@ -745,6 +765,10 @@ tarjetas de prueba en la sección de Ambientes</a>.
 
 ### Confirmar una transacción
 
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#confirmar-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
+</div>
+
 Una vez que el tarjetahabiente ha pagado, Webpay Plus retornará 
 el control vía `POST` a la `URL` que indicaste en el `return_url`. 
 Recibirás también el parámetro `token_ws` que te permitirá conocer el resultado de la transacción.
@@ -892,6 +916,10 @@ for detail in details:
 
 ### Obtener estado de una transacción
 
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#obtener-estado-de-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
+</div>
+
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
 <div class="language-simple" data-multiple-language></div>
@@ -921,6 +949,10 @@ response = MallTransaction.status(token)
 ```
 
 ### Reversar o Anular una transacción
+
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#reversar-o-anular-un-pago-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
+</div>
 
 Esta operación permite a todo comercio habilitado reversar o anular una transacción
 que fue generada en Webpay Plus Mall. El método permite generar el reembolso del
