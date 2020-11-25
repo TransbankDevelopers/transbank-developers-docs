@@ -1,8 +1,6 @@
 # Transacción Completa
 
-
-
-## Webpay Transacción Completa %<span class='tbk-tagTitleDesc'>REST</span>%
+## Transacción Completa
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/transaccion-completa' tbk-link-name='Referencia API'></div>
