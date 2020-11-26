@@ -57,6 +57,10 @@ También se puede incluir directamente el tag script
 </script>
 ```
 
+<aside class="warning">
+Si utilizas el metodo de tag script, entonces el objeto POS se pasa a llamar Transbank.POS en todos los ejemplos que siguen en esta guia.
+</aside>
+
 #### Instalar el agente desktop
 
 Revisa la lista de versiones públicadas y [descarga la última versión](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent/releases). Verás que hay un archivo .exe que debes bajar si usas windows, o un archivo .zip si usas MacOS. Luego, solo debes de instalar y ejecutar el programa.
