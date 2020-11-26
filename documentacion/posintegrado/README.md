@@ -126,7 +126,7 @@ Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilice
 ### LibSerialPort
 
 <aside class="success">
-Solo el SDK <string>C</strong> y <strong>Java</strong> requieren de esta libreria.
+Solo el SDK <string>C</strong> y <strong>Java</strong> requieren de esta librería.
 </aside>
 
 Algunos SDK dependen de [libSerialPort](https://sigrok.org/wiki/Libserialport) para la comunicación serial.
@@ -325,7 +325,7 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta. L
 
 En el caso de C#, los mensajes intermedios se reciven mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`.
 
-Si usas mensajes intermedios en Javascript, entonces puedes pasar un callback como tercer parametro.
+Si usas mensajes intermedios en Javascript, entonces puedes pasar un callback como tercer parámetro.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -408,16 +408,16 @@ El SDK de **C** y **Java** no soportan el envío de mensajes intermedios. Por es
 
 ### Transacción de Venta Multicodigo
 
-Este comando es enviado por la caja para solicitar la ejecución de una venta multicodigo. Los siguientes parámetros deben ser enviados desde la caja:
+Este comando es enviado por la caja para solicitar la ejecución de una venta multicódigo. Los siguientes parámetros deben ser enviados desde la caja:
 
 - `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
 - `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
-- `CodigoDeComercio`: Codigo de comercio que realiza la venta. (No es el mismo codigo del POS, ya que en multicodigo el codigo padre no puede realizar ventas.)
+- `CodigoDeComercio`: Código de comercio que realiza la venta. (No es el mismo código del POS, ya que en multicódigo el código padre no puede realizar ventas.)
 - `Enviar Status`: (Opcional) Indica si se envian los mensajes intermedios (verdader) o se omiten (falso, por defecto)
 
-En el caso de C#, los mensajes intermedios se reciven mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`
+En el caso de C#, los mensajes intermedios se reciben mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`
 
-Si usas mensajes intermedios en Javascript, entonces puedes pasar un callback como tercer parametro.
+Si usas mensajes intermedios en Javascript, entonces puedes pasar un callback como tercer parámetro.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -449,7 +449,7 @@ private static void NewIntermadiateMessageRecived(object sender, IntermediateRes
 import POS from "transbank-pos-sdk-web";
 
 POS.doMulticodeSale(this.total, "ticket2", "597029414301", (data) => {
-//Este tercer parametro es opcional. Si está presente, se ejecutará cada vez que llegue un mensaje de status de la venta.
+//Este tercer parámetro es opcional. Si está presente, se ejecutará cada vez que llegue un mensaje de status de la venta.
 console.log('Mensaje de status recibido', data);
 }).then((saleResponse) => {
     console.log(saleResponse);
@@ -566,7 +566,7 @@ El resultado de la transacción última venta devuelve los mismos datos que una 
 
 Este comando es enviado por la caja, solicitando al POS la re-impresión de la última venta realizada, y además permite recepcionar el voucher como parte de la respuesta del pos.
 
-Si el POS recibe el comando de Última Venta y no existen transacciones en memoria del POS, se envía la respuesta a la caja indicando el código de respuesta 11.
+Si el POS recibe el comando de última venta y no existen transacciones en memoria del POS, se envía la respuesta a la caja indicando el código de respuesta 11.
 ([Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas))
 
 <div class="language-simple" data-multiple-language></div>
@@ -607,7 +607,7 @@ El resultado de la transacción última venta devuelve los mismos datos que una 
   "Last 4 Digits": 6677,
   "Operation Number": 60,
   "Card Type": "CR",
-  "Accounting Date": "28/10/2019 22:35:12";
+  "Accounting Date": "28/10/2019 22:35:12",
   "Account Number": "300000000000",
   "Card Brand": "AX",
   "Real Date": "28/10/2019 22:35:12",
@@ -865,7 +865,7 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` o
 
 ### Transacción de Detalle de Ventas Multicodigo
 
-Esta transacción solicita al POS **todas** las transacciones que se han realizado y permanecen en la memoria del POS. El parámetro que recibe esta función es de tipo booleano e indica si se realiza la impresión del detalle en el POS. En el caso de que no se solicite la impresión, el POS envía **todas** las transacciones a la caja, una por una. Si se realiza la impresión, la caja recibira una lista vacia de transacciónes.
+Esta transacción solicita al POS **todas** las transacciones que se han realizado y permanecen en la memoria del POS. El parámetro que recibe esta función es de tipo booleano e indica si se realiza la impresión del detalle en el POS. En el caso de que no se solicite la impresión, el POS envía **todas** las transacciones a la caja, una por una. Si se realiza la impresión, la caja recibirá una lista vacía de transacciones.
 
 <div class="language-simple" data-multiple-language></div>
 
