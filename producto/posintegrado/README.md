@@ -12,12 +12,15 @@ El POS integrado permite realizar transacciones con tarjeta de Crédito/Débito/
 - Venta.
 - Cierre.
 - Anulación.
-- Última Venta.
-- Detalle de Ventas.
+- Última venta.
+- Detalle de ventas.
 - Totales.
-- Carga de Llaves.
+- Carga de llaves.
 - Poll (prueba de comunicación POS - caja).
-- Cambio a modalidad POS Normal.
+- Cambio a modalidad POS normal.
+- Venta multicódigo.
+- Ultima venta multicódigo
+- Detalle de ventas multicódigo.
 
 ## Requerimientos
 

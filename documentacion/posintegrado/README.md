@@ -6,58 +6,67 @@
 
 ## Cómo empezar
 
-Primero, debes instalar en tu máquina la librería/SDK en C, puedes encontrar el código fuente en [GitHub](https://github.com/TransbankDevelopers/transbank-pos-sdk-c) y seguir las instrucciones para compilarlo. También puede usar las DLLs ya compiladas que se adjuntan en el [último release](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest)
-
-Esta librería y sus dependencias (libserialport) son requisitos para utilizar el SDK.
-
-Por el momento, hay un SDK para [.NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet), [Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java) y [Javascript (tecnologías web)](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js). 
-
+Por el momento, hay un SDK para [.NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet), [Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java) y [Javascript (tecnologías web)](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js).
 
 ### SDK .NET
+
 Para .NET lo puedes encontrar en [NuGet.org](https://www.nuget.org/packages/TransbankPosSDK/) para instalarlo puedes utilizar por ejemplo el package manager de VisualStudio.
+
 ```bash
 PM> Install-Package TransbankPosSDK
 ```
 
 ### SDK Java
+
+Primero, debes instalar en tu máquina la librería/SDK en C, puedes encontrar el código fuente en [GitHub](https://github.com/TransbankDevelopers/transbank-pos-sdk-c) y seguir las instrucciones para compilarlo. También puede usar las DLLs ya compiladas que se adjuntan en el [último release](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest)
+
+Esta librería y sus dependencias (libserialport) son requisitos para utilizar el SDK.
 Para Java se puede incluir el paquete por [Maven.](https://search.maven.org/artifact/com.github.transbankdevelopers/transbank-pos-sdk-java/)
 
 ```xml
-		<dependency>
-			<groupId>com.github.transbankdevelopers</groupId>
-			<artifactId>transbank-sdk-pos-java</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
+<dependency>
+  <groupId>com.github.transbankdevelopers</groupId>
+  <artifactId>transbank-sdk-pos-java</artifactId>
+  <version>1.0.2</version>
+</dependency>
 ```
 
 ### SDK Web
-El SDK Web consta de dos partes: [SDK Javacript](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js) y [Cliente Desktop](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-client). 
+
+El SDK Web consta de dos partes: [SDK Javacript](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js) y [Cliente Desktop](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-client).
 
 [Agente Desktop](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent): Este agente es un programa que se debe instalar e inicializar en el computador que tendrá el equipo POS conectado físicamente. Al instalar e inicializar este servicio, se creará un servidor de websockets local en el puerto `8090` que permitirá, a través del [SDK de Javascript](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js), poder enviar y recibir mensajes del equipo POS, de manera simple y transparente.
 
 [SDK Javascript](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js): Este SDK se debe instalar en el software de caja (o cualquier software web que presente HTML, CSS y JS en un navegador web). Este SDK entrega una interfaz simple para conectarse con el cliente desktop, de manera que se puedan mandar instrucciones al POS con un API fácil de usar directamente desde el browser.
 
-Dentro de cada repositorio se encuentra la documentación más detallada. 
+Dentro de cada repositorio se encuentra la documentación más detallada.
 
 Instalar el SDK en el software web donde se realizará la integración
+
 ```bash
 npm install transbank-pos-sdk-web
 ```
 
 También se puede incluir directamente el tag script
-```html 
-<script src="https://unpkg.com/transbank-pos-sdk-web@2/dist/pos.js"></script>
+
+```html
+<script src="https://unpkg.com/transbank-pos-sdk-web@2.1.0/dist/pos.js"></script>
 <script>
 // En este caso, el objeto en vez de ser POS, es Transbank.POS
-// Ej: Transbank.POS.connect(...); en vez de POS.connect(...) como se especifica en los ejemplos de mas abajo. 
+// Ej: Transbank.POS.connect(...); en vez de POS.connect(...) como se especifica en los ejemplos de mas abajo.
 </script>
 ```
 
-**Instalar el agente desktop:** 
-Revisa la lista de versiones públicadas y [descarga la última versión](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent/releases). Verás que hay un archivo .exe que debes bajar si usas windows, o un archivo .zip si usas MacOS. Luego, solo debes de instalar y ejecutar el programa. 
+<aside class="warning">
+Si utilizas el metodo de tag script, entonces el objeto POS se pasa a llamar Transbank.POS en todos los ejemplos que siguen en esta guia.
+</aside>
 
-Este agente debe estar ejecutándose siempre para que el SDK Javascript funcione correctamente. Puedes ejecutarlo automáticamente cuando se inicie el computador. 
-La primera vez que se ejecuta el agente, este se configura automáticamente para iniciar en el startup del computador. 
+#### Instalar el agente desktop
+
+Revisa la lista de versiones públicadas y [descarga la última versión](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent/releases). Verás que hay un archivo .exe que debes bajar si usas windows, o un archivo .zip si usas MacOS. Luego, solo debes de instalar y ejecutar el programa.
+
+Este agente debe estar ejecutándose siempre para que el SDK Javascript funcione correctamente. Puedes ejecutarlo automáticamente cuando se inicie el computador.
+La primera vez que se ejecuta el agente, este se configura automáticamente para iniciar en el startup del computador.
 
 Una vez instalado, ya puedes usar el SDK Javascript. Pruebes probar la conexión con tu POS usando el [proyecto web de ejemplo](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-example)
 
@@ -116,7 +125,11 @@ Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilice
 
 ### LibSerialPort
 
-Los SDK dependen de [libSerialPort](https://sigrok.org/wiki/Libserialport) para la comunicación serial.
+<aside class="success">
+Solo el SDK <string>C</strong> y <strong>Java</strong> requieren de esta librería.
+</aside>
+
+Algunos SDK dependen de [libSerialPort](https://sigrok.org/wiki/Libserialport) para la comunicación serial.
 
 Incluimos una DLL compilada en el [release de la librería en C](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest), pero puedes obtener el código desde el repositorio oficial usando git:
 
@@ -136,13 +149,12 @@ Procura seguir todos los pasos descritos en el sitio de msys2
 </aside>
 
 ## Proyectos de ejemplo
-Para cada SDK se creó un proyecto de ejemplo: 
+
+Para cada SDK se creó un proyecto de ejemplo:
 
 - [Proyecto de ejemplo SDK Web](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-example)
 - [Proyecto de ejemplo SDK Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java-example)
 - [Proyecto de ejemplo SDK .NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet-example)
-
-
 
 ## Primeros pasos
 
@@ -173,10 +185,17 @@ import cl.transbank.pos.responses.*;
 
 ```js
 import POS from "transbank-pos-sdk-web"; // Si se instala por NPM
-// <script src="https://unpkg.com/transbank-pos-sdk-web@1/dist/pos.js"></script> si se inserta directamente el script en el HTML
-// En el caso de incrustar el script, recordar que el objeto se llama Transbank.POS en vez de POS como se menciona en los siguientes ejemplos. 
 ```
 
+<aside class="notice">
+Si decides insertar directamente el script en el HTML
+
+```js
+<script src="https://unpkg.com/transbank-pos-sdk-web@2/dist/pos.js"></script>
+```
+
+En el caso de incrustar el script, recordar que el objeto se llama `Transbank.POS` y **NO** `POS` como se menciona en los siguientes ejemplos.
+</aside>
 
 ### Listar puertos disponibles
 
@@ -217,7 +236,7 @@ POS.getPorts().then((ports) => {
 
 ### Abrir un puerto Serial
 
-Para abrir un puerto serial y comunicarte con el POS Integrado, necesitarás el nombre del puerto (el cual puedes identificar usando [la función mencionada en el apartado anterior](/documentacion/posintegrado#listar-puertos-disponibles)). También necesitarás el _baudrate_ al cual esta configurado el puerto serial del POS Integrado (por defecto es 115200), y puedes obtener los distintos valores desde la clase `Transbank.POS.Utils.TbkBaudrates` en .NET y la clase `cl.transbank.pos.utils.TbkBaudRate` en Java.
+Para abrir un puerto serial y comunicarte con el POS Integrado, necesitarás el nombre del puerto (el cual puedes identificar usando [la función mencionada en el apartado anterior](/documentacion/posintegrado#listar-puertos-disponibles)). También necesitarás el _baudrate_ al cual esta configurado el puerto serial del POS Integrado (por defecto es **115200**).
 
 Si el puerto no puede ser abierto, se lanzará una excepción `TransbankException` en .NET y Java.
 
@@ -254,9 +273,9 @@ pos.openPort(port);
 import POS from "transbank-pos-sdk-web";
 POS.openPort("COM4").then((result) => {
     if (result === true) {
-	alert("Conectado satisfactoriamente")
+  alert("Conectado satisfactoriamente")
     } else {
-	alert("No se pudo conectar conectado")
+  alert("No se pudo conectar conectado")
     }
 }).catch(error => console.log(error))
 ```
@@ -302,6 +321,11 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta. L
 
 - `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
 - `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
+- `Enviar Status`: (Opcional) Indica si se envian los mensajes intermedios (verdader) o se omiten (falso, por defecto)
+
+En el caso de C#, los mensajes intermedios se reciven mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`.
+
+Si usas mensajes intermedios en Javascript, entonces puedes pasar un callback como tercer parámetro.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -309,7 +333,16 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta. L
 using Transbank.POS;
 using Transbank.POS.Responses;
 //...
-SaleResponse response = POS.Instance.Sale(ammount, ticket);
+
+POS.Instance.IntermediateResponseChange += NewIntermadiateMessageRecived; //EventHandler para los mensajes intermedios.
+SaleResponse response = POS.Instance.Sale(ammount, ticket, true);
+
+//...
+//Manejador de mensajes intermedios...
+private static void NewIntermadiateMessageRecived(object sender, IntermediateResponse e){
+  //...
+}
+//...
 ```
 
 ```c
@@ -329,16 +362,15 @@ SaleResponse saleResponse = POS.getInstance().sale(amount, ticket);
 import POS from "transbank-pos-sdk-web";
 
 POS.doSale(this.total, "ticket1", (data) => {
-	//Este tercer parametro es opcional. Si está presente, se ejecutará cada vez que llegue un mensaje de status de la venta. 
-	console.log('Mensaje de status recibido', data);
-}).then((saleDetails) => {
-    console.log(saleDetails);
-    
+//Este tercer parametro es opcional. Si está presente, se ejecutará cada vez que llegue un mensaje de status de la venta.
+console.log('Mensaje de status recibido', data);
+}).then((saleResponse) => {
+    console.log(saleResponse);
     //Acá llega la respuesta de la venta. Si saleDetails.responseCode es 0, entonces la comproa fue aprobada
-    if (saleDetails.responseCode===0) {
-	alert("Transacción aprobada", "", "success");
+    if (saleResponse.responseCode===0) {
+  alert("Transacción aprobada", "", "success");
     } else {
-	alert("Transacción rechazada o fallida")
+  alert("Transacción rechazada o fallida")
     }
 });
 ```
@@ -348,28 +380,120 @@ El resultado de la venta se entrega en la forma de un objeto `SaleResponse` o un
 El objeto SaleResponse retornará un objeto con los siguientes datos.
 
 ```json
-"Function": 210
-"Response": "Aprobado"
-"Commerce Code": 550062700310
-"Terminal Id": "ABC1234C"
-"Ticket": "ABC123"
-"Autorization Code": "XZ123456"
-"Ammount": 15000
-"Shares Number": 3
-"Shares Amount": 5000
-"Last 4 Digits": 6677
-"Operation Number": 60
-"Card Type": CR
-"Accounting Date":
-"Account Number":
-"Card Brand": AX
-"Real Date": 28/10/2019 22:35:12
-"Employee Id":
-"Tip": 1500
+{
+  "Function": 210,
+  "Response": "Aprobado",
+  "Commerce Code": 550062700310,
+  "Terminal Id": "ABC1234C",
+  "Ticket": "ABC123",
+  "Autorization Code": "XZ123456",
+  "Ammount": 15000,
+  "Shares Number": 3,
+  "Shares Amount": 5000,
+  "Last 4 Digits": 6677,
+  "Operation Number": 60,
+  "Card Type": "CR",
+  "Accounting Date": "28/10/2019 22:35:12",
+  "Account Number": "30000000000",
+  "Card Brand": "AX",
+  "Real Date": "28/10/2019 22:35:12",
+  "Employee Id": 1,
+  "Tip": 1500
+}
 ```
 
 <aside class="warning">
-El SDK no soporta el envío de mensajes intermedios. Por esta razón el 3º parámetro de la función en C es siempre falso.
+El SDK de **C** y **Java** no soportan el envío de mensajes intermedios. Por esta razón el 3º parámetro de la función en C es siempre falso.
+</aside>
+
+### Transacción de Venta Multicodigo
+
+Este comando es enviado por la caja para solicitar la ejecución de una venta multicódigo. Los siguientes parámetros deben ser enviados desde la caja:
+
+- `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
+- `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
+- `CodigoDeComercio`: Código de comercio que realiza la venta. (No es el mismo código del POS, ya que en multicódigo el código padre no puede realizar ventas.)
+- `Enviar Status`: (Opcional) Indica si se envian los mensajes intermedios (verdader) o se omiten (falso, por defecto)
+
+En el caso de C#, los mensajes intermedios se reciben mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`
+
+Si usas mensajes intermedios en Javascript, entonces puedes pasar un callback como tercer parámetro.
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Responses;
+//...
+
+POS.Instance.IntermediateResponseChange += NewIntermadiateMessageRecived; //EventHandler para los mensajes intermedios.
+MultiCodeSaleResponse response = POS.Instance.MultiCodeSale(ammount, ticket, commerceCode, true);
+
+//...
+//Manejador de mensajes intermedios...
+private static void NewIntermadiateMessageRecived(object sender, IntermediateResponse e){
+  //...
+}
+//...
+```
+
+```c
+// No Soportado
+```
+
+```java
+//No Soportado
+```
+
+```js
+import POS from "transbank-pos-sdk-web";
+
+POS.doMulticodeSale(this.total, "ticket2", "597029414301", (data) => {
+//Este tercer parámetro es opcional. Si está presente, se ejecutará cada vez que llegue un mensaje de status de la venta.
+console.log('Mensaje de status recibido', data);
+}).then((saleResponse) => {
+    console.log(saleResponse);
+    //Acá llega la respuesta de la venta. Si saleDetails.responseCode es 0, entonces la comproa fue aprobada
+    if (saleResponse.responseCode===0) {
+  alert("Transacción aprobada", "", "success");
+    } else {
+  alert("Transacción rechazada o fallida")
+    }
+});
+```
+
+El resultado de la venta se entrega en la forma de un objeto `SaleResponse` o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException` en .NET. En Java puede lanzar `TransbankPortNotConfiguredException`.
+
+El objeto SaleResponse retornará un objeto con los siguientes datos.
+
+```json
+{
+
+  "Function": 210,
+  "Response": "Aprobado",
+  "Commerce Code": 550062700310,
+  "Terminal Id": "ABC1234C",
+  "Ticket": "ABC123",
+  "Autorization Code": "XZ123456",
+  "Ammount": 15000,
+  "Shares Number": 3,
+  "Shares Amount": 5000,
+  "Last 4 Digits": 6677,
+  "Operation Number": 60,
+  "Card Type": "CR",
+  "Accounting Date":"28/10/2019 22:35:12",
+  "Account Number":"300000000",
+  "Card Brand": "AX",
+  "Real Date": "28/10/2019 22:35:12",
+  "Employee Id":1,
+  "Tip": 1500,
+  "Change": 150,
+  "CommerceProviderCode:": 550062712310
+}
+```
+
+<aside class="warning">
+El SDK de **C** y **Java** no soportan ventas multicodigo.
 </aside>
 
 ### Transacción de última venta
@@ -415,24 +539,84 @@ POS.getLastSale().then((response) => {
 El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `LastSaleResponse` o un `char*` en el caso de la librería C, o un objeto `SaleResponse` en el caso de Java. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLastSaleException` en .NET o `TransbankException` en Java.
 
 ```json
-"Function": 260
-"Response": "Aprobado"
-"Commerce Code": 550062700310
-"Terminal Id": "ABC1234C"
-"Ticket": "ABC086"
-"Autorization Code": "XZ123456"
-"Ammount": 15000
-"Shares Number": 3
-"Shares Amount": 5000
-"Last 4 Digits": 6677
-"Operation Number": 60
-"Card Type": CR
-"Accounting Date":
-"Account Number":
-"Card Brand": AX
-"Real Date": 28/10/2019 22:35:12
-"Employee Id":
-"Tip": 1500
+{
+
+  "Function": 260,
+  "Response": "Aprobado",
+  "Commerce Code": 550062700310,
+  "Terminal Id": "ABC1234C",
+  "Ticket": "ABC086",
+  "Autorization Code": "XZ123456",
+  "Ammount": 15000,
+  "Shares Number": 3,
+  "Shares Amount": 5000,
+  "Last 4 Digits": 6677,
+  "Operation Number": 60,
+  "Card Type": "CR",
+  "Accounting Date":"28/10/2019 22:35:12",
+  "Account Number":"3000000000",
+  "Card Brand": "AX",
+  "Real Date": "28/10/2019 22:35:12",
+  "Employee Id":,
+  "Tip": 1500
+}
+```
+
+### Transacción de última venta multicodigo
+
+Este comando es enviado por la caja, solicitando al POS la re-impresión de la última venta realizada, y además permite recepcionar el voucher como parte de la respuesta del pos.
+
+Si el POS recibe el comando de última venta y no existen transacciones en memoria del POS, se envía la respuesta a la caja indicando el código de respuesta 11.
+([Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas))
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Responses;
+//...
+MultiCodeLastSaleResponse response = POS.Instance.MultiCodeLastSale(true); //bool indica si pos envia o no el voucher como parte de la respuesta
+```
+
+```c
+// No Soportado
+```
+
+```java
+// No Soportado
+```
+
+```js
+// No Soportado
+```
+
+El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `MultiCodeLastSaleResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankMultiCodeLastSaleException`.
+
+```json
+{
+
+  "Function": 260,
+  "Response": "Aprobado",
+  "Commerce Code": 550062700310,
+  "Terminal Id": "ABC1234C",
+  "Ticket": "ABC086",
+  "Autorization Code": "XZ123456",
+  "Ammount": 15000,
+  "Shares Number": 3,
+  "Shares Amount": 5000,
+  "Last 4 Digits": 6677,
+  "Operation Number": 60,
+  "Card Type": "CR",
+  "Accounting Date": "28/10/2019 22:35:12",
+  "Account Number": "300000000000",
+  "Card Brand": "AX",
+  "Real Date": "28/10/2019 22:35:12",
+  "Employee Id": 1,
+  "Tip": 1500,
+  "Voucher": "VOUCHER COMPLETO EN STRING",
+  "Change": 20000,
+  "CommerceProviderCode": 550062712310
+}
 ```
 
 ### Transacción de Anulación
@@ -480,14 +664,16 @@ POS.refund(21).then(response => console.log(response));
 Como respuesta el **POS** enviará un código de aprobación, acompañado de un código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas. [Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas)
 
 ```json
-"FunctionCode": 1210
-"ResponseCode": 0
-"CommerceCode": 597029414300
-"TerminalId": "ABCD1234"
-"AuthorizationCode": "ABCD1234"
-"OperationID": 123456
-"ResponseMessage": "Aprobado"
-"Success": true
+{
+  "FunctionCode": 1210,
+  "ResponseCode": 0,
+  "CommerceCode": 597029414300,
+  "TerminalId": "ABCD1234",
+  "AuthorizationCode": "ABCD1234",
+  "OperationID": 123456,
+  "ResponseMessage": "Aprobado",
+  "Success": true
+}
 ```
 
 ### Transacción de Cierre
@@ -534,11 +720,13 @@ POS.close()
 El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse` o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException`.
 
 ```json
-"FunctionCode": 510
-"ResponseMessage": "Aprobado"
-"Success": true
-"CommerceCode": 550062700310
-"TerminalId": "ABC1234C"
+{
+  "FunctionCode": 510,
+  "ResponseMessage": "Aprobado",
+  "Success": true,
+  "CommerceCode": 550062700310,
+  "TerminalId": "ABC1234C"
+}
 ```
 
 <aside class="notice">
@@ -584,19 +772,17 @@ POS.getTotals().then(response => console.log(response));
 El resultado de la transacción entrega en la forma de un objeto `TotalsResponse` o una estructura `TotalsCResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankTotalsException`.
 
 ```json
-"Function": 710
-"Response": "Aprobado"
-"TX Count": 3     // Cantidad de transacciones
-"TX Total": 15000 // Suma total de los montos de cada transaccion
+{
+  "Function": 710,
+  "Response": "Aprobado",
+  "TX Count": 3,     // Cantidad de transacciones
+  "TX Total": 15000  // Suma total de los montos de cada transaccion
+}
 ```
 
 ### Transacción de Detalle de Ventas
 
 Esta transacción solicita al POS **todas** las transacciones que se han realizado y permanecen en la memoria del POS. El parámetro que recibe esta función es de tipo booleano e indica si se realiza la impresión del detalle en el POS. En el caso de que no se solicite la impresión, el POS envía **todas** las transacciones a la caja, una por una. Si se realiza la impresión, la caja recibira una lista vacia de transacciónes.
-
-<aside class="warning">
-Una transacción de cierre vacía la memoria del POS
-</aside>
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -605,7 +791,7 @@ using Transbank.POS;
 using Transbank.POS.Responses;
 //...
 bool printOnPOS = false;
-List<DetailResponse> Details(printOnPOS)
+List<DetailResponse> details = POS.Instance.Details(printOnPOS)
 ```
 
 ```c
@@ -630,7 +816,6 @@ let printOnPOS = false;
 POS.details(printOnPOS).then(response => console.log(response));
 ```
 
-
 El resultado de la transacción entrega una lista de objetos  `DetailResponse` o un `char *` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSalesDetailException`.
 
 ```json
@@ -647,10 +832,10 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` o
     "Shares Amount": 5000,
     "Last 4 Digits": 6677,
     "Operation Number": 60,
-    "Card Type": CR,
-    "Accounting Date": ,
-    "Account Number": ,
-    "Card Brand": AX,
+    "Card Type": "CR",
+    "Accounting Date":"28/10/2019 22:35:12" ,
+    "Account Number": "300000000",
+    "Card Brand": "AX",
     "Real Date": "28/10/2019 22:35:12",
     "Employee Id": ,
     "Tip": 1500,
@@ -667,13 +852,90 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` o
     "Shares Amount": 5000,
     "Last 4 Digits": 6677,
     "Operation Number": 60,
-    "Card Type": CR,
-    "Accounting Date": ,
-    "Account Number": ,
-    "Card Brand": AX,
+    "Card Type": "CR",
+    "Accounting Date": "28/10/2019 22:35:12",
+    "Account Number": "30000000000",
+    "Card Brand": "AX",
     "Real Date": "28/10/2019 22:35:12",
-    "Employee Id": ,
+    "Employee Id": 1,
     "Tip": 1500
+  }
+]
+```
+
+### Transacción de Detalle de Ventas Multicodigo
+
+Esta transacción solicita al POS **todas** las transacciones que se han realizado y permanecen en la memoria del POS. El parámetro que recibe esta función es de tipo booleano e indica si se realiza la impresión del detalle en el POS. En el caso de que no se solicite la impresión, el POS envía **todas** las transacciones a la caja, una por una. Si se realiza la impresión, la caja recibirá una lista vacía de transacciones.
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Responses;
+//...
+bool printOnPOS = false;
+List<MultiCodeDetailResponse> details = POS.Instance.MultiCodeDetails(printOnPOS)
+```
+
+```c
+// No Soportado
+```
+
+```java
+// No Soportado
+```
+
+```js
+// No Soportado
+```
+
+El resultado de la transacción entrega una lista de objetos  `MultiCodeDetailResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankMultiCodeDetailException`.
+
+```json
+[
+  {
+    "Function": 261,
+    "Response": "Aprobado",
+    "Commerce Code": 550062700310,
+    "Terminal Id": "ABC1234C",
+    "Ticket": "AB123",
+    "Autorization Code": "XZ123456",
+    "Ammount": 15000,
+    "Shares Number": 3,
+    "Shares Amount": 5000,
+    "Last 4 Digits": 6677,
+    "Operation Number": 60,
+    "Card Type": "CR",
+    "Accounting Date": "28/10/2019 22:35:12",
+    "Account Number": "300000000",
+    "Card Brand": "AX",
+    "Real Date": "28/10/2019 22:35:12",
+    "Employee Id": 1,
+    "Tip": 1500,
+    "Change": 20000,
+    "CommerceProviderCode": 5500627112310
+  },
+  {
+    "Function": 261,
+    "Response": "Aprobado",
+    "Commerce Code": 550062700310,
+    "Terminal Id": "ABC1234C",
+    "Ticket": "AB123",
+    "Autorization Code": "XZ123456",
+    "Ammount": 15000,
+    "Shares Number": 3,
+    "Shares Amount": 5000,
+    "Last 4 Digits": 6677,
+    "Operation Number": 60,
+    "Card Type": "CR",
+    "Accounting Date": "28/10/2019 22:35:12",
+    "Account Number": "30000000000",
+    "Card Brand": "AX",
+    "Real Date": "28/10/2019 22:35:12",
+    "Employee Id": 1,
+    "Tip": 1500,
+    "Change": 20000,
+    "CommerceProviderCode": 5500627112310
   }
 ]
 ```
@@ -716,17 +978,16 @@ let printOnPOS = false;
 POS.loadKeys();
 ```
 
-
-
-
 El resultado de la carga de llaves entrega en la forma de un objeto `LoadKeysResponse` o una estructura `BaseResponse` en el caso de la librería C, un objeto `KeysResponse` para Java. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLoadKeysException` en .NET o `TransbankException` en Java.
 
 ```json
-"FunctionCode": 810
-"ResponseMessage": "Aprobado"
-"Success": true
-"CommerceCode": 550062700310
-"TerminalId": "ABC1234C"
+{
+  "FunctionCode": 810,
+  "ResponseMessage": "Aprobado",
+  "Success": true,
+  "CommerceCode": 550062700310,
+  "TerminalId": "ABC1234C"
+}
 ```
 
 <aside class="warning">
@@ -760,7 +1021,6 @@ import cl.transbank.pos.POS;
 //...
 boolean pollResult = POS.getInstance().poll();
 ```
-
 
 ```js
 import POS from "transbank-pos-sdk-web";
@@ -808,66 +1068,13 @@ POS.setNormalMode().then(result => console.log(result));
 Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en el POS para regresar al modo Integrado, siguiendo las instrucciones disponibles descritas en [Cambio a POS Integrado](referencia/posintegrado#cambio-modalidad-pos-integrado), pues no es posible realizar esta configuración a través del SDK.
 </aside>
 
-## Integración de Onepay para pagos con QR
-
-Ahora es posible realizar pagos con Onepay dentro de tu sistema de caja. Para esto, ponemos a tu disposición, dentro del SDK, las herramientas necesarias para generar un QR de Onepay y procesar el pago en tu sistema de caja.
-
-Lo primero que debes hacer es importar `Transbank.POS` y `Transbank.POS.Model` en tu proyecto, crear un nuevo objeto `OnepayPayment` y suscribirte a los eventos que te notificaran del progreso del pago en el flujo de Onepay.
-
-### Suscribirse a eventos y crear una transacción
-
-```csharp
-using Transbank.POS;
-using Transbank.POS.Model;
-//...
-
-int ticket = new Random().Next(1, 999999);
-Pay = new OnepayPayment(ticket, total);
-
-//Subscribe to events
-Pay.OnConnect += (sender, e) => UpdateWSStatus("Web Socket Conectado");
-Pay.OnDisconnect += WsDisconnected;
-Pay.OnNewMessage += UpdateStatus;
-Pay.OnSuccessfulPayment += ProcessPaymentResult;
-```
-
-### Obtener el QR para iniciar el pago
-
-Luego de crear el objeto OnepayPayment, debes iniciar el pago, lo que te entregará la imagen del QR en base64 y el número de `ott`. Estos le permiten al usuario pagar escaneando la imagen o ingresando el `ott` en la aplicación de Onepay.
-
-```csharp
-using Transbank.POS;
-using Transbank.POS.Model;
-//...
-
-OnepayCreateResponse response = Pay.StarPayment();
-
-//draw the base64 image
-byte[] imageBytes = Convert.FromBase64String(response.QrCodeAsBase64);
-using (MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length))
-{
-  img_qr.Image = Image.FromStream(ms);
-}
-txt_ott.Text = response.Ott;
-```
-
-### Esperar que el usuario termine el pago en la App de Onepay
-
-El último paso es esperar a que el usuario termine el flujo en la app de Onepay. Cuando la transacción termine exitosamente en Onepay, se lanzará el evento `SuccessfulPaymentEventArgs`
-
-```csharp
-using Transbank.POS;
-using Transbank.POS.Model;
-//...
-Pay.WatchPayment();
-```
-
 ## Ejemplos de integración
 
 Ponemos a tu disposición un ejemplo en nuestro Github para ayudarte a entender mejor la integración.
 
-- [Ejemplo Windows Forms](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet-example)
-- [Ejemplo Java]([TransbankDevelopers/transbank-pos-sdk-java-example](https://github.com/TransbankDevelopers/transbank-pos-sdk-java-example))
+- [Ejemplo .Net](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet-example)
+- [Ejemplo Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java-example)
+- [Ejemplo Web](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-example)
 
 <div class="container slate">
   <div class='slate-after-footer'>
