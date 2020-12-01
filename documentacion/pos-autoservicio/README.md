@@ -1,32 +1,36 @@
 # POS Autoservicio
-La solución Autoservicio se integra al kiosco de tu comercio, con la particularidad de que no necesita la intervención 
-de un dependiente de tu establecimiento, sino que permite que los mismos clientes realicen la transacción de pago de 
+
+La solución Autoservicio se integra al kiosco de tu comercio, con la particularidad de que no necesita la intervención
+de un dependiente de tu establecimiento, sino que permite que los mismos clientes realicen la transacción de pago de
 manera completa y autónoma. Ideal para negocios como estacionamientos, bencineras y cines, entre otros.
 
+## Cómo funciona
 
-## ¿Cómo funciona?
 El paso a paso para su implementación:
 
 1. **Auditoría de factibilidad técnica**
-Establecerá si tu comercio tiene las facultades para realizar el desarrollo tecnológico que requiere esta 
+Establecerá si tu comercio tiene las facultades para realizar el desarrollo tecnológico que requiere esta
 integración. En caso de aprobación, se te entregará un Documento Técnico con las indicaciones a seguir.
 
 2. **Desarrollo**
 Tu comercio deberá realizar el desarrollo según las especificaciones que te entregará Transbank.
 
-
 3. **Control de Calidad**
-Este proceso verificará que el desarrollo de integración que hiciste, 
+Este proceso verificará que el desarrollo de integración que hiciste,
 cumple con los que te entregamos en las especificaciones, o si requiere alguna corrección o mejora.
 
 4. **Etapa piloto**
-En un lugar que acordemos juntos, llevamos a producción tu punto de venta autoservicio, donde con cliente reales haremos monitoreo en conjunto de su funcionamiento, por un periodo acordado 2 semanas o 1 mes. Evaluamos los resultados, y acordamos masificación, tambien si se requiere algún ajuste.
-
+En un lugar que acordemos juntos, llevamos a producción tu punto de venta autoservicio, donde con cliente reales haremos monitoreo en conjunto de su funcionamiento, por un periodo acotado de 2 semanas. Evaluamos los resultados, y acordamos masificación, también si se requiere algún ajuste.
 
 5. **Masificación**
 Construimos en conjunto un plan de instalación de los puntos de ventas.
 
-**Flujo de venta en POS autoservicio:** 
+<aside class="notice">
+Para el desarrollo y pruebas del comercio Transbank entrega un set de pruebas que se deben ejecutar y un set de tarjetas físicas para estos casos, estas tarjetas solo funcionan en ambiente de desarrollo, certificación o integración.
+</aside>
+
+**Flujo de venta en POS autoservicio:**
+
 1. El cliente realiza la selección del producto o servicio a comprar
 2. El cliente selecciona la forma de pago que disponga el kiosko, efectivo o tarjeta crédito, tarjeta débito.
 3. El kiosco invoca al POS pasándole el monto a cobrar.
@@ -34,18 +38,28 @@ Construimos en conjunto un plan de instalación de los puntos de ventas.
 5. El POS informa al kiosco el resultado de la venta (aprobada o rechazada).
 6. El kiosko libera el producto e imprime los comprobantes.
 
-## Documentación disponible
-A continuación encontrarás la documentación en formato PDF: 
+## Equipos y conexiones disponibles
 
-- **Manual de integración POS Autoservicio UX100/300/400** - _20.1_ | [Descargar](/files/manual-integracion-pos-autoservicio-20-1.pdf)
+### Verifone ux100, ux400, ux300
+
+POS autoservicio con conexión LAN y Serial
+<img src="/images/documentacion/autoatencion/ux100completo.png" alt="Verifone ux100, ux300 y ux400">
+
+## Funciones de pago disponibles en HOST
+
+* Venta Crédito, con o sin cuotas
+* Venta Débito
+
+## Documentación disponible
+
+A continuación, encontrarás la documentación en formato PDF:
+
+* **Manual de integración POS Autoservicio UX100/300/400** - _20.1_ | [Descargar](/files/manual-integracion-pos-autoservicio-20-1.pdf)
 _Este documento tiene por objetivo explicar las funcionalidades que debe implementar el
 Cliente o su proveedor de caja para el desarrollo del módulo de autoservicio (en este caso los
 ejemplos se efectuaran con el teclado Verifone UX100, el lector de tarjeta Verifone UX300 y el
 lector de tarjetas Contactless Verifone UX400 (pago sin contacto)), permitiendo realizar
 transacciones bancarias de Crédito o Débito (redcompra)_
-
-
-
 
 <div class="container slate">
   <div class='slate-after-footer'>
