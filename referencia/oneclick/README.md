@@ -188,7 +188,7 @@ Content-Type: application/json
 }
 ```
 
-#### Parámetros Crear una inscripción
+<strong>Parámetros Crear una inscripción</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -196,7 +196,7 @@ username  <br> <i> String </i> | Identificador del usuario registrado en el come
 email  <br> <i> String </i> | Email del usuario registrado en el comercio. Largo máximo: 100.
 response_url  <br> <i> String </i> | URL del comercio a la cual Webpay redireccionará posterior al proceso de inscripción. Largo máximo: 255.
 
-#### Respuesta Crear una inscripción
+<strong>Respuesta Crear una inscripción</strong>
 
 ```java
 response.getToken();
@@ -281,13 +281,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-#### Parámetros Confirmar una inscripción
+<strong>Parámetros Confirmar una inscripción</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Identificador del proceso de inscripción. Es entregado por Webpay en la respuesta del método `Inscription.start()`. (See envía en la URL, no en el body)
 
-#### Respuesta Confirmar una inscripción
+<strong>Respuesta Confirmar una inscripción</strong>
 
 ```java
 response.getAuthorizationCode();
@@ -397,14 +397,14 @@ Content-Type: application/json
 }
 ```
 
-#### Parámetros Eliminar una inscripción
+<strong>Parámetros Eliminar una inscripción</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tbk_user  <br> <i> String </i> | Identificador único de la inscripción del cliente (devuelto por `Inscription.finish()`). Largo: 40.
 username  <br> <i> String </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `Inscription.start()`). Largo máximo: 40.
 
-#### Respuesta Eliminar una inscripción
+<strong>Respuesta Eliminar una inscripción</strong>
 
 ```java
 // 204 OK
@@ -536,7 +536,7 @@ Content-Type: application/json
 }
 ```
 
-#### Parámetros Autorizar un pago
+<strong>Parámetros Autorizar un pago</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -549,7 +549,7 @@ details [].buy_order  <br> <i> String </i> | Identificador único de la compra
 details [].amount  <br> <i> Decimal </i> | Monto de la transacción de pago. Largo máximo: 17.
 details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas de la transacción de pago. Largo 2. No obligatorio.
 
-#### Respuesta Autorizar un pago
+<strong>Respuesta Autorizar un pago</strong>
 
 ```java
 response.getAccountingDate();
@@ -738,13 +738,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-#### Parámetros Consultar un pago realizado
+<strong>Parámetros Consultar un pago realizado</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buy_order  <br> <i> String </i> | Orden de compra de la transacción a consultar (se envía en la URL, no en el body).
 
-#### Respuesta Consultar un pago realizado
+<strong>Respuesta Consultar un pago realizado</strong>
 
 ```java
 response.getAccountingDate();
@@ -939,7 +939,7 @@ Content-Type: application/json
 }
 ```
 
-#### Parámetros Reversar o Anular
+<strong>Parámetros Reversar o Anular</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -948,7 +948,7 @@ commerce_code  <br> <i> String </i> | Código de comercio hijo. Largo máximo: 
 detail_buy_order  <br> <i> String </i> | Orden de compra hija de la transacción a  reversar o anular. Largo máximo: 26.
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> | Monto que se desea anular o reversar de la transacción. Largo máximo: 17
 
-#### Respuesta Reversar o Anular
+<strong>Respuesta Reversar o Anular</strong>
 
 ```java
 response.getAuthorizationCode();
@@ -1086,7 +1086,7 @@ Content-Type: application/json
 }
 ```
 
-#### Parámetros Captura Diferida
+<strong>Parámetros Captura Diferida</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1100,7 +1100,7 @@ El método `capture()` debe ser invocado siempre indicando el código del
 comercio de la tienda virtual específica.
 </aside>
 
-#### Respuesta Captura Diferida
+<strong>Respuesta Captura Diferida</strong>
 
 ```java
 // Esta función aun no se encuentra disponible en el SDK
@@ -1235,7 +1235,7 @@ Content-Type: application/json
 }
 ```
 
-#### Parámetros Ejecutar captura diferida
+<strong>Parámetros Ejecutar captura diferida</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1245,7 +1245,7 @@ buy_order  <br> <i> String </i> | Orden de compra de la transacción que se req
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
 capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo máximo: 17.
 
-#### Respuesta Ejecutar captura diferida
+<strong>Respuesta Ejecutar captura diferida</strong>
 
 ```java
 response.getAuthorizationCode();

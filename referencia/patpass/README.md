@@ -327,13 +327,13 @@ transactionResultOutput result =
     transaction.getTransactionResult(Request.Form["token_ws"]);
 ```
 
-##### Parámetros getTransactionResult
+#<strong>Parámetros getTransactionResult</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tokenInput  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 
-##### Respuesta getTransactionResult
+#<strong>Respuesta getTransactionResult</strong>
 
 ```java
 WsTransactionDetailOutput output = result.getDetailOutput().get(0);
@@ -411,7 +411,7 @@ Indica a Webpay que se ha recibido conforme el resultado de la transacción.
 El método acknowledgeTransaction debe ser invocado siempre. Si la invocación no se realiza en un período de 30 segundos, Webpay reversará la transacción, asumiendo que el comercio no pudo informar de su resultado, evitando así el cobro al tarjetahabiente.
 </aside>
 
-##### Parámetros acknowledgeTransaction
+#<strong>Parámetros acknowledgeTransaction</strong>
 
 > Los SDKs ejecutan automáticamente `acknowledgeTransaction()` cuando reciben la
 > respuesta de `getTransactionResult()`.
@@ -420,7 +420,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tokenInput  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 
-##### Respuesta acknowledgeTransaction
+#<strong>Respuesta acknowledgeTransaction</strong>
 
 > Los SDKs arrojarán una excepción dentro de `getTransactionResult()` si falla
 > el `acknowledgeTransaction()` que se ejecuta automáticamente.

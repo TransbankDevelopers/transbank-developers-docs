@@ -310,7 +310,7 @@ DATO        | LARGO     | Comentario
 
 *Mensaje* en <i>ASCII</i>: `<STX>0200|{amount}|{ticket}|||{Convert.ToInt32(sendStatus)}|<ETX><LRC>`
 
-#### Respuesta de Venta
+<strong>Respuesta de Venta</strong>
 
 DATO                    | LARGO     | COMENTARIO
 ------                  | ------    | ------
@@ -469,7 +469,7 @@ DATO                    | LARGO     | Comentario
 
 *Mensaje* en <i>ASCII</i>: `<STX>0270|{amount}|{ticket}|| |{status}|{commerce code}|<ETX><LRC>`
 
-#### Respuesta de Venta Multicodigo
+<strong>Respuesta de Venta Multicodigo</strong>
 
 DATO                    | LARGO     | COMENTARIO
 ------                  | ------    | ------
@@ -600,7 +600,7 @@ DATO        | LARGO     | Comentario
 *Mensaje* en <i>ASCII</i>: `<STX>0250|<ETX>x`
 *Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x32, 0x35, 0x30, 0x7c, 0x03, 0x78}`
 
-#### Respuesta de Última Venta
+<strong>Respuesta de Última Venta</strong>
 
 DATO                    | LARGO     | COMENTARIO
 ------                  | ------    | ------
@@ -724,7 +724,7 @@ DATO                      | LARGO     | Comentario
 
 *Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x31, 0x32, 0x30, 0x30, 0x7c, 0x31, 0x30, 0x7c, 0x03, 0x01}`
 
-#### Respuesta de Anulación
+<strong>Respuesta de Anulación</strong>
 
 DATO                      | LARGO     | COMENTARIO
 ------                    | ------    | ------
@@ -816,7 +816,7 @@ DATO        | LARGO     | Comentario
 *Mensaje* en <i>ASCII</i>: `<STX>0280|1<ETX>u`
 *Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x32, 0x38, 0x30, 0x7c, 0x31, 0x03, 0x75}`
 
-#### Respuesta de Última Venta Multicodigo
+<strong>Respuesta de Última Venta Multicodigo</strong>
 
 DATO                    | LARGO     | COMENTARIO
 ------                  | ------    | ------
@@ -942,7 +942,7 @@ DATO        | LARGO     | Comentario
 *Mensaje* en <i>ASCII</i>: `<STX>0500||<ETX>6`
 *Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x35, 0x30, 0x30, 0x7c, 0x7c, 0x03, 0x06}`
 
-#### Respuesta de Cierre
+<strong>Respuesta de Cierre</strong>
 
 DATO                    | LARGO     | COMENTARIO
 ------                  | ------    | ------
@@ -1022,7 +1022,7 @@ DATO                         | LARGO     | COMENTARIO
 *Mensaje* en <i>ASCII</i>: `<STX>0700||<ETX><EOT>`
 *Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x37, 0x30, 0x30, 0x7c, 0x7c, 0x03, 0x04}`
 
-#### Respuesta de Totales
+<strong>Respuesta de Totales</strong>
 
 DATO                         | LARGO     | COMENTARIO
 ------                       | ------    | ------
@@ -1142,7 +1142,7 @@ DATO                         | LARGO     | COMENTARIO
 
 *Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x32, 0x36, 0x30, 0x7c, 0x7c, 0x03, 0x07}`
 
-#### Respuesta de Detalle de Ventas
+<strong>Respuesta de Detalle de Ventas</strong>
 
 DATO                    | LARGO     | COMENTARIO
 ------                  | ------    | ------
@@ -1283,7 +1283,7 @@ DATO                         | LARGO     | COMENTARIO
 *Mensaje* en <i>ASCII</i>: `<STX>0260|1|<ETX><LRC>`
 *Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x32, 0x36, 0x30, 0x7c, 0x7c, 0x03, 0x07}`
 
-#### Respuesta de Detalle de Ventas Multicodigo
+<strong>Respuesta de Detalle de Ventas Multicodigo</strong>
 
 DATO                    | LARGO     | COMENTARIO
 ------                  | ------    | ------
@@ -1407,7 +1407,7 @@ DATO        | LARGO     | Comentario
 
 *Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x38, 0x30, 0x30, 0x03, 0x0B}`
 
-#### Respuesta de Carga de Llaves
+<strong>Respuesta de Carga de Llaves</strong>
 
 DATO                    | LARGO     | COMENTARIO
 ------                  | ------    | ------
@@ -1475,7 +1475,7 @@ DATO        | LARGO     | Comentario
 
 *Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x31, 0x30, 0x30, 0x03, 0x02}`
 
-#### Respuesta Poll
+<strong>Respuesta Poll</strong>
 
 DATO                    | LARGO         | COMENTARIO
 ------                  | ------        | ------
@@ -1534,7 +1534,7 @@ DATO        | LARGO     | Comentario
 
 *Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x33, 0x30, 0x30, 0x03, 0x00}`
 
-#### Respuesta Cambio a POS Normal
+<strong>Respuesta Cambio a POS Normal</strong>
 
 DATO                    | LARGO         | COMENTARIO
 ------                  | ------        | ------

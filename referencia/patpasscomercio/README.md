@@ -239,7 +239,7 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Inscription.start
+#<strong>Parámetros Inscription.start</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -259,7 +259,7 @@ commerceEmail <br> <i> String </i> | Correo para el comercio con el comprobante 
 userAddress <br> <i> String </i> | Dirección del tarjetahabiente
 userCity <br> <i> String </i> | Ciudad del tarjetahabiente
 
-##### Respuesta Inscription.start
+#<strong>Respuesta Inscription.start</strong>
 
 ```java
 response.getToken();
@@ -358,12 +358,12 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Inscription.status
+#<strong>Parámetros Inscription.status</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 token <br> <i> String </i> | Token entregado al iniciar inscripción
 
-##### Respuesta Inscription.status
+#<strong>Respuesta Inscription.status</strong>
 
 ```java
 response.getVoucherUrl();

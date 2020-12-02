@@ -336,7 +336,7 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Transaction.create
+#<strong>Parámetros Transaction.create</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -345,7 +345,7 @@ session_id  <br> <i> String </i> | Identificador de sesión, uso interno de com
 amount  <br> <i> Decimal </i> | Monto de la transacción. Máximo 2 decimales para USD. Largo máximo: 17
 return_url  <br> <i> String </i> | URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización. Largo máximo: 256
 
-##### Respuesta Transaction.create
+#<strong>Respuesta Transaction.create</strong>
 
 ```java
 response.getUrl();
@@ -427,13 +427,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-##### Parámetros Transaction.commit
+#<strong>Parámetros Transaction.commit</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
-##### Respuesta Transaction.commit
+#<strong>Respuesta Transaction.commit</strong>
 
 ```java
 response.getVci();
@@ -599,13 +599,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-##### Parámetros Transaction.status
+#<strong>Parámetros Transaction.status</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
-##### Respuesta Transaction.status
+#<strong>Respuesta Transaction.status</strong>
 
 ```java
 response.getVci();
@@ -800,14 +800,14 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Transaction.refund
+#<strong>Parámetros Transaction.refund</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> | Monto que se desea anular o reversar de la transacción. Largo máximo: 17.
 
-##### Respuesta Transaction.refund
+#<strong>Respuesta Transaction.refund</strong>
 
 ```java
 response.getAuthorizationCode();
@@ -1053,7 +1053,7 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Transaction.create Mall
+#<strong>Parámetros Transaction.create Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1065,7 +1065,7 @@ details [].amount  <br> <i> Decimal </i> | Monto de la transacción de una tie
 details [].commerce_code  <br> <i>String </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
 details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda del mall. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>.
 
-##### Respuesta Transaction.create() Mall
+#<strong>Respuesta Transaction.create() Mall</strong>
 
 ```java
 response.getToken();
@@ -1147,13 +1147,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-##### Parámetros Transaction.commit Mall
+#<strong>Parámetros Transaction.commit Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
-##### Respuesta Transaction.commit Mall
+#<strong>Respuesta Transaction.commit Mall</strong>
 
 ```java
 response.getAccountingDate();
@@ -1346,13 +1346,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-##### Parámetros Transaction.status Mall
+#<strong>Parámetros Transaction.status Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
-##### Respuesta Transaction.status Mall
+#<strong>Respuesta Transaction.status Mall</strong>
 
 ```java
 response.getAccountingDate();
@@ -1570,7 +1570,7 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Transaction.refund Mall
+#<strong>Parámetros Transaction.refund Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1579,7 +1579,7 @@ buy_order  <br> <i> String </i> | Orden de compra de la transacción que se req
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> | Monto que se desea anular o reversar de la transacción. Largo máximo: 17.
 commerce_code  <br> <i> Number </i> | Código de comercio de la tienda mall que realizó la transacción. Largo: 12.
 
-##### Respuesta Transaction.refund Mall
+#<strong>Respuesta Transaction.refund Mall</strong>
 
 ```java
 response.getAuthorizationCode();
@@ -1722,7 +1722,7 @@ Content-Type: application/json
 }
 ```
 
-#### Parámetros inscripción Oneclick Mall
+<strong>Parámetros inscripción Oneclick Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1730,7 +1730,7 @@ username  <br> <i> String </i> | Identificador del usuario registrado en el come
 email  <br> <i> String </i> | Email del usuario registrado en el comercio. Largo máximo: 100.
 response_url  <br> <i> String </i> | URL del comercio a la cual Webpay redireccionará posterior al proceso de inscripción. Largo máximo: 255.
 
-#### Respuesta inscripción Oneclick Mall
+<strong>Respuesta inscripción Oneclick Mall</strong>
 
 ```java
 response.getToken();
@@ -1815,13 +1815,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-#### Parámetros Confirmar inscripción Oneclick Mall
+<strong>Parámetros Confirmar inscripción Oneclick Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Identificador del proceso de inscripción. Es entregado por Webpay en la respuesta del método `Inscription.start()`. (See envía en la URL, no en el body)
 
-#### Respuesta Confirmar inscripción Oneclick Mall
+<strong>Respuesta Confirmar inscripción Oneclick Mall</strong>
 
 ```java
 response.getAuthorizationCode();
@@ -1931,14 +1931,14 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Inscription.remove Oneclick Mall
+#<strong>Parámetros Inscription.remove Oneclick Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tbk_user  <br> <i> String </i> | Identificador único de la inscripción del cliente (devuelto por `Inscription.finish()`). Largo: 40.
 username  <br> <i> String </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `Inscription.start()`). Largo máximo: 40.
 
-##### Respuesta Inscription.remove Oneclick Mall
+#<strong>Respuesta Inscription.remove Oneclick Mall</strong>
 
 ```java
 // 204 OK
@@ -2070,7 +2070,7 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Transaction.authorize Oneclick Mall
+#<strong>Parámetros Transaction.authorize Oneclick Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -2083,7 +2083,7 @@ details [].buy_order  <br> <i> String </i> | Identificador único de la compra
 details [].amount  <br> <i> Decimal </i> | Monto de la transacción de pago. Largo máximo: 17.
 details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas de la transacción de pago. Largo 2. No obligatorio.
 
-##### Respuesta Transaction.authorize Oneclick Mall
+#<strong>Respuesta Transaction.authorize Oneclick Mall</strong>
 
 ```java
 response.getAccountingDate();
@@ -2274,13 +2274,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-##### Parámetros Transaction.status Oneclick Mall
+#<strong>Parámetros Transaction.status Oneclick Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buy_order  <br> <i> String </i> | Orden de compra de la transacción a consultar (se envía en la URL, no en el body).
 
-##### Respuesta Transaction.status Oneclick Mall
+#<strong>Respuesta Transaction.status Oneclick Mall</strong>
 
 ```java
 response.getAccountingDate();
@@ -2500,7 +2500,7 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Transaction.refund Oneclick Mall
+#<strong>Parámetros Transaction.refund Oneclick Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -2509,7 +2509,7 @@ commerce_code  <br> <i> String </i> | Código de comercio hijo. Largo máximo: 
 detail_buy_order  <br> <i> String </i> | Orden de compra hija de la transacción a  reversar o anular. Largo máximo: 26.
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> | Monto que se desea anular o reversar de la transacción. Largo máximo: 17
 
-##### Respuesta Transaction.refund Oneclick Mall
+#<strong>Respuesta Transaction.refund Oneclick Mall</strong>
 
 ```java
 response.getAuthorizationCode();
@@ -2647,7 +2647,7 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros capture Oneclick Mall
+#<strong>Parámetros capture Oneclick Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -2661,7 +2661,7 @@ El método `capture()` debe ser invocado siempre indicando el código del
 comercio de la tienda virtual específica.
 </aside>
 
-##### Respuesta capture Oneclick Mall
+#<strong>Respuesta capture Oneclick Mall</strong>
 
 ```java
 response.getAuthorizationCode();
@@ -2814,7 +2814,7 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Transaction.create Completa
+#<strong>Parámetros Transaction.create Completa</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -2825,7 +2825,7 @@ cvv  <br> <i> String </i> | (Opcional) Código que se utiliza como método de se
 card_number  <br> <i> String </i> | Número de tarjeta. Largo máximo: 16
 card_expiration_date  <br> <i> String </i> | Fecha de expiración de la tarjeta con la que se realiza la transacción. Largo máximo: 5
 
-##### Respuesta Transaction.create Completa
+#<strong>Respuesta Transaction.create Completa</strong>
 
 ```java
 response.getToken();
@@ -2934,14 +2934,14 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Transaction.installments Completa
+#<strong>Parámetros Transaction.installments Completa</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 
-##### Respuesta Transaction.installments Completa
+#<strong>Respuesta Transaction.installments Completa</strong>
 
 ```java
 response.getInstallmentsAmount();
@@ -3073,7 +3073,7 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Transaction.commit Completa
+#<strong>Parámetros Transaction.commit Completa</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -3082,7 +3082,7 @@ id_query_installments  <br> <i> Number </i> | (Opcional) Identificador de cuota.
 deferred_period_index  <br> <i> Number </i> | (Opcional) Cantidad de periodo diferido. Largo máximo: 2. Solo enviar si el pago es en cuotas
 grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia. Solo enviar si el pago es en cuotas
 
-##### Respuesta Transaction.commit Completa
+#<strong>Respuesta Transaction.commit Completa</strong>
 
 ```java
 response.getAccountingDate();
@@ -3244,13 +3244,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-##### Parámetros Transaction.status Completa
+#<strong>Parámetros Transaction.status Completa</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
-##### Respuesta Transaction.status Completa
+#<strong>Respuesta Transaction.status Completa</strong>
 
 ```java
 response.getAccountingDate();
@@ -3438,14 +3438,14 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Transaction.refund Completa
+#<strong>Parámetros Transaction.refund Completa</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> |  Monto que se desea anular o reversar de la transacción. Largo máximo: 17.
 
-##### Respuesta Transaction.refund Completa
+#<strong>Respuesta Transaction.refund Completa</strong>
 
 ```java
 response.getType();
@@ -3697,7 +3697,7 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Transaction.create Completa Mall
+#<strong>Parámetros Transaction.create Completa Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -3710,7 +3710,7 @@ details [].amount  <br> <i> Decimal </i> | Monto de la transacción de una tie
 details [].commerce_code  <br> <i>String </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
 details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda del mall. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>. Largo máximo: 26
 
-##### Respuesta Transaction.create Completa Mall
+#<strong>Respuesta Transaction.create Completa Mall</strong>
 
 ```java
 response.getToken();
@@ -3850,7 +3850,7 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Transaction.installments Completa Mall
+#<strong>Parámetros Transaction.installments Completa Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -3859,7 +3859,7 @@ commerce_code  <br> <i> String </i> | Código comercio asignado por Transbank p
 buy_order  <br> <i> String </i> | Orden de compra de la tienda del mall. Largo máximo: 26
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 
-##### Respuesta Transaction.installments Completa Mall
+#<strong>Respuesta Transaction.installments Completa Mall</strong>
 
 ```java
 response.getInstallmentsAmount();
@@ -4058,7 +4058,7 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Transaction.commit Completa Mall
+#<strong>Parámetros Transaction.commit Completa Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -4070,7 +4070,7 @@ id_query_installments  <br> <i> Number </i> | (Opcional) Identificador de cuota.
 deferred_period_index  <br> <i> Number </i> | (Opcional) Cantidad de periodo diferido. Largo máximo: 2. Solo enviar si el pago es en cuotas
 grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia. Solo enviar si el pago es en cuotas
 
-##### Respuesta Transaction.commit Completa Mall
+#<strong>Respuesta Transaction.commit Completa Mall</strong>
 
 ```java
 response.getBuyOrder();
@@ -4246,13 +4246,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-##### Parámetros Transaction.status Completa Mall
+#<strong>Parámetros Transaction.status Completa Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
-##### Respuesta Transaction.status Completa Mall
+#<strong>Respuesta Transaction.status Completa Mall</strong>
 
 ```java
 response.getBuyOrder();
@@ -4461,7 +4461,7 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Transaction.refund Completa
+#<strong>Parámetros Transaction.refund Completa</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -4470,7 +4470,7 @@ buy_order  <br> <i> String </i> | Orden de compra de la transacción que se req
 commerce_code  <br> <i> Number </i> | Tienda hija que realizó la transacción. Largo: 12.
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> |  Monto que se desea anular o reversar de la transacción. Largo máximo: 17
 
-##### Respuesta Transaction.refund Completa
+#<strong>Respuesta Transaction.refund Completa</strong>
 
 ```java
 response.getType();
@@ -4629,7 +4629,7 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Transaction.capture
+#<strong>Parámetros Transaction.capture</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -4639,7 +4639,7 @@ buy_order  <br> <i> String </i> | Orden de compra de la transacción que se req
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
 capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo máximo: 17.
 
-##### Respuesta Transaction.capture
+#<strong>Respuesta Transaction.capture</strong>
 
 ```java
 response.getAuthorizationCode();
