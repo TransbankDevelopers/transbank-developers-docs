@@ -303,7 +303,7 @@ Descargar el formulario de envidencias...
 * Para integraciones Webpay (Webpay Plus, Webpay OneClick, Webpay transacción completa): [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-rest.docx)
 * Para integraciones Webpay que usen un plugin oficial: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-plugins-rest.docx)
 * Para integraciones Onepay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx)
-* Para integraciones Patpas Comercio: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-patpass-comercio.docx)
+* Para integraciones Patpass Comercio: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-patpass-comercio.docx)
 
 Soporte validará que los casos de prueba sean consistentes con los registrados
 en los sistemas de Webpay y, de estar todo correcto, se le notificará al
