@@ -237,7 +237,7 @@ Si el tarjetahabiente anula la transacción en el formulario de pago de Webpay,
 
 Para crear una transacción basta llamar al método `initTransaction()`
 
-#### initTransaction()
+<strong>initTransaction()</strong>
 
 Permite inicializar una transacción en  Webpay. Como respuesta a la invocación se genera un toke que representa en forma única una transacción.
 
@@ -259,7 +259,7 @@ wsInitTransactionOutput initResult = transaction.initTransaction(
     amount, buyOrder, sessionId, returnUrl, finalUrl, patPassInfo);
 ```
 
-##### Parámetros
+#<strong>Parámetros</strong>
 
 Nombre <br><i> tipo </i> | Descripción
 ------ | -----------
@@ -283,7 +283,7 @@ wPMDetail.expirationDate <br><i> xs:dateTime </i> | Fecha expiración de PatPas
 wPMDetail.commerceMail <br><i> xs:string </i> | Correo electrónico comercio. Largo máximo: 50. Los SDKs se encargan automáticamente de este parámetro a partir del email de comercio ingresado en la configuración usada para iniciar la transacción
 wPMDetail.ufFlag <br><i> xs:boolean </i> | Valor en true indica que el monto enviado está expresado en UF, valor en false indica que valor esta expresado en pesos. Los SDKs se encargan automáticamente de este parámetro a partir de la configuración de moneda y certificados/llaves usada para iniciar la transacción
 
-##### Respuesta
+#<strong>Respuesta</strong>
 
 ```java
 initResult.getUrl();
@@ -308,7 +308,7 @@ url  <br> <i> xs:string </i> | URL de formulario de pago PatPass by Webpay. Larg
 
 Cuando el comercio retoma el control mediante `returnURL` puedes confirmar una transacción usando los métodos  `getTransactionResult()` y `acknowledgeTransaction()`
 
-#### getTransactionResult()
+<strong>getTransactionResult()</strong>
 
 Permite obtener el resultado de la transacción una vez que Webpay ha resuelto su autorización financiera.
 
@@ -403,7 +403,7 @@ detailsOutput[0].sharesNumber  <br> <i> xs:int </i> | Cantidad de cuotas. Valor 
 detailsOutput[0].commerceCode  <br> <i> xs:string </i> | Código comercio de la tienda. Largo: 12
 detailsOutput[0].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Largo máximo: 26
 
-#### acknowledgeTransaction()
+<strong>acknowledgeTransaction()</strong>
 
 Indica a Webpay que se ha recibido conforme el resultado de la transacción.
 

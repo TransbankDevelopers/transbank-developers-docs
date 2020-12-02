@@ -346,7 +346,7 @@ Este caso es importante de destacar, ya que si se configura la misma URL para `r
 
 Para crear una transacción basta llamar al método `initTransaction()`
 
-#### initTransaction()
+<strong>initTransaction()</strong>
 
 Permite inicializar una transacción en Webpay. Como respuesta a la invocación
 se genera un token que representa en forma única una transacción.
@@ -419,7 +419,7 @@ Cuando el comercio retoma el control mediante `returnURL` puedes confirmar una
 transacción usando los métodos  `getTransactionResult()` y
 `acknowledgeTransaction()`
 
-#### getTransactionResult()
+<strong>getTransactionResult()</strong>
 
 Permite obtener el resultado de la transacción una vez que Webpay ha resuelto su autorización financiera.
 
@@ -534,7 +534,7 @@ detailsOutput[0].sharesNumber  <br> <i> xs:int </i> | Cantidad de cuotas. Largo 
 detailsOutput[0].commerceCode  <br> <i> xs:string </i> | Código comercio de la tienda. Largo: 12
 detailsOutput[0].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Largo máximo: 26
 
-#### acknowledgeTransaction()
+<strong>acknowledgeTransaction()</strong>
 
 Indica a Webpay que se ha recibido conforme el resultado de la transacción.
 
@@ -621,7 +621,7 @@ Las diferencias son:
 
 Para crear una transacción basta llamar al método `initTransaction()`
 
-#### initTransaction() Mall
+<strong>initTransaction() Mall</strong>
 
 Permite inicializar una transacción en Webpay. Como respuesta a la invocación
 se genera un token que representa en forma única una transacción.
@@ -728,7 +728,7 @@ Si un `buyOrder` es enviado dos o más veces se obtendrá el error `Transaction 
 Para confirmar una transacción se deben usar los métodos  `getTransactionResult()` y
 `acknowledgeTransaction()`
 
-#### getTransactionResult() Mall
+<strong>getTransactionResult() Mall</strong>
 
 Permite obtener el resultado de la transacción una vez que Webpay ha resuelto
 su autorización financiera.
@@ -851,7 +851,7 @@ detailsOutput[].sharesNumber  <br> <i> xs:int </i> | Cantidad de cuotas. Largo m
 detailsOutput[].commerceCode  <br> <i> xs:string </i> | Código comercio de la tienda. Largo: 12
 detailsOutput[].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Largo máximo: 26
 
-#### acknowledgeTransaction() Mall
+<strong>acknowledgeTransaction() Mall</strong>
 
 Indica a Webpay que se ha recibido conforme el resultado de la transacción.
 
@@ -913,7 +913,7 @@ para conocer más detalles y restricciones.
 
 Para realizar esa captura explícita debe usarse el método `capture()`
 
-#### capture()
+<strong>capture()</strong>
 
 Permite solicitar a Webpay la captura diferida de una transacción con
 autorización y sin captura simultánea.
@@ -1051,7 +1051,7 @@ más detalles y restricciones.
 
 Para anular una transacción se debe invocar al método `nullify()`.
 
-#### nullify()
+<strong>nullify()</strong>
 
 Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentra vigente.
 
@@ -1267,7 +1267,7 @@ Proceso:
 
 Para realizar el primero de los procesos descritos (la inscripción), debe llamarse al método `initInscription()`
 
-#### initInscription()
+<strong>initInscription()</strong>
 
 Permite realizar la inscripción del tarjetahabiente e información de su
 tarjeta de crédito. Retorna como respuesta un token que representa la
@@ -1339,7 +1339,7 @@ Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a
 la URL de fin de inscripción que definió el comercio. En ese instante el
 comercio debe llamar a `finishInscription()`.
 
-#### finishInscription()
+<strong>finishInscription()</strong>
 
 Permite finalizar el proceso de inscripción del tarjetahabiente en Oneclick.
 Retorna el identificador del usuario en Oneclick, el cual será utilizado para
@@ -1472,7 +1472,7 @@ responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de pago, do
 
 Este proceso permite reversar una venta cuando esta no pudo concretarse, dentro del mismo día contable, con la finalidad de anular un cargo realizado al cliente. Para esto se debe consumir el método `codeReverseOneClick()` con la orden de compra de la transacción a reversar.
 
-#### codeReverseOneClick()
+<strong>codeReverseOneClick()</strong>
 
 Permite reversar una transacción de venta autorizada con anterioridad. Este
 método retorna como respuesta un identificador único de la transacción de
@@ -1532,7 +1532,7 @@ solicitud de este para no operar con esta forma de pago, el comercio deberá
 invocar a `removeUser()` con el identificador de usuario entregado en la
 inscripción.
 
-#### removerUser()
+<strong>removerUser()</strong>
 
 Permite eliminar una inscripción de usuario en Transbank
 
@@ -1589,7 +1589,7 @@ Las diferencias son:
 
 Para iniciar la inscripción debe usarse el método `initInscription()`
 
-#### initInscription() Mall
+<strong>initInscription() Mall</strong>
 
 Permite gatillar el inicio del proceso de inscripción.
 
@@ -1628,7 +1628,7 @@ de recibir el token en la URL de fin de inscripción (`returnUrl`). Pasados los
 el usuario serán eliminados.
 </aside>
 
-#### finishInscription() Mall
+<strong>finishInscription() Mall</strong>
 
 Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
 
@@ -1657,7 +1657,7 @@ tbkUser  <br> <i> xs:string </i> | Identificador único de la inscripción del
 Una vez realizada la inscripción, el comercio puede usar el `tbkUser` recibido
 para realizar transacciones. Para eso debes usar el método `authorize()`.
 
-#### autorize() Mall
+<strong>autorize() Mall</strong>
 
 Permite autorizar un pago.
 
@@ -1722,7 +1722,7 @@ comercio saber si Transbank recibió la anulación).
 
 Para llevar a cabo la reversa, el comercio debe usar el método `reverse()`. Para la anulación, se debe usar el método `nullify()`. Y para reversar una anulación existe el método `reverseNullification()`
 
-#### reverse() Mall
+<strong>reverse() Mall</strong>
 
 Permite reversar una operación de autorización.
 
@@ -1746,7 +1746,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 [].reversed  <br> <i> xs:boolean </i> | Indica si la reversa se realizó correctamente o no.
 [].reverseCode  <br> <i> xs:string </i> | Identificador único de la transacción de reversa.
 
-#### nullify() Mall
+<strong>nullify() Mall</strong>
 
 Permite anular un pago.
 
@@ -1774,7 +1774,7 @@ authorizationDate  <br> <i> xs:dateTime </i> | Fecha de la autorización de la 
 nullifiedAmount  <br> <i> xs:decimal </i> | Monto anulado.
 balance   <br> <i> xs:decimal </i> | Monto restante de la sub-transacción de pago original: monto inicial – monto anulado.
 
-#### reverseNullification()
+<strong>reverseNullification()</strong>
 
 Permite reversar una anulación.
 
@@ -1805,7 +1805,7 @@ método `nullify()`.
 
 En el caso que el comercio requiera eliminar la inscripción de un usuario en Oneclick Mall ya sea por la eliminación de un cliente en su sistema o por la solicitud de este para no operar con esta forma de pago, el comercio deberá invocar a `removeInscription()` con el identificador de usuario entregado en la inscripción.
 
-#### removeInscription() Mall
+<strong>removeInscription() Mall</strong>
 
 Permite eliminar una inscripción de usuario en Oneclick Mall
 
@@ -1843,7 +1843,7 @@ Estas modalidades, por separado, solo son válidas para tarjetas de crédito.
 
 Para realizar esa captura explícita debe usarse el método `capture()`
 
-#### capture() Mall
+<strong>capture() Mall</strong>
 
 Este método permite a los comercios Oneclick Mall habilitados, poder
 realizar capturas diferidas de una transacción previamente autorizada. El método

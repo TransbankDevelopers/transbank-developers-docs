@@ -456,7 +456,7 @@ resp = MallTransaction.authorize(user_name=username, tbk_user=tbkUser, buy_order
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 Revisa la [referencia](/referencia/webpay#consultar-un-pago-realizado-con-oneclick-mall) de este método para mayor detalle en los parámetros de entrada y respuesta.
 
-#### Transaction.status()
+<strong>Transaction.status()</strong>
 
 Permite consultar el estado de pago realizado a través de Oneclick.
 Retorna el resultado de la autorización.
@@ -514,7 +514,7 @@ reversa o una anulación:
 
 Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.</strong>
 
-#### Transaction.refund()
+<strong>Transaction.refund()</strong>
 
 Permite reversar o anular una transacción de venta autorizada con anterioridad.
 Este método retorna como respuesta un identificador único de la transacción de reversa/anulación.

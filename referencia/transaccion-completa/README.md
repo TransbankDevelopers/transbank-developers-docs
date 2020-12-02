@@ -143,7 +143,7 @@ y cvv (no necesario para comercios con la opción `sin cvv` habilitada).
 
 Para crear una transacción completa basta llamar al método `Transaction.create()`
 
-#### Transaction.create()
+<strong>Transaction.create()</strong>
 
 Permite inicializar una transacción completa en Webpay. Como respuesta a la
 invocación se genera un token que representa en forma única una transacción.
@@ -276,7 +276,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 
-#### Modalidad sin cvv
+<strong>Modalidad sin cvv</strong>
 
 Para modalidad del producto Transacción completa `sin CVV`, este campo **no** debe ser enviado.
 
@@ -297,7 +297,7 @@ Content-Type: application/json
 Para consultar el valor de las cuotas que pagará el tarjeta habiente en una
 transacción completa, es necesario llamar al método `Transaction.installments()`
 
-#### Transaction.installments()
+<strong>Transaction.installments()</strong>
 
 Operación que permite obtener el monto de la cuota a partir del número de cuotas.
 El id de la consulta que selecciona el tarjetahabiente debe ser informado en la
@@ -423,7 +423,7 @@ Una vez iniciada la transacción y consultado el monto de las cuotas, puedes
 confirmar y obtener el resultado de una transacción completa usando el metodo
 `Transaction.commit()`.
 
-#### Transaction.commit()
+<strong>Transaction.commit()</strong>
 
 Operación que permite confirmar una transacción. Retorna el estado de la
 transacción.
@@ -621,7 +621,7 @@ prepaid_balance <br> <i> Number </i> | Saldo de la tarjeta de prepago. Se envía
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
-#### Transaction.status()
+<strong>Transaction.status()</strong>
 
 Obtiene resultado de transacción a partir de un token.
 
@@ -811,7 +811,7 @@ Dependiendo de la siguiente lógica de negocio la invocación a esta operacio�
 * Si se supera el tiempo máximo para ejecutar una reversa se ejecutará una anulación.
 * Si no se ha dado ninguno de los casos anteriores se ejecutará una reversa.
 
-#### Transaction.refund()
+<strong>Transaction.refund()</strong>
 
 Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentre vigente.
 
@@ -969,7 +969,7 @@ Las diferencias son:
 
 Para crear una Transacción Completa Mall basta llamar al método `Transaction.create()`
 
-#### Transaction.create() Completa Mall
+<strong>Transaction.create() Completa Mall</strong>
 
 Permite inicializar una transacción Completa Mall en Webpay. Como respuesta a la
 invocación se genera un token que representa en forma única una transacción.
@@ -1165,7 +1165,7 @@ token  <br> <i> String </i> | Token identificador de la transacción. Largo: 6
 
 Para consultar el valor de las cuotas que pagará el tarjeta habiente en cada transacción dentro transacción Completa Mall, es necesario llamar al método `Transaction.installments()`
 
-#### Transaction.installments() Completa Mall
+<strong>Transaction.installments() Completa Mall</strong>
 
 Operación que permite obtener el monto de la cuota a partir del número de cuotas.
 El id de la consulta que selecciona el tarjetahabiente debe ser informado en la
@@ -1345,7 +1345,7 @@ deferred_periods [].period  <br> <i> String </i> | Índice de periodo. Largo: 2
 
 Una vez iniciada la transacción y consultado el monto de las cuotas por cada subtransacción, puedes confirmar y obtener el resultado de una transacción completa usando el metodo `Transaction.commit()`.
 
-#### Transaction.commit() Completa Mall
+<strong>Transaction.commit() Completa Mall</strong>
 
 Operación que permite confirmar una transacción. Retorna el estado de la
 transacción.
@@ -1627,7 +1627,7 @@ prepaid_balance <br> <i> Number </i> | Saldo de la tarjeta de prepago. Se envía
 
 Esta operación permite obtener el estado de la transacción Completa Mall en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
-#### Transaction.status() Completa Mall
+<strong>Transaction.status() Completa Mall</strong>
 
 Obtiene resultado de transacción a partir de un token.
 
@@ -1815,7 +1815,7 @@ Dependiendo de la siguiente lógica de negocio la invocación a esta operacio�
 * Si se supera el tiempo máximo para ejecutar una reversa se ejecutará una anulación.
 * Si no se ha dado ninguno de los casos anteriores se ejecutará una reversa.
 
-#### Transaction.refund() Completa Mall
+<strong>Transaction.refund() Completa Mall</strong>
 
 Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentre vigente.
 
@@ -1985,7 +1985,7 @@ para conocer más detalles y restricciones.
 
 Para realizar esa captura explícita debe usarse el método `Transaction.capture()`
 
-#### Transaction.capture()
+<strong>Transaction.capture()</strong>
 
 Permite solicitar a Webpay la captura diferida de una transacción con
 autorización y sin captura simultánea.
@@ -2144,7 +2144,7 @@ Código de estado HTTP | Descripción
 200 | La operación se ha ejecutado exitosamente
 204 | La operación DELETE se ha ejecutado exitosamente
 
-#### Códigos de error
+<strong>Códigos de error</strong>
 
 Todos los errores reportados por la API REST de Webpay despliegan un mensaje JSON con una descripción del error.
 

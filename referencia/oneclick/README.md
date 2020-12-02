@@ -355,7 +355,7 @@ card_number <br> <i> String </i> | Últimos 4 dígitos de la tarjeta inscrito: <
 
 Una vez finalizado el proceso de inscripción es posible eliminarla de ser necesario. Para esto debes usar el método llamado `Inscription.remove()`.
 
-#### Inscription.remove()
+<strong>Inscription.remove()</strong>
 
 Permite eliminar un usuario enrolado a Oneclick Mall.
 
@@ -436,7 +436,7 @@ Content-Type: application/json
 Una vez realizada la inscripción, el comercio puede usar el `tbkUser` recibido
 para realizar transacciones. Para eso debes usar el método `Transaction.authorize()`.
 
-#### Transaction.authorize()
+<strong>Transaction.authorize()</strong>
 
 Permite autorizar un pago.
 
@@ -1041,7 +1041,7 @@ Estas modalidades, por separado, solo son válidas para tarjetas de crédito.
 
 Para realizar esa captura explícita debe usarse el método `capture()`
 
-#### capture()
+<strong>capture()</strong>
 
 Este método permite a los comercios Oneclick Mall habilitados, poder
 realizar capturas diferidas de una transacción previamente autorizada. El método
@@ -1175,7 +1175,7 @@ para conocer más detalles y restricciones.
 
 Para realizar esa captura explícita debe usarse el método `Transaction.capture()`
 
-#### Transaction.capture()
+<strong>Transaction.capture()</strong>
 
 Permite solicitar a Webpay la captura diferida de una transacción con
 autorización y sin captura simultánea.
@@ -1334,7 +1334,7 @@ Código de estado HTTP | Descripción
 200 | La operación se ha ejecutado exitosamente
 204 | La operación DELETE se ha ejecutado exitosamente
 
-#### Códigos de error
+<strong>Códigos de error</strong>
 
 Todos los errores reportados por la API REST de Webpay despliegan un mensaje JSON con una descripción del error.
 

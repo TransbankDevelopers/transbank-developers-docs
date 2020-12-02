@@ -291,7 +291,7 @@ El SDK Java y C no soportan el envío de mensajes intermedios. Por esta razón e
 3. La caja al recibir la respuesta envía un `<ACK>` si el mensaje está correcto, o un `<NAK>` para el caso en que el `LRC` no corresponde.
 4. El POS al recibir el `<ACK>` vuelve al inicio a esperar un nuevo comando, para el caso que recibe un `<NAK>` vuelve a enviar la respuesta 2 veces más.
 
-#### Solicitud de Venta
+<strong>Solicitud de Venta</strong>
 
 DATO        | LARGO     | Comentario
 ------      | ------    | ------
@@ -447,7 +447,7 @@ El resultado de la venta se entrega en la forma de un objeto `MultiCodeSaleRespo
 3. La caja al recibir la respuesta envía un `<ACK>` si el mensaje está correcto, o un `<NAK>` para el caso en que el `LRC` no corresponde.
 4. El POS al recibir el `<ACK>` vuelve al inicio a esperar un nuevo comando, para el caso que recibe un `<NAK>` vuelve a enviar la respuesta 2 veces más.
 
-#### Solicitud de Venta Multicodigo
+<strong>Solicitud de Venta Multicodigo</strong>
 
 DATO                    | LARGO     | Comentario
 ------                  | ------    | ------
@@ -587,7 +587,7 @@ El resultado de la transacción última venta devuelve los mismos datos que una 
 1. La caja envía el requerimiento y espera como respuesta `<ACK>`/`<NAK>`, en caso de que llegue un `<NAK>`, debe reintentar el envío del requerimiento 2 veces. Si recibe un `<ACK>` debe esperar la respuesta de la transacción.
 2. Una vez recibida la respuesta, la caja calcula el `<LRC>` del mensaje y lo compara con el recibido, en el caso de coincidir la caja envía un `<ACK>` al **POS** dando por finalizado el comando; en caso contrario envía `<NAK>` y vuelve a esperar la respuesta del **POS**.
 
-#### Solicitud de Última Venta
+<strong>Solicitud de Última Venta</strong>
 
 DATO        | LARGO     | Comentario
 ------      | ------    | ------
@@ -708,7 +708,7 @@ Como respuesta el **POS** enviará un código de aprobación, acompañado de un 
 3. La caja al recibir la respuesta envía un `<ACK>` si el mensaje está correcto, o un `<NAK>` para el caso en que el `<LRC>` no corresponda.
 4. El **POS** al recibir el `<ACK>` vuelve al inicio a la espera de un nuevo comando, para el caso que reciba un `<NAK>` o no reciba ninguna validación dentro de los próximos 10 segundos; vuelve a enviar la respuesta. Esto lo repetirá 2 veces más.
 
-#### Solicitud de Anulación
+<strong>Solicitud de Anulación</strong>
 
 DATO                      | LARGO     | Comentario
 ------                    | ------    | ------
@@ -802,7 +802,7 @@ El resultado de la transacción última venta devuelve los mismos datos que una 
 1. La caja envía el requerimiento y espera como respuesta `<ACK>`/`<NAK>`, en caso de que llegue un `<NAK>`, debe reintentar el envío del requerimiento 2 veces. Si recibe un `<ACK>` debe esperar la respuesta de la transacción.
 2. Una vez recibida la respuesta, la caja calcula el `<LRC>` del mensaje y lo compara con el recibido, en el caso de coincidir la caja envía un `<ACK>` al **POS** dando por finalizado el comando; en caso contrario envía `<NAK>` y vuelve a esperar la respuesta del **POS**.
 
-#### Solicitud de Última Venta Multicodigo
+<strong>Solicitud de Última Venta Multicodigo</strong>
 
 DATO        | LARGO     | Comentario
 ------      | ------    | ------
@@ -928,7 +928,7 @@ El resultado del cierre de caja se entrega en la forma de un objeto `CloseRespon
 Para el cierre no se solicitara tarjeta supervisora.
 </aside>
 
-#### Solicitud de Cierre
+<strong>Solicitud de Cierre</strong>
 
 DATO        | LARGO     | Comentario
 ------      | ------    | ------
@@ -1008,7 +1008,7 @@ El resultado de la transacción entrega en la forma de un objeto `TotalsResponse
 
 <img class="td_img-night" src="/images/referencia/posintegrado/diagrama-totales.png" alt="Diagrama de Solicitud de Totales">
 
-#### Solicitud de Totales
+<strong>Solicitud de Totales</strong>
 
 DATO                         | LARGO     | COMENTARIO
 ------                       | ------    | ------
@@ -1126,7 +1126,7 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` e
 
 <img class="td_img-night" src="/images/referencia/posintegrado/diagrama-detalle-ventas.png" alt="Diagrama de Detalle de Ventas">
 
-#### Solicitud de Detalle de Ventas
+<strong>Solicitud de Detalle de Ventas</strong>
 
 DATO                         | LARGO     | COMENTARIO
 ------                       | ------    | ------
@@ -1268,7 +1268,7 @@ El resultado de la transacción entrega una lista de objetos  `MultiCodeDetailRe
 
 <img class="td_img-night" src="/images/referencia/posintegrado/diagrama-detalle-ventas.png" alt="Diagrama de Detalle de Ventas">
 
-#### Solicitud de Detalle de Ventas Multicodigo
+<strong>Solicitud de Detalle de Ventas Multicodigo</strong>
 
 DATO                         | LARGO     | COMENTARIO
 ------                       | ------    | ------
@@ -1394,7 +1394,7 @@ El resultado de la carga de llaves se entrega en la forma de un objeto `LoadKeys
 El uso de esta transacción debe ser limitado a pruebas de comunicación o cuando el POS Integrado pierda las llaves.
 </aside>
 
-#### Solicitud de Carga de Llaves
+<strong>Solicitud de Carga de Llaves</strong>
 
 DATO        | LARGO     | Comentario
 ------      | ------    | ------
@@ -1462,7 +1462,7 @@ POS.poll().then(result => console.log(result));
 
 1. La caja envía el requerimiento y espera como respuesta `<ACK>`, en caso de recibir `<ACK>`, esto indica que el POS se encuentra operativo y listo para recibir comandos. si no se recibe respuesta o es `<NAK>` se debe reintentar el envío del comando 2 veces.
 
-#### Solicitud Poll
+<strong>Solicitud Poll</strong>
 
 DATO        | LARGO     | Comentario
 ------      | ------    | ------
@@ -1520,7 +1520,7 @@ POS.setNormalMode().then(result => console.log(result));
 
 1. La caja envía el requerimiento y espera como respuesta `<ACK>`, en caso de recibir `<ACK>`, esto indica que el POS cambio se realizó correctamente, si no se recibe respuesta o es `<NAK>` se debe reintentar el envío del comando 2 veces.
 
-#### Solicitud Cambio a POS Normal
+<strong>Solicitud Cambio a POS Normal</strong>
 
 DATO        | LARGO     | Comentario
 ------      | ------    | ------

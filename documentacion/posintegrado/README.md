@@ -61,7 +61,7 @@ También se puede incluir directamente el tag script
 Si utilizas el metodo de tag script, entonces el objeto POS se pasa a llamar Transbank.POS en todos los ejemplos que siguen en esta guia.
 </aside>
 
-#### Instalar el agente desktop
+<strong>Instalar el agente desktop</strong>
 
 Revisa la lista de versiones públicadas y [descarga la última versión](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent/releases). Verás que hay un archivo .exe que debes bajar si usas windows, o un archivo .zip si usas MacOS. Luego, solo debes de instalar y ejecutar el programa.
 
@@ -74,7 +74,7 @@ Una vez instalado, ya puedes usar el SDK Javascript. Pruebes probar la conexión
 
 Actualmente contamos con 2 equipos POS Integrado en circulación.
 
-#### Verifone VX520 y VX520C
+<strong>Verifone VX520 y VX520C</strong>
 
 Este equipo esta certificado para operar mediante conexión serial, utilizando el puerto RS232.
 En este caso solo debes tener instalados los drivers de tu adaptador USB-Serial o tu tarjeta RS232.
@@ -91,7 +91,7 @@ La comunicación con el POS Integrado se realiza mediante puerto serial RS232 y 
 Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilicen el [chip CH340](http://www.wch.cn/download/CH341SER_EXE.html). También puedes encontrar drivers para adaptadores con [chip Prolific](http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041)
 </aside>
 
-#### Ingenico Desk 3500
+<strong>Ingenico Desk 3500</strong>
 
 Estos equipos funcionan tanto con puerto serial RS232 y USB (Generalmente plug and play), para el cual puedes necesitar instalar un [driver de Ingenico](http://transbankdevelopers.cl/files/Ingenico-USB-driver-3.10.zip).
 
