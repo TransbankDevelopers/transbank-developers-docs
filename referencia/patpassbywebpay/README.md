@@ -240,7 +240,7 @@ Si el tarjetahabiente anula la transacción en el formulario de pago de Webpay,
 
 Para crear una transacción basta llamar al método `Transaction.create()`
 
-#### `Transaction.create()`
+#### Transaction.create()
 
 Permite inicializar una transacción en PatPass by Webpay. Como respuesta a la invocación se genera un token que representa en forma única una transacción.
 
@@ -352,7 +352,7 @@ url  <br> <i> String </i> | URL de formulario de pago PatPass by Webpay. Largo m
 
 Cuando el comercio retoma el control mediante `returnURL` puedes confirmar una transacción usando el método  `Transaction.commit()`.
 
-#### `Transaction.commit()`
+#### Transaction.commit()
 
 Permite obtener el resultado de la transacción una vez que Webpay ha resuelto su autorización financiera.
 

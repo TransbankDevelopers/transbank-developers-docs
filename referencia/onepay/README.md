@@ -152,7 +152,7 @@ representadas por otros valores de `responseCode`.
 
 Crea una transacción a partir de un carro de compras.
 
-#### `POST /ewallet-plugin-api-services/services/transactionservice/sendtransaction`
+#### POST /ewallet-plugin-api-services/services/transactionservice/sendtransaction
 
 ```java
 Onepay.setAppScheme("mi-app://mi-app/onepay-result");
@@ -438,7 +438,7 @@ Al usar los SDKs si no provees un external unique number, será generado automá
 A través del servicio `gettransactionnumber` se obtiene la información de una
 transacción y al mismo tiempo se confirma por parte del comercio.
 
-#### `POST /ewallet-plugin-api-services/services/transactionservice/gettransactionnumber`
+#### POST /ewallet-plugin-api-services/services/transactionservice/gettransactionnumber
 
 ```java
 TransactionCommitResponse response =
@@ -590,7 +590,7 @@ result.buyOrder <br> <i>  Number  </i> | Orden de compra Onepay.
 A través del servicio nullifyTransaction se puede anular una transacción
 previamente autorizada y confirmada.
 
-#### `POST /ewallet-plugin-api-services/services/transactionservice/gettransactionnumber` anulación
+#### POST /ewallet-plugin-api-services/services/transactionservice/gettransactionnumber anulación
 
 ```java
 RefundCreateResponse response =
@@ -723,7 +723,7 @@ result.externalUniqueNumber <br> <i>  String  </i> | Identificador de la transac
 La modalidad checkout del SDK JavaScript permite integrar fácilmente Onepay, simplemente invocando a una función JavaScript e implementando dos _endpoints_
 en tu backend. Onepay checkout se encarga de levantar un "modal" que toma el control de toda la experiencia del usuario y la sincronización con la app Onepay.
 
-#### `Onepay.checkout(options)`
+#### Onepay.checkout(options)
 
 Realiza una integración simple de Onepay a través de un modal que mantiene
 informado al usuario en todo momento de los siguientes pasos a seguir para
@@ -813,7 +813,7 @@ navegador del usuario. Por lo tanto el callback debe entregar una página web (s
 
 En la modalidad QR Directo tienes todas las herramientas a tu disposición para controlar tú mismo la experiencia del usuario, la sincronización con la app Onepay y la comunicación con tu backend. Por lo tanto, lo que se ofrecen son un set de funciones que te brindan dichas herramientas.
 
-#### `Onepay.getChannel()`
+#### Onepay.getChannel()
 
 Entrega el canal apropiado para iniciar una transacción Onepay en el backend. Es
 tú responsabilidad llevar este valor hacia tu backend para crear la transacción
@@ -828,7 +828,7 @@ Ninguno.
 Un String con valor `"WEB"` (si el usuario está en un navegador desktop) o
 `"MOBILE"` (si se encuentra en un navegador de smartphone).
 
-#### `Onepay.isMobile()`
+#### Onepay.isMobile()
 
 Indica si el usuario está usando un smartphone para navegar la página actual.
 Una vez que hayas creado la transacción (o en el momento que prefieras) te
@@ -870,7 +870,7 @@ Ninguna. Al final del flujo de aprobación del pago recibirás el callback que
 hayas configurado al invocar el API de creación de transacción (o que hayas
 configurado en tu SDK de backend).
 
-#### `Onepay.directQr(transaction, htmlTagId)`
+#### Onepay.directQr(transaction, htmlTagId)
 
 Dibuja el código QR y te permite escuchar los eventos de Onepay para sincronizarte con lo que ocurra en la app del usuario.
 
@@ -1004,7 +1004,7 @@ En Android debes pasar un contexto como parámetro al constructor de `OnePay` (t
 > }
 > ```
 
-#### `isOnePayInstalled()`
+#### isOnePayInstalled()
 
 Este método te permite saber si la app Onepay ya se encuentra instalada en el
 dispositivo del usuario.
@@ -1017,7 +1017,7 @@ Ninguno.
 
 Retorna `true` si la app Onepay está instalada, `false` en caso contrario.
 
-#### `installOnePay()`
+#### installOnePay()
 
 Si has detectado que Onepay no está presente puedes invitar al usuario a probar
 Onepay y luego con este método gatillas la instalación de Onepay en el
@@ -1035,7 +1035,7 @@ Ninguna.
 
 El uso principal del SDK móvil es invocar a la app de Onepay para completar una transacción ya iniciada en tu backend.
 
-#### `initPayment(occ, callback)`
+#### initPayment(occ, callback)
 
 > En iOS:
 >
