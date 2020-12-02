@@ -1,4 +1,3 @@
-# Plugin Woocommerce Webpay SOAP
 
 <div class="data-menu-side-right">
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
