@@ -1,5 +1,3 @@
-# Plugin Magento Onepay
-
 <div class="data-menu-side-right">
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">

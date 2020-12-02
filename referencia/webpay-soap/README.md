@@ -346,7 +346,7 @@ Este caso es importante de destacar, ya que si se configura la misma URL para `r
 
 Para crear una transacción basta llamar al método `initTransaction()`
 
-#### initTransaction()
+<strong>initTransaction()</strong>
 
 Permite inicializar una transacción en Webpay. Como respuesta a la invocación
 se genera un token que representa en forma única una transacción.
@@ -373,7 +373,7 @@ var initResult = transaction.initTransaction(
         amount, buyOrder, sessionId, returnUrl, finalUrl);
 ```
 
-##### Parámetros initTransaction
+#<strong>Parámetros initTransaction</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -386,7 +386,7 @@ transactionDetails[0].amount  <br> <i> xs:decimal </i> | Monto de la transaccio�
 transactionDetails[0].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>
 transactionDetails[0].commerceCode  <br> <i>xs:string </i> | Código comercio de la tienda entregado por Transbank. Largo: 12, Si el código que posees es de 8 dígitos debes anteponer 5970. Los SDKs se encargan automáticamente de este parámetro a partir de la configuración de comercio y certificados/llaves usada para iniciar la transacción
 
-##### Respuesta initTransaction
+#<strong>Respuesta initTransaction</strong>
 
 ```java
 initResult.getToken();
@@ -419,7 +419,7 @@ Cuando el comercio retoma el control mediante `returnURL` puedes confirmar una
 transacción usando los métodos  `getTransactionResult()` y
 `acknowledgeTransaction()`
 
-#### getTransactionResult()
+<strong>getTransactionResult()</strong>
 
 Permite obtener el resultado de la transacción una vez que Webpay ha resuelto su autorización financiera.
 
@@ -438,13 +438,13 @@ $result = transaction->getTransactionResult(
 var result = transaction.getTransactionResult(tokenWs));
 ```
 
-##### Parámetros getTransactionResult
+#<strong>Parámetros getTransactionResult</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tokenInput  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 
-##### Respuesta getTransactionResult
+#<strong>Respuesta getTransactionResult</strong>
 
 ```java
 
@@ -534,7 +534,7 @@ detailsOutput[0].sharesNumber  <br> <i> xs:int </i> | Cantidad de cuotas. Largo 
 detailsOutput[0].commerceCode  <br> <i> xs:string </i> | Código comercio de la tienda. Largo: 12
 detailsOutput[0].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Largo máximo: 26
 
-#### acknowledgeTransaction()
+<strong>acknowledgeTransaction()</strong>
 
 Indica a Webpay que se ha recibido conforme el resultado de la transacción.
 
@@ -545,7 +545,7 @@ asumiendo que el comercio no pudo informar de su resultado, evitando así el
 cobro al tarjetahabiente.
 </aside>
 
-##### Parámetros acknowledgeTransaction
+#<strong>Parámetros acknowledgeTransaction</strong>
 
 > Los SDKs ejecutan automáticamente `acknowledgeTransaction()` cuando reciben la
 > respuesta de `getTransactionResult()`.
@@ -554,7 +554,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tokenInput  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 
-##### Respuesta acknowledgeTransaction
+#<strong>Respuesta acknowledgeTransaction</strong>
 
 > Los SDKs arrojarán una excepción dentro de `getTransactionResult()` si falla
 > el `acknowledgeTransaction()` que se ejecuta automáticamente.
@@ -621,7 +621,7 @@ Las diferencias son:
 
 Para crear una transacción basta llamar al método `initTransaction()`
 
-#### initTransaction() Mall
+<strong>initTransaction() Mall</strong>
 
 Permite inicializar una transacción en Webpay. Como respuesta a la invocación
 se genera un token que representa en forma única una transacción.
@@ -681,7 +681,7 @@ var initResult = transaction.initTransaction(
     buyOrder, sessionId, returnUrl, finalUrl, transactions);
 ```
 
-##### Parámetros initTransaction Mall
+#<strong>Parámetros initTransaction Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -695,7 +695,7 @@ transactionDetails[].amount  <br> <i> xs:decimal </i> | Monto de la transacció
 transactionDetails[].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda del mall. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>.
 transactionDetails[].commerceCode  <br> <i>xs:string </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.<br>Si el código que posees es de 8 dígitos debes anteponer 5970.
 
-##### Respuesta initTransaction Mall
+#<strong>Respuesta initTransaction Mall</strong>
 
 ```java
 initResult.getToken();
@@ -728,7 +728,7 @@ Si un `buyOrder` es enviado dos o más veces se obtendrá el error `Transaction 
 Para confirmar una transacción se deben usar los métodos  `getTransactionResult()` y
 `acknowledgeTransaction()`
 
-#### getTransactionResult() Mall
+<strong>getTransactionResult() Mall</strong>
 
 Permite obtener el resultado de la transacción una vez que Webpay ha resuelto
 su autorización financiera.
@@ -748,13 +748,13 @@ $result = transaction->getTransactionResult(
 var result = transaction.getTransactionResult(tokenWs));
 ```
 
-##### Parámetros getTransactionResult Mall
+#<strong>Parámetros getTransactionResult Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tokenInput  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 
-##### Respuesta getTransactionResult Mall
+#<strong>Respuesta getTransactionResult Mall</strong>
 
 ```java
 for (WsTransactionDetailOutput output: result.getDetailOutput()) {
@@ -851,7 +851,7 @@ detailsOutput[].sharesNumber  <br> <i> xs:int </i> | Cantidad de cuotas. Largo m
 detailsOutput[].commerceCode  <br> <i> xs:string </i> | Código comercio de la tienda. Largo: 12
 detailsOutput[].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Largo máximo: 26
 
-#### acknowledgeTransaction() Mall
+<strong>acknowledgeTransaction() Mall</strong>
 
 Indica a Webpay que se ha recibido conforme el resultado de la transacción.
 
@@ -862,7 +862,7 @@ asumiendo que el comercio no pudo informar de su resultado, evitando así el
 cobro al tarjetahabiente.
 </aside>
 
-##### Parámetros acknowledgeTransaction Mall
+#<strong>Parámetros acknowledgeTransaction Mall</strong>
 
 > Los SDKs ejecutan automáticamente `acknowledgeTransaction()` cuando reciben la
 > respuesta de `getTransactionResult()`.
@@ -871,7 +871,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tokenInput  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 
-##### Respuesta acknowledgeTransaction Mall
+#<strong>Respuesta acknowledgeTransaction Mall</strong>
 
 > Los SDKs arrojarán una excepción dentro de `getTransactionResult()` si falla
 > el `acknowledgeTransaction()` que se ejecuta automáticamente.
@@ -913,7 +913,7 @@ para conocer más detalles y restricciones.
 
 Para realizar esa captura explícita debe usarse el método `capture()`
 
-#### capture()
+<strong>capture()</strong>
 
 Permite solicitar a Webpay la captura diferida de una transacción con
 autorización y sin captura simultánea.
@@ -967,7 +967,7 @@ var captureResult = transaction.capture(
 
 ```
 
-##### Parámetros capture
+#<strong>Parámetros capture</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -976,7 +976,7 @@ buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se r
 commerceId  <br> <i> xs:long </i> | Código de comercio o tienda mall que realizó la transacción. Largo: 12.<br>Si el código que posees es de 8 dígitos debes anteponer 5970.
 capturedAmount  <br> <i> xs:decimal </i> | Monto que se desea capturar. Largo máximo: 10.
 
-##### Respuesta capture
+#<strong>Respuesta capture</strong>
 
 ```java
 captureResult.getToken();
@@ -1051,7 +1051,7 @@ más detalles y restricciones.
 
 Para anular una transacción se debe invocar al método `nullify()`.
 
-#### nullify()
+<strong>nullify()</strong>
 
 Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentra vigente.
 
@@ -1106,7 +1106,7 @@ var result = transaction.nullify(
     storeCommerceCode);
 ```
 
-##### Parámetros nullify
+#<strong>Parámetros nullify</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1116,7 +1116,7 @@ buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se r
 nullifyAmount  <br> <i> xs:decimal </i> | Monto que se desea anular de la transacción. Largo máximo: 10.
 commerceId  <br> <i> xs:long </i> | Código de comercio o tienda mall que realizó la transacción. Largo: 12.<br>Si el código que posees es de 8 dígitos debes anteponer 5970.
 
-##### Respuesta nullify
+#<strong>Respuesta nullify</strong>
 
 ```java
 result.getToken();
@@ -1267,7 +1267,7 @@ Proceso:
 
 Para realizar el primero de los procesos descritos (la inscripción), debe llamarse al método `initInscription()`
 
-#### initInscription()
+<strong>initInscription()</strong>
 
 Permite realizar la inscripción del tarjetahabiente e información de su
 tarjeta de crédito. Retorna como respuesta un token que representa la
@@ -1298,7 +1298,7 @@ var initResult =
     transaction.initInscription(username, email, urlReturn);
 ```
 
-##### Parámetros initInscription
+#<strong>Parámetros initInscription</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1306,7 +1306,7 @@ username  <br> <i> xs:string </i> | Identificador del usuario registrado en el c
 email  <br> <i> xs:string </i> | Email del usuario registrado en el comercio. Largo máximo: 256.
 responseURL  <br> <i> xs:string </i> | URL del comercio a la cual Webpay redireccionará posterior al proceso de inscripción. Largo máximo: 256.
 
-##### Respuesta initInscription
+#<strong>Respuesta initInscription</strong>
 
 ```java
 initResult.getToken();
@@ -1339,7 +1339,7 @@ Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a
 la URL de fin de inscripción que definió el comercio. En ese instante el
 comercio debe llamar a `finishInscription()`.
 
-#### finishInscription()
+<strong>finishInscription()</strong>
 
 Permite finalizar el proceso de inscripción del tarjetahabiente en Oneclick.
 Retorna el identificador del usuario en Oneclick, el cual será utilizado para
@@ -1364,7 +1364,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> xs:string </i> | Token de la inscripción.
 
-##### Respuesta finishInscription
+#<strong>Respuesta finishInscription</strong>
 
 ```java
 result.getResponseCode();
@@ -1425,7 +1425,7 @@ var output = transaction.authorize(
 
 ```
 
-#### Parámetros authorize
+<strong>Parámetros authorize</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1434,7 +1434,7 @@ buyOrder  <br> <i> xs:long </i> | Identificador único de la compra generado po
 tbkUser  <br> <i> xs:string </i> | Identificador único de la inscripción del cliente (devuelto por `finishInscription()`).
 username  <br> <i> xs:string </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `initInscription()`).
 
-#### Respuesta authorize
+<strong>Respuesta authorize</strong>
 
 ```java
 output.getAuthorizationCode();
@@ -1472,7 +1472,7 @@ responseCode  <br> <i> xs:int </i> | Código de retorno del proceso de pago, do
 
 Este proceso permite reversar una venta cuando esta no pudo concretarse, dentro del mismo día contable, con la finalidad de anular un cargo realizado al cliente. Para esto se debe consumir el método `codeReverseOneClick()` con la orden de compra de la transacción a reversar.
 
-#### codeReverseOneClick()
+<strong>codeReverseOneClick()</strong>
 
 Permite reversar una transacción de venta autorizada con anterioridad. Este
 método retorna como respuesta un identificador único de la transacción de
@@ -1490,13 +1490,13 @@ $result = $transaction->reverseTransaction($buyOrder);
 var result = transaction.reverseTransaction(buyOrderLong);
 ```
 
-##### Parámetros codeReverseOneClick
+#<strong>Parámetros codeReverseOneClick</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buyOrder  <br> <i> xs:long </i> | Orden de compra de la transacción a reversar.
 
-##### Respuesta codeReverseOneClick
+#<strong>Respuesta codeReverseOneClick</strong>
 
 ```java
 // El SDK Java solo entrega el booleano de estado, no el código de reversa :(
@@ -1532,7 +1532,7 @@ solicitud de este para no operar con esta forma de pago, el comercio deberá
 invocar a `removeUser()` con el identificador de usuario entregado en la
 inscripción.
 
-#### removerUser()
+<strong>removerUser()</strong>
 
 Permite eliminar una inscripción de usuario en Transbank
 
@@ -1548,14 +1548,14 @@ $success = $transaction->removeUser($tbkUser, $username);
 var success = transaction.RemoveUser(tbkUser, username);
 ```
 
-##### Parámetros removerUser
+#<strong>Parámetros removerUser</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tbkUser  <br> <i> xs:string </i> | Identificador único de la inscripción del cliente
 username  <br> <i> xs:string </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `initInscription()`).
 
-##### Respuesta removerUser
+#<strong>Respuesta removerUser</strong>
 
 El boolean de respuesta será `true` en caso de éxito y `false` en caso contrario.
 
@@ -1589,13 +1589,13 @@ Las diferencias son:
 
 Para iniciar la inscripción debe usarse el método `initInscription()`
 
-#### initInscription() Mall
+<strong>initInscription() Mall</strong>
 
 Permite gatillar el inicio del proceso de inscripción.
 
 > Los SDKs no soportan aún los servicios Oneclick Mall.
 
-##### Parámetros initInscription Mall
+#<strong>Parámetros initInscription Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1603,7 +1603,7 @@ username  <br> <i> xs:string </i> | Identificador del usuario registrado en el c
 email  <br> <i> xs:string </i> | Email del usuario registrado en el comercio.
 returnUrl  <br> <i> xs:string </i> | URL a la que será enviado el cliente finalizado el proceso de inscripción.
 
-##### Respuesta initInscription Mall
+#<strong>Respuesta initInscription Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1628,19 +1628,19 @@ de recibir el token en la URL de fin de inscripción (`returnUrl`). Pasados los
 el usuario serán eliminados.
 </aside>
 
-#### finishInscription() Mall
+<strong>finishInscription() Mall</strong>
 
 Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
 
 > Los SDKs no soportan aún los servicios Oneclick Mall.
 
-##### Parámetros finishInscription Mall
+#<strong>Parámetros finishInscription Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> xs:string </i> | Identificador del proceso de inscripción. Es entregado por Webpay en la respuesta del método `initInscription()`.
 
-##### Respuesta finishInscription Mall
+#<strong>Respuesta finishInscription Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1657,13 +1657,13 @@ tbkUser  <br> <i> xs:string </i> | Identificador único de la inscripción del
 Una vez realizada la inscripción, el comercio puede usar el `tbkUser` recibido
 para realizar transacciones. Para eso debes usar el método `authorize()`.
 
-#### autorize() Mall
+<strong>autorize() Mall</strong>
 
 Permite autorizar un pago.
 
 > Los SDKs no soportan aún los servicios Oneclick Mall.
 
-##### Parámetros authorize Mall
+#<strong>Parámetros authorize Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1681,7 +1681,7 @@ Cualquier valor distinto de número en `sharesNumber` (incluyendo letras,
 inexistencia del campo o nulo) será asumido como cero, es decir "Sin cuotas".
 </aside>
 
-##### Respuesta authorize Mall
+#<strong>Respuesta authorize Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1722,19 +1722,19 @@ comercio saber si Transbank recibió la anulación).
 
 Para llevar a cabo la reversa, el comercio debe usar el método `reverse()`. Para la anulación, se debe usar el método `nullify()`. Y para reversar una anulación existe el método `reverseNullification()`
 
-#### reverse() Mall
+<strong>reverse() Mall</strong>
 
 Permite reversar una operación de autorización.
 
 > Los SDKs no soportan aún los servicios Oneclick Mall.
 
-##### Parámetros reverse Mall
+#<strong>Parámetros reverse Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buyOrder  <br> <i> xs:string </i> | Orden de compra generada por el comercio padre (mall) para la operación a reversar.
 
-##### Respuesta reverse Mall
+#<strong>Respuesta reverse Mall</strong>
 
 La respuesta es una lista con tantos elementos como transacciones haya tenido la
 operación identificada por `buyOrder`:
@@ -1746,13 +1746,13 @@ Nombre  <br> <i> tipo </i> | Descripción
 [].reversed  <br> <i> xs:boolean </i> | Indica si la reversa se realizó correctamente o no.
 [].reverseCode  <br> <i> xs:string </i> | Identificador único de la transacción de reversa.
 
-#### nullify() Mall
+<strong>nullify() Mall</strong>
 
 Permite anular un pago.
 
 > Los SDKs no soportan aún los servicios Oneclick Mall.
 
-##### Parámetros nullify Mall
+#<strong>Parámetros nullify Mall</strong>
 
 Nombre | Descripción
 ------ | -----------
@@ -1762,7 +1762,7 @@ authorizedAmount | Monto de la sub-transacción de pago a anular.
 authorizationCode | Código de autorización de la sub-transacción de pago a anular.
 nullifyAmount | Monto a anular de la sub-transacción de pago. Puede ser un monto parcial o monto total.
 
-##### Respuesta nullify Mall
+#<strong>Respuesta nullify Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1774,13 +1774,13 @@ authorizationDate  <br> <i> xs:dateTime </i> | Fecha de la autorización de la 
 nullifiedAmount  <br> <i> xs:decimal </i> | Monto anulado.
 balance   <br> <i> xs:decimal </i> | Monto restante de la sub-transacción de pago original: monto inicial – monto anulado.
 
-#### reverseNullification()
+<strong>reverseNullification()</strong>
 
 Permite reversar una anulación.
 
 > Los SDKs no soportan aún los servicios Oneclick Mall.
 
-##### Parámetros reverseNullification
+#<strong>Parámetros reverseNullification</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1788,7 +1788,7 @@ buyOrder  <br> <i> xs:string </i> | Orden de compra generada por el comercio hij
 commerceId  <br> <i> xs:long </i> | Código de comercio del comercio hijo (tienda).
 nullifyAmount  <br> <i> xs:decimal </i> | Monto anulado en la transacción de anulación que se intenta reversar.
 
-##### Respuesta reverseNullification
+#<strong>Respuesta reverseNullification</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1805,20 +1805,20 @@ método `nullify()`.
 
 En el caso que el comercio requiera eliminar la inscripción de un usuario en Oneclick Mall ya sea por la eliminación de un cliente en su sistema o por la solicitud de este para no operar con esta forma de pago, el comercio deberá invocar a `removeInscription()` con el identificador de usuario entregado en la inscripción.
 
-#### removeInscription() Mall
+<strong>removeInscription() Mall</strong>
 
 Permite eliminar una inscripción de usuario en Oneclick Mall
 
 > Los SDKs no soportan aún los servicios Oneclick Mall.
 
-##### Parámetros removeInscription Mall
+#<strong>Parámetros removeInscription Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tbkUser  <br> <i> xs:string </i> | Identificador único de la inscripción del cliente.
 username  <br> <i> xs:string </i> | Nombre de usuario, del cliente, en el sistema del comercio.
 
-##### Respuesta removeInscription Mall
+#<strong>Respuesta removeInscription Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1843,7 +1843,7 @@ Estas modalidades, por separado, solo son válidas para tarjetas de crédito.
 
 Para realizar esa captura explícita debe usarse el método `capture()`
 
-#### capture() Mall
+<strong>capture() Mall</strong>
 
 Este método permite a los comercios Oneclick Mall habilitados, poder
 realizar capturas diferidas de una transacción previamente autorizada. El método
@@ -1855,7 +1855,7 @@ comercio configurado para captura diferida. De esta forma la transacción estar�
 autorizada pero requerirá una captura explícita posterior para confirmar la
 transacción.
 
-##### Parámetros capture Mall
+#<strong>Parámetros capture Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1869,7 +1869,7 @@ El método `capture()` debe ser invocado siempre indicando el código del
 comercio de la tienda virtual específica.
 </aside>
 
-##### Respuesta capture Mall
+#<strong>Respuesta capture Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------

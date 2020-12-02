@@ -153,7 +153,7 @@ response = Transbank::Webpay::WebpayPlus::Transaction::create(
 response = transbank.webpay.webpay_plus.create(buy_order, session_id, amount, return_url)
 ```
 
-#### Respuesta Crear una transacción
+<strong>Respuesta Crear una transacción</strong>
 
 La respuesta de Webpay Plus a la creación es el token de la transacción y la URL a la cual debes redirigir al tarjetahabiente.
 
@@ -247,7 +247,7 @@ response = Transbank::Webpay::WebpayPlus::Transaction::commit(token: @token)
 response = transbank.webpay.webpay_plus.transaction.commit(token)
 ```
 
-#### Respuesta Confirmar una transacción
+<strong>Respuesta Confirmar una transacción</strong>
 
 Utilizando la respuesta de la confirmación podrás mostrar un comprobante o página de éxito a tu usuario.
 Con eso habrás completado el flujo "feliz" en que todo funciona.
@@ -377,7 +377,7 @@ response = Transbank::Webpay::WebpayPlus::Transaction::status(token: @token)
 response = transbank.webpay.webpay_plus.transaction.status(token)
 ```
 
-#### Respuesta estado de una transacción
+<strong>Respuesta estado de una transacción</strong>
 
 Para obtener la información contenida en la respuesta puedes hacerlo de la siguiente manera.
 
@@ -515,7 +515,7 @@ var response = Transaction.Refund(token, amount);
 response = Transbank::Webpay::WebpayPlus::Transaction::refund(token: @token, amount: @amount)
 ```
 
-#### Respuesta Reversa o Anulación
+<strong>Respuesta Reversa o Anulación</strong>
 
 Para obtener la información contenida en la respuesta puedes hacerlo de la siguiente manera.
 
@@ -704,7 +704,7 @@ response = MallTransaction.create(
 Observar que existe un <code>buyOrder</code> generado para el comercio mall y un <code>buyOrder</code> para cada una de las tiendas.
 </aside>
 
-#### Respuesta Crear una transacción mall
+<strong>Respuesta Crear una transacción mall</strong>
 
 La respuesta de Webpay Plus Mall a la creación de es el token de la transacción y la URL a la cual debes redirigir al tarjetahabiente.
 
@@ -796,7 +796,7 @@ response = MallTransaction.commit(token)
 response = MallTransaction.commit(token)
 ```
 
-#### Respuesta Confirmar una transacción mall
+<strong>Respuesta Confirmar una transacción mall</strong>
 
 Utilizando la respuesta de la confirmación podrás mostrar un comprobante o página de éxito a tu usuario.
 Con eso habrás completado el flujo "feliz" en que todo funciona.
@@ -941,7 +941,7 @@ response = MallTransaction.status(token)
 response = MallTransaction.status(token)
 ```
 
-#### Respuesta estado de una transacción mall
+<strong>Respuesta estado de una transacción mall</strong>
 
 Para obtener la información contenida en la respuesta puedes hacerlo de la siguiente manera.
 
@@ -1094,7 +1094,7 @@ response = Transaction.refund(token, buy_order, commerce_code, amount)
 response = Transaction.refund(token, buy_order, commerce_code, amount)
 ```
 
-#### Respuesta Reversa o Anulacion mall
+<strong>Respuesta Reversa o Anulacion mall</strong>
 
 Para obtener la información contenida en la respuesta puedes hacerlo de la siguiente manera.
 

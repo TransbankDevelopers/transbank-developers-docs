@@ -240,7 +240,7 @@ Si el tarjetahabiente anula la transacción en el formulario de pago de Webpay,
 
 Para crear una transacción basta llamar al método `Transaction.create()`
 
-#### `Transaction.create()`
+<strong>Transaction.create()</strong>
 
 Permite inicializar una transacción en PatPass by Webpay. Como respuesta a la invocación se genera un token que representa en forma única una transacción.
 
@@ -291,7 +291,7 @@ POST /rswebpaytransaction/api/webpay/v1.0/transactions
 }
 ```
 
-##### Parámetros Transaction.create
+#<strong>Parámetros Transaction.create</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -311,7 +311,7 @@ wpmDetail.expirationDate <br><i> DateTime </i> | Fecha expiración de PatPass b
 wpmDetail.commerceMail <br><i> String </i> | Correo electrónico comercio. Largo máximo: 50. Los SDKs se encargan automáticamente de este parámetro a partir del email de comercio ingresado en la configuración usada para iniciar la transacción
 wpmDetail.ufFlag <br><i> Boolean </i> | Valor en true indica que el monto enviado está expresado en UF, valor en false indica que valor esta expresado en Pesos o dólar según corresponda
 
-##### Respuesta Transaction.create
+#<strong>Respuesta Transaction.create</strong>
 
 ```java
 // Este SDK aún no se encuentra disponible
@@ -352,7 +352,7 @@ url  <br> <i> String </i> | URL de formulario de pago PatPass by Webpay. Largo m
 
 Cuando el comercio retoma el control mediante `returnURL` puedes confirmar una transacción usando el método  `Transaction.commit()`.
 
-#### `Transaction.commit()`
+<strong>Transaction.commit()</strong>
 
 Permite obtener el resultado de la transacción una vez que Webpay ha resuelto su autorización financiera.
 
@@ -383,13 +383,13 @@ Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
-##### Parámetros Transaction.commit
+#<strong>Parámetros Transaction.commit</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 
-##### Respuesta Transaction.commit
+#<strong>Respuesta Transaction.commit</strong>
 
 ```java
 // Este SDK aún no se encuentra disponible

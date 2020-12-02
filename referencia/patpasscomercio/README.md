@@ -9,7 +9,7 @@ La API REST de Patpass está protegida para garantizar que solamente comercios 
 * Canal seguro a través de TLSv1.2 para la comunicación del cliente con Webpay.
 * Autenticación y autorización mediante el intercambio de headers `Tbk-Api-Key-Id` y `Tbk-Api-Key-Secret`.
   
-#### Ambiente de Producción
+<strong>Ambiente de Producción</strong>
 
 Las URLs de endpoints de producción están alojados dentro de
 <https://www.pagoautomaticocontarjetas.cl//>.
@@ -38,7 +38,7 @@ Las URLs de endpoints de producción están alojados dentro de
 Host: https://www.pagoautomaticocontarjetas.cl/
 ```
 
-#### Ambiente de Integración
+<strong>Ambiente de Integración</strong>
 
 Las URLs de endpoints de integración están alojados dentro de
 <https://pagoautomaticocontarjetasint.transbank.cl//>.
@@ -107,7 +107,7 @@ Content-Type: application/json
 
 Para iniciar una inscripción debes llamar al método `Inscription.start`
 
-#### Inscription.start()
+<strong>Inscription.start()</strong>
 
 Permite gatillar el inicio del proceso de inscripción. Los datos ingresados serán precargados en el formulario al momento de mostrarse.
 
@@ -239,7 +239,7 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Inscription.start
+#<strong>Parámetros Inscription.start</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -259,7 +259,7 @@ commerceEmail <br> <i> String </i> | Correo para el comercio con el comprobante 
 userAddress <br> <i> String </i> | Dirección del tarjetahabiente
 userCity <br> <i> String </i> | Ciudad del tarjetahabiente
 
-##### Respuesta Inscription.start
+#<strong>Respuesta Inscription.start</strong>
 
 ```java
 response.getToken();
@@ -291,7 +291,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 token  <br> <i> xs:string </i> |  Token de la transacción. Largo: 64.
 url  <br> <i> xs:string </i> | URL de formulario de pago Patpass Comercio. Largo máximo: 256.
 
-##### Mensajes de error
+#<strong>Mensajes de error</strong>
 
 Código | Descripción
 ------   | -----------
@@ -321,7 +321,7 @@ La respuesta de este método se debe utilizar para crear un campo de nombre `tok
 
 Para finalizar el proceso de inscripción se debe llamar a `Inscription.status`
 
-#### Inscription.status
+<strong>Inscription.status</strong>
 
 Este método permite finalizar el proceso de inscripción del PAT asociado al
 token que se generó en la inscripción
@@ -359,12 +359,12 @@ Content-Type: application/json
 }
 ```
 
-##### Parámetros Inscription.status
+#<strong>Parámetros Inscription.status</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 token <br> <i> String </i> | Token entregado al iniciar inscripción
 
-##### Respuesta Inscription.status
+#<strong>Respuesta Inscription.status</strong>
 
 ```java
 response.getVoucherUrl();
