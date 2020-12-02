@@ -6,9 +6,9 @@ PatPass **opera exclusivamente con tarjetas de crédito (nacionales e internacio
 
 PatPass se relaciona con los comercios y emisores mediante las siguientes plataformas:
 
-- **Transdata** es la plataforma que Transbank pone a disposición de los comercios para que puedan revisar el resultado de los cobros generados a sus clientes suscritos a PatPass, permitiendo además la administración de su universo de suscripciones.
+* **Transdata** es la plataforma que Transbank pone a disposición de los comercios para que puedan revisar el resultado de los cobros generados a sus clientes suscritos a PatPass, permitiendo además la administración de su universo de suscripciones.
 
-- **PatPass Emisor** es la plataforma que le permite al tarjetahabiente gestionar los pagos automáticos existentes en su tarjeta desde el sitio web de su banco emisor.
+* **PatPass Emisor** es la plataforma que le permite al tarjetahabiente gestionar los pagos automáticos existentes en su tarjeta desde el sitio web de su banco emisor.
 
 De manera complementaria a esas plataformas, **PatPass by Webpay** permite a los comercios disponibilizar las inscripciones de clientes de manera directa al tarjetahabiente, aprovechando la infraestructura y seguridad ofrecida por la pasarela Webpay.
 
@@ -27,17 +27,17 @@ PatPass by Webpay es un canal utilizado sólo para dar de alta pagos automático
 
 **El comercio deberá almacenar la información de todas las transacciones efectuadas a través del producto PatPass by Webpay**, debiendo mantener los respectivos registros a lo menos por el plazo de un año desde la fecha de cada operación, a modo de respaldo de las ventas efectuadas y de los servicios prestados. Esta información deberá ser puesta a disposición de Transbank cada vez y tan pronto éste la requiera. La información mínima que deberá almacenar el Establecimiento Comercial por cada una de las transacciones es la siguiente:
 
-- Código de Comercio asignado por Transbank.
-- Número de Orden de Pedido.
-- Fecha y hora de la transacción.
-- Monto y moneda de la operación.
-- Número de Código de Autorización entregado por Transbank.
-- Identificación de Servicio.
-- Descripción de bienes vendidos o servicios prestados.
-- Nombre del tarjetahabiente que efectúa la compra.
-- Campo de autenticación emisor.
-- Fecha de vencimiento de la suscripción.
-- Mail de contacto de Tarjetahabiente.
+* Código de Comercio asignado por Transbank.
+* Número de Orden de Pedido.
+* Fecha y hora de la transacción.
+* Monto y moneda de la operación.
+* Número de Código de Autorización entregado por Transbank.
+* Identificación de Servicio.
+* Descripción de bienes vendidos o servicios prestados.
+* Nombre del tarjetahabiente que efectúa la compra.
+* Campo de autenticación emisor.
+* Fecha de vencimiento de la suscripción.
+* Mail de contacto de Tarjetahabiente.
 
 ### Flujo de una transacción PatPass by Webpay
 
@@ -70,17 +70,17 @@ PatPass Comercio es un canal utilizado sólo para dar de alta pagos automáticos
 
 **El comercio deberá almacenar la información de todas las transacciones efectuadas a través del producto PatPass Comercio**, debiendo mantener los respectivos registros a lo menos por el plazo de un año desde la fecha de cada operación, a modo de respaldo de las ventas efectuadas y de los servicios prestados. Esta información deberá ser puesta a disposición de Transbank cada vez y tan pronto éste la requiera. La información mínima que deberá almacenar el Establecimiento Comercial por cada una de las transacciones es la siguiente:
 
-- Código de Comercio asignado por Transbank.
-- Número de Orden de Pedido.
-- Fecha y hora de la transacción.
-- Monto y moneda de la operación.
-- Número de Código de Autorización entregado por Transbank.
-- Identificación de Servicio.
-- Descripción de bienes vendidos o servicios prestados.
-- Nombre del tarjetahabiente que efectúa la compra.
-- Campo de autenticación emisor.
-- Fecha de vencimiento de la suscripción.
-- Mail de contacto de Tarjetahabiente.
+* Código de Comercio asignado por Transbank.
+* Número de Orden de Pedido.
+* Fecha y hora de la transacción.
+* Monto y moneda de la operación.
+* Número de Código de Autorización entregado por Transbank.
+* Identificación de Servicio.
+* Descripción de bienes vendidos o servicios prestados.
+* Nombre del tarjetahabiente que efectúa la compra.
+* Campo de autenticación emisor.
+* Fecha de vencimiento de la suscripción.
+* Mail de contacto de Tarjetahabiente.
 
 ### Flujo de una transacción PatPass Comercio
 
@@ -97,15 +97,14 @@ El flujo de transacción **PatPass Comercio** se puede resumir en los siguientes
 Una vez completada toda la operación el comercio podrá visualizar el detalle de las transacciones y consultar por los cobros recurrentes mediante Transadata.
 Por parte del tarjetahabiente, podrá visualizar la inscripción de este cobro mensual a través del PatPass Emisor (HomeBanking) en su respectivo Banco. Allí podrá observar el canal de origen que corresponde a “Webpay Mensual” y la fecha de término de este cobro recurrente.
 
-
 ### Anulaciones PatPass
 
 Una Anulación corresponde a la revocación de una venta ya autorizada y capturada por Transbank.
 
 Las anulaciones de ventas podrán solicitarse por:
 
-- Ingresando a portal web de Transbank.
-- Llamando al Servicio al Cliente.
+* Ingresando a portal web de Transbank.
+* Llamando al Servicio al Cliente.
 
 <div class="container slate">
   <div class='slate-after-footer'>

@@ -28,7 +28,7 @@ onepay.integration_type = onepay.IntegrationType.LIVE
 Host: www.onepay.cl
 ```
 
-- `LIVE` (Producción) corresponde al sistema productivo con transacciones
+* `LIVE` (Producción) corresponde al sistema productivo con transacciones
   reales. La URL Base es `https://www.onepay.cl`
 
 ```java
@@ -55,14 +55,14 @@ onepay.integration_type = onepay.IntegrationType.TEST
 Host: onepay.ionix.cl
 ```
 
-- `TEST` (Integración) se utiliza para el desarrollo y la validación de una
+* `TEST` (Integración) se utiliza para el desarrollo y la validación de una
   integración. La URL Base es `https://onepay.ionix.cl`.
 
 En cuanto a credenciales, todos los métodos del API requieren tres parámetros:
 
 > Los SDKs manejan automáticamente el parámetro `appKey`.
 
-- `appKey`: Identifica el lenguaje de programación usado.
+* `appKey`: Identifica el lenguaje de programación usado.
 
 Lenguaje | App Key TEST | App Key LIVE |
 -------- | ------------ | -------------|
@@ -97,11 +97,11 @@ onepay.api_key = "api-key-entregado-por-transbank"
 onepay.shared_secret = "secreto-entregado-por-transbank"
 ```
 
-- `apiKey`: Identificador del comercio, entregado por Transbank.
+* `apiKey`: Identificador del comercio, entregado por Transbank.
 
 > Los SDKs manejan automáticamente el cálculo del parámetro `signature`
 
-- `signature`: Corresponde a la representación `base64` de un hash `HMAC-SHA256`
+* `signature`: Corresponde a la representación `base64` de un hash `HMAC-SHA256`
   usando como llave un _shared secret_ entregado por Transbank al comercio. El
   texto a firmar con esa llave es la concatenación ciertos parámetros de negocio
   (documentados en cada _endpoint_) precedidos el largo de cada string.
@@ -110,7 +110,6 @@ onepay.shared_secret = "secreto-entregado-por-transbank"
   y `"quux"` entonces el string a firmar sería `"6foobar3baz4quux"`.
 
 > Los SDKs por defecto se conectan al ambiente `TEST` usando estas credenciales de prueba.
-
 
 <aside class="success">
   Para hacer tus primera pruebas en el ambiente <code>TEST</code> puedes utilizar
@@ -121,30 +120,30 @@ onepay.shared_secret = "secreto-entregado-por-transbank"
 
 Dentro del flujo de venta, puedes utilizar un simulador de transacciones donde podrás generar casos de éxito y fracaso, para utilizarlo sigue los siguientes pasos:
 
-- Una vez presionado el botón para iniciar la compra, se mostrará la ventana de pago Onepay, tal como se ve en la imagen. Toma nota del número que aparece como "Código de compra", ya que lo necesitarás para emular el pago en el siguiente paso.
+* Una vez presionado el botón para iniciar la compra, se mostrará la ventana de pago Onepay, tal como se ve en la imagen. Toma nota del número que aparece como "Código de compra", ya que lo necesitarás para emular el pago en el siguiente paso.
   ![Paso 1](/images/referencia/onepay/sim1.png)
 
-- En otra ventana del navegador, ingresa al emulador de pagos desde [https://onepay.ionix.cl/mobile-payment-emulator/](https://onepay.ionix.cl/mobile-payment-emulator/), utiliza test@onepay.cl como correo electrónico, y el código de compra obtenido desde la pantalla anterior. Una vez ingresado los datos solicitados, presiona el botón "Iniciar Pago":
+* En otra ventana del navegador, ingresa al emulador de pagos desde [https://onepay.ionix.cl/mobile-payment-emulator/](https://onepay.ionix.cl/mobile-payment-emulator/), utiliza test@onepay.cl como correo electrónico, y el código de compra obtenido desde la pantalla anterior. Una vez ingresado los datos solicitados, presiona el botón "Iniciar Pago":
   ![Paso 2](/images/referencia/onepay/sim2.png)
 
-- Si todo va bien, el emulador mostrará opciones para simular situaciones distintas. Para simular un pago exitoso, presiona el botón `PRE_AUTHORIZED`. En caso de querer simular un pago fallido, presiona le botón `REJECTED`. Simularemos un pago exitoso presionando el botón `PRE_AUTHORIZED`.
+* Si todo va bien, el emulador mostrará opciones para simular situaciones distintas. Para simular un pago exitoso, presiona el botón `PRE_AUTHORIZED`. En caso de querer simular un pago fallido, presiona le botón `REJECTED`. Simularemos un pago exitoso presionando el botón `PRE_AUTHORIZED`.
   ![Paso 3](/images/referencia/onepay/sim3.png)
 
-- Vuelve a la ventana del navegador donde comenzaste, y podrás comprobar que el pago ha sido exitoso.
+* Vuelve a la ventana del navegador donde comenzaste, y podrás comprobar que el pago ha sido exitoso.
   ![Paso 4](/images/referencia/onepay/sim4.png)
 
-- Alternativamente, en vez de simular un pago exitoso puedes simular un pago rechazado utilizando el botón `REJECTED` en el emulador. Si vuelves a la ventana del comercio, podrás ver que la operación ha sido cancelada.
+* Alternativamente, en vez de simular un pago exitoso puedes simular un pago rechazado utilizando el botón `REJECTED` en el emulador. Si vuelves a la ventana del comercio, podrás ver que la operación ha sido cancelada.
   ![Paso 5](/images/referencia/onepay/sim5.png)
 
 ### Códigos de Error Comunes
 
 Todos los endpoints pueden entregar como respuesta los siguientes `responseCode`:
 
-- `"INVALID_PLUGIN_VERSION"`(la appKey no se encuentra registrada en la base de datos).
-- `"INVALID_APP_KEY"` (la appKey no está activa).
-- `"COMMERCE_NOT_FOUND"` (apiKey no corresponde a ningún comercio registrado).
-- `"SIGN_VALIDATION_ERROR"` (falla la validación de la firma por motivos de encriptación, no por su contenido).
-- `"INVALID_TRANSACTION_SIGN"` (falla la validación del contenido de la firma).
+* `"INVALID_PLUGIN_VERSION"`(la appKey no se encuentra registrada en la base de datos).
+* `"INVALID_APP_KEY"` (la appKey no está activa).
+* `"COMMERCE_NOT_FOUND"` (apiKey no corresponde a ningún comercio registrado).
+* `"SIGN_VALIDATION_ERROR"` (falla la validación de la firma por motivos de encriptación, no por su contenido).
+* `"INVALID_TRANSACTION_SIGN"` (falla la validación del contenido de la firma).
 
 Además, cada endpoint puede tener condiciones adicionales de error que serán
 representadas por otros valores de `responseCode`.
@@ -290,7 +289,7 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+#### Parámetros Crear una Transacción
 
 Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 ------ | -----------
@@ -314,7 +313,7 @@ items[].amount <br> <i>  Number  </i> | Precio unitario. Puede ser negativo par
 items[].additionalData <br> <i>  String  </i> |
 items[].expire <br> <i>  Number  </i> |
 
-**Respuesta**
+#### Respuesta Crear una Transacción
 
 ```java
 response.getOcc();
@@ -390,7 +389,7 @@ result.externalUniqueNumber <br> <i>  String  </i> | Identificador de la transa
 result.issuedAt <br> <i>  Number  </i> | Fecha de creación de la transacción en Unix timestamp.
 result.qrCodeAsBase64 <br> <i>  String  </i> | Base64 que contiene el QR con la ott de la transacción.
 
-**Callbacks**
+#### Callbacks
 
 Cuando la transacción sea aprobada o rechazada, se invocará vía método `GET` la
 URL `callbackUrl` (en canal `WEB` modalidad checkout y en canal `MOBILE`) o la
@@ -404,7 +403,7 @@ status | Estado resultante de la transacción. Puede ser `"PRE_AUTHORIZED"` (tra
 
 Los parámetros son todos String (pues son parte de una URL), excepto en Android donde los parámetros de un intent son tipados. Ver la referencia del SDK móvil para más detalles.
 
-##### Especificar tus propios external unique numbers
+#### Especificar tus propios external unique numbers
 
 ```java
 TransactionCreateResponse response = Transaction.create(
@@ -478,7 +477,7 @@ Content-Type: application/json
 
 ```
 
-**Parámetros**
+#### Parámetros Confirmar una Transacción
 
 Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 ------ | -----------
@@ -489,7 +488,7 @@ occ <br> <i>  String  </i> | Identificador único de la transacción Onepay. Es 
 externalUniqueNumber <br> <i>  String  </i> | Identificador de la transacción en el sistema del comercio. Es el segundo parámetro para esta funcionalidad en los SDK.
 issuedAt <br> <i>  Number  </i> | Fecha de creación de la petición en Unix timestamp. Los SDKs lo manejan automáticamente.
 
-**Respuesta**
+#### Respuesta Confirmar una Transacción
 
 ```java
 response.getOcc();
@@ -591,7 +590,7 @@ result.buyOrder <br> <i>  Number  </i> | Orden de compra Onepay.
 A través del servicio nullifyTransaction se puede anular una transacción
 previamente autorizada y confirmada.
 
-#### `POST /ewallet-plugin-api-services/services/transactionservice/gettransactionnumber`
+#### `POST /ewallet-plugin-api-services/services/transactionservice/gettransactionnumber` anulación
 
 ```java
 RefundCreateResponse response =
@@ -648,7 +647,7 @@ authorizationCode <br> <i>  String  </i> | Código de autorización recibido a
 nullifyAmount <br> <i>  Number  </i> | Monto de la transacción a anular.
 issuedAt <br> <i>  Number  </i> | Fecha de creación de la petición en Unix timestamp. Los SDKs lo manejan automáticamente.
 
-**Respuesta**
+#### Respuesta Anular una Transacción
 
 ```java
 response.getOcc();
@@ -734,7 +733,7 @@ integración transparentemente usa la app nativa de Onepay en lugar del modal.
 Es la integración recomendada, por su facilidad de integración y su
 versatilidad.
 
-**Parámetros**
+#### Parámetros Checkout
 
 Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 -------|------------
@@ -745,6 +744,7 @@ options.callbackUrl <br> <i>  String  </i> | URL del endpoint que será el call
 options.transactionDescription <br> <i>  String  </i> | (Opcional) Texto que representa la descripción general de la compra, se dibujará en el modal sobre el valor del precio.
 
 > Ejemplo:
+>
 > ```javascript
 > Onepay.checkout({
 >  endpoint: './transaction-create',
@@ -754,11 +754,11 @@ options.transactionDescription <br> <i>  String  </i> | (Opcional) Texto que re
 > });
 > ```
 
-**Respuesta**
+#### Respuesta Checkout
 
 Ninguna.
 
-**Parámetros endpoint**
+#### Parámetros endpoint
 
 El endpoint de creación de transacción será invocado via `POST` y recibirá los siguientes parámetros:
 
@@ -766,11 +766,12 @@ Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 -------|------------
 channel <br> <i>  String  </i> | Tendrá el valor `"WEB"` si el navegador donde se está ejecutando checkout es desktop. Si es un navegador móvil tomará el valor `"MOBILE"`.
 
-**Respuesta endpoint**
+#### Respuesta endpoint
 
 Se espera que el endpoint responda a checkout con el siguiente resultado como una respuesta JSON:
 
 > Ejemplo de respuesta:
+>
 > ```json
 > {
 > "externalUniqueNumber":"38bab443-c55b-4d4e-86fa-8b9f4a2d2d13",
@@ -791,7 +792,7 @@ issuedAt <br> <i>  Number  </i> | Unix timestamp de la creación de la transacci
 occ <br> <i>  String  </i> | Identificador único de la transacción en Onepay.
 ott <br> <i>  Number  </i> | Identificador temporal de la transacción (8 dígitos).
 
-**Parámetros callbackUrl**
+#### Parámetros callbackUrl
 
 El callback final será invocado via `GET` y recibirá los siguientes parámetros:
 
@@ -803,7 +804,7 @@ status | Estado resultante de la transacción. Puede ser `"PRE_AUTHORIZED"` (tra
 
 Los parámetros son todos String (pues son parte de una URL).
 
-**Respuesta callbackUrl**
+#### Respuesta callbackUrl
 
 El callback *NO* debe entregar JSON como resultado, pues tiene el control del
 navegador del usuario. Por lo tanto el callback debe entregar una página web (sea de éxito o fracaso) con la información pertinente.
@@ -818,11 +819,11 @@ Entrega el canal apropiado para iniciar una transacción Onepay en el backend. E
 tú responsabilidad llevar este valor hacia tu backend para crear la transacción
 con el canal entregado.
 
-**Parámetros**
+#### Parámetros QR Directo
 
 Ninguno.
 
-**Respuesta**
+#### Respuesta QR Directo
 
 Un String con valor `"WEB"` (si el usuario está en un navegador desktop) o
 `"MOBILE"` (si se encuentra en un navegador de smartphone).
@@ -833,11 +834,11 @@ Indica si el usuario está usando un smartphone para navegar la página actual.
 Una vez que hayas creado la transacción (o en el momento que prefieras) te
 permite saber si el usuario está en un smartphone (y por tanto no tiene sentido dibujar un QR)
 
-**Parámetros**
+#### Parámetros Onepay.isMobile()
 
 Ninguno.
 
-**Respuesta**
+#### Respuesta Onepay.isMobile()
 
 Un Boolean con valor `true` si el usuario está usando un smartphone y `false`
 en caso contrario.
@@ -845,6 +846,7 @@ en caso contrario.
 #### `Onepay.redirectToApp(occ)`
 
 > Ejemplo:
+>
 > ```javascript
 > if (Onepay.isMobile()) {
 >  Onepay.redirectToApp(transaction.occ);
@@ -856,13 +858,13 @@ Lleva al usuario a la app nativa de Onepay par autorizar una transacción. La
 interfaz que le indique al usuario que puede abrir dicha app (y/o lo invite a
 instalar Onepay) es tu responsabilidad.
 
-**Parámetros**
+#### Parámetros redirectToApp(occ)
 
 Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 -------|------------
 occ <br> <i>  String  </i> | Identificador de la transacción en Onepay
 
-**Respuesta**
+#### Respuesta redirectToApp(occ)
 
 Ninguna. Al final del flujo de aprobación del pago recibirás el callback que
 hayas configurado al invocar el API de creación de transacción (o que hayas
@@ -872,9 +874,10 @@ configurado en tu SDK de backend).
 
 Dibuja el código QR y te permite escuchar los eventos de Onepay para sincronizarte con lo que ocurra en la app del usuario.
 
-**Parámetros**
+#### Parámetros Onepay.directQr
 
 > Ejemplo:
+>
 >```javascript
 >var transaction = {
 >    occ:1808696602719171,
@@ -941,7 +944,7 @@ transaction.externalUniqueNumber <br> <i>  String  </i> | Identificador de la t
 transaction.qrCodeAsBase64 <br> <i>  String  </i> | Código QR tal como lo devuelve [el API de creación de transacción](#post-ewallet-plugin-api-services-services-transactionservice-sendtransaction).
 transaction.paymentStatusHandler <br> <i>  Object  </i> | Funciones de escucha para los eventos de Onepay
 
-**Callbacks**
+#### Callbacks Onepay.directQr
 
 Los siguientes elementos dentro de `transaction.paymentStatusHandler` serán llamados cuando ocurran los eventos correspondientes:
 
@@ -961,12 +964,14 @@ webs ni webviews, tus usuarios tendrán la mejor experiencia de pago app-to-app.
 Todas las funciones de los SDK Móviles son métodos de una instancia `onepay`.
 
 > En iOS:
+>
 > ```swift
 > let onepay = OnePay()
 > ```
-
+>
 > En Android:
-> ```
+>
+> ```java
 > OnePay onepay = new OnePay(this);
 > ```
 
@@ -975,6 +980,7 @@ Todas las funciones de los SDK Móviles son métodos de una instancia `onepay`.
 En Android debes pasar un contexto como parámetro al constructor de `OnePay` (típicamente el activity actual desde el que usas Onepay)
 
 > En iOS:
+>
 > ```swift
 > if (onepay.isOnePayInstalled()) {
 >      // Todo OK, sigue adelante
@@ -984,9 +990,10 @@ En Android debes pasar un contexto como parámetro al constructor de `OnePay` (t
 >     onepay.installOnePay()
 > }
 > ```
-
+>
 > En Android:
-> ```
+>
+> ```java
 > if (onepay.isOnePayInstalled()) {
 >   // Todo OK, sigue adelante
 > } else {
@@ -1002,11 +1009,11 @@ En Android debes pasar un contexto como parámetro al constructor de `OnePay` (t
 Este método te permite saber si la app Onepay ya se encuentra instalada en el
 dispositivo del usuario.
 
-**Parámetros**
+#### Parámetros isOnePayInstalled
 
 Ninguno.
 
-**Respuesta**.
+#### Respuesta isOnePayInstalled
 
 Retorna `true` si la app Onepay está instalada, `false` en caso contrario.
 
@@ -1016,11 +1023,11 @@ Si has detectado que Onepay no está presente puedes invitar al usuario a probar
 Onepay y luego con este método gatillas la instalación de Onepay en el
 dispositivo del usuario.
 
-**Parámetros**
+#### Parámetros installOnePay
 
 Ninguno.
 
-**Respuesta**.
+#### Respuesta installOnePay
 
 Ninguna.
 
@@ -1031,6 +1038,7 @@ El uso principal del SDK móvil es invocar a la app de Onepay para completar una
 #### `initPayment(occ, callback)`
 
 > En iOS:
+>
 > ```swift
 > onepay.initPayment(occ,
 >     callback: {(statusCode, description) in
@@ -1049,9 +1057,10 @@ El uso principal del SDK móvil es invocar a la app de Onepay para completar una
 >     }
 > )
 > ```
-
+>
 > En Android:
-> ```
+>
+>``` java
 > onepay.initPayment(occ, new OnePayCallback() {
 >     @Override
 >     public void failure(Error error, String s) {
@@ -1076,24 +1085,23 @@ El uso principal del SDK móvil es invocar a la app de Onepay para completar una
 > });
 > ```
 
-
 Si Onepay está instalado y creaste en tu backend una transacción para el canal `APP`, sólo necesitas la `occ` para iniciar el pago:
 
-**Parámetros**
+#### Parámetros initPayment
 
 Nombre <br> <i>tipo</i>| Descripción<br>&nbsp;
 ------ | -----------
 occ <br> <i>  String  </i> | Identificador único de la transacción en Onepay.
 callback <br> <i>  OnePayCallback  </i> | Callback que se invocará en caso de error.
 
-**Respuesta**
+#### Respuesta initPayment
 
 Ninguna. En caso de error será invocado el callback y en caso de que el control
 pase exitosamente a Onepay retomarás el control mediante el `appScheme` que
 hayas enviado en el API cuando creaste la transacción (o el que hayas
 configurado en tu SDK).
 
-**callback**
+#### callback
 
 El callback de ser invocado recibirá dos parámetros:
 
@@ -1151,16 +1159,18 @@ Para la [modalidad Cortafilas](/documentacion/onepay#integracion-cortafila), hem
 Para integrar este componente, debes agregar en el archivo build.gradle del módulo que contiene tu proyecto Android (generalmente en app/build.gradle).
 
 > En el archivo build.gradle:
-> ```
+>
+> ```java
 > dependencies {
-> 	implementation 'com.google.zxing:core:3.3.0'
-> 	implementation('com.journeyapps:zxing-android-embedded:3.6.0') { transitive = false }
+>   implementation 'com.google.zxing:core:3.3.0'
+>   implementation('com.journeyapps:zxing-android-embedded:3.6.0') { transitive = false }
 > }
 > ```
 
 También debes agregar el componente en tu archivo layout.
 
 > En el archivo xml del layout:
+>
 > ```xml
 > <cl.ionix.tbk_ewallet_sdk_android.ui.QROnepayView
 >                 android:id="@+id/qr_imageView"
@@ -1171,7 +1181,8 @@ También debes agregar el componente en tu archivo layout.
 Y en la clase Java del Activity o Fragment en donde estás agregando el componente, debes obtener el elemento del layout para setear el ott.
 
 > En la clase encargada del layout:
-> ```
+>
+> ```java
 > QROnepayView imageViewQrCode = inflatedView.findViewById(R.id.qr_imageView);
 > imageViewQrCode.setOtt(ott);
 > ```
@@ -1183,6 +1194,7 @@ Para integrar este componente, puedes hacerlo por una de las dos formas:
 * Programáticamente. Dentro la inicialización de tu UIViewController, debes inicializar la clase QROnepayView y agregarlo a tu vista.
 
 > Para incorporarlo programáticamente:
+>
 > ```swift
 > let qrOnepayView = QROnepayView(ott: "12345678")
 > qrOnepayView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
@@ -1192,6 +1204,7 @@ Para integrar este componente, puedes hacerlo por una de las dos formas:
 * Usando Storyboards. En el UIViewController, agrega un View para indicar como Custom Class la clase `QROnepayView`. En el código de la implementación del UIViewController, sobre la variable que posee el Outlet de la clase, debes setear el ott.
 
 > Al usar Storyboard:
+>
 > ```swift
 > qrOnepayView.setOtt("12345678")
 > ```

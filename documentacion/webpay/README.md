@@ -49,20 +49,10 @@ var transaction =
 
 ```ruby
 # Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
 ```
 
 ```python
 # Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
 ```
 
 ```javascript
@@ -71,7 +61,6 @@ const Transbank = require('transbank-sdk');
 const transaction = new Transbank.Webpay(
   Transbank.Configuration.forTestingWebpayPlusNormal()
 ).getNormalTransaction();
-
 ```
 
 <aside class="notice">
@@ -135,40 +124,10 @@ var tokenWs = initResult.token;
 
 ```ruby
 # Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ```
 
 ```python
 # Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ```
 
 ```javascript
@@ -264,32 +223,16 @@ if (output.responseCode == 0) {
 
 ```ruby
 # Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
 ```
 
 ```python
 # Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
 ```
 
 ```javascript
 // Obtener el token desde el paraemtro token_ws recibido por POST
-// Si usas express, sería algo como esto: 
-const token = req.body.token_ws; 
+// Si usas express, sería algo como esto:
+const token = req.body.token_ws;
 
 transaction.getTransactionResult(token)
   .then((response) => {
@@ -327,7 +270,6 @@ usuario. Con eso habrás completado el flujo "feliz" en que todo funciona.
 En la confirmación es posible obtener dos excepciones de Timeout diferentes. Se obtendrá la excepción `Timeout error(272)` en caso de un fallo de _getTransactionResult_, si el fallo corresponda al _acknowledge_ la excepción que se obtendrá será `Timeout error (Transaction is REVERSED)(272)`
 </aside>
 
-
 En [la referencia detallada de Webpay Plus puedes ver cada paso del flujo, incluyendo
 los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-plus-normal).
 
@@ -341,14 +283,13 @@ los casos de borde que también debes manejar](https://www.transbankdevelopers.c
   </div>
 </div>
 
-
 ## Webpay Plus Mall %<span class='tbk-tagTitleDesc'>SOAP</span>%
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-plus-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
-### Crear una transacción
+### Crear una transacción mall
 
 Para una transacción asociada a una tienda mall, lo primero que necesitas es preparar una instancia de `WebpayMallNormal` con la `Configuration` que incluye los códigos de comercio de cada tienda incluida y los certificados a usar.
 
@@ -369,7 +310,6 @@ WebpayMallNormal transaction =
 
 ```php
 use Transbank\Webpay\Configuration;
-
 use Transbank\Webpay\Webpay;
 // ...
 
@@ -387,20 +327,10 @@ var transaction = new Webpay(Configuration.ForTestingWebpayPlusMall())
 
 ```ruby
 # Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
 ```
 
 ```python
 # Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
 ```
 
 ```javascript
@@ -512,40 +442,10 @@ var formAction = initResult.url;
 
 ```ruby
 # Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ```
 
 ```python
 # Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ```
 
 ```javascript
@@ -582,6 +482,7 @@ transaction.initTransaction(buyOrder, sessionId, returnUrl, finalUrl, transactio
     console.log(error.toString());
   });
 ```
+
 <aside class="notice">
 Observar que existe un `buyOrder` generado para el comercio mall y un `buyOrder` para cada una de las tiendas.
 </aside>
@@ -596,7 +497,7 @@ Debido a la posibilidad que el formulario de WebPay no se despliegue, no se reco
 Tip: En el ambiente de integración puedes usar la tarjeta VISA 4051885600446623 para hacer pruebas simples de éxito. El CVV es 123 y la fecha de vencimiento es cualquiera superior a la fecha actual. Luego para la autenticación bancaria usa el RUT 11.111.111-1 y la clave 123. Para pruebas exhaustivas [consulta todas las tarjetas de prueba en la sección de Ambientes](/documentacion/como_empezar#ambientes).
 </aside>
 
-### Confirmar una transacción
+### Confirmar una transacción mall
 
 Una vez que el tarjetahabiente ha pagado (o declinado, o ha ocurrido un error), Webpay retornará el control vía `POST` a la URL que indicaste en el `returnUrl`. Recibirás también el parámetro `token_ws` que te permitirá conocer el resultado de la transacción:
 
@@ -647,26 +548,10 @@ foreach (var output in result.detailOutput){
 
 ```ruby
 # Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
 ```
 
 ```python
 # Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
 ```
 
 ```javascript
@@ -675,7 +560,7 @@ transaction.getTransactionResult(token)
     response.detailOutput.forEach((output) => {
       // Se debe verificar cada transacción de cada tienda del mall por separado:
       if (output.responseCode == 0) {
-        // Transaccion exitosa, puedes procesar el resultado con el contenido de 
+        // Transaccion exitosa, puedes procesar el resultado con el contenido de
         // las variables result y output.
       }
     });
@@ -693,21 +578,20 @@ Finalmente después del comprobante Webpay redirigirá otra vez (vía `POST`) a 
 
 En [la referencia detallada de Webpay Plus Mall puedes ver cada paso del flujo, incluyendo los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-plus-mall).
 
-
-## OneClick %<span class='tbk-tagTitleDesc'>SOAP</span>%
+## Oneclick %<span class='tbk-tagTitleDesc'>SOAP</span>%
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-oneclick-normal' tbk-link-name='Referencia Api'></div>
 </div>
 
 <aside class="warning">
-Este producto se encuentra deprecado y ya no está disponible para su contración. Como alternativa puedes utilizar OneClick Mall REST 
+Este producto se encuentra deprecado y ya no está disponible para su contración. Como alternativa puedes utilizar OneClick Mall REST
 [click aquí](#webpay-oneclick-mall)
 </aside>
 
 ### Crear una inscripción
 
-Para usar OneClick en transacciones asociadas a un único comercio, lo
+Para usar Oneclick en transacciones asociadas a un único comercio, lo
 primero que necesitas es preparar una instancia de `WebpayOneClick` con la
 `Configuration` que incluye el código de comercio y los certificados a
 usar
@@ -750,22 +634,10 @@ var transaction =
 
 ```ruby
 # Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
 ```
 
 ```python
 # Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
 ```
 
 ```javascript
@@ -825,35 +697,13 @@ var tbkToken = initResult.token;
 
 ```ruby
 # Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
-
-
-
 ```
 
 ```python
 # Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
-
-
-
 ```
-```javascript
 
+```javascript
 // Identificador del usuario en el comercio
 const username = "pepito"
 // Correo electrónico del usuario
@@ -892,7 +742,7 @@ OneClickFinishInscriptionOutput result =
 if (result.getResponseCode() == 0) {
     // Inscripcion exitosa.
     // Ahora puedes usar result.tbkUser para autorizar transacciones
-    // oneclick sin nueva intervención del usuario.
+    // Oneclick sin nueva intervención del usuario.
 }
 ```
 
@@ -901,7 +751,7 @@ $result = $transaction->finishInscription($tbkToken);
 if ($result->responseCode == 0) {
     // Inscripcion exitosa.
     // Ahora puedes usar $result->tbkUser para autorizar transacciones
-    // oneclick sin nueva intervención del usuario.
+    // Oneclick sin nueva intervención del usuario.
 }
 ```
 
@@ -913,32 +763,16 @@ var result = transaction.finishInscription(tbkToken);
 if (result.responseCode == 0) {
     // Inscripcion exitosa.
     // Ahora puedes usar result.tbkUser para autorizar transacciones
-    // oneclick sin nueva intervención del usuario.
+    // Oneclick sin nueva intervención del usuario.
 }
 ```
 
 ```ruby
 # Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
 ```
 
 ```python
 # Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
 ```
 
 ```javascript
@@ -955,7 +789,7 @@ transaction.finishInscription(token)
 ```
 
 Con eso habrás completado el flujo "feliz" en que todo funciona OK. En [la
-referencia detallada de OneClick puedes ver cada paso del flujo,
+referencia detallada de Oneclick puedes ver cada paso del flujo,
 incluyendo los casos de borde que también debes
 manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-oneclick-normal).
 
@@ -968,7 +802,6 @@ Finalmente, puedes autorizar transacciones usando el `tbkUser` retornado:
 ```java
 import com.transbank.webpayserver.webservices.OneClickPayOutput;
 //...
-
 // Identificador único de orden de compra generado por el comercio:
 Long buyOrder = Math.abs(new Random().nextLong());
 String tbkUser = tbkUserRetornadoPorFinishInscription;
@@ -1008,30 +841,10 @@ if (output.responseCode == 0) {
 
 ```ruby
 # Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
-
-
 ```
 
 ```python
 # Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
-
-
 ```
 
 ```javascript
@@ -1051,18 +864,17 @@ transaction.authorize(buyOrder, tbkUser, username, amount)
   })
 ```
 
-## OneClick Mall %<span class='tbk-tagTitleDesc'>REST</span>%
+## Oneclick Mall %<span class='tbk-tagTitleDesc'>REST</span>%
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpayrest#webpay-oneclick-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
-Para usar OneClick Mall en transacciones asociadas a varios comercios, lo primero que se debe hacer es definir las dependencias necesarias para poder realizar cualquier tipo de transacción.
+Para usar Oneclick Mall en transacciones asociadas a varios comercios, lo primero que se debe hacer es definir las dependencias necesarias para poder realizar cualquier tipo de transacción.
 
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-
 import cl.transbank.webpay.oneclick.OneClickMall;
 
 // ...
@@ -1070,7 +882,6 @@ import cl.transbank.webpay.oneclick.OneClickMall;
 ```
 
 ```php
-
 use Transbank\Webpay\Oneclick\MallInscription;
 use Transbank\Webpay\Oneclick\MallTransaction;
 
@@ -1087,32 +898,26 @@ using Transbank.Webpay.Oneclick;
 ```
 
 ```ruby
-
-// Incluir en el Gemfile
+# Incluir en el Gemfile
 gem 'transbank-sdk', git: "https://github.com/TransbankDevelopers/transbank-sdk-ruby.git"
-
-
 ```
 
 ```python
-
 from transbank.oneclick.mall_inscription import MallInscription
 from transbank.oneclick.mall_transaction import MallTransaction
 
 from transbank.oneclick.request import MallTransactionAuthorizeDetails
 
-// ...
-
+# ...
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
-
 
 Una vez que ya cuentas con esa preparación, puedes iniciar transacciones:
 
-
-### Crear una inscripción
+### Crear una inscripción mall
 
 Te permite realizar la inscripción del tarjetahabiente:
 
@@ -1120,8 +925,6 @@ Te permite realizar la inscripción del tarjetahabiente:
 
 ```java
 //...
-
-
 // Identificador del usuario en el comercio
 String username = "nombre_de_usuario";
 // Correo electrónico del usuario
@@ -1136,8 +939,6 @@ String tbk_token = response.getToken();
 
 ```php
 //...
-
-
 // Identificador del usuario en el comercio
 $username = "nombre_de_usuario";
 // Correo electrónico del usuario
@@ -1148,13 +949,10 @@ $response = MallInscription::start($username, $email, $response_url);
 
 $url_webpay = $resp->getUrlWebpay();
 $tbk_token = $resp->getToken();
-
 ```
 
 ```csharp
 //...
-
-
 // Identificador del usuario en el comercio
 var username = "nombre_de_usuario";
 // Correo electrónico del usuario
@@ -1165,26 +963,20 @@ var response = Inscription.start(username, email, response_url);
 
 var url_webpay = response.Url;
 var tbk_token = response.Token;
-
 ```
 
 ```ruby
-
-
 @username = "nombre_de_usuario"
 @email = "nombre_de_usuario@gmail.com"
 @response_url = "https://callback/resultado/de/transaccion"
-
 
 @resp = Transbank::Webpay::Oneclick::MallInscription::start(user_name: @username,email: @email,response_url: @response_url)
 
 @url_webpay = @resp.url_webpay
 @tbk_token = @resp.token
-
 ```
 
 ```python
-
 username = "nombre_de_usuario"
 email = "nombre_de_usuario@gmail.com"
 response_url = "https://callback/resultado/de/transaccion"
@@ -1193,16 +985,15 @@ resp = MallInscription.start(user_name=username,email=email,response_url=respons
 
 url_webpay = resp.url_webpay
 tbk_token = resp.token
-
-
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
 
 Tal como en el caso de Oneclick Normal, debes redireccionar vía `POST` el navegador del usuario a la url retornada en `url_webpay`. **Recordando que el nombre del parámetro que contiene el token se debe llamar `TBK_TOKEN`**.
 
-### Confirmar una inscripción
+### Confirmar una inscripción mall
 
 Una vez que se autorice la inscripción del usuario, se retornará el control al comercio vía `POST` en la url indicada en `response_url`, con el parámetro `TBK_TOKEN` identificando la transacción. Con esa información se puede finalizar la inscripción:
 
@@ -1210,64 +1001,48 @@ Una vez que se autorice la inscripción del usuario, se retornará el control al
 
 ```java
 //...
-
 String tbk_token = "tbkTokenRetornadoPorInscriptionStart";
-
 OneclickMallInscriptionFinishResponse response = OneclickMall.Inscription.finish(tbk_token);
-
 String tbkUser = response.getTbkUser();
-
 ```
 
 ```php
 //...
 
 $tbk_token = "tbkTokenRetornadoPorInscriptionStart";
-
 $response = MallInscription::finish($tbk_token);
-
 $tbkUser = $resp->getTbkUser();
-
-
 ```
 
 ```csharp
 //...
 
 var token = "tbkTokenRetornadoPorInscriptionStart";
-
 var result = Inscription.Finish(tbk_token);
-
 var tbkUser = result.TbkUser;
-
 ```
 
 ```ruby
-//...
+#...
 
 @tbk_token = "tbkTokenRetornadoPorInscriptionStart";
-
 @resp = Transbank::Webpay::Oneclick::MallInscription::finish(token: @tbk_token)
-
 @tbkUser = @resp.tbk_user
-
 ```
 
 ```python
-//...
+#...
 
 tbk_token = "tbkTokenRetornadoPorInscriptionStart"
-
 resp = MallInscription.finish(token=tbk_token)
-
 tbkUser = resp.tbk_user
-
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
 
-Con eso habrás completado el flujo "feliz" en que todo funciona OK. En [la referencia detallada de OneClick Mall puedes ver cada paso del flujo, incluyendo los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-oneclick-mall).
+Con eso habrás completado el flujo "feliz" en que todo funciona OK. En [la referencia detallada de Oneclick Mall puedes ver cada paso del flujo, incluyendo los casos de borde que también debes manejar](https://www.transbankdevelopers.cl/referencia/webpay#webpay-oneclick-mall).
 
 ### Eliminar una inscripción
 
@@ -1277,19 +1052,15 @@ Si en algún momento se quiere eliminar la inscripción de un usuario, se debe i
 
 ```java
 //...
-
 // Identificador del usuario en el comercio
 String username = "nombre_de_usuario";
 String tbkUser = "tbkUserRetornadoPorInscriptionFinish";
 
 OneclickMall.Inscription.delete(username, tbkUser);
-
-
 ```
 
 ```php
 //...
-
 // Identificador del usuario en el comercio
 $username = "nombre_de_usuario";
 $tbkUser = $tbkUserRetornadoPorInscriptionFinish;
@@ -1298,59 +1069,52 @@ $tbkUser = $tbkUserRetornadoPorInscriptionFinish;
 $options = new Options($apiKey, $parentCommerceCode);
 
 $response = MallInscription::delete($tbkUser, $username, $options);
-
-
 ```
 
 ```csharp
 //...
-
 // Identificador del usuario en el comercio
 var username = "nombre_de_usuario";
 var tbkUser = "tbkUserRetornadoPorInscriptionFinish";
 
 var result = Inscription.Delete(username, tbkUser);
-
 ```
 
 ```ruby
-//...
+#...
 
 @username = "nombre_de_usuario"
 @tbkUser = "tbkUserRetornadoPorInscriptionFinish"
 
 @resp = Transbank::Webpay::Oneclick::MallInscription::delete(user_name: @username,tbk_user: @tbkUser)
-
 ```
 
 ```python
-//...
+#...
 
 tbkUser = "tbkUserRetornadoPorInscriptionFinish"
 username = "nombre_de_usuario"
 
 resp = MallInscription.delete(tbk_user=tbkUser, user_name=username)
-
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
 
 Si se quiere comprobar si se eliminó correctamente, la función retorna un boolean, el cual será `true` en caso de éxito y `false` en otro caso.
 
-### Realizar transacciones
+### Realizar transacciones mall
 
 Con el `tbkUser` retornado de `Inscription.finish()` puedes autorizar transacciones:
 
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-
 // Identificador único de orden de compra generado por el comercio:
 String username = "nombre_de_usuario";
 String tbkUser = "tbkUserRetornadoPorInscriptionFinish";
 String buyOrder = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
-
 
 double amountOne = 10000;
 String MallOneCommerceCode = "597055555542";
@@ -1366,14 +1130,10 @@ MallTransactionCreateDetails details = MallTransactionCreateDetails.build()
                 .add(amountOne, MallOneCommerceCode, buyOrderMallOne, installmentNumberOne)
                 .add(amuntTwo, MallTwoCommerceCode, buyOrderMallTwo, installmentNumberTwo);
 
-
 OneclickMallTransactionAuthorizeResponse response = OneclickMall.Transaction.authorize(username, tbkUser, buyOrder, details);
-
-
 ```
 
 ```php
-
 // Identificador del usuario en el comercio
 $username = "nombre_de_usuario";
 $tbkUser = $tbkUserRetornadoPorInscriptionFinish;
@@ -1405,12 +1165,9 @@ $details = [
 ];
 
 $response = MallTransaction::authorize($username, $tbkUser, $parentBuyOrder, $details);
-
-
 ```
 
 ```csharp
-
 var username = "nombre_de_usuario";
 var tbkUser = "tbkUserRetornadoPorInscriptionFinish";
 var buyOrder = RandomString(10);
@@ -1424,12 +1181,9 @@ List<PaymentRequest> details = new List<PaymentRequest>();
 details.Add(new PaymentRequest(childCommerceCode, childBuyOrder, amount, installmentsNumber));
 
 var result = MallTransaction.Authorize(username, tbkUser, buyOrder, details);
-
-
 ```
 
 ```ruby
-
 @username = "nombre_de_usuario"
 @tbkUser = "tbkUserRetornadoPorInscriptionFinish"
 @buy_order = "12345" + Time.now.to_i.to_s
@@ -1449,14 +1203,10 @@ var result = MallTransaction.Authorize(username, tbkUser, buyOrder, details);
   }]
 end
 
-
 @resp = Transbank::Webpay::Oneclick::MallTransaction::authorize(username: @username, tbk_user: @tbkUser, parent_buy_order: @buy_order, details: @details)
-
-
 ```
 
 ```python
-
 username = "nombre_de_usuario"
 tbkUser = "tbkUserRetornadoPorInscriptionFinish"
 buy_order = str(random.randrange(1000000, 99999999))
@@ -1475,10 +1225,10 @@ details = MallTransactionAuthorizeDetails(commerce_code1, buy_order_child1, inst
     .add(commerce_code2, buy_order_child2, installments_number2, amount2)
 
 resp = MallTransaction.authorize(user_name=username, tbk_user=tbkUser, buy_order=buy_order, details=details)
-
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
 
 ### Anular una transacción
@@ -1489,20 +1239,16 @@ En el caso de que se quiera anular alguna transacción, se invoca a `Transaction
 
 ```java
 //...
-
-
 String buyOrder = "buyOrderIndicadoEnTransactionAuthorize";
 String childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
 String childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
 double amount = (byte) 1;
 
 OneclickMallTransactionRefundResponse response = OneclickMall.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
-
 ```
 
 ```php
 //...
-
 $buyOrder = $buyOrderIndicadoEnTransactionAuthorize;
 $childCommerceCode = $childCommerceCodeIndicadoEnTransactionAuthorize;
 $childBuyOrder = $childBuyOrderIndicadoEnTransactionAuthorize;
@@ -1512,55 +1258,45 @@ $amount = $amountIndicadoEnTransactionAuthorize;
 $options = new Options($apiKey, $parentCommerceCode);
 
 $response = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrder, $amount, $options);
-
-
 ```
 
 ```csharp
 //...
-
 var buyOrder = Request.Form["buy_order"];
 var childCommerceCode = Request.Form["child_commerce_code"];
 var childBuyOrder = Request.Form["child_buy_order"];
 var amount = decimal.Parse(Request.Form["amount"]);
 
 var result = MallTransaction.Refund(buyOrder, childCommerceCode,childBuyOrder,amount);
-
-
 ```
 
 ```ruby
-//...
-
+#...
 @buy_order = "12345" + Time.now.to_i.to_s
 @child_commerce_code = "597055555542"
 @child_buy_order = "abcdef" + Time.now.to_i.to_s
 @amount = 1000
 
 @resp = Transbank::Webpay::Oneclick::MallTransaction::refund(buy_order: @buy_order, child_commerce_code: @child_commerce_code, child_buy_order: @child_buy_order, amount: @amount)
-
 ```
 
 ```python
-//...
-
-
+#...
 buy_order = str(random.randrange(1000000, 99999999))
 child_commerce_code = '597055555542'
 child_buy_order = str(random.randrange(1000000, 99999999))
 amount = 10000
 
 resp = MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, amount)
-
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
 
 ## Webpay Transacción Completa {data-submenuhidden=true} %<span class='tbk-tagTitleDesc'>REST</span>%
 
-
-### Crear una transacción
+### Crear una transacción completa
 
 Antes de realizar cualquier transacción es necesario instanciar el producto.
 
@@ -1580,33 +1316,31 @@ use Transbank\TransaccionCompleta;
 TransaccionCompleta::setCommerceCode = "Codigo de Comercio";
 TransaccionCompleta::setApiKey = "Apikey entregado por Transabank";
 TransaccionCompleta::setIntegrationType = "TEST/LIVE"; //ambiente de integracion;
-
-
 ```
 
 ```csharp
-...
+//...
 using Transbank.Webpay.Common;
 using Transbank.Webpay.TransaccionCompleta;
-...
+//...
 
 TransaccionCompleta.CommerceCode = "Codigo de Comercio";
 TransaccionCompleta.ApiKey = "Apikey entregado por Transabank";
 TransaccionCompleta.IntegrationType = "TEST/LIVE"; //ambiente de integracion;
-
 ```
 
 ```ruby
-
+#
 ```
 
 ```python
-
-
+#
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
+
 Es recomendado encapsular la asignacion para utilizarla sin problemas en los demas metodos.
 
 Ahora se pueden realizar transacciones sin problemas
@@ -1624,7 +1358,6 @@ String cardExpirationDate= "Fecha de expiracion en formato AA/MM";
 short cvv = 123; // CVV de la tarjeta.
 
 FullTransactionCreateResponse response = FullTransaction.Transaction.create(buyOrder, sessionId, amount, cardNumber, cardExpirationDate, cvv);
-
 ```
 
 ```php
@@ -1667,7 +1400,6 @@ card_number = "Numero de Tarjeta"
 card_expiration_date = "Fecha de expiracion en formato AA/MM"
 cvv = 123 /* CVV de la tarjeta. */
 
-
 response = Transbank::TransaccionCompleta::Transaction::create(
                                                             buy_order: buy_order,
                                                             session_id: session_id,
@@ -1680,10 +1412,7 @@ response = Transbank::TransaccionCompleta::Transaction::create(
 ```
 
 ```python
-
 from transbank.transaccion_completa.transaction import Transaction
-
-    # leyendo variables desde un formulario
     buy_order = 'Orden de compra de la transaccion '
     session_id = 'Identificador del servicio unico de transacción'
     amount = 10000; #monto en pesos
@@ -1695,10 +1424,10 @@ from transbank.transaccion_completa.transaction import Transaction
         buy_order=buy_order, session_id=session_id, amount=amount,
         card_number=card_number, cvv=cvv, card_expiration_date=card_expiration_date
     )
-
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
 
 ### Consulta de Cuotas
@@ -1709,7 +1438,6 @@ Antes de confirmar una transaccion es necesario confirmar la cantidad de cuotas 
 
 ```java
 import cl.transbank.transaccioncompleta.FullTransaction;
-
 
 String token = "token obtenido como respuesta de la creacion de transaccion";
 int installmentsNumber = 10; // numero de cuotas;
@@ -1754,16 +1482,14 @@ response = Transbank::TransaccionCompleta::Transaction::installments( token: tok
 
 ```python
 from transbank.transaccion_completa.transaction import Transaction
-
-#obtener form desde el request
     req = request.form
     token = request.form.get('token') #token obtenido al iniciar la transaccion
     installments_number = 10 #numero de cuotas
     resp = Transaction.installments(token=token, installments_number=installments_number)
-
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
 
 ### Confirmar Transaccion
@@ -1774,7 +1500,6 @@ Una vez obtenido la respuesta de la consulta de cuotas, con los datos de esta se
 
 ```java
 import cl.transbank.transaccioncompleta.FullTransaction;
-
 
 String token = "token obtenido como respuesta de la creacion de transaccion";
 int idQueryInstallments = 12345679; // numero identificador de las cuotas.
@@ -1797,7 +1522,6 @@ $token = "token obtenido como respuesta de la creacion de transaccion";
 $idQueryInstallments = 12345679; // numero identificador de las cuotas.
 $deferredPeriodIndex= 1;
 $gracePeriod = false;
-
 
 $response = Transaction::commit(
     $token,
@@ -1837,7 +1561,6 @@ response = Transbank::TransaccionCompleta::Transaction::commit( token: token,
 
 ```python
     from transbank.transaccion_completa.transaction import Transaction
-    
     #token obtenido como respuesta de la creacion de transaccion
     token = request.form.get('token')
     id_query_installments = 12345679 # numero identificador de las cuotas.
@@ -1848,12 +1571,11 @@ response = Transbank::TransaccionCompleta::Transaction::commit( token: token,
                               id_query_installments=id_query_installments,
                               deferred_period_index=deferred_period_index,
                               grace_period=grace_period)
-
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
-
 
 ### Estado Transaccion
 
@@ -1863,7 +1585,6 @@ Para obtener el resultado de la transaccion exite el siguiente metodo:
 
 ```java
 import cl.transbank.transaccioncompleta.FullTransaction;
-
 
 String token = "token obtenido como respuesta de la creacion de transaccion";
 
@@ -1903,10 +1624,10 @@ response = Transbank::TransaccionCompleta::Transaction::status(token: token)
 from transbank.transaccion_completa.transaction import Transaction
 
     response = Transaction.status(token=token) #token obtenido como respuesta de la creacion de transaccion
-
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
 
 ### Reembolso Transaccion
@@ -1921,7 +1642,6 @@ import cl.transbank.transaccioncompleta.FullTransaction;
   double amount = 1000;
 
   final FullTransactionRefundResponse response = FullTransaction.Transaction.refund(tokenWs,amount);
-
 ```
 
 ```php
@@ -1963,18 +1683,17 @@ from transbank.transaccion_completa.transaction import Transaction
     token = req.get('token') #token obtenido al crear la transaccion
     amount = '1000' #monto a reembolsar
     response = Transaction.refund(token=token, amount=amount)
-
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
-
 
 ## Credenciales y Ambiente
 
 Para Webpay, las credenciales del comercio (código de comercio y certificados)
-varían según el subproducto usado (Webpay Plus, Webpay Plus Mall, OneClick,
-OneClick Mall). Asimismo, varían las credenciales si la captura es
+varían según el subproducto usado (Webpay Plus, Webpay Plus Mall, Oneclick,
+Oneclick Mall). Asimismo, varían las credenciales si la captura es
 diferida. Y también varían si la moneda a manejar es pesos chilenos (CLP) o
 dólares (USD).
 
@@ -2002,9 +1721,7 @@ import cl.transbank.webpay.WebpayCapture;
 import cl.transbank.webpay.WebpayNullify;
 import cl.transbank.webpay.WebpayOneClick;
 
-
 //...
-
 Configuration configuration = new Configuration();
 
 // a continuación va tu código de comercio, Si el código que posees es de 8 dígitos debes anteponer 5970.
@@ -2074,13 +1791,10 @@ var oneClickTransaction = webpay.OneClickTransaction;
 
 ```ruby
 # Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
 ```
 
 ```python
 # Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
 ```
 
 ```javascript
@@ -2138,26 +1852,10 @@ Configuration configuration = new Configuration()
 
 ```ruby
 # Para integrar Webpay en Ruby puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
 ```
 
 ```python
 # Para integrar Webpay en Python puedes utilizar la Referencia API, alguna librería externa o libwebpay
-
-
-
-
-
-
-
-
 ```
 
 ```javascript
@@ -2226,7 +1924,7 @@ detailsOutput[0].sharesNumber  <br> <i> xs:int </i> | Número de cuotas
 detailsOutput[0].commerceCode  <br> <i> xs:string </i> | Comercio, desde el quinto dígito en adelante del `commerceCode` corresponde al número antes del guión que podemos apreciar en la imagen anterior.
 detailsOutput[0].buyOrder  <br> <i> xs:string </i> | Orden de compra
 
-### OneClick
+### Oneclick
 
 Para realizar la conciliación debes seguir los siguientes pasos:
 
@@ -2237,8 +1935,8 @@ Para realizar la conciliación debes seguir los siguientes pasos:
 
 3. En la parte superior de la ventana puedes encontrar un buscador que te ayudará
 a filtrar, según los parámetros que gustes, las transacciones que quieras cuadrar.
-Para filtrar por las transacciones de OneClick, en el campo "Producto" debes
-seleccionar **OneClick**.
+Para filtrar por las transacciones de Oneclick, en el campo "Producto" debes
+seleccionar **Oneclick**.
 ![Paso 3](/images/documentacion/conciliacion2.png)
 
 4. Dentro de la tabla en la imagen anterior puedes presionar el número de orden de
@@ -2249,7 +1947,7 @@ encontrar y conciliar los parámetros devueltos por el SDK al confirmar una tran
 5. Sólo queda realizar la conciliación. A continuación puedes ver una lista de
 parámetros que recibirás al momento de confirmar una transacción y a que fila
 de la tabla "Detalles de la transacción" corresponden (la lista completa de
-parámetros de OneClick la puedes encontrar
+parámetros de Oneclick la puedes encontrar
 [acá](/referencia/webpay-soap#autorizar-un-pago-con-webpay-oneclick))
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -2262,57 +1960,56 @@ responseCode  <br> <i> xs:int </i> | Código de respuesta
 ## Más Funcionalidades
 
 Consulta la referencia del API para más funcionalidades ofrecidas por Webpay
-Plus y OneClick:
+Plus y Oneclick:
 
-- [Transacciones Webpay Plus Mall](/referencia/webpay-soap#webpay-plus-mall) para
+* [Transacciones Webpay Plus Mall](/referencia/webpay-soap#webpay-plus-mall) para
   realizar cargos atribuibles a múltiples comercios dentro de una agrupación
   denominada _mall_. Con esto puedes realizar una sola integración y cobrar a
   nombre de tus clientes o partners.
 
-- [Realizar Captura Diferida](/referencia/webpay-soap#captura-diferida-webpay-plus) de manera que la autorización de
+* [Realizar Captura Diferida](/referencia/webpay-soap#captura-diferida-webpay-plus) de manera que la autorización de
 Webpay Plus Normal solo reserve el cupo y la captura de la transacción se pueda
 realizar posteriormente.
 
-- [Anular Transacciones Webpay Plus](/referencia/webpay-soap#anulacion-webpay-plus) para devolver dinero parcial o
+* [Anular Transacciones Webpay Plus](/referencia/webpay-soap#anulacion-webpay-plus) para devolver dinero parcial o
 totalmente.
 
-- [Reversar Transacciones OneClick](/referencia/webpay-soap#reversar-un-pago-webpay-oneclick) para dejar sin efecto una
+* [Reversar Transacciones Oneclick](/referencia/webpay-soap#reversar-un-pago-webpay-oneclick) para dejar sin efecto una
 transacción realizada durante el día contable actual.
 
-- [Anular Transacciones Webpay
-  OneClick](/referencia/webpay-soap#anular-un-pago-webpay-oneclick) para dejar sin
+* [Anular Transacciones Webpay
+  Oneclick](/referencia/webpay-soap#anular-un-pago-webpay-oneclick) para dejar sin
   efecto una transacción realizada en otra fecha distinta al día contable
   actual.
 
-- [Eliminar Inscripciones OneClick](/referencia/webpay-soap#eliminar-una-inscripcion-webpay-oneclick) para eliminar el `tbkUser`
+* [Eliminar Inscripciones Oneclick](/referencia/webpay-soap#eliminar-una-inscripcion-webpay-oneclick) para eliminar el `tbkUser`
 cuando tus usuarios no quieren continuar con el servicio.
 
-- [Transacciones OneClick Mall](/referencia/webpay-soap#webpay-oneclick-mall).
+* [Transacciones Oneclick Mall](/referencia/webpay-soap#webpay-oneclick-mall).
 
 ## Ejemplos de integración
 
 Ponemos a tu disposición una serie de repositorios en nuestro Github para ayudarte a entender la integración de mejor forma.
 
-
-- [Ejemplo de Webpay en PHP](https://github.com/TransbankDevelopers/transbank-sdk-php-webpay-example)
-- [Ejemplo de Webpay en .Net](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-example)
-- [Ejemplo de Webpay en Java](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-example)
-- [Ejemplo de Webpay en Node.js](https://github.com/TransbankDevelopers/transbank-sdk-nodejs-webpay-example)
+* [Ejemplo de Webpay en PHP](https://github.com/TransbankDevelopers/transbank-sdk-php-webpay-example)
+* [Ejemplo de Webpay en .Net](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-example)
+* [Ejemplo de Webpay en Java](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-example)
+* [Ejemplo de Webpay en Node.js](https://github.com/TransbankDevelopers/transbank-sdk-nodejs-webpay-example)
 
 En el caso de integrar webpay en una aplicación móvil Android, usando webview, debes tener presente la siguiente configuración:
 
 1. Al momento de abrir el webview.
 
-```js
-// habilitar el Cookie Manager. Depende del nivel de la API de Android que se utilice se habilita de diferente forma
-if (android.os.Build.VERSION.SDK_INT >= 21)
-    CookieManager.getInstance().setAcceptThirdPartyCookies(myWebPayView, true); // myWebPayView es el WebView
-else
-    CookieManager.getInstance().setAcceptCookie(true);
+    ```js
+    // habilitar el Cookie Manager. Depende del nivel de la API de Android que se utilice se habilita de diferente forma
+    if (android.os.Build.VERSION.SDK_INT >= 21)
+        CookieManager.getInstance().setAcceptThirdPartyCookies(myWebPayView, true); // myWebPayView es el WebView
+    else
+        CookieManager.getInstance().setAcceptCookie(true);
 
-// Asignar el caché en el webview
-webPayView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-```
+    // Asignar el caché en el webview
+    webPayView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+    ```
 
 2. Al momento de cerrar el webview
 

@@ -1,3 +1,5 @@
+# Plugin Woocommerce Onepay
+
 <div class="data-menu-side-right">
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">
@@ -33,13 +35,13 @@ Ud. debe tener instalado previamente Wordpress, y WooCommerce.
 
 1. Dirígete a [https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-onepay/releases](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-onepay/releases), y descargue la última versión disponible del plugin.
 
-  Una vez descargado el plugin, ingrese a la página de administración de Wordpress (usualmente en _misitio.com_/wp-admin), y dirígete a Plugins, Añadir nuevo, indicado a continuación:
+   Una vez descargado el plugin, ingrese a la página de administración de Wordpress (usualmente en _misitio.com_/wp-admin), y dirígete a Plugins, Añadir nuevo, indicado a continuación:
 
-  ![Paso 1](/images/plug/woo/onepay/paso1.png)
+   ![Paso 1](/images/plug/woo/onepay/paso1.png)
 
 2. Haz click sobre el botón "Subir plugin", y selecciona el archivo que descargaste en el paso anterior. Luego de eso, presiona el botón "Instalar Ahora".
 
-  ![Paso 2](/images/plug/woo/onepay/paso2.png)
+   ![Paso 2](/images/plug/woo/onepay/paso2.png)
 
 3. Una vez realizado el paso anterior, Wordpress realizará la instalación del plugin Onepay. Cuando finalice, debes activar el plugin haciendo click en el botón "Activar plugin".
 
@@ -53,15 +55,15 @@ Para acceder a la configuración, debes seguir los siguientes pasos:
 
 1. Dirígete a la página de administración de Wordpress (usualmente en _misitio.com_/wp-admin), y luego anda a WooCommerce, Ajustes.
 
-  ![Paso 1](/images/plug/woo/onepay/paso4.png)
+    ![Paso 1](/images/plug/woo/onepay/paso4.png)
 
 2. Llegarás a la página de configuración de WooCommerce, ahora debes hacer click en "Pagos".
 
-  ![Paso 2](/images/plug/woo/onepay/paso5.png)
+   ![Paso 2](/images/plug/woo/onepay/paso5.png)
 
 3. En esta pantalla podrás ver todos los medios de pago disponibles.  Busca el plugin "Onepay", y haz click sobre el título.
 
-  ![Paso 3](/images/plug/woo/onepay/paso6.png)
+    ![Paso 3](/images/plug/woo/onepay/paso6.png)
 
 4. ¡Ya está! Estás en la pantalla de configuración del plugin, debes ingresar la siguiente información:
      * **Activar Onepay**: Al activarlo, Onepay estará disponible como medio de pago. Ten la precaución de que se encuentre marcada esta opción cuando quieras que los usuarios paguen con Onepay.

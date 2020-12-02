@@ -9,46 +9,46 @@ El POS integrado permite realizar transacciones con tarjeta de Crédito/Débito/
 
 ## Transacciones Soportadas
 
-- Venta.
-- Cierre.
-- Anulación.
-- Última venta.
-- Detalle de ventas.
-- Totales.
-- Carga de llaves.
-- Poll (prueba de comunicación POS - caja).
-- Cambio a modalidad POS normal.
-- Venta multicódigo.
-- Ultima venta multicódigo
-- Detalle de ventas multicódigo.
+* Venta.
+* Cierre.
+* Anulación.
+* Última venta.
+* Detalle de ventas.
+* Totales.
+* Carga de llaves.
+* Poll (prueba de comunicación POS - caja).
+* Cambio a modalidad POS normal.
+* Venta multicódigo.
+* Ultima venta multicódigo
+* Detalle de ventas multicódigo.
 
 ## Requerimientos
 
 ### Requisitos en Local
 
-- El comercio debe contar con sistema propio de caja, con las siguientes características deseables:
-  - Sistema de Lectura de producto (scanner / código).
-  - Sistema de Stock.
-  - Sistema de Cuadratura.
-  - Proveedor de Soporte de Sistema.
-  - Acceso Remoto.
-- La caja debe contar con a lo menos un puerto `RS232` o en su defecto con entrada USB exclusiva para el Dispositivo POS.
-- El comercio debe disponer en cada local con puntos exclusivos para conectar a Internet vía Lan `RJ45` los POS.
-- Se recomienda segmentar el ancho de banda con `300 kb` exclusivos para el uso del POS, dado que cuando existen procesos batch, cámaras de seguridad, uso de aplicaciones de escritorio, etc. bajo la mismo segmento pueden afectar una transacción si la banda ancha contratada no es suficientemente alta.
-- El local debe disponer con un punto de corriente exclusivo de `220v` para enchufar el POS.
+* El comercio debe contar con sistema propio de caja, con las siguientes características deseables:
+  * Sistema de Lectura de producto (scanner / código).
+  * Sistema de Stock.
+  * Sistema de Cuadratura.
+  * Proveedor de Soporte de Sistema.
+  * Acceso Remoto.
+* La caja debe contar con a lo menos un puerto `RS232` o en su defecto con entrada USB exclusiva para el Dispositivo POS.
+* El comercio debe disponer en cada local con puntos exclusivos para conectar a Internet vía Lan `RJ45` los POS.
+* Se recomienda segmentar el ancho de banda con `300 kb` exclusivos para el uso del POS, dado que cuando existen procesos batch, cámaras de seguridad, uso de aplicaciones de escritorio, etc. bajo la mismo segmento pueden afectar una transacción si la banda ancha contratada no es suficientemente alta.
+* El local debe disponer con un punto de corriente exclusivo de `220v` para enchufar el POS.
 
 ### Requisitos del Comercio
 
-- El comercio debe contar con una o más áreas encargadas de los siguientes puntos:
-  - Procedimientos de Contingencia ante caídas de señal Internet y energía eléctrica.
-  - Procedimiento de Respaldo y Recuperación de operaciones efectuadas en POS Integrado de Transbank.
-  - Homologación en versiones sistemas de Caja.
-  - Homologación en Sistema Operativos de Caja.
-  - Manejo de Claves Supervisora y de usuarios de Sistema Operativo.
-  - Procedimientos de Seguridad y responsabilidad en el uso de la información proporcionada por Transbank y Clientes.
-  - Capacitación y divulgación de uso de nuevos sistemas.
-  - Manuales de Sistemas.
-  - Soporte de Redes.
+* El comercio debe contar con una o más áreas encargadas de los siguientes puntos:
+  * Procedimientos de Contingencia ante caídas de señal Internet y energía eléctrica.
+  * Procedimiento de Respaldo y Recuperación de operaciones efectuadas en POS Integrado de Transbank.
+  * Homologación en versiones sistemas de Caja.
+  * Homologación en Sistema Operativos de Caja.
+  * Manejo de Claves Supervisora y de usuarios de Sistema Operativo.
+  * Procedimientos de Seguridad y responsabilidad en el uso de la información proporcionada por Transbank y Clientes.
+  * Capacitación y divulgación de uso de nuevos sistemas.
+  * Manuales de Sistemas.
+  * Soporte de Redes.
 
 <aside class="notice">
 Se recomienda que el Establecimiento posea la misma versión de Sistema Operativo y Software de Caja en todas sus cajas. En caso de poseer distintas versiones, será necesario efectuar un proceso de Integración y Certificación con Transbank por cada uno de ellos.
@@ -64,8 +64,8 @@ Ante cualquier cambio que efectúe el Establecimiento, ya sea de Sistema Operati
 
 De acuerdo a las normativas vigentes, las transacciones con Tarjeta de Crédito y Débito incorporan los siguientes elementos de seguridad en el sistema:
 
-- La información leída en el punto de venta NO es almacenada en ningún sistema.
-- Para efectos de cuadratura e identificación de transacciones, se utilizar el NÚMERO DE OPERACIÓN.
+* La información leída en el punto de venta NO es almacenada en ningún sistema.
+* Para efectos de cuadratura e identificación de transacciones, se utilizar el NÚMERO DE OPERACIÓN.
 
 ### Tratamiento de los Tracks de la Tarjeta
 
@@ -81,8 +81,8 @@ El método actual de administración de llaves es el llamado Máster/Session Key
 
 El procedimiento actual para cifrar en los Pin Pads un PinBlock es el siguiente:
 
-- Se descifra la Working Key usando la Master Key que tiene cargado el PED.
-- Con la Working Key, se cifra el PinBlock y se envía al servidor.
+* Se descifra la Working Key usando la Master Key que tiene cargado el PED.
+* Con la Working Key, se cifra el PinBlock y se envía al servidor.
 
 La Working Key se cambia en forma periódica (al menos en cada cierre), para evitar que sea descubierta por
 terceros.
@@ -103,8 +103,8 @@ Para asegurar la integridad de la información que viaja desde y hacia el Autori
 
 Las llaves criptográficas para la generación de MAC (working key de MAC) se maneja de acuerdo a lo siguiente:
 
-- Las working key son generadas por el sistema de Transbank y transmitidas en línea para cada uno de los terminal ID definidos en el comercio cliente.
-- Para la carga y / o cambio de la working keys de MAC se utilizan las transacciones de CIERRE BATCH y CARGA DE LLAVE (Ver Transacciones Administrativas).
+* Las working key son generadas por el sistema de Transbank y transmitidas en línea para cada uno de los terminal ID definidos en el comercio cliente.
+* Para la carga y / o cambio de la working keys de MAC se utilizan las transacciones de CIERRE BATCH y CARGA DE LLAVE (Ver Transacciones Administrativas).
 
 Las llaves working keys de MAC se actualizan en cada nueva transacción atendida por Transbank. Por lo que la caja debe registrar esta nueva llave para su uso en la siguiente transacción.
 Las llaves se deben cambiar automáticamente todos los días. Esto implica que debe existir un procedimiento de inicialización o cierre obligatorio en cada caja (terminal ID) que se ejecuta en forma automática todos los días y que como parte de este procedimiento se envía a Transbank una transacción de CIERRE BATCH o CARGA DE LLAVE por cada caja (terminal ID).

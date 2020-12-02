@@ -21,16 +21,16 @@ cortafila](#integracion-en-modalidad-quotcortafilaquot)).
 *canal* mediante el cual se enlaza la transacción con la app Onepay en el
 teléfono del usuario. Los canales son:
 
-- `WEB`: Web desktop. En este caso aparece un QR en la pantalla del comercio que
+* `WEB`: Web desktop. En este caso aparece un QR en la pantalla del comercio que
 le permite al usuario escanearlo con la app Onepay y confirmar la transacción.
 El comercio es notificado cuando el usuario ha completado la transacción.
 
-- `MOBILE`: Web móvil. Aquí el navegador móvil abre la app Onepay, donde
+* `MOBILE`: Web móvil. Aquí el navegador móvil abre la app Onepay, donde
 el usuario confirma directamente la transacción. Luego la app Onepay abre *una
 nueva pestaña del navegador del sistema* para notificar al comercio que se ha
 completado la transacción.
 
-- `APP`: Integración app-to-app. Aquí el comercio cuenta con una app móvil que
+* `APP`: Integración app-to-app. Aquí el comercio cuenta con una app móvil que
 abre la app Onepay cuando el usuario desea pagar usando este medio de pago. Una
 vez se completa la transacción, la app Onepay invoca nuevamente la app del
 comercio.
@@ -38,7 +38,7 @@ comercio.
 Para los dos primeros canales (`WEB` y `MOBILE`) se ofrece un [SDK Javascript](https://github.com/TransbankDevelopers/transbank-sdk-js-onepay#integraci%C3%B3n-checkout)
 con dos modalidades de integración:
 
-- **Checkout**: Integración recomendada que maneja toda la comunicación con Onepay
+* **Checkout**: Integración recomendada que maneja toda la comunicación con Onepay
 e informa al usuario de los pasos a seguir a través de un diálogo "modal". En
 esta modalidad el comercio indica dos urls que conectan el frontend del comercio
 con el backend. La primera url es la encargada de crear la transacción. La
@@ -46,7 +46,7 @@ segunda url es la que toma el control después de que el usuario completa el
 flujo en la app. **Checkout se encarga de hacer invisibles las diferencias entre
 el canal `WEB` y `MOBILE`.**
 
-- **QR Directo**: La versión "hágalo usted mismo" para usuarios avanzados.
+* **QR Directo**: La versión "hágalo usted mismo" para usuarios avanzados.
 Provee más flexibilidad pero es más compleja y requiere más trabajo la
 integración. Se le entregan al comercio las herramientas para dibujar el
 código QR y para "escuchar" los eventos que van ocurriendo en la app del
@@ -95,7 +95,7 @@ Esto abrirá un modal que se encargará de toda la interacción con el usuario.
 
 A continuación una descripción de los parámetros recibidos por esta función:
 
-- `endpoint` : corresponde a la URL de tu backend que tiene la lógica de crear
+* `endpoint` : corresponde a la URL de tu backend que tiene la lógica de crear
 la transacción usando alguno de nuestros SDK disponibles o invocando
 directamente al API de Onepay.
 
@@ -118,22 +118,22 @@ Se espera que el `endpoint` retorne un JSON como el del siguiente ejemplo:
 
 En el paso 2 más abajo podrás ver más información sobre este `endpoint`.
 
-- `commerceLogo`: (Opcional) Corresponde a la URL full del logo de comercio que se mostrará
+* `commerceLogo`: (Opcional) Corresponde a la URL full del logo de comercio que se mostrará
   en el modal. Como el modal reside en un dominio externo, no puede ser una URL
   relativa (a diferencia de los otros parámetros). El logo se redimensionará a
   125 pixeles de ancho y la altura se calcula automáticamente para mantener las
   proporciones de la imagen.
 
-- `callbackUrl` : URL que se invocará desde el SDK una vez que la transacción
+* `callbackUrl` : URL que se invocará desde el SDK una vez que la transacción
 ha sido autorizada por el comercio. En este callback el comercio debe hacer la
 confirmación de la transacción, para lo cual dispone de 30 segundos desde que
 la transacción se autorizó, de lo contrario esta sera automáticamente reversada.
 
 En el paso 3 más abajo podrás ver más sobre cómo se invoca este _callback_.
 
-- `transactionDescription` : (Opcional) Texto que representa la descripción general de la compra, se dibujará en el modal sobre el valor del precio.
+* `transactionDescription` : (Opcional) Texto que representa la descripción general de la compra, se dibujará en el modal sobre el valor del precio.
 
-- `onclose` : (Opcional) Función de callback que será invocada cuando el usuario
+* `onclose` : (Opcional) Función de callback que será invocada cuando el usuario
 cierre el modal ya sea porque se arrepintió de realizar el pago o porque hubo un error
 en este último y el usuario presionó el botón "Entendido". Esto puede ser útil
 para el flujo de tu comercio en caso que necesites de alguna forma poder saber y
@@ -394,12 +394,12 @@ El callback será invocado vía `GET` e irán los parámetros `occ` y
 transacción desde tu backend. Adicionalmente se envía el parámetro `status`,
 que puede tomar los siguientes valores:
 
-- `PRE_AUTHORIZED`: El estado de éxito. Debes confirmar la transacción para
+* `PRE_AUTHORIZED`: El estado de éxito. Debes confirmar la transacción para
   completar el flujo.
-- `CANCELLED_BY_USER`: El tarjetahabiente decidió abortar la autorización.
-- `REJECTED`: La transacción fue rechazada.
-- `REVERSED`: No se pudo confirmar el pago.
-- `REVERSE_NOT_COMPLETED`: Se intentó reversar (ver estado anterior) pero falló
+* `CANCELLED_BY_USER`: El tarjetahabiente decidió abortar la autorización.
+* `REJECTED`: La transacción fue rechazada.
+* `REVERSED`: No se pudo confirmar el pago.
+* `REVERSE_NOT_COMPLETED`: Se intentó reversar (ver estado anterior) pero falló
   por alguna razón interna.
 
 Si se recibe cualquier otro valor, el comercio debe asumir que ocurrió un error.
@@ -661,17 +661,17 @@ indicado. Por ejemplo, si tu appScheme fuera mi-app://mi-app/onepay-result,
 agregarías lo siguiente:
 
 ```xml
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>mi-app</string>
-			</array>
-			<key>CFBundleURLName</key>
-			<string>cl.micomercio.mi-app</string>
-		</dict>
-	</array>
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>mi-app</string>
+      </array>
+      <key>CFBundleURLName</key>
+      <string>cl.micomercio.mi-app</string>
+    </dict>
+  </array>
 ```
 
 Y en tu `AppDelegate` deberás manejar esas urls que comiencen con mi-app:
@@ -1142,32 +1142,32 @@ result.buyOrder <br> <i>  Number  </i> | Orden de compra.
 
 Consulta la [referencia del API](/referencia/onepay) para más funcionalidades ofrecidas por Onepay:
 
-- [Especificar tus propios external unique numbers](/referencia/onepay#especificar-tus-propios-external-unique-numbers) si quieres
+* [Especificar tus propios external unique numbers](/referencia/onepay#especificar-tus-propios-external-unique-numbers) si quieres
 usarlos para asociarlos a un número que ya exista en tu aplicación (pero
 recuerda que si la transacción falla y quieres reintentar debes usar otro
 external unique number).
 
-- [Anular una transacción Onepay](/referencia/onepay#anular-una-transaccion) para revertir completamente una
+* [Anular una transacción Onepay](/referencia/onepay#anular-una-transaccion) para revertir completamente una
 transacción.
 
-- [QR Directo](/referencia/onepay#modalidad-qr-directo) para controlar tú mismo
+* [QR Directo](/referencia/onepay#modalidad-qr-directo) para controlar tú mismo
   el frontend web (javascript) durante todo el flujo. Necesitarás hacer mucho
   más trabajo, pero tendrás total control de la interacción con el usuario, con Onepay y con tu backend.
 
-- [Detectar y/o instalar la app Onepay desde tu app](/referencia/onepay#detectar-e-instalar-la-app-onepay) para asegurar la
+* [Detectar y/o instalar la app Onepay desde tu app](/referencia/onepay#detectar-e-instalar-la-app-onepay) para asegurar la
   mejor experiencia de pago en apps móviles.
 
 ## Ejemplos de integración
 
 Ponemos a tu disposición una serie de repositorios en nuestro Github para ayudarte a entender la integración mejor.
 
-- [Ejemplo de Onepay en PHP](https://github.com/TransbankDevelopers/transbank-sdk-php-onepay-example)
-- [Ejemplo de Onepay en .Net](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-onepay-example)
-- [Ejemplo de Onepay en Java](https://github.com/TransbankDevelopers/transbank-sdk-java-onepay-example)
-- [Ejemplo de Onepay en Python](https://github.com/TransbankDevelopers/transbank-sdk-python-onepay-example)
-- [Ejemplo de Onepay en Ruby](https://github.com/TransbankDevelopers/transbank-sdk-ruby-onepay-example)
-- [Ejemplo de Onepay Cortafila en Android](https://github.com/TransbankDevelopers/demo-onepay-cortafila-android)
-- [Ejemplo de Onepay Cortafila Backend](https://github.com/TransbankDevelopers/demo-onepay-cortafila-backend)
+* [Ejemplo de Onepay en PHP](https://github.com/TransbankDevelopers/transbank-sdk-php-onepay-example)
+* [Ejemplo de Onepay en .Net](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-onepay-example)
+* [Ejemplo de Onepay en Java](https://github.com/TransbankDevelopers/transbank-sdk-java-onepay-example)
+* [Ejemplo de Onepay en Python](https://github.com/TransbankDevelopers/transbank-sdk-python-onepay-example)
+* [Ejemplo de Onepay en Ruby](https://github.com/TransbankDevelopers/transbank-sdk-ruby-onepay-example)
+* [Ejemplo de Onepay Cortafila en Android](https://github.com/TransbankDevelopers/demo-onepay-cortafila-android)
+* [Ejemplo de Onepay Cortafila Backend](https://github.com/TransbankDevelopers/demo-onepay-cortafila-backend)
 
 <div class="container slate">
   <div class='slate-after-footer'>

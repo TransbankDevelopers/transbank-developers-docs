@@ -162,10 +162,10 @@ El flujo de pago en PatPass by WebPay se inicia desde el comercio, en donde el T
 
 Dentro de los atributos más relevantes de WebPay se pueden mencionar:
 
-- Permite realizar transacciones seguras y en línea a través de Internet.
-- En transacciones con WebPay Plus se solicita al tarjetahabiente autenticarse con su emisor, protegiendo de esta forma al comercio por eventuales fraudes o desconocimientos de compra.
-- La seguridad es reforzada por medio de la utilización de servidores seguros, protegidos con TLS 1.2
-- Firma digital.
+* Permite realizar transacciones seguras y en línea a través de Internet.
+* En transacciones con WebPay Plus se solicita al tarjetahabiente autenticarse con su emisor, protegiendo de esta forma al comercio por eventuales fraudes o desconocimientos de compra.
+* La seguridad es reforzada por medio de la utilización de servidores seguros, protegidos con TLS 1.2
+* Firma digital.
 
 ### Flujo en caso de éxito
 
@@ -191,16 +191,16 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
 12. Comercio recibe el resultado de la invocación del método `getTransactionResult()`.
 13. Para que el comercio informe a WebPay que el resultado de la transacción se ha recibido sin problemas, el sistema del comercio debe consumir el tercer método `acknowledgeTrasaction()`. Si esto fue ejecutado correctamente el producto puede ser liberado al cliente.
 
-> Los SDKs consumen `acknowledgeTransaction()` de manera automática, tan pronto
-> reciben una respuesta de `getTransactionResult()`.
+    >    Los SDKs consumen `acknowledgeTransaction()` de manera automática, tan pronto
+    >    reciben una respuesta de `getTransactionResult()`.
 
-<aside class="warning">
-De no ser consumido `acknowledgeTransaction()` o demorar más de 30 segundos en
-su consumo, Webpay realizará la reversa de la transacción, asumiendo que
-existieron problemas de comunicación. En este caso el método retorna una
-Excepción indicando la situación. Esta excepción debe ser manejada para no
-entregar el producto o servicio en caso que ocurra.
-</aside>
+    <aside class="warning">
+      De no ser consumido `acknowledgeTransaction()` o demorar más de 30 segundos en
+      su consumo, Webpay realizará la reversa de la transacción, asumiendo que
+      existieron problemas de comunicación. En este caso el método retorna una
+      Excepción indicando la situación. Esta excepción debe ser manejada para no
+      entregar el producto o servicio en caso que ocurra.
+    </aside>
 
 14. Una vez recibido el resultado de la transacción e informado a WebPay su correcta recepción, el sitio del comercio debe redirigir al tarjetahabiente nuevamente a WebPay, con la finalidad de desplegar el comprobante de pago. Es importante realizar este punto para que el tarjetahabiente entienda que el proceso de pago fue exitoso, y que involucrará un cargo a su tarjeta bancaria. El redireccionamiento a WebPay se hace utilizando como destino la URL informada por el método `getTransactionResult()` enviando por método POST el token de la transacción en la variable `token_ws`.
 15. WebPay recibe un requerimiento con el token en la variable `token_ws`.
@@ -224,9 +224,9 @@ Si el tarjetahabiente anula la transacción en el formulario de pago de Webpay,
 7. Tarjetahabiente hace clic en anular, en formulario PatPass by WebPay.
 8. Webpay retorna el control al comercio, realizando un redireccionamiento HTTPS hacia la página de **final del comercio**, en donde se envía por método POST el token de la transacción en la variable `TBK_TOKEN` además de las variables `TBK_ORDEN_COMPRA` y `TBK_ID_SESION`.
 
-<aside class="warning">
-Nota que el nombre de las variables recibidas es diferente. En lugar de `token_ws` acá el token viene en la variable `TBK_TOKEN`.
-</aside>
+    <aside class="warning">
+        Nota que el nombre de las variables recibidas es diferente. En lugar de `token_ws` acá el token viene en la variable `TBK_TOKEN`.
+    </aside>
 
 9. El comercio con la variable `TBK_TOKEN` debe invocar el método
    `getTransactionResult()`, para obtener el resultado de la autorización. En
@@ -327,13 +327,13 @@ transactionResultOutput result =
     transaction.getTransactionResult(Request.Form["token_ws"]);
 ```
 
-##### Parámetros
+##### Parámetros getTransactionResult
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tokenInput  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 
-##### Respuesta
+##### Respuesta getTransactionResult
 
 ```java
 WsTransactionDetailOutput output = result.getDetailOutput().get(0);
@@ -411,7 +411,7 @@ Indica a Webpay que se ha recibido conforme el resultado de la transacción.
 El método acknowledgeTransaction debe ser invocado siempre. Si la invocación no se realiza en un período de 30 segundos, Webpay reversará la transacción, asumiendo que el comercio no pudo informar de su resultado, evitando así el cobro al tarjetahabiente.
 </aside>
 
-##### Parámetros
+##### Parámetros acknowledgeTransaction
 
 > Los SDKs ejecutan automáticamente `acknowledgeTransaction()` cuando reciben la
 > respuesta de `getTransactionResult()`.
@@ -420,7 +420,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tokenInput  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 
-##### Respuesta
+##### Respuesta acknowledgeTransaction
 
 > Los SDKs arrojarán una excepción dentro de `getTransactionResult()` si falla
 > el `acknowledgeTransaction()` que se ejecuta automáticamente.

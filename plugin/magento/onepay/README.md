@@ -1,3 +1,5 @@
+# Plugin Magento Onepay
+
 <div class="data-menu-side-right">
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">
@@ -59,25 +61,25 @@ Este plugin posee un sitio de configuración que te permitirá ingresar credenci
 
 Para acceder a la configuración, debes seguir los siguientes pasos:
 
-1. Dirígete a la página de administración de Magento2 (usualmente en http://misitio.com/admin, http://localhost/admin) e ingresa usuario y clave.
+1. Dirígete a la página de administración de Magento2 (usualmente en [http://misitio.com/admin](http://misitio.com/admin), [http://localhost/admin](http://localhost/admin)) e ingresa usuario y clave.
 
-  ![Paso 10](/images/plug/mage/onepay/paso10.png)
+    ![Paso 10](/images/plug/mage/onepay/paso10.png)
 
 2. Dentro del sitio de administración dirígete a (Stores / Configuration).
 
-  ![Paso 11](/images/plug/mage/onepay/paso11.png)
+    ![Paso 11](/images/plug/mage/onepay/paso11.png)
 
 3. Luego a sección (Sales / Payments Methods).
 
-  ![Paso 12](/images/plug/mage/onepay/paso12.png)
+    ![Paso 12](/images/plug/mage/onepay/paso12.png)
 
 4. Elegir el país Chile
 
-  ![Paso 13](/images/plug/mage/onepay/paso13.png)
+    ![Paso 13](/images/plug/mage/onepay/paso13.png)
 
 5. Bajando al listado de métodos de pagos verás Onepay
 
-  ![Paso 14](/images/plug/mage/onepay/paso14.png)
+    ![Paso 14](/images/plug/mage/onepay/paso14.png)
 
 6. ¡Ya está! Estás en la pantalla de configuración del plugin, debes ingresar la siguiente información:
 
@@ -95,11 +97,11 @@ Para el ambiente de Integración, puedes utilizar las siguientes credenciales pa
 * APIKey: `dKVhq1WGt_XapIYirTXNyUKoWTDFfxaEV63-O5jcsdw`
 * Shared Secret: `?XW#WOLG##FBAGEAYSNQ5APD#JF@$AYZ`
 
-7. Guardar los cambios presionando el botón [Save Config]
+1. Guardar los cambios presionando el botón [Save Config]
 
-  ![Paso 15](/images/plug/mage/onepay/paso15.png)
+   ![Paso 15](/images/plug/mage/onepay/paso15.png)
 
-8. Además, puedes generar un documento de diagnóstico en caso que Transbank te lo pida. Para ello, haz click en "Generar PDF de Diagnóstico", y automáticamente se descargará dicho documento.
+2. Además, puedes generar un documento de diagnóstico en caso que Transbank te lo pida. Para ello, haz click en "Generar PDF de Diagnóstico", y automáticamente se descargará dicho documento.
 
   ![Paso 17](/images/plug/mage/onepay/paso17.png)
 
@@ -109,11 +111,11 @@ El plugin solamente funciona con moneda chilena CLP dado esto magento2 debe esta
 
 1. Ir a la sección de administración (Stores / General / Country Option) y elegir Chile tal como se muestra en la siguiente imagen, luego guardar los cambios.
 
-  ![Paso 1](/images/plug/mage/onepay/clp1.png)
+    ![Paso 1](/images/plug/mage/onepay/clp1.png)
 
 2. Ir a la sección de administración (Stores / Currency Setup / Country Option) y elegir Chile tal como se muestra en la siguiente imagen, luego guardar los cambios.
 
-  ![Paso 2](/images/plug/mage/onepay/clp2.png)
+    ![Paso 2](/images/plug/mage/onepay/clp2.png)
 
 3. Ir a la sección de administración (Stores / Currency) y verificar en las dos secciones (Currency Rates y Currency Symbols) que CLP se encuentre activo.
 

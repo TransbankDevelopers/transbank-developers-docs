@@ -1,6 +1,9 @@
 # Patpass Rest
+
 ## Patpass Comercio
+
 ### Ambientes y credenciales
+
 La API REST de Patpass está protegida para garantizar que solamente comercios autorizados por Transbank hagan uso de las operaciones disponibles. La seguridad esta implementada mediante los siguientes mecanismos:
 
 * Canal seguro a través de TLSv1.2 para la comunicación del cliente con Webpay.
@@ -130,7 +133,8 @@ final PatpassComercioInscriptionStartResponse response = PatpassComercio.Inscrip
     'Merced 156, Santiago, Chile',                      // Dirección
     'Santiago'                                          // Ciudad
 );
-``` 
+```
+
 ```php
 $response = PatpassComercio\Inscription::start(  
     'http://misitio.cl/finalizar_suscripcion',          // URL
@@ -149,7 +153,6 @@ $response = PatpassComercio\Inscription::start(
     'Merced 156, Santiago, Chile',                      // Dirección
     'Santiago'                                          // Ciudad
 );
-               
 ```
 
 ```csharp
@@ -236,7 +239,7 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+##### Parámetros Inscription.start
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -244,19 +247,20 @@ url <br> <i> String </i> | URL de retorno del comercio
 firstName <br> <i> String </i> | Nombre del tarjetahabiente
 fLastname <br> <i> String </i> | Apellido paterno del tarjetahabiente  
 sLastname <br> <i> String </i> | Apellido materno del tarjetahabiente
-rut <br> <i> String </i> | Rut del tarjetahabiente 
+rut <br> <i> String </i> | Rut del tarjetahabiente
 serviceId <br> <i> String </i> | ID del servicio del tarjetahabiente  
 finalUrl <br> <i> String </i> | Url final de la inscripción
 maxAmount <br> <i> String </i> | Monto máximo del PAT a inscribir  
-phoneNumber <br> <i> String </i> | Teléfono fijo del tarjetahabiente 
-mobileNumber <br> <i> String </i> | Teléfono celular del tarjetahabiente   
+phoneNumber <br> <i> String </i> | Teléfono fijo del tarjetahabiente
+mobileNumber <br> <i> String </i> | Teléfono celular del tarjetahabiente
 patPassName <br> <i> String </i> | Nombre del PAT  
-userEmail <br> <i> String </i> | Correo al tarjetahabiente con la suscripción 
+userEmail <br> <i> String </i> | Correo al tarjetahabiente con la suscripción
 commerceEmail <br> <i> String </i> | Correo para el comercio con el comprobante de suscripción
 userAddress <br> <i> String </i> | Dirección del tarjetahabiente
 userCity <br> <i> String </i> | Ciudad del tarjetahabiente
 
-**Respuesta**
+##### Respuesta Inscription.start
+
 ```java
 response.getToken();
 response.getUrl();
@@ -287,10 +291,10 @@ Nombre  <br> <i> tipo </i> | Descripción
 token  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 url  <br> <i> xs:string </i> | URL de formulario de pago Patpass Comercio. Largo máximo: 256.
 
-**Mensajes de error**
+##### Mensajes de error
 
 Código | Descripción
--1   | Error interno              
+-1   | Error interno
 -101 | URL final incorrecta
 -102 | URL retorno incorrecta
 -103 | Nombre Incorrecto
@@ -303,7 +307,7 @@ Código | Descripción
 -110 | Headers de autentificación requeridos
 -111 | Headers de autentificación erróneos
 
-La respuesta de este método se debe utilizar para crear un campo de nombre `tokenComercio` en un formulario, al cual se  le asigna el valor de `token` y debe ser enviado a `url`. 
+La respuesta de este método se debe utilizar para crear un campo de nombre `tokenComercio` en un formulario, al cual se  le asigna el valor de `token` y debe ser enviado a `url`.
 
 ```html
 <form action="<Insertar URL aquí>" method="post" name="tokenForm">
@@ -318,15 +322,16 @@ Para finalizar el proceso de inscripción se debe llamar a `Inscription.status`
 
 #### Inscription.status
 
-Este método permite finalizar el proceso de inscripción del PAT asociado al 
+Este método permite finalizar el proceso de inscripción del PAT asociado al
 token que se generó en la inscripción
 
 La respuesta del método contiene el estado y la URL para desplegar el voucher.
 
 ```java
-final PatpassComercioTransactionStatusResponse response = 
+final PatpassComercioTransactionStatusResponse response =
     PatpassComercio.Transaction.status(token);
-``` 
+```
+
 ```php
 $response = PatpassComercio\Inscription::getStatus($token);
 ```
@@ -349,16 +354,16 @@ Tbk-Api-Key-Id: 27082157
 Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
 Content-Type: application/json
 {
-	"token": "21383fe8ba4c4cdd9e18518daf4e9bcbaffd9e8e3ad4ec36f66ae2b4e80cc4b5"
+    "token": "21383fe8ba4c4cdd9e18518daf4e9bcbaffd9e8e3ad4ec36f66ae2b4e80cc4b5"
 }
 ```
 
-**Parámetros**
+##### Parámetros Inscription.status
 
 Nombre  <br> <i> tipo </i> | Descripción
 token <br> <i> String </i> | Token entregado al iniciar inscripción
 
-**Respuesta**
+##### Respuesta Inscription.status
 
 ```java
 response.getVoucherUrl();
@@ -397,4 +402,4 @@ La respuesta de este método se debe utilizar para crear un campo de nombre `tok
     <input type="hidden" name="tokenComercio" value="<Insertar token aquí>">
     <input type="submit" class="btn btn-success" value="Inscribirse en Patpass Comercio">
 </form>
-``` 
+```

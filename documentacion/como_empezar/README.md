@@ -1,4 +1,5 @@
 # Cómo empezar
+
 Para empezar a integrar los productos de Transbank, te recomendamos usar
 nuestros SDK y plugins, disponibles para múltiples lenguajes de programación y
 plataformas. En general, existe un único Transbank SDK para el _backend_
@@ -22,20 +23,22 @@ A continuación, puedes conocer el flujo completo.
 <img class="td_img-night" src="/images/documentacion/flujo-integracion.svg" alt="Flujo de integración">
 
 ## Proceso técnico de integración
-Este proceso contempla todas las tareas necesarias que debe realizar el comercio para integrar el producto contratado 
+
+Este proceso contempla todas las tareas necesarias que debe realizar el comercio para integrar el producto contratado
 dentro de sus sistemas.
 
 ### A) Usando un plugin
-Si quieres implementar Webpay Plus con alguno de nuestros plugins oficiales, 
-revisa [su documentación](/plugin) específica. En ese caso, el proceso es más simple y no requiere escribir 
+
+Si quieres implementar Webpay Plus con alguno de nuestros plugins oficiales,
+revisa [su documentación](/plugin) específica. En ese caso, el proceso es más simple y no requiere escribir
 código como en el caso de los SDK, ya que basta con realizar la instalación y configuración del plugin en la plataforma
-que estés utilizando. 
+que estés utilizando.
 
 ### B) Usando un SDK
+
 Para instalar el SDK, debes agregarlo al gestor de dependencias de tu lenguaje:
 
-[En 
-**Java**](https://github.com/TransbankDevelopers/transbank-sdk-java#instalaci%C3%B3n)
+[En **Java**](https://github.com/TransbankDevelopers/transbank-sdk-java#instalaci%C3%B3n)
 debes agregar esta entrada en tu archivo `pom.xml` de Maven:
 
 ```xml
@@ -45,6 +48,7 @@ debes agregar esta entrada en tu archivo `pom.xml` de Maven:
     <version>{mira-en-github-la-ultima-version-disponible}</version>
 </dependency>
 ```
+
 Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Java](https://github.com/TransbankDevelopers/transbank-sdk-java#instalaci%C3%B3n) para más opciones e información de la última versión disponible.
 
 [En
@@ -83,65 +87,68 @@ Te recomendamos leer [las instrucciones de instalación detalladas para el SDK R
 ```bash
 pip install transbank-sdk
 ```
+
 Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Python](https://github.com/TransbankDevelopers/transbank-sdk-python#instalaci%C3%B3n) para más opciones de instalación.
 
 ### C) Usando el API REST
-También puedes consumir el API REST de los productos directamente. 
-Si usas un lenguaje de programación que no tiene un SDK oficial o 
-simplemente quieres conectarte directamente al API, debes revisar la [Referencia del API REST](/referencia/webpay?l=http) 
-en el tab "http" para conocer los diferentes endpoints de cada producto, sus parámetros de entrada y parámetros de respuesta . 
+
+También puedes consumir el API REST de los productos directamente.
+Si usas un lenguaje de programación que no tiene un SDK oficial o
+simplemente quieres conectarte directamente al API, debes revisar la [Referencia del API REST](/referencia/webpay?l=http)
+en el tab "http" para conocer los diferentes endpoints de cada producto, sus parámetros de entrada y parámetros de respuesta.
 
 ### Ejemplos
 
 Ponemos a tu disposición una serie de repositorios en nuestro Github para ayudarte a entender la integración de mejor forma.
-- [Ejemplo en PHP](https://github.com/TransbankDevelopers/transbank-sdk-php-webpay-rest-example)
-- [Ejemplo en .Net](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-rest-example)
-- [Ejemplo en Java](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-rest-example)
-- [Ejemplo en Ruby](https://github.com/TransbankDevelopers/transbank-sdk-ruby-webpay-rest-example)
-- [Ejemplo en Python](https://github.com/TransbankDevelopers/transbank-sdk-python-webpay-rest-example)
+
+* [Ejemplo en PHP](https://github.com/TransbankDevelopers/transbank-sdk-php-webpay-rest-example)
+* [Ejemplo en .Net](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-rest-example)
+* [Ejemplo en Java](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-rest-example)
+* [Ejemplo en Ruby](https://github.com/TransbankDevelopers/transbank-sdk-ruby-webpay-rest-example)
+* [Ejemplo en Python](https://github.com/TransbankDevelopers/transbank-sdk-python-webpay-rest-example)
 
 Adicionalmente, puedes revisar el proyecto de ejemplo de PHP [funcionando acá](https://transbank-rest-demo.herokuapp.com/)
 
 En el caso de integrar webpay en una aplicación móvil Android, usando webview, debes tener presente la siguiente configuración:
+
 1. Al momento de abrir el webview.
 
-```js
-// habilitar el Cookie Manager. Depende del nivel de la API de Android que se utilice se habilita de diferente forma
-if (android.os.Build.VERSION.SDK_INT >= 21)
-    CookieManager.getInstance().setAcceptThirdPartyCookies(myWebPayView, true); // myWebPayView es el WebView
-else
-    CookieManager.getInstance().setAcceptCookie(true);
-
-// Asignar el caché en el webview
-webPayView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-```
+   ```js
+    // habilitar el Cookie Manager. Depende del nivel de la API de Android que se utilice se habilita de diferente forma
+    if (android.os.Build.VERSION.SDK_INT >= 21)
+        CookieManager.getInstance().setAcceptThirdPartyCookies(myWebPayView, true); // myWebPayView es el WebView
+    else
+        CookieManager.getInstance().setAcceptCookie(true);
+    // Asignar el caché en el webview
+    webPayView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+    ```
 
 2. Al momento de cerrar el webview
 
-```js
-// Remover Cookies
-if (android.os.Build.VERSION.SDK_INT >= 21)
-    CookieManager.getInstance().removeAllCookies(null);
-else
-    CookieManager.getInstance().removeAllCookie();
-
-// Borrar caché
-myWebPayView.clearCache(true);
-```
+  ```js
+    // Remover Cookies
+    if (android.os.Build.VERSION.SDK_INT >= 21)
+      CookieManager.getInstance().removeAllCookies(null);
+    else
+      CookieManager.getInstance().removeAllCookie();
+    // Borrar caché
+    myWebPayView.clearCache(true);
+  ```
 
 ## Ambientes
 
 Transbank provee dos ambientes: **Integración** y **Producción**.
 
-**Ambiente de integración**: En este ambiente el comercio realiza la integración del producto a contratar y testea 
+**Ambiente de integración**: En este ambiente el comercio realiza la integración del producto a contratar y testea
 su solución de medio pago.
 `HOST: https://webpay3gint.transbank.cl`
 
-**Ambiente de producción**: En este ambiente el comercio operará luego de finalizar el [proceso de puesta en producción](#puesta-en-produccion) y realizará transacciones 
+**Ambiente de producción**: En este ambiente el comercio operará luego de finalizar el [proceso de puesta en producción](#puesta-en-produccion) y realizará transacciones
 con tarjetas de crédito, débito o prepago **reales**.  
 `HOST: https://webpay3g.transbank.cl`
 
 ### Ambiente de integración
+
 Para las transacciones Webpay en este ambiente se deben usar estas
 tarjetas:
 
@@ -155,23 +162,24 @@ Redcompra       | 5186 0085 4123 3829 | Genera transacciones rechazadas (para op
 Cuando aparece un formulario de autenticación con RUT y clave, se debe
 usar el RUT **11.111.111-1** y la clave **123**.
 
-### Códigos de comercio 
+### Códigos de comercio
+
 <aside class="notice">
 Tip: Los SDK y plugins provistos por Transbank tienen pre-configuradas
 las credenciales para el ambiente de integración. Puedes ver como usarlas
 en la sección de [documentación de los SDK](/referencia/webpay#webpay) y [Plugins](/plugin)
 </aside>
 
-A continuación encontrarás todos los códigos de comercio disponibles en el ambiente de integración. 
+A continuación encontrarás todos los códigos de comercio disponibles en el ambiente de integración.
 Para todos los código de comercio, la **llave secreta (Api Key Secret)** es `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`  
 
 Producto | Código de Comercio |
 -------- | ------------ |
 Webpay Plus | `597055555532`
 Webpay Plus Captura Diferida | `597055555540`
-Webpay Plus Mall | `597055555535 ` Mall <br> `597055555536` Tienda 1 <br> `597055555537 ` Tienda 2
-OneClick Mall | `597055555541` Mall <br> `597055555542` Tienda 1 <br> `597055555543` Tienda 2
-OneClick Mall Captura Diferida | `597055555547` Mall <br> `597055555548` Tienda 1 <br> `597055555549` Tienda 2
+Webpay Plus Mall | `597055555535` Mall <br> `597055555536` Tienda 1 <br> `597055555537` Tienda 2
+Oneclick Mall | `597055555541` Mall <br> `597055555542` Tienda 1 <br> `597055555543` Tienda 2
+Oneclick Mall Captura Diferida | `597055555547` Mall <br> `597055555548` Tienda 1 <br> `597055555549` Tienda 2
 Transacción Completa | `597055555530`
 Transacción Completa sin CVV | `597055555557`
 Transacción Completa Diferida | `597055555531`
@@ -181,15 +189,16 @@ Transacción Completa Mall sin CVV| `597055555551` Mall <br> `597055555552` Tien
 Transacción Completa Mall Captura Diferida | `597055555576` Mall <br> `597055555577` Tienda 1 <br> `597055555578` Tienda 2
 Transacción Completa Mall Captura Diferida sin CVV | `597055555561` Mall <br> `597055555562` Tienda 1 <br> `597055555563` Tienda 2
 
-
 ## Productos disponibles
+
  Los siguientes productos están disponibles para que puedas realizar la integración. Revisa su documentación acá:
   
-- [Webpay Plus](/referencia/webpay#webpay-plus)
-- [OneClick Mall](/referencia/webpay#oneclick-mall)
-- [Transacción Completa](/referencia/webpay#transaccion-completa)
+* [Webpay Plus](/referencia/webpay#webpay-plus)
+* [Oneclick Mall](/referencia/webpay#oneclick-mall)
+* [Transacción Completa](/referencia/webpay#transaccion-completa)
 
 ## Seguridad
+
 Los servicios Web de Transbank están protegidos para garantizar que solamente
 miembros autorizados por Transbank hagan uso de las operaciones disponibles.
 
@@ -230,7 +239,6 @@ pago.
 integraciones que no operen con HTTPS.
 </aside>
 
-
 ### Validación de montos y órdenes de compra
 
 El comercio debe verificar al completar cualquier transacción que los valores
@@ -239,39 +247,41 @@ valores entregados por el comercio al principio del flujo transaccional.
 
 ## Puesta en Producción
 
-1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](#el-proceso-de-validacion). Si realizaste la integración con un plugin, considera que junto con la planilla de integración debes enviar el logo (GIF, 130x59) a soporte@transbank.cl. 
+1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](#el-proceso-de-validacion). Si realizaste la integración con un plugin, considera que junto con la planilla de integración debes enviar el logo (GIF, 130x59) a soporte@transbank.cl.
 2. Transbank informará via correo electrónico el resultado de la validación enviado por el comercio. En caso de que la validación sea aprobada, Transbank indicará la **llave secreta** (_API Key Secret_) para poder usar el ambiente de producción. Posterior a ello, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-de-produccion)
 3. Con la configuración del ambiente de producción ya lista, será necesario realizar una compra de $50 para validar el correcto funcionamiento.
-4. Ya estás operando en producción. 
-
+4. Ya estás operando en producción.
 
 ### Onepay
+
 En el caso de Onepay las credenciales consisten en:
 
-- Un API Key
-- Un secreto ("shared secret").
+* Un API Key
+* Un secreto ("shared secret").
 
 Estos valores serán provistos por Transbank y en su conjunto permiten hacer
 transacciones a nombre del comercio. **Debes custodiar estas credenciales para
 evitar que caigan en manos de terceros**.
 
-### Webpay, OneClick y Transacción Completa
+### Webpay, Oneclick y Transacción Completa
+
 En el caso de Webpay, las credenciales consisten en:
 
-- Un código de comercio (Api-Key-Id).
-- Una llave secreta (Api-Key-Secret).
+* Un código de comercio (Api-Key-Id).
+* Una llave secreta (Api-Key-Secret).
 
 ### Obtener tu llave secreta (proceso de validación)
-Para usar el ambiente de producción (donde se utiliza dinero real), necesitas tener tu **llave secreta**, que es un código especial que está asociado a tu código de comercio. 
-Para obtenerla necesitas pasar un proceso de validación, que está [explicado a continuación](#el-proceso-de-validacion). 
+
+Para usar el ambiente de producción (donde se utiliza dinero real), necesitas tener tu **llave secreta**, que es un código especial que está asociado a tu código de comercio.
+Para obtenerla necesitas pasar un proceso de validación, que está [explicado a continuación](#el-proceso-de-validacion).
 
 Al finalizar este proceso de validación, obtendrás tu **llave secreta**.
 <aside class="notice">
-Nota: Esta **llave secreta** es como la contraseña de tu código de comercio, por lo que no debes compartirla. Se usa para identificar que tu comercio es quién realmente está realizando cada operación (transacción, anulación de un pago, etc). 
+Nota: Esta **llave secreta** es como la contraseña de tu código de comercio, por lo que no debes compartirla. Se usa para identificar que tu comercio es quién realmente está realizando cada operación (transacción, anulación de un pago, etc).
 </aside>
 
+## El proceso de validación
 
-## El proceso de validación 
 Durante la validación de la integración se pretende verificar que el comercio
 transacciona de manera segura y sin problemas, por lo que se solicitarán una
 serie de pruebas y su posterior envío de evidencias para validar la
@@ -279,18 +289,19 @@ integración. Esta validación es requisito necesario para dejar al comercio e
 producción y no se permitirá que un comercio utilice productivamente el
 servicio Webpay sin poseer una validación.
 
-Transbank solo validará las integraciones de aquellos comercios que tengan un código de comercio productivo. 
+Transbank solo validará las integraciones de aquellos comercios que tengan un código de comercio productivo.
 Para obtenerlo, sigue las instrucciones en cómo hacerse cliente en el portal <http://www.transbank.cl> o contacte a su
 ejecutivo comercial.
 
-En esta etapa, el comercio envía las evidencias a [soporte@transbank.cl](mailto:soporte@transbank.cl) empleando el formulario correspondiente al 
-producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones. Para integraciones 
+En esta etapa, el comercio envía las evidencias a [soporte@transbank.cl](mailto:soporte@transbank.cl) empleando el formulario correspondiente al
+producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones. Para integraciones
 Webpay que utilicen algún [plugin oficial](/plugin) existe un formulario especial.
- 
-Descargar el formulario de envidencias... 
-- Para integraciones Webpay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-rest.docx)
-- Para integraciones Webpay que usen un plugin oficial: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-plugins-rest.docx)
-- Para integraciones Onepay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx)
+
+Descargar el formulario de envidencias...
+
+* Para integraciones Webpay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-rest.docx)
+* Para integraciones Webpay que usen un plugin oficial: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-plugins-rest.docx)
+* Para integraciones Onepay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx)
 
 Soporte validará que los casos de prueba sean consistentes con los registrados
 en los sistemas de Webpay y, de estar todo correcto, se le notificará al
@@ -305,18 +316,20 @@ transacción de prueba real, con la que finalizará oficialmente la puesta en
 producción.
 
 ## Configuración de producción
-### A) Utilizando Plugins
-Si ya tienes tu código de comercio de producción y llave secreta, solo debes entrar a la configuración de tu plugin ([ver documentacion de plugins](/plugin)) y colocar: 
 
-- Ambiente: Producción
-- Código de comercio: tu código de comercio de producción
-- Api Key: Tu llave secreta
+### A) Utilizando Plugins
+
+Si ya tienes tu código de comercio de producción y llave secreta, solo debes entrar a la configuración de tu plugin ([ver documentacion de plugins](/plugin)) y colocar:
+
+* Ambiente: Producción
+* Código de comercio: tu código de comercio de producción
+* Api Key: Tu llave secreta
 
 Al guardar, el plugin funcionará inmediatamente en ambiente de producción y podrás operar con tarjetas y transacciones reales.
 
 ### B) Utilizando los SDK
 
-Si ya tienes tu código de comercio de producción y llave secreta, ahora solo debes configurar tu proyecto para que use 
+Si ya tienes tu código de comercio de producción y llave secreta, ahora solo debes configurar tu proyecto para que use
 el ambiente de producción, proporcionándole tus credenciales. Te explicamos como hacerlo en los diferentes SDK realizando  
 los siguientes pasos:  
 
@@ -330,7 +343,7 @@ Definir que se usará el ambiente de producción y pasar el Api Key (Código de 
 \Transbank\Webpay\WebpayPlus::setCommerceCode("{commerce-code}");
 \Transbank\Webpay\WebpayPlus::setApiKey("{llave-secreta}");
 
-// OneClick Mall
+// Oneclick Mall
 \Transbank\Webpay\OneClick::setIntegrationType("LIVE");
 \Transbank\Webpay\OneClick::setCommerceCode("{commerce-code}");
 \Transbank\Webpay\OneClick::setApiKey("{llave-secreta}");
@@ -350,7 +363,7 @@ WebpayPlus.CommerceCode = "5970TuCodigo";
 WebpayPlus.ApiKey = "VeryLongKey";
 WebpayPlus.IntegrationType = WebpayIntegrationType.Live;
 
-// OneClick
+// Oneclick
 using Transbank.Webpay.Oneclick;
 
 Oneclick.CommerceCode = "5970TuCodigo";
@@ -404,14 +417,14 @@ Transbank::Webpay::WebpayPlus::Base.commerce_code = "commercecode"
 Transbank::Webpay::WebpayPlus::Base.api_key = "apikey"
 Transbank::Webpay::WebpayPlus::Base.integration_type = :LIVE
 
-# OneClick
+# Oneclick
 Transbank::Webpay::OneClick::Base.commerce_code = "commercecode"
 Transbank::Webpay::OneClick::Base.api_key = "apikey"
 Transbank::Webpay::OneClick::Base.integration_type = :LIVE
 ```
 
 ```python
-# OneClick
+# Oneclick
 from transbank import oneclick as BaseOneClick
 from transbank.common.integration_type import IntegrationType
 
@@ -428,18 +441,19 @@ BaseTransaccionCompleta.api_key = "apikey"
 BaseTransaccionCompleta.integration_type = IntegrationType.LIVE
 ```
 
-### C) Utilizando el API 
-Si estás consumiendo el API directamente, solo debes de preocuparte de usar el 
-[host correspondiente al ambiente de producción](/referencia/webpay#ambiente-de-produccion), el código de comercio productivo y llave 
-secreta obtenida en el proceso de validación.  
- 
+### C) Utilizando el API
 
-## Requerimientos de página de resultado 
+Si estás consumiendo el API directamente, solo debes de preocuparte de usar el
+[host correspondiente al ambiente de producción](/referencia/webpay#ambiente-de-produccion), el código de comercio productivo y llave
+secreta obtenida en el proceso de validación.
+
+## Requerimientos de página de resultado
 
 ### Webpay Plus
+
 <aside class="notice">
 Para Webpay Plus REST, a diferencia de la versión anterior (SOAP), ya no se cuenta con una página de Voucher de Transbank.
-De esta forma, al finalizar el proceso de pago, el usuario llega directamente al sitio del comercio, en donde este último 
+De esta forma, al finalizar el proceso de pago, el usuario llega directamente al sitio del comercio, en donde este último
 debe presentarle un comprobante de pago (una pantalla donde quede claro que el pago fue exitoso o fallido).  
 </aside>
 
@@ -452,17 +466,17 @@ información a presentar dependerá de si la transacción fue autorizada o no
 
 Se recomienda, como mínimo, que posea:
 
-- Número de orden de pedido
-- Nombre del comercio (Tienda de Mall)
-- Monto y moneda de la transacción
-- Código de autorización de la transacción
-- Fecha de la transacción
-- Tipo de pago realizado (Débito o Crédito)
-- Tipo de cuota
-- Cantidad de cuotas
-- Monto de cada cuota
-- Cuatro últimos dígitos de la tarjeta bancaria
-- Descripción de los bienes y/o servicios
+* Número de orden de pedido
+* Nombre del comercio (Tienda de Mall)
+* Monto y moneda de la transacción
+* Código de autorización de la transacción
+* Fecha de la transacción
+* Tipo de pago realizado (Débito o Crédito)
+* Tipo de cuota
+* Cantidad de cuotas
+* Monto de cada cuota
+* Cuatro últimos dígitos de la tarjeta bancaria
+* Descripción de los bienes y/o servicios
 
 **Cuando la transacción no sea autorizada**, se recomienda informar al tarjetahabiente al respecto. Puede presentar un texto explicativo como:
 
@@ -476,8 +490,8 @@ Las posibles causas de este rechazo son:
 ```
 
 <aside class="notice">
-Esta nueva documentación hace referencia a los nuevos servicios REST de Transbank. 
-Si deseas revisar la documentación de los productos SOAP, 
+Esta nueva documentación hace referencia a los nuevos servicios REST de Transbank.
+Si deseas revisar la documentación de los productos SOAP,
 [haz click aquí](/documentacion/como_empezar_soap)
 </aside>
 

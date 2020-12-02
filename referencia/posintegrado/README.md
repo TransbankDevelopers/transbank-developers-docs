@@ -204,20 +204,20 @@ POS.closePort();
 
 Este comando es enviado por la caja para solicitar la ejecución de una venta. Los siguientes parámetros deben ser enviados desde la caja:
 
-- `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
-- `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
-- `Enviar Mensaje`: Este parámetro indica al POS si debe enviar mensajes intermedios a la caja mientras se realiza el proceso de venta.
+* `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
+* `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
+* `Enviar Mensaje`: Este parámetro indica al POS si debe enviar mensajes intermedios a la caja mientras se realiza el proceso de venta.
 
 <aside class="warning">
 El SDK Java y C no soportan el envío de mensajes intermedios. Por esta razón el parámetro `Enviar Mensaje` en `C` será siempre falso.
 </aside>
   
-- Los mensajes intermedios que envía el POS y que deben ser mostrados por la Caja, deben corresponder según los siguientes códigos:
-  - `78`: Lectura de Tarjeta.
-  - `79`: Confirmación de Monto.
-  - `80`: Selección de Cuotas.
-  - `81`: Ingreso de Pinpass.
-  - `82`: Envío de transacción a Transbank.
+* Los mensajes intermedios que envía el POS y que deben ser mostrados por la Caja, deben corresponder según los siguientes códigos:
+  * `78`: Lectura de Tarjeta.
+  * `79`: Confirmación de Monto.
+  * `80`: Selección de Cuotas.
+  * `81`: Ingreso de Pinpass.
+  * `82`: Envío de transacción a Transbank.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -364,17 +364,17 @@ Este metodo esta disponible desde la versión 19.3 del aplicativo de POS Integra
 
 Este comando es enviado por la caja para solicitar la ejecución de una venta para los distintos códigos de comercio asociados en el POS. Solo los códigos de comercios virtuales o hijos puede realizar ventas, el código de comercio del POS es distinto y no puede realizar ventas. Los siguientes parámetros deben ser enviados desde la caja:
 
-- `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
-- `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
-- `Enviar Mensaje`: Este parámetro indica al POS si debe enviar mensajes intermedios a la caja mientras se realiza el proceso de venta.
-- `Comercio prestador`: Es el código de comercio que ejecutara la venta.
+* `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
+* `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
+* `Enviar Mensaje`: Este parámetro indica al POS si debe enviar mensajes intermedios a la caja mientras se realiza el proceso de venta.
+* `Comercio prestador`: Es el código de comercio que ejecutara la venta.
 
-- Los mensajes intermedios que envía el POS y que deben ser mostrados por la caja, deben corresponder según los siguientes códigos:
-  - `78`: Lectura de Tarjeta.
-  - `79`: Confirmación de Monto.
-  - `80`: Selección de Cuotas.
-  - `81`: Ingreso de Pinpass.
-  - `82`: Envío de transacción a Transbank.
+* Los mensajes intermedios que envía el POS y que deben ser mostrados por la caja, deben corresponder según los siguientes códigos:
+  * `78`: Lectura de Tarjeta.
+  * `79`: Confirmación de Monto.
+  * `80`: Selección de Cuotas.
+  * `81`: Ingreso de Pinpass.
+  * `82`: Envío de transacción a Transbank.
 
 <div class="language-simple" data-multiple-language></div>
 

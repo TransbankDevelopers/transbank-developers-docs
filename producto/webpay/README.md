@@ -44,21 +44,21 @@ El concepto de "mall" agrupa múltiples tiendas. Son dichas tiendas las que pued
 
 El tipo de transacción Mall es útil para proveedores de servicios tecnológicos (PST) que pueden realizar una única integración con Transbank y realizar cobros a nombre de los clientes de dichos servicios tecnológicos. Por ejemplo una plataforma SaaS puede ser un mall y las empresas clientes de la plataforma pueden ser las tiendas de dicho mall. De esa manera, la recaudación que la plataforma realice irá directo al cliente a nombre del cual realizó cada cobro.
 
-### OneClick Mall
+### Oneclick Mall
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#oneclick-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
-OneClick Mall permite agrupar pagos en una única transacción OneClick hacia múltiples códigos de comercios (similar a una transacción Mall). En una transacción de este tipo, al igual que en OneClick, el tarjetahabiente podrá realizar pagos sin la necesidad de ingresar la información de su tarjeta de crédito en cada uno de ellos. Este tipo de pago facilita la venta, centraliza los pagos, disminuye el tiempo de la transacción y reduce los riesgos de ingreso erróneo de los datos del medio de pago.
+Oneclick Mall permite agrupar pagos en una única transacción Oneclick hacia múltiples códigos de comercios (similar a una transacción Mall). En una transacción de este tipo, al igual que en Oneclick, el tarjetahabiente podrá realizar pagos sin la necesidad de ingresar la información de su tarjeta de crédito en cada uno de ellos. Este tipo de pago facilita la venta, centraliza los pagos, disminuye el tiempo de la transacción y reduce los riesgos de ingreso erróneo de los datos del medio de pago.
 
-**OneClick Mall opera con tarjetas de crédito y débito Redcompra.** El modelo de pago contempla el mismo proceso de enrolamiento que la transacción OneClick.
+**Oneclick Mall opera con tarjetas de crédito y débito Redcompra.** El modelo de pago contempla el mismo proceso de enrolamiento que la transacción Oneclick.
 
-De cara al comercio, OneClick Mall combina dos grupos de beneficios:
+De cara al comercio, Oneclick Mall combina dos grupos de beneficios:
 
-- Permite que un tarjetahabiente registre su tarjeta una única vez y pague frecuentemente en cualquiera de las tiendas del mall.
+* Permite que un tarjetahabiente registre su tarjeta una única vez y pague frecuentemente en cualquiera de las tiendas del mall.
 
-- Permite que un proveedor de servicios tecnológicos (PST) realice una única integración y haga cobros a nombre de múltiples tiendas clientes.
+* Permite que un proveedor de servicios tecnológicos (PST) realice una única integración y haga cobros a nombre de múltiples tiendas clientes.
 
 Al no contar con sistema de autenticación bancaria en los cargos que se realizan después de la autorización, será el comercio el responsable de asumir el riesgo de fraude o desconocimientos de compra que realice un tarjetahabiente.
 
@@ -70,18 +70,17 @@ Al no contar con sistema de autenticación bancaria en los cargos que se realiza
 
 Este producto permite realizar transacciones con tarjetas de crédito sin utilizar el formulario standard de Webpay. La mayor diferencia con Webpay Plus Tradicional es que el ingreso de los datos de la tarjeta de crédito, se realiza dentro del mismo sitio web del comercio, lo que permite personalizar, a su criterio, la manera en como pide y valida los datos del cliente.
 
-- La modalidad de Transacción Completa solo funciona con tarjetas de crédito.
+* La modalidad de Transacción Completa solo funciona con tarjetas de crédito.
 
-- El comercio puede personalizar el formulario en el que solicita los datos del tarjetahabiente para procesar una transacción.
+* El comercio puede personalizar el formulario en el que solicita los datos del tarjetahabiente para procesar una transacción.
 El comercio que desee comenzar a operar con la modalidad de Transacción Completa, debe contar con la certificación de Normas PCI DSS (Payment Card Industry-Data Security Standard) y renovarlas anualmente, debido al manejo de data sensible que pueden procesar y que serán utilizados exclusivamente en su relación con Transbank.
 
 Transacción Completa, le ofrece al comercio elegir una o ambas de las siguientes funcionalidades:
 
-- Autorización en línea y captura simultánea, en la que se realiza el cargo al tarjetahabiente de inmediato.
-- Autorización en línea y captura diferida, en la que se efectúa una reserva de crédito sobre un valor estimado del producto y/o servicio a adquirir por el tarjetahabiente, posteriormente el comercio define el monto de la transacción el cual será menor o igual al autorizado, en caso de ser superior la transacción será rechazada.
+* Autorización en línea y captura simultánea, en la que se realiza el cargo al tarjetahabiente de inmediato.
+* Autorización en línea y captura diferida, en la que se efectúa una reserva de crédito sobre un valor estimado del producto y/o servicio a adquirir por el tarjetahabiente, posteriormente el comercio define el monto de la transacción el cual será menor o igual al autorizado, en caso de ser superior la transacción será rechazada.
 
 Por este motivo este producto no se encuentra dentro de la oferta publica de Transbank.
-
 
 ## Tipos de Pago
 
@@ -89,17 +88,17 @@ Los tipos de pago disponibles actualmente a través de Webpay dependen del tipo
 
 Para tarjeta de crédito pueden ser los siguientes tipos de pago (con las abreviaciones entre paréntesis):
 
-- Venta Normal (VN): Pago en 1 cuota.
-- 2 Cuotas sin interés (S2): El comercio recibe el pago en 2 cuotas iguales sin interés.
-- 3 Cuotas sin interés (SI): El comercio recibe el pago en 3 cuotas iguales sin interés.
-- N Cuotas sin interés (NC): El comercio recibe el pago en un número de cuotas iguales y sin interés que el tarjetahabiente puede elegir de entre un rango de 2 y N (el valor N es definido por el comercio y no puede ser superior a 12)
-- Cuotas normales (VC): El emisor ofrece al tarjetahabiente entre 2 y 48 cuotas. El emisor define si son sin interés (si ha establecido un rango de cuotas en promoción) o con interés. El emisor también puede ofrecer de 1 hasta 3 meses de pago diferida. Todo esto sin impacto para el comercio que en esta modalidad de cuotas siempre recibe el pago en 48 horas hábiles.
+* Venta Normal (VN): Pago en 1 cuota.
+* 2 Cuotas sin interés (S2): El comercio recibe el pago en 2 cuotas iguales sin interés.
+* 3 Cuotas sin interés (SI): El comercio recibe el pago en 3 cuotas iguales sin interés.
+* N Cuotas sin interés (NC): El comercio recibe el pago en un número de cuotas iguales y sin interés que el tarjetahabiente puede elegir de entre un rango de 2 y N (el valor N es definido por el comercio y no puede ser superior a 12)
+* Cuotas normales (VC): El emisor ofrece al tarjetahabiente entre 2 y 48 cuotas. El emisor define si son sin interés (si ha establecido un rango de cuotas en promoción) o con interés. El emisor también puede ofrecer de 1 hasta 3 meses de pago diferida. Todo esto sin impacto para el comercio que en esta modalidad de cuotas siempre recibe el pago en 48 horas hábiles.
 
 Para tarjeta de débito Redcompra el tipo de pago siempre corresponde a:
 
-- Venta débito Redcompra (VD): Pago con tarjeta de débito Redcompra.
+* Venta débito Redcompra (VD): Pago con tarjeta de débito Redcompra.
 
-- Venta Prepago (VP): Pago con tarjeta de débito Redcompra.
+* Venta Prepago (VP): Pago con tarjeta de débito Redcompra.
 
 ## Autorización y Captura
 
@@ -113,9 +112,9 @@ Para tarjetas de débito Redcompra, la autorización y captura es siempre simult
 
 Desde el punto de vista de la transacción, lo que ocurre es lo siguiente:
 
-- **Autorización y captura simultánea:** La transacción es validada en línea por Transbank. El cargo del pago se hace simultáneamente en la tarjeta de crédito o débito Redcompra del cliente.
+* **Autorización y captura simultánea:** La transacción es validada en línea por Transbank. El cargo del pago se hace simultáneamente en la tarjeta de crédito o débito Redcompra del cliente.
 
-- **Autorización y captura diferida (Sólo válida para tarjetas de crédito):** Se retiene el valor de la compra del saldo de la tarjeta de crédito del cliente, reservando cupo pero sin realizar la transacción  definitivamente hasta que el comercio confirma la compra (vía captura diferida) y lo comunique a Transbank. Existe un **tiempo máximo de 7 días calendario** para realizar la captura. Superado ese tiempo la retención de la tarjeta de crédito será reversada y el cupo liberado. La captura puede realizarse a través del [portal Transbank](https://www.transbank.cl/web/login) o mediante [el servicio web de captura diferida](/referencia/webpay-soap#captura-diferida-webpay-plus).
+* **Autorización y captura diferida (Sólo válida para tarjetas de crédito):** Se retiene el valor de la compra del saldo de la tarjeta de crédito del cliente, reservando cupo pero sin realizar la transacción  definitivamente hasta que el comercio confirma la compra (vía captura diferida) y lo comunique a Transbank. Existe un **tiempo máximo de 7 días calendario** para realizar la captura. Superado ese tiempo la retención de la tarjeta de crédito será reversada y el cupo liberado. La captura puede realizarse a través del [portal Transbank](https://www.transbank.cl/web/login) o mediante [el servicio web de captura diferida](/referencia/webpay-soap#captura-diferida-webpay-plus).
 
 ## Anulaciones
 

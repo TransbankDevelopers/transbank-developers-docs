@@ -1,8 +1,8 @@
-# Webpay Plus
-
-Webpay Plus permite realizar una solicitud de autorización financiera de un pago con tarjetas de crédito o débito Redcompra en donde quién realiza el pago ingresa al sitio del comercio, selecciona productos o servicio, y el ingreso asociado a los datos de la tarjeta de crédito o débito Redcompra lo realiza en forma segura en Webpay Plus. El comercio que recibe pagos mediante Webpay Plus es identificado mediante un código de comercio.
+# Webpay
 
 ## Webpay Plus
+
+Webpay Plus permite realizar una solicitud de autorización financiera de un pago con tarjetas de crédito o débito Redcompra en donde quién realiza el pago ingresa al sitio del comercio, selecciona productos o servicio, y el ingreso asociado a los datos de la tarjeta de crédito o débito Redcompra lo realiza en forma segura en Webpay Plus. El comercio que recibe pagos mediante Webpay Plus es identificado mediante un código de comercio.
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#webpay-plus' tbk-link-name='Referencia Api'></div>
@@ -13,9 +13,7 @@ Webpay Plus permite realizar una solicitud de autorización financiera de un pag
 
 Es el tipo de transacción mas común, usada para un pago puntual en una tienda simple. Se generará un único cobro para todos los productos o servicios adquiridos por el tarjetahabiente.
 
-
-
-#### Flujo en caso de éxito
+### Flujo en caso de éxito
 
 De cara al tarjetahabiente, el flujo de páginas para la transacción es el
 siguiente:
@@ -49,7 +47,7 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
 9. Una vez resuelta la autorización, Webpay retorna el control al comercio,
    realizando un redireccionamiento HTTPS hacia la página de transición
    del comercio, en donde se envía por método POST el token de la transacción  
-   en la variable `token_ws` (en la versión 1.1 y superior del API la redirección 
+   en la variable `token_ws` (en la versión 1.1 y superior del API la redirección
    es por GET). El comercio debe implementar la recepción de esta variable.
 10. El navegador Web del tarjetahabiente realiza una petición HTTPS al
     sitio del comercio, en base a la redirección generada por Webpay en el
@@ -59,18 +57,16 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
     El resultado de la autorización podrá ser consultado posteriormente con la
     variable anteriormente mencionada.
 12. Comercio recibe el resultado de la confirmación.
-
-<aside class="warning">
-En la versión anterior de WebPay, había que invocar `acknowledgeTransaction()`
-para informar a WebPay que se había recibido el resultado la transacción sin
-problemas. Ahora no es necesario, ya que ésto se realiza de forma automática
-una vez que se confirma la transacción.  Además ya no se debe mostrar el voucher
-de Transbank, solo debe mostrarse desde el sitio del comercio.
-</aside>
-
+    <aside class="warning">
+    En la versión anterior de WebPay, había que invocar `acknowledgeTransaction()`
+    para informar a WebPay que se había recibido el resultado la transacción sin
+    problemas. Ahora no es necesario, ya que ésto se realiza de forma automática
+    una vez que se confirma la transacción.  Además ya no se debe mostrar el voucher
+    de Transbank, solo debe mostrarse desde el sitio del comercio.
+    </aside>
 13. Sitio del comercio despliega voucher con los datos de la transacción.
 
-#### Flujo si usuario aborta el pago
+### Flujo si usuario aborta el pago
 
 Si el tarjetahabiente anula la transacción en el formulario de pago de Webpay,
 el flujo cambia y los pasos son los siguientes:
@@ -97,11 +93,9 @@ el flujo cambia y los pasos son los siguientes:
 8. Webpay retorna el control al comercio, realizando un redireccionamiento
    HTTPS hacia la página de **retorno del comercio**, en donde se envía por
    método POST el token de la transacción en la variable `TBK_TOKEN` además de las variables `TBK_ORDEN_COMPRA` y `TBK_ID_SESION`.
-
-<aside class="warning">
-Nota que el nombre de las variables recibidas es diferente. En lugar de `token_ws` acá el token viene en la variable `TBK_TOKEN`.
-</aside>
-
+    <aside class="warning">
+    Nota que el nombre de las variables recibidas es diferente. En lugar de `token_ws` acá el token viene en la variable `TBK_TOKEN`.
+    </aside>
 9. El comercio con la variable `TBK_TOKEN` debe invocar el método
    de confirmación de transacción para obtener el resultado de la autorización. En
    este caso debe obtener una excepción, pues el pago fue abortado.
@@ -113,8 +107,8 @@ Nota que el nombre de las variables recibidas es diferente. En lugar de `token_w
   <div tbk-link='/referencia/webpay#crear-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
 </div>
 
-Esta operación te permite iniciar o crear una transacción, Webpay Plus procesa el requerimiento y entrega 
-como resultado de la operación el token de la transacción y URL de redireccionamiento a la cual 
+Esta operación te permite iniciar o crear una transacción, Webpay Plus procesa el requerimiento y entrega
+como resultado de la operación el token de la transacción y URL de redireccionamiento a la cual
 se deberá redirigir al tarjetahabiente.
 
 <aside class="notice">
@@ -159,7 +153,7 @@ response = Transbank::Webpay::WebpayPlus::Transaction::create(
 response = transbank.webpay.webpay_plus.create(buy_order, session_id, amount, return_url)
 ```
 
-**Respuesta**
+#### Respuesta Crear una transacción
 
 La respuesta de Webpay Plus a la creación es el token de la transacción y la URL a la cual debes redirigir al tarjetahabiente.
 
@@ -190,8 +184,8 @@ response.url
 response.token
 ```
 
-Con estos datos debes crear un formulario en el cual debes poner un `input` de nombre `token_ws` 
-y en su valor debes insertar el token devuelto. El formulario debe usar el método `POST` y su acción (o URL) 
+Con estos datos debes crear un formulario en el cual debes poner un `input` de nombre `token_ws`
+y en su valor debes insertar el token devuelto. El formulario debe usar el método `POST` y su acción (o URL)
 debe ser la URL devuelta por Webpay Plus.
 
 ```html
@@ -220,11 +214,11 @@ tarjetas de prueba en la sección de Ambientes</a>.
   <div tbk-link='/referencia/webpay#confirmar-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
 </div>
 
-Una vez que el tarjetahabiente ha pagado, Webpay Plus retornará 
-el control vía `POST` a la `URL` que indicaste en el `return_url`. 
+Una vez que el tarjetahabiente ha pagado, Webpay Plus retornará
+el control vía `POST` a la `URL` que indicaste en el `return_url`.
 Recibirás también el parámetro `token_ws` que te permitirá conocer el resultado de la transacción.
 
-En caso de que el tarjetahabiente haya declinado, o haya ocurrido un error, recibirás la variable `TBK_TOKEN` 
+En caso de que el tarjetahabiente haya declinado, o haya ocurrido un error, recibirás la variable `TBK_TOKEN`
 además de las variables `TBK_ORDEN_COMPRA` y `TBK_ID_SESION`.
 
 <div class="language-simple" data-multiple-language></div>
@@ -253,9 +247,9 @@ response = Transbank::Webpay::WebpayPlus::Transaction::commit(token: @token)
 response = transbank.webpay.webpay_plus.transaction.commit(token)
 ```
 
-**Respuesta**
+#### Respuesta Confirmar una transacción
 
-Utilizando la respuesta de la confirmación podrás mostrar un comprobante o página de éxito a tu usuario. 
+Utilizando la respuesta de la confirmación podrás mostrar un comprobante o página de éxito a tu usuario.
 Con eso habrás completado el flujo "feliz" en que todo funciona.
 
 <div class="language-simple" data-multiple-language></div>
@@ -351,8 +345,8 @@ response.balance
   <div tbk-link='/referencia/webpay#obtener-estado-de-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
 </div>
 
-Esta operación permite obtener el estado de la transacción en los siguientes 7 días desde su creación. 
-En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error 
+Esta operación permite obtener el estado de la transacción en los siguientes 7 días desde su creación.
+En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error
 inesperado permite conocer el estado y tomar las acciones que correspondan.
 
 Debes enviar el `token` dela transacción de la cual desees obtener el estado.
@@ -383,7 +377,7 @@ response = Transbank::Webpay::WebpayPlus::Transaction::status(token: @token)
 response = transbank.webpay.webpay_plus.transaction.status(token)
 ```
 
-**Respuesta**
+#### Respuesta estado de una transacción
 
 Para obtener la información contenida en la respuesta puedes hacerlo de la siguiente manera.
 
@@ -481,11 +475,12 @@ response.balance
 </div>
 
 Esta operación permite a todo comercio habilitado, reembolsar o anular una
-transacción que fue generada en Webpay Plus. 
-Puedes generar el reembolso del total o parte del monto de una transacción, dependiendo de la 
+transacción que fue generada en Webpay Plus.
+Puedes generar el reembolso del total o parte del monto de una transacción, dependiendo de la
 siguiente lógica de negocio la invocación a esta operación generará una reversa o una anulación:
-- Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
-- Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
+
+* Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
+* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
 
 La anulación puede realizarse máximo 90 días después de la fecha de la
 transacción original.
@@ -520,7 +515,7 @@ var response = Transaction.Refund(token, amount);
 response = Transbank::Webpay::WebpayPlus::Transaction::refund(token: @token, amount: @amount)
 ```
 
-**Respuesta**
+#### Respuesta Reversa o Anulación
 
 Para obtener la información contenida en la respuesta puedes hacerlo de la siguiente manera.
 
@@ -563,12 +558,12 @@ response.type;
 ```
 
 ```python
-response.authorization_code;
-response.authorization_date;
-response.balance;
-response.nullified_amount;
-response.response_code;
-response.type;
+response.authorization_code
+response.authorization_date
+response.balance
+response.nullified_amount
+response.response_code
+response.type
 ```
 
 ## Webpay Plus Mall
@@ -586,31 +581,30 @@ Es la tienda Mall la que agrupa múltiples tiendas, son estas últimas las que p
 generar transacciones. Tanto el mall como las tiendas asociadas son
 identificadas a través de un número denominado código de comercio.
 
+### Flujo Webpay Plus Mall
 
-#### Flujo Webpay Plus Mall
-
-El flujo de Webpay Plus Mall es en general el mismo que el de [Webpay Plus](#webpay-plus-normal) 
+El flujo de Webpay Plus Mall es en general el mismo que el de [Webpay Plus](#webpay-plus-normal)
 tanto de cara al tarjeta habiente como de cara al integrador.
 
 Las diferencias son:
 
-- Se debe usar un código de comercio configurado para modalidad Mall en
+* Se debe usar un código de comercio configurado para modalidad Mall en
   Transbank, el cual debe ser indicado al iniciar la transacción.
-- Se pueden indicar múltiples transacciones, cada una asociada a un código de
+* Se pueden indicar múltiples transacciones, cada una asociada a un código de
   comercio de tienda (que debe estar configurada en Transbank como perteneciente
   al mall).
-- Se debe verificar por separado el resultado de cada una de esas transacciones
+* Se debe verificar por separado el resultado de cada una de esas transacciones
   individualmente, pues es posible que el emisor de la tarjeta autorice algunas
   y otras no.
 
-### Crear una transacción
+### Crear una transacción mall
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#crear-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
-Esta operación te permite iniciar o crear varias transacciones de una sola vez, Webpay Plus Mall procesa el requerimiento y entrega 
-como resultado de la operación el token de la transacción y URL de redireccionamiento a la cual 
+Esta operación te permite iniciar o crear varias transacciones de una sola vez, Webpay Plus Mall procesa el requerimiento y entrega
+como resultado de la operación el token de la transacción y URL de redireccionamiento a la cual
 se deberá redirigir al tarjetahabiente.
 
 <aside class="notice">
@@ -641,7 +635,7 @@ $transaction_details = [
       "commerce_code": 597055555536,
       "buy_order": "ordenCompraDetalle1234"
   },
-  {     
+  {
      "amount": 12000,
      "commerce_code": 597055555537,
      "buy_order": "ordenCompraDetalle4321"
@@ -676,7 +670,7 @@ transaction_details = [
       commerce_code: 597055555536,
       buy_order: "ordenCompraDetalle1234"
   },
-  {     
+  {
      amount: 12000,
      commerce_code: 597055555537,
      buy_order: "ordenCompraDetalle4321"
@@ -710,7 +704,7 @@ response = MallTransaction.create(
 Observar que existe un <code>buyOrder</code> generado para el comercio mall y un <code>buyOrder</code> para cada una de las tiendas.
 </aside>
 
-**Respuesta**
+#### Respuesta Crear una transacción mall
 
 La respuesta de Webpay Plus Mall a la creación de es el token de la transacción y la URL a la cual debes redirigir al tarjetahabiente.
 
@@ -739,8 +733,8 @@ response.token
 response.url
 ```
 
-Con estos datos debes crear un formulario en el cual debes poner un `input` de nombre `token_ws` 
-y en su valor debes insertar el token devuelto. El formulario debe usar el método `POST` y su acción (o URL) 
+Con estos datos debes crear un formulario en el cual debes poner un `input` de nombre `token_ws`
+y en su valor debes insertar el token devuelto. El formulario debe usar el método `POST` y su acción (o URL)
 debe ser la URL devuelta por Webpay Plus.
 
 ```html
@@ -763,17 +757,17 @@ el RUT 11.111.111-1 y la clave 123. Para pruebas exhaustivas <a href="https://ww
 tarjetas de prueba en la sección de Ambientes</a>.
 </aside>
 
-### Confirmar una transacción
+### Confirmar una transacción mall
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#confirmar-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
-Una vez que el tarjetahabiente ha pagado, Webpay Plus retornará 
-el control vía `POST` a la `URL` que indicaste en el `return_url`. 
+Una vez que el tarjetahabiente ha pagado, Webpay Plus retornará
+el control vía `POST` a la `URL` que indicaste en el `return_url`.
 Recibirás también el parámetro `token_ws` que te permitirá conocer el resultado de la transacción.
 
-En caso de que el tarjetahabiente haya declinado, o haya ocurrido un error, recibirás la variable `TBK_TOKEN` 
+En caso de que el tarjetahabiente haya declinado, o haya ocurrido un error, recibirás la variable `TBK_TOKEN`
 además de las variables `TBK_ORDEN_COMPRA` y `TBK_ID_SESION`.
 
 <div class="language-simple" data-multiple-language></div>
@@ -802,9 +796,9 @@ response = MallTransaction.commit(token)
 response = MallTransaction.commit(token)
 ```
 
-**Respuesta**
+#### Respuesta Confirmar una transacción mall
 
-Utilizando la respuesta de la confirmación podrás mostrar un comprobante o página de éxito a tu usuario. 
+Utilizando la respuesta de la confirmación podrás mostrar un comprobante o página de éxito a tu usuario.
 Con eso habrás completado el flujo "feliz" en que todo funciona.
 
 <div class="language-simple" data-multiple-language></div>
@@ -913,8 +907,7 @@ for detail in details:
   detail.status
 ```
 
-
-### Obtener estado de una transacción
+### Obtener estado de una transacción mall
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#obtener-estado-de-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
@@ -948,7 +941,117 @@ response = MallTransaction.status(token)
 response = MallTransaction.status(token)
 ```
 
-### Reversar o Anular una transacción
+#### Respuesta estado de una transacción mall
+
+Para obtener la información contenida en la respuesta puedes hacerlo de la siguiente manera.
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+  response.getAccountingDate();
+  response.getBuyOrder();
+  final CardDetail cardDetail = response.getCardDetail();
+  cardDetail.getCardNumber();
+  response.getSessionId();
+  response.getTransactionDate();
+  response.getVci();
+  final List<Detail> details = response.getDetails();
+  for (Detail detail : details) {
+      detail.getAmount();
+      detail.getAuthorizationCode();
+      detail.getBuyOrder();
+      detail.getCommerceCode();
+      detail.getInstallmentsNumber();
+      detail.getPaymentTypeCode();
+      detail.getResponseCode();
+      detail.getStatus();
+  }
+```
+
+```csharp
+  response.AccountingDate;
+  response.BuyOrder;
+  var cardDetail = response.CardDetail;
+  cardDetail.CardNumber;
+  response.SessionId;
+  response.TransactionDate;
+  response.Vci;
+  var details = response.Details;
+  foreach (var detail in details) {
+      detail.Amount;
+      detail.AuthorizationCode;
+      detail.BuyOrder;
+      detail.CommerceCode;
+      detail.InstallmentsNumber;
+      detail.PaymentTypeCode;
+      detail.ResponseCode;
+      detail.Status;
+  }
+```
+
+```php
+  $response->getAccountingDate();
+  $response->getBuyOrder();
+  $card_detail = response->getCardDetail();
+  $card_detail->getCardNumber();
+  $response->getSessionId();
+  $response->getTransactionDate();
+  $response->getVci();
+  $details = response->getDetails();
+  foreach($details as $detail){
+      detail->getAmount();
+      detail->getAuthorizationCode();
+      detail->getBuyOrder();
+      detail->getCommerceCode();
+      detail->getInstallmentsNumber();
+      detail->getPaymentTypeCode();
+      detail->getResponseCode();
+      detail->getStatus();
+  }
+```
+
+```ruby
+  response.accounting_date
+  response.buy_order
+  card_detail = response.card_detail
+  card_detail.card_number
+  response.session_id
+  response.transaction_date
+  response.vci
+  details = response.details
+  details.each do |detail|
+    detail.amount
+    detail.authorization_code
+    detail.buy_order
+    detail.commerce_code
+    detail.installments_number
+    detail.payment_type_code
+    detail.response_code
+    detail.status
+  end
+```
+
+```python
+  response.accounting_date
+  response.buy_order
+  card_detail = response.card_detail
+  card_detail.card_number
+  response.session_id
+  response.transaction_date
+  response.vci
+  details = response.details
+  for detail in details:
+    detail.amount
+    detail.authorization_code
+    detail.buy_order
+    detail.commerce_code
+    detail.installments_number
+    detail.payment_type_code
+    detail.response_code
+    detail.status
+```
+
+### Reversar o Anular una transacción mall
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#reversar-o-anular-un-pago-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
@@ -958,8 +1061,9 @@ Esta operación permite a todo comercio habilitado reversar o anular una transac
 que fue generada en Webpay Plus Mall. El método permite generar el reembolso del
 total o parte del monto de una transacción. Dependiendo de la siguiente lógica
 de negocio la invocación a esta operación generará una reversa o una anulación:
-- Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
-- Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
+
+* Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
+* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
 
 La anulación puede realizarse máximo 90 días después de la fecha de la
 transacción original.
@@ -990,6 +1094,57 @@ response = Transaction.refund(token, buy_order, commerce_code, amount)
 response = Transaction.refund(token, buy_order, commerce_code, amount)
 ```
 
+#### Respuesta Reversa o Anulacion mall
+
+Para obtener la información contenida en la respuesta puedes hacerlo de la siguiente manera.
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+  response.getAuthorizationCode();
+  response.getAuthorizationDate();
+  response.getBalance();
+  response.getNullifiedAmount();
+  response.getResponseCode();
+  response.getType();
+```
+
+```csharp
+  response.AuthorizationCode;
+  response.AuthorizationDate;
+  response.Balance;
+  response.NullifiedAmount;
+  response.ResponseCode;
+  response.Type;
+```
+
+```php
+  $response->getAuthorizationCode();
+  $response->getAuthorizationDate();
+  $response->getBalance();
+  $response->getNullifiedAmount();
+  $response->getResponseCode();
+  $response->getType();
+```
+
+```ruby
+  response.authorization_code
+  response.authorization_date
+  response.balance
+  response.nullified_amount
+  response.response_code
+  response.type
+```
+
+```python
+  response.authorization_code
+  response.authorization_date
+  response.balance
+  response.nullified_amount
+  response.response_code
+  response.type
+```
+
 ## Credenciales y Ambiente
 
 Para Webpay Plus, las credenciales del comercio (código de comercio y API Key) varían según el la modalidad del producto usado (Webpay Plus, Webpay Plus Mall. Webpay Plus Diferido, Webpay Plus Mall Diferido). También varían si la moneda a manejar es pesos chilenos (CLP) o dólares (USD).
@@ -1007,7 +1162,7 @@ transacciones que puedes revisar entrando a
 [www.transbank.cl](https://www.transbank.cl/). Si lo deseas  puedes realizar una
 conciliación entre tu sistema y el reporte que entrega el portal.
 
-### Webpay Plus
+### Conciliación Webpay Plus
 
 Para realizar la conciliación debes seguir los siguientes pasos:
 
@@ -1035,7 +1190,7 @@ parámetros de Webpay Plus la puedes encontrar
 
 Nombre | Descripción
 ------ | -----------
-vci | Resultado de la autenticación del tarjetahabiente. 
+vci | Resultado de la autenticación del tarjetahabiente.
 amount | Monto de la transacción.
 status | Estado de la transacción
 buy_order | Orden de compra de la tienda
@@ -1046,9 +1201,9 @@ accounting_date | Fecha de la autorización.
 transaction_date | Fecha y hora de la autorización.
 authorization_code | Código de autorización de la transacción
 payment_type_code  | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.
-installments_amount | Monto de las cuotas. 
+installments_amount | Monto de las cuotas.
 installments_number | Cantidad de cuotas.
-balance | Monto restante para un detalle anulado. 
+balance | Monto restante para un detalle anulado.
 
 ## Ejemplos de integración
 

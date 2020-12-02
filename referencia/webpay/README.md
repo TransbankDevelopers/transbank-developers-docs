@@ -1,11 +1,11 @@
+# Webpay Rest
+
 ___
 
 <aside class="notice">
 Estás viendo la <strong>nueva referencia REST</strong>. Si quieres ver la referencia anterior
 (SOAP) haz [click aquí](/referencia/webpay-soap)
 </aside>
-
-# Webpay Rest
 
 ## Ambientes y Credenciales
 
@@ -123,7 +123,8 @@ iguales a los entregados para el ambiente de integración.
 </aside>
 
 ### Códigos de comercio
-En la documentación puedes revisar [todos los códigos de comercio](/documentacion/como_empezar#codigos-de-comercio) del ambiente de integración 
+
+En la documentación puedes revisar [todos los códigos de comercio](/documentacion/como_empezar#codigos-de-comercio) del ambiente de integración
 
 > Los SDKs ya incluyen esos códigos de comercio y llaves secretas
 > que funcionan en el ambiente de integración, por lo que puedes obtener
@@ -213,7 +214,7 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
 9. Una vez resuelta la autorización, Webpay retorna el control al comercio,
    realizando un redireccionamiento HTTPS hacia la página de transición
    del comercio, en donde se envía por método POST el token de la transacción  
-   en la variable `token_ws` (en la versión 1.1 y superior del API la redirección 
+   en la variable `token_ws` (en la versión 1.1 y superior del API la redirección
    es por GET). El comercio debe implementar la recepción de esta variable.
 10. El navegador Web del tarjetahabiente realiza una petición HTTPS al
     sitio del comercio, en base a la redirección generada por Webpay en el
@@ -224,13 +225,13 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
     variable anteriormente mencionada.
 12. Comercio recibe el resultado de la confirmación.
 
-<aside class="warning">
-En la versión anterior de WebPay, había que invocar `acknowledgeTransaction()`
-para informar a WebPay que se había recibido el resultado la transacción sin
-problemas. Ahora no es necesario, ya que ésto se realiza de forma automática
-una vez que se confirma la transacción.  Además ya no se debe mostrar el voucher
-de Transbank, solo debe mostrarse desde el sitio del comercio.
-</aside>
+    <aside class="warning">
+    En la versión anterior de WebPay, había que invocar `acknowledgeTransaction()`
+    para informar a WebPay que se había recibido el resultado la transacción sin
+    problemas. Ahora no es necesario, ya que ésto se realiza de forma automática
+    una vez que se confirma la transacción.  Además ya no se debe mostrar el voucher
+    de Transbank, solo debe mostrarse desde el sitio del comercio.
+    </aside>
 
 13. Sitio del comercio despliega voucher con los datos de la transacción.
 
@@ -262,9 +263,9 @@ el flujo cambia y los pasos son los siguientes:
    HTTPS hacia la página de **retorno del comercio**, en donde se envía por
    método POST el token de la transacción en la variable `TBK_TOKEN` además de las variables `TBK_ORDEN_COMPRA` y `TBK_ID_SESION`.
 
-<aside class="warning">
-Nota que el nombre de las variables recibidas es diferente. En lugar de `token_ws` acá el token viene en la variable `TBK_TOKEN`.
-</aside>
+    <aside class="warning">
+    Nota que el nombre de las variables recibidas es diferente. En lugar de `token_ws` acá el token viene en la variable `TBK_TOKEN`.
+    </aside>
 
 9. El comercio con la variable `TBK_TOKEN` debe invocar el método
    de confirmación de transacción para obtener el resultado de la autorización. En
@@ -275,7 +276,7 @@ Nota que el nombre de las variables recibidas es diferente. En lugar de `token_w
 
 Para crear una transacción basta llamar al método `Transaction.create()`
 
-#### `Transaction.create()`
+#### Transaction.create()
 
 Permite inicializar una transacción en Webpay. Como respuesta a la invocación
 se genera un token que representa en forma única una transacción.
@@ -335,7 +336,7 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+##### Parámetros Transaction.create
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -344,7 +345,7 @@ session_id  <br> <i> String </i> | Identificador de sesión, uso interno de com
 amount  <br> <i> Decimal </i> | Monto de la transacción. Máximo 2 decimales para USD. Largo máximo: 17
 return_url  <br> <i> String </i> | URL del comercio, a la cual Webpay redireccionará posterior al proceso de autorización. Largo máximo: 256
 
-**Respuesta**
+##### Respuesta Transaction.create
 
 ```java
 response.getUrl();
@@ -391,10 +392,9 @@ url  <br> <i> String </i> | URL de formulario de pago Webpay. Largo máximo: 25
 Cuando el comercio retoma el control mediante `return_url` debes confirmar y obtener
 el resultado de una transacción usando el método  `Transaction.commit()`.
 
-#### `Transaction.commit()`
+#### Transaction.commit()
 
 Permite confirmar y obtener el resultado de la transacción una vez que Webpay ha resuelto su autorización financiera.
-
 
 ```java
 final CreateWebpayPlusTransactionResponse response = WebpayPlus.Transaction.commit(token);
@@ -427,13 +427,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-**Parámetros**
+##### Parámetros Transaction.commit
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
-**Respuesta**
+##### Respuesta Transaction.commit
 
 ```java
 response.getVci();
@@ -555,7 +555,7 @@ accounting_date  <br> <i> String </i> | Fecha de la autorización. Largo: 4, fo
 transaction_date  <br> <i> String </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
 payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
-response_code  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br> 
+response_code  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br>
 installments_amount <br> <i> Number </i> | Monto de las cuotas. Largo máximo: 17
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 balance  <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
@@ -564,10 +564,9 @@ balance  <br> <i> Number </i> | Monto restante para un detalle anulado. Largo m�
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
-#### `Transaction.status()`
+#### Transaction.status()
 
 Obtiene resultado de transacción a partir de un token.
-
 
 ```java
 final StatusWebpayPlusTransactionResponse response = WebpayPlus.Transaction.status(token);
@@ -600,13 +599,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-**Parámetros**
+##### Parámetros Transaction.status
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
-**Respuesta**
+##### Respuesta Transaction.status
 
 ```java
 response.getVci();
@@ -728,7 +727,7 @@ accounting_date  <br> <i> String </i> | Fecha de la autorización. Largo: 4, fo
 transaction_date  <br> <i> String </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
 payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
-response_code  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br> 
+response_code  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br>
 installments_amount <br> <i> Number </i> | Monto de las cuotas. Largo máximo: 17
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 balance  <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
@@ -740,8 +739,9 @@ transacción que fue generada en Webpay Plus. El método permite generar el
 reembolso del total o parte del monto de una transacción.
 Dependiendo de la siguiente lógica de negocio la invocación a esta
 operación generará una reversa o una anulación:
-- Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
-- Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
+
+* Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
+* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
 
 La anulación puede realizarse máximo 90 días después de la fecha de la
 transacción original.
@@ -752,7 +752,7 @@ más detalles y restricciones.
 
 Para anular una transacción se debe invocar al método `Transaction.refund()`.
 
-#### `Transaction.refund()`
+#### Transaction.refund()
 
 Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentra vigente.
 
@@ -799,14 +799,15 @@ Content-Type: application/json
   "amount": 1000
 }
 ```
-**Parámetros**
+
+##### Parámetros Transaction.refund
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> | Monto que se desea anular o reversar de la transacción. Largo máximo: 17.
 
-**Respuesta**
+##### Respuesta Transaction.refund
 
 ```java
 response.getAuthorizationCode();
@@ -845,12 +846,12 @@ response.type;
 ```
 
 ```python
-response.authorization_code;
-response.authorization_date;
-response.balance;
-response.nullified_amount;
-response.response_code;
-response.type;
+response.authorization_code
+response.authorization_date
+response.balance
+response.nullified_amount
+response.response_code
+response.type
 ```
 
 ```http
@@ -909,7 +910,7 @@ El Mall Webpay agrupa múltiples tiendas, son estas últimas las que pueden
 generar transacciones. Tanto el mall como las tiendas asociadas son
 identificadas a través de un número denominado código de comercio.
 
-#### Flujo Webpay Plus Mall
+### Flujo Webpay Plus Mall
 
 El flujo de Webpay Plus Mall es en general el mismo que el de [Webpay Plus
 Normal](#webpay-plus-normal) tanto de cara al tarjeta habiente como de cara al
@@ -917,12 +918,12 @@ integrador.
 
 Las diferencias son:
 
-- Se debe usar un código de comercio configurado para modalidad Mall en
+* Se debe usar un código de comercio configurado para modalidad Mall en
   Transbank, el cual debe ser indicado al iniciar la transacción.
-- Se pueden indicar múltiples transacciones, cada una asociada a un código de
+* Se pueden indicar múltiples transacciones, cada una asociada a un código de
   comercio de tienda (que debe estar configurada en Transbank como perteneciente
   al mall).
-- Se debe verificar por separado el resultado de cada una de esas transacciones
+* Se debe verificar por separado el resultado de cada una de esas transacciones
   individualmente, pues es posible que el emisor de la tarjeta autorice algunas
   y otras no.
 
@@ -930,7 +931,7 @@ Las diferencias son:
 
 Para crear una transacción basta llamar al método `Transaction.create()`
 
-#### `Transaction.create()`
+#### Transaction.create() Mall
 
 Permite inicializar una transacción en Webpay. Como respuesta a la invocación
 se genera un token que representa en forma única una transacción.
@@ -961,7 +962,7 @@ $transaction_details = [
       "commerce_code": 597055555536,
       "buy_order": "ordenCompraDetalle1234"
   },
-  {     
+  {
      "amount": 12000,
      "commerce_code": 597055555537,
      "buy_order": "ordenCompraDetalle4321"
@@ -996,7 +997,7 @@ transaction_details = [
       commerce_code: 597055555536,
       buy_order: "ordenCompraDetalle1234"
   },
-  {     
+  {
      amount: 12000,
      commerce_code: 597055555537,
      buy_order: "ordenCompraDetalle4321"
@@ -1043,7 +1044,7 @@ Content-Type: application/json
          "commerce_code": 597055555536,
          "buy_order": "ordenCompraDetalle1234"
      },
-     {     
+     {
         "amount": 12000,
         "commerce_code":  597055555537,
         "buy_order": "ordenCompraDetalle4321"
@@ -1052,7 +1053,7 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+##### Parámetros Transaction.create Mall
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1064,7 +1065,7 @@ details [].amount  <br> <i> Decimal </i> | Monto de la transacción de una tie
 details [].commerce_code  <br> <i>String </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
 details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda del mall. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>.
 
-**Respuesta**
+##### Respuesta Transaction.create() Mall
 
 ```java
 response.getToken();
@@ -1110,7 +1111,7 @@ url  <br> <i> String </i> | URL de formulario de pago Webpay. Largo máximo: 25
 
 Para confirmar una transacción y obtener el resultado, se debe usar el método `Transaction.commit()`
 
-#### `Transaction.commit()`
+#### Transaction.commit() Mall
 
 Permite confirmar una tranascción y obtener el resultado de la transacción
 una vez que Webpay ha resueltosu autorización financiera.
@@ -1146,13 +1147,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-**Parámetros**
+##### Parámetros Transaction.commit Mall
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
-**Respuesta**
+##### Respuesta Transaction.commit Mall
 
 ```java
 response.getAccountingDate();
@@ -1297,7 +1298,7 @@ vci  <br> <i> String </i> | Resultado de la autenticación del tarjetahabiente.
 details  <br> <i> Array </i> | Lista con resultado de cada una de las transacciones enviados en `Transaction.create()`.
 details [].authorization_code  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
 details [].payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
-details [].response_code  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br> 
+details [].response_code  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br>
 details [].amount  <br> <i> Formato número entero para transacciones en peso y decimal para transacciones en dólares. </i> | Monto de la transacción. Largo máximo: 10
 details [].installments_amount  <br> <i> Number </i> | Monto de cada cuota. Largo máximo: 17
 details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
@@ -1310,7 +1311,7 @@ balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo ma�
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
-#### `Transaction.status()`
+#### Transaction.status() Mall
 
 Obtiene resultado de transacción a partir de un token.
 
@@ -1345,13 +1346,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-**Parámetros**
+##### Parámetros Transaction.status Mall
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
-**Respuesta**
+##### Respuesta Transaction.status Mall
 
 ```java
 response.getAccountingDate();
@@ -1495,7 +1496,7 @@ vci  <br> <i> String </i> | Resultado de la autenticación del tarjetahabiente.
 details  <br> <i> Array </i> | Lista con resultado de cada una de las transacciones enviados en `Transaction.create()`.
 details [].authorization_code  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
 details [].payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
-details [].response_code  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br> 
+details [].response_code  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br>
 details [].amount  <br> <i> Formato número entero para transacciones en peso y decimal para transacciones en dólares. </i> | Monto de la transacción. Largo máximo: 10
 details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 details [].installments_amount  <br> <i> Number </i> | Monto de cada cuota. Largo máximo: 17
@@ -1510,8 +1511,9 @@ Este método permite a todo comercio habilitado reversar o anular una transacci
 que fue generada en Webpay Plus Mall. El método permite generar el reembolso del
 total o parte del monto de una transacción. Dependiendo de la siguiente lógica
 de negocio la invocación a esta operación generará una reversa o una anulación:
-- Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
-- Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
+
+* Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
+* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
 
 La anulación puede realizarse máximo 90 días después de la fecha de la
 transacción original.
@@ -1522,7 +1524,7 @@ más detalles y restricciones.
 
 Para anular una transacción se debe invocar al método `Transaction.refund()`.
 
-#### `Transaction.refund()`
+#### Transaction.refund() Mall
 
 Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentra vigente.
 
@@ -1567,7 +1569,8 @@ Content-Type: application/json
   "amount": 1000
 }
 ```
-**Parámetros**
+
+##### Parámetros Transaction.refund Mall
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1576,7 +1579,7 @@ buy_order  <br> <i> String </i> | Orden de compra de la transacción que se req
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> | Monto que se desea anular o reversar de la transacción. Largo máximo: 17.
 commerce_code  <br> <i> Number </i> | Código de comercio de la tienda mall que realizó la transacción. Largo: 12.
 
-**Respuesta**
+##### Respuesta Transaction.refund Mall
 
 ```java
 response.getAuthorizationCode();
@@ -1647,30 +1650,31 @@ response_code <br> <i> Number </i> | Código de resultado de la reversa/anulaci�
 
 En caso de error pueden aparecer los siguientes códigos de error comunes para el método `Transaction.refund()`:
 
-Código | Descripción
------- | -----------
-304 | Validación de campos de entrada nulos
-245 | Código de comercio no existe
-22 | El comercio no se encuentra activo
-316 | El comercio indicado no corresponde al certificado o no es hijo del comercio MALL en caso de transacciones MALL
-308 | Operación no permitida
-274 | Transacción no encontrada
-16 | La transacción no permite anulación
-292 | La transacción no está autorizada
-284 | Periodo de anulación excedido
-310 | Transacción anulada previamente
-311 | Monto a anular excede el saldo disponible para anular
-312 | Error genérico para anulaciones
-315 | Error del autorizador
-53 | La transacción no permite anulación parcial de transacciones con cuotas
+Código  | Descripción
+------  | -----------
+304     | Validación de campos de entrada nulos
+245     | Código de comercio no existe
+22      | El comercio no se encuentra activo
+316     | El comercio indicado no corresponde al certificado o no es hijo del comercio MALL en caso de transacciones MALL
+308     | Operación no permitida
+274     | Transacción no encontrada
+16      | La transacción no permite anulación
+292     | La transacción no está autorizada
+284     | Periodo de anulación excedido
+310     | Transacción anulada previamente
+311     | Monto a anular excede el saldo disponible para anular
+312     | Error genérico para anulaciones
+315     | Error del autorizador
+53      | La transacción no permite anulación parcial de transacciones con cuotas
 
-## OneClick Mall
-Revisa la [documentación de OneClick Mall](/documentacion/oneclick) para tener más información sobre como funciona 
-el producto y tener más detalles sobre como realizar tu integración. 
+## Oneclick Mall
 
-### Crear una inscripción OneClick Mall
+Revisa la [documentación de Oneclick Mall](/documentacion/oneclick) para tener más información sobre como funciona
+el producto y tener más detalles sobre como realizar tu integración.
 
-Permite gatillar el inicio del proceso de inscripción. 
+### Crear una inscripción Oneclick Mall
+
+Permite gatillar el inicio del proceso de inscripción.
 Más información en [la documentación](/documentacion/oneclick).
 
 ```java
@@ -1707,7 +1711,7 @@ MallInscription.start(
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/inscriptions
 
-Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
@@ -1718,7 +1722,7 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+#### Parámetros inscripción Oneclick Mall
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1726,7 +1730,7 @@ username  <br> <i> String </i> | Identificador del usuario registrado en el come
 email  <br> <i> String </i> | Email del usuario registrado en el comercio. Largo máximo: 100.
 response_url  <br> <i> String </i> | URL del comercio a la cual Webpay redireccionará posterior al proceso de inscripción. Largo máximo: 255.
 
-**Respuesta**
+#### Respuesta inscripción Oneclick Mall
 
 ```java
 response.getToken();
@@ -1773,7 +1777,7 @@ Una vez que se llama a este webservice el usuario debe ser redireccionado vía
 POST a `urlInscriptionForm` con parámetro `TBK_TOKEN` igual al token.
 </aside>
 
-### Confirmar una inscripción OneClick Mall
+### Confirmar una inscripción Oneclick Mall
 
 Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
 Más información en [la documentación](/documentacion/oneclick).
@@ -1806,18 +1810,18 @@ response = MallInscription.finish(token=token)
 ```http
 PUT /rswebpaytransaction/api/oneclick/v1.0/inscriptions/{token}
 
-Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 ```
 
-**Parámetros**
+#### Parámetros Confirmar inscripción Oneclick Mall
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Identificador del proceso de inscripción. Es entregado por Webpay en la respuesta del método `Inscription.start()`. (See envía en la URL, no en el body)
 
-**Respuesta**
+#### Respuesta Confirmar inscripción Oneclick Mall
 
 ```java
 response.getAuthorizationCode();
@@ -1876,15 +1880,17 @@ Content-Type: application/json
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 response_code <br> <i> Number </i> | Código de respuesta de la autorización. <br> Largo: 2. <br> Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente (Posible error en el ingreso de datos de la transacción) <br> -2 = Rechazo de transacción (Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada) <br> -3 = Error en transacción (Interno Transbank) <br> -4 = Rechazo emisor (Rechazada por parte del emisor) <br> -5 = Rechazo - Posible Fraude (Transacción con riesgo de posible fraude)
-tbk_user <br> <i> String </i> | Identificador único de la inscripción del cliente en OneClick, que debe ser usado para realizar pagos o borrar la inscripción. <br> Largo: 40.
+tbk_user <br> <i> String </i> | Identificador único de la inscripción del cliente en Oneclick, que debe ser usado para realizar pagos o borrar la inscripción. <br> Largo: 40.
 authorization_code  <br> <i> String </i> | Código que identifica la autorización de la inscripción. <br> Largo: 6.
 card_type <br> <i> cardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna, Redcompra). <br> Largo: 10.
 card_number <br> <i> String </i> | Últimos 4 dígitos de la tarjeta inscrito: <br> Largo: 4.
 
 ### Eliminar una inscripción con Oneclick Mall
+
 Una vez finalizado el proceso de inscripción es posible eliminarla de ser necesario. Para esto debes usar el método llamado `Inscription.remove()`.
 
-#### `Inscription.remove()`
+#### Inscription.remove() Oneclick Mall
+
 Permite eliminar un usuario enrolado a Oneclick Mall.
 
 ```java
@@ -1914,7 +1920,7 @@ MallInscription.delete(tbk_user, user_name)
 ```http
 DELETE /rswebpaytransaction/api/oneclick/v1.0/inscriptions
 
-Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
@@ -1925,14 +1931,14 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+##### Parámetros Inscription.remove Oneclick Mall
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tbk_user  <br> <i> String </i> | Identificador único de la inscripción del cliente (devuelto por `Inscription.finish()`). Largo: 40.
 username  <br> <i> String </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `Inscription.start()`). Largo máximo: 40.
 
-**Respuesta**
+##### Respuesta Inscription.remove Oneclick Mall
 
 ```java
 // 204 OK
@@ -1959,12 +1965,12 @@ username  <br> <i> String </i> | Identificador del usuario en los sistemas del 
 Content-Type: application/json
 ```
 
-### Autorizar un pago con OneClick Mall
+### Autorizar un pago con Oneclick Mall
 
 Una vez realizada la inscripción, el comercio puede usar el `tbkUser` recibido
 para realizar transacciones. Para eso debes usar el método `Transaction.authorize()`.
 
-#### `Transaction.authorize()`
+#### Transaction.authorize() Oneclick Mall
 
 Permite autorizar un pago.
 
@@ -2046,7 +2052,7 @@ MallTransaction.authorize(
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/transactions
 
-Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
@@ -2064,20 +2070,20 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+##### Parámetros Transaction.authorize Oneclick Mall
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 username  <br> <i> String </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `Inscription.start()`). Largo máximo: 40.
 tbk_user  <br> <i> String </i> | Identificador único de la inscripción del cliente (devuelto por `Inscription.finish()`). Largo: 40.
 buy_order  <br> <i> Number </i> | Identificador único de la compra generado por el comercio. Largo máximo: 26.
-details  <br> <i> Array </i> | Lista de objetos, uno por cada tienda diferente del mall que participa en la transacción. 
+details  <br> <i> Array </i> | Lista de objetos, uno por cada tienda diferente del mall que participa en la transacción.
 details [].commerce_code  <br> <i>String </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
 details [].buy_order  <br> <i> String </i> | Identificador único de la compra generado por el comercio hijo (tienda). Largo máximo: 26.
 details [].amount  <br> <i> Decimal </i> | Monto de la transacción de pago. Largo máximo: 17.
 details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas de la transacción de pago. Largo 2. No obligatorio.
 
-**Respuesta**
+##### Respuesta Transaction.authorize Oneclick Mall
 
 ```java
 response.getAccountingDate();
@@ -2202,8 +2208,8 @@ Content-Type: application/json
       "buy_order": "505479072"
   }]
 }
-
 ```
+
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buy_order  <br> <i> String </i> | Orden de compra generada por el comercio padre.
@@ -2226,11 +2232,11 @@ Cualquier valor distinto de número en `installmentsNumber` (incluyendo letras,
 inexistencia del campo o nulo) será asumido como cero, es decir "Sin cuotas".
 </aside>
 
-### Consultar un pago realizado con OneClick Mall
+### Consultar un pago realizado con Oneclick Mall
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
-#### `Transaction.status()`
+#### Transaction.status() Oneclick Mall
 
 Permite consultar el estado de pago realizado a través de Oneclick.
 Retorna el resultado de la autorización.
@@ -2263,18 +2269,18 @@ var response = MallTransaction.status(buy_order)
 ```http
 GET /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}
 
-Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 ```
 
-**Parámetros**
+##### Parámetros Transaction.status Oneclick Mall
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buy_order  <br> <i> String </i> | Orden de compra de la transacción a consultar (se envía en la URL, no en el body).
 
-**Respuesta**
+##### Respuesta Transaction.status Oneclick Mall
 
 ```java
 response.getAccountingDate();
@@ -2421,10 +2427,9 @@ details [].buy_order  <br> <i> String </i> | Orden de compra generada por el com
 status  <br> <i> Text </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
 
+### Reversar o Anular un pago Oneclick Mall
 
-### Reversar o Anular un pago OneClick Mall
-
-Para OneClick Mall hay dos operaciones diferentes para dejar sin efecto
+Para Oneclick Mall hay dos operaciones diferentes para dejar sin efecto
 transacciones autorizadas: La reversa y la anulación.
 
 **La reversa** se aplica para **problemas operacionales (lado comercio) o de
@@ -2433,20 +2438,20 @@ respuesta de una autorización**. En tal caso el comercio **debe** intentar
 reversar la transacción de autorización para evitar un posible descuadre entre
 comercio y Transbank. La reversa funciona sobre la operación completa del mall,
 lo que significa que **todas las transacciones realizadas en la operación mall
-serán reversadas**. 
+serán reversadas**.
 
 **La anulación**, en cambio, actúa individualmente sobre las transacciones de
 las _tiendas_ de un mall. Por ende, **la anulación es la operación correcta a
 utilizar para fines financieros**, de manera de anular un cargo ya realizado.
-Permite generar el reembolso del total o parte del monto de una transacción completa. 
-Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una 
+Permite generar el reembolso del total o parte del monto de una transacción completa.
+Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una
 reversa o una anulación:
 
 <strong>Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
 
 Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.</strong>
 
-#### `Transaction.refund()`
+#### Transaction.refund() Oneclick Mall
 
 Permite reversar o anular una transacción de venta autorizada con anterioridad.
 Este método retorna como respuesta un identificador único de la transacción de reversa/anulación.
@@ -2484,7 +2489,7 @@ var response = MallTransaction.refund(buy_order, child_commerce_code, child_buy_
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}/refunds
 
-Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
@@ -2495,16 +2500,16 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+##### Parámetros Transaction.refund Oneclick Mall
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-buy_order  <br> <i> String </i> | Orden de compra de la transacción a  reversar o anular. Se envía en la URL, no en el body. Largo máximo: 26. 
+buy_order  <br> <i> String </i> | Orden de compra de la transacción a  reversar o anular. Se envía en la URL, no en el body. Largo máximo: 26.
 commerce_code  <br> <i> String </i> | Código de comercio hijo. Largo máximo: 12.
 detail_buy_order  <br> <i> String </i> | Orden de compra hija de la transacción a  reversar o anular. Largo máximo: 26.
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> | Monto que se desea anular o reversar de la transacción. Largo máximo: 17
 
-**Respuesta**
+##### Respuesta Transaction.refund Oneclick Mall
 
 ```java
 response.getAuthorizationCode();
@@ -2575,11 +2580,11 @@ balance  <br> <i> Decimal </i> | Monto restante de la transacción de pago ori
 response_code <br> <i> Number </i> | Código del resultado del pago, donde: 0 (cero) es aprobado. Largo máximo: 2
 buy_order  <br> <i> String </i> | Orden de compra generada por el comercio hijo para la transacción de pago. Largo máximo: 26.
 
-### Captura Diferida OneClick Mall
+### Captura Diferida Oneclick Mall
 
-Una transacción OneClick Mall permite que el tarjetahabiente registre su
-tarjeta de la misma forma en que ocurre con una transacción OneClick, asociando
-dicha inscripción a un comercio padre. Ahora, una vez realizada la inscripción, 
+Una transacción Oneclick Mall permite que el tarjetahabiente registre su
+tarjeta de la misma forma en que ocurre con una transacción Oneclick, asociando
+dicha inscripción a un comercio padre. Ahora, una vez realizada la inscripción,
 el comercio padre tiene permitido autorizar transacciones sin captura para
 los comercios “hijo” registrados que tengan habilitado captura diferida.
 Además posterior a la autorización tiene permitido capturar dicho monto reservado.
@@ -2592,9 +2597,9 @@ Estas modalidades, por separado, solo son válidas para tarjetas de crédito.
 
 Para realizar esa captura explícita debe usarse el método `capture()`
 
-#### `capture()`
+#### capture() Oneclick Mall
 
-Este método permite a los comercios OneClick Mall habilitados, poder
+Este método permite a los comercios Oneclick Mall habilitados, poder
 realizar capturas diferidas de una transacción previamente autorizada. El método
 contempla una única captura por cada autorización. Para ello se deberá indicar los
 datos asociados a la transacción de venta y el monto requerido para capturar, el cual
@@ -2641,7 +2646,8 @@ Content-Type: application/json
     "authorization_code": "1213"
 }
 ```
-**Parámetros**
+
+##### Parámetros capture Oneclick Mall
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -2655,7 +2661,7 @@ El método `capture()` debe ser invocado siempre indicando el código del
 comercio de la tienda virtual específica.
 </aside>
 
-**Respuesta**
+##### Respuesta capture Oneclick Mall
 
 ```java
 response.getAuthorizationCode();
@@ -2693,6 +2699,7 @@ Content-Type: application/json
     "response_code": 0
 }
 ```
+
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 authorization_code  <br> <i> String </i> | Código de autorización de la captura diferida. Largo máximo: 6
@@ -2714,13 +2721,13 @@ No inicies la integración si aún no completan la afiliación comercial.
 
 Una transacción completa permite al comercio presentar al tarjetahabiente un
 formulario propio para almacenar los datos de la tarjeta, fecha de vencimiento
-y cvv (no necesario para comercios con la opción `sin cvv` habilitada) . 
+y cvv (no necesario para comercios con la opción `sin cvv` habilitada) .
 
 ### Crear una Transacción Completa
 
 Para crear una transacción completa basta llamar al método `Transaction.create()`
 
-#### `Transaction.create()`
+#### Transaction.create() Completa
 
 Permite inicializar una transacción completa en Webpay. Como respuesta a la
 invocación se genera un token que representa en forma única una transacción.
@@ -2768,7 +2775,7 @@ FullTransaction.Create(
 
 ```ruby
 Transbank::TransaccionCompleta::Transaction::create(
-  buy_order: 'ordenCompra12345678',                 
+  buy_order: 'ordenCompra12345678',
   session_id: 'sesion1234564',
   amount: 10000,
   card_number: 4239000000000000,
@@ -2807,18 +2814,18 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+##### Parámetros Transaction.create Completa
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buy_order  <br> <i> String </i> | Orden de compra de la tienda. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>
 session_id  <br> <i> String </i> | Identificador de sesión, uso interno de comercio, este valor es devuelto al final de la transacción. Largo máximo: 61
 amount  <br> <i> Decimal </i> | Monto de la transacción. Máximo 2 decimales para USD. Largo máximo: 17
-cvv  <br> <i> String </i> | (Opcional) Código que se utiliza como método de seguridad en transacciones en las que la tarjeta no está físicamente presente. Largo máximo: 4. No se debe enviar para comercios con la opción `sin cvv` habilitada. 
+cvv  <br> <i> String </i> | (Opcional) Código que se utiliza como método de seguridad en transacciones en las que la tarjeta no está físicamente presente. Largo máximo: 4. No se debe enviar para comercios con la opción `sin cvv` habilitada.
 card_number  <br> <i> String </i> | Número de tarjeta. Largo máximo: 16
 card_expiration_date  <br> <i> String </i> | Fecha de expiración de la tarjeta con la que se realiza la transacción. Largo máximo: 5
 
-**Respuesta**
+##### Respuesta Transaction.create Completa
 
 ```java
 response.getToken();
@@ -2853,7 +2860,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 
-#### Modalidad `sin cvv`
+#### Modalidad sin cvv
 
 Para modalidad del producto Transacción completa `sin CVV`, este campo **no** debe ser enviado.
 
@@ -2869,12 +2876,12 @@ Content-Type: application/json
 }
 ```
 
-### Consulta de cuotas
+### Consulta de cuotas Completa
 
 Para consultar el valor de las cuotas que pagará el tarjeta habiente en una
 transacción completa, es necesario llamar al método `Transaction.installments()`
 
-#### `Transaction.installments()`
+#### Transaction.installments() Completa
 
 Operación que permite obtener el monto de la cuota a partir del número de cuotas.
 El id de la consulta que selecciona el tarjetahabiente debe ser informado en la
@@ -2927,14 +2934,14 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+##### Parámetros Transaction.installments Completa
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 
-**Respuesta**
+##### Respuesta Transaction.installments Completa
 
 ```java
 response.getInstallmentsAmount();
@@ -2994,13 +3001,13 @@ deferred_periods  <br> <i> Array </i> | Arreglo con periodos diferidos.
 deferred_periods [].amount  <br> <i> String </i> | Monto. Largo: 17.
 deferred_periods [].period  <br> <i> String </i> | Índice de periodo. Largo: 2.
 
-### Confirmación de la transacción
+### Confirmación de la transacción Completa
 
 Una vez iniciada la transacción y consultado el monto de las cuotas, puedes
 confirmar y obtener el resultado de una transacción completa usando el metodo
 `Transaction.commit()`.
 
-#### `Transaction.commit()`
+#### Transaction.commit() Completa
 
 Operación que permite confirmar una transacción. Retorna el estado de la
 transacción.
@@ -3066,7 +3073,7 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+##### Parámetros Transaction.commit Completa
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -3075,7 +3082,7 @@ id_query_installments  <br> <i> Number </i> | (Opcional) Identificador de cuota.
 deferred_period_index  <br> <i> Number </i> | (Opcional) Cantidad de periodo diferido. Largo máximo: 2. Solo enviar si el pago es en cuotas
 grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia. Solo enviar si el pago es en cuotas
 
-**Respuesta**
+##### Respuesta Transaction.commit Completa
 
 ```java
 response.getAccountingDate();
@@ -3194,11 +3201,11 @@ installments_amount <br> <i> Number </i> | Monto de la cuota. Se envía solo si 
 installments_number <br> <i> Number </i> | Número de cuotas de la transacción. <br> <i>Largo máximo: 2 </i>
 prepaid_balance <br> <i> Number </i> | Saldo de la tarjeta de prepago. Se envía solo si se informa saldo. <br> <i> Largo máximo: 17 </i>
 
-### Consultar estado de una transacción completa
+### Consultar estado de una transacción Completa
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
-#### `Transaction.status()`
+#### Transaction.status() Completa
 
 Obtiene resultado de transacción a partir de un token.
 
@@ -3237,13 +3244,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-**Parámetros**
+##### Parámetros Transaction.status Completa
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
-**Respuesta**
+##### Respuesta Transaction.status Completa
 
 ```java
 response.getAccountingDate();
@@ -3388,7 +3395,7 @@ Dependiendo de la siguiente lógica de negocio la invocación a esta operacio�
 * Si se supera el tiempo máximo para ejecutar una reversa se ejecutará una anulación.
 * Si no se ha dado ninguno de los casos anteriores se ejecutará una reversa.
 
-#### `Transaction.refund()`
+#### Transaction.refund() Completa
 
 Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentre vigente.
 
@@ -3431,14 +3438,14 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+##### Parámetros Transaction.refund Completa
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> |  Monto que se desea anular o reversar de la transacción. Largo máximo: 17.
 
-**Respuesta**
+##### Respuesta Transaction.refund Completa
 
 ```java
 response.getType();
@@ -3507,15 +3514,14 @@ nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17. Solo
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17. Solo viene en caso de anulación.
 response_code  <br> <i> Number </i> | Código de resultado de la anulación. Si es exitoso es 0, de lo contrario la anulación no fue realizada. Largo máximo: 2. Solo viene en caso de anulación.
 
-## Transacción Mall Completa
+## Transacción Completa Mall
 
 <aside class="warning">
 Este producto tiene requerimientos comerciales más estrictos que el resto de los productos.  
 No inicies la integración si aún no completan la afiliación comercial.
 </aside>
 
-
-Una transacción Mall Completa corresponde a una solicitud de transacciones completas
+Una transacción Completa Mall corresponde a una solicitud de transacciones completas
 de un conjunto de pagos con tarjetas de crédito, en donde quién realiza el pago
 ingresa al sitio del comercio, selecciona productos o
 servicios, y el ingreso asociado a los datos de la tarjeta de crédito
@@ -3528,9 +3534,9 @@ El Mall Webpay agrupa múltiples tiendas, son estas últimas las que pueden
 generar transacciones. Tanto el mall como las tiendas asociadas son
 identificadas a través de un número denominado código de comercio.
 
-### Flujo Transacción Mall Completa
+### Flujo Transacción Completa Mall
 
-El flujo de Transacción Mall Completa es en general el mismo que el de [Transacción Completa](#webpay-transaccion-completa) tanto de cara al tarjeta habiente como de cara al integrador.
+El flujo de Transacción Completa Mall es en general el mismo que el de [Transacción Completa](#webpay-transaccion-completa) tanto de cara al tarjeta habiente como de cara al integrador.
 
 Las diferencias son:
 
@@ -3543,13 +3549,13 @@ Las diferencias son:
   individualmente, pues es posible que el emisor de la tarjeta autorice algunas
   y otras no.
 
-### Crear una Transacción Mall Completa
+### Crear una Transacción Completa Mall
 
-Para crear una Transacción Mall Completa basta llamar al método `Transaction.create()`
+Para crear una Transacción Completa Mall basta llamar al método `Transaction.create()`
 
-#### `Transaction.create()`
+#### Transaction.create() Completa Mall
 
-Permite inicializar una transacción mall completa en Webpay. Como respuesta a la
+Permite inicializar una transacción Completa Mall en Webpay. Como respuesta a la
 invocación se genera un token que representa en forma única una transacción.
 
 <aside class="notice">
@@ -3581,7 +3587,7 @@ $transaction_details = [
       "commerce_code": 597055555552,
       "buy_order": "123456789"
   },
-  {     
+  {
      "amount": 12000,
      "commerce_code": 597055555553,
      "buy_order": "123456790"
@@ -3691,7 +3697,7 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+##### Parámetros Transaction.create Completa Mall
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -3704,7 +3710,7 @@ details [].amount  <br> <i> Decimal </i> | Monto de la transacción de una tie
 details [].commerce_code  <br> <i>String </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
 details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda del mall. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>. Largo máximo: 26
 
-**Respuesta**
+##### Respuesta Transaction.create Completa Mall
 
 ```java
 response.getToken();
@@ -3739,11 +3745,11 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token identificador de la transacción. Largo: 64.
 
-### Consulta de cuotas
+### Consulta de cuotas Completa Mall
 
-Para consultar el valor de las cuotas que pagará el tarjeta habiente en cada transacción dentro transacción mall completa, es necesario llamar al método `Transaction.installments()`
+Para consultar el valor de las cuotas que pagará el tarjeta habiente en cada transacción dentro transacción completa mall, es necesario llamar al método `Transaction.installments()`
 
-#### `Transaction.installments()`
+#### Transaction.installments() Completa Mall
 
 Operación que permite obtener el monto de la cuota a partir del número de cuotas.
 El id de la consulta que selecciona el tarjetahabiente debe ser informado en la
@@ -3761,7 +3767,7 @@ $installments_details = [
     "buy_order": "123456789",
     "installments_number": 2
   },
-  {     
+  {
     "commerce_code": 597055555553,
     "buy_order": "123456790",
     "installments_number": 2
@@ -3801,7 +3807,7 @@ installment_details = [
     buy_order: '123456789',
     installments_number: 2
   },
-  {     
+  {
     commerce_code: 597055555553,
     buy_order: '123456790',
     installments_number: 2
@@ -3844,16 +3850,16 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+##### Parámetros Transaction.installments Completa Mall
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 commerce_code  <br> <i> String </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12
-buy_order  <br> <i> String </i> | Orden de compra de la tienda del mall. Largo máximo: 26 
+buy_order  <br> <i> String </i> | Orden de compra de la tienda del mall. Largo máximo: 26
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 
-**Respuesta**
+##### Respuesta Transaction.installments Completa Mall
 
 ```java
 response.getInstallmentsAmount();
@@ -3919,11 +3925,11 @@ deferred_periods  <br> <i> Array </i> | Arreglo con periodos diferidos.
 deferred_periods [].amount  <br> <i> String </i> | Monto. Largo: 17.
 deferred_periods [].period  <br> <i> String </i> | Índice de periodo. Largo: 2.
 
-### Confirmación de la transacción
+### Confirmación de la transacción Completa Mall
 
 Una vez iniciada la transacción y consultado el monto de las cuotas por cada subtransacción, puedes confirmar y obtener el resultado de una transacción completa usando el metodo `Transaction.commit()`.
 
-#### `Transaction.commit()`
+#### Transaction.commit() Completa Mall
 
 Operación que permite confirmar una transacción. Retorna el estado de la
 transacción.
@@ -4052,19 +4058,19 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+##### Parámetros Transaction.commit Completa Mall
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
-details <br> <i> details </i> | Listado con las transacciones mall. 
+details <br> <i> details </i> | Listado con las transacciones mall.
 commerce_code  <br> <i> String </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo máximo: 12
 buy_order  <br> <i> String </i> | Orden de compra de la tienda del mall. Largo máximo: 26
 id_query_installments  <br> <i> Number </i> | (Opcional) Identificador de cuota. Largo máximo: 19. Solo enviar si el pago es en cuotas
 deferred_period_index  <br> <i> Number </i> | (Opcional) Cantidad de periodo diferido. Largo máximo: 2. Solo enviar si el pago es en cuotas
 grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia. Solo enviar si el pago es en cuotas
 
-**Respuesta**
+##### Respuesta Transaction.commit Completa Mall
 
 ```java
 response.getBuyOrder();
@@ -4201,11 +4207,11 @@ details [].commerce_code  <br> <i> String </i> | Código comercio de la tienda.
 details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda. Largo máximo: 26
 prepaid_balance <br> <i> Number </i> | Saldo de la tarjeta de prepago. Se envía solo si se informa saldo. <br> <i> Largo máximo 17 </i>
 
-### Consultar estado de una transacción mall completa
+### Consultar estado de una transacción Completa Mall
 
-Esta operación permite obtener el estado de la transacción mall completa en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
+Esta operación permite obtener el estado de la transacción Completa Mall en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
-#### `Transaction.status()`
+#### Transaction.status() Completa Mall
 
 Obtiene resultado de transacción a partir de un token.
 
@@ -4240,13 +4246,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-**Parámetros**
+##### Parámetros Transaction.status Completa Mall
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
-**Respuesta**
+##### Respuesta Transaction.status Completa Mall
 
 ```java
 response.getBuyOrder();
@@ -4393,7 +4399,7 @@ Dependiendo de la siguiente lógica de negocio la invocación a esta operacio�
 * Si se supera el tiempo máximo para ejecutar una reversa se ejecutará una anulación.
 * Si no se ha dado ninguno de los casos anteriores se ejecutará una reversa.
 
-#### `Transaction.refund()`
+#### Transaction.refund() Completa
 
 Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentre vigente.
 
@@ -4454,7 +4460,8 @@ Content-Type: application/json
   "amount": 1000
 }
 ```
-**Parámetros**
+
+##### Parámetros Transaction.refund Completa
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -4463,8 +4470,7 @@ buy_order  <br> <i> String </i> | Orden de compra de la transacción que se req
 commerce_code  <br> <i> Number </i> | Tienda hija que realizó la transacción. Largo: 12.
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> |  Monto que se desea anular o reversar de la transacción. Largo máximo: 17
 
-
-**Respuesta**
+##### Respuesta Transaction.refund Completa
 
 ```java
 response.getType();
@@ -4533,14 +4539,14 @@ nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17. Solo
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17. Solo viene en caso de anulación.
 response_code <br> <i> Number </i> | Código del resultado del pago. Si es exitoso es 0, de lo contrario el pago no fue realizado. Largo máximo: 2. Solo viene en caso de anulación.
 
-
 ## Captura Diferida
 
-Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo el cargo al tarjetahabiente. 
+Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo el cargo al tarjetahabiente.
 
-**Válido para :** 
-- Webpay Plus Captura Diferida
-- Transacción Completa Captura Diferida
+**Válido para :**
+
+* Webpay Plus Captura Diferida
+* Transacción Completa Captura Diferida
 
 ### Ejecutar captura diferida
 
@@ -4563,7 +4569,7 @@ para conocer más detalles y restricciones.
 
 Para realizar esa captura explícita debe usarse el método `Transaction.capture()`
 
-#### `Transaction.capture()`
+#### Transaction.capture()
 
 Permite solicitar a Webpay la captura diferida de una transacción con
 autorización y sin captura simultánea.
@@ -4611,18 +4617,19 @@ response = MallDeferredTransaction.capture(
 
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
-Tbk-Api-Key-Id: 597055555531 
+Tbk-Api-Key-Id: 597055555531
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
-  "commerce_code": "597055555531", 
+  "commerce_code": "597055555531",
   "buy_order": "415034240",
   "authorization_code": "12345",
   "capture_amount": 1000
 }
 ```
-**Parámetros**
+
+##### Parámetros Transaction.capture
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -4632,7 +4639,7 @@ buy_order  <br> <i> String </i> | Orden de compra de la transacción que se req
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
 capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo máximo: 17.
 
-**Respuesta**
+##### Respuesta Transaction.capture
 
 ```java
 response.getAuthorizationCode();
@@ -4708,12 +4715,12 @@ Código | Descripción
 311 | Monto a capturar excede el monto autorizado
 315 | Error del autorizador
 
-
 ## Códigos y mensajes de error
 
 Al realizar cualquier solicitud al API REST, además de los datos de respuesta, se incluirá uno de los siguientes códigos de estado de respuesta HTTP dependiendo del resultado obtenido:  
 
-### Solicitud exitosa 
+### Solicitud exitosa
+
 Cuando la operación solcitada es ejecutada correctamente, se pueden recibir estos status HTTP:
 
 Código de estado HTTP | Descripción
@@ -4722,6 +4729,7 @@ Código de estado HTTP | Descripción
 204 | La operación DELETE se ha ejecutado exitosamente
 
 #### Códigos de error
+
 Todos los errores reportados por la API REST de Webpay despliegan un mensaje JSON con una descripción del error.
 
 ```json
@@ -4732,14 +4740,14 @@ Todos los errores reportados por la API REST de Webpay despliegan un mensaje JSO
 
 Código de estado HTTP | Descripción
 ------ | -----------
-400 | El mensaje JSON es inválido. Puedes ser que no corresponda a un mensaje bien estructurado o que contenga un campo no esperado. 
-401 | No autorizado. API Key y/o API Secret inválidos 
+400 | El mensaje JSON es inválido. Puedes ser que no corresponda a un mensaje bien estructurado o que contenga un campo no esperado.
+401 | No autorizado. API Key y/o API Secret inválidos
 404 | La transacción no ha sido encontrada.
-405 | Método no permitido. 
-406 | No fue posible procesar la respuesta en el formato que el cliente indica. 
-415 | Tipo de mensaje no permitido. 
-422 | El requerimiento no ha podido ser procesado ya sea por validaciones de datos o por lógica de negocios. 
-500 | Ha ocurrido un error inesperado. 
+405 | Método no permitido.
+406 | No fue posible procesar la respuesta en el formato que el cliente indica.
+415 | Tipo de mensaje no permitido.
+422 | El requerimiento no ha podido ser procesado ya sea por validaciones de datos o por lógica de negocios.
+500 | Ha ocurrido un error inesperado.
 
 ## Puesta en Producción
 
@@ -4765,8 +4773,8 @@ Soporte validará que los casos de prueba sean consistentes con los registrados
 
 En el proceso de contratación recibiste tu código de comercio, y junto con el **secreto compartido** que se te entregó luego de la certificación puedes completar tus credenciales, las cuales **debes custodiar y evitar que estén en manos de terceros** ya que permiten hacer (o anular) transacciones en nombre de tu comercio.
 
-- Código de comercio (*API Key*)
-- Secreto compartido (*Shared Secret*)
+* Código de comercio (*API Key*)
+* Secreto compartido (*Shared Secret*)
 
 Luego que el proceso de validación de tu integración está terminado, debes realizar la configuración para que tu sitio se encuentre en producción.
 
@@ -4780,21 +4788,21 @@ Nunca dejes tu código de comercio y secreto compartido directamente en tu códi
 
 1. Asignar el código de comercio productivo, entregado por Transbank al momento de contratar el producto.
 
-```java
-// Para OneClick
-OneclickMall.setCommerceCode('TU_CODIGO_DE_COMERCIO'); 
-```
+    ```java
+    // Para Oneclick
+    OneclickMall.setCommerceCode('TU_CODIGO_DE_COMERCIO');
+    ```
 
-3. Configuración del secreto compartido.
+2. Configuración del secreto compartido.
 
-```java
-// Para OneClick
-OneclickMall.setApiKey('TU_API_KEY');
-```
+    ```java
+    // Para Oneclick
+    OneclickMall.setApiKey('TU_API_KEY');
+    ```
 
-5. Selección del ambiente productivo.
+3. Selección del ambiente productivo.
 
-```java
-// Para OneClick
-OneclickMall.setIntegrationType(IntegrationType.LIVE);
-```
+    ```java
+    // Para Oneclick
+    OneclickMall.setIntegrationType(IntegrationType.LIVE);
+    ```

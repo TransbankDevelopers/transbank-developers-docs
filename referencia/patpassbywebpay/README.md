@@ -96,8 +96,8 @@ Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
-Todas las peticiones que hagas deben incluir el código de comercio y la llave 
-secreta entregada por Transbank, actuando ambas como las credenciales que autorizan 
+Todas las peticiones que hagas deben incluir el código de comercio y la llave
+secreta entregada por Transbank, actuando ambas como las credenciales que autorizan
 distintas operaciones.
 
 <aside class="notice">
@@ -137,7 +137,7 @@ comercio](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/t
 ```
 
 ```http
- 
+
 ```
 
 ## PatPass by Webpay Normal
@@ -163,7 +163,7 @@ comercio](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/t
 ```
 
 ```http
- 
+
 ```
 
 Una transacción de autorización de PatPass by WebPay corresponde a una solicitud de inscripción de pago recurrente con tarjetas de crédito, en donde el primer pago se resuelve al instante, y los subsiguientes quedan programados para ser ejecutados mes a mes. PatPass by WebPay cuenta con fecha de caducidad o termino, la cual debe ser proporcionada junto a otros datos para esta transacción. La transacción puede ser realizada en Dólares y Pesos, para este último caso es posible enviar el monto en UF y WebPay realizará la conversión a pesos al momento de realizar el cargo al tarjetahabiente.
@@ -172,9 +172,9 @@ El flujo de pago en PatPass by WebPay se inicia desde el comercio, en donde el T
 
 Dentro de los atributos más relevantes se pueden mencionar:
 
-- Permite realizar transacciones seguras y en línea a través de Internet.
-- En transacciones con PatPass by Webpay se solicita al tarjetahabiente autenticarse con su emisor, protegiendo de esta forma al comercio por eventuales fraudes o desconocimientos de compra.
-- La seguridad es reforzada por medio de la utilización de servidores seguros, protegidos con TLS 1.2
+* Permite realizar transacciones seguras y en línea a través de Internet.
+* En transacciones con PatPass by Webpay se solicita al tarjetahabiente autenticarse con su emisor, protegiendo de esta forma al comercio por eventuales fraudes o desconocimientos de compra.
+* La seguridad es reforzada por medio de la utilización de servidores seguros, protegidos con TLS 1.2
 
 ### Flujo en caso de éxito
 
@@ -197,17 +197,17 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
 9. Una vez resuelta la autorización, WebPay retorna el control al comercio, realizando un redireccionamiento HTTPS hacia la página de transición del comercio, en donde se envía por método POST el token de la transacción en la variable `token_ ws`. El comercio debe implementar la recepción de esta variable.
 10. El navegador Web del tarjetahabiente realiza una petición HTTPS al sitio del comercio, en base a la redirección generada por WebPay en el punto 9.
 11. El sitio del comercio recibe la variable `token_ws` e invoca el segundo
-    método Web para confirmar y obtener el resultado de la inscripción. El resultado de la autorización podrá ser consultado posteriormente con la 
+    método Web para confirmar y obtener el resultado de la inscripción. El resultado de la autorización podrá ser consultado posteriormente con la
     variable anteriormente mencionada.
 12. Comercio recibe el resultado de la confirmación.
 
-<aside class="warning">
-En la versión anterior de WebPay, había que invocar `acknowledgeTransaction()` 
-para informar a WebPay que se había recibido el resultado la transacción sin
-problemas. Ahora no es necesario, ya que ésto se realiza de forma automática
-una vez que se confirma la transacción.  Además ya no se debe mostrar el voucher
-de Transbank, solo debe mostrarse desde el sitio del comercio.
-</aside>
+    <aside class="warning">
+    En la versión anterior de WebPay, había que invocar `acknowledgeTransaction()`
+    para informar a WebPay que se había recibido el resultado la transacción sin
+    problemas. Ahora no es necesario, ya que ésto se realiza de forma automática
+    una vez que se confirma la transacción.  Además ya no se debe mostrar el voucher
+    de Transbank, solo debe mostrarse desde el sitio del comercio.
+    </aside>
 
 13. Sitio del comercio despliega voucher con los datos de la inscripción.
 
@@ -227,9 +227,9 @@ Si el tarjetahabiente anula la transacción en el formulario de pago de Webpay,
 7. Tarjetahabiente hace clic en anular, en formulario PatPass by WebPay.
 8. Webpay retorna el control al comercio, realizando un redireccionamiento HTTPS hacia la página de **retorno del comercio**, en donde se envía por método POST el token de la transacción en la variable `TBK_TOKEN` además de las variables `TBK_ORDEN_COMPRA` y `TBK_ID_SESION`.
 
-<aside class="warning">
-Nota que el nombre de las variables recibidas es diferente. En lugar de `token_ws` acá el token viene en la variable `TBK_TOKEN`.
-</aside>
+    <aside class="warning">
+    Nota que el nombre de las variables recibidas es diferente. En lugar de `token_ws` acá el token viene en la variable `TBK_TOKEN`.
+    </aside>
 
 9. El comercio con la variable `TBK_TOKEN` debe invocar el método
    `Transaction.commit()`, para obtener el resultado de la autorización. En
@@ -287,11 +287,11 @@ POST /rswebpaytransaction/api/webpay/v1.0/transactions
     "expiration_date": "2019-03-20T20:18:20Z",
     "commerce_mail": "contacto@comercio.cl",
     "uf_flag": false
-  } 
+  }
 }
 ```
 
-**Parámetros**
+##### Parámetros Transaction.create
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -311,7 +311,7 @@ wpmDetail.expirationDate <br><i> DateTime </i> | Fecha expiración de PatPass b
 wpmDetail.commerceMail <br><i> String </i> | Correo electrónico comercio. Largo máximo: 50. Los SDKs se encargan automáticamente de este parámetro a partir del email de comercio ingresado en la configuración usada para iniciar la transacción
 wpmDetail.ufFlag <br><i> Boolean </i> | Valor en true indica que el monto enviado está expresado en UF, valor en false indica que valor esta expresado en Pesos o dólar según corresponda
 
-**Respuesta**
+##### Respuesta Transaction.create
 
 ```java
 // Este SDK aún no se encuentra disponible
@@ -383,13 +383,13 @@ Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
-**Parámetros**
+##### Parámetros Transaction.commit
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 
-**Respuesta**
+##### Respuesta Transaction.commit
 
 ```java
 // Este SDK aún no se encuentra disponible

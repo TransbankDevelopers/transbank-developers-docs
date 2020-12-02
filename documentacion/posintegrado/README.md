@@ -97,16 +97,16 @@ Estos equipos funcionan tanto con puerto serial RS232 y USB (Generalmente plug a
 
 Este driver es compatible con los siguiente sistemas operativos.
 
-- Windows XP
-- Windows Vista
-- Windows 7
-- Windows 2008 Server
-- Windows 2008 Server R2
-- Windows 8 and 8.1
-- Windows XP Embedded
-- Windows 2012 Server
-- Windows 2016 Server
-- Windows 10
+* Windows XP
+* Windows Vista
+* Windows 7
+* Windows 2008 Server
+* Windows 2008 Server R2
+* Windows 8 and 8.1
+* Windows XP Embedded
+* Windows 2012 Server
+* Windows 2016 Server
+* Windows 10
   
 <aside class="warning">
 Ingenico no proporciona drivers para otros sistemas operativos, sin embargo es posible que de todas maneras puedas utilizar el POS en sistemas operativos distintos a los mencionados. En este caso la responsabilidad del correcto funcionamiento es del comercio.
@@ -139,10 +139,10 @@ git clone git://sigrok.org/libserialport
 
 Para compilar en windows necesitarás lo siguiente:
 
-- [msys2 - mingw-w64](http://www.msys2.org/) Puedes descargarlo siguiendo el link y las instrucciones provistas en su sitio web.
-  - Adicionalmente, necesitarás el toolchain para tu arquitectura:
-    - x86: `pacman -S mingw-w64-i686-toolchain`
-    - x64: `pacman -S mingw-w64-x86_64-toolchain`
+* [msys2 - mingw-w64](http://www.msys2.org/) Puedes descargarlo siguiendo el link y las instrucciones provistas en su sitio web.
+  * Adicionalmente, necesitarás el toolchain para tu arquitectura:
+    * x86: `pacman -S mingw-w64-i686-toolchain`
+    * x64: `pacman -S mingw-w64-x86_64-toolchain`
 
 <aside class="notice">
 Procura seguir todos los pasos descritos en el sitio de msys2
@@ -152,9 +152,9 @@ Procura seguir todos los pasos descritos en el sitio de msys2
 
 Para cada SDK se creó un proyecto de ejemplo:
 
-- [Proyecto de ejemplo SDK Web](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-example)
-- [Proyecto de ejemplo SDK Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java-example)
-- [Proyecto de ejemplo SDK .NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet-example)
+* [Proyecto de ejemplo SDK Web](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-example)
+* [Proyecto de ejemplo SDK Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java-example)
+* [Proyecto de ejemplo SDK .NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet-example)
 
 ## Primeros pasos
 
@@ -319,9 +319,9 @@ POS.closePort();
 
 Este comando es enviado por la caja para solicitar la ejecución de una venta. Los siguientes parámetros deben ser enviados desde la caja:
 
-- `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
-- `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
-- `Enviar Status`: (Opcional) Indica si se envian los mensajes intermedios (verdader) o se omiten (falso, por defecto)
+* `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
+* `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
+* `Enviar Status`: (Opcional) Indica si se envian los mensajes intermedios (verdader) o se omiten (falso, por defecto)
 
 En el caso de C#, los mensajes intermedios se reciven mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`.
 
@@ -410,10 +410,10 @@ El SDK de **C** y **Java** no soportan el envío de mensajes intermedios. Por es
 
 Este comando es enviado por la caja para solicitar la ejecución de una venta multicódigo. Los siguientes parámetros deben ser enviados desde la caja:
 
-- `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
-- `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
-- `CodigoDeComercio`: Código de comercio que realiza la venta. (No es el mismo código del POS, ya que en multicódigo el código padre no puede realizar ventas.)
-- `Enviar Status`: (Opcional) Indica si se envian los mensajes intermedios (verdader) o se omiten (falso, por defecto)
+* `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
+* `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
+* `CodigoDeComercio`: Código de comercio que realiza la venta. (No es el mismo código del POS, ya que en multicódigo el código padre no puede realizar ventas.)
+* `Enviar Status`: (Opcional) Indica si se envian los mensajes intermedios (verdader) o se omiten (falso, por defecto)
 
 En el caso de C#, los mensajes intermedios se reciben mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`
 
@@ -1072,9 +1072,9 @@ Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en 
 
 Ponemos a tu disposición un ejemplo en nuestro Github para ayudarte a entender mejor la integración.
 
-- [Ejemplo .Net](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet-example)
-- [Ejemplo Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java-example)
-- [Ejemplo Web](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-example)
+* [Ejemplo .Net](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet-example)
+* [Ejemplo Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java-example)
+* [Ejemplo Web](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-example)
 
 <div class="container slate">
   <div class='slate-after-footer'>

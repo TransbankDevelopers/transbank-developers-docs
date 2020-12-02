@@ -14,11 +14,9 @@ import cl.transbank.patpass.model.PatpassComercioInscriptionStartResponse;
 import cl.transbank.patpass.model.PatpassComercioTransactionStatusResponse;
 
 PatpassCommercio = new PatpassOptions();
-
 ```
 
 ```php
-
 use Transbank\Patpass\Options;
 use Transbank\Patpass\PatpassComercio;
 
@@ -29,8 +27,8 @@ $integrationType = "TEST / LIVE dependiendo de tu ambiente de integracion";
 PatpassComercio::setCommerceCode($commerceCode);
 PatpassComercio::setApiKey($apiKey);
 PatpassComercio::setIntegrationType($integrationType);
-
 ```
+
 ```csharp
 using Transbank.Common;
 using Transbank.Patpass.PatpassComercio;
@@ -38,14 +36,14 @@ using Transbank.Patpass.PatpassComercio;
 PatpassComercio.CommerceCode = "codigo de comercio en String";
 PatpassComercio.ApiKey = "Api Key en String";
 PatpassComercio.IntegrationType = "TEST / LIVE dependiendo de tu ambiente de integracion";
-
-
 ```
+
 ```ruby
-
+# ...
 ```
-```python
 
+```python
+# ...
 ```
 
 Te recomendamos encapsular estas asignaciones en una función para que puedas reutilizarlas en los demás métodos.
@@ -91,6 +89,7 @@ final PatpassComercioInscriptionStartResponse response = PatpassComercio.Inscrip
                     address,
                     city);
 ```
+
 ```php
 use Transbank\Patpass\Options;
 use Transbank\Patpass\PatpassComercio;
@@ -130,8 +129,8 @@ $response = PatpassComercio\Inscription::Start(
   $address,
   $city
 );
-
 ```
+
 ```csharp
 using Transbank.Patpass.PatpassComercio;
 // ...
@@ -153,7 +152,6 @@ var commerceEmail = "Correo de comercio";
 var address = "Dirección de Suscrito";
 var city = "Ciudad de suscrito";
 
-
 var response = Inscription.Start(
     returnUrl,
     name,
@@ -172,8 +170,8 @@ var response = Inscription.Start(
     address,
     city
 );
-
 ```
+
 ```ruby
 @url = "https://callback_url/resultado/de/la/transaccion"
 @name = "Nombre"
@@ -209,6 +207,7 @@ var response = Inscription.Start(
                                                     city: @city
                                                     )
 ```
+
 ```python
 from transbank.error.transbank_error import TransbankError
 from transbank.patpass_comercio.inscription import Inscription
@@ -234,7 +233,6 @@ response = Inscription.start(return_url, name, first_last_name, second_last_name
                                        person_email, commerce_mail, address, city)
 
 ```
-
 
 ### Confirmar suscripción
 
@@ -316,7 +314,6 @@ try:
 except TransbankError as e:
     print(e.message)
 ```
-
 
 ## Credenciales y Ambiente
 

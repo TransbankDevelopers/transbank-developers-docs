@@ -1,22 +1,19 @@
 # Transacción Completa
 
-## Transacción Completa
-
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#transaccion-completa' tbk-link-name='Referencia API'></div>
 </div>
 
 Una transacción completa permite al comercio presentar al tarjetahabiente un
 formulario propio para almacenar los datos de la tarjeta, fecha de vencimiento
-y cvv (no necesario para comercios con la opción `sin cvv` habilitada) . 
+y cvv (no necesario para comercios con la opción `sin cvv` habilitada).
 
 <aside class="warning">
 Este producto tiene requerimientos comerciales más estrictos que el resto de los productos.  
 No inicies la integración si aún no completan la afiliación comercial.
 </aside>
 
-
-### Crear una transacción
+## Crear una transacción
 
 Antes de realizar cualquier transacción es necesario instanciar el producto.
 
@@ -36,33 +33,31 @@ use Transbank\TransaccionCompleta;
 TransaccionCompleta::setCommerceCode = "Codigo de Comercio";
 TransaccionCompleta::setApiKey = "Apikey entregado por Transabank";
 TransaccionCompleta::setIntegrationType = "TEST/LIVE"; //ambiente de integracion;
-
-
 ```
 
 ```csharp
-...
+//...
 using Transbank.Webpay.Common;
 using Transbank.Webpay.TransaccionCompleta;
-...
+//...
 
 TransaccionCompleta.CommerceCode = "Codigo de Comercio";
 TransaccionCompleta.ApiKey = "Apikey entregado por Transabank";
 TransaccionCompleta.IntegrationType = "TEST/LIVE"; //ambiente de integracion;
-
 ```
 
 ```ruby
-
+# ...
 ```
 
 ```python
-
-
+# ...
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
+
 Es recomendado encapsular la asignacion para utilizarla sin problemas en los demas metodos.
 
 Ahora se pueden realizar transacciones sin problemas
@@ -80,7 +75,6 @@ String cardExpirationDate= "Fecha de expiracion en formato AA/MM";
 short cvv = 123; // CVV de la tarjeta.
 
 FullTransactionCreateResponse response = FullTransaction.Transaction.create(buyOrder, sessionId, amount, cardNumber, cardExpirationDate, cvv);
-
 ```
 
 ```php
@@ -123,7 +117,6 @@ card_number = "Numero de Tarjeta"
 card_expiration_date = "Fecha de expiracion en formato AA/MM"
 cvv = 123 /* CVV de la tarjeta. */
 
-
 response = Transbank::TransaccionCompleta::Transaction::create(
                                                             buy_order: buy_order,
                                                             session_id: session_id,
@@ -132,11 +125,9 @@ response = Transbank::TransaccionCompleta::Transaction::create(
                                                             cvv: cvv,
                                                             card_expiration_date: card_expiration_date
                                                             )
-
 ```
 
 ```python
-
 from transbank.transaccion_completa.transaction import Transaction
 
     # leyendo variables desde un formulario
@@ -151,13 +142,13 @@ from transbank.transaccion_completa.transaction import Transaction
         buy_order=buy_order, session_id=session_id, amount=amount,
         card_number=card_number, cvv=cvv, card_expiration_date=card_expiration_date
     )
-
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
 
-### Consulta de Cuotas
+## Consulta de Cuotas
 
 Antes de confirmar una transaccion es necesario confirmar la cantidad de cuotas y entregar el valor de estas.
 
@@ -165,7 +156,6 @@ Antes de confirmar una transaccion es necesario confirmar la cantidad de cuotas 
 
 ```java
 import cl.transbank.transaccioncompleta.FullTransaction;
-
 
 String token = "token obtenido como respuesta de la creacion de transaccion";
 int installmentsNumber = 10; // numero de cuotas;
@@ -218,11 +208,12 @@ from transbank.transaccion_completa.transaction import Transaction
     resp = Transaction.installments(token=token, installments_number=installments_number)
 
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
 
-### Confirmar Transaccion
+## Confirmar Transaccion
 
 Una vez obtenido la respuesta de la consulta de cuotas, con los datos de esta se puede realizar commit de la transaccion:
 
@@ -253,7 +244,6 @@ $token = "token obtenido como respuesta de la creacion de transaccion";
 $idQueryInstallments = 12345679; // numero identificador de las cuotas.
 $deferredPeriodIndex= 1;
 $gracePeriod = false;
-
 
 $response = Transaction::commit(
     $token,
@@ -293,7 +283,7 @@ response = Transbank::TransaccionCompleta::Transaction::commit( token: token,
 
 ```python
     from transbank.transaccion_completa.transaction import Transaction
-    
+
     #token obtenido como respuesta de la creacion de transaccion
     token = request.form.get('token')
     id_query_installments = 12345679 # numero identificador de las cuotas.
@@ -306,12 +296,12 @@ response = Transbank::TransaccionCompleta::Transaction::commit( token: token,
                               grace_period=grace_period)
 
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
 
-
-### Estado Transaccion
+## Estado Transaccion
 
 Para obtener el resultado de la transaccion exite el siguiente metodo:
 
@@ -319,7 +309,6 @@ Para obtener el resultado de la transaccion exite el siguiente metodo:
 
 ```java
 import cl.transbank.transaccioncompleta.FullTransaction;
-
 
 String token = "token obtenido como respuesta de la creacion de transaccion";
 
@@ -361,11 +350,12 @@ from transbank.transaccion_completa.transaction import Transaction
     response = Transaction.status(token=token) #token obtenido como respuesta de la creacion de transaccion
 
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
 
-### Reembolso Transaccion
+## Reembolso Transaccion
 
 Para procesar un reembolso de la transaccion exite el siguiente metodo:
 
@@ -421,34 +411,36 @@ from transbank.transaccion_completa.transaction import Transaction
     response = Transaction.refund(token=token, amount=amount)
 
 ```
+
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa. 
+// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
 ```
 
 ## Credenciales y Ambiente
 
 ### Ambiente de integración
-En el ambiente de integración existen códigos de comercio previamente creados para todos los productos, 
-para cada una de sus variaciones (Captura Diferida, Mall, Mall Captura Diferida, Sin CVV, etc) y dependiendo de 
+
+En el ambiente de integración existen códigos de comercio previamente creados para todos los productos,
+para cada una de sus variaciones (Captura Diferida, Mall, Mall Captura Diferida, Sin CVV, etc) y dependiendo de
 la moneda que acepten (USD o CLP).
 
 Esto permite que puedas operar en el ambiente de pruebas con un código de comercio que tenga la misma configuración contratada
-en tu código de comercio productivo. (Si contrataste OneClick Mall Captura Diferida, debes usar ese código de comercio 
-en integración para realizar las pruebas) 
+en tu código de comercio productivo. (Si contrataste Oneclick Mall Captura Diferida, debes usar ese código de comercio
+en integración para realizar las pruebas)
 
-Puedes revisar los códigos de comercio del ambiente de integración de todos nuestros productos y variaciones 
+Puedes revisar los códigos de comercio del ambiente de integración de todos nuestros productos y variaciones
 [en este link](/documentacion/como_empezar#ambiente-de-integracion).
 
 ### Configuración SDK
 
-Los SDK vienen configurados para operar con Transacción Completa captura simultanea en ambiente de integración. Si necesitas operar con otra modalidad, 
+Los SDK vienen configurados para operar con Transacción Completa captura simultanea en ambiente de integración. Si necesitas operar con otra modalidad,
 como captura diferida, debes configurar explícitamente el [código de comercio que usarás](/documentacion/como_empezar#ambiente-de-integracion).
-No es necesario definir el Api Key Secret (llave secreta) ya que en este ambiente, todos los productos usan la misma y 
-ya viene configurada. 
+No es necesario definir el Api Key Secret (llave secreta) ya que en este ambiente, todos los productos usan la misma y
+ya viene configurada.
 
 ```java
 FullTransaction.Transaction.setCommerceCode("pon-tu-codigo-de-comercio-aca");
-``` 
+```
 
 ```php
 \Transbank\TransaccionCompleta::setCommerceCode("{commerce-code}");
@@ -472,7 +464,7 @@ BaseTransaccionCompleta.commerce_code = "commercecode"
 
 ### Apuntar a producción
 
-Antes de operar en el ambiente de producción, debes pasar por un [proceso de validación](/documentacion/como_empezar#el-proceso-de-validacion), luego del cual te entregaremos 
+Antes de operar en el ambiente de producción, debes pasar por un [proceso de validación](/documentacion/como_empezar#el-proceso-de-validacion), luego del cual te entregaremos
 tu Api Key Secret (**llave secreta**).  
 
 Si ya tienes tu llave secreta, puedes revisar como configurar el SDK para usar este ambiente de producción en [esta sección](/documentacion/como_empezar#configuracion-de-produccion)
@@ -480,7 +472,7 @@ Si ya tienes tu llave secreta, puedes revisar como configurar el SDK para usar e
 ## Ejemplos de integración
 
 Ponemos a tu disposición una serie de repositorios en nuestro Github para ayudarte a entender la integración de mejor forma.
-Puedes encontrar una lista de [proyectos de ejemplo acá](/documentacion/como_empezar#ejemplos). 
+Puedes encontrar una lista de [proyectos de ejemplo acá](/documentacion/como_empezar#ejemplos).
 
 <aside class="notice">
 Si deseas revisar la documentación anterior (SOAP), puedes revisarla [acá](/documentacion/webpay)

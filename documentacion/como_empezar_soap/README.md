@@ -2,7 +2,6 @@
 Esta documentación hace referencia a los servicios SOAP. Encuentra la nueva [documentación REST acá](/documentacion/como_empezar)
 </aside>
 
-
 # Cómo empezar
 
 Para empezar a integrar los productos de Transbank, te recomendamos usar
@@ -20,7 +19,6 @@ específicos a Onepay, visita la sección dedicada a ese producto.
 ## Flujo de Integración
 
 Inicialmente el comercio tendrá algunas tareas necesarias que realizar mientras ocurre el proceso de integración. A continuación, puedes conocer el flujo completo.
-
 
 <img class="td_img-night" src="/images/documentacion/flujo-integracion.svg" alt="Flujo de integración">
 
@@ -58,6 +56,7 @@ Te recomendamos leer [las instrucciones de instalación detalladas para el SDK P
 se debe instalar por NPM o Yarn, ejecutando esto en la línea de comandos cuando estés en la raíz de tu proyecto:
 
 NPM
+
 ```bash
 npm install transbank-sdk --save
 ```
@@ -69,6 +68,7 @@ npm install -g openssl
 ```
 
 Yarn
+
 ```bash
 yarn add transbank-sdk
 ```
@@ -112,10 +112,10 @@ Te recomendamos leer [las instrucciones de instalación detalladas para el SDK P
 
 Transbank provee dos ambientes: **Integración** y **Producción**.
 
-**Ambiente de Integración**: En este ambiente el comercio realiza la integración del producto a contratar y testea 
+**Ambiente de Integración**: En este ambiente el comercio realiza la integración del producto a contratar y testea
 su solución de medio pago.
 
-**Ambiente de producción**: En este ambiente el comercio operará luego de finalizar el [proceso de puesta en producción](#puesta-en-produccion) y realizará transacciones 
+**Ambiente de producción**: En este ambiente el comercio operará luego de finalizar el [proceso de puesta en producción](#puesta-en-produccion) y realizará transacciones
 con tarjetas de crédito o débito **reales**.  
 
 ### Ambiente de integración
@@ -123,13 +123,13 @@ con tarjetas de crédito o débito **reales**.
 Para las transacciones Webpay en estos ambientes se deben usar estas
 tarjetas:
 
-- VISA 4051885600446623, CVV 123, cualquier fecha de expiración. Esta tarjeta
+* VISA 4051885600446623, CVV 123, cualquier fecha de expiración. Esta tarjeta
 genera transacciones aprobadas.
-- MASTERCARD 5186059559590568, CVV 123, cualquier fecha de expiración. Esta
+* MASTERCARD 5186059559590568, CVV 123, cualquier fecha de expiración. Esta
 tarjeta genera transacciones rechazadas.
-- Redcompra 4051884239937763 genera transacciones aprobadas (para operaciones
+* Redcompra 4051884239937763 genera transacciones aprobadas (para operaciones
 que permiten débito Redcompra y prepago)
-- Redcompra 5186008541233829 genera transacciones rechazadas (para operaciones
+* Redcompra 5186008541233829 genera transacciones rechazadas (para operaciones
 que permiten débito Redcompra y prepago)
 
 Cuando aparece un formulario de autenticación con RUT y clave, se debe
@@ -139,9 +139,9 @@ En cuanto al comercio, en este ambiente puedes usar las credenciales genéricas
 provistas por Transbank que te permiten hacer pruebas rápidamente (pues vienen pre-configuradas en nuestros SDKs). Si tienes prisa, puedes ir directo a ver
 como probar nuestros productos en este ambiente:
 
-- [Webpay Plus](webpay#webpay-plus)
-- [Webpay OneClick](webpay#webpay-oneclick)
-- [Onepay Checkout](onepay#integracion-checkout)
+* [Webpay Plus](webpay#webpay-plus)
+* [Webpay Oneclick](webpay#webpay-oneclick)
+* [Onepay Checkout](onepay#integracion-checkout)
 
 <aside class="notice">
 Tip: Los SDK y plugins provistos por Transbank tiene pre-configuradas
@@ -161,7 +161,6 @@ Oneclick Mall <br> <i>tienda 1</i> <br> <i>tienda 2</i> | 597044444429 <br> 5970
 
 Para mayor detalle de las credenciales puedes visitar [el repositorio GitHub
 `transbank-webpay-credenciales`](https://github.com/TransbankDevelopers/transbank-webpay-credenciales/)
-
 
 <aside class="notice">
 Tip: Cada uno de estos ambientes maneja distintas URLs (endpoints) y
@@ -226,9 +225,9 @@ valores entregados por el comercio al principio del flujo transaccional.
 
 ## Puesta en Producción
 
-1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](#el-proceso-de-validacion-y-puesta-en-produccion). Si realizaste la integración con un plugin, considera que junto con la planilla de integración, debes generar tus credenciales y enviar el certificado público y el logo (GIF, 130x59) a soporte@transbank.cl. 
+1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](#el-proceso-de-validacion-y-puesta-en-produccion). Si realizaste la integración con un plugin, considera que junto con la planilla de integración, debes generar tus credenciales y enviar el certificado público y el logo (GIF, 130x59) a soporte@transbank.cl.
 
-2. Posterior a que Transbank confirme que la planilla de integración se encuentra correcta (no aplica para plugins), se solicitará al comercio la [generación de las credenciales](#credenciales-en-onepay) (llave privada y certificado publico). El certificado público debe ser enviado junto al logo del comercio (GIF, 130x59) a soporte@transbank.cl para su registro. 
+2. Posterior a que Transbank confirme que la planilla de integración se encuentra correcta (no aplica para plugins), se solicitará al comercio la [generación de las credenciales](#credenciales-en-onepay) (llave privada y certificado publico). El certificado público debe ser enviado junto al logo del comercio (GIF, 130x59) a soporte@transbank.cl para su registro.
 
 3. Transbank informará via correo electrónico el correcto registro del certificado público enviado por el comercio. Posterior a ello, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-para-produccion-utilizando-los-sdk)
 
@@ -238,8 +237,8 @@ valores entregados por el comercio al principio del flujo transaccional.
 
 En el caso de Onepay las credenciales consisten en:
 
-- Un API Key
-- Un secreto ("shared secret").
+* Un API Key
+* Un secreto ("shared secret").
 
 Estos valores serán provistos por Transbank y en su conjunto permiten hacer
 transacciones a nombre del comercio. **Debes custodiar estas credenciales para
@@ -249,9 +248,9 @@ evitar que caigan en manos de terceros**.
 
 En el caso de Webpay, las credenciales consisten en:
 
-- Un código de comercio.
-- Una llave privada.
-- Un certificado público.
+* Un código de comercio.
+* Una llave privada.
+* Un certificado público.
 
 La llave y el certificado (autofirmado) deben ser generados por el comercio,
 con la condición de que el common name del certificado debe coincidir con el
@@ -263,43 +262,43 @@ disponer de OpenSSL versión 1.0. Los pasos son los siguientes (debes reemplazar
 
 1. Crear llave privada:
 
-```bash
-openssl genrsa -out 597029124456.key 2048
-```
+    ```bash
+      openssl genrsa -out 597029124456.key 2048
+    ```
 
 2. Crear requerimiento de certificado:
 
-```bash
-openssl req -new -key 597029124456.key -out 597029124456.csr
+    ```bash
+      openssl req -new -key 597029124456.key -out 597029124456.csr
 
-Country Name (2 letter code) []:CL
-State or Province Name (full name) []:
-Locality Name (eg, city) []:SANTIAGO
-Organization Name (eg, company) []:
-Organizational Unit Name (eg, section) []:
-Common Name (eg, your name or your server’s hostname) []:597029124456
-Email Address []:
-Please enter the following ‘extra’ attributes
-to be sent with your certificate request
-A challenge password []:
-An optional company name []:
-```
+      Country Name (2 letter code) []:CL
+      State or Province Name (full name) []:
+      Locality Name (eg, city) []:SANTIAGO
+      Organization Name (eg, company) []:
+      Organizational Unit Name (eg, section) []:
+      Common Name (eg, your name or your server’s hostname) []:597029124456
+      Email Address []:
+      Please enter the following ‘extra’ attributes
+      to be sent with your certificate request
+      A challenge password []:
+      An optional company name []:
+    ```
 
-<aside class="notice">
-Tip: Nota como en el ejemplo se ha ingresado un código de comercio en el
-momento en que openssl solicita un "Common Name". Acá debes ingresar el código
-de comercio de **producción** que te entregó Transbank. Asegúrate de que el código de comercio tenga antepuesto el número 5970, como en el ejemplo superior. Además, es importante no ingresar caracteres especiales en los otros campos ("Organization Name", "Locality Name", etc).
-</aside>
+    <aside class="notice">
+    Tip: Nota como en el ejemplo se ha ingresado un código de comercio en el
+    momento en que openssl solicita un "Common Name". Acá debes ingresar el código
+    de comercio de **producción** que te entregó Transbank. Asegúrate de que el código de comercio tenga antepuesto el número 5970, como en el ejemplo superior. Además, es importante no ingresar caracteres especiales en los otros campos ("Organization Name", "Locality Name", etc).
+    </aside>
 
 3. Crear certificado autofirmado:
 
-```bash
-openssl x509 -req -days 1460 -in 597029124456.csr -signkey 597029124456.key -out 597029124456.crt
-```
+    ```bash
+    openssl x509 -req -days 1460 -in 597029124456.csr -signkey 597029124456.key -out 597029124456.crt
+    ```
 
 <aside class="notice">
-Se recomienda que los certificados públicos tengan vigencia
-de al menos 4 años (1460 días).
+  Se recomienda que los certificados públicos tengan vigencia
+  de al menos 4 años (1460 días).
 </aside>
 
 Finalmente debes enviar a Transbank el certificado público (`597029124456.crt`)
@@ -325,19 +324,19 @@ integración. Esta validación es requisito necesario para dejar al comercio e
 producción y no se permitirá que un comercio utilice productivamente el
 servicio Webpay sin poseer una validación.
 
-Transbank solo validará las integraciones de aquellos comercios que tengan un código de comercio productivo. 
+Transbank solo validará las integraciones de aquellos comercios que tengan un código de comercio productivo.
 Para obtenerlo, sigue las instrucciones en cómo hacerse cliente en el portal <http://www.transbank.cl> o contacte a su
 ejecutivo comercial.
 
-
-En esta etapa, el comercio envía las evidencias a soporte@transbank.cl empleando el formulario correspondiente al 
-producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones. Para integraciones 
+En esta etapa, el comercio envía las evidencias a soporte@transbank.cl empleando el formulario correspondiente al
+producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones. Para integraciones
 Webpay que utilicen algún [plugin oficial](/plugin) existe un formulario especial.
- 
-Descargar el formulario de envidencias... 
-- Para integraciones Webpay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay.docx)
-- Para integraciones Webpay que usen un plugin oficial: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-plugins.docx)
-- Para integraciones Onepay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx)
+
+Descargar el formulario de envidencias...
+
+* Para integraciones Webpay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay.docx)
+* Para integraciones Webpay que usen un plugin oficial: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-plugins.docx)
+* Para integraciones Onepay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx)
 
 Soporte validará que los casos de prueba sean consistentes con los registrados
 en los sistemas de Webpay y, de estar todo correcto, se le notificará al
@@ -382,71 +381,71 @@ Si estás utilizando algún SDK oficial de Transbank y quieres pasa al ambiente 
 
 1. Remover la configuración para el ambiente de pruebas
 
-Antes de crear la nueva configuración para el ambiente de producción será necesario eliminar la actual comfiguración para el ambiente de pruebas que cumple con el siguiente formato `Configuration.ForTestingWebpayPlusNormal()`
+    Antes de crear la nueva configuración para el ambiente de producción será necesario eliminar la actual comfiguración para el ambiente de pruebas que cumple con el siguiente formato `Configuration.ForTestingWebpayPlusNormal()`
 
 2. Crear un nuevo elemento `Configuration`
 
-<div class="language-simple" data-multiple-language></div>
+    <div class="language-simple" data-multiple-language></div>
 
-<img src="/images/documentacion/configuracion/1-configuration-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/1-configuration-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/1-configuration-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
+    <img src="/images/documentacion/configuracion/1-configuration-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
+    <img src="/images/documentacion/configuracion/1-configuration-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
+    <img src="/images/documentacion/configuracion/1-configuration-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
 
-```javascript
-const configuration = new Transbank.Configuration()
-```
+    ```javascript
+      const configuration = new Transbank.Configuration()
+    ```
 
 3. Asignar el código de comercio productivo, entregado por Transbank al momento de contratar el producto.
 
-<img src="/images/documentacion/configuracion/2-codigo-comercio-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/2-codigo-comercio-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/2-codigo-comercio-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
+    <img src="/images/documentacion/configuracion/2-codigo-comercio-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
+    <img src="/images/documentacion/configuracion/2-codigo-comercio-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
+    <img src="/images/documentacion/configuracion/2-codigo-comercio-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
 
-```javascript
-const configuration = new Transbank.Configuration()
-                        .withCommerceCode(/* tu código de comercio */)
-```
+    ```javascript
+      const configuration = new Transbank.Configuration()
+                              .withCommerceCode(/* tu código de comercio */)
+    ```
 
-4. Configuración de la llave privada (`.key` para Java y PHP `.pfx` o `.p12` para .NET) 
+4. Configuración de la llave privada (`.key` para Java y PHP `.pfx` o `.p12` para .NET)
 generada por el comercio en la etapa previa.
 
-<img src="/images/documentacion/configuracion/3-private-key-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/3-private-key-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/3-private-key-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
+    <img src="/images/documentacion/configuracion/3-private-key-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
+    <img src="/images/documentacion/configuracion/3-private-key-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
+    <img src="/images/documentacion/configuracion/3-private-key-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
 
-```javascript
-const configuration = new Transbank.Configuration()
-                        .withCommerceCode(/* tu código de comercio */)
-                        .withPrivateCert(/* tu certificado privado en forma de string */)
-```
+    ```javascript
+      const configuration = new Transbank.Configuration()
+                              .withCommerceCode(/* tu código de comercio */)
+                              .withPrivateCert(/* tu certificado privado en forma de string */)
+    ```
 
-5. Configuración del certificado público (`.crt`) enviado a Transbank para su registro. En el caso de .NET no es 
+5. Configuración del certificado público (`.crt`) enviado a Transbank para su registro. En el caso de .NET no es
 necesario configurar el `.crt` pero se debe configurar el password asignado a la llave privada.
 
-<img src="/images/documentacion/configuracion/4-certificate-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/4-certificate-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/4-certificate-net(password).gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
+    <img src="/images/documentacion/configuracion/4-certificate-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
+    <img src="/images/documentacion/configuracion/4-certificate-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
+    <img src="/images/documentacion/configuracion/4-certificate-net(password).gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
 
-```javascript
-const configuration = new Transbank.Configuration()
-                        .withCommerceCode(/* tu código de comercio */)
-                        .withPrivateCert(/* tu certificado privado en forma de string */)
-                        .withPublicCert(/* tu certificado público en forma de string */)
-```
+    ```javascript
+      const configuration = new Transbank.Configuration()
+                              .withCommerceCode(/* tu código de comercio */)
+                              .withPrivateCert(/* tu certificado privado en forma de string */)
+                              .withPublicCert(/* tu certificado público en forma de string */)
+    ```
 
 6. Selección del ambiente productivo.
 
-<img src="/images/documentacion/configuracion/5-environment-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/5-environment-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
-<img src="/images/documentacion/configuracion/5-environment-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
+    <img src="/images/documentacion/configuracion/5-environment-php.gif" data-lenguaje-visible='php' class="url-modal-embed rounded mx-auto d-block"/>
+    <img src="/images/documentacion/configuracion/5-environment-java.gif" data-lenguaje-visible='java' class="url-modal-embed rounded mx-auto d-block"/>
+    <img src="/images/documentacion/configuracion/5-environment-net.gif" data-lenguaje-visible='csharp' class="url-modal-embed rounded mx-auto d-block"/>
 
-```javascript
-const configuration = new Transbank.Configuration()
-                        .withCommerceCode(/* tu código de comercio */)
-                        .withPrivateCert(/* tu certificado privado en forma de string */)
-                        .withPublicCert(/* tu certificado público en forma de string */)
-                        .usingEnvironment(Transbank.environments.production) // Se define el ambiente como producción
-```
+    ```javascript
+    const configuration = new Transbank.Configuration()
+                            .withCommerceCode(/* tu código de comercio */)
+                            .withPrivateCert(/* tu certificado privado en forma de string */)
+                            .withPublicCert(/* tu certificado público en forma de string */)
+                            .usingEnvironment(Transbank.environments.production) // Se define el ambiente como producción
+    ```
 
 7. Crear elemento Webpay utilizando la configuración de producción.
 
@@ -479,16 +478,16 @@ información a presentar dependerá de si la transacción fue autorizada o no
 
 Se recomienda, como mínimo, que posea:
 
-- Número de orden de Pedido
-- Nombre del comercio (Tienda de Mall)
-- Monto y moneda de la transacción
-- Código de autorización de la transacción
-- Fecha de la transacción
-- Tipo de pago realizado (Débito o Crédito)
-- Tipo de cuota
-- Cantidad de cuotas
-- 4 últimos dígitos de la tarjeta bancaria
-- Descripción de los bienes y/o servicios
+* Número de orden de Pedido
+* Nombre del comercio (Tienda de Mall)
+* Monto y moneda de la transacción
+* Código de autorización de la transacción
+* Fecha de la transacción
+* Tipo de pago realizado (Débito o Crédito)
+* Tipo de cuota
+* Cantidad de cuotas
+* 4 últimos dígitos de la tarjeta bancaria
+* Descripción de los bienes y/o servicios
 
 **Cuando la transacción no sea autorizada**, se recomienda informar al tarjetahabiente al respecto. Puede presentar un texto explicativo como:
 
@@ -499,7 +498,6 @@ Las posibles causas de este rechazo son:
 * Su tarjeta de Crédito o Débito no cuenta con saldo suficiente.
 * Tarjeta aún no habilitada en el sistema financiero.
 ```
-
 
 <div class="container slate">
   <div class='slate-after-footer'>

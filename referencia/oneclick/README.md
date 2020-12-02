@@ -1,11 +1,11 @@
+# Oneclick REST
+
 ___
 
 <aside class="notice">
 Estás viendo la <strong>nueva referencia REST</strong>. Si quieres ver la referencia anterior (deprecada)
 (SOAP) haz [click aquí](/referencia/webpay-soap)
 </aside>
-
-# OneClick REST
 
 ## Ambientes y Credenciales
 
@@ -125,20 +125,22 @@ iguales a los entregados para el ambiente de integración.
 </aside>
 
 ### Códigos de comercio
-En la documentación puedes revisar [todos los códigos de comercio](/documentacion/como_empezar#codigos-de-comercio) del ambiente de integración 
+
+En la documentación puedes revisar [todos los códigos de comercio](/documentacion/como_empezar#codigos-de-comercio) del ambiente de integración
 
 > Los SDKs ya incluyen esos códigos de comercio y llaves secretas
 > que funcionan en el ambiente de integración, por lo que puedes obtener
 > rápidamente una configuración lista para hacer tus primeras pruebas en dicho
 > ambiente:
 
-## OneClick Mall
-Revisa la [documentación de OneClick Mall](/documentacion/oneclick) para tener más información sobre como funciona 
-el producto y tener más detalles sobre como realizar tu integración. 
+## Oneclick Mall
+
+Revisa la [documentación de Oneclick Mall](/documentacion/oneclick) para tener más información sobre como funciona
+el producto y tener más detalles sobre como realizar tu integración.
 
 ### Crear una inscripción
 
-Permite gatillar el inicio del proceso de inscripción. 
+Permite gatillar el inicio del proceso de inscripción.
 Más información en [la documentación](/documentacion/oneclick).
 
 ```java
@@ -175,7 +177,7 @@ MallInscription.start(
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/inscriptions
 
-Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
@@ -186,7 +188,7 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+#### Parámetros Crear una inscripción
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -194,7 +196,7 @@ username  <br> <i> String </i> | Identificador del usuario registrado en el come
 email  <br> <i> String </i> | Email del usuario registrado en el comercio. Largo máximo: 100.
 response_url  <br> <i> String </i> | URL del comercio a la cual Webpay redireccionará posterior al proceso de inscripción. Largo máximo: 255.
 
-**Respuesta**
+#### Respuesta Crear una inscripción
 
 ```java
 response.getToken();
@@ -274,18 +276,18 @@ response = MallInscription.finish(token=token)
 ```http
 PUT /rswebpaytransaction/api/oneclick/v1.0/inscriptions/{token}
 
-Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 ```
 
-**Parámetros**
+#### Parámetros Confirmar una inscripción
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Identificador del proceso de inscripción. Es entregado por Webpay en la respuesta del método `Inscription.start()`. (See envía en la URL, no en el body)
 
-**Respuesta**
+#### Respuesta Confirmar una inscripción
 
 ```java
 response.getAuthorizationCode();
@@ -344,15 +346,17 @@ Content-Type: application/json
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 response_code <br> <i> Number </i> | Código de respuesta de la autorización. <br> Largo: 2. <br> Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente (Posible error en el ingreso de datos de la transacción) <br> -2 = Rechazo de transacción (Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada) <br> -3 = Error en transacción (Interno Transbank) <br> -4 = Rechazo emisor (Rechazada por parte del emisor) <br> -5 = Rechazo - Posible Fraude (Transacción con riesgo de posible fraude)
-tbk_user <br> <i> String </i> | Identificador único de la inscripción del cliente en OneClick, que debe ser usado para realizar pagos o borrar la inscripción. <br> Largo: 40.
+tbk_user <br> <i> String </i> | Identificador único de la inscripción del cliente en Oneclick, que debe ser usado para realizar pagos o borrar la inscripción. <br> Largo: 40.
 authorization_code  <br> <i> String </i> | Código que identifica la autorización de la inscripción. <br> Largo: 6.
 card_type <br> <i> cardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna, Redcompra). <br> Largo: 10.
 card_number <br> <i> String </i> | Últimos 4 dígitos de la tarjeta inscrito: <br> Largo: 4.
 
 ### Eliminar una inscripción
+
 Una vez finalizado el proceso de inscripción es posible eliminarla de ser necesario. Para esto debes usar el método llamado `Inscription.remove()`.
 
 #### `Inscription.remove()`
+
 Permite eliminar un usuario enrolado a Oneclick Mall.
 
 ```java
@@ -382,7 +386,7 @@ MallInscription.delete(tbk_user, user_name)
 ```http
 DELETE /rswebpaytransaction/api/oneclick/v1.0/inscriptions
 
-Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
@@ -393,14 +397,14 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+#### Parámetros Eliminar una inscripción
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tbk_user  <br> <i> String </i> | Identificador único de la inscripción del cliente (devuelto por `Inscription.finish()`). Largo: 40.
 username  <br> <i> String </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `Inscription.start()`). Largo máximo: 40.
 
-**Respuesta**
+#### Respuesta Eliminar una inscripción
 
 ```java
 // 204 OK
@@ -514,7 +518,7 @@ MallTransaction.authorize(
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/transactions
 
-Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
@@ -532,20 +536,20 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+#### Parámetros Autorizar un pago
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 username  <br> <i> String </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `Inscription.start()`). Largo máximo: 40.
 tbk_user  <br> <i> String </i> | Identificador único de la inscripción del cliente (devuelto por `Inscription.finish()`). Largo: 40.
 buy_order  <br> <i> Number </i> | Identificador único de la compra generado por el comercio. Largo máximo: 26.
-details  <br> <i> Array </i> | Lista de objetos, uno por cada tienda diferente del mall que participa en la transacción. 
+details  <br> <i> Array </i> | Lista de objetos, uno por cada tienda diferente del mall que participa en la transacción.
 details [].commerce_code  <br> <i>String </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
 details [].buy_order  <br> <i> String </i> | Identificador único de la compra generado por el comercio hijo (tienda). Largo máximo: 26.
 details [].amount  <br> <i> Decimal </i> | Monto de la transacción de pago. Largo máximo: 17.
 details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas de la transacción de pago. Largo 2. No obligatorio.
 
-**Respuesta**
+#### Respuesta Autorizar un pago
 
 ```java
 response.getAccountingDate();
@@ -670,8 +674,8 @@ Content-Type: application/json
       "buy_order": "505479072"
   }]
 }
-
 ```
+
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buy_order  <br> <i> String </i> | Orden de compra generada por el comercio padre.
@@ -701,7 +705,6 @@ Retorna el resultado de la autorización.
 
 Revisa la [documentación](/documentacion/oneclick#consultar-un-pago-realizado) de este método para mayor detalle.
 
-
 ```java
 final OneclickMallTransactionStatusResponse response =
   OneclickMall.Transaction.status(buyOrder);
@@ -730,18 +733,18 @@ var response = MallTransaction.status(buy_order)
 ```http
 GET /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}
 
-Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 ```
 
-**Parámetros**
+#### Parámetros Consultar un pago realizado
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buy_order  <br> <i> String </i> | Orden de compra de la transacción a consultar (se envía en la URL, no en el body).
 
-**Respuesta**
+#### Respuesta Consultar un pago realizado
 
 ```java
 response.getAccountingDate();
@@ -888,10 +891,9 @@ details [].buy_order  <br> <i> String </i> | Orden de compra generada por el com
 status  <br> <i> Text </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
 
+### Reversar o Anular un pago Oneclick Mall
 
-### Reversar o Anular un pago OneClick Mall
-
-Revisa la [documentación](/documentacion/oneclick#anular-una-transaccion) de este método para mayor detalle.   
+Revisa la [documentación](/documentacion/oneclick#anular-una-transaccion) de este método para mayor detalle.
 
 ```java
 final OneclickMallTransactionRefundResponse response =
@@ -926,7 +928,7 @@ var response = MallTransaction.refund(buy_order, child_commerce_code, child_buy_
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}/refunds
 
-Tbk-Api-Key-Id: 597055555541 
+Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
@@ -937,16 +939,16 @@ Content-Type: application/json
 }
 ```
 
-**Parámetros**
+#### Parámetros Reversar o Anular
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-buy_order  <br> <i> String </i> | Orden de compra de la transacción a  reversar o anular. Se envía en la URL, no en el body. Largo máximo: 26. 
+buy_order  <br> <i> String </i> | Orden de compra de la transacción a  reversar o anular. Se envía en la URL, no en el body. Largo máximo: 26.
 commerce_code  <br> <i> String </i> | Código de comercio hijo. Largo máximo: 12.
 detail_buy_order  <br> <i> String </i> | Orden de compra hija de la transacción a  reversar o anular. Largo máximo: 26.
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> | Monto que se desea anular o reversar de la transacción. Largo máximo: 17
 
-**Respuesta**
+#### Respuesta Reversar o Anular
 
 ```java
 response.getAuthorizationCode();
@@ -1022,12 +1024,11 @@ balance  <br> <i> Decimal </i> | Monto restante de la transacción de pago ori
 response_code <br> <i> Number </i> | Código del resultado del pago, donde: 0 (cero) es aprobado. Largo máximo: 2
 buy_order  <br> <i> String </i> | Orden de compra generada por el comercio hijo para la transacción de pago. Largo máximo: 26.
 
+### Captura Diferida Oneclick Mall
 
-### Captura Diferida OneClick Mall
-
-Una transacción OneClick Mall permite que el tarjetahabiente registre su
-tarjeta de la misma forma en que ocurre con una transacción OneClick, asociando
-dicha inscripción a un comercio padre. Ahora, una vez realizada la inscripción, 
+Una transacción Oneclick Mall permite que el tarjetahabiente registre su
+tarjeta de la misma forma en que ocurre con una transacción Oneclick, asociando
+dicha inscripción a un comercio padre. Ahora, una vez realizada la inscripción,
 el comercio padre tiene permitido autorizar transacciones sin captura para
 los comercios “hijo” registrados que tengan habilitado captura diferida.
 Además posterior a la autorización tiene permitido capturar dicho monto reservado.
@@ -1042,7 +1043,7 @@ Para realizar esa captura explícita debe usarse el método `capture()`
 
 #### `capture()`
 
-Este método permite a los comercios OneClick Mall habilitados, poder
+Este método permite a los comercios Oneclick Mall habilitados, poder
 realizar capturas diferidas de una transacción previamente autorizada. El método
 contempla una única captura por cada autorización. Para ello se deberá indicar los
 datos asociados a la transacción de venta y el monto requerido para capturar, el cual
@@ -1084,7 +1085,8 @@ Content-Type: application/json
     "authorization_code": "1213"
 }
 ```
-**Parámetros**
+
+#### Parámetros Captura Diferida
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1098,7 +1100,7 @@ El método `capture()` debe ser invocado siempre indicando el código del
 comercio de la tienda virtual específica.
 </aside>
 
-**Respuesta**
+#### Respuesta Captura Diferida
 
 ```java
 // Esta función aun no se encuentra disponible en el SDK
@@ -1130,6 +1132,7 @@ Content-Type: application/json
     "response_code": 0
 }
 ```
+
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 authorization_code  <br> <i> String </i> | Código de autorización de la captura diferida. Largo máximo: 6
@@ -1142,14 +1145,14 @@ En caso de error apareceran los mismos códigos exclusivos del método `capture
 para captura simpultanea.
 </aside>
 
-
 ## Captura Diferida
 
-Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo el cargo al tarjetahabiente. 
+Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo el cargo al tarjetahabiente.
 
-**Válido para :** 
-- Webpay Plus Captura Diferida
-- Transacción Completa Captura Diferida
+**Válido para :**
+
+* Webpay Plus Captura Diferida
+* Transacción Completa Captura Diferida
 
 ### Ejecutar captura diferida
 
@@ -1220,18 +1223,19 @@ response = MallDeferredTransaction.capture(
 
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
-Tbk-Api-Key-Id: 597055555531 
+Tbk-Api-Key-Id: 597055555531
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
-  "commerce_code": "597055555531", 
+  "commerce_code": "597055555531",
   "buy_order": "415034240",
   "authorization_code": "12345",
   "capture_amount": 1000
 }
 ```
-**Parámetros**
+
+#### Parámetros Ejecutar captura diferida
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1241,7 +1245,7 @@ buy_order  <br> <i> String </i> | Orden de compra de la transacción que se req
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
 capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo máximo: 17.
 
-**Respuesta**
+#### Respuesta Ejecutar captura diferida
 
 ```java
 response.getAuthorizationCode();
@@ -1317,12 +1321,12 @@ Código | Descripción
 311 | Monto a capturar excede el monto autorizado
 315 | Error del autorizador
 
-
 ## Códigos y mensajes de error
 
 Al realizar cualquier solicitud al API REST, además de los datos de respuesta, se incluirá uno de los siguientes códigos de estado de respuesta HTTP dependiendo del resultado obtenido:  
 
-### Solicitud exitosa 
+### Solicitud exitosa
+
 Cuando la operación solcitada es ejecutada correctamente, se pueden recibir estos status HTTP:
 
 Código de estado HTTP | Descripción
@@ -1331,6 +1335,7 @@ Código de estado HTTP | Descripción
 204 | La operación DELETE se ha ejecutado exitosamente
 
 #### Códigos de error
+
 Todos los errores reportados por la API REST de Webpay despliegan un mensaje JSON con una descripción del error.
 
 ```json
@@ -1341,14 +1346,14 @@ Todos los errores reportados por la API REST de Webpay despliegan un mensaje JSO
 
 Código de estado HTTP | Descripción
 ------ | -----------
-400 | El mensaje JSON es inválido. Puedes ser que no corresponda a un mensaje bien estructurado o que contenga un campo no esperado. 
-401 | No autorizado. API Key y/o API Secret inválidos 
+400 | El mensaje JSON es inválido. Puedes ser que no corresponda a un mensaje bien estructurado o que contenga un campo no esperado.
+401 | No autorizado. API Key y/o API Secret inválidos
 404 | La transacción no ha sido encontrada.
-405 | Método no permitido. 
-406 | No fue posible procesar la respuesta en el formato que el cliente indica. 
-415 | Tipo de mensaje no permitido. 
-422 | El requerimiento no ha podido ser procesado ya sea por validaciones de datos o por lógica de negocios. 
-500 | Ha ocurrido un error inesperado. 
+405 | Método no permitido.
+406 | No fue posible procesar la respuesta en el formato que el cliente indica.
+415 | Tipo de mensaje no permitido.
+422 | El requerimiento no ha podido ser procesado ya sea por validaciones de datos o por lógica de negocios.
+500 | Ha ocurrido un error inesperado.
 
 ## Puesta en Producción
 
@@ -1374,8 +1379,8 @@ Soporte validará que los casos de prueba sean consistentes con los registrados
 
 En el proceso de contratación recibiste tu código de comercio, y junto con el **secreto compartido** que se te entregó luego de la certificación puedes completar tus credenciales, las cuales **debes custodiar y evitar que estén en manos de terceros** ya que permiten hacer (o anular) transacciones en nombre de tu comercio.
 
-- Código de comercio (*API Key*)
-- Secreto compartido (*Shared Secret*)
+* Código de comercio (*API Key*)
+* Secreto compartido (*Shared Secret*)
 
 Luego que el proceso de validación de tu integración está terminado, debes realizar la configuración para que tu sitio se encuentre en producción.
 
@@ -1389,21 +1394,21 @@ Nunca dejes tu código de comercio y secreto compartido directamente en tu códi
 
 1. Asignar el código de comercio productivo, entregado por Transbank al momento de contratar el producto.
 
+    ```java
+    // Para Oneclick
+    OneclickMall.setCommerceCode('TU_CODIGO_DE_COMERCIO');
+    ```
+
+2. Configuración del secreto compartido.
+
+    ```java
+    // Para Oneclick
+    OneclickMall.setApiKey('TU_API_KEY');
+    ```
+
+3. Selección del ambiente productivo.
+
 ```java
-// Para OneClick
-OneclickMall.setCommerceCode('TU_CODIGO_DE_COMERCIO'); 
-```
-
-3. Configuración del secreto compartido.
-
-```java
-// Para OneClick
-OneclickMall.setApiKey('TU_API_KEY');
-```
-
-5. Selección del ambiente productivo.
-
-```java
-// Para OneClick
+// Para Oneclick
 OneclickMall.setIntegrationType(IntegrationType.LIVE);
 ```
