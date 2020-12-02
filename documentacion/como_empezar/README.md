@@ -188,6 +188,7 @@ Transacción Completa Mall | `597055555573` Mall <br> `597055555574` Tienda 1 <b
 Transacción Completa Mall sin CVV| `597055555551` Mall <br> `597055555552` Tienda 1 <br> `597055555553` Tienda 2
 Transacción Completa Mall Captura Diferida | `597055555576` Mall <br> `597055555577` Tienda 1 <br> `597055555578` Tienda 2
 Transacción Completa Mall Captura Diferida sin CVV | `597055555561` Mall <br> `597055555562` Tienda 1 <br> `597055555563` Tienda 2
+Patpass Comercio | `27082157` Código de comercio <br> `J7xYiUS7xqD7LkbWSUHI` Lave secreta (Api Key Secret)
 
 ## Productos disponibles
 
@@ -299,9 +300,10 @@ Webpay que utilicen algún [plugin oficial](/plugin) existe un formulario especi
 
 Descargar el formulario de envidencias...
 
-* Para integraciones Webpay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-rest.docx)
+* Para integraciones Webpay (Webpay Plus, Webpay OneClick, Webpay transacción completa): [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-rest.docx)
 * Para integraciones Webpay que usen un plugin oficial: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-plugins-rest.docx)
 * Para integraciones Onepay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx)
+* Para integraciones Patpass Comercio: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-patpass-comercio.docx)
 
 Soporte validará que los casos de prueba sean consistentes con los registrados
 en los sistemas de Webpay y, de estar todo correcto, se le notificará al

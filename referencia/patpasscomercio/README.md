@@ -288,12 +288,13 @@ respone.url
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-token  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
+token  <br> <i> xs:string </i> |  Token de la transacción. Largo: 64.
 url  <br> <i> xs:string </i> | URL de formulario de pago Patpass Comercio. Largo máximo: 256.
 
 ##### Mensajes de error
 
 Código | Descripción
+------   | -----------
 -1   | Error interno
 -101 | URL final incorrecta
 -102 | URL retorno incorrecta
@@ -392,7 +393,7 @@ response.voucher_url
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-authorized  <br> <i> string </i> | Boolean representa estado de la transacción.
+authorized  <br> <i> string </i> |  Boolean representa estado de la transacción.
 voucherUrl  <br> <i> string </i> | URL para mostrar el voucher. Largo máximo: 256.
 
 La respuesta de este método se debe utilizar para crear un campo de nombre `tokenComercio` en un formulario, al cual se  le asigna el valor de `token` y debe ser enviado a `voucherUrl`.
