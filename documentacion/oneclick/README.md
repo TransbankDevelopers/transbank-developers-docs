@@ -627,7 +627,7 @@ final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTra
 ```
 
 ```php
-//Este SDK aún no tiene implementada esta funcionalidad. Se puede consumir el método del API REST directamente, sin usar el SDK de momento.
+$response = MallTransaction::capture($commerce_code, $buy_order, $authorization_code, $amount);
 ```
 
 ```csharp
@@ -635,7 +635,10 @@ final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTra
 ```
 
 ```ruby
-# Este SDK aún no tiene implementada esta funcionalidad. Se puede consumir el método del API REST directamente, sin usar el SDK de momento.
+response = Transbank::Webpay::Oneclick::MallDeferredTransaction::capture(
+  child_commerce_code: @commerce_code, child_buy_order: @buy_order,
+  amount: @capture_amount, authorization_code: @authorization_code
+)
 ```
 
 ```python
