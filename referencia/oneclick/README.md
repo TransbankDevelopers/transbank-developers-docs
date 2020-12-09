@@ -1054,11 +1054,13 @@ autorizada pero requerirá una captura explícita posterior para confirmar la
 transacción.
 
 ```java
-// Esta funcion aun no se encuentra disponible en el SDK
+final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTransaction.capture(
+  childCommerceCode, childBuyOrder, amount, authorizationCode
+);
 ```
 
 ```php
-// Esta funcion aun no se encuentra disponible en el SDK
+$response = MallTransaction::capture($commerce_code, $buy_order, $authorization_code, $amount);
 ```
 
 ```csharp
@@ -1066,7 +1068,10 @@ transacción.
 ```
 
 ```ruby
-# Esta funcion aun no se encuentra disponible en el SDK
+response = Transbank::Webpay::Oneclick::MallDeferredTransaction::capture(
+  child_commerce_code: @commerce_code, child_buy_order: @buy_order,
+  amount: @capture_amount, authorization_code: @authorization_code
+)
 ```
 
 ```python
@@ -1103,11 +1108,17 @@ comercio de la tienda virtual específica.
 <strong>Respuesta Captura Diferida</strong>
 
 ```java
-// Esta función aun no se encuentra disponible en el SDK
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getCapturedAmount();
+response.getResponseCode();
 ```
 
 ```php
-// Esta función aun no se encuentra disponible en el SDK
+response->getAuthorizationCode();
+response->getAuthorizationDate();
+response->getCapturedAmount();
+response->getResponseCode();
 ```
 
 ```csharp
@@ -1115,7 +1126,10 @@ comercio de la tienda virtual específica.
 ```
 
 ```ruby
-# Esta función aun no se encuentra disponible en el SDK
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
 ```
 
 ```python
