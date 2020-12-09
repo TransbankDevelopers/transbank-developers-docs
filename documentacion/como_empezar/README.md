@@ -420,9 +420,9 @@ Transbank::Webpay::WebpayPlus::Base.api_key = "apikey"
 Transbank::Webpay::WebpayPlus::Base.integration_type = :LIVE
 
 # Oneclick
-Transbank::Webpay::OneClick::Base.commerce_code = "commercecode"
-Transbank::Webpay::OneClick::Base.api_key = "apikey"
-Transbank::Webpay::OneClick::Base.integration_type = :LIVE
+Transbank::Webpay::Oneclick::Base.commerce_code = "commercecode"
+Transbank::Webpay::Oneclick::Base.api_key = "apikey"
+Transbank::Webpay::Oneclick::Base.integration_type = :LIVE
 ```
 
 ```python

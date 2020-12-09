@@ -154,9 +154,9 @@ WebpayPlus.Transaction.IntegrationType = WebpayIntegrationType.Test;
 
 ```ruby
 # El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
-Transbank::Webpay::WebpayPlus.commerce_code = 597055555532;
-Transbank::Webpay::WebpayPlus.api_key = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C";
-Transbank::Webpay::WebpayPlus.integration_type = "TEST";
+Transbank::Webpay::WebpayPlus::Base.commerce_code = 597055555532;
+Transbank::Webpay::WebpayPlus::Base.api_key = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C";
+Transbank::Webpay::WebpayPlus::Base.integration_type = "TEST";
 
 ```
 
