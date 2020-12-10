@@ -7,7 +7,7 @@
     <br>
     <h4>Compatibilidad</h4>
     <ul>
-      <li>Magento2 >= 3.2</li>
+      <li>Magento2 2.2.X y 2.3.X</li>
       <li>PHP >= 5.6</li>
     </ul>
     <h4>Recuerda</h4>
