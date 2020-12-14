@@ -47,7 +47,7 @@ _Esta pantalla de diagnóstico se encuentra en la sección de configuración del
 ## Instalación
 
 1. [Descargar el archivo .zip del plugin](https://github.com/TransbankDevelopers/transbank-plugin-prestashop-webpay-rest/releases/latest)
-2. Sube el archivo zip en la sección Plugin > Subir nuevo plugin en el administrador de tu Wordpress
+2. Sube el archivo zip en la sección Plugin > Subir nuevo plugin en el administrador de tu Prestashop
 
 Las instrucciones detalladas de instalación las puedes encontrar en el [siguiente link](https://github.com/TransbankDevelopers/transbank-plugin-prestashop-webpay-rest/blob/master/docs/INSTALLATION.md).
 
