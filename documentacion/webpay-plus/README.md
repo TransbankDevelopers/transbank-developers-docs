@@ -631,16 +631,15 @@ response = Transbank::Webpay::WebpayPlus::DeferredTransaction::capture(
 ```
 
 ```python
-response = MallDeferredTransaction.capture(
-  token=token, capture_amount=amount, commerce_code=commerce_code,
-  buy_order=buy_order, authorization_code=authorization_code
+response = DeferredTransaction.capture(
+  token=token, buy_order=buy_order, authorization_code=authorization_code, capture_amount=amount
 )
 ```
 
 Una vez realizada la captura, recibirás un objeto con la respuesta. Revisa la [referencia API](/referencia/webpay) para conocer más detalles 
 sobre los posibles resultados.  
-<strong>Respuesta</strong>
 
+<strong>Respuesta de una captura</strong>
 ```java
 response.getAuthorizationCode();
 response.getAuthorizationDate();
@@ -1260,6 +1259,75 @@ Para obtener la información contenida en la respuesta puedes hacerlo de la sigu
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#capturar-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
 </div>
+
+```java
+final WebpayPlusMallTransactionCaptureResponse response = WebpayPlus.MallDeferredTransaction.capture(token, childCommerceCode, buyOrder, authorizationCode, amount);
+```
+
+```php
+use Transbank\Webpay\WebpayPlus;
+
+$response = Transaction::captureMall($childCommerceCode, $token, $buyOrder, $authorizationCode, $captureAmount);
+```
+
+```csharp
+var response = Transbank.Webpay.WebpayPlus.MallDeferredTransaction.Capture(token, childCommerceCode, buyOrder, authorizationCode, captureAmount);
+```
+
+```ruby
+response = Transbank::Webpay::WebpayPlus::MallDeferredTransaction::capture(
+  token: @token,
+  child_commerce_code: @child_commerce_code,
+  buy_order: @buy_order,
+  authorization_code: @auth_code,
+  capture_amount: @amount
+)
+```
+
+```python
+response = MallDeferredTransaction.capture(
+  token=token, capture_amount=amount, commerce_code=commerce_code,
+  buy_order=buy_order, authorization_code=authorization_code
+)
+```
+
+<strong>Respuesta de una captura mall</strong>
+```java
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getCapturedAmount();
+response.getResponseCode();
+```
+
+```php
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getCapturedAmount();
+$response->getResponseCode();
+```
+
+```csharp
+response.AuthorizationCode;
+response.AuthorizationDate;
+response.CapturedAmount;
+response.ResponseCode;
+```
+
+```ruby
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
+```python
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
+
 
 Esta operación funciona de la misma manera que la [captura de Webpay Plus normal](#capturar-una-transaccion).
 
