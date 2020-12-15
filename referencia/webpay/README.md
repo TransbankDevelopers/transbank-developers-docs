@@ -185,7 +185,8 @@ de crédito, débito o prepago lo realiza en forma segura en Webpay.
 Revisa [la documentación](/documentacion/webpay-plus#flujo-en-caso-de-exito) de Webpay plus para revisar los diferentes flujos de pago posibles. 
 
 De cara al tarjetahabiente, el flujo de páginas para la transacción es el
-### Crear una transacción Webpay Plus | [Ver documentación](/documentacion/webpay-plus#crear-una-transaccion)
+### Crear una transacción Webpay Plus
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#crear-una-transaccion)
 
 Permite inicializar una transacción en Webpay. Como respuesta a la invocación
 se genera un token que representa en forma única una transacción.
@@ -292,7 +293,8 @@ Nombre  <br> <i> tipo </i> | Descripción
 token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 url  <br> <i> String </i> | URL de formulario de pago Webpay. Largo máximo: 255.
 
-### Confirmar una transacción Webpay Plus | [Ver documentación](/documentacion/webpay-plus#confirmar-una-transaccion)
+### Confirmar una transacción Webpay Plus
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#confirmar-una-transaccion)
 
 Permite confirmar y obtener el resultado de la transacción una vez que Webpay ha resuelto su autorización financiera.
 
@@ -463,7 +465,8 @@ installments_amount <br> <i> Number </i> | Monto de las cuotas. Largo máximo: 1
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 balance  <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
-### Obtener estado de una transacción Webpay Plus | [Ver documentación](/documentacion/webpay-plus#obtener-estado-de-una-transaccion)
+### Obtener estado de una transacción Webpay Plus
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#obtener-estado-de-una-transaccion)
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable 
 que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las 
@@ -636,7 +639,8 @@ installments_amount <br> <i> Number </i> | Monto de las cuotas. Largo máximo: 1
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 balance  <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
-### Reversar o Anular un pago Webpay Plus | [Ver documentación](/documentacion/webpay-plus#reversar-o-anular-una-transaccion)
+### Reversar o Anular un pago Webpay Plus
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#reversar-o-anular-una-transaccion)
 
 Para anular una transacción se debe invocar al método `Transaction.refund()`.
 
@@ -782,7 +786,8 @@ Código | Descripción
 315 | Error del autorizador
 53 | La transacción no permite anulación parcial de transacciones con cuotas
 
-### Capturar una transacción Webpay Plus | [Ver documentación](/documentacion/webpay-plus#capturar-una-transaccion)
+### Capturar una transacción Webpay Plus
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#capturar-una-transaccion)
 
 Permite solicitar a Webpay la captura diferida de una transacción con
 autorización y sin captura simultánea.
@@ -929,7 +934,8 @@ Cada pago tendrá su propio resultado, autorizado o rechazado.
 
 Revisa más detalles sobre esta modalidad en [la documentación](/documentacion/webpay-plus#webpay-plus-mall)
 
-### Crear una transacción Webpay Plus Mall | [Ver documentación](/documentacion/webpay-plus#crear-una-transaccion-mall)
+### Crear una transacción Webpay Plus Mall
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#crear-una-transaccion-mall)
 
 Para crear una transacción basta llamar al método `Transaction.create()`
 
@@ -1100,7 +1106,8 @@ Nombre  <br> <i> tipo </i> | Descripción
 token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 url  <br> <i> String </i> | URL de formulario de pago Webpay. Largo máximo: 256.
 
-### Confirmar una transacción Webpay Plus Mall | [Ver documentación](/documentacion/webpay-plus#confirmar-una-transaccion-mall)
+### Confirmar una transacción Webpay Plus Mall
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#confirmar-una-transaccion-mall)
 
 
 Permite confirmar una tranascción y obtener el resultado de la transacción
@@ -1300,7 +1307,8 @@ details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda. Largo
 details [].status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 26
 balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
-### Obtener estado de una transacción Webpay Plus Mall | [Ver documentación](/documentacion/webpay-plus#obtener-estado-de-una-transaccion-mall)
+### Obtener estado de una transacción Webpay Plus Mall
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#obtener-estado-de-una-transaccion-mall)
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
@@ -1498,7 +1506,8 @@ details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda. Largo
 details [].status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 26
 balance <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
 
-### Reversar o Anular un pago Webpay Plus Mall | [Ver documentación](/documentacion/webpay-plus#reversar-o-anular-una-transaccion-mall)
+### Reversar o Anular un pago Webpay Plus Mall
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#reversar-o-anular-una-transaccion-mall)
 
 Este método permite a todo comercio habilitado reversar o anular una transacción
 que fue generada en Webpay Plus Mall. 
@@ -1637,7 +1646,8 @@ Código  | Descripción
 315     | Error del autorizador
 53      | La transacción no permite anulación parcial de transacciones con cuotas
 
-### Capturar una transacción Webpay Plus Mall | [Ver documentación](/documentacion/webpay-plus#capturar-una-transaccion-mall)
+### Capturar una transacción Webpay Plus Mall
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#capturar-una-transaccion-mall)
 
 Permite solicitar a Webpay la captura diferida de una transacción con
 autorización y sin captura simultánea.
@@ -1780,7 +1790,8 @@ Código | Descripción
 Revisa la [documentación de Oneclick Mall](/documentacion/oneclick) para tener más información sobre como funciona
 el producto y tener más detalles sobre como realizar tu integración.
 
-### Crear una inscripción Oneclick Mall | [Ver documentación](/documentacion/oneclick#crear-una-inscripcion)
+### Crear una inscripción Oneclick Mall
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#crear-una-inscripcion)
 
 Permite comenzar con el proceso de inscripción.
 
@@ -1884,7 +1895,8 @@ Una vez que se llama a este webservice el usuario debe ser redireccionado vía
 POST a `urlInscriptionForm` con parámetro `TBK_TOKEN` igual al token.
 </aside>
 
-### Confirmar una inscripción Oneclick Mall | [Ver documentación](/documentacion/oneclick#confirmar-una-inscripcion)
+### Confirmar una inscripción Oneclick Mall
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#confirmar-una-inscripcion)
 
 Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
 
@@ -1991,7 +2003,8 @@ authorization_code  <br> <i> String </i> | Código que identifica la autorizaci
 card_type <br> <i> cardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna, Redcompra). <br> Largo: 10.
 card_number <br> <i> String </i> | Últimos 4 dígitos de la tarjeta inscrito: <br> Largo: 4.
 
-### Eliminar una inscripción con Oneclick Mall | [Ver documentación](/documentacion/oneclick#eliminar-una-inscripcion)
+### Eliminar una inscripción con Oneclick Mall
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#eliminar-una-inscripcion)
 
 Una vez finalizado el proceso de inscripción es posible eliminarla de ser necesario. Para esto debes usar el método llamado `Inscription.remove()`.
 
@@ -2071,7 +2084,8 @@ username  <br> <i> String </i> | Identificador del usuario en los sistemas del 
 Content-Type: application/json
 ```
 
-### Autorizar un pago con Oneclick Mall | [Ver documentación](/documentacion/oneclick#autorizar-un-pago)
+### Autorizar un pago con Oneclick Mall
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#autorizar-un-pago)
 
 Una vez realizada la inscripción, el comercio puede usar el `tbkUser` recibido
 para realizar transacciones. Para eso debes usar el método `Transaction.authorize()`.
@@ -2338,7 +2352,8 @@ Cualquier valor distinto de número en `installmentsNumber` (incluyendo letras,
 inexistencia del campo o nulo) será asumido como cero, es decir "Sin cuotas".
 </aside>
 
-### Consultar un pago realizado con Oneclick Mall | [Ver documentación](/documentacion/oneclick#obtener-estado-de-una-transaccion)
+### Consultar un pago realizado con Oneclick Mall
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#obtener-estado-de-una-transaccion)
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
@@ -2533,7 +2548,8 @@ details [].buy_order  <br> <i> String </i> | Orden de compra generada por el com
 status  <br> <i> Text </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
 
-### Reversar o Anular un pago Oneclick Mall | [Ver documentación](/documentacion/oneclick#reversar-o-anular-una-transaccion)
+### Reversar o Anular un pago Oneclick Mall
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#reversar-o-anular-una-transaccion)
 
 Permite reversar o anular una transacción de venta autorizada con anterioridad.
 Este método retorna como respuesta un identificador único de la transacción de reversa/anulación.
