@@ -373,7 +373,7 @@ var initResult = transaction.initTransaction(
         amount, buyOrder, sessionId, returnUrl, finalUrl);
 ```
 
-#<strong>Parámetros initTransaction</strong>
+<strong>Parámetros initTransaction</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -386,7 +386,7 @@ transactionDetails[0].amount  <br> <i> xs:decimal </i> | Monto de la transaccio�
 transactionDetails[0].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>
 transactionDetails[0].commerceCode  <br> <i>xs:string </i> | Código comercio de la tienda entregado por Transbank. Largo: 12, Si el código que posees es de 8 dígitos debes anteponer 5970. Los SDKs se encargan automáticamente de este parámetro a partir de la configuración de comercio y certificados/llaves usada para iniciar la transacción
 
-#<strong>Respuesta initTransaction</strong>
+<strong>Respuesta initTransaction</strong>
 
 ```java
 initResult.getToken();
@@ -438,13 +438,13 @@ $result = transaction->getTransactionResult(
 var result = transaction.getTransactionResult(tokenWs));
 ```
 
-#<strong>Parámetros getTransactionResult</strong>
+<strong>Parámetros getTransactionResult</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tokenInput  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 
-#<strong>Respuesta getTransactionResult</strong>
+<strong>Respuesta getTransactionResult</strong>
 
 ```java
 
@@ -545,7 +545,7 @@ asumiendo que el comercio no pudo informar de su resultado, evitando así el
 cobro al tarjetahabiente.
 </aside>
 
-#<strong>Parámetros acknowledgeTransaction</strong>
+<strong>Parámetros acknowledgeTransaction</strong>
 
 > Los SDKs ejecutan automáticamente `acknowledgeTransaction()` cuando reciben la
 > respuesta de `getTransactionResult()`.
@@ -554,7 +554,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tokenInput  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 
-#<strong>Respuesta acknowledgeTransaction</strong>
+<strong>Respuesta acknowledgeTransaction</strong>
 
 > Los SDKs arrojarán una excepción dentro de `getTransactionResult()` si falla
 > el `acknowledgeTransaction()` que se ejecuta automáticamente.
@@ -681,7 +681,7 @@ var initResult = transaction.initTransaction(
     buyOrder, sessionId, returnUrl, finalUrl, transactions);
 ```
 
-#<strong>Parámetros initTransaction Mall</strong>
+<strong>Parámetros initTransaction Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -695,7 +695,7 @@ transactionDetails[].amount  <br> <i> xs:decimal </i> | Monto de la transacció
 transactionDetails[].buyOrder  <br> <i> xs:string </i> | Orden de compra de la tienda del mall. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>.
 transactionDetails[].commerceCode  <br> <i>xs:string </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.<br>Si el código que posees es de 8 dígitos debes anteponer 5970.
 
-#<strong>Respuesta initTransaction Mall</strong>
+<strong>Respuesta initTransaction Mall</strong>
 
 ```java
 initResult.getToken();
@@ -748,13 +748,13 @@ $result = transaction->getTransactionResult(
 var result = transaction.getTransactionResult(tokenWs));
 ```
 
-#<strong>Parámetros getTransactionResult Mall</strong>
+<strong>Parámetros getTransactionResult Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tokenInput  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 
-#<strong>Respuesta getTransactionResult Mall</strong>
+<strong>Respuesta getTransactionResult Mall</strong>
 
 ```java
 for (WsTransactionDetailOutput output: result.getDetailOutput()) {
@@ -862,7 +862,7 @@ asumiendo que el comercio no pudo informar de su resultado, evitando así el
 cobro al tarjetahabiente.
 </aside>
 
-#<strong>Parámetros acknowledgeTransaction Mall</strong>
+<strong>Parámetros acknowledgeTransaction Mall</strong>
 
 > Los SDKs ejecutan automáticamente `acknowledgeTransaction()` cuando reciben la
 > respuesta de `getTransactionResult()`.
@@ -871,7 +871,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tokenInput  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 
-#<strong>Respuesta acknowledgeTransaction Mall</strong>
+<strong>Respuesta acknowledgeTransaction Mall</strong>
 
 > Los SDKs arrojarán una excepción dentro de `getTransactionResult()` si falla
 > el `acknowledgeTransaction()` que se ejecuta automáticamente.
@@ -967,7 +967,7 @@ var captureResult = transaction.capture(
 
 ```
 
-#<strong>Parámetros capture</strong>
+<strong>Parámetros capture</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -976,7 +976,7 @@ buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se r
 commerceId  <br> <i> xs:long </i> | Código de comercio o tienda mall que realizó la transacción. Largo: 12.<br>Si el código que posees es de 8 dígitos debes anteponer 5970.
 capturedAmount  <br> <i> xs:decimal </i> | Monto que se desea capturar. Largo máximo: 10.
 
-#<strong>Respuesta capture</strong>
+<strong>Respuesta capture</strong>
 
 ```java
 captureResult.getToken();
@@ -1106,7 +1106,7 @@ var result = transaction.nullify(
     storeCommerceCode);
 ```
 
-#<strong>Parámetros nullify</strong>
+<strong>Parámetros nullify</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1116,7 +1116,7 @@ buyOrder  <br> <i> xs:string </i> | Orden de compra de la transacción que se r
 nullifyAmount  <br> <i> xs:decimal </i> | Monto que se desea anular de la transacción. Largo máximo: 10.
 commerceId  <br> <i> xs:long </i> | Código de comercio o tienda mall que realizó la transacción. Largo: 12.<br>Si el código que posees es de 8 dígitos debes anteponer 5970.
 
-#<strong>Respuesta nullify</strong>
+<strong>Respuesta nullify</strong>
 
 ```java
 result.getToken();
@@ -1298,7 +1298,7 @@ var initResult =
     transaction.initInscription(username, email, urlReturn);
 ```
 
-#<strong>Parámetros initInscription</strong>
+<strong>Parámetros initInscription</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1306,7 +1306,7 @@ username  <br> <i> xs:string </i> | Identificador del usuario registrado en el c
 email  <br> <i> xs:string </i> | Email del usuario registrado en el comercio. Largo máximo: 256.
 responseURL  <br> <i> xs:string </i> | URL del comercio a la cual Webpay redireccionará posterior al proceso de inscripción. Largo máximo: 256.
 
-#<strong>Respuesta initInscription</strong>
+<strong>Respuesta initInscription</strong>
 
 ```java
 initResult.getToken();
@@ -1364,7 +1364,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> xs:string </i> | Token de la inscripción.
 
-#<strong>Respuesta finishInscription</strong>
+<strong>Respuesta finishInscription</strong>
 
 ```java
 result.getResponseCode();
@@ -1490,13 +1490,13 @@ $result = $transaction->reverseTransaction($buyOrder);
 var result = transaction.reverseTransaction(buyOrderLong);
 ```
 
-#<strong>Parámetros codeReverseOneClick</strong>
+<strong>Parámetros codeReverseOneClick</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buyOrder  <br> <i> xs:long </i> | Orden de compra de la transacción a reversar.
 
-#<strong>Respuesta codeReverseOneClick</strong>
+<strong>Respuesta codeReverseOneClick</strong>
 
 ```java
 // El SDK Java solo entrega el booleano de estado, no el código de reversa :(
@@ -1548,14 +1548,14 @@ $success = $transaction->removeUser($tbkUser, $username);
 var success = transaction.RemoveUser(tbkUser, username);
 ```
 
-#<strong>Parámetros removerUser</strong>
+<strong>Parámetros removerUser</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tbkUser  <br> <i> xs:string </i> | Identificador único de la inscripción del cliente
 username  <br> <i> xs:string </i> | Identificador del usuario en los sistemas del comercio (el mismo indicado en `initInscription()`).
 
-#<strong>Respuesta removerUser</strong>
+<strong>Respuesta removerUser</strong>
 
 El boolean de respuesta será `true` en caso de éxito y `false` en caso contrario.
 
@@ -1595,7 +1595,7 @@ Permite gatillar el inicio del proceso de inscripción.
 
 > Los SDKs no soportan aún los servicios Oneclick Mall.
 
-#<strong>Parámetros initInscription Mall</strong>
+<strong>Parámetros initInscription Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1603,7 +1603,7 @@ username  <br> <i> xs:string </i> | Identificador del usuario registrado en el c
 email  <br> <i> xs:string </i> | Email del usuario registrado en el comercio.
 returnUrl  <br> <i> xs:string </i> | URL a la que será enviado el cliente finalizado el proceso de inscripción.
 
-#<strong>Respuesta initInscription Mall</strong>
+<strong>Respuesta initInscription Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1634,13 +1634,13 @@ Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
 
 > Los SDKs no soportan aún los servicios Oneclick Mall.
 
-#<strong>Parámetros finishInscription Mall</strong>
+<strong>Parámetros finishInscription Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> xs:string </i> | Identificador del proceso de inscripción. Es entregado por Webpay en la respuesta del método `initInscription()`.
 
-#<strong>Respuesta finishInscription Mall</strong>
+<strong>Respuesta finishInscription Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1663,7 +1663,7 @@ Permite autorizar un pago.
 
 > Los SDKs no soportan aún los servicios Oneclick Mall.
 
-#<strong>Parámetros authorize Mall</strong>
+<strong>Parámetros authorize Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1681,7 +1681,7 @@ Cualquier valor distinto de número en `sharesNumber` (incluyendo letras,
 inexistencia del campo o nulo) será asumido como cero, es decir "Sin cuotas".
 </aside>
 
-#<strong>Respuesta authorize Mall</strong>
+<strong>Respuesta authorize Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1728,13 +1728,13 @@ Permite reversar una operación de autorización.
 
 > Los SDKs no soportan aún los servicios Oneclick Mall.
 
-#<strong>Parámetros reverse Mall</strong>
+<strong>Parámetros reverse Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buyOrder  <br> <i> xs:string </i> | Orden de compra generada por el comercio padre (mall) para la operación a reversar.
 
-#<strong>Respuesta reverse Mall</strong>
+<strong>Respuesta reverse Mall</strong>
 
 La respuesta es una lista con tantos elementos como transacciones haya tenido la
 operación identificada por `buyOrder`:
@@ -1752,7 +1752,7 @@ Permite anular un pago.
 
 > Los SDKs no soportan aún los servicios Oneclick Mall.
 
-#<strong>Parámetros nullify Mall</strong>
+<strong>Parámetros nullify Mall</strong>
 
 Nombre | Descripción
 ------ | -----------
@@ -1762,7 +1762,7 @@ authorizedAmount | Monto de la sub-transacción de pago a anular.
 authorizationCode | Código de autorización de la sub-transacción de pago a anular.
 nullifyAmount | Monto a anular de la sub-transacción de pago. Puede ser un monto parcial o monto total.
 
-#<strong>Respuesta nullify Mall</strong>
+<strong>Respuesta nullify Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1780,7 +1780,7 @@ Permite reversar una anulación.
 
 > Los SDKs no soportan aún los servicios Oneclick Mall.
 
-#<strong>Parámetros reverseNullification</strong>
+<strong>Parámetros reverseNullification</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1788,7 +1788,7 @@ buyOrder  <br> <i> xs:string </i> | Orden de compra generada por el comercio hij
 commerceId  <br> <i> xs:long </i> | Código de comercio del comercio hijo (tienda).
 nullifyAmount  <br> <i> xs:decimal </i> | Monto anulado en la transacción de anulación que se intenta reversar.
 
-#<strong>Respuesta reverseNullification</strong>
+<strong>Respuesta reverseNullification</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1811,14 +1811,14 @@ Permite eliminar una inscripción de usuario en Oneclick Mall
 
 > Los SDKs no soportan aún los servicios Oneclick Mall.
 
-#<strong>Parámetros removeInscription Mall</strong>
+<strong>Parámetros removeInscription Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tbkUser  <br> <i> xs:string </i> | Identificador único de la inscripción del cliente.
 username  <br> <i> xs:string </i> | Nombre de usuario, del cliente, en el sistema del comercio.
 
-#<strong>Respuesta removeInscription Mall</strong>
+<strong>Respuesta removeInscription Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1855,7 +1855,7 @@ comercio configurado para captura diferida. De esta forma la transacción estar�
 autorizada pero requerirá una captura explícita posterior para confirmar la
 transacción.
 
-#<strong>Parámetros capture Mall</strong>
+<strong>Parámetros capture Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1869,7 +1869,7 @@ El método `capture()` debe ser invocado siempre indicando el código del
 comercio de la tienda virtual específica.
 </aside>
 
-#<strong>Respuesta capture Mall</strong>
+<strong>Respuesta capture Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------

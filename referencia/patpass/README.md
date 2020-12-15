@@ -259,7 +259,7 @@ wsInitTransactionOutput initResult = transaction.initTransaction(
     amount, buyOrder, sessionId, returnUrl, finalUrl, patPassInfo);
 ```
 
-#<strong>Parámetros</strong>
+<strong>Parámetros</strong>
 
 Nombre <br><i> tipo </i> | Descripción
 ------ | -----------
@@ -283,7 +283,7 @@ wPMDetail.expirationDate <br><i> xs:dateTime </i> | Fecha expiración de PatPas
 wPMDetail.commerceMail <br><i> xs:string </i> | Correo electrónico comercio. Largo máximo: 50. Los SDKs se encargan automáticamente de este parámetro a partir del email de comercio ingresado en la configuración usada para iniciar la transacción
 wPMDetail.ufFlag <br><i> xs:boolean </i> | Valor en true indica que el monto enviado está expresado en UF, valor en false indica que valor esta expresado en pesos. Los SDKs se encargan automáticamente de este parámetro a partir de la configuración de moneda y certificados/llaves usada para iniciar la transacción
 
-#<strong>Respuesta</strong>
+<strong>Respuesta</strong>
 
 ```java
 initResult.getUrl();
@@ -327,13 +327,13 @@ transactionResultOutput result =
     transaction.getTransactionResult(Request.Form["token_ws"]);
 ```
 
-#<strong>Parámetros getTransactionResult</strong>
+<strong>Parámetros getTransactionResult</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tokenInput  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 
-#<strong>Respuesta getTransactionResult</strong>
+<strong>Respuesta getTransactionResult</strong>
 
 ```java
 WsTransactionDetailOutput output = result.getDetailOutput().get(0);
@@ -411,7 +411,7 @@ Indica a Webpay que se ha recibido conforme el resultado de la transacción.
 El método acknowledgeTransaction debe ser invocado siempre. Si la invocación no se realiza en un período de 30 segundos, Webpay reversará la transacción, asumiendo que el comercio no pudo informar de su resultado, evitando así el cobro al tarjetahabiente.
 </aside>
 
-#<strong>Parámetros acknowledgeTransaction</strong>
+<strong>Parámetros acknowledgeTransaction</strong>
 
 > Los SDKs ejecutan automáticamente `acknowledgeTransaction()` cuando reciben la
 > respuesta de `getTransactionResult()`.
@@ -420,7 +420,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 tokenInput  <br> <i> xs:string </i> | Token de la transacción. Largo: 64.
 
-#<strong>Respuesta acknowledgeTransaction</strong>
+<strong>Respuesta acknowledgeTransaction</strong>
 
 > Los SDKs arrojarán una excepción dentro de `getTransactionResult()` si falla
 > el `acknowledgeTransaction()` que se ejecuta automáticamente.

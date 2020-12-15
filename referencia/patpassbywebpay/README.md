@@ -291,7 +291,7 @@ POST /rswebpaytransaction/api/webpay/v1.0/transactions
 }
 ```
 
-#<strong>Parámetros Transaction.create</strong>
+<strong>Parámetros Transaction.create</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -311,7 +311,7 @@ wpmDetail.expirationDate <br><i> DateTime </i> | Fecha expiración de PatPass b
 wpmDetail.commerceMail <br><i> String </i> | Correo electrónico comercio. Largo máximo: 50. Los SDKs se encargan automáticamente de este parámetro a partir del email de comercio ingresado en la configuración usada para iniciar la transacción
 wpmDetail.ufFlag <br><i> Boolean </i> | Valor en true indica que el monto enviado está expresado en UF, valor en false indica que valor esta expresado en Pesos o dólar según corresponda
 
-#<strong>Respuesta Transaction.create</strong>
+<strong>Respuesta Transaction.create</strong>
 
 ```java
 // Este SDK aún no se encuentra disponible
@@ -383,13 +383,13 @@ Tbk-Api-Key-Secret: Próximamente...
 Content-Type: application/json
 ```
 
-#<strong>Parámetros Transaction.commit</strong>
+<strong>Parámetros Transaction.commit</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64.
 
-#<strong>Respuesta Transaction.commit</strong>
+<strong>Respuesta Transaction.commit</strong>
 
 ```java
 // Este SDK aún no se encuentra disponible

@@ -566,6 +566,115 @@ response.response_code
 response.type
 ```
 
+### Capturar una transacción
+
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#capturar-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
+</div>
+
+Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo el cargo al tarjetahabiente.
+
+Este método permite a todo comercio habilitado realizar capturas de una
+transacción autorizada sin captura generada en Webpay Plus. 
+El método contempla una única captura por cada autorización. Para ello se
+deberá indicar los datos asociados a la transacción de venta con autorización
+sin captura y el monto requerido para capturar el cual debe ser menor o igual al
+monto originalmente autorizado.
+
+Para capturar una transacción, ésta debe haber sido creada (según lo visto
+anteriormente para Webpay Plus o Webpay Plus Mall) por un código de
+comercio configurado para captura diferida. De esa forma la transacción estará
+autorizada pero requerirá una captura explícita posterior para confirmar la
+transacción.
+
+Puedes [leer más sobre la captura en la información del
+producto Webpay](/producto/webpay#autorizacion-y-captura)
+para conocer más detalles y restricciones.
+
+Para realizar esa captura explícita debe usarse el método `Transaction.capture()`
+
+<strong>Transaction.capture()</strong>
+
+
+> Los SDKs permiten indicar opcionalmente el código de comercio de la
+> transacción a capturar, para soportar la captura en comercios Webpay Plus
+> Mall o Transacción Completa Mall. En comercios sin modalidad Mall no es necesario especificar el código
+> de comercio, ya que se usa el indicado en la configuración.
+
+<aside class="notice">
+El método `Transaction.capture()` debe ser invocado siempre indicando el código del
+comercio que realizó la transacción. En el caso de comercios modalidad Mall,
+el código debe ser el código de la tienda virtual específica.
+</aside>
+
+```java
+final CaptureWebpayPlusTransactionResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
+```
+
+```php
+use Transbank\Webpay\WebpayPlus;
+
+$response = Transaction::capture($token, $buyOrder, $authCode, $amount);
+```
+
+```csharp
+var response = DeferredTransaction.Capture(token, buyOrder, authorizationCode, captureAmount);
+```
+
+```ruby
+response = Transbank::Webpay::WebpayPlus::DeferredTransaction::capture(
+  token: @token,
+  buy_order: @buy_order,
+  authorization_code: @auth_code,
+  capture_amount: @amount
+)
+```
+
+```python
+response = DeferredTransaction.capture(
+  token=token, buy_order=buy_order, authorization_code=authorization_code, capture_amount=amount
+)
+```
+
+Una vez realizada la captura, recibirás un objeto con la respuesta. Revisa la [referencia API](/referencia/webpay) para conocer más detalles 
+sobre los posibles resultados.  
+
+<strong>Respuesta de una captura</strong>
+```java
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getCapturedAmount();
+response.getResponseCode();
+```
+
+```php
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getCapturedAmount();
+$response->getResponseCode();
+```
+
+```csharp
+response.AuthorizationCode;
+response.AuthorizationDate;
+response.CapturedAmount;
+response.ResponseCode;
+```
+
+```ruby
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
+```python
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
 ## Webpay Plus Mall
 
 <div class="pos-title-nav">
@@ -1094,7 +1203,7 @@ response = Transaction.refund(token, buy_order, commerce_code, amount)
 response = Transaction.refund(token, buy_order, commerce_code, amount)
 ```
 
-<strong>Respuesta Reversa o Anulacion mall</strong>
+<strong>Respuesta Reversa o Anulación Mall</strong>
 
 Para obtener la información contenida en la respuesta puedes hacerlo de la siguiente manera.
 
@@ -1144,6 +1253,83 @@ Para obtener la información contenida en la respuesta puedes hacerlo de la sigu
   response.response_code
   response.type
 ```
+
+### Capturar una transacción mall
+
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/webpay#capturar-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
+</div>
+
+```java
+final WebpayPlusMallTransactionCaptureResponse response = WebpayPlus.MallDeferredTransaction.capture(token, childCommerceCode, buyOrder, authorizationCode, amount);
+```
+
+```php
+use Transbank\Webpay\WebpayPlus;
+
+$response = Transaction::captureMall($childCommerceCode, $token, $buyOrder, $authorizationCode, $captureAmount);
+```
+
+```csharp
+var response = Transbank.Webpay.WebpayPlus.MallDeferredTransaction.Capture(token, childCommerceCode, buyOrder, authorizationCode, captureAmount);
+```
+
+```ruby
+response = Transbank::Webpay::WebpayPlus::MallDeferredTransaction::capture(
+  token: @token,
+  child_commerce_code: @child_commerce_code,
+  buy_order: @buy_order,
+  authorization_code: @auth_code,
+  capture_amount: @amount
+)
+```
+
+```python
+response = MallDeferredTransaction.capture(
+  token=token, capture_amount=amount, commerce_code=commerce_code,
+  buy_order=buy_order, authorization_code=authorization_code
+)
+```
+
+<strong>Respuesta de una captura mall</strong>
+```java
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getCapturedAmount();
+response.getResponseCode();
+```
+
+```php
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getCapturedAmount();
+$response->getResponseCode();
+```
+
+```csharp
+response.AuthorizationCode;
+response.AuthorizationDate;
+response.CapturedAmount;
+response.ResponseCode;
+```
+
+```ruby
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
+```python
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
+
+
+Esta operación funciona de la misma manera que la [captura de Webpay Plus normal](#capturar-una-transaccion).
 
 ## Credenciales y Ambiente
 
