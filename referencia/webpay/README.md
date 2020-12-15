@@ -2295,7 +2295,7 @@ for (Detail detail : detailsResp) {
     detail.getBuyOrder();
     detail.getCommerceCode();
     detail.getInstallmentsNumber();
-    detail.getPaymentTypeCod$e();
+    detail.getPaymentTypeCode();
     detail.getStatus();
 }
 ```

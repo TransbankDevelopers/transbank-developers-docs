@@ -19,6 +19,7 @@
   </div>
 </div>
 
+
 ___
 
 <aside class="notice">
@@ -54,6 +55,44 @@ _Esta pantalla de diagnóstico se encuentra en la sección de configuración del
 2. Sube el archivo zip en la sección Plugin > Subir nuevo plugin en el administrador de tu Wordpress
 
 Las instrucciones detalladas de instalación las puedes encontrar en el [siguiente link](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest/blob/master/docs/INSTALLATION.md).
+
+## Cómo usar
+Una vez instalado agregará un nuevo método de pago disponible en tu WooCommerce. Si no se activa correctamente, revisa que el plugin esté activo y que tu tienda está configurada en Pesos Chilenos. 
+
+Como nuevo método de pago, tus clientes podrán pagar por sus pedidos usando la opción Webpay Plus en el proceso de Checkout, y una vez finalizado el pago la ordfen será aprobada automáticamente (si el pago fue realizado correctamente).
+Dentro de la lista de órdenes verás cuales están pagadas. En el detalle de una orden verás también algunas notas (Notas de la orden) donde puedes verificar cual fue el resultado detallado de la transacción (código de autorización, tipo de tarjeta, etc )  
+
+### Anulaciones
+Dentro del detalle de una orden, podrás realizar una anulación o reversa de un pago. 
+Puedes ver el detalle de una reversa o anulación ("refund") [en este link](https://transbankdevelopers.cl/documentacion/webpay-plus#reversar-o-anular-una-transaccion)
+
+Las tarjetas de débito solo soportan Reversas (refunds realizados dentro de los primeros 30 minutos de aprobada la transacción). 
+En tarjetas de crédito se permiten reversas, anulaciones y anulaciones parciales. 
+
+En el siguiente video te mostramos como realizar el proceso: 
+<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/ogw2yHcaZ4M-8" >
+  <div class="container-embed">
+    <div class="data-info-url">
+      <b>Tutorial de "refunds" (41s)</b>
+    </div>
+    <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
+  </div>
+</div>
+
+### Consultar estado 
+
+También en el detalle de una orden, se puede revisar el estado actual de una transacción en todo momento. 
+Se puede revisar si una transacción está autorizada, anulada, parcialmente anulada o reversada. 
+
+En el siguiente video te dejamos las instrucciones para realizar este proceso
+<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/AB9eh7BTJUE" >
+  <div class="container-embed">
+    <div class="data-info-url">
+      <b>Tutorial de consulta de transacción (02:07)</b>
+    </div>
+    <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
+  </div>
+</div>
 
 ## Ambiente de pruebas
 
