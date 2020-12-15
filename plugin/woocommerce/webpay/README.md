@@ -59,7 +59,7 @@ Las instrucciones detalladas de instalación las puedes encontrar en el [siguien
 ## Cómo usar
 Una vez instalado agregará un nuevo método de pago disponible en tu WooCommerce. Si no se activa correctamente, revisa que el plugin esté activo y que tu tienda está configurada en Pesos Chilenos. 
 
-Como nuevo método de pago, tus clientes podrán pagar por sus pedidos usando la opción Webpay Plus en el proceso de Checkout, y una vez finalizado el pago la ordfen será aprobada automáticamente (si el pago fue realizado correctamente).
+Como nuevo método de pago, tus clientes podrán pagar por sus pedidos usando la opción Webpay Plus en el proceso de Checkout, y una vez finalizado el pago, la orden será aprobada automáticamente (si el pago fue realizado correctamente).
 Dentro de la lista de órdenes verás cuales están pagadas. En el detalle de una orden verás también algunas notas (Notas de la orden) donde puedes verificar cual fue el resultado detallado de la transacción (código de autorización, tipo de tarjeta, etc )  
 
 ### Anulaciones
@@ -81,7 +81,7 @@ En el siguiente video te mostramos como realizar el proceso:
 
 ### Consultar estado 
 
-También en el detalle de una orden, se puede revisar el estado actual de una transacción en todo momento. 
+También en el detalle de una orden, se puede revisar el estado actual de una transacción (hasta por 7 días de realizada la transacción). 
 Se puede revisar si una transacción está autorizada, anulada, parcialmente anulada o reversada. 
 
 En el siguiente video te dejamos las instrucciones para realizar este proceso
