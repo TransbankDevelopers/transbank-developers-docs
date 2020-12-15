@@ -617,7 +617,6 @@ transacción.
 
 <aside class="notice">
 En esta modalidad no se aceptan tarjetas de débito ni prepago.
-Tampoco se aceptan cuotas, solo ventas con tarjeta de crédito normales sin cuotas.
 </aside>
 
 ```java

@@ -2295,7 +2295,7 @@ for (Detail detail : detailsResp) {
     detail.getBuyOrder();
     detail.getCommerceCode();
     detail.getInstallmentsNumber();
-    detail.getPaymentTypeCode();
+    detail.getPaymentTypeCod$e();
     detail.getStatus();
 }
 ```
@@ -2303,20 +2303,20 @@ for (Detail detail : detailsResp) {
 ```php
 $response->getAccountingDate();
 $response->getBuyOrder();
-$card_detail = response->getCardDetail();
+$card_detail = $response->getCardDetail();
 $card_detail->getCardNumber();
 $response->getTransactionDate();
 $response->getVci();
-$details = response->getDetails();
+$details = $response->getDetails();
 foreach($details as $detail){
-    detail->getAmount();
-    detail->getAuthorizationCode();
-    detail->getBuyOrder();
-    detail->getCommerceCode();
-    detail->getInstallmentsNumber();
-    detail->getPaymentTypeCode();
-    detail->getResponseCode();
-    detail->getStatus();
+    $detail->getAmount();
+    $detail->getAuthorizationCode();
+    $detail->getBuyOrder();
+    $detail->getCommerceCode();
+    $detail->getInstallmentsNumber();
+    $detail->getPaymentTypeCode();
+    $detail->getResponseCode();
+    $detail->getStatus();
 }
 ```
 
@@ -2521,12 +2521,12 @@ response.getType();
 ```
 
 ```php
-response->getAuthorizationCode;
-response->getAuthorizationDate;
-response->getBalance;
-response->getNullifiedAmount;
-response->getResponseCode;
-response->getType;
+$response->getAuthorizationCode;
+$response->getAuthorizationDate;
+$response->getBalance;
+$response->getNullifiedAmount;
+$response->getResponseCode;
+$response->getType;
 ```
 
 ```csharp
@@ -2952,9 +2952,9 @@ deferredPeriod.getPeriod();
 ```
 
 ```php
-response->getInstallmentsAmount();
-response->getIdQueryInstallments();
-response->getDeferredPeriods();
+$response->getInstallmentsAmount();
+$response->getIdQueryInstallments();
+$response->getDeferredPeriods();
 ```
 
 ```csharp
@@ -3100,18 +3100,18 @@ response.getTransactionDate();
 ```
 
 ```php
-response->getAccountingDate();
-response->getAmount();
-response->getAuthorizationCode();
-response->getBuyOrder();
-cardDetail = response->getCardDetail();
+$response->getAccountingDate();
+$response->getAmount();
+$response->getAuthorizationCode();
+$response->getBuyOrder();
+cardDetail = $response->getCardDetail();
 cardDetail->getCardNumber();
-response->getInstallmentsAmount();
-response->getInstallmentsNumber();
-response->getPaymentCodeType();
-response->getResponseCode();
-response->getSessionId();
-response->getTransactionDate();
+$response->getInstallmentsAmount();
+$response->getInstallmentsNumber();
+$response->getPaymentCodeType();
+$response->getResponseCode();
+$response->getSessionId();
+$response->getTransactionDate();
 ```
 
 ```csharp
@@ -3268,18 +3268,18 @@ response.getTransactionDate();
 ```
 
 ```php
-response->getAccountingDate();
-response->getAmount();
-response->getAuthorizationCode();
-response->getBuyOrder();
-cardDetail = response->getCardDetail();
+$response->getAccountingDate();
+$response->getAmount();
+$response->getAuthorizationCode();
+$response->getBuyOrder();
+cardDetail = $response->getCardDetail();
 cardDetail->getCardNumber();
-response->getInstallmentsAmount();
-response->getInstallmentsNumber();
-response->getPaymentCodeType();
-response->getResponseCode();
-response->getSessionId();
-response->getTransactionDate();
+$response->getInstallmentsAmount();
+$response->getInstallmentsNumber();
+$response->getPaymentCodeType();
+$response->getResponseCode();
+$response->getSessionId();
+$response->getTransactionDate();
 ```
 
 ```csharp
@@ -3457,12 +3457,12 @@ response.getResponse();
 ```
 
 ```php
-response->getType();
-response->getAuthorizationCode();
-response->getAuthorizationDate();
-response->getNullifiedAmount();
-response->getBalance();
-response->getResponse();
+$response->getType();
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getNullifiedAmount();
+$response->getBalance();
+$response->getResponse();
 ```
 
 ```csharp
@@ -3717,7 +3717,7 @@ response.getToken();
 ```
 
 ```php
-response->getToken();
+$response->getToken();
 ```
 
 ```csharp
@@ -3946,20 +3946,20 @@ final MallFullTransactionCommitResponse response = MallFullTransaction.Transacti
 use Transbank\TransaccionCompleta\Transaction;
 
 $details = [
-  {
-    "commerce_code": '597055555552',
-    "buy_order": 'ordenCompra1234',
-    "id_query_installments": 12,
-    "deferred_period_index": 1,
-    "grace_period": false
-  },
-  {
-    "commerce_code": '597055555553',
-    "buy_order": 'ordenCompra12345',
-    "id_query_installments": 12,
-    "deferred_period_index": 1,
-    "grace_period": false
-  }
+  [
+    "commerce_code" => '597055555552',
+    "buy_order" => 'ordenCompra1234',
+    "id_query_installments" => 12,
+    "deferred_period_index" => 1,
+    "grace_period" => false
+  ],
+  [
+    "commerce_code" => '597055555553',
+    "buy_order" => 'ordenCompra12345',
+    "id_query_installments" => 12,
+    "deferred_period_index" => 1,
+    "grace_period" => false
+  ]
 ]
 
 $res = MallTransaction::commit(
@@ -4091,21 +4091,21 @@ detail.getBalance();
 ```
 
 ```php
-$response.getBuyOrder();
-$response.getCardNumber();
-$response.getAccountingDate();
-$response.getTransactionDate();
-$detail = response.getDetails()[0];
-$detail.getAuthorizationCode();
-$detail.getPaymentCodeType();
-$detail.getResponseCode();
-$detail.getInstallmentsAmount();
-$detail.getInstallmentsNumber();
-$detail.getAmount();
-$detail.getCommerceCode();
-$detail.getBuyOrder();
-$detail.getStatus();
-$detail.getBalance();
+$response->getBuyOrder();
+$response->getCardNumber();
+$response->getAccountingDate();
+$response->getTransactionDate();
+$detail = $response->getDetails()[0];
+$detail->getAuthorizationCode();
+$detail->getPaymentCodeType();
+$detail->getResponseCode();
+$detail->getInstallmentsAmount();
+$detail->getInstallmentsNumber();
+$detail->getAmount();
+$detail->getCommerceCode();
+$detail->getBuyOrder();
+$detail->getStatus();
+$detail->getBalance();
 ```
 
 ```csharp
@@ -4273,21 +4273,21 @@ detail.getBalance();
 ```
 
 ```php
-$response.getBuyOrder();
-$response.getCardNumber();
-$response.getAccountingDate();
-$response.getTransactionDate();
-$detail = response.getDetails()[0];
-$detail.getAuthorizationCode();
-$detail.getPaymentCodeType();
-$detail.getResponseCode();
-$detail.getInstallmentsAmount();
-$detail.getInstallmentsNumber();
-$detail.getAmount();
-$detail.getCommerceCode();
-$detail.getBuyOrder();
-$detail.getStatus();
-$detail.getBalance();
+$response->getBuyOrder();
+$response->getCardNumber();
+$response->getAccountingDate();
+$response->getTransactionDate();
+$detail = $response->getDetails()[0];
+$detail->getAuthorizationCode();
+$detail->getPaymentCodeType();
+$detail->getResponseCode();
+$detail->getInstallmentsAmount();
+$detail->getInstallmentsNumber();
+$detail->getAmount();
+$detail->getCommerceCode();
+$detail->getBuyOrder();
+$detail->getStatus();
+$detail->getBalance();
 ```
 
 ```csharp
@@ -4482,12 +4482,12 @@ response.getResponseCode();
 ```
 
 ```php
-response->getType();
-response->getAuthorizationCode();
-response->getAuthorizationDate();
-response->getNullifiedAmount();
-response->getBalance();
-response->getResponseCode();
+$response->getType();
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getNullifiedAmount();
+$response->getBalance();
+$response->getResponseCode();
 ```
 
 ```csharp
@@ -4649,10 +4649,10 @@ response.getResponseCode();
 ```
 
 ```php
-response->getAuthorizationCode();
-response->getAuthorizationDate();
-response->getCapturedAmount();
-response->getResponseCode();
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getCapturedAmount();
+$response->getResponseCode();
 ```
 
 ```csharp
@@ -4751,32 +4751,7 @@ Código de estado HTTP | Descripción
 
 ## Puesta en Producción
 
-1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](/referencia/webpay#proceso-de-validacion).
-
-2. Una vez que Transbank confirme que la planilla de integración se encuentra correcta (no aplica para plugins), se enviará al comercio la confirmación y se generará su **secreto compartido**, que en conjunto con el código de comercio, permiten operar en producción.
-
-3. Cuando recibas el correo, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-para-produccion-utilizando-los-sdk)
-
-4. Con la configuración del ambiente de producción ya lista, será necesario realizar una compra de $10 para validar el correcto funcionamiento.
-
-### Proceso de validación
-
-Durante la validación de la integración se pretende verificar que el comercio transacciona de manera segura y sin problemas, por lo que se solicitarán una serie de pruebas y su posterior envío de evidencias para validar la integración. Esta validación es un requisito para que el comercio pueda operar en el ambiente de producción (bancos y dinero real) y no se permitirá que un comercio utilice productivamente el servicio sin poseer una validación.
-
-Transbank solo validará las integraciones de aquellos comercios que tengan un código de comercio productivo. Para obtenerlo, sigue las instrucciones para hacerte cliente en el portal [http://www.transbank.cl](http://www.transbank.cl) o contacta a tu ejecutivo comercial.
-
-En esta etapa, el comercio envía las evidencias a [soporte@transbank.cl](mailto:soporte@transbank.cl) en **formato PDF** empleando el formulario correspondiente al producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones. Para integraciones Webpay que utilicen algún [plugin oficial](https://transbankdevelopers.cl/plugin) existe un formulario especial.
-
-[Descargar el formulario de envidencias](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-rest.docx)
-
-Soporte validará que los casos de prueba sean consistentes con los registrados en los sistemas de Webpay y, de estar todo correcto, se le notificará al comercio la conformidad para pasar a producción, recibiendo las instrucciones para ello. De no estar consistentes las pruebas, se le hará alcances al comercio respecto de su integración, para que realices las correcciones correspondientes y vuelvas a enviar las evidencias una vez terminadas dichas correcciones.
-
-En el proceso de contratación recibiste tu código de comercio, y junto con el **secreto compartido** que se te entregó luego de la certificación puedes completar tus credenciales, las cuales **debes custodiar y evitar que estén en manos de terceros** ya que permiten hacer (o anular) transacciones en nombre de tu comercio.
-
-* Código de comercio (*API Key*)
-* Secreto compartido (*Shared Secret*)
-
-Luego que el proceso de validación de tu integración está terminado, debes realizar la configuración para que tu sitio se encuentre en producción.
+Puedes revisar el proceso necesario para operar en el ambiente de producción en [la documentación](/documentacion/como_empezar#puesta-en-produccion)
 
 ### Configuración para producción utilizando los SDK
 
@@ -4786,23 +4761,5 @@ Si estas utilizando algún SDK oficial de Transbank, entonces debes seguir los s
 Nunca dejes tu código de comercio y secreto compartido directamente en tu código, te recomendamos utilizar variables de entorno u otro método que te permita mantener tus credenciales seguras.
 </aside>
 
-1. Asignar el código de comercio productivo, entregado por Transbank al momento de contratar el producto.
+Revisa la [esta sección](/documentacion/como_empezar#b-utilizando-los-sdk) de la documentación para ver el código necesario para configurar tu propio código de comercio y Api Key Secret. 
 
-    ```java
-    // Para Oneclick
-    OneclickMall.setCommerceCode('TU_CODIGO_DE_COMERCIO');
-    ```
-
-2. Configuración del secreto compartido.
-
-    ```java
-    // Para Oneclick
-    OneclickMall.setApiKey('TU_API_KEY');
-    ```
-
-3. Selección del ambiente productivo.
-
-    ```java
-    // Para Oneclick
-    OneclickMall.setIntegrationType(IntegrationType.LIVE);
-    ```
