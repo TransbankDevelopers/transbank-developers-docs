@@ -70,7 +70,7 @@ Las tarjetas de débito solo soportan Reversas (refunds realizados dentro de los
 En tarjetas de crédito se permiten reversas, anulaciones y anulaciones parciales. 
 
 En el siguiente video te mostramos como realizar el proceso: 
-<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/ogw2yHcaZ4M-8" >
+<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube-nocookie.com/embed/ogw2yHcaZ4M" >
   <div class="container-embed">
     <div class="data-info-url">
       <b>Tutorial de "refunds" (41s)</b>

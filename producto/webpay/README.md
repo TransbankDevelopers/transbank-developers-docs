@@ -103,7 +103,7 @@ Para tarjeta de débito Redcompra el tipo de pago siempre corresponde a:
 ## Autorización y Captura
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#captura-diferida-webpay-plus' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/documentacion/webpay-plus#capturar-una-transaccion' tbk-link-name='Documentación'></div>
 </div>
 
 Las transacciones Webpay cuentan con 2 fases: autorización y captura. La **autorización** se encarga de validar si es posible realizar el cargo a la cuenta asociada a la tarjeta de crédito realizando en el mismo acto la reserva de monto de la transacción. La **captura** hace efectiva la reserva hecha previamente o cargo en la cuenta de crédito asociada a la tarjeta del titular.
@@ -119,7 +119,7 @@ Desde el punto de vista de la transacción, lo que ocurre es lo siguiente:
 ## Anulaciones
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#anulacion-webpay-plus' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/documentacion/webpay-plus#reversar-o-anular-una-transaccion-mall' tbk-link-name='Documentación'></div>
 </div>
 
 Las transacciones Webpay **realizadas con tarjeta de crédito** pueden ser anuladas mediante servicios web. Esta funcionalidad no aplica para tarjetas de débito Redcompra.

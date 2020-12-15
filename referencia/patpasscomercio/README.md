@@ -239,7 +239,7 @@ Content-Type: application/json
 }
 ```
 
-#<strong>Parámetros Inscription.start</strong>
+<strong>Parámetros Inscription.start</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -259,7 +259,7 @@ commerceEmail <br> <i> String </i> | Correo para el comercio con el comprobante 
 userAddress <br> <i> String </i> | Dirección del tarjetahabiente
 userCity <br> <i> String </i> | Ciudad del tarjetahabiente
 
-#<strong>Respuesta Inscription.start</strong>
+<strong>Respuesta Inscription.start</strong>
 
 ```java
 response.getToken();
@@ -291,7 +291,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 token  <br> <i> xs:string </i> |  Token de la transacción. Largo: 64.
 url  <br> <i> xs:string </i> | URL de formulario de pago Patpass Comercio. Largo máximo: 256.
 
-#<strong>Mensajes de error</strong>
+<strong>Mensajes de error</strong>
 
 Código | Descripción
 ------   | -----------
@@ -359,12 +359,12 @@ Content-Type: application/json
 }
 ```
 
-#<strong>Parámetros Inscription.status</strong>
+<strong>Parámetros Inscription.status</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 token <br> <i> String </i> | Token entregado al iniciar inscripción
 
-#<strong>Respuesta Inscription.status</strong>
+<strong>Respuesta Inscription.status</strong>
 
 ```java
 response.getVoucherUrl();

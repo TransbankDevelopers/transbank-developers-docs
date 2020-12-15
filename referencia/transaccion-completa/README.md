@@ -230,7 +230,7 @@ Content-Type: application/json
 }
 ```
 
-#<strong>Parámetros Transaction.create</strong>
+<strong>Parámetros Transaction.create</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -241,7 +241,7 @@ cvv  <br> <i> String </i> | (Opcional) Código que se utiliza como método de se
 card_number  <br> <i> String </i> | Número de tarjeta. Largo máximo: 16
 card_expiration_date  <br> <i> String </i> | Fecha de expiración de la tarjeta con la que se realiza la transacción. Largo máximo: 5
 
-#<strong>Respuesta Transaction.create</strong>
+<strong>Respuesta Transaction.create</strong>
 
 ```java
 response.getToken();
@@ -350,14 +350,14 @@ Content-Type: application/json
 }
 ```
 
-#<strong>Parámetros Transaction.installments</strong>
+<strong>Parámetros Transaction.installments</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 
-#<strong>Respuesta Transaction.installments</strong>
+<strong>Respuesta Transaction.installments</strong>
 
 ```java
 response.getInstallmentsAmount();
@@ -489,7 +489,7 @@ Content-Type: application/json
 }
 ```
 
-#<strong>Parámetros Transaction.commit</strong>
+<strong>Parámetros Transaction.commit</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -498,7 +498,7 @@ id_query_installments  <br> <i> Number </i> | (Opcional) Identificador de cuota.
 deferred_period_index  <br> <i> Number </i> | (Opcional) Cantidad de periodo diferido. Largo máximo: 2. Solo enviar si el pago es en cuotas
 grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia. Solo enviar si el pago es en cuotas
 
-#<strong>Respuesta Transaction.commit</strong>
+<strong>Respuesta Transaction.commit</strong>
 
 ```java
 response.getAccountingDate();
@@ -660,13 +660,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-#<strong>Parámetros Transaction.status</strong>
+<strong>Parámetros Transaction.status</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
-#<strong>Respuesta Transaction.status</strong>
+<strong>Respuesta Transaction.status</strong>
 
 ```java
 response.getAccountingDate();
@@ -854,14 +854,14 @@ Content-Type: application/json
 }
 ```
 
-#<strong>Parámetros Transaction.refund</strong>
+<strong>Parámetros Transaction.refund</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> |  Monto que se desea anular o reversar de la transacción. Largo máximo: 17.
 
-#<strong>Respuesta Transaction.refund</strong>
+<strong>Respuesta Transaction.refund</strong>
 
 ```java
 response.getType();
@@ -1113,7 +1113,7 @@ Content-Type: application/json
 }
 ```
 
-#<strong>Parámetros Transaction.create Completa Mall</strong>
+<strong>Parámetros Transaction.create Completa Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1126,7 +1126,7 @@ details [].amount  <br> <i> Decimal </i> | Monto de la transacción de una tie
 details [].commerce_code  <br> <i>String </i> | Código comercio asignado por Transbank para la tienda perteneciente al mall a la cual corresponde esta transacción. Largo: 12.
 details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda del mall. Este número debe ser único para cada transacción. Largo máximo: 26. La orden de compra puede tener: Números, letras, mayúsculas y minúsculas, y los signos <code>&#124;_=&%.,~:/?[+!@()>-</code>. Largo máximo: 26
 
-#<strong>Respuesta Transaction.create Completa Mall</strong>
+<strong>Respuesta Transaction.create Completa Mall</strong>
 
 ```java
 response.getToken();
@@ -1266,7 +1266,7 @@ Content-Type: application/json
 }
 ```
 
-#<strong>Parámetros Transaction.installments Completa Mall</strong>
+<strong>Parámetros Transaction.installments Completa Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1275,7 +1275,7 @@ commerce_code  <br> <i> String </i> | Código comercio asignado por Transbank p
 buy_order  <br> <i> String </i> | Orden de compra de la tienda del mall. Largo máximo: 26
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 
-#<strong>Respuesta Transaction.installments Completa Mall</strong>
+<strong>Respuesta Transaction.installments Completa Mall</strong>
 
 ```java
 response.getInstallmentsAmount();
@@ -1474,7 +1474,7 @@ Content-Type: application/json
 }
 ```
 
-#<strong>Parámetros Transaction.commit Completa Mall</strong>
+<strong>Parámetros Transaction.commit Completa Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1486,7 +1486,7 @@ id_query_installments  <br> <i> Number </i> | (Opcional) Identificador de cuota.
 deferred_period_index  <br> <i> Number </i> | (Opcional) Cantidad de periodo diferido. Largo máximo: 2. Solo enviar si el pago es en cuotas
 grace_period  <br> <i> Boolean </i> | (Opcional) Indicador de periodo de gracia. Solo enviar si el pago es en cuotas
 
-#<strong>Respuesta Transaction.commit Completa Mall</strong>
+<strong>Respuesta Transaction.commit Completa Mall</strong>
 
 ```java
 response.getBuyOrder();
@@ -1662,13 +1662,13 @@ Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A3
 Content-Type: application/json
 ```
 
-#<strong>Parámetros Transaction.status Completa Mall</strong>
+<strong>Parámetros Transaction.status Completa Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
 
-#<strong>Respuesta Transaction.status Completa Mall</strong>
+<strong>Respuesta Transaction.status Completa Mall</strong>
 
 ```java
 response.getBuyOrder();
@@ -1877,7 +1877,7 @@ Content-Type: application/json
 }
 ```
 
-#<strong>Parámetros Transaction.refund Completa Mall</strong>
+<strong>Parámetros Transaction.refund Completa Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1886,7 +1886,7 @@ buy_order  <br> <i> String </i> | Orden de compra de la transacción que se req
 commerce_code  <br> <i> Number </i> | Tienda hija que realizó la transacción. Largo: 12.
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> |  Monto que se desea anular o reversar de la transacción. Largo máximo: 17
 
-#<strong>Respuesta Transaction.refund Completa Mall</strong>
+<strong>Respuesta Transaction.refund Completa Mall</strong>
 
 ```java
 response.getType();
@@ -2045,7 +2045,7 @@ Content-Type: application/json
 }
 ```
 
-#<strong>Parámetros Transaction.capture</strong>
+<strong>Parámetros Transaction.capture</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -2055,7 +2055,7 @@ buy_order  <br> <i> String </i> | Orden de compra de la transacción que se req
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
 capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo máximo: 17.
 
-#<strong>Respuesta Transaction.capture</strong>
+<strong>Respuesta Transaction.capture</strong>
 
 ```java
 response.getAuthorizationCode();
