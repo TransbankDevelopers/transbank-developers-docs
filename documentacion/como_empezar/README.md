@@ -178,6 +178,7 @@ Producto | Código de Comercio |
 Webpay Plus | `597055555532`
 Webpay Plus Captura Diferida | `597055555540`
 Webpay Plus Mall | `597055555535` Mall <br> `597055555536` Tienda 1 <br> `597055555537` Tienda 2
+Webpay Plus Mall Captura Diferida| `597055555581` Mall <br> `597055555582` Tienda 1 <br> `597055555583` Tienda 2
 Oneclick Mall | `597055555541` Mall <br> `597055555542` Tienda 1 <br> `597055555543` Tienda 2
 Oneclick Mall Captura Diferida | `597055555547` Mall <br> `597055555548` Tienda 1 <br> `597055555549` Tienda 2
 Transacción Completa | `597055555530`
