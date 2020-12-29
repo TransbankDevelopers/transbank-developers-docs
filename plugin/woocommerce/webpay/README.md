@@ -26,6 +26,15 @@ Estás viendo la <strong>nueva documentación REST</strong> de este plugin. Si q
 (SOAP) haz [click aquí](/plugin/woocommerce/webpay-soap)
 </aside>
 
+<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/embed/9--NHgh07Fw" >
+  <div class="container-embed">
+    <div class="data-info-url">
+      <b>Como pasar de SOAP a REST</b>
+    </div>
+    <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
+  </div>
+</div>
+
 <h1 class="toc-ignore">Webpay REST WooCommerce</h1>
 <h1 style="display: none;">Webpay REST</h1>
 
