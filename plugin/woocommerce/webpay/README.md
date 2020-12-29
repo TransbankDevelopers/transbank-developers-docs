@@ -42,6 +42,15 @@ Estás viendo la <strong>nueva documentación REST</strong> de este plugin. Si q
 
 Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente en tu comercio, basado en WooCommerce.
 
+<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/watch?v=IeKb8RreF08" >
+  <div class="container-embed">
+    <div class="data-info-url">
+      <b>Cómo instalar el plugin de woocommerce</b>
+    </div>
+    <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
+  </div>
+</div>
+
 ## Requisitos
 
 Debes tener instalado previamente [WooCommerce](https://woocommerce.com/).
