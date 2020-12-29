@@ -19,14 +19,16 @@
   </div>
 </div>
 
+---
+
+<aside class="warning">
+Estás viendo una versión <strong>antigua de la documentación</strong> de este plugin. Si quieres ver la nueva versión (REST) haz [click aquí](/plugin/prestashop/webpay)
+</aside>
+
 <h1 class="toc-ignore">Webpay Prestashop</h1>
 <h1 style="display: none;">Webpay</h1>
 
 ## Descripción
-
-<aside class="notice">
-Estás viendo la versión SOAP de este plugin.
-</aside>
 
 Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente en tu comercio, basado en Prestashop.
 

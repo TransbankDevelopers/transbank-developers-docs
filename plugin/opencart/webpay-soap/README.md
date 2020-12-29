@@ -19,6 +19,12 @@
   </div>
 </div>
 
+---
+
+<aside class="warning">
+Estás viendo una versión <strong>antigua de la documentación</strong> de este plugin. Si quieres ver la nueva versión (REST) haz [click aquí](/plugin/opencart/webpay)
+</aside>
+
 <h1 class="toc-ignore">Webpay Opencart</h1>
 <h1 style="display: none;">Webpay</h1>
 
