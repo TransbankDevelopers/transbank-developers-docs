@@ -42,7 +42,7 @@ Estás viendo la <strong>nueva documentación REST</strong> de este plugin. Si q
 
 Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente en tu comercio, basado en WooCommerce.
 
-<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/watch?v=IeKb8RreF08" >
+<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/embed/IeKb8RreF08" >
   <div class="container-embed">
     <div class="data-info-url">
       <b>Cómo instalar el plugin de woocommerce</b>
@@ -139,7 +139,7 @@ Soporte validará el formulario enviado y, de estar todo correcto, se te notifi
 
 ## Puesta en producción
 
-<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/watch?v=B9sb7SyROVk" >
+<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/embed/B9sb7SyROVk" >
   <div class="container-embed">
     <div class="data-info-url">
       <b>Cómo pasar a producción</b>
