@@ -19,7 +19,6 @@
   </div>
 </div>
 
-
 ___
 
 <aside class="notice">
