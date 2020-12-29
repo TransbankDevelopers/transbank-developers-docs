@@ -103,7 +103,7 @@ Ponemos a tu disposición una serie de repositorios en nuestro Github para ayuda
 
 * [Ejemplo en PHP](https://github.com/TransbankDevelopers/transbank-sdk-php-webpay-rest-example)
 * [Ejemplo en .Net](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-rest-example)
-* [Ejemplo en Java](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-rest-example)
+* [Ejemplo en Java](https://github.com/TransbankDevelopers/transbank-sdk-java-webpay-rest-example)
 * [Ejemplo en Ruby](https://github.com/TransbankDevelopers/transbank-sdk-ruby-webpay-rest-example)
 * [Ejemplo en Python](https://github.com/TransbankDevelopers/transbank-sdk-python-webpay-rest-example)
 

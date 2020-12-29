@@ -35,7 +35,7 @@ Estás viendo la <strong>nueva documentación REST</strong> de este plugin. Si q
   </div>
 </div>
 
-<h1 class="toc-ignore">Webpay REST WooCommerce</h1>
+<h1 class="toc-ignore">WooCommerce | Plugin Webpay Plus </h1>
 <h1 style="display: none;">Webpay REST</h1>
 
 ## Descripción
@@ -56,29 +56,37 @@ Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente e
 Debes tener instalado previamente [WooCommerce](https://woocommerce.com/).
 Asegúrate de tener habilitados los siguientes módulos / extensiones para PHP:
 
-* Soap
+* Extensión de PHP JSON 
 * OpenSSL 1.0.1 o superior
-* SimpleXML
 * DOM 2.7.8 o superior
-* PHP 5.6 o superior
+* PHP 7.0 o superior
 
 Al instalar el plugin, podrás revisar si todas estos requisitos se cumplen, a través de la pantalla de diagnóstico que se incluye.
 
-_Esta pantalla de diagnóstico se encuentra en la sección de configuración del plugin (en donde configuras tu código de comercio y tu **llave secreta**). Ahí debes presionar el botón "Información del sistema"_
+_Esta pantalla de diagnóstico se encuentra en la sección de configuración del plugin (en donde configuras tu código de comercio y tu **llave secreta**). Ahí verás un tab "Diagnóstico". _
 
 ## Instalación
+Como se puede ver en el video, los pasos para instalar el plugin son los siguientes:  
+1. Entra al panel de administración de tu Wordpress > Plugins > Agregar Nuevo
+2. Busca el plugin "Transbank Webpay Plus REST", instálalo y actívalo.
+
+### Instalación manual (obsoleta)
+Si no puedes instalarlo de manera automática, también puedes descargar el archivo .zip del plugin y cargarlo manualmente en tu Wordpress. 
 
 1. [Descargar el archivo .zip del plugin](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest/releases/latest)
 2. Sube el archivo zip en la sección Plugin > Subir nuevo plugin en el administrador de tu Wordpress
-
 Las instrucciones detalladas de instalación las puedes encontrar en el [siguiente link](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest/blob/master/docs/INSTALLATION.md).
+
+<img src="/images/plugins/instalacion-woocommerce.png" alt="Marketplace Wordpress">
 
 ## Cómo usar
 
 Una vez instalado agregará un nuevo método de pago disponible en tu WooCommerce. Si no se activa correctamente, revisa que el plugin esté activo y que tu tienda está configurada en Pesos Chilenos.
 
 Como nuevo método de pago, tus clientes podrán pagar por sus pedidos usando la opción Webpay Plus en el proceso de Checkout, y una vez finalizado el pago, la orden será aprobada automáticamente (si el pago fue realizado correctamente).
-Dentro de la lista de órdenes verás cuales están pagadas. En el detalle de una orden verás también algunas notas (Notas de la orden) donde puedes verificar cual fue el resultado detallado de la transacción (código de autorización, tipo de tarjeta, etc )  
+Dentro de la lista de órdenes verás cuales están pagadas. En el detalle de una orden verás también algunas notas (Notas de la orden) donde puedes verificar cual fue el resultado detallado de la transacción (código de autorización, tipo de tarjeta, etc )
+
+<img src="/images/plugins/medio-pago-woocommerce.png" alt="Medio de pago en WooCommerce">
 
 ### Anulaciones
 

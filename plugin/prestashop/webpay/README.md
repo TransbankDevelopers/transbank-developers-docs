@@ -7,7 +7,7 @@
     <br>
     <h4>Compatibilidad</h4>
     <ul>
-      <li>Prestashop >= 3.2</li>
+      <li>Prestashop >= 1.6</li>
       <li>PHP >= 5.6</li>
     </ul>
     <h4>Recuerda</h4>
