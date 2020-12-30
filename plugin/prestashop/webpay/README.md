@@ -77,7 +77,7 @@ Soporte validará el formulario enviado y, de estar todo correcto, se te notifi
 
 ## Puesta en producción
 
-<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/watch?v=B9sb7SyROVk" >
+<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/embed/B9sb7SyROVk" >
   <div class="container-embed">
     <div class="data-info-url">
       <b>Cómo pasar a producción</b>
