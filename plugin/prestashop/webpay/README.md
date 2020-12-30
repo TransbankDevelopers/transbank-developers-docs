@@ -28,7 +28,7 @@ ___
 
 Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente en tu comercio, basado en Prestashop.
 
-Estás viendo la nueva documentación REST de este plugin. Si aún estás usando la versión anterior SOAP (las que te solicita certificados y una llave privada), revisa este video para actualizarte.
+Estás viendo la nueva documentación REST de este plugin. Si aún estás usando la versión anterior SOAP (la que te solicita certificados y una llave privada), revisa este video para actualizarte.
 
 <div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/embed/9--NHgh07Fw" >
   <div class="container-embed">
