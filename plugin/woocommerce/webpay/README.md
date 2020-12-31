@@ -21,20 +21,6 @@
 
 ___
 
-<aside class="notice">
-Estás viendo la <strong>nueva documentación REST</strong> de este plugin. Si quieres ver referencia de la versión anterior
-(SOAP) haz [click aquí](/plugin/woocommerce/webpay-soap)
-</aside>
-
-<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/embed/9--NHgh07Fw" >
-  <div class="container-embed">
-    <div class="data-info-url">
-      <b>Como pasar de SOAP a REST</b>
-    </div>
-    <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
-  </div>
-</div>
-
 <h1 class="toc-ignore">WooCommerce | Plugin Webpay Plus </h1>
 <h1 style="display: none;">Webpay REST</h1>
 
@@ -42,14 +28,17 @@ Estás viendo la <strong>nueva documentación REST</strong> de este plugin. Si q
 
 Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente en tu comercio, basado en WooCommerce.
 
-<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/embed/IeKb8RreF08" >
+Estás viendo la nueva documentación REST de este plugin. Si aún estás usando la versión anterior SOAP (la que te solicita certificados y una llave privada), revisa este video para actualizarte. 
+
+<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/embed/9--NHgh07Fw" >
   <div class="container-embed">
     <div class="data-info-url">
-      <b>Cómo instalar el plugin de woocommerce</b>
+      <b>Cómo pasar de SOAP a REST</b>
     </div>
     <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
   </div>
 </div>
+
 
 ## Requisitos
 
@@ -63,12 +52,22 @@ Asegúrate de tener habilitados los siguientes módulos / extensiones para PHP:
 
 Al instalar el plugin, podrás revisar si todas estos requisitos se cumplen, a través de la pantalla de diagnóstico que se incluye.
 
-_Esta pantalla de diagnóstico se encuentra en la sección de configuración del plugin (en donde configuras tu código de comercio y tu **llave secreta**). Ahí verás un tab "Diagnóstico". _
+_Esta pantalla de diagnóstico se encuentra en la sección de configuración del plugin (en donde configuras tu código de comercio y tu **llave secreta**). Ahí verás un tab "Diagnóstico"._
 
 ## Instalación
+
 Como se puede ver en el video, los pasos para instalar el plugin son los siguientes:  
 1. Entra al panel de administración de tu Wordpress > Plugins > Agregar Nuevo
 2. Busca el plugin "Transbank Webpay Plus REST", instálalo y actívalo.
+
+<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/embed/IeKb8RreF08" >
+  <div class="container-embed">
+    <div class="data-info-url">
+      <b>Cómo instalar el plugin de WooCommerce</b>
+    </div>
+    <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
+  </div>
+</div>
 
 ### Instalación manual (obsoleta)
 Si no puedes instalarlo de manera automática, también puedes descargar el archivo .zip del plugin y cargarlo manualmente en tu Wordpress. 
@@ -76,17 +75,15 @@ Si no puedes instalarlo de manera automática, también puedes descargar el arch
 1. [Descargar el archivo .zip del plugin](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest/releases/latest)
 2. Sube el archivo zip en la sección Plugin > Subir nuevo plugin en el administrador de tu Wordpress
 Las instrucciones detalladas de instalación las puedes encontrar en el [siguiente link](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest/blob/master/docs/INSTALLATION.md).
-
-<img src="/images/plugins/instalacion-woocommerce.png" alt="Marketplace Wordpress">
-
+   
 ## Cómo usar
 
-Una vez instalado agregará un nuevo método de pago disponible en tu WooCommerce. Si no se activa correctamente, revisa que el plugin esté activo y que tu tienda está configurada en Pesos Chilenos.
+Una vez instalado, se agregará un nuevo método de pago al proceso de checkout. Si no se activa correctamente, revisa que el plugin esté activo y que tu tienda está configurada en Pesos Chilenos.
 
-Como nuevo método de pago, tus clientes podrán pagar por sus pedidos usando la opción Webpay Plus en el proceso de Checkout, y una vez finalizado el pago, la orden será aprobada automáticamente (si el pago fue realizado correctamente).
-Dentro de la lista de órdenes verás cuales están pagadas. En el detalle de una orden verás también algunas notas (Notas de la orden) donde puedes verificar cual fue el resultado detallado de la transacción (código de autorización, tipo de tarjeta, etc )
+### Ambiente de pruebas
 
-<img src="/images/plugins/medio-pago-woocommerce.png" alt="Medio de pago en WooCommerce">
+Una vez instalado el plugin, este viene configurado en el ambiente de **Integración** de Transbank, por lo que puedes realizar todas las pruebas de pago que necesites, ya que no se usa dinero real.
+En este ambiente solo funcionan las tarjetas de crédito y débito de prueba que puedes [encontrar acá](/documentacion/como_empezar#ambiente-de-integracion).
 
 ### Anulaciones
 
@@ -121,29 +118,19 @@ En el siguiente video te dejamos las instrucciones para realizar este proceso
   </div>
 </div>
 
-## Ambiente de pruebas
-
-Una vez instalado el plugin, este viene configurado en el ambiente de **Integración** de Transbank, por lo que puedes realizar todas las pruebas de pago que necesites, ya que no se usa dinero real.
-En este ambiente solo funcionan las tarjetas de crédito y débito de prueba que puedes [encontrar acá](/documentacion/como_empezar#ambiente-de-integracion).
-
 ## Obtener tu llave secreta (proceso de validación)
 
 Para usar el plugin en el ambiente de producción (donde se utiliza dinero real), necesitas tener tu **llave secreta**, que es un código especial que está asociado a tu código de comercio.
 Para obtenerla necesitas pasar un proceso de validación, que está [explicado acá](/documentacion/como_empezar#el-proceso-de-validacion).
 
-Al finalizar este proceso de validación, obtendrás tu **llave secreta**.
-
-Nota: Esta **llave secreta** es como la contraseña de tu código de comercio, por lo que no debes compartirla. Se usa para identificar que tu comercio es quién realmente está realizando cada operación (transacción, anulación de un pago, etc).
-
-## El proceso de validación
-
 Este proceso pretende verificar que el comercio transacciona de manera segura y sin problemas. Esta validación es un requisito para dejar al comercio en producción y no se permitirá que un comercio utilice productivamente el servicio Webpay sin poseer esta validación.
-
 En esta etapa, debes envíar las evidencias a [soporte@transbank.cl](mailto:soporte@transbank.cl).
 
 Planilla de validación para plugins oficiales: [Descargar](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-plugins-rest.docx)
 
 Soporte validará el formulario enviado y, de estar todo correcto, se te notificará la conformidad para pasar a producción, recibiendo tu **llave secreta** (_Api Key Secret_) de producción y algunas instrucciones.
+
+Nota: Esta **llave secreta** es una contraseña de tu código de comercio, por lo que no debes compartirla.
 
 ## Puesta en producción
 

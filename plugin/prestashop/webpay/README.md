@@ -21,17 +21,23 @@
 
 ___
 
-<aside class="notice">
-Estás viendo la <strong>nueva documentación REST</strong> de este plugin. Si quieres ver referencia de la versión anterior
-(SOAP) haz [click aquí](/plugin/prestashop/webpay-soap)
-</aside>
-
 <h1 class="toc-ignore">Webpay REST Prestashop</h1>
 <h1 style="display: none;">Webpay REST</h1>
 
 ## Descripción
 
 Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente en tu comercio, basado en Prestashop.
+
+Estás viendo la nueva documentación REST de este plugin. Si aún estás usando la versión anterior SOAP (la que te solicita certificados y una llave privada), revisa este video para actualizarte.
+
+<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/embed/9--NHgh07Fw" >
+  <div class="container-embed">
+    <div class="data-info-url">
+      <b>Como pasar de SOAP a REST</b>
+    </div>
+    <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
+  </div>
+</div>
 
 ## Requisitos
 
