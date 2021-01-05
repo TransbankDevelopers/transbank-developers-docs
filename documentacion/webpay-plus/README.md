@@ -165,8 +165,8 @@ response.getToken();
 ```
 
 ```php
-response.getUrl();
-response.getToken();
+$response.getUrl();
+$response.getToken();
 ```
 
 ```csharp
@@ -272,20 +272,20 @@ response.getBalance();
 ```
 
 ```php
-response->getVci();
-response->getAmount();
-response->getStatus();
-response->getBuyOrder();
-response->getSessionId();
-response->getCardDetail();
-response->getAccountingDate();
-response->getTransactionDate();
-response->getAuthorizationCode();
-response->getPaymentTypeCode();
-response->getResponseCode();
-response->getInstallmentsAmount();
-response->getInstallmentsNumber();
-response->getBalance();
+$response->getVci();
+$response->getAmount();
+$response->getStatus();
+$response->getBuyOrder();
+$response->getSessionId();
+$response->getCardDetail();
+$response->getAccountingDate();
+$response->getTransactionDate();
+$response->getAuthorizationCode();
+$response->getPaymentTypeCode();
+$response->getResponseCode();
+$response->getInstallmentsAmount();
+$response->getInstallmentsNumber();
+$response->getBalance();
 ```
 
 ```csharp
@@ -401,20 +401,20 @@ response.getBalance();
 ```
 
 ```php
-response->getVci();
-response->getAmount();
-response->getStatus();
-response->getBuyOrder();
-response->getSessionId();
-response->getCardDetail();
-response->getAccountingDate();
-response->getTransactionDate();
-response->getAuthorizationCode();
-response->getPaymentTypeCode();
-response->getResponseCode();
-response->getInstallmentsAmount();
-response->getInstallmentsNumber();
-response->getBalance();
+$response->getVci();
+$response->getAmount();
+$response->getStatus();
+$response->getBuyOrder();
+$response->getSessionId();
+$response->getCardDetail();
+$response->getAccountingDate();
+$response->getTransactionDate();
+$response->getAuthorizationCode();
+$response->getPaymentTypeCode();
+$response->getResponseCode();
+$response->getInstallmentsAmount();
+$response->getInstallmentsNumber();
+$response->getBalance();
 ```
 
 ```csharp
@@ -531,12 +531,12 @@ response.getType();
 ```
 
 ```php
-response->getAuthorizationCode();
-response->getAuthorizationDate();
-response->getBalance();
-response->getNullifiedAmount();
-response->getResponseCode();
-response->getType();
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getBalance();
+$response->getNullifiedAmount();
+$response->getResponseCode();
+$response->getType();
 ```
 
 ```csharp
@@ -739,16 +739,16 @@ use Transbank\Webpay\WebpayPlus\Transaction;
 WebpayPlus::configureMallForTesting();
 
 $transaction_details = [
-  {
-      "amount": 10000,
-      "commerce_code": 597055555536,
-      "buy_order": "ordenCompraDetalle1234"
-  },
-  {
-     "amount": 12000,
-     "commerce_code": 597055555537,
-     "buy_order": "ordenCompraDetalle4321"
-  },
+  [
+      "amount" => 10000,
+      "commerce_code" => 597055555536,
+      "buy_order" => "ordenCompraDetalle1234"
+  ],
+  [
+     "amount" =>12000,
+     "commerce_code" => 597055555537,
+     "buy_order" => "ordenCompraDetalle4321"
+  ],
 ];
   
 $response = Transaction::createMall($buy_order, $session_id, $return_url, $transaction_details);
@@ -823,8 +823,8 @@ response.getUrl();
 ```
 
 ```php
-response->getToken();
-response->getUrl();
+$response->getToken();
+$response->getUrl();
 ```
 
 ```csharp
@@ -941,16 +941,16 @@ $card_detail->getCardNumber();
 $response->getSessionId();
 $response->getTransactionDate();
 $response->getVci();
-$details = response->getDetails();
+$details = $response->getDetails();
 foreach($details as $detail){
-    detail->getAmount();
-    detail->getAuthorizationCode();
-    detail->getBuyOrder();
-    detail->getCommerceCode();
-    detail->getInstallmentsNumber();
-    detail->getPaymentTypeCode();
-    detail->getResponseCode();
-    detail->getStatus();
+    $detail->getAmount();
+    $detail->getAuthorizationCode();
+    $detail->getBuyOrder();
+    $detail->getCommerceCode();
+    $detail->getInstallmentsNumber();
+    $detail->getPaymentTypeCode();
+    $detail->getResponseCode();
+    $detail->getStatus();
 }
 ```
 
@@ -1106,16 +1106,16 @@ Para obtener la información contenida en la respuesta puedes hacerlo de la sigu
   $response->getSessionId();
   $response->getTransactionDate();
   $response->getVci();
-  $details = response->getDetails();
+  $details = $response->getDetails();
   foreach($details as $detail){
-      detail->getAmount();
-      detail->getAuthorizationCode();
-      detail->getBuyOrder();
-      detail->getCommerceCode();
-      detail->getInstallmentsNumber();
-      detail->getPaymentTypeCode();
-      detail->getResponseCode();
-      detail->getStatus();
+      $detail->getAmount();
+      $detail->getAuthorizationCode();
+      $detail->getBuyOrder();
+      $detail->getCommerceCode();
+      $detail->getInstallmentsNumber();
+      $detail->getPaymentTypeCode();
+      $detail->getResponseCode();
+      $detail->getStatus();
   }
 ```
 
