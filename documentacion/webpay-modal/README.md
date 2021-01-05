@@ -1,4 +1,4 @@
-# Webpay modal
+# Webpay Modal
 
 Webpay Modal permite a los comercios integrar un formulario de pago directamente dentro de su sitio web, sin una redirección 
 del navegador web a una plataforma de pago externa, permitiendo a sus clientes realizar una solicitud de autorización 
@@ -69,28 +69,26 @@ response.getToken();
 ```
 
 ### Mostrar formulario de pago
-Una vez que ya tienes el token en tu poder, debes desplegar el formulario de pago de Webpay Modal. 
+Una vez que ya tienes el token, debes desplegar el formulario de pago de Webpay Modal. 
 Para eso, debes incluir el siguiente `<script>` en tu web. 
 
-<strong>Ambiente de integración</strong>
-Usar dominio `https://webpay3gint.transbank.cl`
 ```html 
+<!-- A) Incluir este para el ambiente de integración -->
 <script type="text/javascript" src="https://webpay3gint.transbank.cl/webpayserver/webpay.js"></script>
-```
 
-<strong>Ambiente de producción</strong>
-Usar dominio `https://webpay3g.transbank.cl`
-```html 
+<!-- B) Incluir este para el ambiente de producción -->
 <script type="text/javascript" src="https://webpay3g.transbank.cl/webpayserver/webpay.js"></script>
 ```
+Para el ambiente de **integración**, usar dominio `https://webpay3gint.transbank.cl` y para **producción* usar el dominio `https://webpay3g.transbank.cl`
 
 Luego, es necesario tener un `<div>` en donde se montará el formulario de pago: 
 ```html 
     <div id="webpay_div" style="margin: 0 auto; height:637px !important">
 ```
 
-Posteriormente se debe ejecutar la función `Webpay.show(...)` para desplegar el formulario. 
+Posteriormente, se debe ejecutar la función `Webpay.show(...)` para desplegar el formulario. Esta función se debe ejecutar después de que el div haya sido creado en el DOM (por ejemplo, dentro de `window.onload`, en un tag script casi al cerrar el tag `body` o algo similar).
 ```html
+<div id="webpay_div" style="margin: 0 auto; height:637px !important">
 <script>
     Webpay.show("webpay_div", "EL_TOKEN_DE_LA_TRANSACCION_CREADA_ACA", success_callback, error_callback);
     
@@ -158,9 +156,9 @@ function success_callback(token) {
 }
 </script>
 ```
-Lo importante del código anterior, es entender que una vez que se ejecuta el success callback, no significa necesariamente que la 
-transacción haya sido aprobada, si no que el flujo de pago finalizó correctamente. 
-Es en ese momento en el que debemos confirmar en la transacción (en nuestro servidor, en el backend) y en este ejemplo, 
+Lo importante del código anterior es entender que una vez que se ejecuta el success callback, no significa necesariamente que la 
+transacción haya sido aprobada, sino que el flujo de pago finalizó correctamente. 
+Es en ese momento en el que debemos confirmar en la transacción (en nuestro servidor, en el backend) y en este código de ejemplo
 se envía el token mediante AJAX a una API dentro de nuestro sitio. Es en ese endpoint en donde se realiza la confirmación (también puede ser una redirección a otra página o algo así). 
 
 ### Confirmar una transacción
@@ -183,7 +181,7 @@ $response = Transaction::commit($token);
 ```
 
 
-<strong>Respuesta Confirmar una transacción</strong>
+<strong>Respuesta de confirmar una transacción</strong>
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -204,11 +202,12 @@ $response->getInstallmentsAmount();
 $response->getInstallmentsNumber();
 ```
  
-Si responseCode es igual a 0, entonces la transacción fue aprobada satisfactoriamente. Cualquier otro valor indicará que el pago fue rechazado.
-En este momento, dependiendo netamente del responseCode, que puedes verificar el estado de la transacción y realizar las acciones que necesites, como aprobar el pedido en tu base de datos, rebajar stock, etc.
+Si `responseCode`  es igual a `0`, entonces la transacción fue aprobada satisfactoriamente. Cualquier otro valor indicará que el pago fue rechazado.
+En este momento, dependiendo netamente del responseCode, puedes verificar el estado de la transacción y realizar las acciones que necesites, como aprobar el pedido en tu base de datos, rebajar stock, etc.
 
 <strong>Mostrar el voucher</strong>
 Siguiendo con el ejemplo, podemos utilizar la respuesta de la confirmación podrás mostrar un comprobante o página de éxito a tu usuario en caso de que el responseCode sea igual a cero.
+Si es diferente de cero, puedes mostrar un mensaje indicando que la transacción fue rechazada para que pueda reintentar el pago (se debe comenzar el proceso desde cero, creando una nueva transacción y obteniendo un nuevo token)
 
 ### Obtener estado de una transacción
 
