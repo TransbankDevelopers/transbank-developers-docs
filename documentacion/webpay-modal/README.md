@@ -3,11 +3,6 @@
 Webpay Modal permite a los comercios integrar un formulario de pago directamente dentro de su sitio web, sin una redirección 
 del navegador web a una plataforma de pago externa, permitiendo a sus clientes realizar una solicitud de autorización 
 financiera de un pago con tarjetas de crédito, débito o prepago. 
-
-<div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay-modal' tbk-link-name='Referencia Api'></div>
-</div>
-
 Usada para un pago puntual en una tienda simple. Se generará un único cobro para todos los productos o servicios adquiridos por el tarjetahabiente.
 
 ### Flujo en caso de éxito
@@ -30,9 +25,6 @@ De cara al tarjetahabiente, el flujo de pago es el siguiente:
 
 ### Crear una transacción
 
-<div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay-modal#crear-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
-</div>
 
 Esta operación te permite crear una transacción.  Webpay Modal procesa el requerimiento y entrega
 como resultado de la operación el token de la transacción.
@@ -65,7 +57,7 @@ para identificar tu transacción.
 <div class="language-simple" data-multiple-language></div>
 
 ```php
-response.getToken();
+$response.getToken();
 ```
 
 ### Mostrar formulario de pago
@@ -131,9 +123,6 @@ tarjetas de prueba en la sección de Ambientes</a>.
 
 ### Esperar que el usuario termine el flujo de pago
 
-<div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#confirmar-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
-</div>
 
 Una vez que el tarjetahabiente ha pagado, Webpay Plus retornará
 el control al comercio mediante Javascript, ejecutando la función de éxito ("Success Callback"). 
@@ -211,9 +200,6 @@ Si es diferente de cero, puedes mostrar un mensaje indicando que la transacción
 
 ### Obtener estado de una transacción
 
-<div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#obtener-estado-de-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
-</div>
 
 Esta operación permite obtener el estado de la transacción en los siguientes 7 días desde su creación.
 En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error
@@ -255,9 +241,6 @@ $response->getBalance();
 
 ### Reversar o Anular una transacción
 
-<div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#reversar-o-anular-un-pago-webpay-plus' tbk-link-name='Referencia Api'></div>
-</div>
 
 Esta operación permite a todo comercio habilitado, reembolsar o anular una
 transacción que fue generada en Webpay Plus.
