@@ -3,12 +3,11 @@
 Webpay Modal permite a los comercios integrar un formulario de pago directamente dentro de su sitio web, sin una redirección 
 del navegador web a una plataforma de pago externa, permitiendo a sus clientes realizar una solicitud de autorización 
 financiera de un pago con tarjetas de crédito, débito o prepago. 
-
-<div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay-modal' tbk-link-name='Referencia Api'></div>
-</div>
-
 Usada para un pago puntual en una tienda simple. Se generará un único cobro para todos los productos o servicios adquiridos por el tarjetahabiente.
+
+<aside class="success">
+Este producto está disponible desde la versión 1.1 del API REST. 
+</aside>
 
 ### Flujo en caso de éxito
 
@@ -29,10 +28,6 @@ De cara al tarjetahabiente, el flujo de pago es el siguiente:
 8. Si la transacción ha sido aprobada (código de respuesta es igual a 0), el comercio muestra el voucher con los datos de la transacción y/o una página de gracias. 
 
 ### Crear una transacción
-
-<div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay-modal#crear-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
-</div>
 
 Esta operación te permite crear una transacción.  Webpay Modal procesa el requerimiento y entrega
 como resultado de la operación el token de la transacción.
@@ -65,7 +60,7 @@ para identificar tu transacción.
 <div class="language-simple" data-multiple-language></div>
 
 ```php
-response.getToken();
+$response->getToken();
 ```
 
 ### Mostrar formulario de pago
@@ -131,9 +126,6 @@ tarjetas de prueba en la sección de Ambientes</a>.
 
 ### Esperar que el usuario termine el flujo de pago
 
-<div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#confirmar-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
-</div>
 
 Una vez que el tarjetahabiente ha pagado, Webpay Plus retornará
 el control al comercio mediante Javascript, ejecutando la función de éxito ("Success Callback"). 
@@ -211,9 +203,6 @@ Si es diferente de cero, puedes mostrar un mensaje indicando que la transacción
 
 ### Obtener estado de una transacción
 
-<div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#obtener-estado-de-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
-</div>
 
 Esta operación permite obtener el estado de la transacción en los siguientes 7 días desde su creación.
 En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error
@@ -255,9 +244,6 @@ $response->getBalance();
 
 ### Reversar o Anular una transacción
 
-<div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#reversar-o-anular-un-pago-webpay-plus' tbk-link-name='Referencia Api'></div>
-</div>
 
 Esta operación permite a todo comercio habilitado, reembolsar o anular una
 transacción que fue generada en Webpay Plus.
@@ -305,8 +291,29 @@ $response->getType();
 
 ## Credenciales y Ambiente
 
-Para Webpay Modal, las credenciales del comercio (código de comercio y API Key) vienen pre configurados en los SDK. Si no usas un SDK, revisa [la documentación para encontrar los códigos de comercio](/documentacion/como_empezar#codigos-de-comercio) y API Key.
-Si quieres apuntar a producción tienes dos opciones; puedes re-configurar el SDK para que apunte a producción utilizando el código de comercio y API Key. O puedes configurar cada llamada a las operaciones siguientes para pasar un objeto `Options` en el cual configuras donde quieres apuntar.
+Para Webpay Modal, las credenciales del comercio (código de comercio y API Key) vienen pre configurados en los SDK. 
+
+Si no usas un SDK, estos es el código de comercio y Api Key del ambiente de integración:
+
+La **llave secreta (Api Key Secret)** es `579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C`
+
+Producto | Código de Comercio |
+-------- | ------------ |
+Webpay Modal | `597055555584`
+
+Si quieres apuntar a producción tienes dos opciones: puedes re-configurar el SDK para que apunte a producción utilizando el código de comercio y API Key o puedes configurar cada llamada a las operaciones siguientes para pasar un objeto `Options` en el cual configuras donde quieres apuntar.
+
+Ejemplo:
+```php
+$apiKey = 'MiApiKeySEcret_Llave_secreta';
+$commerceCode = '5970MICODIGO';
+$environment = 'LIVE'; //Ambiente de producción
+
+$options = new Transbank\Webpay\Options($apiKey, $commerceCode, $environment);
+Transaction::create($amount, $buyOrder, $sessionId, $options);
+```
+A todos los métodos se les puede entregar un objeto Options en el último parámetro, que permite especificar un código de comercio, api key y ambiente. 
+
 Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#b-utilizando-los-sdk)
 
 ## Conciliación de Transacciones
