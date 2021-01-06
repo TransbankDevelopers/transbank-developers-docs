@@ -97,7 +97,7 @@ Estos equipos funcionan tanto con puerto serial RS232 y USB (Generalmente plug a
 
 Este driver es compatible con los siguiente sistemas operativos.
 
-
+* Windows 7 (SP3) 32 bits
 * Windows 7 (SP3) 64 bits
 * Windows 8/8.1 32 bits
 * Windows 8/8.1 64 bits
