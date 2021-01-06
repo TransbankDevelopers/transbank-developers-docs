@@ -97,16 +97,14 @@ Estos equipos funcionan tanto con puerto serial RS232 y USB (Generalmente plug a
 
 Este driver es compatible con los siguiente sistemas operativos.
 
-* Windows XP
-* Windows Vista
-* Windows 7
-* Windows 2008 Server
-* Windows 2008 Server R2
-* Windows 8 and 8.1
-* Windows XP Embedded
-* Windows 2012 Server
-* Windows 2016 Server
+
+* Windows 7 (SP3) 64 bits
+* Windows 8/8.1 32 bits
+* Windows 8/8.1 64 bits
+* Windows Server 2012
+* Windows Server 2016
 * Windows 10
+
   
 <aside class="warning">
 Ingenico no proporciona drivers para otros sistemas operativos, sin embargo es posible que de todas maneras puedas utilizar el POS en sistemas operativos distintos a los mencionados. En este caso la responsabilidad del correcto funcionamiento es del comercio.
