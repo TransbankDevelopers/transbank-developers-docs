@@ -57,7 +57,7 @@ para identificar tu transacción.
 <div class="language-simple" data-multiple-language></div>
 
 ```php
-$response.getToken();
+$response->getToken();
 ```
 
 ### Mostrar formulario de pago
