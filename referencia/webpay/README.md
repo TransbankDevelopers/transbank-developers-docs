@@ -184,7 +184,7 @@ de crédito, débito o prepago lo realiza en forma segura en Webpay.
 
 Revisa [la documentación](/documentacion/webpay-plus#flujo-en-caso-de-exito) de Webpay plus para revisar los diferentes flujos de pago posibles. 
 
-De cara al tarjetahabiente, el flujo de páginas para la transacción es el
+
 ### Crear una transacción Webpay Plus
 Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#crear-una-transaccion)
 
