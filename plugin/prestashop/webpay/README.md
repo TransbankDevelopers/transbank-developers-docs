@@ -33,7 +33,7 @@ Estás viendo la nueva documentación REST de este plugin. Si aún estás usando
 <div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/embed/wYa6Wynfimw" >
   <div class="container-embed">
     <div class="data-info-url">
-      <b>Como pasar de SOAP a REST</b>
+      <b>Cómo pasar de SOAP a REST</b>
     </div>
     <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
   </div>
