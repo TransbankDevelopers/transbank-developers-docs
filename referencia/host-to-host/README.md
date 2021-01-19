@@ -75,32 +75,44 @@ El SDK Java y C no soportan el envío de mensajes intermedios. Por esta razón e
 
 <strong>Solicitud de Venta</strong>
 
-DATO        | LARGO     | Comentario
-------      | ------    | ------
-`<STX>`     | 1         | Indica el inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
-`Comando`   | 4         | <i>valor ASCII</i>: `0100` <br><i>valor hexadecimal</i>: `0x30 0x31 0x30 0x30`
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Local comercio OnUs`     | 2         | **Valor Numérico** <br /> 00 Comercio sin tarjetas propias 01-99 Comercios onus, TBK asigna un numero para lectura de tarjetas propias
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Entrega BIN`    | 1         | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />Sirve para conocer el bin de la tarjeta y poder realizar algún descuento a la venta por convenio con el banco
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Transacción offline`    | 1         | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />Ya no está permitido su uso
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Autoservicio` | 1         | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Monto` | 18         | **Valor numérico (máximo)** <br />Monto de Compra (sin propina, sin vuelto) Monto mínimo $50,00 o US$1,00 Incluye dos decimales.
-`Status`    | 1         | Indica al POS si debe enviar mensajes intermedios o de estado de la transacción <br><i>1</i>: Envía Mensajes<br><i>0</i>: No envía mensajes
-`<ETX>`     | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
-`LRC`       | 1         | Resultado del calculo del `LRC` del mensaje
+DATO        | LARGO     | COMENTARIO DATO       | VALOR POR DEFECTO
+------      | ------    | ------                | ------    
+`<STX>`     | 1         | Indica el inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`| STX
+`Comando`   | 4         | <i>valor ASCII</i>: `0100` <br><i>valor hexadecimal</i>: `0x30 0x31 0x30 0x30`| 
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Local comercio OnUs`     | 2         | **Valor Numérico** <br /> 00 Comercio sin tarjetas propias 01-99 Comercios onus, TBK asigna un numero para lectura de tarjetas propias |**00**
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Entrega BIN`    | 1         | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />Sirve para conocer el bin de la tarjeta y poder realizar algún descuento a la venta por convenio con el banco |**N**
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Transacción offline`    | 1         | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />Ya no está permitido su uso | **N**
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Autoservicio` | 1         | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />| **N**
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Monto` | 18         | **Valor numérico (máximo)** <br />Monto de Compra (sin propina, sin vuelto) <br>Monto mínimo $50,00 o US$1,00 <br />Incluye dos decimales.|
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Código de moneda`    | 2         | **Valor alfanumérico** <br />\|CL\| Pesos chilenos 152<br>\|US\| Dólares estadounidenses 840 | **CL**
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Tipo de tarjeta`       | 2         | **Valor alfanumérico** <br />Indicador del tipo de menú por el cual se realizó la transacción.<br>\|CR\| : CRÉDITO<br>\|DB\| : DÉBITO - PREPAGO<br>\|NB\| : NO BANCARIA<br>Valor de tipo en Tabla tipo de tarjeta<br>***Una venta hecha como debito puede ser autorizada como prepago*** | 
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Lista montos de vuelto`       | 60         | **Valor numérico (máximo)** <br />Lista de montos de vuelto permitidos, separados por “;” Incluyen dos decimales, siempre se debe enviar las 4 opciones definidas por Transbank.<br>Campo paramétrico por punto de venta.<br>Sólo si “Tipo de tarjeta = DB” | **500000;**<br>**1000000;**<br>**2000000;**<br>**5000000;**
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Monto vuelto`       | 18         | **Valor numérico (máximo)** <br />\|0\| : No muestra menú en pinpad<br>\|\| : ø Muestra menú consultando por vuelto<br>Si \|n\|> 0 no se muestra menú. El valor debe corresponder a alguno enviado en el campo “Lista de montos de vuelto”<br>Vuelto solo existe en débito, enviar 0 en crédito<br>Campo c | **Ø**
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Monto propina/donación`       | 9         | **Valor numérico (máximo)** <br />Corresponde al monto propina o donación de la venta o anulación<br>(incluye dos decimales)<br/><br/>**Importante:** Si se desea pedir propina al Tarjeta Habiente y que este la confirme, se debe enviar este campo el valor en vacío (Ø )<br />**Para las anulaciones** se debe colocar el monto de la propina de la venta a anular, en caso de no tener propina **colocar un cero (0).** | **Ø**
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03` | ETX
+`<LRC>`                   |  1        | Resultado del calculo del `LRC` del mensaje | 
 
-*Mensaje* en <i>ASCII</i>: `<STX>0200|{amount}|{ticket}|||{Convert.ToInt32(sendStatus)}|<ETX><LRC>`
 
-<strong>Respuesta de Venta</strong>
+Timeout máximo de espera por comando 110 de 35seg, ya que el PinPad espera 30seg a que el cliente opere
+tarjeta, por lo tanto a los 30 segundas si no se opera tarjeta, devuelve un 110\|99.
 
-DATO                    | LARGO     | COMENTARIO
-------                  | ------    | ------
+
+
+DATO                    | LARGO     | COMENTARIO        | VALOR POR DEFECTO
+------                  | ------    | ------            | ------
 `<STX>`                 |  1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
-`Comando`               |  4        | <i>Valor ASCII</i>:  `0510` <br><i>valor hexadecimal</i>: `0x30 0x35 0x31 0x30`
+`Comando`               |  4        | <i>Valor ASCII</i>:  `0110` <br><i>valor hexadecimal</i>: `0x30 0x31 0x31 0x30`
 `Separador`             |  1        | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Código Respuesta`      |  2        | Valor Numérico
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
