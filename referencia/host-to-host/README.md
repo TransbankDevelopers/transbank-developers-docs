@@ -79,43 +79,43 @@ DATO        | LARGO     | COMENTARIO DATO       | VALOR POR DEFECTO
 ------      | ------    | ------                | ------    
 `<STX>`     | 1         | Indica el inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`| STX
 `Comando`   | 4         | <i>valor ASCII</i>: `0100` <br><i>valor hexadecimal</i>: `0x30 0x31 0x30 0x30`| 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`|
 `Local comercio OnUs`     | 2         | **Valor Numérico** <br /> 00 Comercio sin tarjetas propias 01-99 Comercios onus, TBK asigna un numero para lectura de tarjetas propias |**00**
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`|
 `Entrega BIN`    | 1         | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />Sirve para conocer el bin de la tarjeta y poder realizar algún descuento a la venta por convenio con el banco |**N**
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| 
 `Transacción offline`    | 1         | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />Ya no está permitido su uso | **N**
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`|
 `Autoservicio` | 1         | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />| **N**
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`|
 `Monto` | 18         | **Valor numérico (máximo)** <br />Monto de Compra (sin propina, sin vuelto) <br>Monto mínimo $50,00 o US$1,00 <br />Incluye dos decimales.|
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
-`Código de moneda`    | 2         | **Valor alfanumérico** <br />\|CL\| Pesos chilenos 152<br>\|US\| Dólares estadounidenses 840 | **CL**
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
-`Tipo de tarjeta`       | 2         | **Valor alfanumérico** <br />Indicador del tipo de menú por el cual se realizó la transacción.<br>\|CR\| : CRÉDITO<br>\|DB\| : DÉBITO - PREPAGO<br>\|NB\| : NO BANCARIA<br>Valor de tipo en Tabla tipo de tarjeta<br>***Una venta hecha como debito puede ser autorizada como prepago*** | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`|
+`Código de moneda`    | 2         | **Valor alfanumérico** <br />CL Pesos chilenos 152<br>US Dólares estadounidenses 840 | **CL**
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`|
+`Tipo de tarjeta`       | 2         | **Valor alfanumérico** <br />Indicador del tipo de menú por el cual se realizó la transacción.<br>CR : CRÉDITO<br>DB : DÉBITO - PREPAGO<br>NB : NO BANCARIA<br>Valor de tipo en Tabla tipo de tarjeta<br>***Una venta hecha como debito puede ser autorizada como prepago*** | 
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`|
 `Lista montos de vuelto`       | 60         | **Valor numérico (máximo)** <br />Lista de montos de vuelto permitidos, separados por “;” Incluyen dos decimales, siempre se debe enviar las 4 opciones definidas por Transbank.<br>Campo paramétrico por punto de venta.<br>Sólo si “Tipo de tarjeta = DB” | **500000;**<br>**1000000;**<br>**2000000;**<br>**5000000;**
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
-`Monto vuelto`       | 18         | **Valor numérico (máximo)** <br />\|0\| : No muestra menú en pinpad<br>\|\| : ø Muestra menú consultando por vuelto<br>Si \|n\|> 0 no se muestra menú. El valor debe corresponder a alguno enviado en el campo “Lista de montos de vuelto”<br>Vuelto solo existe en débito, enviar 0 en crédito<br>Campo c | **Ø**
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| 
+`Monto vuelto`       | 18         | **Valor numérico (máximo)** <br />0 : No muestra menú en pinpad<br>| : ø Muestra menú consultando por vuelto<br>Si n> 0 no se muestra menú. El valor debe corresponder a alguno enviado en el campo “Lista de montos de vuelto”<br>Vuelto solo existe en débito, enviar 0 en crédito<br>Campo c | **Ø**
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`|
 `Monto propina/donación`       | 9         | **Valor numérico (máximo)** <br />Corresponde al monto propina o donación de la venta o anulación<br>(incluye dos decimales)<br/><br/>**Importante:** Si se desea pedir propina al Tarjeta Habiente y que este la confirme, se debe enviar este campo el valor en vacío (Ø )<br />**Para las anulaciones** se debe colocar el monto de la propina de la venta a anular, en caso de no tener propina **colocar un cero (0).** | **Ø**
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
-`<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03` | ETX
-`<LRC>`                   |  1        | Byte resultado de la operación XOR del mensaje | 
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`|
+`<ETX> |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03` | ETX
+`<LRC>`|  1        | Byte resultado de la operación XOR del mensaje | 
 
 
 Timeout máximo de espera por comando 110 de 35seg, ya que el PinPad espera 30seg a que el cliente opere
-tarjeta, por lo tanto a los 30 segundas si no se opera tarjeta, devuelve un 110\|99.
+tarjeta, por lo tanto a los 30 segundas si no se opera tarjeta, devuelve un 11/99.
 
 
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
-`<STX>`         | 1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
+`<STX>`         | 1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4        | <i>Valor ASCII</i>:  `0110` <br><i>valor hexadecimal</i>: `0x30 0x31 0x31 0x30`
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
-`Código Respuesta`  |  2        | Valor Numérico
-`Separador`     |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`|
+`Código de respuesta PinPad`  |  2        | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - <XX> : <GLOSA><br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) |
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`|
 `Código de comercio`    | 12        | Valor Numérico
 `Separador`     |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Terminal ID`           |  8        | Valor Alfanumérico
@@ -154,60 +154,6 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `LRC`                   |  1        | Resultado del calculo del `LRC` del mensaje
 
 
-## Tabla de respuestas
-
-Respuesta                                               | Código
-------                                                  | -----------
-Aprobado                                                | 00
-Rechazado                                               | 01
-Host no Responde                                        | 02
-Conexión Fallo                                          | 03
-Transacción ya Fue Anulada                              | 04
-No existe Transacción para Anular                       | 05
-Tarjeta no Soportada                                    | 06
-Transacción Cancelada desde el POS                      | 07
-No puede Anular Transacción Débito                      | 08
-Error Lectura Tarjeta                                   | 09
-Monto menor al mínimo permitido                         | 10
-No existe venta                                         | 11
-Transacción No Soportada                                | 12
-Debe ejecutar cierre                                    | 13
-No hay Tono                                             | 14
-Archivo BITMAP.DAT no encontrado. Favor cargue          | 15
-Error Formato Respuesta del HOST                        | 16
-Error en los 4 últimos dígitos.                         | 17
-Menú invalido                                           | 18
-ERROR_TARJ_DIST                                         | 19
-Tarjeta Invalida                                        | 20
-Anulación. No Permitida                                 | 21
-TIMEOUT                                                 | 22
-Impresora Sin Papel                                     | 24
-Fecha Invalida                                          | 25
-Debe Cargar Llaves                                      | 26
-Debe Actualizar                                         | 27
-Error en Número de Cuotas                               | 60
-Error en Armado de Solicitud                            | 61
-Problema con el Pinpad interno                          | 62
-Error al Procesar la Respuesta del Host                 | 65
-Superó Número Máximo de Ventas, Debe Ejecutar Cierre    | 67
-Error Genérico, Falla al Ingresar Montos                | 68
-Error de formato Campo de Boleta MAX 6                  | 70
-Error de Largo Campo de Impresión                       | 71
-Error de Monto Venta, Debe ser Mayor que 0              | 72
-Terminal ID no configurado                              | 73
-Debe Ejecutar CIERRE                                    | 74
-Comercio no tiene Tarjetas Configuradas                 | 75
-Supero Número Máximo de Ventas, Debe Ejecutar CIERRE    | 76
-Debe Ejecutar Cierre                                    | 77
-Esperando Leer Tarjeta                                  | 78
-Solicitando Confirmar Monto                             | 79
-Solicitando Ingreso de Clave                            | 81
-Enviando transacción al Host                            | 82
-Error Cantidad Cuotas                                   | 88
-Declinada                                               | 93
-Error al Procesar Respuesta                             | 94
-Error al Imprimir TASA                                  | 95
-
 <aside class="warning">
 Toda transacción cuyo código de respuesta en el POS Integrado sea distinto de `0` será considerada como un rechazo. Por secreto bancario el detalle de la causa del rechazo no será entregado al comercio.
 </aside>
@@ -230,3 +176,30 @@ RIPLEY          | RP
 EXTRA           | EX
 CMR             | TC
 REDCOMPRA       | DB
+
+
+## Tabla de Respuesta Pinpad
+
+CÓDIGO DE RESPUESTA         | GLOSA
+------                      | -----------
+00                          | **RESPUESTA OK**
+--                          | POR DEFINIR (CONSIDERAR COMO SI FUERA 99)
+81                          | TIMEOUT POR MENOS DE 30 SEGUNDOS*
+82                          | COMANDO NO VÁLIDO
+83                          | NO EXISTE CÓDIGO DE MENSAJE
+84                          | TARJETA NO SOPORTADA
+85                          | REVERSA APLICADA
+86                          | ERROR DE LECTURA
+87                          | PINPAD SIN MASTER KEY
+88                          | TARJETA NO PERMITE VENTA ONUS
+89                          | TRANSACCIÓN DECLINADA POR LA TARJETA CHIP
+90                          | TARJETA NO PERMITIDA PARA EL MODO SELECCIONADO
+91                          | ERROR CANTIDAD DE CUOTAS
+92                          | NO COINCIDE CON TARJETA DE PRIMER “TAPEO”
+93                          | ERROR DE MONTO MÍNIMO
+94                          | ERROR DE VALIDACIÓN MONTO VUELTO
+95                          | ERROR ID DE CONTEXTO
+96                          | NO COINCIDE LOS 4 ULTIMOS DIGITOS
+97                          | LA TRANSACCIÓN NO PERMITE REVERSA
+98                          | ERROR DE FORMATO DEL MENSAJE
+99                          | CANCELACIÓN POR LA TECLA \[CANCEL\] / TIMEOUT
