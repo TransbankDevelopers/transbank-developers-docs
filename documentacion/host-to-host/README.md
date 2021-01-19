@@ -27,7 +27,7 @@ Construimos en conjunto un plan de instalación de los puntos de ventas.
 Para el desarrollo y pruebas del comercio Transbank entrega un set de pruebas que se deben ejecutar y un set de tarjetas físicas para estos casos, estas tarjetas solo funcionan en ambiente de desarrollo, certificación o integración.
 </aside>
 
-### **Flujo de venta en Pinpad Host:**
+### Flujo de venta en Pinpad Host:
 
 1. El cliente entrega los productos o servicio que desea comprar al vendedor.
 2. El vendedor realiza la venta en su sistema de caja.
@@ -209,10 +209,10 @@ Algunas consideraciones en la impresión de los voucher de transbank
     el voucher de pel el de cliente y el del comercio.
 
 ### Voucher de venta o anulaciones
-![](../../images/documentacion/host2host/voucher-venta.png)
+![](/images/documentacion/host2host/voucher-venta.png)
 
 ### Voucher de venta en ingles con surcharge
-![](../../images/documentacion/host2host/voucher-venta-surcharge.png)
+![](/images/documentacion/host2host/voucher-venta-surcharge.png)
 
 ### Voucher Pel y reimpresión
 Solo se permite imprimir 1 vez el voucher original y el voucher de PEL, si existe algún problema con
@@ -231,19 +231,19 @@ Duplicados:
 Se debe imprimir este voucher solo si:
 **COMANDO** H505 **CAMPO** TIPO DE VOUCHER = Entrega Pto. de Venta
 
-![](../../images/documentacion/host2host/voucher-pel-1.png)
+![](/images/documentacion/host2host/voucher-pel-1.png)
 
 ### Voucher pel 2 - Premiación en línea
 Se debe imprimir este voucher solo si:
 **COMANDO** H505 **CAMPO** TIPO DE VOUCHER = |2| Entrega Diferida
 
-![](../../images/documentacion/host2host/voucher-pel-2.png)
+![](/images/documentacion/host2host/voucher-pel-2.png)
 
 ### Voucher pel 3 - Premiación en línea
 Se debe imprimir este voucher solo si:
 **COMANDO** H505 **CAMPO** TIPO DE VOUCHER =  |3| Devolución al Tarjeta Habiente
 
-![](../../images/documentacion/host2host/voucher-pel-3.png)
+![](/images/documentacion/host2host/voucher-pel-3.png)
 
 
 <div class="container slate">
