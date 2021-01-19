@@ -101,7 +101,7 @@ DATO        | LARGO     | COMENTARIO DATO       | VALOR POR DEFECTO
 `Monto propina/donación`       | 9         | **Valor numérico (máximo)** <br />Corresponde al monto propina o donación de la venta o anulación<br>(incluye dos decimales)<br/><br/>**Importante:** Si se desea pedir propina al Tarjeta Habiente y que este la confirme, se debe enviar este campo el valor en vacío (Ø )<br />**Para las anulaciones** se debe colocar el monto de la propina de la venta a anular, en caso de no tener propina **colocar un cero (0).** | **Ø**
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
 `<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03` | ETX
-`<LRC>`                   |  1        | Resultado del calculo del `LRC` del mensaje | 
+`<LRC>`                   |  1        | Byte resultado de la operación XOR del mensaje | 
 
 
 Timeout máximo de espera por comando 110 de 35seg, ya que el PinPad espera 30seg a que el cliente opere
@@ -109,15 +109,15 @@ tarjeta, por lo tanto a los 30 segundas si no se opera tarjeta, devuelve un 110\
 
 
 
-DATO                    | LARGO     | COMENTARIO        | VALOR POR DEFECTO
-------                  | ------    | ------            | ------
-`<STX>`                 |  1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
-`Comando`               |  4        | <i>Valor ASCII</i>:  `0110` <br><i>valor hexadecimal</i>: `0x30 0x31 0x31 0x30`
-`Separador`             |  1        | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Código Respuesta`      |  2        | Valor Numérico
-`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
+------          | ------    | ------            | ------
+`<STX>`         | 1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
+`Comando`       | 4        | <i>Valor ASCII</i>:  `0110` <br><i>valor hexadecimal</i>: `0x30 0x31 0x31 0x30`
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| \||
+`Código Respuesta`  |  2        | Valor Numérico
+`Separador`     |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Código de comercio`    | 12        | Valor Numérico
-`Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Separador`     |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Terminal ID`           |  8        | Valor Alfanumérico
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Ticket`                |  6        | Valor ASCII, Número de boleta o ticket
