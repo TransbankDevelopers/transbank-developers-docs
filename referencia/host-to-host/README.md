@@ -31,7 +31,7 @@ Todos los comandos que se envían al POS deben cumplir con el flujo antes mencio
 Todos los mensajes intercambiados entre la caja y el POS Integrado cumplen con el formato: <strong>&lt;STX&gt;DATOS&lt;ETX&gt;LRC</strong>
 </aside>
 
-### Ejemplo de calculo LRC
+### Ejemplo de cálculo LRC
 
 Dado el siguiente comando:
 `<STX>0200|123|<ETX>`
@@ -41,7 +41,7 @@ Que en notación hexadecimal seria:
 
 Para calcular el `LRC` debemos omitir el inicio de texto `<STX>` o `0x02`.
 
-La operación entonces seria:
+La operación entonces sería:
 
 `(((((((((0x30 XOR 0x32) XOR 0x30) XOR 0x30) XOR 0x7C) XOR 0x31) XOR 0x32) XOR 0x33) XOR 0x7C) XOR 0x03)`
 
@@ -54,85 +54,13 @@ El resultado entonces seria `0x31` en hexadecimal o `1` en ASCII, por lo tanto, 
 
 ## Mensajes
 
-### Mensaje de Venta
+### Comando lectura de tarjeta
 
-Este comando es enviado por la caja para solicitar la ejecución de una venta. Los siguientes parámetros deben ser enviados desde la caja:
-
-* `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
-* `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
-* `Enviar Mensaje`: Este parámetro indica al POS si debe enviar mensajes intermedios a la caja mientras se realiza el proceso de venta.
-
-<aside class="warning">
-El SDK Java y C no soportan el envío de mensajes intermedios. Por esta razón el parámetro `Enviar Mensaje` en `C` será siempre falso.
-</aside>
-  
-* Los mensajes intermedios que envía el POS y que deben ser mostrados por la Caja, deben corresponder según los siguientes códigos:
-  * `78`: Lectura de Tarjeta.
-  * `79`: Confirmación de Monto.
-  * `80`: Selección de Cuotas.
-  * `81`: Ingreso de Pinpass.
-  * `82`: Envío de transacción a Transbank.
-
-<div class="language-simple" data-multiple-language></div>
-
-```csharp
-using Transbank.POS;
-using Transbank.POS.Responses;
-//...
-SaleResponse response = POS.Instance.Sale(ammount, ticket);
-```
-
-```c
-#include "transbank.h"
-#include "transbank_serial_utils.h"
-//...
-char* response = sale(ammount, ticket, false);
-```
-
-```java
-import cl.transbank.pos.POS;
-//...
-SaleResponse saleResponse = POS.getInstance().sale(amount, ticket);
-```
-
-```js
-import POS from "transbank-pos-sdk-web";
-
-POS.doSale(this.total, "ticket1").then((saleDetails) => {
-    console.log(saleDetails);
-    //Acá llega la respuesta de la venta. Si saleDetails.responseCode es 0, entonces la comproa fue aprobada
-    if (saleDetails.responseCode===0) {
-    alert("Transacción aprobada", "", "success");
-    } else {
-    alert("Transacción rechazada o fallida")
-    }
-});
-```
-
-El resultado de la venta se entrega en la forma de un objeto `SaleResponse` en .NET y Java, o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException` en .NET, o `TransbankException` en Java.
-
-```json
-{
-    "Function": 210,
-    "Response": "Aprobado",
-    "Commerce Code": 550062700310,
-    "Terminal Id": "ABC1234C",
-    "Ticket": "AB123",
-    "Autorization Code": "XZ123456",
-    "Ammount": 15000,
-    "Shares Number": 3,
-    "Shares Amount": 5000,
-    "Last 4 Digits": 6677,
-    "Operation Number": 60,
-    "Card Type": "CR",
-    "Accounting Date": "28/10/2019 22:35:12",
-    "Account Number": "30000000",
-    "Card Brand": "AX",
-    "Real Date": "28/10/2019 22:35:12",
-    "Employee Id": 1,
-    "Tip": 1500
-}
-```
+En este punto la caja ya tiene construida la venta en su sistema, por lo cual ya cuenta con los datos
+requeridos para iniciar el proceso de pago con Transbank con el comando 0100.
+Desde este punto se debe registrar los datos de la transacción para ir complementando con los siguientes
+comandos, pues frente a alguna caída los datos están resguardados para solicitar reversa o finalmente
+imprimir el voucher con la transacción aprobada.
 
 <aside class="warning">
 El SDK Java y C no soportan el envío de mensajes intermedios. Por esta razón el 3º parámetro de la función en C es siempre falso.
@@ -150,14 +78,17 @@ El SDK Java y C no soportan el envío de mensajes intermedios. Por esta razón e
 DATO        | LARGO     | Comentario
 ------      | ------    | ------
 `<STX>`     | 1         | Indica el inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
-`Comando`   | 4         | <i>valor ASCII</i>: `0200` <br><i>valor hexadecimal</i>: `0x30 0x32 0x30 0x30`
+`Comando`   | 4         | <i>valor ASCII</i>: `0100` <br><i>valor hexadecimal</i>: `0x30 0x31 0x30 0x30`
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Monto`     | 9         | Valor Numérico que debe ser convertido a hexadecimal.
+`Local comercio OnUs`     | 2         | **Valor Numérico** <br /> 00 Comercio sin tarjetas propias 01-99 Comercios onus, TBK asigna un numero para lectura de tarjetas propias
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Ticket`    | 6         | Valor ASCII, Número de boleta o ticket, que debe ser convertido a hexadecimal
+`Entrega BIN`    | 1         | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />Sirve para conocer el bin de la tarjeta y poder realizar algún descuento a la venta por convenio con el banco
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Transacción offline`    | 1         | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />Ya no está permitido su uso
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Autoservicio` | 1         | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
+`Monto` | 18         | **Valor numérico (máximo)** <br />Monto de Compra (sin propina, sin vuelto) Monto mínimo $50,00 o US$1,00 Incluye dos decimales.
 `Status`    | 1         | Indica al POS si debe enviar mensajes intermedios o de estado de la transacción <br><i>1</i>: Envía Mensajes<br><i>0</i>: No envía mensajes
 `<ETX>`     | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
 `LRC`       | 1         | Resultado del calculo del `LRC` del mensaje
