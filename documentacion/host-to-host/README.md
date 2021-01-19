@@ -246,6 +246,149 @@ Se debe imprimir este voucher solo si:
 ![](/images/documentacion/host2host/voucher-pel-3.png)
 
 
+## Cuadratura y liquidación
+En esta sección se describen los archivos de cuadratura y liquidación que se entregan al
+cliente que utiliza el servicio de Salidas Especiales.
+Los archivos de cuadratura (conciliación) son archivos planos que contienen los registros
+de las transacciones (de venta y anulación) efectuadas en un comercio dentro de un
+periodo determinado.
+Los archivos de liquidación son archivos planos que contienen los registros de los abonos
+y retenciones hechas sobre la cuenta del comercio dentro de un período determinado.
+
+### Distribución
+Los archivos de cuadratura y liquidación son colocados periódicamente en una casilla
+SFTP creada en forma exclusiva para el respectivo comercio, para que éste los descargue
+a su propio sistema.
+La siguiente tabla indica la frecuencia y horario de colocación de archivos de cuadratura
+y liquidación en la casilla:
+
+Archivo     | Periodo abarcado | Colocación en casilla | Horario de copia de archivos
+------      | -----------      | -----------           | ----------- 
+Cuadratura  | 00ºº hrs día – 00ºº hrs día siguiente | Todos los días | 12:00 Martes 14:00
+Liquidación  | 00ºº hrs día – 00ºº hrs día siguiente | Día hábil  | 12:00 Martes 14:00   
+
+### Acceso a la casilla
+Los comercios deberán utilizar alguna aplicación del tipo cliente SFTP disponible en el
+mercado para el acceso a la casilla, algunas de estas pueden ser Filezilla, WinSCP, PuTTY,
+MobaxTerm
+
+El nombre de los archivos de las Salidas especiales (SSEE) se generará en forma dinámica a partir de los
+datos ingresados en el enrolamiento más la fecha de proceso
+
+```
+<Formato de Salida>_<Periodo>_<Agrupación Archivo de Salidas>_<RutComercio ó CódigoComercio>_<Tipo Conexion>_<Agrupación de Transacciones>_<Número Agrupación>
+```
+
+**Formato de Salida**
+* LDN: Liquidación de débito
+* LCN: Liquidación de crédito
+* CDN: Cuadratura de débito
+* CCN: Cuadratura de crédito
+
+**Periodo**
+* Diaria: Se genera un archivo diario en base a la fecha de proceso
+* Mensual: Se genera un archivo por mes. Fecha asociada al penúltimo día hábil
+del mes
+
+**Agrupación Archivo de Salidas**
+* RE: Archivo con información única asociada al RUT enrolado (Genera un archivo)
+* CC: Archivo con información separada por código de comercio de la transacción
+(genera un archivo diferente para cada código de comercio)
+
+**Tipo Conexión**
+* Se genera un único archivo. Información de archivos no es separada por tipo de
+conexión (cuando es un archivo único no es parte del nombre)
+* Cuando se genera un archivo para transacciones con tipo de conexión presencial
+y no presencial
+o NP: No presencial
+o PR: presencial
+
+**Agrupación de transacciones**
+* Cuando esta agrupado por RUT no se incluye en el nombre del archivo
+* RB: Rubro
+
+**Número Agrupación**
+* Corresponderá al número del Rubro enrolado.
+
+### Cuadratura crédito
+A continuación, se describe en detalle la estructura de los registros de los archivos de
+cuadratura crédito. Cada archivo tiene un registro de encabezamiento (“header”), luego
+un registro por cada transacción efectuada en el periodo abarcado y al final un registro
+de pie (“footer”).
+El archivo de cuadraturas crédito contiene el registro al detalle de las transacciones
+financieras efectuadas con tarjeta de crédito. Contiene tanto las transacciones
+procesadas en forma presencial como no presencial.
+
+**Header**
+
+Nombre | Descripción | Formato | Largo | Total
+------ | ----------- | ------- | ----- | -----
+Dktt-Hr-Reg | "HR" | Alfanumérico | 2 | 2
+Dktt-Hr-Fech-Proc | Fecha De Proceso <br > Formato "AAMMDD" El día en el que se procesa el archivo es el día hábil inmediato al período abarcado. | Numérico | 6 | 8
+Dktt-Hr-Hora-Proc | Hora De Proceso Formato "HHMMSS" | Numérico | 6 | 14
+Dktt-Hr-Glosa | Nombre Del Comercio <br > Nombre de Fantasía del comercio | Alfanumérico | 25 | 39
+Filler | Disponible |  Alfanumérico | 282 | 321
+
+**Footer**
+Nombre | Descripción | Formato | Largo | Total
+------ | ----------- | ------- | ----- | -----
+Dktt-Tr-Reg | Valor fijo "TR" | Alfanumérico | 2 | 2
+Dktt-Tr-Fech-Proc | Fecha De Proceso Formato "AAMMDD" | Numérico | 6 | 8
+Dktt-Tr-Hora-Proc | Hora De Proceso Formato "HHMMSS" | Numérico | 6 | 14
+Dktt-Tr-Cant-Reg | Total De Registros | Numérico | 7 | 21
+Dktt-Tr-Acum-Monto Monto | Total. 11 enteros 2 decimales Numérico 13 34
+Dktt-Tr-Fech-Desde | Fecha menor de Txs <br> Formato "AAMMDD". De entre las transacciones registradas en el archivo indica la fecha en la que se realizó la más temprana.  | Numérico | 6 | 40
+Dktt-Tr-Hora-Desde | Hora menor de Txs <br> Formato "HHMMSS". De entre las transacciones registradas en el archivo indica la hora en la que se realizó la más temprana.  | Numérico | 6 | 46
+Dktt-Tr-Fech-Hasta | Fecha mayor de Txs. <br> Formato "AAMMDD". De entre las transacciones registradas en el archivo indica la fecha en la que se realizó la más tardía. | Numérico | 6 | 52
+Dktt-Tr-Hora-Hasta | Hora mayor de Txs. <br> Formato "HHMMSS". De entre las transacciones registradas en el archivo indica la hora en la que se realizó la más tardía | Numérico | 6 | 58
+Filler | Disponible | Alfanumérico | 263 | 321
+
+**Detalle**
+La siguiente tabla describe cada uno de sus campos:
+
+Nombre | Descripción | Formato | Largo | Total
+------ | ----------- | ------- | ----- | -----
+DSK-DT-REG | Tipo de Registro Valor fijo “DT” | Alfanumérico | 2 | 2
+DSK-TYP Tipo | de Transacción 0210 : venta en línea 0420 : reversa | Numérico | 4 | 6
+DSK-TC Código | de Transacción4 "10" : Compra "18" : Compra con vuelto "30" : Retención | Numérico | 2 | 8
+DSK-TRAN-DAT | Fecha de la Transacción <br>Formato “AAMMDD”. Corresponde a la fecha en la cual Transbank emitió respuesta a la transacción | Numérico | 6 | 14
+DSK-TRAN-TIM |  Hora de la Transacción <br> Formato “HHMMSS”. Corresponde a la hora en la cual Transbank emitió respuesta a la transacción | Numérico | 6 | 20
+DSK-ID-RETAILER | Código del Comercio Prestador | Numérico | 12 | 32
+DSK-NAME-RETAILER | Nombre del Comercio <br>Nombre de fantasía del comercio | Alfanumérico | 20 | 52
+DSK-CARD | Número de Tarjeta <br> Sólo aparecen los últimos 4 dígitos, los demás están enmascarados con * | Alfanumérico | 19 | 71
+DSK-AMT-1 | Monto de la Compra. 11 enteros 2 decimales | Numérico | 13 | 84
+DSK-AMT-2 | Monto del Vuelto. 11 enteros 2 decimales | Numérico | 13 | 97
+DSK-AMT-PROPINA | Monto Propina. 7 enteros 2 decimales | Numérico | 9 | 106
+DSK-RESP-CDE | Código de Respuesta <br>Emitido por Base-24. Los valores entre 000 y 009 indican transacción aprobada. |  Alfanumérico |  |3 109
+DSK-APPRV-CDE | Código de Aprobación <br>“O De Autorización”. Entregado por el Emisor. | Alfanumérico | 8 | 117
+DSK-TERM-NAME | Código del terminal POS Terminal ID | Alfanumérico | 16 | 133
+DSK-ID-CAJA | Identificador de la Caja | Alfanumérico | 16 | 149
+DSK-NUM-BOLETA | Número de Boleta | Alfanumérico | 10 | 159
+DSK-FECHA-PAGO | Fecha de Pago <br> 1 día hábil después de la fecha de Proceso del archivo | Numérico | 6 | 165
+DSK-IDENT | identificador del Host <br>Corresponde al “Identificador del Comercio” que aparece al principio del nombre del nombre del archivo | Alfanumérico | 2 | 167
+DSK-ID-RETAILER | Código del Comercio Responsable <br>Código del comercio intermediario (si lo hubiese) entre el Comercio y la tarjeta habiente | Numérico | 8 | 175
+DSK-ID-COD-SERVI | Código de Servicio | Alfanumérico | 20 | 195
+DSK-ID-NRO-UNICO | Número único <br>Asignado por el comercio | Alfanumérico | 26 | 221
+DSK-PREPAGO | Prepago <br>Valor “P” para registros que provienen de prepago. En blanco si se trata de una transacción de otro producto. | Alfanumérico | 1 | 222
+FILLER | Disponible | Alfanumérico | 18 | 240
+
+### Cuadratura débito (L3)
+El archivo de cuadraturas débito contiene el registro al detalle de las transacciones
+financieras efectuadas con tarjeta de débito. Contiene tanto las transacciones
+procesadas en forma presencial como no presencial.
+
+
+Nombre | Descripción | Formato | Largo | Total
+------ | ----------- | ------- | ----- | -----
+Dktt-Hr-Reg | Tipo de registro | Alfanumérico | 2 | 2
+Dktt-Hr-Fech-Proc | Fecha De Proceso | Numérico | 6 | 8
+Dktt-Hr-Hora-Proc | Hora De Proceso | Numérico | 6 | 14
+Dktt-Hr-Glosa | Nombre Del Comercio <br > Nombre de Fantasía del comercio | Alfanumérico | 25 | 39
+Filler | Disponible |  Alfanumérico | 201 | 240
+
+
+
+
 <div class="container slate">
   <div class='slate-after-footer'>
     <div class='row d-flex align-items-stretch'>
