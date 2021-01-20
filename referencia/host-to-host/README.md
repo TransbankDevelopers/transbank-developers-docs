@@ -134,7 +134,7 @@ SEPARADOR CAMPO     | Indica el separador de cada campo dentro de los comandos d
 LRC                 | Es un byte que se concatena luego del `<FIN COMANDO>` y que se calcula realizando un XOR byte a byte del mensajes, el cual consta de: `<DATA>` + `<FIN COMANDO>`.
 ACK                 | Lo envía el PINPAD o la caja como aviso de recepción OK para todos los comandos (valor Hexa 0x06).
 NAK                 | Lo envía el PINPAD o la caja cuando el LRC calculado no corresponde al enviado para todos los comandos (valor Hexa 0x15). 
-Timeout1 ACK        |  Es el tiempo de espera del ACK o NAK para reintentar el envío del requerimiento por la caja. 10 segundos
+Timeout1 ACK        | Es el tiempo de espera del ACK o NAK para reintentar el envío del requerimiento por la caja. 10 segundos
 Timeout 2 Resp      | Es el tiempo de espera del ACK o NAK para reintentar el envío de la respuesta por el PINPAD. El tiempo depende de cada comando.
 Timeout 3 ACK       | Es el tiempo de espera del ACK o NAK para reintentar el envío de la respuesta por el PINPAD. 10 segundos
 STX                 | Indica un INICIO del mensaje (valor Hexa 0x02).
@@ -219,11 +219,11 @@ CARÁCTER DE CONTROL     | NOMENCLATURA
 
 A fin de mantener el mismo lenguaje en comunicación TCP-IP se mantienen estos caracteres STX, ETX y LRC.
 
-### Comandos ventas
+## Comandos ventas
 
 Los comandos 0100, 0110, 0200, 0210, 0400, 0410, 0500, 0510 son Igual al Retail Estándar vx805 versión 15.2 para dejarlos en un solo documento se anexan acá:
 
-#### 0100 – 0110 Comando Lectura de tarjeta
+### 0100 – 0110 Comando Lectura de tarjeta
 
 En este punto la caja ya tiene construida la venta en su sistema, por lo cual ya cuenta con los datos
 requeridos para iniciar el proceso de pago con Transbank con el comando 0100.  
@@ -234,28 +234,28 @@ DATO        | LARGO     | COMENTARIO            | VALOR POR DEFECTO
 `<STX>`     | 1         | Indica el inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`| STX
 `Comando`   | 4         | <i>valor ASCII</i>: `0100` <br><i>valor hexadecimal</i>: `0x30 0x31 0x30 0x30`| 
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Local comercio OnUs`     | 2         | **Valor Numérico** <br /> 00 Comercio sin tarjetas propias <br>01-99 Comercios onus, TBK asigna un numero para lectura de tarjetas propias |**00**
+`Local comercio OnUs` |2| **Valor Numérico** <br /> 00 Comercio sin tarjetas propias <br>01-99 Comercios onus, TBK asigna un numero para lectura de tarjetas propias |**00**
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Entrega BIN`    | 1         | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />Sirve para conocer el bin de la tarjeta y poder realizar algún descuento a la venta por convenio con el banco |**N**
+`Entrega BIN` | 1       | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />Sirve para conocer el bin de la tarjeta y poder realizar algún descuento a la venta por convenio con el banco |**N**
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Transacción offline`    | 1         | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />Ya no está permitido su uso | **N**
+`Transacción offline`|1 | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />Ya no está permitido su uso | **N**
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Autoservicio` | 1         | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />| **N**
+`Autoservicio` | 1      | **Valor alfanumérico** <br />(Y: Si)<br />(N: No) <br />| **N**
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Monto` | 18         | **Valor numérico (máximo)** <br />Monto de Compra (sin propina, sin vuelto) <br>Monto mínimo $50,00 o US$1,00 <br />Incluye dos decimales.|
+`Monto`     | 18        | **Valor numérico (máximo)** <br />Monto de Compra (sin propina, sin vuelto) <br>Monto mínimo $50,00 o US$1,00 <br />Incluye dos decimales.|
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de moneda`    | 2         | **Valor alfanumérico** <br /><code>&#124;</code>CL<code>&#124;</code> Pesos chilenos 152<br><code>&#124;</code>US<code>&#124;</code> Dólares estadounidenses 840 | **CL**
+`Código de moneda` | 2  | **Valor alfanumérico** <br /><code>&#124;</code>CL<code>&#124;</code> Pesos chilenos 152<br><code>&#124;</code>US<code>&#124;</code> Dólares estadounidenses 840 | **CL**
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Tipo de tarjeta`       | 2         | **Valor alfanumérico** <br />Indicador del tipo de menú por el cual se realizó la transacción.<br>&#124;CR&#124;: CRÉDITO<br>&#124;DB&#124;: DÉBITO - PREPAGO<br>&#124;NB&#124;: NO BANCARIA<br>Valor de tipo en Tabla tipo de tarjeta<br>***Una venta hecha como debito puede ser autorizada como prepago*** | 
+`Tipo de tarjeta`| 2    | **Valor alfanumérico** <br />Indicador del tipo de menú por el cual se realizó la transacción.<br>&#124;CR&#124;: CRÉDITO<br>&#124;DB&#124;: DÉBITO - PREPAGO<br>&#124;NB&#124;: NO BANCARIA<br>Valor de tipo en Tabla tipo de tarjeta<br>***Una venta hecha como debito puede ser autorizada como prepago*** | 
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Lista montos de vuelto`       | 60         | **Valor numérico (máximo)** <br />Lista de montos de vuelto permitidos, separados por “;” Incluyen dos decimales, siempre se debe enviar las 4 opciones definidas por Transbank.<br>Campo paramétrico por punto de venta.<br>Sólo si “Tipo de tarjeta = DB” | **500000;**<br>**1000000;**<br>**2000000;**<br>**5000000;**
+`Lista montos de vuelto`| 60 | **Valor numérico (máximo)** <br />Lista de montos de vuelto permitidos, separados por “;” Incluyen dos decimales, siempre se debe enviar las 4 opciones definidas por Transbank.<br>Campo paramétrico por punto de venta.<br>Sólo si “Tipo de tarjeta = DB” | **500000;**<br>**1000000;**<br>**2000000;**<br>**5000000;**
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Monto vuelto`       | 18         | **Valor numérico (máximo)** <br /> &#124;0&#124;: No muestra menú en pinpad<br> &#124; &#124; : ø Muestra menú consultando por vuelto<br>Si &#124;n&#124; > 0 no se muestra menú. El valor debe corresponder a alguno enviado en el campo “Lista de montos de vuelto”<br>Vuelto solo existe en débito, enviar 0 en crédito<br>Campo c | **Ø**
+`Monto vuelto`| 18      | **Valor numérico (máximo)** <br /> &#124;0&#124;: No muestra menú en pinpad<br> &#124; &#124; : ø Muestra menú consultando por vuelto<br>Si &#124;n&#124; > 0 no se muestra menú. El valor debe corresponder a alguno enviado en el campo “Lista de montos de vuelto”<br>Vuelto solo existe en débito, enviar 0 en crédito<br>Campo c | **Ø**
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Monto propina/donación`       | 9         | **Valor numérico (máximo)** <br />Corresponde al monto propina o donación de la venta o anulación<br>(incluye dos decimales)<br/><br/>**Importante:** Si se desea pedir propina al Tarjeta Habiente y que este la confirme, se debe enviar este campo el valor en vacío (Ø )<br />**Para las anulaciones** se debe colocar el monto de la propina de la venta a anular, en caso de no tener propina **colocar un cero (0).** | **Ø**
-`Separador` | 1     | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`<ETX>`     | 1     | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
-`<LRC>`     | 1     | Byte resultado de la operación XOR del mensaje | 
+`Monto propina/donación`| 9 | **Valor numérico (máximo)** <br />Corresponde al monto propina o donación de la venta o anulación<br>(incluye dos decimales)<br/><br/>**Importante:** Si se desea pedir propina al Tarjeta Habiente y que este la confirme, se debe enviar este campo el valor en vacío (Ø )<br />**Para las anulaciones** se debe colocar el monto de la propina de la venta a anular, en caso de no tener propina **colocar un cero (0).** | **Ø**
+`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`<ETX>`     | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
+`<LRC>`     | 1         | Byte resultado de la operación XOR del mensaje | 
 
 
 Timeout máximo de espera por comando 110 de 35seg, ya que el PinPad espera 30seg a que el cliente opere tarjeta, por lo tanto a los 30 segundas si no se opera tarjeta, devuelve un 110&#124;99.
@@ -266,11 +266,11 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4         | <i>Valor ASCII</i>:  `0110` <br><i>valor hexadecimal</i>: `0x30 0x31 0x31 0x30` |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de respuesta PinPad`  | 2        | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - <XX> : <GLOSA><br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) |
+`Código de respuesta PinPad`| 2  | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - `<XX>` : `<GLOSA>`<br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador de contexto` | 16        | **Valor alfanumérico** <br> Formato aaaammddhhmmssmm <br>Es solo un ID, la fecha y hora en el pinpad puede estar desactualizada. |
+`Indicador de contexto` | 16| **Valor alfanumérico** <br> Formato aaaammddhhmmssmm <br>Es solo un ID, la fecha y hora en el pinpad puede estar desactualizada. |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Tipo de captura`   | 2        | **Valor numérico**<br>Este campo será utilizado en el futuros<br>&#124;00&#124; : B - Banda<br>&#124;01&#124; : E . EMV c/contactoa<br>&#124;02&#124; : C - Contacless<br>&#124;03&#124; : F - Fallback<br>&#124;04&#124; : D - Digitada |
+`Tipo de captura` | 2       | **Valor numérico**<br>Este campo será utilizado en el futuros<br>&#124;00&#124; : B - Banda<br>&#124;01&#124; : E . EMV c/contactoa<br>&#124;02&#124; : C - Contacless<br>&#124;03&#124; : F - Fallback<br>&#124;04&#124; : D - Digitada |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `TRACK I`       | 80        | **Valor alfanumérico (máximo)** <br>Rellenados con blancos (0x20) a la derecha<br>Si “Local comercio OnUs ≠ 00”<br>Con pan encriptado se entrega 160 caracteres alfanuméricos que corresponde a 80 HEXA |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
@@ -280,20 +280,20 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `BIN`           | 6         | **Valor Numérico** <br>Si “Entrega BIN = Y” o “Transacción offline = Y” |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`4 últimos dígitos`           | 4       | **Valor Numérico** |
+`4 últimos dígitos` | 4     | **Valor Numérico** | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Nombre tarjetahabiente`    | 26        | **Valor alfanumérico (máximo)** |
+`Nombre tarjetahabiente`| 26| **Valor alfanumérico (máximo)** |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Nombre marca de la tarjeta`      | 20        | **Valor alfanumérico (máximo)** <br>De acuerdo a [Tabla de marcas](/referencia/host-to-host#tabla-de-marcas) |
+`Nombre marca de la tarjeta`| 20 | **Valor alfanumérico (máximo)** <br>De acuerdo a [Tabla de marcas](/referencia/host-to-host#tabla-de-marcas) | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Abreviación de la tarjeta`       | 2        | **Valor alfanumérico** <br>De acuerdo a [Tabla de marcas](/referencia/host-to-host#tabla-de-marcas) |
+`Abreviación de la tarjeta` | 2 | **Valor alfanumérico** <br>De acuerdo a [Tabla de marcas](/referencia/host-to-host#tabla-de-marcas) | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag solicita 4 últimos dígitos`        | 1        |**Valor alfanumérico** <br> (Y: El punto de venta debe solicitar los 4ud)<br>(N: El pinpad solicitará el ingreso de PIN)<br>En caso de anulación no se ingresa pin, tampoco se solicita ingreso de 4ud.    |
+`Flag solicita 4 últimos dígitos` | 1 |**Valor alfanumérico** <br> (Y: El punto de venta debe solicitar los 4ud)<br>(N: El pinpad solicitará el ingreso de PIN)<br>En caso de anulación no se ingresa pin, tampoco se solicita ingreso de 4ud.    | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
-#### 0200 – 0210 Comando Requerimiento de venta/anulación
+### 0200 – 0210 Comando Requerimiento de venta/anulación
 
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
@@ -303,43 +303,43 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Monto`         | 18        | **Valor alfanumérico (máximo)** <br>Monto de Compra (sin propina, sin vuelto)<br>Monto mínimo $50,00 o US$1,00<br>Incluye dos decimales |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número Ticket/Boleta `    | 10        | **Valor alfanumérico**<br>Si comercio no utiliza este campo enviar el campo un cero |
+`Número Ticket/Boleta `| 10 | **Valor alfanumérico**<br>Si comercio no utiliza este campo enviar el campo un cero |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Numero de Cuotas`    | 2        | **Valor numérico**<br>Obligatorio si “Tipo de transacción = 01”<br>Si la venta original fue sin cuotas se debe informar el valor 00 |
+`Numero de Cuotas`| 2       | **Valor numérico**<br>Obligatorio si “Tipo de transacción = 01”<br>Si la venta original fue sin cuotas se debe informar el valor 00 |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Campo Impresión`    | 1        | **Valor numérico**<br>Indica si entrega voucher formateado <br>0: No envía voucher (utiliza comandos 500-510)<br>1: Envía voucher (utiliza comandos 540-550) |
+`Campo Impresión`| 1        | **Valor numérico**<br>Indica si entrega voucher formateado <br>0: No envía voucher (utiliza comandos 500-510)<br>1: Envía voucher (utiliza comandos 540-550) |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Enviar Mensajes`    | 1        | **Valor numérico**<br>Indica si el PINPAD debe enviar mensajes de estatus de la transacción<br>0: No envía mensajes (Valor por defecto)<br>1: Envía mensajes |
+`Enviar Mensajes`| 1        | **Valor numérico**<br>Indica si el PINPAD debe enviar mensajes de estatus de la transacción<br>0: No envía mensajes (Valor por defecto)<br>1: Envía mensajes |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador de contexto`    | 16        | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción |
+`Indicador de contexto`| 16 | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Tipo de transacción`    | 2        | **Valor numérico**<br>(00: Venta)<br>(01: Anulación) |
+`Tipo de transacción`| 2    | **Valor numérico**<br>(00: Venta)<br>(01: Anulación) |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de comercio`    | 12        | **Valor numérico**<br>Código del comercio entregado por TBK y configurado en la caja.<br>EJ: 597012345678 |
+`Código de comercio`| 12    | **Valor numérico**<br>Código del comercio entregado por TBK y configurado en la caja.<br>EJ: 597012345678 |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Terminal ID `  | 16        | **Valor alfanumérico**<br>DDLL o Dirección lógica entregada por TBK y configurada en la caja en tabla de parametros. |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Monto cuotas ` | 9        | **Valor numérico**<br>Obligatorio si Tipo de transacción = 01. Si la venta original fue sin cuotas se debe informar el valor “0” |
+`Monto cuotas ` | 9         | **Valor numérico**<br>Obligatorio si Tipo de transacción = 01. Si la venta original fue sin cuotas se debe informar el valor “0” |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Producto `     | 1        | **Valor numérico**<br>Obligatorio si Tipo de transacción = 01. Corresponde al campo “Tipo cuotas” del comando 0510 de la venta original | **Ø**
+`Producto `     | 1         | **Valor numérico**<br>Obligatorio si Tipo de transacción = 01. Corresponde al campo “Tipo cuotas” del comando 0510 de la venta original | **Ø**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-~~`Número de empleado`~~    | 6        | **Valor alfanumérico**<br>Campo sin uso enviar vacío siempre | **Ø**
+~~`Número de empleado`~~| 6 | **Valor alfanumérico**<br>Campo sin uso enviar vacío siempre | **Ø**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Número único`  | 26        | **Valor numérico**<br>Caja debe enviar el número único para imprimir en el voucher tanto en venta como anulación.<br>Cada comercio puede definir un formato para el numero único, TBK entrega el siguiente<br>ejemplo: AAAAMMDDHHMMSSLLLCCCXXXXXX<br>Donde LLL es un número del local <br>CCC es el número de la caja o punto de venta<br>XXXXXX es un contador<br>Campo a  |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de dependiente (Empleado)`    | 4        | **Valor numérico**<br>Campo de Empleado es opcional<br>Si comercio no lo utiliza enviar el campo vacío | **Ø**
+`Código de dependiente (Empleado)`| 4 | **Valor numérico**<br>Campo de Empleado es opcional<br>Si comercio no lo utiliza enviar el campo vacío | **Ø**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Índice interno del comercio`    | 16        | **Valor alfanumérico (máximo)**<br>Campo que puede ser utilizado por el comercio para agregar información que le sirva a sus procesos internos, numero caja, vendedor, ID venta, etc. | 
+`Índice interno del comercio`| 16  | **Valor alfanumérico (máximo)**<br>Campo que puede ser utilizado por el comercio para agregar información que le sirva a sus procesos internos, numero caja, vendedor, ID venta, etc. | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de autorización transacción original`    | 8        | **Valor alfanumérico (máximo)**<br>Código de autorización de la venta original, obligatorio si es una anulación “Tipo de transacción= 01” | **Ø**
+`Código de autorización transacción original`| 8 | **Valor alfanumérico (máximo)**<br>Código de autorización de la venta original, obligatorio si es una anulación “Tipo de transacción= 01” | **Ø**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número de secuencia transacción original`    | 9        | **Valor alfanumérico (máximo)**<br>Número de secuencia de la venta original, obligatorio si es una anulación “Tipo de transacción= 01”<br>También conocido como número de operación | **Ø**
+`Número de secuencia transacción original`| 9 | **Valor alfanumérico (máximo)**<br>Número de secuencia de la venta original, obligatorio si es una anulación “Tipo de transacción= 01”<br>También conocido como número de operación | **Ø**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Fecha transacción original`    | 6        | **Formato AAMMDD**<br>Fecha de la venta original, obligatorio si es una anulación “Tipo de transacción = 01” | **Ø**
+`Fecha transacción original`| 6 | **Formato AAMMDD**<br>Fecha de la venta original, obligatorio si es una anulación “Tipo de transacción = 01” | **Ø**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Hora transacción original`    | 6        | **Formato HHMMSS**<br>Hora de la venta original, obligatorio si es una anulación “Tipo de transacción = 01” | **Ø**
+`Hora transacción original` | 6 | **Formato HHMMSS**<br>Hora de la venta original, obligatorio si es una anulación “Tipo de transacción = 01” | **Ø**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`4 últimos dígitos`    | 4        | **Valor numérico**<br>Si es una anulación “Tipo de transacción = 01”, se debe ingresar los 4ud de la venta original, contra este dato el pinpad comparará con la tarjeta deslizada para anular.<br>Si “Tipo de transacción = 00” y “Flag solicita 4 últimos dígitos = Y” del comando 0110, se debe ingresar los 4ud de la tarjeta deslizada. | **Ø**
+`4 últimos dígitos`| 4      | **Valor numérico**<br>Si es una anulación “Tipo de transacción = 01”, se debe ingresar los 4ud de la venta original, contra este dato el pinpad comparará con la tarjeta deslizada para anular.<br>Si “Tipo de transacción = 00” y “Flag solicita 4 últimos dígitos = Y” del comando 0110, se debe ingresar los 4ud de la tarjeta deslizada. | **Ø**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
@@ -352,18 +352,18 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4         | <i>Valor ASCII</i>:  `0210` <br><i>valor hexadecimal</i>: `0x30 0x32 0x31 0x30` | **0210**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de respuesta PinPad`  | 2        | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - <XX> : <GLOSA><br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) |
+`Código de respuesta PinPad`| 2 | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - `<XX>` : `<GLOSA>`<br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador de contexto`    | 4        | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción  |
+`Indicador de contexto`| 4  | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción  |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Largo mensaje`    | 4        | **Valor numérico** |
+`Largo mensaje` | 4         | **Valor numérico** |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Mensaje SPDH`    | 2048        | **Valor alfanumérico (máximo)** |
+`Mensaje SPDH`  | 2048      | **Valor alfanumérico (máximo)** |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
-#### 0400 – 0410 Comando Requerimiento de reversa
+### 0400 – 0410 Comando Requerimiento de reversa
 
 Si se requiere una reversa, la caja rescata el indicador de contexto que ha guardado de su última transacción (independiente del nivel de completitud de la transacción) y solicita al pinpad la reversa. El pinpad puede discriminar si solo se hizo lectura de tarjeta, o solo se hizo una consulta de cuotas, o si la venta está rechazada o aprobada.  
 Si el pinpad no está presente, debe mantener la reversa pendiente, hasta que el pinpad pueda responder.
@@ -373,7 +373,7 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4         | <i>Valor ASCII</i>:  `0400` <br><i>valor hexadecimal</i>: `0x30 0x34 0x30 0x30` | **0400**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador de contexto`    | 16        | **Valor alfanumérico**<br>Id de la transacción que se quiere reversar  | 
+`Indicador de contexto`| 16 | **Valor alfanumérico**<br>Id de la transacción que se quiere reversar  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
@@ -385,18 +385,18 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4         | <i>Valor ASCII</i>:  `0410` <br><i>valor hexadecimal</i>: `0x30 0x34 0x31 0x30` | **0410**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de respuesta PinPad`  | 2        | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - <XX> : <GLOSA><br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) |
+`Código de respuesta PinPad`| 2 | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - `<XX>` : `<GLOSA>`<br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador de contexto`    | 16        | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción   |
+`Indicador de contexto`| 16 | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción   |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Largo mensaje`    | 4        | **Valor numérico** |
+`Largo mensaje` | 4         | **Valor numérico** |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Mensaje SPDH`    | 2048        | **Valor alfanumérico (máximo)** |
+`Mensaje SPDH`  | 2048      | **Valor alfanumérico (máximo)** |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
-#### 0500 – 0510 Comando Requerimiento de validación/actualización
+### 0500 – 0510 Comando Requerimiento de validación/actualización
 
 En este comando 0510 la caja debe validar si la respuesta final (Flag terminal) y si está aprobada (Código respuesta Transbank) para luego imprimir. Si la transacción no es final (Flag terminal) debe renviar el mensaje spdh adjunto, no importa si la transacción está o no aprobada en este caso.
 
@@ -405,11 +405,11 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4         | <i>Valor ASCII</i>:  `0500` <br><i>valor hexadecimal</i>: `0x30 0x35 0x30 0x30` | **0500**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador de contexto`    | 16        | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción  | 
+`Indicador de contexto`| 16 | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Largo mensaje`    | 4        | **Valor numérico** |
+`Largo mensaje` | 4         | **Valor numérico** |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Mensaje SPDH`    | 2048        | **Valor alfanumérico (máximo)** | 
+`Mensaje SPDH`  | 2048      | **Valor alfanumérico (máximo)** | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
@@ -421,132 +421,132 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4         | <i>Valor ASCII</i>:  `0510` <br><i>valor hexadecimal</i>: `0x30 0x35 0x31 0x30` | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de respuesta PinPad`  | 2        | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - <XX> : <GLOSA><br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) | 
+`Código de respuesta PinPad`| 2 | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - `<XX>` : `<GLOSA>`<br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador de contexto`    | 16        | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción  | 
+`Indicador de contexto`| 16 | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de comercio`    | 12        | **Valor numérico**<br>Código del comercio entregado por TBK y configurado en la caja, se imprime en voucher | 
+`Código de comercio`| 12    | **Valor numérico**<br>Código del comercio entregado por TBK y configurado en la caja, se imprime en voucher | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Terminal ID `  | 16        | **Valor alfanumérico**<br>Dirección lógica entregada por TBK y configurada en la caja, se imprime en voucher | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número Ticket/Boleta `    | 20        | **Valor alfanumérico**<br>Campo opcional, si viene se imprime en voucher si no viene se omite el campo | 
+`Número Ticket/Boleta`| 20  | **Valor alfanumérico**<br>Campo opcional, si viene se imprime en voucher si no viene se omite el campo | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Empleado`    | 4        | **Valor alfanumérico**<br>Campo opcional, si viene se imprime en voucher si no viene se omite el campo | 
+`Empleado`      | 4         | **Valor alfanumérico**<br>Campo opcional, si viene se imprime en voucher si no viene se omite el campo | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código Autorización `    | 8        | **Valor alfanumérico (máximo)**<br>Código de autorización de la transacción enviado por TBK ejemplo: &#124;AB 12 C3&#124;<br> Se imprime lo que viene en el voucher | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Monto` | 18         | **Valor numérico (máximo)** <br />Monto total autorizado (incluye el monto de la venta, propina, vuelto y donación según sea el caso)<br>Se imprime en voucher | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Monto vuelto`       | 18         | **Valor numérico (máximo)** <br />Vuelto seleccionado por cliente, solo aplica en debito<br> Se imprime en voucher| 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Numero de Cuotas`    | 2        | **Valor numérico**<br>Cantidad de cuotas de la transacción (para ventas sin cuotas se informa “00”)<br>Se imprime en voucher | 
+`Código Autorización`| 8    | **Valor alfanumérico (máximo)**<br>Código de autorización de la transacción enviado por TBK ejemplo: &#124;AB 12 C3&#124;<br> Se imprime lo que viene en el voucher | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Monto`         | 18        | **Valor numérico (máximo)** <br />Monto total autorizado (incluye el monto de la venta, propina, vuelto y donación según sea el caso)<br>Se imprime en voucher | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Monto vuelto`  | 18        | **Valor numérico (máximo)** <br />Vuelto seleccionado por cliente, solo aplica en debito<br> Se imprime en voucher| 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Numero de Cuotas`| 2       | **Valor numérico**<br>Cantidad de cuotas de la transacción (para ventas sin cuotas se informa “00”)<br>Se imprime en voucher | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Monto cuota`   | 14        | **Valor numérico**<br>Si el monto informado es vacío &#124;&#124; o &#124;0&#124; caja debe omitir la línea completa en el voucher.<br>Se imprime en voucher si viene el campo |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Últimos 4 Dígitos Tarjeta`    | 4        | **Valor numérico**<br>No se imprime | 
+`Últimos 4 Dígitos Tarjeta` | 4 | **Valor numérico**<br>No se imprime | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número Operación`    | 9        | **Correlativo de transacción del terminal**<br>También conocido como número de secuencia este campo se debe imprimir en voucher de venta y anulación. | 
+`Número Operación`| 9       | **Correlativo de transacción del terminal**<br>También conocido como número de secuencia este campo se debe imprimir en voucher de venta y anulación. | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa Tipo de Tarjeta `    | 7        | **Valor alfanumérico (máximo)**<br>Valor de glosa en [Tabla tipo de tarjeta](/referencia/host-to-host#tabla-de-tipo-de-tarjeta) | 
+`Glosa Tipo de Tarjeta `| 7 | **Valor alfanumérico (máximo)**<br>Valor de glosa en [Tabla tipo de tarjeta](/referencia/host-to-host#tabla-de-tipo-de-tarjeta) | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Fecha Contable `    | 6        | **Valor alfanumérico**<br>Se utiliza sólo si es transacción de Debito<br>Caja no debe formatear (ej: DDAAMM), simplemente debe transferir el valor al voucher (XX/XX/XX) | 
+`Fecha Contable `| 6        | **Valor alfanumérico**<br>Se utiliza sólo si es transacción de Debito<br>Caja no debe formatear (ej: DDAAMM), simplemente debe transferir el valor al voucher (XX/XX/XX) | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número de Cuenta`    | 19        | **Valor alfanumérico**<br>Número de tarjeta enmascarado para incluir en el voucher | 
+`Número de Cuenta`| 19      | **Valor alfanumérico**<br>Número de tarjeta enmascarado para incluir en el voucher | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Abreviación de la tarjeta`       | 2        | **Valor alfanumérico** <br>Valor a imprimir en el voucher |
+`Abreviación de la tarjeta` | 2 | **Valor alfanumérico** <br>Valor a imprimir en el voucher |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Fecha Transacción`    | 6        | **Formato AAMMDD**<br>Valor a imprimir en el voucher | 
+`Fecha Transacción`| 6      | **Formato AAMMDD**<br>Valor a imprimir en el voucher | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Hora Transacción`    | 6        | **Formato HHMMSS**<br>Valor a imprimir en el voucher | 
+`Hora Transacción` | 6      | **Formato HHMMSS**<br>Valor a imprimir en el voucher | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Campo Impresión`    | 8192        | **Campo depende si la caja requiere voucher formateado (máximo)**<br>En este comando no se envía el voucher. | 
+`Campo Impresión`  | 8192   | **Campo depende si la caja requiere voucher formateado (máximo)**<br>En este comando no se envía el voucher. | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Transacción premiada`    | 1        | **Valor numérico**<br>&#124;1&#124;: transacción premiada<br>En este caso caja debe imprimir voucher PEL además del de venta<br>&#124;&#124;: transacción sin premio  | 
+`Transacción premiada`| 1   | **Valor numérico**<br>&#124;1&#124;: transacción premiada<br>En este caso caja debe imprimir voucher PEL además del de venta<br>&#124;&#124;: transacción sin premio  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Tipo promoción`    | 1        | **Valor numérico**<br>&#124;1&#124;: Entrega Pto. de Venta<br>&#124;2&#124;: Entrega Diferida<br>&#124;3&#124;: Devolución al Tarjeta Habiente  | 
+`Tipo promoción`| 1         | **Valor numérico**<br>&#124;1&#124;: Entrega Pto. de Venta<br>&#124;2&#124;: Entrega Diferida<br>&#124;3&#124;: Devolución al Tarjeta Habiente  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código promoción`    | 8        | **Valor alfanumérico**<br>Valor a imprimir en el voucher premiado | 
+`Código promoción`| 8       | **Valor alfanumérico**<br>Valor a imprimir en el voucher premiado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Nombre promoción`    | 21        | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
+`Nombre promoción`| 21      | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa vale premio`    | 62        | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
+`Glosa vale premio`| 62     | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Texto vale premio`    | 27        | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
+`Texto vale premio`| 27     | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag permite cuotas`    | 1        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
+`Flag permite cuotas`| 1    | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag de gracia`    | 1        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
+`Flag de gracia`| 1         | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag C2C`    | 1        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
+`Flag C2C`      | 1         | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag C3C`    | 1        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
+`Flag C3C`      | 1         | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag NCuotas`    | 1        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
+`Flag NCuotas`  | 1         | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag máximo de cuotas`    | 2        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **00**
+`Flag máximo de cuotas`| 2  | **Valor numérico**<br>Campo informativo de la configuración del comercio | **00**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Tipo de menú`    | 2        | **Valor alfanumérico**<br>Indicador del tipo de menú por el cual se realizó la transacción<br>&#124;CR&#124; : CRÉDITO<br>&#124;DB&#124; : DÉBITO PREPAGO<br>&#124;NB&#124; : NO BANCARIA<br>Valor de tipo en [Tabla tipo de tarjeta](/referencia/host-to-host#tabla-de-tipo-de-tarjeta)<br>Una venta hecha como debito puede ser autorizada como prepago | 
+`Tipo de menú`  | 2         | **Valor alfanumérico**<br>Indicador del tipo de menú por el cual se realizó la transacción<br>&#124;CR&#124; : CRÉDITO<br>&#124;DB&#124; : DÉBITO PREPAGO<br>&#124;NB&#124; : NO BANCARIA<br>Valor de tipo en [Tabla tipo de tarjeta](/referencia/host-to-host#tabla-de-tipo-de-tarjeta)<br>Una venta hecha como debito puede ser autorizada como prepago | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador transacción con gracia`    | 1        | **Valor numérico**<br>Indicador de modalidad de la transacción<br>&#124;0&#124; transacción sin mes gracia<br>&#124;1&#124; transacción con mes gracia | 
+`Indicador transacción con gracia`| 1 | **Valor numérico**<br>Indicador de modalidad de la transacción<br>&#124;0&#124; transacción sin mes gracia<br>&#124;1&#124; transacción con mes gracia | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Tipo cuotas`    | 1        | **Valor numérico**<br>&#124;0&#124; Sin cuotas<br>&#124;1&#124; Cuotas normales<br>&#124;3&#124; C3C o C2C<br>&#124;4&#124; CIC o N-cuotas | 
+`Tipo cuotas`   | 1         | **Valor numérico**<br>&#124;0&#124; Sin cuotas<br>&#124;1&#124; Cuotas normales<br>&#124;3&#124; C3C o C2C<br>&#124;4&#124; CIC o N-cuotas | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Tasa aplicada`    | 4        | **Valor numérico**<br>Solo se imprime en voucher si “Flag imprimir tasa = 1” | 
+`Tasa aplicada` | 4         | **Valor numérico**<br>Solo se imprime en voucher si “Flag imprimir tasa = 1” | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa tipo cuota` | 30        | **Valor alfanumérico**<br>Glosa a imprimir en voucher<br>Si el campo informado viene vacío “&#124;&#124;” caja debe omitir la línea en el voucher. | 
+`Glosa tipo cuota`| 30      | **Valor alfanumérico**<br>Glosa a imprimir en voucher<br>Si el campo informado viene vacío “&#124;&#124;” caja debe omitir la línea en el voucher. | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa tipo cuota 2`    | 22        | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
+`Glosa tipo cuota 2`| 22    | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa promoción`    | 10        | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
+`Glosa promoción`| 10       | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Id promoción`    | 10        | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
+`Id promoción`  | 10        | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag imprimir tasa`    | 1        | **Valor numérico**<br>&#124;&#124; o &#124;0&#124; no imprime tasa aplicada<br>&#124;1&#124; imprime tasa aplicada | 
+`Flag imprimir tasa`| 1     | **Valor numérico**<br>&#124;&#124; o &#124;0&#124; no imprime tasa aplicada<br>&#124;1&#124; imprime tasa aplicada | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Periodo diferido`    | 3        | **Valor numérico**<br>Periodo diferido seleccionado, valor a imprimir en voucher | 
+`Periodo diferido`  | 3     | **Valor numérico**<br>Periodo diferido seleccionado, valor a imprimir en voucher | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 1 periodo`    | 3        | **Valor numérico**<br>No utilizado | 
+`Diferido 1 periodo`| 3     | **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 1 valor tasa`    | 4        | **Valor numérico**<br>No utilizado | 
+`Diferido 1 valor tasa`| 4  | **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 1 valor cuota`    | 14        | **Valor numérico**<br>No utilizado | 
+`Diferido 1 valor cuota`| 14| **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 2 periodo`    | 3        | **Valor numérico**<br>No utilizado | 
+`Diferido 2 periodo`| 3     | **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 2 valor tasa`    | 4        | **Valor numérico**<br>No utilizado | 
+`Diferido 2 valor tasa`| 4  | **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 2 valor cuota`    | 14        | **Valor numérico**<br>No utilizado | 
+`Diferido 2 valor cuota`| 14| **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 3 periodo`    | 3        | **Valor numérico**<br>No utilizado | 
+`Diferido 3 periodo`| 3     | **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 3 valor tasa`    | 4        | **Valor numérico**<br>No utilizado | 
+`Diferido 3 valor tasa`| 4  | **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 3 valor cuota`    | 14        | **Valor numérico**<br>No utilizado | 
+`Diferido 3 valor cuota`| 14| **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número de secuencia transacción original` | 9         | **Valor alfanumérico (máximo)** <br />También conocido como número de operación original de la venta. No se está usando este campo, no se imprime | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código respuesta Transbank` | 3         | **Valor numérico** <br />Código de respuesta una vez finalizada la transacción. Se debe desplegar en el punto de venta.<br>EJ: RESPUESTA TRANSBANK - <XXX> : <GLOSA> | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa respuesta Transbank` | 48         | **Valor alfanumérico (máximo)** <br />Glosa que despliega el pinpad una vez finalizada la transacción. Se debe desplegar en el punto de venta.<br>EJ: RESPUESTA TRANSBANK - <XXX> : <GLOSA>| 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag transacción con PIN` | 1         | **Valor alfanumérico** <br />Y: Transacción autentificada con PIN<br>N: Transacción autentificada por firma | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Nombre tarjetahabiente` | 26         | **Valor alfanumérico** <br />Sólo imprimir si “Flag tipo voucher = 1, 2 ó 3” | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag tipo voucher` | 1         | **Valor numérico** <br />Según el número recibido se debe imprimir voucher con o sin firma:<br>&#124;0&#124; = Sin firma<br>&#124;1&#124; o &#124;2&#124; o &#124;3&#124; = con firma<br><br>**Cabeceras de los voucher:**<br>Para ventas con crédito: “VENTA CREDITO”<br>Para ventas con débito (siempre sin firma): “VENTA DEBITO”<br>Para ventas con no bancaria: “VENTA NO BANCARIA”<br>Para ventas con prepago (sin firma): “VENTA PREPAGO”<br>Para anulaciones con crédito (sin firma):“ANULACION CREDITO”<br>Para anulaciones con no bancaria (sin firma): “ANULACION NO BANCARIA” | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag modalidad cuotas` | 1         | **Valor alfanumérico** <br />0: Modalidad 3.1 (No utilizado)<br>1: Modalidad cuotas 4.0 | **1**
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa transacción afecta a ahorro` | 40         | **Valor alfanumérico (máximo)** <br />Se debe imprimir en el voucher cuando sea distinta de vacío<br>Campo 9, subcampo D | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número de secuencia` | 9         | **Valor numérico** <br />No se está usando este campo, este no se imprime<br>También conocido como número de operación | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag mensaje terminal` | 1         | **Valor alfanumérico** <br />Y: El mensaje es terminal y NO se debe enviar el mensaje SPDH de respuesta<br>N: Se debe enviar el mensaje SPDH de respuesta | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Número de secuencia transacción original` | 9 | **Valor alfanumérico (máximo)** <br />También conocido como número de operación original de la venta. No se está usando este campo, no se imprime | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Código respuesta Transbank`| 3 | **Valor numérico** <br />Código de respuesta una vez finalizada la transacción. Se debe desplegar en el punto de venta.<br>EJ: RESPUESTA TRANSBANK - `<XXX>` : `<GLOSA>` | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Glosa respuesta Transbank` | 48 | **Valor alfanumérico (máximo)** <br />Glosa que despliega el pinpad una vez finalizada la transacción. Se debe desplegar en el punto de venta.<br>EJ: RESPUESTA TRANSBANK - `<XXX>` : `<GLOSA>`| 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag transacción con PIN`| 1 | **Valor alfanumérico** <br />Y: Transacción autentificada con PIN<br>N: Transacción autentificada por firma | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Nombre tarjetahabiente`| 26| **Valor alfanumérico** <br />Sólo imprimir si “Flag tipo voucher = 1, 2 ó 3” | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag tipo voucher` | 1     | **Valor numérico** <br />Según el número recibido se debe imprimir voucher con o sin firma:<br>&#124;0&#124; = Sin firma<br>&#124;1&#124; o &#124;2&#124; o &#124;3&#124; = con firma<br><br>**Cabeceras de los voucher:**<br>Para ventas con crédito: “VENTA CREDITO”<br>Para ventas con débito (siempre sin firma): “VENTA DEBITO”<br>Para ventas con no bancaria: “VENTA NO BANCARIA”<br>Para ventas con prepago (sin firma): “VENTA PREPAGO”<br>Para anulaciones con crédito (sin firma):“ANULACION CREDITO”<br>Para anulaciones con no bancaria (sin firma): “ANULACION NO BANCARIA” | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag modalidad cuotas`| 1  | **Valor alfanumérico** <br />0: Modalidad 3.1 (No utilizado)<br>1: Modalidad cuotas 4.0 | **1**
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Glosa transacción afecta a ahorro` | 40 | **Valor alfanumérico (máximo)** <br />Se debe imprimir en el voucher cuando sea distinta de vacío<br>Campo 9, subcampo D | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Número de secuencia` | 9   | **Valor numérico** <br />No se está usando este campo, este no se imprime<br>También conocido como número de operación | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag mensaje terminal` | 1 | **Valor alfanumérico** <br />Y: El mensaje es terminal y NO se debe enviar el mensaje SPDH de respuesta<br>N: Se debe enviar el mensaje SPDH de respuesta | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Largo mensaje` | 4         | **Valor numérico**  | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Mensaje SPDH Venta/Reversa` | 2048         | **Valor alfanumérico (máximo)** | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Mensaje SPDH Venta/Reversa`| 2048 | **Valor alfanumérico (máximo)** | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
@@ -564,17 +564,17 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4         | <i>Valor ASCII</i>:  `0540` <br><i>valor hexadecimal</i>: `0x30 0x35 0x34 0x30` | **0540**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador de contexto`  | 16        | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción | 
+`Indicador de contexto`| 16 | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Largo mensaje`    | 4        | **Valor Numérico** | 
+`Largo mensaje` | 4         | **Valor Numérico** | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Mensaje SPDH`    | 2048        | **Valor alfanumérico (máximo)** | 
+`Mensaje SPDH`  | 2048      | **Valor alfanumérico (máximo)** | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Nombre Comercio`  | 40        | **Valor alfanumérico**<br>Campo paramétrico en caja enviado al pinpad | 
+`Nombre Comercio`| 40       | **Valor alfanumérico**<br>Campo paramétrico en caja enviado al pinpad | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Dirección Comercio`    | 40        | **Valor alfanumérico**<br>Campo paramétrico en caja enviado al pinpad | 
+`Dirección Comercio`| 40    | **Valor alfanumérico**<br>Campo paramétrico en caja enviado al pinpad | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Comuna Comercio`    | 40        | **Valor alfanumérico**<br>Campo paramétrico en caja enviado al pinpad<br>Puede ser comuna o ciudad | 
+`Comuna Comercio`| 40       | **Valor alfanumérico**<br>Campo paramétrico en caja enviado al pinpad<br>Puede ser comuna o ciudad | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
@@ -586,148 +586,148 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4         | <i>Valor ASCII</i>:  `0550` <br><i>valor hexadecimal</i>: `0x30 0x35 0x31 0x30` | **0550**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de respuesta PinPad`  | 2        | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - <XX> : <GLOSA><br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) | 
+`Código de respuesta PinPad`| 2 | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - `<XX>` : `<GLOSA>`<br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador de contexto`    | 16        | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción  | 
+`Indicador de contexto`| 16 | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de comercio`    | 12        | **Valor numérico**<br>Código del comercio entregado por TBK y configurado en la caja, se imprime en voucher | 
+`Código de comercio`| 12    | **Valor numérico**<br>Código del comercio entregado por TBK y configurado en la caja, se imprime en voucher | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Terminal ID `  | 16        | **Valor alfanumérico**<br>Dirección lógica entregada por TBK y configurada en la caja, se imprime en voucher | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número Ticket/Boleta `    | 20        | **Valor alfanumérico**<br>Campo opcional, si viene se imprime en voucher si no viene se omite el campo | 
+`Número Ticket/Boleta `| 20 | **Valor alfanumérico**<br>Campo opcional, si viene se imprime en voucher si no viene se omite el campo | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Empleado`    | 4        | **Valor alfanumérico**<br>Campo opcional, si viene se imprime en voucher si no viene se omite el campo | 
+`Empleado`      | 4         | **Valor alfanumérico**<br>Campo opcional, si viene se imprime en voucher si no viene se omite el campo | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código Autorización `    | 8        | **Valor alfanumérico (máximo)**<br>Código de autorización de la transacción enviado por TBK ejemplo: &#124;AB 12 C3&#124;<br> Se imprime lo que viene en el voucher | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Monto` | 18         | **Valor numérico (máximo)** <br />Monto total autorizado (incluye el monto de la venta, propina, vuelto y donación según sea el caso)<br>Se imprime en voucher | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Monto vuelto`       | 18         | **Valor numérico (máximo)** <br />Vuelto seleccionado por cliente, solo aplica en debito<br> Se imprime en voucher| 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Numero de Cuotas`    | 2        | **Valor numérico**<br>Cantidad de cuotas de la transacción (para ventas sin cuotas se informa “00”)<br>Se imprime en voucher | 
+`Código Autorización `| 8   | **Valor alfanumérico (máximo)**<br>Código de autorización de la transacción enviado por TBK ejemplo: &#124;AB 12 C3&#124;<br> Se imprime lo que viene en el voucher | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Monto`         | 18        | **Valor numérico (máximo)** <br />Monto total autorizado (incluye el monto de la venta, propina, vuelto y donación según sea el caso)<br>Se imprime en voucher | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Monto vuelto`  | 18        | **Valor numérico (máximo)** <br />Vuelto seleccionado por cliente, solo aplica en debito<br> Se imprime en voucher| 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Numero de Cuotas`| 2       | **Valor numérico**<br>Cantidad de cuotas de la transacción (para ventas sin cuotas se informa “00”)<br>Se imprime en voucher | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Monto cuota`   | 14        | **Valor numérico**<br>Si el monto informado es vacío &#124;&#124; o &#124;0&#124; caja debe omitir la línea completa en el voucher.<br>Se imprime en voucher si viene el campo |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Últimos 4 Dígitos Tarjeta`    | 4        | **Valor numérico**<br>No se imprime | 
+`Últimos 4 Dígitos Tarjeta` | 4 | **Valor numérico**<br>No se imprime | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número Operación`    | 9        | **Correlativo de transacción del terminal**<br>También conocido como número de secuencia este campo se debe imprimir en voucher de venta y anulación. | 
+`Número Operación`| 9       | **Correlativo de transacción del terminal**<br>También conocido como número de secuencia este campo se debe imprimir en voucher de venta y anulación. | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa Tipo de Tarjeta `    | 7        | **Valor alfanumérico (máximo)**<br>Valor de glosa en [Tabla tipo de tarjeta](/referencia/host-to-host#tabla-de-tipo-de-tarjeta) | 
+`Glosa Tipo de Tarjeta `| 7 | **Valor alfanumérico (máximo)**<br>Valor de glosa en [Tabla tipo de tarjeta](/referencia/host-to-host#tabla-de-tipo-de-tarjeta) | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Fecha Contable `    | 6        | **Valor alfanumérico**<br>Se utiliza sólo si es transacción de Debito<br>Caja no debe formatear (ej: DDAAMM), simplemente debe transferir el valor al voucher (XX/XX/XX) | 
+`Fecha Contable `| 6        | **Valor alfanumérico**<br>Se utiliza sólo si es transacción de Debito<br>Caja no debe formatear (ej: DDAAMM), simplemente debe transferir el valor al voucher (XX/XX/XX) | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número de Cuenta`    | 19        | **Valor alfanumérico**<br>Número de tarjeta enmascarado para incluir en el voucher | 
+`Número de Cuenta`| 19      | **Valor alfanumérico**<br>Número de tarjeta enmascarado para incluir en el voucher | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Abreviación de la tarjeta`       | 2        | **Valor alfanumérico** <br>Valor a imprimir en el voucher |
+`Abreviación de la tarjeta` | 2 | **Valor alfanumérico** <br>Valor a imprimir en el voucher |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Fecha Transacción`    | 6        | **Formato AAMMDD**<br>Valor a imprimir en el voucher | 
+`Fecha Transacción`| 6      | **Formato AAMMDD**<br>Valor a imprimir en el voucher | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Hora Transacción`    | 6        | **Formato HHMMSS**<br>Valor a imprimir en el voucher | 
+`Hora Transacción`| 6       | **Formato HHMMSS**<br>Valor a imprimir en el voucher | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Campo Impresión`    | 8192        | **Campo depende si la caja requiere voucher formateado (máximo)**<br>Se envía voucher siempre | 
+`Campo Impresión`| 8192     | **Campo depende si la caja requiere voucher formateado (máximo)**<br>Se envía voucher siempre | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Transacción premiada`    | 1        | **Valor numérico**<br>&#124;1&#124;: transacción premiada<br>En este caso caja debe imprimir voucher PEL además del de venta<br>&#124;&#124;: transacción sin premio  | 
+`Transacción premiada`| 1   | **Valor numérico**<br>&#124;1&#124;: transacción premiada<br>En este caso caja debe imprimir voucher PEL además del de venta<br>&#124;&#124;: transacción sin premio  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Tipo promoción`    | 1        | **Valor numérico**<br>&#124;1&#124;: Entrega Pto. de Venta<br>&#124;2&#124;: Entrega Diferida<br>&#124;3&#124;: Devolución al Tarjeta Habiente  | 
+`Tipo promoción`| 1         | **Valor numérico**<br>&#124;1&#124;: Entrega Pto. de Venta<br>&#124;2&#124;: Entrega Diferida<br>&#124;3&#124;: Devolución al Tarjeta Habiente  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código promoción`    | 8        | **Valor alfanumérico**<br>Valor a imprimir en el voucher premiado | 
+`Código promoción`| 8       | **Valor alfanumérico**<br>Valor a imprimir en el voucher premiado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Nombre promoción`    | 21        | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
+`Nombre promoción`| 21      | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa vale premio`    | 62        | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
+`Glosa vale premio`| 62     | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Texto vale premio`    | 27        | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
+`Texto vale premio`| 27     | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag permite cuotas`    | 1        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
+`Flag permite cuotas`| 1    | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag de gracia`    | 1        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
+`Flag de gracia`| 1         | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag C2C`    | 1        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
+`Flag C2C`      | 1         | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag C3C`    | 1        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
+`Flag C3C`      | 1         | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag NCuotas`    | 1        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
+`Flag NCuotas`  | 1         | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag máximo de cuotas`    | 2        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **00**
+`Flag máximo de cuotas`| 2  | **Valor numérico**<br>Campo informativo de la configuración del comercio | **00**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Tipo de menú`    | 2        | **Valor alfanumérico**<br>Indicador del tipo de menú por el cual se realizó la transacción<br>&#124;CR&#124; : CRÉDITO<br>&#124;DB&#124; : DÉBITO PREPAGO<br>&#124;NB&#124; : NO BANCARIA<br>Valor de tipo en [Tabla tipo de tarjeta](/referencia/host-to-host#tabla-de-tipo-de-tarjeta)<br>Una venta hecha como debito puede ser autorizada como prepago | 
+`Tipo de menú`  | 2         | **Valor alfanumérico**<br>Indicador del tipo de menú por el cual se realizó la transacción<br>&#124;CR&#124; : CRÉDITO<br>&#124;DB&#124; : DÉBITO PREPAGO<br>&#124;NB&#124; : NO BANCARIA<br>Valor de tipo en [Tabla tipo de tarjeta](/referencia/host-to-host#tabla-de-tipo-de-tarjeta)<br>Una venta hecha como debito puede ser autorizada como prepago | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador transacción con gracia`    | 1        | **Valor numérico**<br>Indicador de modalidad de la transacción<br>&#124;0&#124; transacción sin mes gracia<br>&#124;1&#124; transacción con mes gracia | 
+`Indicador transacción con gracia`| 1 | **Valor numérico**<br>Indicador de modalidad de la transacción<br>&#124;0&#124; transacción sin mes gracia<br>&#124;1&#124; transacción con mes gracia | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Tipo cuotas`    | 1        | **Valor numérico**<br>&#124;0&#124; Sin cuotas<br>&#124;1&#124; Cuotas normales<br>&#124;3&#124; C3C o C2C<br>&#124;4&#124; CIC o N-cuotas | 
+`Tipo cuotas`   | 1         | **Valor numérico**<br>&#124;0&#124; Sin cuotas<br>&#124;1&#124; Cuotas normales<br>&#124;3&#124; C3C o C2C<br>&#124;4&#124; CIC o N-cuotas | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Tasa aplicada`    | 4        | **Valor numérico**<br>Solo se imprime en voucher si “Flag imprimir tasa = 1” | 
+`Tasa aplicada` | 4         | **Valor numérico**<br>Solo se imprime en voucher si “Flag imprimir tasa = 1” | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa tipo cuota` | 30        | **Valor alfanumérico**<br>Glosa a imprimir en voucher<br>Si el campo informado viene vacío “&#124;&#124;” caja debe omitir la línea en el voucher. | 
+`Glosa tipo cuota`| 30      | **Valor alfanumérico**<br>Glosa a imprimir en voucher<br>Si el campo informado viene vacío “&#124;&#124;” caja debe omitir la línea en el voucher. | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa tipo cuota 2`    | 22        | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
+`Glosa tipo cuota 2`| 22    | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa promoción`    | 10        | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
+`Glosa promoción`| 10       | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Id promoción`    | 10        | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
+`Id promoción`  | 10        | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag imprimir tasa`    | 1        | **Valor numérico**<br>&#124;&#124; o &#124;0&#124; no imprime tasa aplicada<br>&#124;1&#124; imprime tasa aplicada | 
+`Flag imprimir tasa`| 1     | **Valor numérico**<br>&#124;&#124; o &#124;0&#124; no imprime tasa aplicada<br>&#124;1&#124; imprime tasa aplicada | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Periodo diferido`    | 3        | **Valor numérico**<br>Periodo diferido seleccionado, valor a imprimir en voucher | 
+`Periodo diferido`| 3       | **Valor numérico**<br>Periodo diferido seleccionado, valor a imprimir en voucher | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 1 periodo`    | 3        | **Valor numérico**<br>No utilizado | 
+`Diferido 1 periodo`| 3     | **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 1 valor tasa`    | 4        | **Valor numérico**<br>No utilizado | 
+`Diferido 1 valor tasa`| 4  | **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 1 valor cuota`    | 14        | **Valor numérico**<br>No utilizado | 
+`Diferido 1 valor cuota`| 14| **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 2 periodo`    | 3        | **Valor numérico**<br>No utilizado | 
+`Diferido 2 periodo`| 3     | **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 2 valor tasa`    | 4        | **Valor numérico**<br>No utilizado | 
+`Diferido 2 valor tasa`| 4  | **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 2 valor cuota`    | 14        | **Valor numérico**<br>No utilizado | 
+`Diferido 2 valor cuota`| 14| **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 3 periodo`    | 3        | **Valor numérico**<br>No utilizado | 
+`Diferido 3 periodo`| 3     | **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 3 valor tasa`    | 4        | **Valor numérico**<br>No utilizado | 
+`Diferido 3 valor tasa`| 4  | **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 3 valor cuota`    | 14        | **Valor numérico**<br>No utilizado | 
+`Diferido 3 valor cuota`| 14| **Valor numérico**<br>No utilizado | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número de secuencia transacción original` | 9         | **Valor alfanumérico (máximo)** <br />También conocido como número de operación original de la venta. No se está usando este campo, no se imprime | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código respuesta Transbank` | 3         | **Valor numérico** <br />Código de respuesta una vez finalizada la transacción. Se debe desplegar en el punto de venta.<br>EJ: RESPUESTA TRANSBANK - <XXX> : <GLOSA> | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa respuesta Transbank` | 48         | **Valor alfanumérico (máximo)** <br />Glosa que despliega el pinpad una vez finalizada la transacción. Se debe desplegar en el punto de venta.<br>EJ: RESPUESTA TRANSBANK - <XXX> : <GLOSA>| 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag transacción con PIN` | 1         | **Valor alfanumérico** <br />Y: Transacción autentificada con PIN<br>N: Transacción autentificada por firma | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Nombre tarjetahabiente` | 26         | **Valor alfanumérico** <br />Sólo imprimir si “Flag tipo voucher = 1, 2 ó 3” | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag tipo voucher` | 1         | **Valor numérico** <br />Según el número recibido se debe imprimir voucher con o sin firma:<br>&#124;0&#124; = Sin firma<br>&#124;1&#124; o &#124;2&#124; o &#124;3&#124; = con firma<br><br>**Cabeceras de los voucher:**<br>Para ventas con crédito: “VENTA CREDITO”<br>Para ventas con débito (siempre sin firma): “VENTA DEBITO”<br>Para ventas con no bancaria: “VENTA NO BANCARIA”<br>Para ventas con prepago (sin firma): “VENTA PREPAGO”<br>Para anulaciones con crédito (sin firma):“ANULACION CREDITO”<br>Para anulaciones con no bancaria (sin firma): “ANULACION NO BANCARIA” | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag modalidad cuotas` | 1         | **Valor alfanumérico** <br />0: Modalidad 3.1 (No utilizado)<br>1: Modalidad cuotas 4.0 | **1**
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa transacción afecta a ahorro` | 40         | **Valor alfanumérico (máximo)** <br />Se debe imprimir en el voucher cuando sea distinta de vacío<br>Campo 9, subcampo D | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número de secuencia` | 9         | **Valor numérico** <br />No se está usando este campo, este no se imprime<br>También conocido como número de operación | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag mensaje terminal` | 1         | **Valor alfanumérico** <br />Y: El mensaje es terminal y NO se debe enviar el mensaje SPDH de respuesta<br>N: Se debe enviar el mensaje SPDH de respuesta | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Número de secuencia transacción original` | 9 | **Valor alfanumérico (máximo)** <br />También conocido como número de operación original de la venta. No se está usando este campo, no se imprime | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Código respuesta Transbank`| 3 | **Valor numérico** <br />Código de respuesta una vez finalizada la transacción. Se debe desplegar en el punto de venta.<br>EJ: RESPUESTA TRANSBANK - `<XXX>` : `<GLOSA>` | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Glosa respuesta Transbank` | 48 | **Valor alfanumérico (máximo)** <br />Glosa que despliega el pinpad una vez finalizada la transacción. Se debe desplegar en el punto de venta.<br>EJ: RESPUESTA TRANSBANK - `<XXX>` : `<GLOSA>`| 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag transacción con PIN`  | 1 | **Valor alfanumérico** <br />Y: Transacción autentificada con PIN<br>N: Transacción autentificada por firma | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Nombre tarjetahabiente` |26| **Valor alfanumérico** <br />Sólo imprimir si “Flag tipo voucher = 1, 2 ó 3” | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag tipo voucher` | 1     | **Valor numérico** <br />Según el número recibido se debe imprimir voucher con o sin firma:<br>&#124;0&#124; = Sin firma<br>&#124;1&#124; o &#124;2&#124; o &#124;3&#124; = con firma<br><br>**Cabeceras de los voucher:**<br>Para ventas con crédito: “VENTA CREDITO”<br>Para ventas con débito (siempre sin firma): “VENTA DEBITO”<br>Para ventas con no bancaria: “VENTA NO BANCARIA”<br>Para ventas con prepago (sin firma): “VENTA PREPAGO”<br>Para anulaciones con crédito (sin firma):“ANULACION CREDITO”<br>Para anulaciones con no bancaria (sin firma): “ANULACION NO BANCARIA” | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag modalidad cuotas` | 1 | **Valor alfanumérico** <br />0: Modalidad 3.1 (No utilizado)<br>1: Modalidad cuotas 4.0 | **1**
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Glosa transacción afecta a ahorro` | 40 | **Valor alfanumérico (máximo)** <br />Se debe imprimir en el voucher cuando sea distinta de vacío<br>Campo 9, subcampo D | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Número de secuencia` | 9   | **Valor numérico** <br />No se está usando este campo, este no se imprime<br>También conocido como número de operación | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag mensaje terminal` | 1 | **Valor alfanumérico** <br />Y: El mensaje es terminal y NO se debe enviar el mensaje SPDH de respuesta<br>N: Se debe enviar el mensaje SPDH de respuesta | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Largo mensaje` | 4         | **Valor numérico**  | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Mensaje SPDH Venta/Reversa` | 2048         | **Valor alfanumérico (máximo)** | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Propina` | 18         | **Valor numérico**<br>Monto Propina o Donación | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Voucher de Rechazo` | 1024         | **Valor numérico**<br>Cuando transacción es declinada por EMV se debe imprimir un voucher especial.<br>Si este campo viene vacío no se imprime, si viene con dato se imprime<br>Este voucher se imprime solo, sin voucher de venta | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Voucher de PEL` | 1024         | **Valor alfanumérico**<br>Voucher de PEL si viene la caja debe imprimirlo, solo una vez junto al voucher de venta<br>No se debe imprimir en duplicado<br>Este voucher se imprime junto al de venta | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`LABEL - EMV` | 32         | **Valor alfanumérico**<br>Si el campo viene con datos caja debe incluirlo en el voucher en la posición indicada | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`RID - EMV` | 32         | **Valor alfanumérico**<br>Si el campo viene con datos caja debe incluirlo en el voucher en la posición indicada | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Mensaje SPDH Venta/Reversa`| 2048 | **Valor alfanumérico (máximo)** | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Propina`       | 18        | **Valor numérico**<br>Monto Propina o Donación | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Voucher de Rechazo` | 1024 | **Valor numérico**<br>Cuando transacción es declinada por EMV se debe imprimir un voucher especial.<br>Si este campo viene vacío no se imprime, si viene con dato se imprime<br>Este voucher se imprime solo, sin voucher de venta | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Voucher de PEL`| 1024      | **Valor alfanumérico**<br>Voucher de PEL si viene la caja debe imprimirlo, solo una vez junto al voucher de venta<br>No se debe imprimir en duplicado<br>Este voucher se imprime junto al de venta | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`LABEL - EMV`   | 32        | **Valor alfanumérico**<br>Si el campo viene con datos caja debe incluirlo en el voucher en la posición indicada | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`RID - EMV`     | 32        | **Valor alfanumérico**<br>Si el campo viene con datos caja debe incluirlo en el voucher en la posición indicada | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Modelo pinpad` | 6         | **Valor numérico**<br>Caja debe incluirlo en el voucher ejemplo: VX805<br>Campo obligatorio | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Versión de pinpad` | 6         | **Valor numérico**<br>Caja debe incluirlo en el voucher ejemplo: 12.34A<br>Campo obligatorio | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Saldo Prepago ` | 40         | **Valor alfanumérico (máximo)**<br>Indica el saldo de una tarjeta de prepago la cual se debe imprimir en voucher cuando es venta de prepago y cuando viene el saldo.<br>Nota: El Pinpad agrega esa glosa al voucher tal como viene en la mensajería. | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Versión de pinpad` | 6     | **Valor numérico**<br>Caja debe incluirlo en el voucher ejemplo: 12.34A<br>Campo obligatorio | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Saldo Prepago `| 40        | **Valor alfanumérico (máximo)**<br>Indica el saldo de una tarjeta de prepago la cual se debe imprimir en voucher cuando es venta de prepago y cuando viene el saldo.<br>Nota: El Pinpad agrega esa glosa al voucher tal como viene en la mensajería. | 
+`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
@@ -748,17 +748,17 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4         | <i>Valor ASCII</i>:  `0580` <br><i>valor hexadecimal</i>: `0x30 0x35 0x38 0x30` | **0580**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador de contexto`  | 16        | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción | 
+`Indicador de contexto`| 16 | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Largo mensaje`    | 4        | **Valor Numérico** | 
+`Largo mensaje` | 4         | **Valor Numérico** | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Mensaje SPDH`    | 2048        | **Valor alfanumérico (máximo)** | 
+`Mensaje SPDH`  | 2048      | **Valor alfanumérico (máximo)** | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Nombre Comercio`  | 40        | **Valor alfanumérico**<br>Campo paramétrico en caja enviado al pinpad | 
+`Nombre Comercio`| 40       | **Valor alfanumérico**<br>Campo paramétrico en caja enviado al pinpad | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Dirección Comercio`    | 40        | **Valor alfanumérico**<br>Campo paramétrico en caja enviado al pinpad | 
+`Dirección Comercio`| 40    | **Valor alfanumérico**<br>Campo paramétrico en caja enviado al pinpad | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Comuna Comercio`    | 40        | **Valor alfanumérico**<br>Campo paramétrico en caja enviado al pinpad<br>Puede ser comuna o ciudad | 
+`Comuna Comercio`| 40       | **Valor alfanumérico**<br>Campo paramétrico en caja enviado al pinpad<br>Puede ser comuna o ciudad | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
@@ -766,159 +766,159 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 Timeout máximo de espera por comando 540 de 125seg, ya que hay hasta 4 interacción con el usuario.
 
 
-DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
-------          | ------    | ------            | ------
-`<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
-`Comando`       | 4         | <i>Valor ASCII</i>:  `0590` <br><i>valor hexadecimal</i>: `0x30 0x35 0x39 0x30` | **0590**
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de respuesta PinPad`  | 2        | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - <XX> : <GLOSA><br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador de contexto`    | 16        | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción  | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de comercio`    | 12        | **Valor numérico**<br>Código del comercio entregado por TBK y configurado en la caja, se imprime en voucher | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Terminal ID `  | 16        | **Valor alfanumérico**<br>Dirección lógica entregada por TBK y configurada en la caja, se imprime en voucher | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número Ticket/Boleta `    | 20        | **Valor alfanumérico**<br>Campo opcional, si viene se imprime en voucher si no viene se omite el campo | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Empleado`    | 4        | **Valor alfanumérico**<br>Campo opcional, si viene se imprime en voucher si no viene se omite el campo | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código Autorización `    | 8        | **Valor alfanumérico (máximo)**<br>Código de autorización de la transacción enviado por TBK ejemplo: &#124;AB 12 C3&#124;<br> Se imprime lo que viene en el voucher | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Monto` | 18         | **Valor numérico (máximo)** <br />Monto total autorizado (incluye el monto de la venta, propina, vuelto y donación según sea el caso)<br>Se imprime en voucher | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Monto vuelto`       | 18         | **Valor numérico (máximo)** <br />Vuelto seleccionado por cliente, solo aplica en debito<br> Se imprime en voucher| 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Numero de Cuotas`    | 2        | **Valor numérico**<br>Cantidad de cuotas de la transacción (para ventas sin cuotas se informa “00”)<br>Se imprime en voucher | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Monto cuota`   | 14        | **Valor numérico**<br>Si el monto informado es vacío &#124;&#124; o &#124;0&#124; caja debe omitir la línea completa en el voucher.<br>Se imprime en voucher si viene el campo |
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Últimos 4 Dígitos Tarjeta`    | 4        | **Valor numérico**<br>No se imprime | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número Operación`    | 9        | **Correlativo de transacción del terminal**<br>También conocido como número de secuencia este campo se debe imprimir en voucher de venta y anulación. | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa Tipo de Tarjeta `    | 7        | **Valor alfanumérico (máximo)**<br>Valor de glosa en [Tabla tipo de tarjeta](/referencia/host-to-host#tabla-de-tipo-de-tarjeta) | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Fecha Contable `    | 6        | **Valor alfanumérico**<br>Se utiliza sólo si es transacción de Debito<br>Caja no debe formatear (ej: DDAAMM), simplemente debe transferir el valor al voucher (XX/XX/XX) | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número de Cuenta`    | 19        | **Valor alfanumérico**<br>Número de tarjeta enmascarado para incluir en el voucher | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Abreviación de la tarjeta`       | 2        | **Valor alfanumérico** <br>Valor a imprimir en el voucher |
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Fecha Transacción`    | 6        | **Formato AAMMDD**<br>Valor a imprimir en el voucher | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Hora Transacción`    | 6        | **Formato HHMMSS**<br>Valor a imprimir en el voucher | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Campo Impresión`    | 8192        | **Campo depende si la caja requiere voucher formateado (máximo)**<br>Se envía voucher siempre | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Transacción premiada`    | 1        | **Valor numérico**<br>&#124;1&#124;: transacción premiada<br>En este caso caja debe imprimir voucher PEL además del de venta<br>&#124;&#124;: transacción sin premio  | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Tipo promoción`    | 1        | **Valor numérico**<br>&#124;1&#124;: Entrega Pto. de Venta<br>&#124;2&#124;: Entrega Diferida<br>&#124;3&#124;: Devolución al Tarjeta Habiente  | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código promoción`    | 8        | **Valor alfanumérico**<br>Valor a imprimir en el voucher premiado | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Nombre promoción`    | 21        | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa vale premio`    | 62        | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Texto vale premio`    | 27        | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag permite cuotas`    | 1        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag de gracia`    | 1        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag C2C`    | 1        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag C3C`    | 1        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag NCuotas`    | 1        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag máximo de cuotas`    | 2        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **00**
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Tipo de menú`    | 2        | **Valor alfanumérico**<br>Indicador del tipo de menú por el cual se realizó la transacción<br>&#124;CR&#124; : CRÉDITO<br>&#124;DB&#124; : DÉBITO PREPAGO<br>&#124;NB&#124; : NO BANCARIA<br>Valor de tipo en [Tabla tipo de tarjeta](/referencia/host-to-host#tabla-de-tipo-de-tarjeta)<br>Una venta hecha como debito puede ser autorizada como prepago | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador transacción con gracia`    | 1        | **Valor numérico**<br>Indicador de modalidad de la transacción<br>&#124;0&#124; transacción sin mes gracia<br>&#124;1&#124; transacción con mes gracia | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Tipo cuotas`    | 1        | **Valor numérico**<br>&#124;0&#124; Sin cuotas<br>&#124;1&#124; Cuotas normales<br>&#124;3&#124; C3C o C2C<br>&#124;4&#124; CIC o N-cuotas | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Tasa aplicada`    | 4        | **Valor numérico**<br>Solo se imprime en voucher si “Flag imprimir tasa = 1” | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa tipo cuota` | 30        | **Valor alfanumérico**<br>Glosa a imprimir en voucher<br>Si el campo informado viene vacío “&#124;&#124;” caja debe omitir la línea en el voucher. | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa tipo cuota 2`    | 22        | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa promoción`    | 10        | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Id promoción`    | 10        | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag imprimir tasa`    | 1        | **Valor numérico**<br>&#124;&#124; o &#124;0&#124; no imprime tasa aplicada<br>&#124;1&#124; imprime tasa aplicada | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Periodo diferido`    | 3        | **Valor numérico**<br>Periodo diferido seleccionado, valor a imprimir en voucher | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 1 periodo`    | 3        | **Valor numérico**<br>No utilizado | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 1 valor tasa`    | 4        | **Valor numérico**<br>No utilizado | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 1 valor cuota`    | 14        | **Valor numérico**<br>No utilizado | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 2 periodo`    | 3        | **Valor numérico**<br>No utilizado | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 2 valor tasa`    | 4        | **Valor numérico**<br>No utilizado | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 2 valor cuota`    | 14        | **Valor numérico**<br>No utilizado | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 3 periodo`    | 3        | **Valor numérico**<br>No utilizado | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 3 valor tasa`    | 4        | **Valor numérico**<br>No utilizado | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Diferido 3 valor cuota`    | 14        | **Valor numérico**<br>No utilizado | 
-`Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número de secuencia transacción original` | 9         | **Valor alfanumérico (máximo)** <br />También conocido como número de operación original de la venta. No se está usando este campo, no se imprime | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código respuesta Transbank` | 3         | **Valor numérico** <br />Código de respuesta una vez finalizada la transacción. Se debe desplegar en el punto de venta.<br>EJ: RESPUESTA TRANSBANK - <XXX> : <GLOSA> | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa respuesta Transbank` | 48         | **Valor alfanumérico (máximo)** <br />Glosa que despliega el pinpad una vez finalizada la transacción. Se debe desplegar en el punto de venta.<br>EJ: RESPUESTA TRANSBANK - <XXX> : <GLOSA>| 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag transacción con PIN` | 1         | **Valor alfanumérico** <br />Y: Transacción autentificada con PIN<br>N: Transacción autentificada por firma | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Nombre tarjetahabiente` | 26         | **Valor alfanumérico** <br />Sólo imprimir si “Flag tipo voucher = 1, 2 ó 3” | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+DATO                | LARGO     | COMENTARIO        | VALOR POR DEFECTO
+------              | ------    | ------            | ------
+`<STX>`             | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
+`Comando`           | 4         | <i>Valor ASCII</i>:  `0590` <br><i>valor hexadecimal</i>: `0x30 0x35 0x39 0x30` | **0590**
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Código de respuesta PinPad`| 2 | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - `<XX>` : `<GLOSA>`<br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Indicador de contexto`| 16     | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción  | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Código de comercio`| 12        | **Valor numérico**<br>Código del comercio entregado por TBK y configurado en la caja, se imprime en voucher | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Terminal ID `      | 16        | **Valor alfanumérico**<br>Dirección lógica entregada por TBK y configurada en la caja, se imprime en voucher | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Número Ticket/Boleta `| 20     | **Valor alfanumérico**<br>Campo opcional, si viene se imprime en voucher si no viene se omite el campo | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Empleado`          | 4         | **Valor alfanumérico**<br>Campo opcional, si viene se imprime en voucher si no viene se omite el campo | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Código Autorización`| 8        | **Valor alfanumérico (máximo)**<br>Código de autorización de la transacción enviado por TBK ejemplo: &#124;AB 12 C3&#124;<br> Se imprime lo que viene en el voucher | 
+`Separador`          | 1        | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Monto`             | 18        | **Valor numérico (máximo)** <br />Monto total autorizado (incluye el monto de la venta, propina, vuelto y donación según sea el caso)<br>Se imprime en voucher | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Monto vuelto`      | 18        | **Valor numérico (máximo)** <br />Vuelto seleccionado por cliente, solo aplica en debito<br> Se imprime en voucher| 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Numero de Cuotas`  | 2         | **Valor numérico**<br>Cantidad de cuotas de la transacción (para ventas sin cuotas se informa “00”)<br>Se imprime en voucher | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Monto cuota`       | 14        | **Valor numérico**<br>Si el monto informado es vacío &#124;&#124; o &#124;0&#124; caja debe omitir la línea completa en el voucher.<br>Se imprime en voucher si viene el campo |
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Últimos 4 Dígitos Tarjeta`| 4  | **Valor numérico**<br>No se imprime | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Número Operación`  | 9         | **Correlativo de transacción del terminal**<br>También conocido como número de secuencia este campo se debe imprimir en voucher de venta y anulación. | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Glosa Tipo de Tarjeta`| 7      | **Valor alfanumérico (máximo)**<br>Valor de glosa en [Tabla tipo de tarjeta](/referencia/host-to-host#tabla-de-tipo-de-tarjeta) | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Fecha Contable `   | 6         | **Valor alfanumérico**<br>Se utiliza sólo si es transacción de Debito<br>Caja no debe formatear (ej: DDAAMM), simplemente debe transferir el valor al voucher (XX/XX/XX) | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Número de Cuenta`  | 19        | **Valor alfanumérico**<br>Número de tarjeta enmascarado para incluir en el voucher | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Abreviación de la tarjeta`| 2  | **Valor alfanumérico** <br>Valor a imprimir en el voucher |
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Fecha Transacción` | 6         | **Formato AAMMDD**<br>Valor a imprimir en el voucher | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Hora Transacción`  | 6         | **Formato HHMMSS**<br>Valor a imprimir en el voucher | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Campo Impresión`   | 8192      | **Campo depende si la caja requiere voucher formateado (máximo)**<br>Se envía voucher siempre | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Transacción premiada`| 1       | **Valor numérico**<br>&#124;1&#124;: transacción premiada<br>En este caso caja debe imprimir voucher PEL además del de venta<br>&#124;&#124;: transacción sin premio  | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Tipo promoción`    | 1         | **Valor numérico**<br>&#124;1&#124;: Entrega Pto. de Venta<br>&#124;2&#124;: Entrega Diferida<br>&#124;3&#124;: Devolución al Tarjeta Habiente  | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Código promoción`  | 8         | **Valor alfanumérico**<br>Valor a imprimir en el voucher premiado | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Nombre promoción`  | 21        | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Glosa vale premio` | 62        | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Texto vale premio` | 27        | **Valor alfanumérico**<br>Valor a imprimir en el voucher de premio | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag permite cuotas`| 1        | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag de gracia`    | 1         | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag C2C`          | 1         | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag C3C`          | 1         | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag NCuotas`      | 1         | **Valor numérico**<br>Campo informativo de la configuración del comercio | **0**
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag máximo de cuotas`| 2      | **Valor numérico**<br>Campo informativo de la configuración del comercio | **00**
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Tipo de menú`      | 2         | **Valor alfanumérico**<br>Indicador del tipo de menú por el cual se realizó la transacción<br>&#124;CR&#124; : CRÉDITO<br>&#124;DB&#124; : DÉBITO PREPAGO<br>&#124;NB&#124; : NO BANCARIA<br>Valor de tipo en [Tabla tipo de tarjeta](/referencia/host-to-host#tabla-de-tipo-de-tarjeta)<br>Una venta hecha como debito puede ser autorizada como prepago | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Indicador transacción con gracia`| 1 | **Valor numérico**<br>Indicador de modalidad de la transacción<br>&#124;0&#124; transacción sin mes gracia<br>&#124;1&#124; transacción con mes gracia | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Tipo cuotas`       | 1         | **Valor numérico**<br>&#124;0&#124; Sin cuotas<br>&#124;1&#124; Cuotas normales<br>&#124;3&#124; C3C o C2C<br>&#124;4&#124; CIC o N-cuotas | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Tasa aplicada`     | 4         | **Valor numérico**<br>Solo se imprime en voucher si “Flag imprimir tasa = 1” | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Glosa tipo cuota`  | 30        | **Valor alfanumérico**<br>Glosa a imprimir en voucher<br>Si el campo informado viene vacío “&#124;&#124;” caja debe omitir la línea en el voucher. | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Glosa tipo cuota 2`| 22        | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Glosa promoción`   | 10        | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Id promoción`      | 10        | **Valor alfanumérico**<br>Glosa que se despliega en pinpad | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag imprimir tasa`| 1         | **Valor numérico**<br>&#124;&#124; o &#124;0&#124; no imprime tasa aplicada<br>&#124;1&#124; imprime tasa aplicada | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Periodo diferido`  | 3         | **Valor numérico**<br>Periodo diferido seleccionado, valor a imprimir en voucher | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Diferido 1 periodo`| 3         | **Valor numérico**<br>No utilizado | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Diferido 1 valor tasa`| 4      | **Valor numérico**<br>No utilizado | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Diferido 1 valor cuota`| 14    | **Valor numérico**<br>No utilizado | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Diferido 2 periodo`| 3         | **Valor numérico**<br>No utilizado | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Diferido 2 valor tasa`| 4      | **Valor numérico**<br>No utilizado | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Diferido 2 valor cuota` | 14   | **Valor numérico**<br>No utilizado | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Diferido 3 periodo`| 3         | **Valor numérico**<br>No utilizado | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Diferido 3 valor tasa`| 4      | **Valor numérico**<br>No utilizado | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Diferido 3 valor cuota`| 14    | **Valor numérico**<br>No utilizado | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Número de secuencia transacción original` | 9 | **Valor alfanumérico (máximo)** <br />También conocido como número de operación original de la venta. No se está usando este campo, no se imprime | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Código respuesta Transbank` | 3| **Valor numérico** <br />Código de respuesta una vez finalizada la transacción. Se debe desplegar en el punto de venta.<br>EJ: RESPUESTA TRANSBANK - `<XXX>` : `<GLOSA>` | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Glosa respuesta Transbank` | 48| **Valor alfanumérico (máximo)** <br />Glosa que despliega el pinpad una vez finalizada la transacción. Se debe desplegar en el punto de venta.<br>EJ: RESPUESTA TRANSBANK - `<XXX>` : `<GLOSA>`| 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag transacción con PIN` | 1  | **Valor alfanumérico** <br />Y: Transacción autentificada con PIN<br>N: Transacción autentificada por firma | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Nombre tarjetahabiente` | 26   | **Valor alfanumérico** <br />Sólo imprimir si “Flag tipo voucher = 1, 2 ó 3” | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Flag tipo voucher` | 1         | **Valor numérico** <br />Según el número recibido se debe imprimir voucher con o sin firma:<br>&#124;0&#124; = Sin firma<br>&#124;1&#124; o &#124;2&#124; o &#124;3&#124; = con firma<br><br>**Cabeceras de los voucher:**<br>Para ventas con crédito: “VENTA CREDITO”<br>Para ventas con débito (siempre sin firma): “VENTA DEBITO”<br>Para ventas con no bancaria: “VENTA NO BANCARIA”<br>Para ventas con prepago (sin firma): “VENTA PREPAGO”<br>Para anulaciones con crédito (sin firma):“ANULACION CREDITO”<br>Para anulaciones con no bancaria (sin firma): “ANULACION NO BANCARIA” | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag modalidad cuotas` | 1         | **Valor alfanumérico** <br />0: Modalidad 3.1 (No utilizado)<br>1: Modalidad cuotas 4.0 | **1**
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa transacción afecta a ahorro` | 40         | **Valor alfanumérico (máximo)** <br />Se debe imprimir en el voucher cuando sea distinta de vacío<br>Campo 9, subcampo D | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número de secuencia` | 9         | **Valor numérico** <br />No se está usando este campo, este no se imprime<br>También conocido como número de operación | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag mensaje terminal` | 1         | **Valor alfanumérico** <br />Y: El mensaje es terminal y NO se debe enviar el mensaje SPDH de respuesta<br>N: Se debe enviar el mensaje SPDH de respuesta | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Largo mensaje` | 4         | **Valor numérico**  | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Mensaje SPDH Venta/Reversa` | 2048         | **Valor alfanumérico (máximo)** | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Propina` | 18         | **Valor numérico**<br>Monto Propina o Donación | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Voucher de Rechazo` | 1024         | **Valor numérico**<br>Cuando transacción es declinada por EMV se debe imprimir un voucher especial.<br>Si este campo viene vacío no se imprime, si viene con dato se imprime<br>Este voucher se imprime solo, sin voucher de venta | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Voucher de PEL` | 1024         | **Valor alfanumérico**<br>Voucher de PEL si viene la caja debe imprimirlo, solo una vez junto al voucher de venta<br>No se debe imprimir en duplicado<br>Este voucher se imprime junto al de venta | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`LABEL - EMV` | 32         | **Valor alfanumérico**<br>Si el campo viene con datos caja debe incluirlo en el voucher en la posición indicada | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`RID - EMV` | 32         | **Valor alfanumérico**<br>Si el campo viene con datos caja debe incluirlo en el voucher en la posición indicada | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Modelo pinpad` | 6         | **Valor numérico**<br>Caja debe incluirlo en el voucher ejemplo: VX805<br>Campo obligatorio | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag modalidad cuotas` | 1     | **Valor alfanumérico** <br />0: Modalidad 3.1 (No utilizado)<br>1: Modalidad cuotas 4.0 | **1**
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Glosa transacción afecta a ahorro` | 40 | **Valor alfanumérico (máximo)** <br />Se debe imprimir en el voucher cuando sea distinta de vacío<br>Campo 9, subcampo D | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Número de secuencia` | 9       | **Valor numérico** <br />No se está usando este campo, este no se imprime<br>También conocido como número de operación | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Flag mensaje terminal` | 1     | **Valor alfanumérico** <br />Y: El mensaje es terminal y NO se debe enviar el mensaje SPDH de respuesta<br>N: Se debe enviar el mensaje SPDH de respuesta | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Largo mensaje`     | 4         | **Valor numérico**  | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Mensaje SPDH Venta/Reversa` | 2048 | **Valor alfanumérico (máximo)** | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Propina`           | 18        | **Valor numérico**<br>Monto Propina o Donación | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Voucher de Rechazo`| 1024      | **Valor numérico**<br>Cuando transacción es declinada por EMV se debe imprimir un voucher especial.<br>Si este campo viene vacío no se imprime, si viene con dato se imprime<br>Este voucher se imprime solo, sin voucher de venta | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Voucher de PEL`    | 1024      | **Valor alfanumérico**<br>Voucher de PEL si viene la caja debe imprimirlo, solo una vez junto al voucher de venta<br>No se debe imprimir en duplicado<br>Este voucher se imprime junto al de venta | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`LABEL - EMV`       | 32        | **Valor alfanumérico**<br>Si el campo viene con datos caja debe incluirlo en el voucher en la posición indicada | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`RID - EMV`         | 32        | **Valor alfanumérico**<br>Si el campo viene con datos caja debe incluirlo en el voucher en la posición indicada | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Modelo pinpad`     | 6         | **Valor numérico**<br>Caja debe incluirlo en el voucher ejemplo: VX805<br>Campo obligatorio | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Versión de pinpad` | 6         | **Valor numérico**<br>Caja debe incluirlo en el voucher ejemplo: 12.34A<br>Campo obligatorio | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Saldo Prepago` | 40         | **Valor alfanumérico (máximo)**<br>Indica el saldo de una tarjeta de prepago la cual se debe imprimir en voucher cuando es venta de prepago y cuando viene el saldo.<br>Nota: El Pinpad agrega esa glosa al voucher tal como viene en la mensajería. | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Monto Surcharge  ` | 12         | **Valor numérico**<br>Monto asociado a Surcharge. Incluye 2 decimales.<br>Si el monto informado es vacío &#124;&#124; o &#124;0&#124; caja debe omitir la línea completa en el voucher.<br>Se imprime en voucher si viene el campo. <br>Para realizar posteriores anulaciones, este campo se debe sumar al monto total de la venta. | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Surcharge Idioma` | 2         | **Valor alfanumérico**<br>Se informa el idioma en que será emitido el voucher.<br>ES: Español<br>EN: Ingles | 
-`Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
-`<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Saldo Prepago`     | 40        | **Valor alfanumérico (máximo)**<br>Indica el saldo de una tarjeta de prepago la cual se debe imprimir en voucher cuando es venta de prepago y cuando viene el saldo.<br>Nota: El Pinpad agrega esa glosa al voucher tal como viene en la mensajería. | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Monto Surcharge  ` | 12        | **Valor numérico**<br>Monto asociado a Surcharge. Incluye 2 decimales.<br>Si el monto informado es vacío &#124;&#124; o &#124;0&#124; caja debe omitir la línea completa en el voucher.<br>Se imprime en voucher si viene el campo. <br>Para realizar posteriores anulaciones, este campo se debe sumar al monto total de la venta. | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`Surcharge Idioma`  | 2         | **Valor alfanumérico**<br>Se informa el idioma en que será emitido el voucher.<br>ES: Español<br>EN: Ingles | 
+`Separador`         | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
+`<ETX>`             | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
+`<LRC>`             | 1         | Byte resultado de la operación XOR del mensaje | 
 
 ## Comandos actualización parámetros pinpad (cierre batch)
 
@@ -935,11 +935,11 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4         | <i>Valor ASCII</i>:  `0600` <br><i>valor hexadecimal</i>: `0x30 0x36 0x30 0x30` | **0600**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de comercio`  | 12        | **Valor numérico**<br>Código del comercio entregado por TBK y configurado en la caja. | 
+`Código de comercio`  | 12  | **Valor numérico**<br>Código del comercio entregado por TBK y configurado en la caja. | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Terminal ID`    | 16        | **Valor alfanumérico**<br>Dirección lógica entregada por TBK y configurada en la caja. | 
+`Terminal ID`    | 16       | **Valor alfanumérico**<br>Dirección lógica entregada por TBK y configurada en la caja. | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Índice interno del comercio`    | 16        | **Valor alfanumérico (máximo)**<br>Campo que puede ser utilizado por el comercio para agregar información que le sirva a sus procesos internos. | 
+`Índice interno del comercio`| 16 | **Valor alfanumérico (máximo)**<br>Campo que puede ser utilizado por el comercio para agregar información que le sirva a sus procesos internos. | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
@@ -964,13 +964,13 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4         | <i>Valor ASCII</i>:  `0610` <br><i>valor hexadecimal</i>: `0x30 0x36 0x31 0x30` | **0610**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de respuesta`  | 2        | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - <XX> : <GLOSA><br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) | 
+`Código de respuesta`  | 2  | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - `<XX>` : `<GLOSA>`<br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Índice interno del comercio`    | 16        | **Valor alfanumérico (máximo)**<br>Campo que puede ser utilizado por el comercio para agregar información que le sirva a sus procesos internos. | 
+`Índice interno del comercio`| 16 | **Valor alfanumérico (máximo)**<br>Campo que puede ser utilizado por el comercio para agregar información que le sirva a sus procesos internos. | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Largo mensaje` | 4         | **Valor numérico**  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Mensaje SPDH Cierre batch` | 2048         | **Valor alfanumérico (máximo)** | 
+`Mensaje SPDH Cierre batch` | 2048 | **Valor alfanumérico (máximo)** | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
@@ -985,7 +985,7 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Largo mensaje` | 4         | **Valor numérico**  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Mensaje SPDH Cierre batch` | 2048         | **Valor alfanumérico (máximo)** | 
+`Mensaje SPDH Cierre batch` | 2048 | **Valor alfanumérico (máximo)** | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
@@ -997,19 +997,19 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4         | <i>Valor ASCII</i>:  `0710` <br><i>valor hexadecimal</i>: `0x30 0x37 0x31 0x30` | **0710**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de respuesta`  | 2        | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - <XX> : <GLOSA><br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) | 
+`Código de respuesta`  | 2  | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - `<XX>` : `<GLOSA>`<br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código respuesta Transbank`  | 3        | **Valor Numérico**<br>Código de respuesta de TBK. Se debe desplegar en el punto de venta. | 
+`Código respuesta Transbank`| 3 | **Valor Numérico**<br>Código de respuesta de TBK. Se debe desplegar en el punto de venta. | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa respuesta Transbank` | 48         | **Valor alfanumérico (máximo)** <br />Glosa que despliega el pinpad una vez finalizada la transacción. Se debe desplegar en el punto de venta. | 
+`Glosa respuesta Transbank` | 48 | **Valor alfanumérico (máximo)** <br />Glosa que despliega el pinpad una vez finalizada la transacción. Se debe desplegar en el punto de venta. | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Cantidad transacciones venta` | 4         | **Valor numérico**  |  
+`Cantidad transacciones venta`| 4 | **Valor numérico**  |  
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Monto transacciones venta` | 18         | **Valor numérico**  | 
+`Monto transacciones venta` | 18 | **Valor numérico**  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Cantidad transacciones anulación` | 4         | **Valor numérico**  | 
+`Cantidad transacciones anulación` | 4 | **Valor numérico**  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Monto transacciones anulación` | 18         | **Valor numérico**  | 
+`Monto transacciones anulación` | 18 | **Valor numérico**  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
@@ -1052,7 +1052,7 @@ DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| X | &#124;
 `Version de caja` | 16      | Identifica la versión del punto de venta del comercio<br>EJ: NEWPOS 123.456 | X |  
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| X | &#124;
-`Identificador de caja` | 16      | Identifica al punto de venta del comercio<br>EJ: sucursal 123 caja 456| X | 
+`Identificador de caja` | 16| Identifica al punto de venta del comercio<br>EJ: sucursal 123 caja 456| X | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| X | &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`       | X | STX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje                              | X | STX
@@ -1065,13 +1065,13 @@ DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| X | &#124;
 `Respuesta comando`  | 2    | Valor Numérico<br>Código de respuesta al comando, de acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) |  X | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| X | &#124;
-`Identificador PinPad`      | 20        | Valor alfanumérico Marca modelo pinpad<br>EJ: VERIFONE UX300    | X | 
+`Identificador PinPad`| 20  | Valor alfanumérico Marca modelo pinpad<br>EJ: VERIFONE UX300    | X | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| X | &#124;
 `Versión PinPad `| 20       | Valor alfanumérico<br>Versión de aplicativo cargado en pinpad<br>ej: 15.20A TBK20171231 | X |  
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| X | &#124;
 `Número Serie PinPad` | 20  | Valor alfanumérico<br>Número de serie del PINPAD<br>EJ: 123-123-123-123     | X |  
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| X | &#124;
-`Identificador de caja` | 16      | Identifica al punto de venta del comercio<br>EJ: sucursal 123 caja 456| X | 
+`Identificador de caja`| 16 | Identifica al punto de venta del comercio<br>EJ: sucursal 123 caja 456| X | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| X | &#124;
 `Fecha`         | 8         | Fecha actual configurada en caja (AAAAMMDD) 20171231                        | X | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| X | &#124;
@@ -1107,7 +1107,7 @@ DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR 
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`       | X | STX
 `Comando`       | 4         | <i>Valor</i>:  `ADMN`                                                       | X | ADMN
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| X | &#124;
-`Respuesta comando`  | 2    | Valor Numérico<br>Código de respuesta al comando, de acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) |  X | 
+`Respuesta comando`| 2      | Valor Numérico<br>Código de respuesta al comando, de acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) |  X | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| X | &#124;
 `Fecha`         | 8         | Fecha actual configurada en caja (AAAAMMDD) 20171231                        | X | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| X | &#124;
@@ -1163,7 +1163,7 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Timeout Comando`  | 2      | **Valor numérico**<br>01-99 Tiempo en segundos, para mantener la lectura de código de barra en el pinpad. | **20**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Línea de Display 1`  | 21  | **Valor alfaumérico**<br>Primera línea de mensaje a Desplegar en el Pinpad para indicar el inicio de Lectura de Código de Barra. | 
+`Línea de Display 1` | 21   | **Valor alfaumérico**<br>Primera línea de mensaje a Desplegar en el Pinpad para indicar el inicio de Lectura de Código de Barra. | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Línea de Display 2` | 21   | **Valor alfaumérico**<br>Segunda línea de mensaje a Desplegar en el Pinpad para indicar el inicio de Lectura de Código de Barra. | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
@@ -1177,7 +1177,7 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4         | <i>Valor ASCII</i>:  `1610` <br><i>valor hexadecimal</i>: `0x31 0x36 0x31 0x30` | **1610**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de respuesta`  | 2        | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - <XX> : <GLOSA><br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) | **00**
+`Código de respuesta`  | 2  | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - `<XX>` : `<GLOSA>`<br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) | **00**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Código de Barra`  | 150    | **0 Valor alfanumérico largo variable**<br>Código de barra capturado por el pinpad | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
@@ -1314,7 +1314,7 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4         | <i>Valor ASCII</i>:  `0800` (Obligatorio) <br><i>valor hexadecimal</i>: `0x30 0x38 0x30 0x30` | **0800**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador de contexto comando`  | 16        | **Valor alfanumérico (opcional)**<br>Formato aaaammddhhmmssmm<br>Es solo un ID, la fecha y hora en el pinpad puede estar desactualizada<br>Si este comando proviene de otro y es parte de la misa transacción se debe mantener el ID |  
+`Indicador de contexto comando`  | 16 | **Valor alfanumérico (opcional)**<br>Formato aaaammddhhmmssmm<br>Es solo un ID, la fecha y hora en el pinpad puede estar desactualizada<br>Si este comando proviene de otro y es parte de la misa transacción se debe mantener el ID |  
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Local comercio OnUs`  | 2  | **Valor numérico (obligatorio)**<br>(00 -> 99)<br>Cada local onus tiene su ID definido | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
@@ -1328,17 +1328,17 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Monto vuelto`  | 18        | **Valor numérico (opcional)**<br>&#124;0&#124; Transacción sin vuelto<br>Campo no utilizado por el momento enviar cero<br>Largo variable  | **0**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Flag solicita confirma monto` | 1         | **Valor alfanumérico (obligatorio)**<br>&#124;Y&#124; Solicitar confirmar monto<br>&#124;N&#124; No solicitar confirmar monto  | 
+`Flag solicita confirma monto` | 1 | **Valor alfanumérico (obligatorio)**<br>&#124;Y&#124; Solicitar confirmar monto<br>&#124;N&#124; No solicitar confirmar monto  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa 1 confirma monto` | 21         | **Valor alfanumérico (opcional)**<br>Solo si “Solicita confirma monto = Y”<br>Largo variable  | 
+`Glosa 1 confirma monto`| 21| **Valor alfanumérico (opcional)**<br>Solo si “Solicita confirma monto = Y”<br>Largo variable  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa 2 confirma monto` | 21         | **Valor alfanumérico (opcional)**<br>Solo si “Solicita confirma monto = Y”<br>Largo variable  | 
+`Glosa 2 confirma monto`| 21| **Valor alfanumérico (opcional)**<br>Solo si “Solicita confirma monto = Y”<br>Largo variable  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa 3 confirma monto` | 21         | **Valor alfanumérico (opcional)**<br>Solo si “Solicita confirma monto = Y”<br>Largo variable  | 
+`Glosa 3 confirma monto`| 21| **Valor alfanumérico (opcional)**<br>Solo si “Solicita confirma monto = Y”<br>Largo variable  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Glosa 4 confirma monto` | 21         | **Valor alfanumérico (opcional)**<br>Solo si “Solicita confirma monto = Y”<br>Largo variable  | 
+`Glosa 4 confirma monto`| 21| **Valor alfanumérico (opcional)**<br>Solo si “Solicita confirma monto = Y”<br>Largo variable  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador solicitud de autentificación` | 2         | **Valor numérico (obligatorio)**<br>&#124;00&#124; Pide PIN a todo evento<br>&#124;01&#124; No pide PIN a menos que la tarjeta EMV lo indique<br>&#124;02&#124; Pide PIN según código de servicio<br>&#124;03&#124; Pide PIN según código de servicio, pero acepta pin nulo<br>&#124;04&#124; No pide PIN nunca  | 
+`Indicador solicitud de autentificación` | 2 | **Valor numérico (obligatorio)**<br>&#124;00&#124; Pide PIN a todo evento<br>&#124;01&#124; No pide PIN a menos que la tarjeta EMV lo indique<br>&#124;02&#124; Pide PIN según código de servicio<br>&#124;03&#124; Pide PIN según código de servicio, pero acepta pin nulo<br>&#124;04&#124; No pide PIN nunca  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | LRC
@@ -1354,7 +1354,7 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Código de respuesta`  | 2  | **Valor numérico**<br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-codigos-de-respuesta-de-comandos-onus) |  
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Indicador de contexto`  |16| **Valor alfanumérico**<br>Formato aaaammddhhmmssmm<br>Es solo un ID, la fecha y hora en el pinpad puede estar desactualizada | 
+`Indicador de contexto` |16 | **Valor alfanumérico**<br>Formato aaaammddhhmmssmm<br>Es solo un ID, la fecha y hora en el pinpad puede estar desactualizada | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Tipo de captura ` | 2      | **Valor numérico**<br />&#124;00&#124; : B - Banda<br>&#124;01&#124; : E . EMV c/contacto<br>&#124;02&#124; : C - Contacless<br>&#124;03&#124; : F - Fallback | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
@@ -1368,9 +1368,9 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Nombre tarjetahabiente` |26| **Valor alfanumérico**<br>Este dato se obtiene desde el track1, por lo tanto si no existe el track1, no se entrega el nombre del tarjetahabiente<br>Largo variable  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Nombre marca de la tarjeta`| 20        | **Valor alfanumérico** <br>De acuerdo a [Tabla de marcas]() | 
+`Nombre marca de la tarjeta`| 20 | **Valor alfanumérico** <br>De acuerdo a [Tabla de marcas]() | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Abreviación de la tarjeta` | 2         | **Valor alfanumérico** <br>De acuerdo a [Tabla de marcas]() | 
+`Abreviación de la tarjeta` | 2  | **Valor alfanumérico** <br>De acuerdo a [Tabla de marcas]() | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Pinblock`      | 16        | **Valor alfanumérico**<br>PIN ingresado por el cliente pero encriptado con las llaves proporcionadas por la caja| 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
