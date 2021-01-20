@@ -310,7 +310,7 @@ o PR: presencial
 **Número Agrupación**
 * Corresponderá al número del Rubro enrolado.
 
-### Cuadratura crédito
+### Archivo de cuadratura crédito (L3)
 A continuación, se describe en detalle la estructura de los registros de los archivos de
 cuadratura crédito. Cada archivo tiene un registro de encabezamiento (“header”), luego
 un registro por cada transacción efectuada en el periodo abarcado y al final un registro
@@ -349,8 +349,8 @@ La siguiente tabla describe cada uno de sus campos:
 Nombre | Descripción | Formato | Largo | Total
 ------ | ----------- | ------- | ----- | -----
 DSK-DT-REG | Tipo de Registro Valor fijo “DT” | Alfanumérico | 2 | 2
-DSK-TYP Tipo | de Transacción 0210 : venta en línea 0420 : reversa | Numérico | 4 | 6
-DSK-TC Código | de Transacción4 "10" : Compra "18" : Compra con vuelto "30" : Retención | Numérico | 2 | 8
+DSK-TYP | Tipo de Transacción 0210 : venta en línea 0420 : reversa | Numérico | 4 | 6
+DSK-TC | Código de Transacción4 "10" : Compra "18" : Compra con vuelto "30" : Retención | Numérico | 2 | 8
 DSK-TRAN-DAT | Fecha de la Transacción <br>Formato “AAMMDD”. Corresponde a la fecha en la cual Transbank emitió respuesta a la transacción | Numérico | 6 | 14
 DSK-TRAN-TIM |  Hora de la Transacción <br> Formato “HHMMSS”. Corresponde a la hora en la cual Transbank emitió respuesta a la transacción | Numérico | 6 | 20
 DSK-ID-RETAILER | Código del Comercio Prestador | Numérico | 12 | 32
@@ -372,11 +372,12 @@ DSK-ID-NRO-UNICO | Número único <br>Asignado por el comercio | Alfanumérico |
 DSK-PREPAGO | Prepago <br>Valor “P” para registros que provienen de prepago. En blanco si se trata de una transacción de otro producto. | Alfanumérico | 1 | 222
 FILLER | Disponible | Alfanumérico | 18 | 240
 
-### Cuadratura débito (L3)
+### Archivo de cuadratura débito (L3)
 El archivo de cuadraturas débito contiene el registro al detalle de las transacciones
 financieras efectuadas con tarjeta de débito. Contiene tanto las transacciones
 procesadas en forma presencial como no presencial.
 
+**Header**
 
 Nombre | Descripción | Formato | Largo | Total
 ------ | ----------- | ------- | ----- | -----
@@ -386,6 +387,343 @@ Dktt-Hr-Hora-Proc | Hora De Proceso | Numérico | 6 | 14
 Dktt-Hr-Glosa | Nombre Del Comercio <br > Nombre de Fantasía del comercio | Alfanumérico | 25 | 39
 Filler | Disponible |  Alfanumérico | 201 | 240
 
+**Footer**
+
+Nombre | Descripción | Formato | Largo | Total
+------ | ----------- | ------- | ----- | -----
+DSK-TR-REG | Tipo de Registro. Valor "TR" | Alfanumérico 2 | 2
+DSK-TR-FECHA-PROC | Fecha de Proceso | Numérico | 6 | 8
+DSK-TR-HORA-PROC | Hora de proceso | Numérico | 6 | 14
+DSK-TR-TOT-REG | Total Registros | Numérico | 7 | 21
+DSK-TR-MONTO | Monto Total. 11 enteros 2 decimales | Numérico | 13 | 34
+DSK-TR-MONTO-COM | Monto Comisiones Total. 11 enteros 2 | Numérico | 13 | 47
+FILLER | Alfanumérico | 193 | 240
+
+**Detalle**
+
+Nombre | Descripción | Formato | Largo | Total
+------ | ----------- | ------- | ----- | -----
+DSK-DT-REG | Tipo de Registro Valor fijo “DT” | Alfanumérico | 2 | 2
+DSK-TYP | Tipo de Transacción 0210 : venta en línea 0420 : reversa | Numérico | 4 | 6
+DSK-TC | Código de Transacción4 "10" : Compra "18" : Compra con vuelto "30" : Retención | Numérico | 2 | 8
+DSK-TRAN-DAT | Fecha de la Transacción <br>Formato “AAMMDD”. Corresponde a la fecha en la cual Transbank emitió respuesta a la transacción | Numérico | 6 | 14
+DSK-TRAN-TIM |  Hora de la Transacción <br> Formato “HHMMSS”. Corresponde a la hora en la cual Transbank emitió respuesta a la transacción | Numérico | 6 | 20
+DSK-ID-RETAILER | Código del Comercio Prestador | Numérico | 12 | 32
+DSK-NAME-RETAILER | Nombre del Comercio <br>Nombre de fantasía del comercio | Alfanumérico | 20 | 52
+DSK-CARD | Número de Tarjeta <br> Sólo aparecen los últimos 4 dígitos, los demás están enmascarados con * | Alfanumérico | 19 | 71
+DSK-AMT-1 | Monto de la Compra. 11 enteros 2 decimales | Numérico | 13 | 84
+DSK-AMT-2 | Monto del Vuelto. 11 enteros 2 decimales | Numérico | 13 | 97
+DSK-AMT-PROPINA | Monto Propina. 7 enteros 2 decimales | Numérico | 9 | 106
+DSK-RESP-CDE | Código de Respuesta <br>Emitido por Base-24. Los valores entre 000 y 009 indican transacción aprobada. |  Alfanumérico |  |3 109
+DSK-APPRV-CDE | Código de Aprobación <br>“O De Autorización”. Entregado por el Emisor. | Alfanumérico | 8 | 117
+DSK-TERM-NAME | Código del terminal POS Terminal ID | Alfanumérico | 16 | 133
+DSK-ID-CAJA | Identificador de la Caja | Alfanumérico | 16 | 149
+DSK-NUM-BOLETA | Número de Boleta | Alfanumérico | 10 | 159
+DSK-FECHA-PAGO | Fecha de Pago <br> 1 día hábil después de la fecha de Proceso del archivo | Numérico | 6 | 165
+DSK-IDENT | identificador del Host <br>Corresponde al “Identificador del Comercio” que aparece al principio del nombre del nombre del archivo | Alfanumérico | 2 | 167
+DSK-ID-RETAILER | Código del Comercio Responsable <br>Código del comercio intermediario (si lo hubiese) entre el Comercio y la tarjeta habiente | Numérico | 8 | 175
+DSK-ID-COD-SERVI | Código de Servicio | Alfanumérico | 20 | 195
+DSK-ID-NRO-UNICO | Número único <br>Asignado por el comercio | Alfanumérico | 26 | 221
+DSK-PREPAGO | Prepago <br>Valor “P” para registros que provienen de prepago. En blanco si se trata de una transacción de otro producto. | Alfanumérico | 1 | 222
+FILLER | Disponible | Alfanumérico | 18 | 240
+
+### Archivo de liquidaciones crédito (L5)
+El archivo de liquidaciones crédito contiene el registro al detalle de los abonos y
+retenciones sobre la cuenta del comercio dentro de un período determinado por
+transacciones con tarjeta de crédito.
+
+**Header**
+
+Nombre | Descripción | Formato | Largo | Total
+------ | ----------- | ------- | ----- | -----
+Abono - Desde | Fecha inicio periodo de abono ddmmaaaa | Numérico | 8 | 8
+Filler | Relleno | Alfanumérico | 1 | 9
+Abono – Hasta | Fecha de término periodo de abono ddmmaaaa | Numérico | 8 | 17
+Filler | Relleno | Alfanumérico | 1 | 18
+Proceso – Fecha | Fecha de proceso, en formato ddmmaaaa | Numérico | 8 | 26
+Filler | Relleno | Alfanumérico | 1 | 27
+Abono - Fecha | Fecha de pago de las transacciones, en formato ddmmaaaa | Numérico | 8 | 35
+
+SI largo de código cliente es menor que 4
+
+Nombre | Descripción | Formato | Largo | Total
+------ | ----------- | ------- | ----- | -----
+Código cliente |  Número interno de cliente | Numérico | 3 | 38
+Nombre de cliente | Nombre del comercio | Alfanumérico | 20 | 58
+Filler | Relleno | Alfanumérico | 76 | 134
+Filler | Contiene " HEADER" | Alfanumérico | 6 | 140
+Filler | Relleno | Alfanumérico | 89 | 229
+
+SI largo de código cliente es mayor que 3
+
+Nombre | Descripción | Formato | Largo | Total
+------ | ----------- | ------- | ----- | -----
+Código cliente |  Número interno de cliente | Numérico | 5 | 40
+Nombre de cliente | Nombre del comercio | Alfanumérico | 20 | 60
+Filler | Relleno | Alfanumérico | 74 | 134
+Filler | Contiene " HEADER" | Alfanumérico | 6 | 140
+Filler | Relleno | Alfanumérico | 89 | 229
+
+**Footer**
+
+Nombre | Descripción | Formato | Largo | Total
+------ | ----------- | ------- | ----- | -----
+Sal - Contador | Número de transacciones a abonar | Numérico | 10 | 10
+Filler | Relleno  | Alfanumérico | 1 | 11
+Sal - Monto | Monto total de las ventas a abonar (11 enteros, 2 decimales) | Numérico | 13 | 24
+Filler | Relleno  | Alfanumérico | 1 | 25
+Sal - Rret. | Número de retenciones | Numérico | 10 | 35
+Filler | Relleno  | Alfanumérico | 1 | 36
+Sal - Ret. | Monto total de retenciones (11 enteros, 2 decimales) | Numérico | 13 | 49
+Filler | Relleno  | Alfanumérico | 1 | 50
+Sal - Ceic | Monto total de comisión más IVA de la comisión (Venta) (11 enteros, 2 decimales) | Numérico | 13 | 63
+Sal - caeica | Monto total de comisión adicional más IVA adicional de la comisión (11 enteros, 2 decimales) | Numérico | 13 | 76
+Sal - dceic | Monto total de comisión más IVA de la comisión (Retenciones) (11 enteros, 2 decimales) | Numérico | 13 | 89
+Sal - dcaeica | Monto total de comisión adicional más IVA adicional de la comisión (Retenciones) (11 enteros, 2 decimales). | Numérico | 13 | 102
+Filler | Relleno  | Alfanumérico | 32 | 134
+Filler | Contiene " FOOTER" | Alfanumérico | 6 | 140
+Filler | Relleno  | Alfanumérico | 89 | 229
+
+**Detalle**
+
+Nombre | Descripción | Formato | Largo | Total
+------ | ----------- | ------- | ----- | -----
+Liq-Numc | Código de Comercio | Numérico | 8 | 8
+Liq-Fproc | Fecha de Proceso, en formato ddmmaaaa | Numérico | 8 | 16
+Liq-Fcom | Fecha de la venta o retención, en formato ddmmaaaa | Numérico | 8 | 24
+Liq-Micr | Número de Microfilm | Alfanumérico | 8 | 32
+Liq-Numta | Número de Tarjeta SI numPedido es nulo | Alfanumérico | 19 | 51
+Liq-Marca | Tipo de Tarjeta. Los valores son, VI: Visa; MC: Master; DI: Diners; AX: Amex | Alfanumérico | 2 | 53
+Liq-Monto | Monto de la venta o retención (11 enteros, 2 decimales) | Numérico | 11 | 64
+Liq-Moneda | Tipo de Moneda. 0: pesos; 1: dólar. | Numérico | 1 | 65
+Liq-Txs | Tipo de transacción. Si es venta:”VA” Venta a abonar “VP” Venta pareada con retención (“RP”). Si es retención:<br>“RP” Retención pareada con venta (“VP”) <br> “RA” Retención total aplicada <br>“RC” Saldo de retención aplicada en forma parcial. <br>“RE” Retención Pendiente | Alfanumérico | 2 | 67
+Liq-Rete | Atributo de la transacción. Si es venta a abonar o pareada va “0000”. Si es venta 3CSI, va “C3C*” donde * es el número de la cuota. Si es venta Cuotas Comercio, va “I&&&”, donde &&& es la cantidad de cuotas, alineada a la derecha. Si es venta NCuotas, va “nnSI”, donde nn indica el número de cuotas (02 a 24) y SI indica: cuotas sin interés.Si es retención, va el código de retención. | Alfanumérico | 4 | 71
+Liq-Cprin | Código de casa matriz del comercio. Si LiqNumc es la matriz, lleva “99999999”. | Numérico | 8 | 79
+Liq-Fpago | Fecha de pago, en formato ddmmaaaa | Numérico | 8 | 87
+Liq-orpedi | Número de Orden de Pedido o Código de Barra | Alfanumérico | 26 | 113
+Liq-codaut | Código de autorización de transacción | Alfanumérico | 6 | 119
+Liq-cuotas | Número de cuota que se está abonando y que opera para ventas efectuadas con los productos Ncuotas o Ventas en cuotas sin intereses. | Numérico | 2 | 121
+Liq-vci | Valor de autentificación de la transacción (Venta) | Numérico | 4 | 125
+Liq-ceic | Valor de la comisión más IVA de la comisión(Venta) | Numérico | 11 | 136
+Liq-caeica | Valor de la comisión adicional más IVA adicional de la comisión | Numérico | 11 | 147
+Liq-dceic | Valor de la comisión más IVA de la comisión(Retenciones) | Numérico | 11 | 158
+Liq-dcaeica | Valor de la comisión adicional más IVA adicional de la comisión (Retenciones) | Numérico | 11 | 169
+Liq-ntc | número total de cuotas de la venta original y que opera para ventas efectuadas con los productos NCuotas o Ventas en cuotas sin intereses. | Numérico | 2 | 171
+Liq_Nombre_banco | Nombre del banco indicará el nombre del banco | Alfabético | 35 | 206
+Liq_Tipo_cuenta_banco | Tipo de la cuenta del banco asociada al abono | Alfabético | 2 | 208
+Liq_Número_cuenta_banco | Número de la cuenta del banco asociada al abono | Alfabético | 18 | 226
+Liq_Moneda_cuenta_banco | Moneda de la cuenta de abono seleccionada | Alfabético | 3 | 229
+
+### Archivo de liquidaciones débito (L5)
+El archivo de liquidaciones débito contiene el registro al detalle de los abonos y
+retenciones sobre la cuenta del comercio dentro de un período determinado por
+transacciones con tarjeta de débito.
+
+**Header**
+
+Nombre | Descripción | Formato | Largo | Total
+------ | ----------- | ------- | ----- | -----
+Abono-Desde | Fecha inicio periodo de abono Formato ‘ddmmaa’ | Numérico | 6 | 6
+Filler | Disponible | Alfanumérico | 1 | 7
+Abono-Hasta | Fecha final periodo de abono Formato ‘ddmmaa’ | Numérico | 6 | 13
+Filler | Disponible | Alfanumérico | 4 | 17
+Liqu-Fecha | Fecha de liquidación Formato ‘ddmmaa’ | Numérico | 6 | 23
+Filler | Disponible | Alfanumérico | 1 | 24
+Nombre-Fan | Nombre de fantasía del comercio | Alfanumérico | 25 | 49
+Header | Indicador de registros “HEADER” | Alfanumérico | 6 | 55
+Filler | Disponible | Alfanumérico | 160 | 215
+
+**Footer**
+
+Nombre | Descripción | Formato | Largo | Total
+------ | ----------- | ------- | ----- | -----
+Liq-Ncom | Sumatoria de registros de detalle Para registros de detalle con Liq-Ttra = “00” | Numérico | 10 | 10
+Filler | Disponible | Numérico | 1 | 11
+Liq-Tcom | Sumatoria de campo Liq-Amt1. 11 enteros 2 decimales <br> Para registros de detalle con Liq-Ttra = “00” | Numérico | 13 | 24
+Filler | Disponible | Numérico | 1 | 25
+Liq-Nret | Sumatoria de registros de detalle de retenciones | Numérico | 10 | 35
+Filler | Disponible | Alfanumérico | 1 | 36
+Liq-Mret | Sumatoria de campo Liq-Amt1, para registros de detalle con Liq-Ttra =”03”. 11 enteros 2 decimales | Numérico | 13 | 49
+Liq-Vret | Valores fijos de “000000000” | Numérico | 9 | 58
+Liq-Tret | Valores fijos de “0000000000” | Numérico | 10 | 68
+Footer | Indicador del tipo de registros “FOOTER” | Alfanumérico | 6 | 74
+Liq-Tot-Com-comiv | Sumatoria de la comisión más IVA de la comisión (Venta). 11 enteros 2 decimales | Numérico | 13 | 87
+Filler | Disponible | Alfanumérico | 1 | 88
+Liq-Tot-decom-ivcom | Sumatoria de la comisión más IVA de la comisión (Retenciones). 11 enteros 2 decimales | Numérico | 13 | 101
+Liq-Fill  | | Alfanumérico | 114 | 215
+
+**Detalle**
+
+Nombre | Descripción | Formato | Largo | Total
+------ | ----------- | ------- | ----- | -----
+Liq-Ccre | Código de Comercio interno de Transbank Es el código asignado al comercio por Transbank. No incluye el prefijo 5970. | Numérico | 8 | 8
+Liq-Fpro | Fecha de proceso del archivo Formato ‘ddmmaa’. Corresponde a la fecha de proceso de la respectiva transacción. | Numérico | 6 | 14
+Liq-Fcom | Fecha de compra Formato ‘ddmmaa’. Corresponde a la fecha en la cual se realizó la transacción | Numérico | 6 | 20
+Liq-Appr | Código de Autorización Entregado por el autorizador | Alfanumérico | 6 | 26
+Liq-Pan | Número de la tarjeta Sólo últimos cuatro dígitos, demás caracteres con asteriscos | Alfanumérico | 19 | 45
+Liq-Amt1 | Monto de la transacción. 11 enteros 2 decimales | Numérico | 13 | 58
+Liq-Ttra | Tipo de transacción = 0 : compra abonada <br> mayor que 0 : retención | Numérico | 2 | 60
+Liq-Cpri | Valor fijo “99999999” | Numérico | 8 | 68
+Liq-Marc | Retenciones Valor “RE” : para retenciones En blanco si se trata de una transacción abonada. | Alfanumérico | 2 | 70
+Liq-Fedi | Fecha de Liquidación Formato ‘dd/mm/aa’ Corresponde a la fecha de abono de la transacción respectiva | Alfanumérico | 8 | 78
+Liq-nro-unico | Número único | Alfanumérico | 26 | 104
+Liq-com-comiv | Valor de la comisión más IVA de la comisión (Venta). 11 enteros 2 decimales | Numérico | 13 | 117
+Liq-cad-cadiva | N/A Se rellena el largo con “0”. 11 enteros 2 decimales | Numérico | 13 | 130
+Liq-decom-ivcom | Valor de la comisión más IVA de la comisión(Retenciones). 11 enteros 2 decimales | Numérico | 13  |143
+Liq-dcoad-ivcom | N/A Se rellena el largo con “0”. 11 enteros 2 decimales | Numérico | 13 | 156
+Liq_prepago | Prepago Valor “P” para registros que provienen de prepago. En blanco si se trata de una transacción de otro producto. | Alfanumérico | 1 | 157
+Liq_Nombre_banco | Nombre del banco se indicará el nombre del banco | Alfabético | 35 | 192
+Liq_Tipo_cuenta_banco | Tipo de la cuenta del banco asociada al abono | Alfabético | 2 | 194
+Liq_Número_cuenta_banco | Número de la cuenta del banco asociada al abono | Alfabético | 18 | 212
+Liq_Moneda_cuenta_banco | Moneda de la cuenta de abono seleccionada | Alfabético | 3 | 215
+
+
+### Notas
+
+* Todos los campos “Fecha de Proceso” explicados en este documento aplican a la
+Fecha de Proceso del archivo
+* La siguiente tabla indica qué transacciones pueden ocurrir tanto a través de Host
+como POS de contingencia, y cuáles solo a través de una de ambas vías:
+
+<table>
+<tr>
+<td></td><td colspan="3">Tipo de transacción</td>
+</tr>
+<tr>
+    <th>Código de Transacción</th>
+    <td>210</td>
+    <td>220</td>
+    <td>420</td>
+</tr>
+<tr>
+    <th>10</th>
+    <td>Host - POS </td>
+    <td>Host - POS </td>
+    <td>Host - POS </td>
+</tr>
+<tr>
+    <th>13</th>
+    <td>Webpay</td>
+    <td></td>
+    <td>Webpay</td>
+</tr>
+<tr>
+    <th>14</th>
+    <td>POS - Webpay</td>
+    <td>Host</td>
+    <td>Host - POS - Webpay</td>
+</tr>
+<tr>
+    <th>18</th>
+    <td>Host - POS </td>
+    <td></td>
+    <td>Host - POS </td>
+</tr>
+</table>
+
+
+* Para las aplicaciones con mensajería SPDH 3.1 las transacciones de anulación
+efectuadas a través del Host son consideradas como FS04 (fuera de línea), lo que
+en el archivo quedaría representado como una 220-14
+* Para efectos de parear transacciones, solo se deben considerar los registros con
+código de transacción “10” (Compras), “13” (WebPay) y “18” (Compra con
+vuelto).
+* Para los registros correspondientes a transacciones retenidas (Código de
+Transacción “30”), se informarán solamente los siguientes campos:
+o Fecha de Transacción (Dktt-Dt-Tran-Dat)
+o Código de comercio (Dktt-Dt-Id-Retailer)
+o Número de Único (DSK-ID-NUM-UNICO)
+o Monto de la transacción (Dktt-Dt-Amt-1)
+* Para el caso de Liquidación el campo (liq-vci), podrá contener los valores TSY
+(correctamente autenticada) ya que muestras solo autorizaciones ok nacionales.
+En el caso de una transacción internacional, podrás visualizar TSY y A (intento
+de autenticación)
+* En los casos de archivo de cuadratura, el campo (Dktt-Dt-VCI) además de los
+casos anteriores, también existirán los rechazos con TO (TimeOut) y TSN
+(Transacción no autenticada).
+
+### Archivo de saldos
+Considera los saldos contables pendientes de abono para los productos Crédito ($ y US$)
+y Débito. Contiene todas las transacciones que se encuentran procesadas hasta el cierre
+contable (último día de proceso hasta las 14:00 hrs.) y que se encuentran pendientes
+de abono (ventas) o cargo (retenciones).
+
+**Material disponible en la casilla**
+* Detalle Saldos Contables Pendientes de abono; Archivo que contiene todas las
+transacciones pendientes de abono que respaldan el informe disponible en portal
+* Detalle transacciones al cierre de Mes; Archivo que presenta el detalle de
+transacciones al cierre del mes, que no han sido procesadas dentro del mes y
+que no conforman el informe de saldo pendientes de abono.
+Para cada casilla de cliente se le creará una carpeta llamada CARTOLA_SALDOS, dentro
+de ella estará todos los archivos en donde su nombre identificará con PREFIJO_FECHA_RUT (DET_DDMMYYY_XXXXXXXXX).
+  
+DET_31102018_761349465.* (.txt)
+COL_31122018_761349465.* (.txt)
+
+**Estructura de archivo de texto**
+
+Campo | Tipo Dato | Largo
+--- | ---- | ---
+FECHA PROCESO | DATE | 
+RUT COMERCIO | STRING | 9
+CODIGO COMERCIO | STRING | 8
+TIPO CONTRATO | STRING | 2
+DESCRIPCION TIPO CONTRATO | STRING | 13
+TIPO FLUJO | STRING | 4
+DESCRIPCION TIPO FLUJO | STRING | 2
+FECHA VENTA | DATE |
+FECHA ABONO | DATE | 
+TARJETA | STRING | 19
+NRO CUOTA | NUMBER | 2
+MONTO CUOTA | NUMBER | 17,2
+LNIN SEC | NUMBER | 23
+FECHA PROCESO TXS | DATE | 
+MONTO VENTA | NUMBER | 17,2
+CODIGO AUTORIZACION | STRING | 6
+ORDEN PEDIDO | STRING | 26
+ID SERVICIO | STRING | 20
+PAREADA | STRING | 2
+
+
+
+### Estructura nombres archivos saldos
+Los nombres de archivos tendrán una nueva estructura, según el siguiente detalle:
+```
+<Formato de Salida>_<Periodo>_<Agrupación Archivo de
+Salidas>_<Agrupación de Transacciones>_<RutEnrolado ó
+CódigoComercio>_<Tipo Conexion><Modo Agrupación>
+```
+
+**\<Formato de Salida>** corresponde al formato de salida:
+LDN = Liquidación de débito
+LCN = Liquidación de crédito
+CDN = Cuadratura de débito
+CCN = Cuadratura de crédito
+
+**\<Periodo>** corresponde a la fecha en formato DDMMAAAA, según la frecuencia
+configurada:
+* Diaria: Se genera un archivo diario en base a la fecha de proceso; esta es la
+  frecuencia por defecto
+* Mensual: Se genera un archivo por mes. Fecha asociada al penúltimo día hábil del
+  mes
+
+**\<Agrupación Archivo de Salidas>** corresponde a la naturaleza de agrupación:
+* RE: Archivo con información única asociada al RUT enrolado (Genera un archivo)
+* CC: Archivo con información separada por código de comercio de la transacción
+  (genera un archivo diferente para cada código de comercio)
+
+**\<Tipo Conexión>** corresponde al tipo de conexión de los códigos de comercio:
+* UN: Se genera un único archivo. Información de archivos no es separada por tipo
+  de conexión (cuando es un archivo único no es parte del nombre)
+* SE: Se genera un archivo para transacciones con tipo de conexión presencial y no
+  presencial
+* NP: No presencial
+* PR: presencial
+
+**\<Modo Agrupación>** corresponde al modo de agrupación de los códigos de comercio
+SC: Sucursal Matriz (cuando esta agrupado por RUT no se incluye en el nombre
+del archivo)
+RB: Rubro
 
 
 
