@@ -185,7 +185,7 @@ Si se desea reintentar la venta se debe iniciar un nuevo flujo de venta.
 TABLA CON CODIGOS   |
 -----------------   |
 
-## Flujo de ejecución de reversa a solicitud de la caja
+### Flujo de ejecución de reversa a solicitud de la caja
 
 La caja no tuvo respuesta de algún comando o no tuvo respuesta de un mensaje SPDH en vuelo, por lo tanto no pudo terminar una venta que inicio, luego no sabe si está aprobada o rechazada, en este caso debe solicitar una reversa al pinpad.  
 
@@ -219,7 +219,7 @@ CARÁCTER DE CONTROL     | NOMENCLATURA
 
 A fin de mantener el mismo lenguaje en comunicación TCP-IP se mantienen estos caracteres STX, ETX y LRC.
 
-## Comandos ventas
+### Comandos ventas
 
 Los comandos 0100, 0110, 0200, 0210, 0400, 0410, 0500, 0510 son Igual al Retail Estándar vx805 versión 15.2 para dejarlos en un solo documento se anexan acá:
 
@@ -244,7 +244,7 @@ DATO        | LARGO     | COMENTARIO            | VALOR POR DEFECTO
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Monto`     | 18        | **Valor numérico (máximo)** <br />Monto de Compra (sin propina, sin vuelto) <br>Monto mínimo $50,00 o US$1,00 <br />Incluye dos decimales.|
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de moneda` | 2  | **Valor alfanumérico** <br /><code>&#124;</code>CL<code>&#124;</code> Pesos chilenos 152<br><code>&#124;</code>US<code>&#124;</code> Dólares estadounidenses 840 | **CL**
+`Código de moneda` | 2  | **Valor alfanumérico** <br />&#124;CL&#124; Pesos chilenos 152<br>&#124;US&#124; Dólares estadounidenses 840 | **CL**
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Tipo de tarjeta`| 2    | **Valor alfanumérico** <br />Indicador del tipo de menú por el cual se realizó la transacción.<br>&#124;CR&#124;: CRÉDITO<br>&#124;DB&#124;: DÉBITO - PREPAGO<br>&#124;NB&#124;: NO BANCARIA<br>Valor de tipo en Tabla tipo de tarjeta<br>***Una venta hecha como debito puede ser autorizada como prepago*** | 
 `Separador` | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
@@ -303,13 +303,13 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Monto`         | 18        | **Valor alfanumérico (máximo)** <br>Monto de Compra (sin propina, sin vuelto)<br>Monto mínimo $50,00 o US$1,00<br>Incluye dos decimales |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Número Ticket/Boleta `| 10 | **Valor alfanumérico**<br>Si comercio no utiliza este campo enviar el campo un cero |
+`Número Ticket/Boleta `| 10 | **Valor alfanumérico**<br>Si comercio no utiliza este campo enviar el campo un cero | **0**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Numero de Cuotas`| 2       | **Valor numérico**<br>Obligatorio si “Tipo de transacción = 01”<br>Si la venta original fue sin cuotas se debe informar el valor 00 |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Campo Impresión`| 1        | **Valor numérico**<br>Indica si entrega voucher formateado <br>0: No envía voucher (utiliza comandos 500-510)<br>1: Envía voucher (utiliza comandos 540-550) |
+`Campo Impresión`| 1        | **Valor numérico**<br>Indica si entrega voucher formateado <br>0: No envía voucher (utiliza comandos 500-510)<br>1: Envía voucher (utiliza comandos 540-550) | **1**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Enviar Mensajes`| 1        | **Valor numérico**<br>Indica si el PINPAD debe enviar mensajes de estatus de la transacción<br>0: No envía mensajes (Valor por defecto)<br>1: Envía mensajes |
+`Enviar Mensajes`| 1        | **Valor numérico**<br>Indica si el PINPAD debe enviar mensajes de estatus de la transacción<br>0: No envía mensajes (Valor por defecto)<br>1: Envía mensajes | **0**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Indicador de contexto`| 16 | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
@@ -385,7 +385,7 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4         | <i>Valor ASCII</i>:  `0410` <br><i>valor hexadecimal</i>: `0x30 0x34 0x31 0x30` | **0410**
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de respuesta PinPad`| 2 | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - `<XX>` : `<GLOSA>`<br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) |
+`Código de respuesta PinPad`| 2 | **Valor numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - `<XX>` : `<GLOSA>`<br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Indicador de contexto`| 16 | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción   |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
@@ -421,7 +421,7 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
 `Comando`       | 4         | <i>Valor ASCII</i>:  `0510` <br><i>valor hexadecimal</i>: `0x30 0x35 0x31 0x30` | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Código de respuesta PinPad`| 2 | **Valor Numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - `<XX>` : `<GLOSA>`<br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) | 
+`Código de respuesta PinPad`| 2 | **Valor numérico**<br>En caso de rechazo se debe desplegar en el punto de venta:<br>RECHAZO PINPAD - `<XX>` : `<GLOSA>`<br>De acuerdo a [Tabla de códigos de respuesta de comandos](/referencia/host-to-host#tabla-de-respuesta-pinpad) | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Indicador de contexto`| 16 | **Valor alfanumérico**<br>Id entregado por el pinpad por cada transacción  | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
@@ -550,11 +550,11 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
-#### 0520 – 0530 Comando Requerimiento de validación/actualización
+### 0520 – 0530 Comando Requerimiento de validación/actualización
 
 Solo para pinpad wifi retail estándar. 
 
-#### 0540 – 0550 Comando Requerimiento de validación/actualización
+### 0540 – 0550 Comando Requerimiento de validación/actualización
 
 En este comando 0540 la caja debe validar si la respuesta final (Flag terminal) y si está aprobada (Código respuesta Transbank) para luego imprimir. Si la transacción no es final (Flag terminal) debe renviar el mensaje spdh adjunto, no importa si la transacción está o no aprobada en este caso.  
 Entrega un voucher formateado para impresión y además soporta tarjetas de Prepago.
@@ -731,12 +731,12 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
-## 0560 – 0570 Comando Requerimiento de validación/actualización
+### 0560 – 0570 Comando Requerimiento de validación/actualización
 
 Solo para pinpad wifi retail estándar
 
 
-## 0580 – 0590 Comando Requerimiento con capacidad Surcharge
+### 0580 – 0590 Comando Requerimiento con capacidad Surcharge
 
 En este comando 0580 la caja debe validar si la respuesta final (Flag terminal) y si está aprobada (Código
 respuesta Transbank) para luego imprimir. Si la transacción no es final (Flag terminal) debe renviar el
@@ -976,7 +976,7 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
 
-## 0700 - Validación comando actualización parámetros pinpad
+### 0700 - Validación comando actualización parámetros pinpad
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -1020,17 +1020,17 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 
 Solo para retail con tarjetas propias
 
-## 0900 – 0910 Validación venta ONUS
+### 0900 – 0910 Validación venta ONUS
 
 Solo para retail con tarjetas propias
 
-### ADMN - Comandos administrativos 
+## ADMN - Comandos administrativos 
 
 Estos comandos por el momento solo están habilitados para los terminales autoservicio con equipos
 Verifone ux300, ux100, ux400.
 A continuación se describen los comandos administrativos, los cuales tienen campos mandatorios y otros no:<br>X = Obligatorio <br>O = Opcional <br>Z = en desuso
 
-## Eco CAJA -> PINPAD
+### Eco CAJA -> PINPAD
 
 Comando enviado desde la Caja hacia el pinpad para verificar que el pinpad se encuentra conectado y
 disponible, debe ser enviando en un tiempo configurable en la caja por ejemplo cada 5 minutos. Este
@@ -1080,7 +1080,7 @@ DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR 
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`       | X | STX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje                              | X | STX
 
-## Reiniciar Pinpad (Caja -> Pinpad)
+### Reiniciar Pinpad (Caja -> Pinpad)
 
 Comando con el cual la caja solicita al pinpad que se reinicie, pinpad responde ok y reinicia.
 Este comando puede ser enviado por ejemplo todos los días a las 4:00AM no debe ser enviado al iniciar la
@@ -1117,7 +1117,7 @@ DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR 
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje                              | X | STX
 
 
-## Actualización parámetros de Pinpad (Pinpad -> Caja)
+### Actualización parámetros de Pinpad (Pinpad -> Caja)
 
 Comando con el cual el pinpad solicita a la caja gatillar una actualización de parámetros o cierre batch,
 mediante el flujo habitual (comandos 600-700), caja inicia el flujo estándar 600, 610, 700, 710.
@@ -1151,9 +1151,10 @@ DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR 
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje                              | X | STX
 
 
-## 1600 – 1610 Comando Lectura de Código de Barras*
+### 1600 – 1610 Comando Lectura de Código de Barras*
 
-**Importante: Los códigos de barra soportados por el pinpad e355 son: CODE39, CODE128, EAN y UPC *Solo para el modelo que tiene lector de código de barras Verifone e355**
+**Importante: Los códigos de barra soportados por el pinpad e355 son: CODE39, CODE128, EAN y UPC. \*Solo para el modelo que tiene lector de código de barras Verifone e355**  
+
 Comando para iniciar la captura de código de barra desde el Pinpad modelo E355.
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
@@ -1184,9 +1185,9 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
-### Anexos
+## Anexos
 
-## Tabla de Marcas
+### Tabla de Marcas
 
 NOMBRE MARCA DE TARJETA         | ABREVIACIÓN DE TARJETA
 ------                          | -----------
@@ -1205,7 +1206,7 @@ ELECTRON                        | EL
 DEBITO                          | DB
 PREPAGO                         | PP
 
-## Tabla de tipo de tarjeta
+### Tabla de tipo de tarjeta
 
 CÓDIGO TIPO DE TARJETA          | GLOSA TIPO DE TARJETA
 ------                          | -----------
@@ -1214,7 +1215,7 @@ DB                              | DEBITO - PREPAGO
 NB                              | NO BANCARIA
 Null (vacío)                    | Se despliega Menú en PINPAD.
 
-## Tabla de Respuesta Pinpad
+### Tabla de códigos de respuesta de pinpad a los comandos
 
 Estos códigos de respuesta a los comandos enviado al pinpad, solo en caso de rechazo (distinto a 00), se
 deben desplegar en pantalla del punto de venta del comercio, en caso de problemas ayudan a identificar la
@@ -1244,13 +1245,12 @@ CÓDIGO DE RESPUESTA         | GLOSA
 98                          | ERROR DE FORMATO DEL MENSAJE
 99                          | CANCELACIÓN POR LA TECLA \[CANCEL\] / TIMEOUT
 
-## Algunos códigos de respuesta de los autorizadores
+**Valido para la versión del aplicativo configurado para Bencineras.*
 
-Estos son solo algunos de los códigos de respuestas de los autorizadores sean aprobadas o rechazadas, hay
-muchos más pero estos son los más comunes
-Al recibir respuesta de la transacción sea aprobada o rechazada, se debe desplegar los 3 dígitos y la glosa
-entregada en la pantalla del punto de venta del comercio, en caso de problemas ayudan a identificar la
-causa, sin tener que estar buscando log de la caja:
+### Algunos códigos de respuesta de los autorizadores
+
+Estos son solo algunos de los códigos de respuestas de los autorizadores sean aprobadas o rechazadas, hay muchos más pero estos son los más comunes.  
+Al recibir respuesta de la transacción sea aprobada o rechazada, se debe desplegar los 3 dígitos y la glosa entregada en la pantalla del punto de venta del comercio, en caso de problemas ayudan a identificar la causa, sin tener que estar buscando log de la caja:
 
 CÓDIGO DE RESPUESTA         | GLOSA
 ------                      | -----------
