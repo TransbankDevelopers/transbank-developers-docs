@@ -167,6 +167,14 @@ transbank.webpay.webpay_plus.default_api_key = "579B532A7440BB0C9079DED94D31EA16
 transbank.webpay.webpay_plus.default_integration_type = IntegrationType.TEST
 ```
 
+```javascript
+const Environment = require('transbank-sdk').Environment;
+
+WebpayPlus.commerceCode = 597055555532;
+WebpayPlus.apiKey = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C';
+WebpayPlus.environment = Environment.Integration;
+```
+
 ```http
 Tbk-Api-Key-Id: 597055555532
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -227,6 +235,12 @@ response = Transbank::Webpay::WebpayPlus::Transaction::create(
 response = transbank.webpay.webpay_plus.create(buy_order, session_id, amount, return_url)
 ```
 
+```javascript
+const WebpayPlus = require('transbank-sdk').WebpayPlus;
+
+const response = await WebpayPlus.Transaction.create(buyOrder, sessionId, amount, returnUrl);
+```
+
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions
 
@@ -278,6 +292,11 @@ response.url
 response.token
 ```
 
+```javascript
+response.url
+response.token
+```
+
 ```http
 200 OK
 Content-Type: application/json
@@ -323,6 +342,12 @@ response = Transbank::Webpay::WebpayPlus::Transaction::commit(token: @token)
 
 ```python
 response = transbank.webpay.webpay_plus.transaction.commit(token)
+```
+
+```javascript
+const WebpayPlus = require('transbank-sdk').WebpayPlus;
+
+const response = await WebpayPlus.Transaction.commit(token);
 ```
 
 ```http
@@ -425,6 +450,23 @@ response.installments_number
 response.balance
 ```
 
+```javascript
+response.vci
+response.amount
+response.status
+response.buy_order
+response.session_id
+response.card_detail
+response.accounting_date
+response.transaction_date
+response.authorization_code
+response.payment_type_code
+response.response_code
+response.installments_amount
+response.installments_number
+response.balance
+```
+
 ```http
 200 OK
 Content-Type: application/json
@@ -497,6 +539,12 @@ response = Transbank::Webpay::WebpayPlus::Transaction::status(token: @token)
 
 ```python
 response = transbank.webpay.webpay_plus.transaction.status(token)
+```
+
+```javascript
+const WebpayPlus = require('transbank-sdk').WebpayPlus;
+
+const response = await WebpayPlus.Transaction.status(token);
 ```
 
 ```http
@@ -599,6 +647,23 @@ response.installments_number
 response.balance
 ```
 
+```javascript
+response.vci
+response.amount
+response.status
+response.buy_order
+response.session_id
+response.card_detail
+response.accounting_date
+response.transaction_date
+response.authorization_code
+response.payment_type_code
+response.response_code
+response.installments_amount
+response.installments_number
+response.balance
+```
+
 ```http
 200 OK
 Content-Type: application/json
@@ -680,6 +745,12 @@ response = Transbank::Webpay::WebpayPlus::Transaction::refund(token: @token, amo
 response = Transbank.webpay.webpay_plus.refund(token, amount)
 ```
 
+```javascript
+const WebpayPlus = require('transbank-sdk').WebpayPlus;
+
+const response = await WebpayPlus.Transaction.refund(token, amount);
+```
+
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refunds
 Tbk-Api-Key-Id: 597055555532
@@ -737,6 +808,15 @@ response.type;
 ```
 
 ```python
+response.authorization_code
+response.authorization_date
+response.balance
+response.nullified_amount
+response.response_code
+response.type
+```
+
+```javascript
 response.authorization_code
 response.authorization_date
 response.balance
@@ -823,6 +903,10 @@ response = DeferredTransaction.capture(
 )
 ```
 
+```javascript
+const response  = await WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, captureAmount);
+```
+
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
 Tbk-Api-Key-Id: 597055555531
@@ -878,6 +962,13 @@ response.response_code
 ```
 
 ```python
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
+```javascript
 response.authorization_code
 response.authorization_date
 response.captured_amount
@@ -1026,6 +1117,27 @@ response = MallTransaction.create(
 )
 ```
 
+```javascript
+const WebpayPlus = require('transbank-sdk').WebpayPlus;
+const TransactionDetail = require('transbank-sdk').TransactionDetail;
+
+let details = [
+  new TransactionDetail(
+    amount, commerceCode, buyOrder
+  ),
+  new TransactionDetail(
+    amount2, commerceCode2, buyOrder2
+  ),
+];
+
+const createResponse = await WebpayPlus.MallTransaction.create(
+  buyOrder,
+  sessionId,
+  returnUrl,
+  details
+);
+```
+
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions
 
@@ -1091,6 +1203,11 @@ response.token
 response.url
 ```
 
+```javascript
+response.token
+response.url
+```
+
 ```http
 200 OK
 Content-Type: application/json
@@ -1138,6 +1255,12 @@ response = MallTransaction.commit(token)
 
 ```python
 response = MallTransaction.commit(token)
+```
+
+```javascript
+const WebpayPlus = require('transbank-sdk').WebpayPlus;
+
+const response = await WebpayPlus.MallTransaction.commit(token);
 ```
 
 ```http
@@ -1259,6 +1382,27 @@ for detail in details:
   detail.status
 ```
 
+```javascript
+response.accounting_date
+response.buy_order
+cardDetail = response.card_detail
+cardDetail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+details.forEach(detail => {
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+});
+```
+
 ```http
 200 OK
 Content-Type: application/json
@@ -1338,6 +1482,12 @@ response = MallTransaction.status(token)
 
 ```python
 response = MallTransaction.status(token)
+```
+
+```javascript
+const WebpayPlus = require('transbank-sdk').WebpayPlus;
+
+const response = await WebpayPlus.MallTransaction.status(token);
 ```
 
 ```http
@@ -1459,6 +1609,27 @@ for detail in details:
   detail.status
 ```
 
+```javascript
+response.accounting_date
+response.buy_order
+cardDetail = response.card_detail
+cardDetail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+details.forEach(detail => {
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+});
+```
+
 ```http
 200 OK
 Content-Type: application/json
@@ -1536,6 +1707,12 @@ response = Transaction.refund(token, buy_order, commerce_code, amount)
 response = Transaction.refund(token, buy_order, commerce_code, amount)
 ```
 
+```javascript
+const WebpayPlus = require('transbank-sdk').WebpayPlus;
+
+const response = await WebpayPlus.MallTransaction.refund(token, buyOrder, commerceCode, amount);
+```
+
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refunds
 Tbk-Api-Key-Id: 597055555535
@@ -1603,6 +1780,15 @@ response.balance
 response.nullified_amount
 response.response_code
 response.type
+```
+
+```javascript
+  response.authorization_code
+  response.authorization_date
+  response.balance
+  response.nullified_amount
+  response.response_code
+  response.type
 ```
 
 ```http
@@ -1826,6 +2012,10 @@ MallInscription.start(
         response_url=response_url)
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/inscriptions
 
@@ -1873,6 +2063,10 @@ response.url_webpay
 ```python
 response.token
 response.url_webpay
+```
+
+```javascript
+// El SDK aun no soporta este producto
 ```
 
 ```http
@@ -1923,6 +2117,10 @@ response = Transbank::Webpay::Oneclick::MallInscription::finish(token: token)
 
 ```python
 response = MallInscription.finish(token=token)
+```
+
+```javascript
+// El SDK aun no soporta este producto
 ```
 
 ```http
@@ -1981,6 +2179,10 @@ response.card_type
 response.card_number
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 200 OK
 Content-Type: application/json
@@ -2036,6 +2238,10 @@ MallInscription::delete(user_name: user_name, tbk_user: tbk_user)
 MallInscription.delete(tbk_user, user_name)
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 DELETE /rswebpaytransaction/api/oneclick/v1.0/inscriptions
 
@@ -2077,6 +2283,10 @@ username  <br> <i> String </i> | Identificador del usuario en los sistemas del 
 
 ```python
 # 204 OK
+```
+
+```javascript
+// El SDK aun no soporta este producto
 ```
 
 ```http
@@ -2167,6 +2377,10 @@ MallTransaction.authorize(
   buy_order=buy_order,
   details=details
 )
+```
+
+```javascript
+// El SDK aun no soporta este producto
 ```
 
 ```http
@@ -2387,6 +2601,10 @@ response = Transbank::Webpay::Oneclick::MallTransaction::status(buy_order: buy_o
 var response = MallTransaction.status(buy_order)
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 GET /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}
 
@@ -2503,6 +2721,10 @@ for detail in details:
   detail.status
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 200 OK
 Content-Type: application/json
@@ -2584,6 +2806,10 @@ response = Transbank::Webpay::Oneclick::MallTransaction::refund(
 var response = MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, amount)
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 POST /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}/refunds
 
@@ -2654,6 +2880,10 @@ response.response_code
 response.type
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 200 OK
 Content-Type: application/json
@@ -2706,6 +2936,10 @@ final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTra
 
 ```python
 # Esta funcion aun no se encuentra disponible en el SDK
+```
+
+```javascript
+// El SDK aun no soporta este producto
 ```
 
 ```http
@@ -2761,6 +2995,10 @@ response.response_code
 
 ```python
 # Esta función aun no se encuentra disponible en el SDK
+```
+
+```javascript
+// El SDK aun no soporta este producto
 ```
 
 ```http
@@ -2871,6 +3109,10 @@ Transaction.create(
 )
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions
 
@@ -2919,6 +3161,10 @@ response.token
 
 ```python
 response.token
+```
+
+```javascript
+// El SDK aun no soporta este producto
 ```
 
 ```http
@@ -2996,6 +3242,10 @@ Transaction.installments(
 )
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/installments
 
@@ -3047,6 +3297,10 @@ response.deferred_periods
 response.installments_amount
 response.id_query_installments
 response.deferred_periods
+```
+
+```javascript
+// El SDK aun no soporta este producto
 ```
 
 Si el comercio no tiene configurado periodos diferidos, la respuesta de `deferred_periods` será `[]`:
@@ -3131,6 +3385,10 @@ Transaction.commit(
   deferred_period_index=deferred_period_index,
   grace_period=grace_period
 )
+```
+
+```javascript
+// El SDK aun no soporta este producto
 ```
 
 ```http
@@ -3236,6 +3494,10 @@ response.installments_amount
 response.balance
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 200 OK
 Content-Type: application/json
@@ -3309,6 +3571,10 @@ Transbank::TransaccionCompleta::Transaction::status(token: token)
 from transbank.transaccion_completa.transaction import Transaction
 
 Transaction.status(token=token)
+```
+
+```javascript
+// El SDK aun no soporta este producto
 ```
 
 ```http
@@ -3501,6 +3767,10 @@ from transbank.transaccion_completa.transaction import Transaction
 Transaction.refund(token=token, amount=amount)
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refund
 Tbk-Api-Key-Id: 597055555530
@@ -3564,6 +3834,10 @@ response.authorization_date
 response.nullified_amount
 response.balance
 response.response_code
+```
+
+```javascript
+// El SDK aun no soporta este producto
 ```
 
 ```http
@@ -3744,6 +4018,10 @@ response = Transaction.create(
 )
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions
 
@@ -3910,6 +4188,10 @@ details = [
 response = Transaction.installments(token=token, details=details)
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/installments
 
@@ -3973,6 +4255,10 @@ response.id_query_installments
 deferred_period = response.deferred_periods[0]
 deferred_period.amount
 deferred_period.period
+```
+
+```javascript
+// El SDK aun no soporta este producto
 ```
 
 ```http
@@ -4112,6 +4398,10 @@ response = Transaction.commit(
 )
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
 
@@ -4236,6 +4526,10 @@ detail.status
 detail.balance
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 200 OK
 Content-Type: application/json
@@ -4311,6 +4605,10 @@ Transbank::TransaccionCompleta::MallTransaction::status(token)
 
 ```python
 Transaction.status(token)
+```
+
+```javascript
+// El SDK aun no soporta este producto
 ```
 
 ```http
@@ -4418,6 +4716,10 @@ detail.status
 detail.balance
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 200 OK
 Content-Type: application/json
@@ -4522,6 +4824,10 @@ Transaction.refund(
 )
 ```
 
+```javascript
+// El SDK aun no soporta este producto
+```
+
 ```http
 POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refunds
 Tbk-Api-Key-Id: 597055555551
@@ -4589,6 +4895,11 @@ response.authorization_date
 response.nullified_amount
 response.balance
 response.response_code
+```
+
+
+```javascript
+// El SDK aun no soporta este producto
 ```
 
 ```http
