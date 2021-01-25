@@ -71,13 +71,13 @@ El SDK Java y C no soportan el envío de mensajes intermedios. Por esta razón e
 
 La caja del comercio y el pinpad se conectan a través de un cable de USB o SERIAL:
 
-<img class="" src="">
+![Conexión entre pinpad y caja](/images/documentacion/host2host/conexion-directa-pinpad-caja.png)
 
 ### Conexión pinpad bluetooth y caja
 
 La caja del comercio y el pinpad se conectan a través de Bluetooth:
 
-<img class="" src="">
+![Conexión pinpad bluetooth y caja](/images/documentacion/host2host/pinpad-bluetooth-caja.png)
 
 ### Software de apoyo
 
@@ -113,19 +113,19 @@ Los Router actuales permiten conocer los dispositivos que están conectados a la
 Es recomendable monitorear para poder evitar algún dispositivo que esté conectado sin
 autorización.
 
->>*WPA2-PSK (AES): Sistema de protección para redes inalámbricas WI-FI. Es el último estándar de encriptación WI-FI y AES es el más reciente algoritmo de cifrado.
+*WPA2-PSK (AES): Sistema de protección para redes inalámbricas WI-FI. Es el último estándar de encriptación WI-FI y AES es el más reciente algoritmo de cifrado.
 
->>*SSID: Difusión de un SSID de red. Un SSID es el nombre público de una red de área local inalámbrica (WLAN) que sirve para diferenciarla de otras redes inalámbricas en la zona. SSID es el nombre de la red que se especifica al configurar la red WI-Fi.  
+*SSID: Difusión de un SSID de red. Un SSID es el nombre público de una red de área local inalámbrica (WLAN) que sirve para diferenciarla de otras redes inalámbricas en la zona. SSID es el nombre de la red que se especifica al configurar la red WI-Fi.  
 
 ### Protocolo de comunicación
 
 El protocolo que usará el PINPAD es VISA II, sobre el que se enviarán los mensajes de requerimiento y respuesta. Conceptualmente se utiliza el siguiente formato:  
 
-<img class="" src="">
+![Protocolo de comunicación](/images/documentacion/host2host/protocolo-de-comunicacion.png)
 
-<img class="" src="">
+Donde:  
 
-Donde:
+
 TERMINO             | DESCRIPCIÓN
 -------             | -----------
 INICIO COMANDO      | Indica el inicio del mensaje (STX).
@@ -139,13 +139,14 @@ Timeout 2 Resp      | Es el tiempo de espera del ACK o NAK para reintentar el en
 Timeout 3 ACK       | Es el tiempo de espera del ACK o NAK para reintentar el envío de la respuesta por el PINPAD. 10 segundos
 STX                 | Indica un INICIO del mensaje (valor Hexa 0x02).
 ETX                 | Indica un FIN del mensaje (valor Hexa 0x03).
-DATA                | CAMPO0&#124;CAMPO1&#124;CAMPO2&#124;…&#124;CAMPON
+DATA                | CAMPO₀&#124;CAMPO₁&#124;CAMPO₂&#124;…&#124;CAMPOn
+
 
 ### Diagrama genérico de secuencia de comandos 
 
 El diagrama que se describe corresponde a la generalización del comportamiento de cada uno de los comandos o mensajes enviados entre pinpad y caja.  
 
-<img class="" src="">
+![Secuencia de comandos entre Caja y PINPAD](/images/documentacion/host2host/secuencia-comandos-caja-pinpad.png)
 
 ACK: cuando se recibió un mensaje válido, se va a procesar y responder con el mensaje o comando
 correspondiente dentro del timeout definido.  
@@ -155,7 +156,7 @@ Diagrama muestra la evaluación del comando por parte del pinpad y caja, se reci
 
 Luego se valida la respuesta al código del comando, si 00 se procesa el comando si es distinto se termina por el código retornado.
 
-<img class="" src="">
+![Flujo al recibir un comando](/images/documentacion/host2host/flujo-al-recibir-comando.png)
 
 ### Administración ID de Contexto
 
@@ -168,28 +169,23 @@ Comando/campo donde la caja recibe el ID por parte del pinpad:
 
 Asumiendo que la caja tiene conexión con el pinpad, solicita al pinpad una actualización de parámetros de pinpad 
 
-<img class="" src="">
+![Flujo comandos actualización de parámetros pinpad](/images/documentacion/host2host/flujo-comandos-actualizacion-param-pinpad.png)
 
-TABLA CON CODIGOS   |
------------------   |
 
 ### Flujo de venta detallado
 
-<img class="" src="">
+![Secuencia detallada de comandos de una venta](/images/documentacion/host2host/secuencia-detallada-comandos-venta.png)
 
-<img class="" src="">
+![Diagrama de flujo detallado de comandos de una venta con respuesta con problema](/images/documentacion/host2host/comandos-venta-respuesta-con-problema.png)
 
 1. Para el caso de una respuesta del pinpad que esté fuera de lo especificado (tipo de dato erróneo, largo incorrecto, separador incorrecto o faltante, etc.) la caja debe interpretar que la transacción terminó con problema y luego solicitar reversa según el “flujo de ejecución de reversa a solicitud de la caja” detallado a continuación.  
 Si se desea reintentar la venta se debe iniciar un nuevo flujo de venta.
-
-TABLA CON CODIGOS   |
------------------   |
 
 ### Flujo de ejecución de reversa a solicitud de la caja
 
 La caja no tuvo respuesta de algún comando o no tuvo respuesta de un mensaje SPDH en vuelo, por lo tanto no pudo terminar una venta que inicio, luego no sabe si está aprobada o rechazada, en este caso debe solicitar una reversa al pinpad.  
 
-<img class="" src="">
+![Reversa solicitada por la caja](/images/documentacion/host2host/reversa-solicitada-por-caja.png)
 
 Para el comando 400 se consideran como Reversa Exitosa los siguientes mensajes:
 
@@ -201,9 +197,6 @@ Comando             | Observación
 510&#124;00&#124;...&#124;Código respuesta Transbank < 010&#124;…     | Respuesta optimizada en la 18.2x
 
 Ejemplo de reversa:
-
-TABLA CON CODIGO |
----------------  |
 
 Con el 510 el pinpad muestra por pantalla “REVERSA APLICADA”.
 
@@ -227,7 +220,9 @@ Los comandos 0100, 0110, 0200, 0210, 0400, 0410, 0500, 0510 son Igual al Retail 
 
 En este punto la caja ya tiene construida la venta en su sistema, por lo cual ya cuenta con los datos
 requeridos para iniciar el proceso de pago con Transbank con el comando 0100.  
-Desde este punto se debe registrar los datos de la transacción para ir complementando con los siguientes comandos, pues frente a alguna caída los datos están resguardados para solicitar reversa o finalmente imprimir el voucher con la transacción aprobada.
+Desde este punto se debe registrar los datos de la transacción para ir complementando con los siguientes comandos, pues frente a alguna caída los datos están resguardados para solicitar reversa o finalmente imprimir el voucher con la transacción aprobada.  
+
+**Requerimiento**
 
 DATO        | LARGO     | COMENTARIO            | VALOR POR DEFECTO
 ------      | ------    | ------                | ------    
@@ -258,7 +253,9 @@ DATO        | LARGO     | COMENTARIO            | VALOR POR DEFECTO
 `<LRC>`     | 1         | Byte resultado de la operación XOR del mensaje | 
 
 
-Timeout máximo de espera por comando 110 de 35seg, ya que el PinPad espera 30seg a que el cliente opere tarjeta, por lo tanto a los 30 segundas si no se opera tarjeta, devuelve un 110&#124;99.
+Timeout máximo de espera por comando 110 de 35seg, ya que el PinPad espera 30seg a que el cliente opere tarjeta, por lo tanto a los 30 segundas si no se opera tarjeta, devuelve un 110&#124;99.  
+
+**Respuesta**
 
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
@@ -295,6 +292,7 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 
 ### 0200 – 0210 Comando Requerimiento de venta/anulación
 
+**Requerimiento**
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -346,6 +344,8 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 
 Timeout máximo de espera por comando 210 de 125seg, ya que hay hasta 4 interacción con el usuario.
 
+**Respuesta**
+
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -366,7 +366,10 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ### 0400 – 0410 Comando Requerimiento de reversa
 
 Si se requiere una reversa, la caja rescata el indicador de contexto que ha guardado de su última transacción (independiente del nivel de completitud de la transacción) y solicita al pinpad la reversa. El pinpad puede discriminar si solo se hizo lectura de tarjeta, o solo se hizo una consulta de cuotas, o si la venta está rechazada o aprobada.  
-Si el pinpad no está presente, debe mantener la reversa pendiente, hasta que el pinpad pueda responder.
+Si el pinpad no está presente, debe mantener la reversa pendiente, hasta que el pinpad pueda responder.  
+
+**Requerimiento**  
+
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -378,7 +381,11 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
-Timeout máximo de espera por comando 410 de 20seg y no requiere interacción con tarjetabiente.
+Timeout máximo de espera por comando 410 de 20seg y no requiere interacción con tarjetabiente.  
+
+**Respuesta**  
+
+
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -398,7 +405,10 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 
 ### 0500 – 0510 Comando Requerimiento de validación/actualización
 
-En este comando 0510 la caja debe validar si la respuesta final (Flag terminal) y si está aprobada (Código respuesta Transbank) para luego imprimir. Si la transacción no es final (Flag terminal) debe renviar el mensaje spdh adjunto, no importa si la transacción está o no aprobada en este caso.
+En este comando 0510 la caja debe validar si la respuesta final (Flag terminal) y si está aprobada (Código respuesta Transbank) para luego imprimir. Si la transacción no es final (Flag terminal) debe renviar el mensaje spdh adjunto, no importa si la transacción está o no aprobada en este caso.  
+
+**Requerimiento**  
+
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -414,7 +424,9 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
-Timeout máximo de espera por comando 510 de 125seg, ya que hay hasta 4 interacción con el usuario.
+Timeout máximo de espera por comando 510 de 125seg, ya que hay hasta 4 interacción con el usuario.  
+
+**Respuesta**
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -557,7 +569,11 @@ Solo para pinpad wifi retail estándar.
 ### 0540 – 0550 Comando Requerimiento de validación/actualización
 
 En este comando 0540 la caja debe validar si la respuesta final (Flag terminal) y si está aprobada (Código respuesta Transbank) para luego imprimir. Si la transacción no es final (Flag terminal) debe renviar el mensaje spdh adjunto, no importa si la transacción está o no aprobada en este caso.  
-Entrega un voucher formateado para impresión y además soporta tarjetas de Prepago.
+Entrega un voucher formateado para impresión y además soporta tarjetas de Prepago.  
+
+**Requerimiento**  
+
+
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -579,7 +595,11 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
-Timeout maximo de espera por comando 540 de 125seg, ya que hay hasta 4 interacción con el usuario.
+Timeout maximo de espera por comando 540 de 125seg, ya que hay hasta 4 interacción con el usuario.  
+
+**Respuesta**  
+
+
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -741,7 +761,11 @@ Solo para pinpad wifi retail estándar
 En este comando 0580 la caja debe validar si la respuesta final (Flag terminal) y si está aprobada (Código
 respuesta Transbank) para luego imprimir. Si la transacción no es final (Flag terminal) debe renviar el
 mensaje SPDH adjunto, no importa si la transacción está o no aprobada en este caso.
-Entrega un voucher formateado para impresión. Además, soporta tarjetas de Prepago y Surcharge.
+Entrega un voucher formateado para impresión. Además, soporta tarjetas de Prepago y Surcharge.  
+
+**Requerimiento**  
+
+
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -763,7 +787,10 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
-Timeout máximo de espera por comando 540 de 125seg, ya que hay hasta 4 interacción con el usuario.
+Timeout máximo de espera por comando 540 de 125seg, ya que hay hasta 4 interacción con el usuario.  
+
+**Respuesta**  
+
 
 
 DATO                | LARGO     | COMENTARIO        | VALOR POR DEFECTO
@@ -928,7 +955,11 @@ El cierre batch es una transacción que sirve para cargar parámetros en el pinp
 en Transbank para el comercio (ej: código de servicio)
 Este cierre se debe ejecutar al iniciar el día, idealmente en forma automática. También puede ejecutarse en
 forma manual, y esto además sirve para verificar si hay comunicación con Transbank, el resultado debe ser
-una transacción aprobada que figura en pantalla de pinpad y en caja.
+una transacción aprobada que figura en pantalla de pinpad y en caja.  
+
+**Requerimiento**  
+
+
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -944,20 +975,10 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
-Timeout máximo de espera por comando 610 de 20seg, no requiere interacción con tarjetabiente.
+Timeout máximo de espera por comando 610 de 20seg, no requiere interacción con tarjetabiente.  
 
-```
-0610|00|0123456789ABCDEF|0523|9.11S4HOST2HOST3DES1
-171116113320AO60050000Q0123456789ABCDEFa0010050000+0000000000000000000000+0000000000
-000000000000+000000000000000000d597044440001h0010050071r;597044440001=9912?t74
-0000000000000000326-478-322 15.30C
-S0000000000T0000000000W00700000009-A1EL20212223242526272829VI0 6MC0 67DC0
-6AX012345OTTP06TR01TE0 TM0
-TC12TD12TJ12TH12T812T90 -B01205240-C2100-P000000000000-I0-J0-K000-G33032131100000000
-0000000000000000000000000000000000000000000000000000000000000000|
- m
+**Respuesta**  
 
-```
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -978,6 +999,9 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 
 ### 0700 - Validación comando actualización parámetros pinpad
 
+**Requerimiento**  
+
+
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
 `<STX>`         | 1         | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02` | STX
@@ -990,7 +1014,10 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
-Timeout máximo de espera por comando 710 de 20seg, no requiere interacción con tarjetabiente.
+Timeout máximo de espera por comando 710 de 20seg, no requiere interacción con tarjetabiente.  
+
+**Respuesta**  
+
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -1014,6 +1041,8 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
+
+
 ## Comandos de Ventas ONUS
 
 ### 0800 – 0810 Solicitud venta ONUS
@@ -1030,13 +1059,15 @@ Estos comandos por el momento solo están habilitados para los terminales autose
 Verifone ux300, ux100, ux400.
 A continuación se describen los comandos administrativos, los cuales tienen campos mandatorios y otros no:<br>X = Obligatorio <br>O = Opcional <br>Z = en desuso
 
-### Eco CAJA -> PINPAD
+### Eco CAJA - PINPAD
 
 Comando enviado desde la Caja hacia el pinpad para verificar que el pinpad se encuentra conectado y
 disponible, debe ser enviando en un tiempo configurable en la caja por ejemplo cada 5 minutos. Este
 comando también sirve para establecer la conexión entre pinpad y caja. El pinpad abre un socket de
-conexión el cual no se cierra habitualmente, pero ante una nueva solicitud cierra el socket anterior y abre
-otro.
+conexión el cual no se cierra habitualmente, pero ante una nueva solicitud cierra el socket anterior y abre otro.  
+
+**Requerimiento**  
+
 
 
 DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR POR DEFECTO
@@ -1055,7 +1086,10 @@ DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR 
 `Identificador de caja` | 16| Identifica al punto de venta del comercio<br>EJ: sucursal 123 caja 456| X | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| X | &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`       | X | STX
-`<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje                              | X | STX
+`<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje                              | X | STX  
+
+**Respuesta**  
+
 
 
 DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR POR DEFECTO
@@ -1080,12 +1114,16 @@ DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR 
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`       | X | STX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje                              | X | STX
 
-### Reiniciar Pinpad (Caja -> Pinpad)
+### Reiniciar Pinpad (Caja - Pinpad)
 
 Comando con el cual la caja solicita al pinpad que se reinicie, pinpad responde ok y reinicia.
 Este comando puede ser enviado por ejemplo todos los días a las 4:00AM no debe ser enviado al iniciar la
 caja o punto de venta del comercio ya que en ese instante se debe enviar la actualización de parámetros del
-pinpad o (cierre batch)
+pinpad o (cierre batch).  
+
+**Requerimiento**  
+
+
 
 DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR POR DEFECTO
 ------          | ------    | ------            | ------                | ------
@@ -1101,6 +1139,8 @@ DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR 
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`       | X | STX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje                              | X | STX
 
+
+**Respuesta**
 
 DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR POR DEFECTO
 ------          | ------    | ------            | ------                | ------
@@ -1120,7 +1160,10 @@ DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR 
 ### Actualización parámetros de Pinpad (Pinpad -> Caja)
 
 Comando con el cual el pinpad solicita a la caja gatillar una actualización de parámetros o cierre batch,
-mediante el flujo habitual (comandos 600-700), caja inicia el flujo estándar 600, 610, 700, 710.
+mediante el flujo habitual (comandos 600-700), caja inicia el flujo estándar 600, 610, 700, 710.  
+
+**Requerimiento**  
+
 
 DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR POR DEFECTO
 ------          | ------    | ------            | ------                | ------
@@ -1135,6 +1178,8 @@ DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| X | &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`       | X | STX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje                              | X | STX
+
+**Respuesta**
 
 DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR POR DEFECTO
 ------          | ------    | ------            | ------                | ------
@@ -1155,7 +1200,9 @@ DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR 
 
 **Importante: Los códigos de barra soportados por el pinpad e355 son: CODE39, CODE128, EAN y UPC. \*Solo para el modelo que tiene lector de código de barras Verifone e355**  
 
-Comando para iniciar la captura de código de barra desde el Pinpad modelo E355.
+Comando para iniciar la captura de código de barra desde el Pinpad modelo E355.  
+
+**Requerimiento**
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -1171,7 +1218,9 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
 
-Timeout máximo de espera por comando 1610 es el configurado en la solicitud (1600), si se cumple este tiempo el Pinpad devuelve un 1610&#124;99.
+Timeout máximo de espera por comando 1610 es el configurado en la solicitud (1600), si se cumple este tiempo el Pinpad devuelve un 1610&#124;99.  
+
+**Respuesta**
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -1287,6 +1336,34 @@ CÓDIGO DE RESPUESTA         | GLOSA
 
 # ANEXO ONUS
 
+### Objetivos  
+
+Esta documentación describe la forma de operar, la funcionalidad y el detalle de la mensajería de un PINPAD TRANSBANK trabajando bajo la modalidad OnUs.  
+La aplicación del PINPAD, supone la existencia de un ECR inteligente (por ejemplo una caja registradora) que enviará los requerimientos al PINPAD, para que este los procese y entregue los resultados cuando corresponda.
+
+### Audiencia  
+Para entender completamente este documento es necesario tener conocimientos transaccionales y conocer las funciones implementadas habitualmente en los PINPAD usados en las transacciones bancarias.  
+En particular este manual está dirigido exclusivamente a los comercio ONUS que tienen tarjetas propias y utilizan el pinpad de Transabank para leer sus tarjetas, pero las transacciones las realizan y autorizan ellos mismos. 
+
+### Alcance
+Aplica para el equipo Verifone vx805 (Conexión Serial o USB)  
+Aplica para el equipo Verifone e355 (Conexión Bluetooth)
+
+## Protocolo de mensajería según tipo de comunicación
+
+### Protocolo de comunicación serial (Interface RS232)
+IDÉNTICO AL ESTÁNDAR
+
+### Diagrama genérico de secuencia de comandos 
+IDÉNTICO AL ESTÁNDAR
+
+### Flujo de venta detallado
+NO APLICA
+
+### Manejo de contexto
+
+![Manejo de contexto](/images/documentacion/host2host/manejo-de-contexto-onus.png)
+
 ## Descripción de comandos 
 En este capítulo se detalla cada comando que se puede enviar al PINPAD.  
 
@@ -1301,13 +1378,15 @@ caracteres STX, ETX y LRC.
 
 ### Flujo comandos ONUS
 
-![]()
+![Flujo comandos Onus](/images/documentacion/host2host/flujo-comandos-onus.png)
 
 La caja del comercio podría usar el comando 800 más de una vez incorporando el indicado de contexto, por ejemplo en la primera solo lee tarjeta, en la segunda solicita confirmar monto, en la tercera solicita pin. Lo ideal es que utilice un solo comando 800 para solicitar todo, leer tarjeta, confirmar monto y pedir pin.
 
 ### 0800 - Comando requerimiento venta/anulación
 
-Con este comando la caja solicita al pinpad leer una tarjeta, confirmar monto y pedir pin. La caja pude hacer una solicitud con todos los requerimientos o varias solicitudes por separado.
+Con este comando la caja solicita al pinpad leer una tarjeta, confirmar monto y pedir pin. La caja pude hacer una solicitud con todos los requerimientos o varias solicitudes por separado.  
+
+**Requerimiento**
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -1345,7 +1424,9 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 
 ### 0810 - Comando requerimiento venta/anulación
 
-Con este comando el pinpad entrega a la caja los datos obtenidos en la solicitud del comando 800, como los tracks de la tarjeta (en claro o encriptado), el pin ingresado (que siempre se entrega encriptado) y los datos de EMV que se deben enviar al autorizador ONUS.
+Con este comando el pinpad entrega a la caja los datos obtenidos en la solicitud del comando 800, como los tracks de la tarjeta (en claro o encriptado), el pin ingresado (que siempre se entrega encriptado) y los datos de EMV que se deben enviar al autorizador ONUS.  
+
+**Respuesta**
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -1383,7 +1464,10 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 
 Con este comando la caja entrega al pinpad el resultado de la transacción respondida por el autorizador onus, sea aprobada o rechazada.  
 Además si la venta se hizo con chip se debe entregar el criptograma generado por el autorizador onus a la tarjeta que aún está insertada, para su evaluación.  
-A partir de la versión de pinpad 15.2 con este comando el pinpad además de mostrar en pantalla “RETIRE TARJETA” también emite un sonido de alerta.
+A partir de la versión de pinpad 15.2 con este comando el pinpad además de mostrar en pantalla “RETIRE TARJETA” también emite un sonido de alerta.  
+
+****Requerimiento**  
+
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------          | ------    | ------            | ------
@@ -1403,7 +1487,10 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 
 ### 0910 - Comando validación de respuesta autorizador
 
-Primero que nada este comando es la respuesta ok (o nook) al requerimiento del comando 900. El objetivo principal de este comando es que el Pinpad entregue el resultado de la evaluación del criptograma enviado por el autorizador, el resultado puede ser Aprobado o Declinado por la tarjeta, para que el caso de declinación, la caja reverse la venta aprobada.
+Primero que nada este comando es la respuesta ok (o nook) al requerimiento del comando 900. El objetivo principal de este comando es que el Pinpad entregue el resultado de la evaluación del criptograma enviado por el autorizador, el resultado puede ser Aprobado o Declinado por la tarjeta, para que el caso de declinación, la caja reverse la venta aprobada.  
+
+**Respuesta**  
+
 
 DATO                   | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 ------                 | ------    | ------            | ------
