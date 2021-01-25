@@ -643,8 +643,316 @@ Comando enviado desde el PINPAD a la Caja de modo de establecer la conexión. La
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes |
+Comando | 4 | Valor ‘CONN’ |
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Número Serial | 15 | Valor alfanumérico Número serial del PINPAD |
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Data | 20 | Valor alfanumérico (TRANSBANK VER. 4.01A) Identificador de la aplicación más la versión de la aplicación | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 **Respuesta**
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
+Comando | 4 | Valor ‘CONN’ | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Código Retorno | 2 | Valor numérico (00: Prompt de inicio) (01: Glosa de rechazo) | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Número de Líneas | 2 | Valor numérico (00 -> 99) Cantidad de líneas de glosas a desplegar. | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Glosa | 16 | Valor alfanumérico Glosa descripción de error. | Opcional | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+
+### ECHO - Comando Echo Caja – PINPAD
+Comando que permite a la Caja verificar que el PINPAD se encuentra conectado, identificarlo por su número de serie y versión de aplicación.
+
+**Requerimiento**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
+Comando | 4 | Valor ‘ECHO’ | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+
+**Respuesta**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
+Comando | 4 | Valor ‘ECHO’ | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Código Retorno | 2 | Valor numérico (00: OK, Prompt de inicio) (01: NOK, Glosa de rechazo) | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Número Serial | 15 | Valor alfanumérico Número serial del PINPAD | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Data | 20 | Valor alfanumérico (TRANSBANK VER. 4.01A) Identificador de la aplicación más la versión de la aplicación | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+### ISES - Comando Inicio de Sesión Caja- PINPAD
+Este comando permite abrir una sesión con el PINPAD desde la Caja.
+
+**Requerimiento**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
+Comando | 4 | Valor ‘ISES’ | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+
+**Respuesta**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
+Comando | 4 | Valor ‘ISES’ | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Código Retorno | 2 | Valor numérico (00: OK) (Otro: Error) | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Batería | 3 | Valor numérico (000 -> 100) Porcentaje de carga de batería. | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+
+### FSES - Comando Fin de Sesión Caja – PINPAD
+Este comando permite cerrar una sesión con el PINPAD desde la Caja.
+
+**Requerimiento**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
+Comando | 4 | Valor ‘FSES’ | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+
+**Respuesta**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
+Comando | 4 | Valor ‘FSES’ | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` | 
+Código Retorno | 2 | Valor numérico (00: OK) (Otro: Error) | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+### VOUC - Comando Solicitud Impresión Voucher Caja – PINPAD
+
+**Requerimiento**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio |
+Comando | 4 | Valor ‘VOUC’ | Obligatorio |
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Time Out | 5 | Valor numérico (00000 -> 99999) Timeout del comando en milisegundos. | Obligatorio |
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Glosa 1 | 16 | Valor alfanumérico Glosa a desplegar primera línea en pantalla. | Obligatorio |
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Glosa 2 | 16 | Valor alfanumérico Glosa a desplegar segunda línea en pantalla. | Obligatorio |
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Voucher a Imprimir | 4000 | Valor alfanumérico Voucher separado por “\n” para nueva línea, “\c” para corte de voucher | Obligatorio |
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+**Respuesta**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
+Comando | 4 | Valor ‘VOUC’ | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` | 
+Código Retorno | 2 | Valor numérico (00: Impresión OK) (01: Error en la impresión) | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+
+
+### REIM - Comando Solicitud Reimpresión Último Voucher PINPAD – Caja
+Comando enviado desde el PINPAD a la Caja de modo de que la caja envíe al PINPAD el Voucher de la última venta. Para enviar este comando se debe presionar en el PINPAD ` [ENTER] + [5]`
+
+**Requerimiento**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
+Comando | 4 | Valor ‘REIM’ | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+
+
+**Respuesta**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
+Comando | 4 | Valor ‘REIM’ | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` | 
+Código Retorno | 2 | Valor numérico (00: Recibido OK) (01: No existe impresión disponible) | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` | 
+Time Out | 5 | Valor numérico (00000 -> 99999) Timeout del comando en milisegundos. | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` | 
+Glosa 1 | 16 | Valor alfanumérico Glosa a desplegar primera línea en pantalla. | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` | 
+Glosa 2 | 16 | Valor alfanumérico Glosa a desplegar segunda línea en pantalla. | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` | 
+Voucher a Imprimir | 4000 | Valor alfanumérico Voucher separado por `\n` para nueva línea, `\c` para corte de voucher | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+
+### REST - Comando Reset Socket Caja – PINPAD
+Comando permite a la Caja realizar un reset al socket del PINPAD.
+
+**Requerimiento**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
+Comando | 4 | Valor ‘REST’ | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+**Respuesta**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
+Comando | 4 | Valor ‘REST’ | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Código Retorno | 2 | Valor numérico (00: Recibido OK) (01: Error Mensaje) | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+### LKEY - Comando Carga de Llave PINPAD – Caja
+Comando ejecutado a través del menú del PINPAD, el cual permite solicitar a la caja una ‘Carga de llaves’ a la Caja. La transacción de carga de llaves debe ser construida tal como lo define el manual de “Especificaciones Técnicas”.
+
+**Requerimiento**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
+Comando | 4 | Valor ‘LKEY’ | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+**Respuesta**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
+Comando | 4 | Valor ‘LKEY’ | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Código Retorno | 2 | Valor numérico (00: Recibido OK) (01: Error en carga de llaves) | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+### 0000 - Comando TEST PINPAD – Caja
+Comando enviado desde el PINPAD hacia la Caja para mantener el socket abierto.
+
+**Requerimiento**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+Comando | 4 | Valor ‘0000’ | Obligatorio | 
+
+**Respuesta**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+Comando | 4 | Valor ‘0000’ | Obligatorio | 
+
+### CLSB - Comando Cierre Batch PINPAD – Caja
+Comando ejecutado a través del menú del PINPAD, el cual permite indicar a la caja el envío de una solicitud de ‘Cierre batch’.
+
+**Requerimiento**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
+Comando | 4 | Valor ‘CLSB’ | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+**Respuesta**
+
+DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
+---- | ----- | ---------- | ------------------
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
+Comando | 4 | Valor ‘CLSB’ | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+Código Retorno | 2 | Valor numérico (00: Recibido OK) (Otro: Error) | Obligatorio | 
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
+
+## Otros datos
+
+### Tabla de marcas de tajetas
+
+Nombre | Abreviación
+---- | -----
+VISA | VI
+MASTERCARD | MC
+DINERS | DC
+AMEX | AX
+MAGNA | MG
+PRESTO | TP
+MAS | TM
+CMR | TC
+RIPLEY | TR
+MAESTRO | MT
+ELECTRON | EL
+DEBITO | DB
+
+### Tabla de tipo de tarjeta
+
+Código | Glosa
+---- | -----
+CR | CREDITO
+DB | DEBITO
+NB | NO BANCARIA
+Null (vacío) | Se despliega Menú en PINPAD.
+
+### Tabla de códigos de respuesta de comandos
+
+Código de respuesta | Glosa
+---- | -----
+00 | RESPUESTA OK
+84 | NO EXISTE CODIGO DE MENSAJE
+86 | ERROR DE LECTURA.
+87 | PINPAD SIN MASTER KEY
+89 | TRANSACCIÓN DECLINADA POR LA TARJETA CHIP
+90 | TARJETA NO PERMITIDA PARA EL MODO SELECCIONADO
+91 | ERROR CANTIDAD DE CUOTAS
+92 | NO COINCIDE CON TARJETA DE PRIMER “TAPEO”
+93 | ERROR DE MONTO MÍNIMO
+94 | ERROR DE VALIDACIÓN MONTO VUELTO
+95 | ERROR ID DE CONTEXTO
+96 | NO COINCIDE LOS 4 ULTIMOS DIGITOS
+97 | LA TRANSACCIÓN NO PERMITE REVERSA
+98 | ERROR DE FORMATO DEL MENSAJE
+99 | CANCELACIÓN DEL COMANDO A TRAVÉS DE LA TECLA `[CANCEL]` / TIMEOUT
+
+### Tabla de códigos de mensajes de despliegue en PINPAD
+
+Código de respuesta | Glosa
+---- | -----
+0000 | APROBADO
+0001 | ERROR INTERNO DE MENSAJERIA
+0002 | ERROR INTERNO DE MENSAJERIA
+0003 | NIVEL DE BATERIA BAJO
+0004 | CANCELACION DE OPERACIÓN
+0005 | EMISOR NO DISPONIBLE
+0006 | TERMINAL NO DISPONIBLE
+0007 | NO HAY CONFIRMACION
+0008 | ERROR EN OPERACIÓN CON POS
+0009 | MAXIMO INTENTOS SUPERADOS CONEXIÓN SWITCH SERVER
+0010 | CANCELACION DE OPERACIÓN
+0011 | MEDIOS DE PAGO NO DISPONIBLES
+0014 | ERROR INTERNO DE SISTEMA
+0015 | ERROR INTERNO DE SISTEMA
+0016 | ERROR INTERNO DE MENSAJERIA
+0017 | ERROR INTERNO DE MENSAJERIA
+0018 | TRANSACCION DE VENTA INEXISTENTE
+0019 | TRANSACCION ORIGINAL NO ES UNA VENTA
+0020 | TRANSACCION ORIGINAL NO TERMINADA
+0021 | TRANSACCION PENDIENTE EMISOR
+0022 | MONTO A ANULAR MAYOR AL MONTO DE VENTA
+0023 | MONTO A ANULAR DISTINTO AL MONTO DE VENTA 
+0024 | TARJETA NO PERMITIDA
+0025 | ERROR RESPUESTA TERMINAL
+0026 | ERROR RESPUESTA TERMINAL 
