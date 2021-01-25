@@ -459,7 +459,7 @@ Comando | 4 | Valor 0570 | 570
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Código Respuesta PinPad | 2 | "Valor numérico <br> En caso de rechazo se debe desplegar en el punto de venta: <br /> RECHAZO PINPAD - <XX> : <GLOSA> <br /> De acuerdo a Tabla de códigos de respuesta de comandos" |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Indicador de contexto | 16 | Valor alfanumérico <br /> Id entregado por el pinpad por cada transacción | |
+Indicador de contexto | 16 | Valor alfanumérico <br /> Id entregado por el pinpad por cada transacción |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Código de comercio | 12 | Valor numérico  <br /> Código del comercio entregado por TBK y configurado en la caja, se imprime en voucher |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
@@ -469,7 +469,7 @@ Número Ticket/Boleta | 20 | Valor alfanumérico <br /> Campo opcional, si viene
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Empleado | 4 | Valor alfanumérico <br /> Campo opcional, si viene se imprime en voucher si no viene se omite el campo |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Código Autorización | 8 | Valor Alfanumérico (máximo) <br /> Código de autorización de la transacción enviado por TBK ejemplo: |AB 12 C3| <br /> Se imprime lo que viene en el voucher |
+Código Autorización | 8 | Valor Alfanumérico (máximo) <br /> Código de autorización de la transacción enviado por TBK ejemplo:  `[AB 12 C3]` <br /> Se imprime lo que viene en el voucher |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Monto | 18 | Valor numérico (máximo) <br /> Monto total autorizado (incluye el monto de la venta, propina, vuelto y donación según sea el caso) <br /> Se imprime en voucher |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
@@ -477,7 +477,7 @@ Monto vuelto | 18 | Valor numérico (máximo) <br /> Vuelto seleccionado por cli
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Numero de Cuotas | 2 | Valor numérico <br /> Cantidad de cuotas de la transacción (para ventas sin cuotas se informa “00”) <br /> Se imprime en voucher |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Monto Cuota | 14 | Valor numérico <br /> Si el monto informado es vacío || o |0| caja debe omitir la línea completa en el voucher. <br /> Se imprime en voucher si viene el campo |
+Monto Cuota | 14 | Valor numérico <br /> Si el monto informado es vacío `` o `0` caja debe omitir la línea completa en el voucher. <br /> Se imprime en voucher si viene el campo |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Últimos 4 Dígitos Tarjeta | 4 | Valor Numérico <br /> No se imprime |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
@@ -497,9 +497,9 @@ Hora Transacción | 6 | Formato HHMMSS <br /> Valor a imprimir en el voucher |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Campo Impresión | 8192 | Campo depende si la caja requiere voucher formateado (máximo) <br /> En el comando 510 no se envía el voucher <br /> En el comando 550 se envía voucher siempre |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Transacción premiada | 1 | Valor numérico <br /> |1|: transacción premiada <br /> En este caso caja debe imprimir voucher PEL además del de venta <br /> ||: transacción sin premio |
+Transacción premiada | 1 | Valor numérico <br /> `1`: transacción premiada <br /> En este caso caja debe imprimir voucher PEL además del de venta <br /> `[vacío]`  : transacción sin premio |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Tipo promoción | 1 | Valor numérico <br /> |1|: Entrega Pto. de Venta <br /> |2|: Entrega Diferida <br /> |3|: Devolución al Tarjeta Habiente |
+Tipo promoción | 1 | Valor numérico <br /> `1`: Entrega Pto. de Venta <br /> `2`: Entrega Diferida <br /> `3`: Devolución al Tarjeta Habiente |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Código promoción | 8 | Valor alfanumérico <br /> Valor a imprimir en el voucher premiado |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
@@ -509,27 +509,27 @@ Glosa vale premio | 62 | Valor alfanumérico <br /> Valor a imprimir en el vouch
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Texto vale premio | 27 | Valor alfanumérico <br /> Valor a imprimir en el voucher de premio |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Flag permite cuotas | 1 | Valor numérico <br /> Campo informativo de la configuración del comercio | 0 |
+Flag permite cuotas | 1 | Valor numérico <br /> Campo informativo de la configuración del comercio | 0
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Flag de gracia | 1 | Valor numérico <br /> Campo informativo de la configuración del comercio | 0 |
+Flag de gracia | 1 | Valor numérico <br /> Campo informativo de la configuración del comercio | 0
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Flag C2C | 1 | Valor numérico <br /> Campo informativo de la configuración del comercio | 0 |
+Flag C2C | 1 | Valor numérico <br /> Campo informativo de la configuración del comercio | 0
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Flag C3C | 1 | Valor numérico <br /> Campo informativo de la configuración del comercio | 0 |
+Flag C3C | 1 | Valor numérico <br /> Campo informativo de la configuración del comercio | 0
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Flag NCuotas | 1 | Valor numérico <br /> Campo informativo de la configuración del comercio | 0 |
+Flag NCuotas | 1 | Valor numérico <br /> Campo informativo de la configuración del comercio | 0 
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Flag máximo de cuotas | 2 | Valor numérico <br /> Campo informativo de la configuración del comercio | 0 |
+Flag máximo de cuotas | 2 | Valor numérico <br /> Campo informativo de la configuración del comercio | 0
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Tipo de menú | 2 | Valor alfanumérico <br /> Indicador del tipo de menú por el cual se realizó la transacción <br /> |CR| : CRÉDITO <br /> |DB| : DÉBITO PREPAGO <br /> |NB| : NO BANCARIA <br /> Valor de tipo en Tabla tipo de tarjeta <br /> Una venta hecha como debito puede ser autorizada como prepago |
+Tipo de menú | 2 | Valor alfanumérico <br /> Indicador del tipo de menú por el cual se realizó la transacción <br /> `CR` : CRÉDITO <br /> `DB` : DÉBITO PREPAGO <br /> `NB` : NO BANCARIA <br /> Valor de tipo en Tabla tipo de tarjeta <br /> Una venta hecha como débito puede ser autorizada como prepago |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Indicador transacción con gracia | 1 | Valor numérico <br /> Indicador de modalidad de la transacción <br /> |0| transacción sin mes gracia <br /> |1| transacción con mes gracia |
+Indicador transacción con gracia | 1 | Valor numérico <br /> Indicador de modalidad de la transacción <br /> `0` transacción sin mes gracia <br /> `1` transacción con mes gracia |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Tipo cuotas | 1 | Valor numérico <br /> |0| Sin cuotas <br /> |1| Cuotas normales <br /> |3| C3C o C2C <br /> |4| CIC o N-cuotas |
+Tipo cuotas | 1 | Valor numérico <br /> `0` Sin cuotas <br /> `1` Cuotas normales <br /> `3` C3C o C2C <br /> `4` CIC o N-cuotas |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Tasa aplicada | 4 | Valor numérico <br /> Solo se imprime en voucher si “Flag imprimir tasa = 1” |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Glosa tipo cuota | 30 | Valor alfanumérico <br /> Glosa a imprimir en voucher <br /> Si el campo informado viene vacío “||” caja debe omitir la línea en el voucher. |
+Glosa tipo cuota | 30 | Valor alfanumérico <br /> Glosa a imprimir en voucher <br /> Si el campo informado viene vacío ` `  caja debe omitir la línea en el voucher. |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Glosa tipo cuota 2 | 22 | Valor alfanumérico <br /> Glosa que se despliega en pinpad |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
@@ -537,7 +537,7 @@ Glosa promoción | 10 | Valor alfanumérico <br /> Glosa que se despliega en pin
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Id promoción | 10 | Valor alfanumérico <br /> Glosa que se despliega en pinpad |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Flag imprimir tasa | 1 | Valor numérico <br /> || o |0| no imprime tasa aplicada <br /> |1| imprime tasa aplicada | 0 |
+Flag imprimir tasa | 1 | Valor numérico <br /> `[vacío]` o `0` no imprime tasa aplicada <br /> `1` imprime tasa aplicada | 0
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Periodo diferido | 3 | Valor numérico <br /> Periodo diferido seleccionado, valor a imprimir en voucher |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
@@ -569,9 +569,9 @@ Flag transacción con PIN | 1 | Valor alfanumérico <br /> Y: Transacción auten
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Nombre tarjetahabiente | 26 | Valor alfanumérico <br /> Sólo imprimir si “Flag tipo voucher = 1, 2 ó 3” |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Flag tipo voucher | 1 | Valor numérico <br /> Según el número recibido se debe imprimir voucher con o sin firma: <br /> |0| = Sin firma <br /> |1| o |2| o |3| = con firma <br />  <br /> Cabeceras de los voucher: <br /> Para ventas con crédito: <br /> “VENTA CREDITO” <br /> Para ventas con débito (siempre sin firma): <br /> “VENTA DEBITO” <br /> Para ventas con no bancaria: <br /> “VENTA NO BANCARIA” <br /> Para ventas con prepago (sin firma): <br /> “VENTA PREPAGO” <br /> Para anulaciones con crédito (sin firma): <br /> “ANULACION CREDITO” <br /> Para anulaciones con no bancaria (sin firma): <br /> “ANULACION NO BANCARIA” |
+Flag tipo voucher | 1 | Valor numérico <br /> Según el número recibido se debe imprimir voucher con o sin firma: <br /> `0` = Sin firma <br /> `1` o `2` o `3` = con firma <br />  <br /> Cabeceras de los voucher: <br /> Para ventas con crédito: <br /> “VENTA CREDITO” <br /> Para ventas con débito (siempre sin firma): <br /> “VENTA DEBITO” <br /> Para ventas con no bancaria: <br /> “VENTA NO BANCARIA” <br /> Para ventas con prepago (sin firma): <br /> “VENTA PREPAGO” <br /> Para anulaciones con crédito (sin firma): <br /> “ANULACION CREDITO” <br /> Para anulaciones con no bancaria (sin firma): <br /> “ANULACION NO BANCARIA” |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Flag modalidad cuotas | 1 | Valor alfanumérico <br /> 0: Modalidad 3.1 (No utilizado) <br /> 1: Modalidad cuotas 4.0 | 1 |
+Flag modalidad cuotas | 1 | Valor alfanumérico <br /> `0`: Modalidad 3.1 (No utilizado) <br /> 1: Modalidad cuotas 4.0 | 1
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Glosa transacción afecta a ahorro | 40 | Valor alfanumérico (máximo) <br /> Se debe imprimir en el voucher cuando sea distinta de vacío <br /> Campo 9, subcampo D |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
@@ -579,9 +579,9 @@ Número de secuencia | 9 | Valor numérico <br /> No se está usando este campo,
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Flag mensaje terminal | 1 | Valor alfanumérico <br /> Y: El mensaje es terminal y NO se debe enviar el mensaje SPDH de respuesta <br /> N: Se debe enviar el mensaje SPDH de respuesta |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Largo mensaje | 4 | Valor numérico
+Largo mensaje | 4 | Valor numérico |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Mensaje SPDH Venta/Reversa | 2048 | Valor alfanumérico (máximo)
+Mensaje SPDH Venta/Reversa | 2048 | Valor alfanumérico (máximo) |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Propina | 18 | Valor numérico <br /> Monto Propina o Donación |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
@@ -599,7 +599,7 @@ Versión de pinpad | 6 | Valor numérico <br /> Caja debe incluirlo en el vouche
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Saldo Prepago | 40 | Valor alfanumérico (máximo) <br /> Indica el saldo de una tarjeta de prepago la cual se debe imprimir en voucher cuando es venta de prepago y cuando viene el saldo. <br /> Nota: El Pinpad agrega esa glosa al voucher tal como viene en la mensajería. |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-`<ETX>` | 1 | Indica Fin de comando Valor Hexa 0x03 | ETX
+`<ETX>` | 1 | Indica Fin de comando Valor Hexa 0x03 | ETX |
 `<LRC>` | 1 | Byte resultado de la operación XOR del mensaje | 
 
 ### 0600 - Solicitud comando Cierre batch
@@ -648,19 +648,19 @@ Comando | 4 | Valor ‘CONN’ |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Número Serial | 15 | Valor alfanumérico Número serial del PINPAD |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Data | 20 | Valor alfanumérico (TRANSBANK VER. 4.01A) Identificador de la aplicación más la versión de la aplicación | Obligatorio | 
+Data | 20 | Valor alfanumérico (TRANSBANK VER. 4.01A) Identificador de la aplicación más la versión de la aplicación | Obligatorio 
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 **Respuesta**
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
-Comando | 4 | Valor ‘CONN’ | Obligatorio | 
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio
+Comando | 4 | Valor ‘CONN’ | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Código Retorno | 2 | Valor numérico (00: Prompt de inicio) (01: Glosa de rechazo) | Obligatorio | 
+Código Retorno | 2 | Valor numérico (00: Prompt de inicio) (01: Glosa de rechazo) | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Número de Líneas | 2 | Valor numérico (00 -> 99) Cantidad de líneas de glosas a desplegar. | Obligatorio | 
+Número de Líneas | 2 | Valor numérico (00 -> 99) Cantidad de líneas de glosas a desplegar. | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Glosa | 16 | Valor alfanumérico Glosa descripción de error. | Opcional | 
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
@@ -673,8 +673,8 @@ Comando que permite a la Caja verificar que el PINPAD se encuentra conectado, id
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
-Comando | 4 | Valor ‘ECHO’ | Obligatorio | 
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio
+Comando | 4 | Valor ‘ECHO’ | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 
@@ -682,14 +682,14 @@ Comando | 4 | Valor ‘ECHO’ | Obligatorio |
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
-Comando | 4 | Valor ‘ECHO’ | Obligatorio | 
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio
+Comando | 4 | Valor ‘ECHO’ | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Código Retorno | 2 | Valor numérico (00: OK, Prompt de inicio) (01: NOK, Glosa de rechazo) | Obligatorio | 
+Código Retorno | 2 | Valor numérico (00: OK, Prompt de inicio) (01: NOK, Glosa de rechazo) | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Número Serial | 15 | Valor alfanumérico Número serial del PINPAD | Obligatorio | 
+Número Serial | 15 | Valor alfanumérico Número serial del PINPAD | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Data | 20 | Valor alfanumérico (TRANSBANK VER. 4.01A) Identificador de la aplicación más la versión de la aplicación | Obligatorio | 
+Data | 20 | Valor alfanumérico (TRANSBANK VER. 4.01A) Identificador de la aplicación más la versión de la aplicación | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 ### ISES - Comando Inicio de Sesión Caja- PINPAD
@@ -699,8 +699,8 @@ Este comando permite abrir una sesión con el PINPAD desde la Caja.
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
-Comando | 4 | Valor ‘ISES’ | Obligatorio | 
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio
+Comando | 4 | Valor ‘ISES’ | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 
@@ -708,12 +708,12 @@ Comando | 4 | Valor ‘ISES’ | Obligatorio |
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
-Comando | 4 | Valor ‘ISES’ | Obligatorio | 
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio
+Comando | 4 | Valor ‘ISES’ | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Código Retorno | 2 | Valor numérico (00: OK) (Otro: Error) | Obligatorio | 
+Código Retorno | 2 | Valor numérico (00: OK) (Otro: Error) | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Batería | 3 | Valor numérico (000 -> 100) Porcentaje de carga de batería. | Obligatorio | 
+Batería | 3 | Valor numérico (000 -> 100) Porcentaje de carga de batería. | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 
@@ -724,8 +724,8 @@ Este comando permite cerrar una sesión con el PINPAD desde la Caja.
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
-Comando | 4 | Valor ‘FSES’ | Obligatorio | 
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio
+Comando | 4 | Valor ‘FSES’ | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 
@@ -733,10 +733,10 @@ Comando | 4 | Valor ‘FSES’ | Obligatorio |
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
-Comando | 4 | Valor ‘FSES’ | Obligatorio | 
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio
+Comando | 4 | Valor ‘FSES’ | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` | 
-Código Retorno | 2 | Valor numérico (00: OK) (Otro: Error) | Obligatorio | 
+Código Retorno | 2 | Valor numérico (00: OK) (Otro: Error) | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 ### VOUC - Comando Solicitud Impresión Voucher Caja – PINPAD
@@ -761,10 +761,10 @@ Voucher a Imprimir | 4000 | Valor alfanumérico Voucher separado por “\n” pa
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
-Comando | 4 | Valor ‘VOUC’ | Obligatorio | 
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio
+Comando | 4 | Valor ‘VOUC’ | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` | 
-Código Retorno | 2 | Valor numérico (00: Impresión OK) (01: Error en la impresión) | Obligatorio | 
+Código Retorno | 2 | Valor numérico (00: Impresión OK) (01: Error en la impresión) | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 
@@ -776,8 +776,8 @@ Comando enviado desde el PINPAD a la Caja de modo de que la caja envíe al PINPA
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
-Comando | 4 | Valor ‘REIM’ | Obligatorio | 
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio
+Comando | 4 | Valor ‘REIM’ | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 
@@ -786,18 +786,18 @@ Comando | 4 | Valor ‘REIM’ | Obligatorio |
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
-Comando | 4 | Valor ‘REIM’ | Obligatorio | 
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio
+Comando | 4 | Valor ‘REIM’ | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` | 
-Código Retorno | 2 | Valor numérico (00: Recibido OK) (01: No existe impresión disponible) | Obligatorio | 
+Código Retorno | 2 | Valor numérico (00: Recibido OK) (01: No existe impresión disponible) | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` | 
-Time Out | 5 | Valor numérico (00000 -> 99999) Timeout del comando en milisegundos. | Obligatorio | 
+Time Out | 5 | Valor numérico (00000 -> 99999) Timeout del comando en milisegundos. | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` | 
-Glosa 1 | 16 | Valor alfanumérico Glosa a desplegar primera línea en pantalla. | Obligatorio | 
+Glosa 1 | 16 | Valor alfanumérico Glosa a desplegar primera línea en pantalla. | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` | 
-Glosa 2 | 16 | Valor alfanumérico Glosa a desplegar segunda línea en pantalla. | Obligatorio | 
+Glosa 2 | 16 | Valor alfanumérico Glosa a desplegar segunda línea en pantalla. | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` | 
-Voucher a Imprimir | 4000 | Valor alfanumérico Voucher separado por `\n` para nueva línea, `\c` para corte de voucher | Obligatorio | 
+Voucher a Imprimir | 4000 | Valor alfanumérico Voucher separado por `\n` para nueva línea, `\c` para corte de voucher | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 
@@ -808,18 +808,18 @@ Comando permite a la Caja realizar un reset al socket del PINPAD.
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
-Comando | 4 | Valor ‘REST’ | Obligatorio | 
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio
+Comando | 4 | Valor ‘REST’ | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 **Respuesta**
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
-Comando | 4 | Valor ‘REST’ | Obligatorio | 
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio
+Comando | 4 | Valor ‘REST’ | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Código Retorno | 2 | Valor numérico (00: Recibido OK) (01: Error Mensaje) | Obligatorio | 
+Código Retorno | 2 | Valor numérico (00: Recibido OK) (01: Error Mensaje) | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 ### LKEY - Comando Carga de Llave PINPAD – Caja
@@ -829,18 +829,18 @@ Comando ejecutado a través del menú del PINPAD, el cual permite solicitar a la
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
-Comando | 4 | Valor ‘LKEY’ | Obligatorio | 
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio
+Comando | 4 | Valor ‘LKEY’ | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 **Respuesta**
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
-Comando | 4 | Valor ‘LKEY’ | Obligatorio | 
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio
+Comando | 4 | Valor ‘LKEY’ | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Código Retorno | 2 | Valor numérico (00: Recibido OK) (01: Error en carga de llaves) | Obligatorio | 
+Código Retorno | 2 | Valor numérico (00: Recibido OK) (01: Error en carga de llaves) | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 ### 0000 - Comando TEST PINPAD – Caja
@@ -850,13 +850,13 @@ Comando enviado desde el PINPAD hacia la Caja para mantener el socket abierto.
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-Comando | 4 | Valor ‘0000’ | Obligatorio | 
+Comando | 4 | Valor ‘0000’ | Obligatorio
 
 **Respuesta**
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-Comando | 4 | Valor ‘0000’ | Obligatorio | 
+Comando | 4 | Valor ‘0000’ | Obligatorio
 
 ### CLSB - Comando Cierre Batch PINPAD – Caja
 Comando ejecutado a través del menú del PINPAD, el cual permite indicar a la caja el envío de una solicitud de ‘Cierre batch’.
@@ -865,18 +865,18 @@ Comando ejecutado a través del menú del PINPAD, el cual permite indicar a la c
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
-Comando | 4 | Valor ‘CLSB’ | Obligatorio | 
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio
+Comando | 4 | Valor ‘CLSB’ | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 **Respuesta**
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio | 
-Comando | 4 | Valor ‘CLSB’ | Obligatorio | 
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | Obligatorio
+Comando | 4 | Valor ‘CLSB’ | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Código Retorno | 2 | Valor numérico (00: Recibido OK) (Otro: Error) | Obligatorio | 
+Código Retorno | 2 | Valor numérico (00: Recibido OK) (Otro: Error) | Obligatorio
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 
 ## Otros datos
