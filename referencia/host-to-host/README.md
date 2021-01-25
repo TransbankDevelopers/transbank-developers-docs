@@ -113,9 +113,13 @@ Los Router actuales permiten conocer los dispositivos que están conectados a la
 Es recomendable monitorear para poder evitar algún dispositivo que esté conectado sin
 autorización.
 
+<aside class="notice">
 *WPA2-PSK (AES): Sistema de protección para redes inalámbricas WI-FI. Es el último estándar de encriptación WI-FI y AES es el más reciente algoritmo de cifrado.
+</aside>
 
+<aside class="notice">
 *SSID: Difusión de un SSID de red. Un SSID es el nombre público de una red de área local inalámbrica (WLAN) que sirve para diferenciarla de otras redes inalámbricas en la zona. SSID es el nombre de la red que se especifica al configurar la red WI-Fi.  
+</aside>
 
 ### Protocolo de comunicación
 
@@ -124,7 +128,6 @@ El protocolo que usará el PINPAD es VISA II, sobre el que se enviarán los mens
 ![Protocolo de comunicación](/images/documentacion/host2host/protocolo-de-comunicacion.png)
 
 Donde:  
-
 
 TERMINO             | DESCRIPCIÓN
 -------             | -----------
@@ -1066,9 +1069,7 @@ disponible, debe ser enviando en un tiempo configurable en la caja por ejemplo c
 comando también sirve para establecer la conexión entre pinpad y caja. El pinpad abre un socket de
 conexión el cual no se cierra habitualmente, pero ante una nueva solicitud cierra el socket anterior y abre otro.  
 
-**Requerimiento**  
-
-
+**Requerimiento**
 
 DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR POR DEFECTO
 ------          | ------    | ------            | ------                | ------
@@ -1088,9 +1089,7 @@ DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR 
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`       | X | STX
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje                              | X | STX  
 
-**Respuesta**  
-
-
+**Respuesta**
 
 DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR POR DEFECTO
 ------          | ------    | ------            | ------                | ------
