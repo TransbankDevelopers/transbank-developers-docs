@@ -65,27 +65,7 @@ Equipo Movil Bluetooth Pinpad host
 * Ventas en modalidad ONUS (tarjetas propias del comercio)
 
 ## Cómo empezar
-
-Estamos trabajando en integrar la documentación en un formato más amigable en esta misma sección.
-De momento, ponemos a tu disposición los siguientes documentos en formato PDF
-
-### Documentos disponibles
-
-* **Manual de comandos HOST** - _RS20.1_ | [Descargar](/files/manual-comandos-2-9.pdf) <br />
-_Este documento describe la forma de operar, la funcionalidad y el detalle de la mensajería entre el PINPAD de TRANSBANK y tu sistema de caja mediante comandos por puerto USB o SERIAL._
-* **Manual de comandos ONUS HOST** - _2018.06.01 v1.6_ | [Descargar](/files/manual-comandos-pinpad-anexo-onus-1-6.pdf) <br />
-_Este documento describe la forma de operar, la funcionalidad y el detalle de la mensajería de un PINPAD TRANSBANK trabajando bajo la modalidad OnUs._
-* **Manual de comandos HOST Wifi** - _18.2 v2.4_ | [Descargar](/files/manual-comandos-pinpad-host-wifi.pdf) <br />
-_Este documento describe la forma de operar, la funcionalidad y el detalle de la mensajería de un PINPAD TRANSBANK mediante protocolo TCP/IP._
-* **Manual de voucher HOST** - _RS20.1_ | [Descargar](/files/manual-voucher-con-surcharge.pdf) <br />
-_El pinpad entregará el voucher listo para imprimir, pero también entregará todos los datos necesarios para que la misma caja construya el voucher por sí misma._
-* **Manual de especificaciones técnicas de salidas especiales** - _20201112_ | [Descargar](/files/manual-especificaciones-tecnicas-de-salidas-especiales-20201112.pdf) <br />
-_En este anexo se describen los archivos de cuadratura (conciliación) y liquidación que se entregan al cliente Host.
-Los archivos de cuadratura (conciliación) son archivos planos que contienen los registros de las transacciones
-(de venta y anulación)_
-* **Manual para enlazar Pinpad Bluetooth** - _v3.0_ | [Descargar](/files/manual-enlazar-pinpad-bluetooth-3-0.pdf) <br />
-_Procedimiento enlace y conexión Pinpad Bluetooth e355_
-
+Puedes
 
 ## Voucher
 El pinpad entregará el voucher listo para imprimir, pero también entregará todos los datos
@@ -99,27 +79,27 @@ Estas son las glosas que se deberían desplegar en la cabecera del voucher:
 
 Tipo de Tarjeta         | Tipo de transacción
 ------                  | -----------
-CR                      | VENTA CREDITO
-CR                      | ANULACION CREDITO
+CR                      | VENTA CRÉDITO
+CR                      | ANULACIÓN CRÉDITO
 DB                      | VENTA DEBITO
 NB                      | VENTA NO BANCARIA
-NB                      | ANULACION NO BANCARIA
+NB                      | ANULACIÓN NO BANCARIA
 DB                      | VENTA PREPAGO
 CR                      | RESERVA
-CR                      | ANULACION RESERVA
+CR                      | ANULACIÓN RESERVA
 CR                      | NO SHOW
-CR                      | ANULACION NO SHOW
+CR                      | ANULACIÓN NO SHOW
 CR                      | CHECK IN
-CR                      | ANULACION CHECK IN
-CR                      | REAUTORIZACION
-CR                      | ANULACION REAUTORIZACION
+CR                      | ANULACIÓN CHECK IN
+CR                      | REAUTORIZACIÓN
+CR                      | ANULACIÓN REAUTORIZACIÓN
 CR                      | CHECK OUT
-CR                      | ANULACION CHECK OUT
+CR                      | ANULACIÓN CHECK OUT
 CR                      | CARGO DEMORADO
-CR                      | ANULACION CARGO DEMORADO
+CR                      | ANULACIÓN CARGO DEMORADO
 DB                      | RETIRO EFECTIVO DEBITO
-CR                      | AVANCE EFECTIVO CREDITO
-CR                      | ANULACION AVANCE EFECTIVO CREDITO
+CR                      | AVANCE EFECTIVO CRÉDITO
+CR                      | ANULACIÓN AVANCE EFECTIVO CRÉDITO
 
 **Tipos de tarjeta**
 Considerar que las tarjetas emitidas por las casas comerciales bajo una marca como VISA o Master
@@ -128,8 +108,8 @@ Las tarjetas de prepago se considerarán tarjetas de débito.
 
 Código    | Glosa
 ------    | -----------
-CR        | CREDITO
-DB        | DEBITO
+CR        | CRÉDITO
+DB        | DÉBITO
 NB        | NO BANCARIA
 PR        | PREPAGO
 
@@ -173,7 +153,7 @@ El orden de impresión debe ser:
 Cualquier variación al orden o formato del voucher debe ser autorizada por Transbank
 
 ### Otras consideraciones
-Algunas consideraciones en la impresión de los voucher de transbank
+Algunas consideraciones en la impresión de los voucher de Transbank
 1. Los vouchers deben contener exclusivamente la información solicitada en este manual. Cualquier excepción debe ser autorizada y formalizada por Transbank.
 2. El nombre del cliente se puede imprimir solo en voucher con firma
 3. Las líneas de vuelto no deben imprimirse si no están siendo utilizadas.
@@ -193,7 +173,7 @@ Algunas consideraciones en la impresión de los voucher de transbank
 9. La impresión de voucher DEBE ser realizada en forma automática, al aprobarse la
    transacción, no opcional ni manual. No debe depender de un enter en caja para liberar la
    impresión
-10. Para los casos en que sea necesaria la firma del tarjeta habiente, la impresión DEBE
+10. Para los casos en que sea necesaria la firma del tarjetahabiente, la impresión DEBE
     suponer un espacio adecuado para dicha operación.
 11. El inicio de una nueva transacción DEBE realizarse SOLO al momento de finalizada la
     impresión del voucher de la transacción anterior, NUNCA durante su impresión o
@@ -257,7 +237,7 @@ y retenciones hechas sobre la cuenta del comercio dentro de un período determin
 
 ### Distribución
 Los archivos de cuadratura y liquidación son colocados periódicamente en una casilla
-SFTP creada en forma exclusiva para el respectivo comercio, para que éste los descargue
+SFTP creada en forma exclusiva para el respectivo comercio, para que este los descargue
 a su propio sistema.
 La siguiente tabla indica la frecuencia y horario de colocación de archivos de cuadratura
 y liquidación en la casilla:
@@ -330,6 +310,7 @@ Dktt-Hr-Glosa | Nombre Del Comercio <br > Nombre de Fantasía del comercio | Alf
 Filler | Disponible |  Alfanumérico | 282 | 321
 
 **Footer**
+
 Nombre | Descripción | Formato | Largo | Total
 ------ | ----------- | ------- | ----- | -----
 Dktt-Tr-Reg | Valor fijo "TR" | Alfanumérico | 2 | 2
@@ -635,7 +616,7 @@ o Código de comercio (Dktt-Dt-Id-Retailer)
 o Número de Único (DSK-ID-NUM-UNICO)
 o Monto de la transacción (Dktt-Dt-Amt-1)
 * Para el caso de Liquidación el campo (liq-vci), podrá contener los valores TSY
-(correctamente autenticada) ya que muestras solo autorizaciones ok nacionales.
+(correctamente autenticada), ya que muestras solo autorizaciones ok nacionales.
 En el caso de una transacción internacional, podrás visualizar TSY y A (intento
 de autenticación)
 * En los casos de archivo de cuadratura, el campo (Dktt-Dt-VCI) además de los
@@ -666,11 +647,11 @@ Campo | Tipo Dato | Largo
 --- | ---- | ---
 FECHA PROCESO | DATE | 
 RUT COMERCIO | STRING | 9
-CODIGO COMERCIO | STRING | 8
+CÓDIGO COMERCIO | STRING | 8
 TIPO CONTRATO | STRING | 2
-DESCRIPCION TIPO CONTRATO | STRING | 13
+DESCRIPCIÓN TIPO CONTRATO | STRING | 13
 TIPO FLUJO | STRING | 4
-DESCRIPCION TIPO FLUJO | STRING | 2
+DESCRIPCIÓN TIPO FLUJO | STRING | 2
 FECHA VENTA | DATE |
 FECHA ABONO | DATE | 
 TARJETA | STRING | 19
@@ -679,7 +660,7 @@ MONTO CUOTA | NUMBER | 17,2
 LNIN SEC | NUMBER | 23
 FECHA PROCESO TXS | DATE | 
 MONTO VENTA | NUMBER | 17,2
-CODIGO AUTORIZACION | STRING | 6
+CÓDIGO AUTORIZACIÓN | STRING | 6
 ORDEN PEDIDO | STRING | 26
 ID SERVICIO | STRING | 20
 PAREADA | STRING | 2
@@ -689,30 +670,28 @@ PAREADA | STRING | 2
 ### Estructura nombres archivos saldos
 Los nombres de archivos tendrán una nueva estructura, según el siguiente detalle:
 ```
-<Formato de Salida>_<Periodo>_<Agrupación Archivo de
-Salidas>_<Agrupación de Transacciones>_<RutEnrolado ó
-CódigoComercio>_<Tipo Conexion><Modo Agrupación>
+<Formato de Salida>_<Periodo>_<Agrupación Archivo de Salidas>_<Agrupación de Transacciones>_<RutEnrolado ó CódigoComercio>_<Tipo Conexion><Modo Agrupación>
 ```
 
-**\<Formato de Salida>** corresponde al formato de salida:
+**`<Formato de Salida>`** corresponde al formato de salida:
 LDN = Liquidación de débito
 LCN = Liquidación de crédito
 CDN = Cuadratura de débito
 CCN = Cuadratura de crédito
 
-**\<Periodo>** corresponde a la fecha en formato DDMMAAAA, según la frecuencia
+**`<Periodo>`** corresponde a la fecha en formato DDMMAAAA, según la frecuencia
 configurada:
 * Diaria: Se genera un archivo diario en base a la fecha de proceso; esta es la
   frecuencia por defecto
 * Mensual: Se genera un archivo por mes. Fecha asociada al penúltimo día hábil del
   mes
 
-**\<Agrupación Archivo de Salidas>** corresponde a la naturaleza de agrupación:
+**`<Agrupación Archivo de Salidas>`** corresponde a la naturaleza de agrupación:
 * RE: Archivo con información única asociada al RUT enrolado (Genera un archivo)
 * CC: Archivo con información separada por código de comercio de la transacción
   (genera un archivo diferente para cada código de comercio)
 
-**\<Tipo Conexión>** corresponde al tipo de conexión de los códigos de comercio:
+**`<Tipo Conexión>`** corresponde al tipo de conexión de los códigos de comercio:
 * UN: Se genera un único archivo. Información de archivos no es separada por tipo
   de conexión (cuando es un archivo único no es parte del nombre)
 * SE: Se genera un archivo para transacciones con tipo de conexión presencial y no
@@ -720,8 +699,8 @@ configurada:
 * NP: No presencial
 * PR: presencial
 
-**\<Modo Agrupación>** corresponde al modo de agrupación de los códigos de comercio
-SC: Sucursal Matriz (cuando esta agrupado por RUT no se incluye en el nombre
+**`<Modo Agrupación>`** corresponde al modo de agrupación de los códigos de comercio
+SC: Sucursal Matriz (cuando está agrupado por RUT no se incluye en el nombre
 del archivo)
 RB: Rubro
 
