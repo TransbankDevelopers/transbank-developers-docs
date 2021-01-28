@@ -1157,7 +1157,7 @@ DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR 
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje                              | X | STX
 
 
-### Actualización parámetros de Pinpad (Pinpad -> Caja)
+### Actualización parámetros de Pinpad (Pinpad - Caja)
 
 Comando con el cual el pinpad solicita a la caja gatillar una actualización de parámetros o cierre batch,
 mediante el flujo habitual (comandos 600-700), caja inicia el flujo estándar 600, 610, 700, 710.  
@@ -1196,9 +1196,9 @@ DATO            | LARGO     | COMENTARIO        | REQUERIDO             | VALOR 
 `<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje                              | X | STX
 
 
-### 1600 – 1610 Comando Lectura de Código de Barras*
+### 1600 – 1610 Comando Lectura de Código de Barras
 
-**Importante: Los códigos de barra soportados por el pinpad e355 son: CODE39, CODE128, EAN y UPC. \*Solo para el modelo que tiene lector de código de barras Verifone e355**  
+**Importante: Los códigos de barra soportados por el pinpad e355 son: CODE39, CODE128, EAN y UPC. \*Solo para el modelo que tiene lector de código de barras Verifone e355.**  
 
 Comando para iniciar la captura de código de barra desde el Pinpad modelo E355.  
 
@@ -1232,8 +1232,10 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `Código de Barra`  | 150    | **0 Valor alfanumérico largo variable**<br>Código de barra capturado por el pinpad | 
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `<ETX>`         | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`     | ETX
-`<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje | 
+`<LRC>`         | 1         | Byte resultado de la operación XOR del mensaje |  
 
+  
+  
 ## Anexos
 
 ### Tabla de Marcas
