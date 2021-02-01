@@ -65,7 +65,8 @@ Equipo Movil Bluetooth Pinpad host
 * Ventas en modalidad ONUS (tarjetas propias del comercio)
 
 ## Cómo empezar
-Puedes
+A continuación, verás la documentación asociada a como imprimir los voucher. 
+Puedes revisar la [Referencia](/referencia/host-to-host) para ver la información asociada a la comunicación y los comandos.
 
 ## Voucher
 El pinpad entregará el voucher listo para imprimir, pero también entregará todos los datos
