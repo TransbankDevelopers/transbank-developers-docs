@@ -10,9 +10,9 @@ Un flujo de pago en Webpay generalmente cuenta con los siguientes pasos:
 
 1. El tarjetahabiente selecciona los productos o servicios a pagar en el sitio del comercio.
 
-2. El tarjetahabiente elige pagar con Webpay en donde, dependiendo de los productos contratados por el comercio, se despliegan las alternativas de pago de crédito con productos cuotas y/o débito Redcompra.
+2. El tarjetahabiente elige pagar con Webpay en donde, dependiendo de los productos contratados por el comercio, se despliegan las alternativas de pago: Tarjeta de crédito, débito Redcompra y/o prepago.
 
-3. Durante el proceso de pago el emisor de la tarjeta autentica al tarjetahabiente antes de realizar la transacción financiera, con el objetivo de validar que la tarjeta este siendo utilizada por el titular.
+3. Durante el proceso de pago el emisor de la tarjeta autentica al tarjetahabiente antes de realizar la transacción financiera, con el objetivo de validar que la tarjeta esté siendo utilizada por el titular.
 
 4. Una vez resuelta la autenticación se procede a autorizar el pago. Webpay entrega al sistema del comercio el resultado de la autorización.
 
@@ -28,9 +28,10 @@ A continuación se describen los productos que se ofrecen en los servicios web d
   <div tbk-link='/plugin/webpay' tbk-link-name='Plugins'></div>
 </div>
 
-Webpay Plus permite realizar una solicitud de autorización financiera de **un pago** con tarjetas de crédito o débito Redcompra en donde quién realiza el pago ingresa al sitio del comercio, selecciona productos o servicio, y el ingreso asociado a los datos de la tarjeta de crédito o débito Redcompra lo realiza en forma segura en Webpay. El comercio que recibe pagos mediante Webpay Plus es identificado mediante un código de comercio.
+Webpay Plus permite realizar una solicitud de autorización financiera **de un pago** con tarjetas de crédito, débito Redcompra o prepago en donde quién realiza el pago ingresa al sitio del comercio, selecciona productos o servicio, e indica los datos asociados a la tarjeta del medio de pago seleccionado anteriormente, esta acción lo realiza en forma segura en Webpay. El comercio que recibe pagos mediante Webpay Plus es identificado mediante un código de comercio.
 
-Es el tipo de transacción mas común, usada para un pago puntual en una tienda simple. Se generará un único cobro para todos los productos o servicios adquiridos por el tarjetahabiente.
+Es el tipo de transacción mas común, usada para un pago puntual en una tienda simple. Se generará un único cobro para 
+todos los productos o servicios adquiridos por el tarjetahabiente.
 
 ### Webpay Plus Mall
 
@@ -38,11 +39,14 @@ Es el tipo de transacción mas común, usada para un pago puntual en una tienda 
   <div tbk-link='/referencia/webpay#webpay-plus-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
-Webpay Plus Mall permite realizar una solicitud de autorización financiera de **un conjunto de pagos** con tarjetas de crédito o débito, en donde quién realiza el pago ingresa al sitio del comercio, selecciona productos o servicios, y el ingreso asociado a los datos de la tarjeta de crédito o débito Redcompra lo realiza una única vez en forma segura en Webpay para el conjunto de pagos. **Cada pago tendrá su propio resultado, autorizado o rechazado.**
+Webpay Plus Mall permite realizar una solicitud de autorización financiera de **un conjunto de pagos** con tarjetas de crédito, débito o prepago, a través de una sola transacción unificada. Quién realiza el pago, ingresa al sitio del comercio, selecciona varios productos o servicios (pertenecientes a diferentes códigos de comercio), y selecciona Webpay Plus como medio de pago, realizando la transacción de forma segura en Webpay para el conjunto de pagos. **Cada pago tendrá su propio resultado, autorizado o rechazado.**
+El concepto de "mall" agrupa múltiples tiendas. Son dichas tiendas las que pueden generar transacciones. Tanto el mall 
+como cada una de las tiendas asociadas son identificadas por un código de comercio diferente.
 
-El concepto de "mall" agrupa múltiples tiendas. Son dichas tiendas las que pueden generar transacciones. Tanto el mall como cada una de las tiendas asociadas son identificadas por un código de comercio diferente.
-
-El tipo de transacción Mall es útil para proveedores de servicios tecnológicos (PST) que pueden realizar una única integración con Transbank y realizar cobros a nombre de los clientes de dichos servicios tecnológicos. Por ejemplo una plataforma SaaS puede ser un mall y las empresas clientes de la plataforma pueden ser las tiendas de dicho mall. De esa manera, la recaudación que la plataforma realice irá directo al cliente a nombre del cual realizó cada cobro.
+El tipo de transacción Mall es útil para proveedores de servicios tecnológicos (PST) que pueden realizar una única 
+integración con Transbank y realizar cobros a nombre de los clientes de dichos servicios tecnológicos. Por ejemplo una 
+plataforma SaaS puede ser un mall y las empresas clientes de la plataforma pueden ser las tiendas de dicho mall. De esa 
+manera, la recaudación que la plataforma realice irá directo al cliente a nombre del cual realizó cada cobro.
 
 ### Oneclick Mall
 
@@ -50,9 +54,13 @@ El tipo de transacción Mall es útil para proveedores de servicios tecnológico
   <div tbk-link='/referencia/webpay#oneclick-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
-Oneclick Mall permite agrupar pagos en una única transacción Oneclick hacia múltiples códigos de comercios (similar a una transacción Mall). En una transacción de este tipo, al igual que en Oneclick, el tarjetahabiente podrá realizar pagos sin la necesidad de ingresar la información de su tarjeta de crédito en cada uno de ellos. Este tipo de pago facilita la venta, centraliza los pagos, disminuye el tiempo de la transacción y reduce los riesgos de ingreso erróneo de los datos del medio de pago.
+Oneclick Mall permite agrupar pagos en una única transacción Oneclick hacia múltiples códigos de comercios 
+(similar a una transacción Mall). En una transacción de este tipo, al igual que en Oneclick, el tarjetahabiente podrá 
+realizar pagos sin la necesidad de ingresar la información de su tarjeta de crédito en cada uno de ellos. Este tipo de 
+pago facilita la venta, centraliza los pagos, disminuye el tiempo de la transacción y reduce los riesgos de ingreso 
+erróneo de los datos del medio de pago.
 
-**Oneclick Mall opera con tarjetas de crédito y débito Redcompra.** El modelo de pago contempla el mismo proceso de enrolamiento que la transacción Oneclick.
+**Oneclick Mall opera con tarjetas de crédito, prepago y débito Redcompra.** El modelo de pago contempla el mismo proceso de enrolamiento que la transacción Oneclick.
 
 De cara al comercio, Oneclick Mall combina dos grupos de beneficios:
 
@@ -108,7 +116,7 @@ Para tarjeta de débito Redcompra el tipo de pago siempre corresponde a:
 
 Las transacciones Webpay cuentan con 2 fases: autorización y captura. La **autorización** se encarga de validar si es posible realizar el cargo a la cuenta asociada a la tarjeta de crédito realizando en el mismo acto la reserva de monto de la transacción. La **captura** hace efectiva la reserva hecha previamente o cargo en la cuenta de crédito asociada a la tarjeta del titular.
 
-Para tarjetas de débito Redcompra, la autorización y captura es siempre simultánea. Para tarjetas de crédito, la autorización y captura puede ser simultánea o separada. En este último caso, se trata de una **captura diferida**.
+Para tarjetas de débito Redcompra y prepago, la autorización y captura es siempre simultánea. Para tarjetas de crédito, la autorización y captura puede ser simultánea o separada. En este último caso, se trata de una **captura diferida**.
 
 Desde el punto de vista de la transacción, lo que ocurre es lo siguiente:
 
