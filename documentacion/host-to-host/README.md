@@ -706,6 +706,184 @@ del archivo)
 RB: Rubro
 
 
+# Procedimiento enlace y conexión Pinpad Bluetooth e355
+
+## Flujo de enlace Pinpad Bluetooth
+
+![](/images/documentacion/host2host/flujo-pp-blue-e355.png)
+
+## Conexion Pinpad Bluetooth E355
+
+
+### Encendido de equipo
+
+**Paso 1**
+Al encender el equipo entra a la pantalla principal del aplicativo.
+
+**Paso 2**
+Se debe digitar secuencial mente las teclas “* 0 ” para ingresar al “Menú de Conexión Bluetooth.
+![](/images/documentacion/host2host/conexion-paso-2.png)
+
+
+### Enlazar dispositivos
+
+**Paso 3**
+En el Menú de conexión bluetooth.
+Se selecciona la opción **1> Enlazar Dispositivo**
+
+**Paso 4**  
+Si anteriormente se realizo una búsqueda preguntara si desea **Buscar nuevamente**, si presiona 
+**2> NO** mostrara los dispositivos encontrados en la búsqueda anterior  
+
+![](/images/documentacion/host2host/conexion-paso-4a.png)
+
+*el BT Name, que es el nombre que será visible al resto de dispositivos Bluetooth*
+
+![](/images/documentacion/host2host/conexion-paso-4b.png)
+
+**Paso 5**
+Al finalizar la búsqueda muestra los dispositivos encontrados
+
+![](/images/documentacion/host2host/conexion-paso-5.png)  
+
+**Paso 6**
+Al seleccionar un dispositivo aparecerá esta
+ventana para confirmar el enlace.
+
+![](/images/documentacion/host2host/conexion-paso-6.png)  
+
+**Paso 7**
+Al seleccionar el dispositivo aparecerá esta ventana para
+confirmar el enlace.
+
+![](/images/documentacion/host2host/conexion-paso-7a.png)  
+
+
+Un mensaje similar aparecerá en el otro dispositivo, el
+código que aparece deberá ser el mismo en ambos
+dispositivos;
+En este caso **648005**
+Y seleccionamos YES y quedaran enlazados  
+
+![](/images/documentacion/host2host/conexion-paso-7b.png)  
+
+
+**Paso 8**
+Comercio debe aceptar la conexión Bluetooth.  
+*Se debe coordina la visita al comercio - Contraparte Comercio*
+
+## Revisar habilitación SPP
+
+**SPP: Serial Profile interfaz (interfaz que emula una conexión puerto serie) se debe configurar en caso que este deshabilitado**  
+
+
+**Paso 1**
+En el Menú Principal del administrador de bluetooth.
+Si se Requiere habilitar SSP (Serial Port Profile) **3> Config MENU CONEC. BLUETOOTH SPP \[Desactivado\]**  
+
+![](/images/documentacion/host2host/habilitacion-spp-paso-1.png)
+
+**Paso 2**
+Selecciona la opción **2> Servidor SPP**  
+
+![](/images/documentacion/host2host/habilitacion-spp-paso-2.png)
+
+**Paso 3**
+Aparecerá esta Pantalla y Volverá al menú Principal
+
+![](/images/documentacion/host2host/habilitacion-spp-paso-3.png)
+
+## Borrar equipos enlazados
+
+**Paso 1**
+En el Menú del Administrador de
+Bluetooth, seleccionar la opción
+**2> Dispositivos Enlazados**
+
+![](/images/documentacion/host2host/borrar-equipos-paso-1.png)
+
+**Paso 2**
+En esta opción se mostrará un menú
+con todos los dispositivos que están
+enlazados con el pinpad e355, quedan
+registrados los dispositivos
+anteriormente enlazados.  
+
+![](/images/documentacion/host2host/borrar-equipos-paso-2.png)  
+
+**Paso 3**
+Si seleccionamos el dispositivo, aparecerá este
+menú que nos mostrar 2 opciones.
+Si seleccionamos **SI** eliminamos el enlace, y
+volvemos al menú principal.
+
+![](/images/documentacion/host2host/borrar-equipos-paso-3.png)  
+
+
+## Utilización del SDK
+
+
+Para la integración con aplicaciones propias del
+comercio, es necesario utilizar en los desarrollos
+propios, las librerías incluidas en el SDK del equipo
+Verifone e355.  
+Estas son:
+1. libPtr
+![](/images/documentacion/host2host/libPtr.png)  
+
+2. libVmf  
+![](/images/documentacion/host2host/libVmf.png)  
+
+Para facilitar el proceso de integración se utiliza la
+referencia al recurso “pinpad” que contiene
+funciones para la comunicación entre Pinpad y la
+App del Comercio.
+La estructura y el código de ejemplo están
+incluidos en el archivo **demo_e355.zip**
+
+
+### Importación de librerías y recurso Pinpad
+
+![](/images/documentacion/host2host/sdk-import-lib-pinpad.png)  
+
+### Declaración del activity principal y PINPadTransport
+
+![](/images/documentacion/host2host/sdk-pinpadtransport.png)  
+
+
+### Función para la conexión y desconexión
+
+![](/images/documentacion/host2host/sdk-conexion-desconexion.png)  
+
+### Ejemplo para enviar el comando 0100 (lectura tarjeta al pinpad) al Pinpad
+
+![](/images/documentacion/host2host/sdk-comando-0100.png)  
+
+### Función para recibir la respuesta del Pinpad
+
+![](/images/documentacion/host2host/sdk-respuesta-pinpad.png)  
+
+
+## Instalación en Windows
+
+Cuando se realiza el enlace se crean 2 puertos COM que se enlazan al Bluetooth.
+Para poder revisarlo se debe ingresar a: **Dispositivos**
+
+**Paso 1**
+
+![](/images/documentacion/host2host/windows-1.png)  
+
+**Paso 2**
+
+![](/images/documentacion/host2host/windows-2.png)  
+
+**Paso 3**
+
+![](/images/documentacion/host2host/windows-3.png)  
+
+**Paso 4**
+
+![](/images/documentacion/host2host/windows-4.png)  
 
 <div class="container slate">
   <div class='slate-after-footer'>
