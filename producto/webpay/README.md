@@ -44,7 +44,7 @@ El concepto de "mall" agrupa múltiples tiendas. Son dichas tiendas las que pued
 como cada una de las tiendas asociadas son identificadas por un código de comercio diferente.
 
 El tipo de transacción Mall es útil para proveedores de servicios tecnológicos (PST) que pueden realizar una única 
-integración con Transbank y realizar cobros a nombre de los clientes de dichos servicios tecnológicos. Por ejemplo una 
+integración con Transbank y realizar cobros a nombre de los clientes de dichos servicios tecnológicos. Por ejemplo, una 
 plataforma SaaS puede ser un mall y las empresas clientes de la plataforma pueden ser las tiendas de dicho mall. De esa 
 manera, la recaudación que la plataforma realice irá directo al cliente a nombre del cual realizó cada cobro.
 
