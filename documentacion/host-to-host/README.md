@@ -737,7 +737,7 @@ Si anteriormente se realizo una búsqueda preguntara si desea **Buscar nuevament
 
 ![](/images/documentacion/host2host/conexion-paso-4a.png)
 
-*el BT Name, que es el nombre que será visible al resto de dispositivos Bluetooth*
+*el **BT Name**, que es el nombre que será visible al resto de dispositivos Bluetooth*
 
 ![](/images/documentacion/host2host/conexion-paso-4b.png)
 
