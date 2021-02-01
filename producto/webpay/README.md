@@ -12,7 +12,7 @@ Un flujo de pago en Webpay generalmente cuenta con los siguientes pasos:
 
 2. El tarjetahabiente elige pagar con Webpay en donde, dependiendo de los productos contratados por el comercio, se despliegan las alternativas de pago: Tarjeta de crédito, débito Redcompra y/o prepago.
 
-3. Durante el proceso de pago el emisor de la tarjeta autentica al tarjetahabiente antes de realizar la transacción financiera, con el objetivo de validar que la tarjeta esté siendo utilizada por el titular.
+3. Durante el proceso de pago, el emisor de la tarjeta autentica al tarjetahabiente antes de realizar la transacción financiera, con el objetivo de validar que la tarjeta esté siendo utilizada por el titular.
 
 4. Una vez resuelta la autenticación se procede a autorizar el pago. Webpay entrega al sistema del comercio el resultado de la autorización.
 
