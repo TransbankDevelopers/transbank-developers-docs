@@ -76,34 +76,32 @@ Actualmente contamos con 2 equipos POS Integrado en circulación.
 
 <strong>Verifone VX520 y VX520C</strong>
 
-Este equipo esta certificado para operar mediante conexión serial, utilizando el puerto RS232.
-En este caso solo debes tener instalados los drivers de tu adaptador USB-Serial o tu tarjeta RS232.
+Estos equipos funcionan tanto con puerto serial RS232 y USB (Generalmente plug and play), para el cual puedes necesitar instalar un [driver de verifone](/files/verifone.zip). 
 
-<aside class="warning">
-Existe la posibilidad que puedas utilizar el puerto USB incluido en este equipo, sin embargo Transbank no puede garantizar el correcto funcionamiento de este.
-</aside>
+Este driver es compatible con los siguientes sistemas operativos informados por Verifone:
+* Windows 10 de 32/64 bits
+* Windows 8/8.1 de 32/64 bits
+* Windows 7 de 32/64 bits
 
-<aside class="notice">
-La comunicación con el POS Integrado se realiza mediante puerto serial RS232 y tú eres el/la responsable de instalar el driver correcto para tu tarjeta o adaptador serial.
-</aside>
+Por normas PCI los comercios no deben utilizar un Sistema Operativo bajo obsolescencia, además es muy importante mantener su Sistema Operativo con los últimos parches instalado, esto principalmente por un tema de seguridad.
 
 <aside class="success">
-Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilicen el [chip CH340](http://www.wch.cn/download/CH341SER_EXE.html). También puedes encontrar drivers para adaptadores con [chip Prolific](http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041)
+Si vas a utilizar el puerto serial, estos drivers son conocidos por funcionar con Adaptadores genéricos que utilicen el [chip CH340](http://www.wch.cn/download/CH341SER_EXE.html). También puedes encontrar drivers para adaptadores con [chip Prolific](http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041)
 </aside>
 
 <strong>Ingenico Desk 3500</strong>
 
-Estos equipos funcionan tanto con puerto serial RS232 y USB (Generalmente plug and play), para el cual puedes necesitar instalar un [driver de Ingenico](http://transbankdevelopers.cl/files/Ingenico-USB-driver-3.10.zip).
+Estos equipos funcionan tanto con puerto serial RS232 y USB (Generalmente plug and play), para el cual puedes necesitar instalar un [driver de Ingenico](http://transbankdevelopers.cl/files/ingenico.zip).
 
-Este driver es compatible con los siguiente sistemas operativos.
+Este driver es compatible con los siguientes sistemas operativos:
 
-* Windows 7 (SP3) 32 bits
-* Windows 7 (SP3) 64 bits
-* Windows 8/8.1 32 bits
-* Windows 8/8.1 64 bits
-* Windows Server 2012
-* Windows Server 2016
-* Windows 10
+* Windows 10 de 32/64 bits 
+* Windows Server 2016 
+* Windows Server 2012 
+* Windows 8/8.1 de 32/64 bits 
+* Windows 7 de 32/64 bits
+  
+Por normas PCI los comercios no deben utilizar un Sistema Operativo bajo obsolescencia, además es muy importante mantener su Sistema Operativo con los últimos parches instalado, esto principalmente por un tema de seguridad.
 
   
 <aside class="warning">
