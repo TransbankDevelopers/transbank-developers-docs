@@ -151,6 +151,10 @@ response = Transbank::Webpay::WebpayPlus::Transaction::create(
 response = transbank.webpay.webpay_plus.create(buy_order, session_id, amount, return_url)
 ```
 
+```javascript
+const response = await WebpayPlus.Transaction.create(buyOrder, sessionId, amount, returnUrl);
+```
+
 <strong>Respuesta Crear una transacción</strong>
 
 La respuesta de Webpay Plus a la creación es el token de la transacción y la URL a la cual debes redirigir al tarjetahabiente.
@@ -178,6 +182,11 @@ response.token
 ```
 
 ```python
+response.url
+response.token
+```
+
+```javascript
 response.url
 response.token
 ```
@@ -243,6 +252,10 @@ response = Transbank::Webpay::WebpayPlus::Transaction::commit(token: @token)
 
 ```python
 response = transbank.webpay.webpay_plus.transaction.commit(token)
+```
+
+```javascript
+const response = await WebpayPlus.Transaction.commit(token);
 ```
 
 <strong>Respuesta Confirmar una transacción</strong>
@@ -337,6 +350,23 @@ response.installments_number
 response.balance
 ```
 
+```javascript
+response.vci
+response.amount
+response.status
+response.buy_order
+response.session_id
+response.card_detail
+response.accounting_date
+response.transaction_date
+response.authorization_code
+response.payment_type_code
+response.response_code
+response.installments_amount
+response.installments_number
+response.balance
+```
+
 ### Obtener estado de una transacción
 
 <div class="pos-title-nav">
@@ -373,6 +403,10 @@ response = Transbank::Webpay::WebpayPlus::Transaction::status(token: @token)
 
 ```python
 response = transbank.webpay.webpay_plus.transaction.status(token)
+```
+
+```javascript
+const response = await WebpayPlus.Transaction.status(token);
 ```
 
 <strong>Respuesta estado de una transacción</strong>
@@ -466,6 +500,23 @@ response.installments_number
 response.balance
 ```
 
+```javascript
+response.vci
+response.amount
+response.status
+response.buy_order
+response.session_id
+response.card_detail
+response.accounting_date
+response.transaction_date
+response.authorization_code
+response.payment_type_code
+response.response_code
+response.installments_amount
+response.installments_number
+response.balance
+```
+
 ### Reversar o Anular una transacción
 
 <div class="pos-title-nav">
@@ -513,6 +564,10 @@ var response = Transaction.Refund(token, amount);
 response = Transbank::Webpay::WebpayPlus::Transaction::refund(token: @token, amount: @amount)
 ```
 
+```javascript
+const response = await WebpayPlus.Transaction.refund(token, amount);
+```
+
 <strong>Respuesta Reversa o Anulación</strong>
 
 Para obtener la información contenida en la respuesta puedes hacerlo de la siguiente manera.
@@ -556,6 +611,15 @@ response.type;
 ```
 
 ```python
+response.authorization_code
+response.authorization_date
+response.balance
+response.nullified_amount
+response.response_code
+response.type
+```
+
+```javascript
 response.authorization_code
 response.authorization_date
 response.balance
@@ -634,6 +698,10 @@ response = DeferredTransaction.capture(
 )
 ```
 
+```javascript
+const response = await WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, captureAmount);
+```
+
 Una vez realizada la captura, recibirás un objeto con la respuesta. Revisa la [referencia API](/referencia/webpay) para conocer más detalles 
 sobre los posibles resultados.  
 
@@ -667,6 +735,13 @@ response.response_code
 ```
 
 ```python
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
+```javascript
 response.authorization_code
 response.authorization_date
 response.captured_amount
@@ -807,6 +882,26 @@ response = MallTransaction.create(
 )
 ```
 
+```javascript
+const TransactionDetail = require("transbank-sdk").TransactionDetail;
+
+let details = [
+  new TransactionDetail(
+    amount, commerceCode, buyOrder
+  ),
+  new TransactionDetail(
+    amount2, commerceCode2, buyOrder2
+  ),
+];
+
+const createResponse = await WebpayPlus.MallTransaction.create(
+  buyOrder,
+  sessionId,
+  returnUrl,
+  details
+);
+```
+
 <aside class="notice">
 Observar que existe un <code>buyOrder</code> generado para el comercio mall y un <code>buyOrder</code> para cada una de las tiendas.
 </aside>
@@ -836,6 +931,11 @@ response.url
 ```
 
 ```python
+response.token
+response.url
+```
+
+```javascript
 response.token
 response.url
 ```
@@ -901,6 +1001,10 @@ response = MallTransaction.commit(token)
 
 ```python
 response = MallTransaction.commit(token)
+```
+
+```javascript
+const response = await WebpayPlus.MallTransaction.commit(token);
 ```
 
 <strong>Respuesta Confirmar una transacción mall</strong>
@@ -1014,6 +1118,27 @@ for detail in details:
   detail.status
 ```
 
+```javascript
+response.accounting_date
+response.buy_order
+cardDetail = response.card_detail
+cardDetail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+details.forEach(detail => {
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+});
+```
+
 ### Obtener estado de una transacción mall
 
 <div class="pos-title-nav">
@@ -1046,6 +1171,10 @@ response = MallTransaction.status(token)
 
 ```python
 response = MallTransaction.status(token)
+```
+
+```javascript
+const response = await WebpayPlus.MallTransaction.status(token);
 ```
 
 <strong>Respuesta estado de una transacción mall</strong>
@@ -1158,6 +1287,27 @@ Para obtener la información contenida en la respuesta puedes hacerlo de la sigu
     detail.status
 ```
 
+```javascript
+response.accounting_date
+response.buy_order
+cardDetail = response.card_detail
+cardDetail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+details.forEach(detail => {
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+});
+```
+
 ### Reversar o Anular una transacción mall
 
 <div class="pos-title-nav">
@@ -1201,7 +1351,11 @@ response = Transaction.refund(token, buy_order, commerce_code, amount)
 response = Transaction.refund(token, buy_order, commerce_code, amount)
 ```
 
-<strong>Respuesta Reversa o Anulación Mall</strong>
+```javascript
+const response = await WebpayPlus.MallTransaction.refund(token, buyOrder, commerceCode, amount);
+```
+
+<strong>Respuesta Reversa o Anulacion mall</strong>
 
 Para obtener la información contenida en la respuesta puedes hacerlo de la siguiente manera.
 
@@ -1258,6 +1412,8 @@ Para obtener la información contenida en la respuesta puedes hacerlo de la sigu
   <div tbk-link='/referencia/webpay#capturar-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
+<div class="language-simple" data-multiple-language></div>
+
 ```java
 final WebpayPlusMallTransactionCaptureResponse response = WebpayPlus.MallDeferredTransaction.capture(token, childCommerceCode, buyOrder, authorizationCode, amount);
 ```
@@ -1290,6 +1446,9 @@ response = MallDeferredTransaction.capture(
 ```
 
 <strong>Respuesta de una captura mall</strong>
+
+<div class="language-simple" data-multiple-language></div>
+
 ```java
 response.getAuthorizationCode();
 response.getAuthorizationDate();
@@ -1323,9 +1482,16 @@ response.authorization_code
 response.authorization_date
 response.captured_amount
 response.response_code
+````
+
+```javascript
+  response.authorization_code
+  response.authorization_date
+  response.balance
+  response.nullified_amount
+  response.response_code
+  response.type
 ```
-
-
 
 Esta operación funciona de la misma manera que la [captura de Webpay Plus normal](#capturar-una-transaccion).
 
