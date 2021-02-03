@@ -717,42 +717,42 @@ RB: Rubro
 
 ### Encendido de equipo
 
-**Paso 1**
+**Paso 1**  
 Al encender el equipo entra a la pantalla principal del aplicativo.
 
-**Paso 2**
+**Paso 2**  
 Se debe digitar secuencial mente las teclas “* 0 ” para ingresar al “Menú de Conexión Bluetooth.
 ![](/images/documentacion/host2host/conexion-paso-2.png)
 
 
 ### Enlazar dispositivos
 
-**Paso 3**
+**Paso 3**  
 En el Menú de conexión bluetooth.
 Se selecciona la opción **1> Enlazar Dispositivo**
 
 **Paso 4**  
 Si anteriormente se realizo una búsqueda preguntara si desea **Buscar nuevamente**, si presiona 
-**2> NO** mostrara los dispositivos encontrados en la búsqueda anterior  
+**2> NO** mostrara los dispositivos encontrados en la búsqueda anterior.  
 
 ![](/images/documentacion/host2host/conexion-paso-4a.png)
 
-*el **BT Name**, que es el nombre que será visible al resto de dispositivos Bluetooth*
+*El **BT Name**, que es el nombre que será visible al resto de dispositivos Bluetooth*
 
 ![](/images/documentacion/host2host/conexion-paso-4b.png)
 
-**Paso 5**
+**Paso 5**  
 Al finalizar la búsqueda muestra los dispositivos encontrados
 
 ![](/images/documentacion/host2host/conexion-paso-5.png)  
 
-**Paso 6**
+**Paso 6**  
 Al seleccionar un dispositivo aparecerá esta
 ventana para confirmar el enlace.
 
 ![](/images/documentacion/host2host/conexion-paso-6.png)  
 
-**Paso 7**
+**Paso 7**  
 Al seleccionar el dispositivo aparecerá esta ventana para
 confirmar el enlace.
 
@@ -768,7 +768,7 @@ Y seleccionamos YES y quedaran enlazados
 ![](/images/documentacion/host2host/conexion-paso-7b.png)  
 
 
-**Paso 8**
+**Paso 8**  
 Comercio debe aceptar la conexión Bluetooth.  
 *Se debe coordina la visita al comercio - Contraparte Comercio*
 
@@ -777,32 +777,32 @@ Comercio debe aceptar la conexión Bluetooth.
 **SPP: Serial Profile interfaz (interfaz que emula una conexión puerto serie) se debe configurar en caso que este deshabilitado**  
 
 
-**Paso 1**
+**Paso 1**  
 En el Menú Principal del administrador de bluetooth.
 Si se Requiere habilitar SSP (Serial Port Profile) **3> Config MENU CONEC. BLUETOOTH SPP \[Desactivado\]**  
 
 ![](/images/documentacion/host2host/habilitacion-spp-paso-1.png)
 
-**Paso 2**
+**Paso 2**  
 Selecciona la opción **2> Servidor SPP**  
 
 ![](/images/documentacion/host2host/habilitacion-spp-paso-2.png)
 
-**Paso 3**
+**Paso 3**  
 Aparecerá esta Pantalla y Volverá al menú Principal
 
 ![](/images/documentacion/host2host/habilitacion-spp-paso-3.png)
 
 ## Borrar equipos enlazados
 
-**Paso 1**
+**Paso 1**  
 En el Menú del Administrador de
 Bluetooth, seleccionar la opción
 **2> Dispositivos Enlazados**
 
 ![](/images/documentacion/host2host/borrar-equipos-paso-1.png)
 
-**Paso 2**
+**Paso 2**  
 En esta opción se mostrará un menú
 con todos los dispositivos que están
 enlazados con el pinpad e355, quedan
@@ -811,7 +811,7 @@ anteriormente enlazados.
 
 ![](/images/documentacion/host2host/borrar-equipos-paso-2.png)  
 
-**Paso 3**
+**Paso 3**  
 Si seleccionamos el dispositivo, aparecerá este
 menú que nos mostrar 2 opciones.
 Si seleccionamos **SI** eliminamos el enlace, y

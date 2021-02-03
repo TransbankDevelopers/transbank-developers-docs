@@ -270,7 +270,7 @@ DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `Indicador de contexto` | 16| **Valor alfanumérico** <br> Formato aaaammddhhmmssmm <br>Es solo un ID, la fecha y hora en el pinpad puede estar desactualizada. |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
-`Tipo de captura` | 2       | **Valor numérico**<br>Este campo será utilizado en el futuros<br>&#124;00&#124; : B - Banda<br>&#124;01&#124; : E . EMV c/contactoa<br>&#124;02&#124; : C - Contacless<br>&#124;03&#124; : F - Fallback<br>&#124;04&#124; : D - Digitada |
+`Tipo de captura` | 2       | **Valor numérico**<br>Este campo será utilizado en el futuros<br>&#124;00&#124; : B - Banda<br>&#124;01&#124; : E . EMV c/contacto<br>&#124;02&#124; : C - Contacless<br>&#124;03&#124; : F - Fallback<br>&#124;04&#124; : D - Digitada |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
 `TRACK I`       | 80        | **Valor alfanumérico (máximo)** <br>Rellenados con blancos (0x20) a la derecha<br>Si “Local comercio OnUs ≠ 00”<br>Con pan encriptado se entrega 160 caracteres alfanuméricos que corresponde a 80 HEXA |
 `Separador`     | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`| &#124;
@@ -1343,7 +1343,7 @@ Esta documentación describe la forma de operar, la funcionalidad y el detalle d
 La aplicación del PINPAD, supone la existencia de un ECR inteligente (por ejemplo una caja registradora) que enviará los requerimientos al PINPAD, para que este los procese y entregue los resultados cuando corresponda.
 
 ### Audiencia  
-Para entender completamente este documento es necesario tener conocimientos transaccionales y conocer las funciones implementadas habitualmente en los PINPAD usados en las transacciones bancarias.  
+Para entender completamente esta documentación es necesario tener conocimientos transaccionales y conocer las funciones implementadas habitualmente en los PINPAD usados en las transacciones bancarias.  
 En particular este manual está dirigido exclusivamente a los comercio ONUS que tienen tarjetas propias y utilizan el pinpad de Transabank para leer sus tarjetas, pero las transacciones las realizan y autorizan ellos mismos. 
 
 ### Alcance
@@ -1467,7 +1467,7 @@ Con este comando la caja entrega al pinpad el resultado de la transacción respo
 Además si la venta se hizo con chip se debe entregar el criptograma generado por el autorizador onus a la tarjeta que aún está insertada, para su evaluación.  
 A partir de la versión de pinpad 15.2 con este comando el pinpad además de mostrar en pantalla “RETIRE TARJETA” también emite un sonido de alerta.  
 
-****Requerimiento**  
+**Requerimiento**  
 
 
 DATO            | LARGO     | COMENTARIO        | VALOR POR DEFECTO
