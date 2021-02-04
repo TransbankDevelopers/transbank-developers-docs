@@ -72,10 +72,11 @@ Puedes revisar la [Referencia](/referencia/host-to-host) para ver la informació
 El pinpad entregará el voucher listo para imprimir, pero también entregará todos los datos
 necesarios para que la misma caja construya el voucher por sí misma.
 Si se requiere obtener el voucher duplicado la caja debe construir el voucher, sin los datos de PEL y
-agregando la glosa duplicado
+agregando la glosa duplicado.
 
 ### Consideraciones
-**Tipo de transacciones**
+**Tipo de transacciones**  
+
 Estas son las glosas que se deberían desplegar en la cabecera del voucher:
 
 Tipo de Tarjeta         | Tipo de transacción
@@ -102,7 +103,8 @@ DB                      | RETIRO EFECTIVO DEBITO
 CR                      | AVANCE EFECTIVO CRÉDITO
 CR                      | ANULACIÓN AVANCE EFECTIVO CRÉDITO
 
-**Tipos de tarjeta**
+**Tipos de tarjeta**  
+
 Considerar que las tarjetas emitidas por las casas comerciales bajo una marca como VISA o Master
 se consideran bancarias ya no tarjetas no bancarias.
 Las tarjetas de prepago se considerarán tarjetas de débito.
@@ -155,29 +157,29 @@ Cualquier variación al orden o formato del voucher debe ser autorizada por Tran
 
 ### Otras consideraciones
 Algunas consideraciones en la impresión de los voucher de Transbank
-1. Los vouchers deben contener exclusivamente la información solicitada en este manual. Cualquier excepción debe ser autorizada y formalizada por Transbank.
+1. Los vouchers deben contener exclusivamente la información solicitada en este manual. **Cualquier excepción debe ser autorizada y formalizada por Transbank.**
 2. El nombre del cliente se puede imprimir solo en voucher con firma
 3. Las líneas de vuelto no deben imprimirse si no están siendo utilizadas.
 4. Las líneas de donación o propina no deben imprimirse si no están siendo utilizadas.
-5. Los vouchers de premio NO deben ser impresos en papel auto copiativo. En caso de que
-   el cliente solamente posea impresoras que utilicen papel autocopiativo, debe notificarse a
+5. **Los vouchers de premio NO deben ser impresos en papel auto copiativo**. En caso de que
+   el cliente solamente posea impresoras que utilicen papel autocopiativo, **debe notificarse a
    Transbank de esta situación, y es este último quien debe autorizar el que sea aceptado
    este tipo de impresión, pudiendo quedar fuera la funcionalidad de promociones en
-   línea.
-6. Solo debe generarse una copia de un voucher de premio, frente a cualquier condición de
+   línea**.
+6. Solo debe generarse **una** copia de un voucher de premio, frente a cualquier condición de
    borde si no se pudo imprimir el voucher, se pierde el premio, en el duplicado no debe
    figurar nada al respecto.
-7. NO es posible reimprimir el voucher de premio ni realizar alusiones de premio en los
+7. **NO es posible reimprimir el voucher de premio** ni realizar alusiones de premio en los
    vouchers de Transbank en caso de la impresión de un duplicado.
 8. El código del premio y las glosas son entregadas por el PINPAD luego de validar la
    respuesta del requerimiento.
-9. La impresión de voucher DEBE ser realizada en forma automática, al aprobarse la
+9. La impresión de voucher **DEBE** ser realizada en forma automática, al aprobarse la
    transacción, no opcional ni manual. No debe depender de un enter en caja para liberar la
    impresión
-10. Para los casos en que sea necesaria la firma del tarjetahabiente, la impresión DEBE
+10. Para los casos en que sea necesaria la firma del tarjetahabiente, la impresión **DEBE**
     suponer un espacio adecuado para dicha operación.
-11. El inicio de una nueva transacción DEBE realizarse SOLO al momento de finalizada la
-    impresión del voucher de la transacción anterior, NUNCA durante su impresión o
+11. El inicio de una nueva transacción **DEBE** realizarse **SOLO** al momento de finalizada la
+    impresión del voucher de la transacción anterior, **NUNCA** durante su impresión o
     reimpresión, dado que la transacción se da por finalizada al momento de la impresión del
     voucher o su reimpresión.
 12. La separación entre los vouchers (de transacciones (original/copia), de premio) puede ser
@@ -197,7 +199,7 @@ Algunas consideraciones en la impresión de los voucher de Transbank
 
 ### Voucher Pel y reimpresión
 Solo se permite imprimir 1 vez el voucher original y el voucher de PEL, si existe algún problema con
-la impresión del voucher original se debe abortar la impresión y permitir obtener duplicado.
+la impresión del voucher original se debe abortar la impresión y permitir obtener duplicado.  
 Original:
 
 1. Voucher de PEL
@@ -225,6 +227,24 @@ Se debe imprimir este voucher solo si:
 **COMANDO** H505 **CAMPO** TIPO DE VOUCHER =  |3| Devolución al Tarjeta Habiente
 
 ![](/images/documentacion/host2host/voucher-pel-3.png)
+
+## OnUs Host
+
+### Objetivos  
+
+Esta documentación describe la forma de operar, la funcionalidad y el detalle de la mensajería de un PINPAD TRANSBANK trabajando bajo la modalidad OnUs.  
+La aplicación del PINPAD, supone la existencia de un ECR inteligente (por ejemplo una caja registradora) que enviará los requerimientos al PINPAD, para que este los procese y entregue los resultados cuando corresponda.
+
+### Audiencia  
+Para entender completamente esta documentación es necesario tener conocimientos transaccionales y conocer las funciones implementadas habitualmente en los PINPAD usados en las transacciones bancarias.  
+En particular este manual está dirigido exclusivamente a los comercio ONUS que tienen tarjetas propias y utilizan el pinpad de Transabank para leer sus tarjetas, pero las transacciones las realizan y autorizan ellos mismos. 
+
+### Alcance
+Aplica para el equipo Verifone vx805 (Conexión Serial o USB)  
+Aplica para el equipo Verifone e355 (Conexión Bluetooth)
+
+Puedes revisar la [Referencia](/referencia/host-to-host#anexo-onus) para ver la información asociada a la comunicación y los comandos.
+
 
 
 ## Cuadratura y liquidación
@@ -718,9 +738,11 @@ RB: Rubro
 ### Encendido de equipo
 
 **Paso 1**  
+
 Al encender el equipo entra a la pantalla principal del aplicativo.
 
 **Paso 2**  
+  
 Se debe digitar secuencial mente las teclas “* 0 ” para ingresar al “Menú de Conexión Bluetooth.
 ![](/images/documentacion/host2host/conexion-paso-2.png)
 
@@ -728,10 +750,12 @@ Se debe digitar secuencial mente las teclas “* 0 ” para ingresar al “Menú
 ### Enlazar dispositivos
 
 **Paso 3**  
+  
 En el Menú de conexión bluetooth.
 Se selecciona la opción **1> Enlazar Dispositivo**
 
 **Paso 4**  
+
 Si anteriormente se realizo una búsqueda preguntara si desea **Buscar nuevamente**, si presiona 
 **2> NO** mostrara los dispositivos encontrados en la búsqueda anterior.  
 
@@ -742,17 +766,20 @@ Si anteriormente se realizo una búsqueda preguntara si desea **Buscar nuevament
 ![](/images/documentacion/host2host/conexion-paso-4b.png)
 
 **Paso 5**  
+
 Al finalizar la búsqueda muestra los dispositivos encontrados
 
 ![](/images/documentacion/host2host/conexion-paso-5.png)  
 
 **Paso 6**  
+
 Al seleccionar un dispositivo aparecerá esta
 ventana para confirmar el enlace.
 
 ![](/images/documentacion/host2host/conexion-paso-6.png)  
 
 **Paso 7**  
+
 Al seleccionar el dispositivo aparecerá esta ventana para
 confirmar el enlace.
 
@@ -769,6 +796,7 @@ Y seleccionamos YES y quedaran enlazados
 
 
 **Paso 8**  
+
 Comercio debe aceptar la conexión Bluetooth.  
 *Se debe coordina la visita al comercio - Contraparte Comercio*
 
@@ -778,17 +806,20 @@ Comercio debe aceptar la conexión Bluetooth.
 
 
 **Paso 1**  
+
 En el Menú Principal del administrador de bluetooth.
 Si se Requiere habilitar SSP (Serial Port Profile) **3> Config MENU CONEC. BLUETOOTH SPP \[Desactivado\]**  
 
 ![](/images/documentacion/host2host/habilitacion-spp-paso-1.png)
 
 **Paso 2**  
+
 Selecciona la opción **2> Servidor SPP**  
 
 ![](/images/documentacion/host2host/habilitacion-spp-paso-2.png)
 
 **Paso 3**  
+
 Aparecerá esta Pantalla y Volverá al menú Principal
 
 ![](/images/documentacion/host2host/habilitacion-spp-paso-3.png)
@@ -796,6 +827,7 @@ Aparecerá esta Pantalla y Volverá al menú Principal
 ## Borrar equipos enlazados
 
 **Paso 1**  
+
 En el Menú del Administrador de
 Bluetooth, seleccionar la opción
 **2> Dispositivos Enlazados**
@@ -803,6 +835,7 @@ Bluetooth, seleccionar la opción
 ![](/images/documentacion/host2host/borrar-equipos-paso-1.png)
 
 **Paso 2**  
+
 En esta opción se mostrará un menú
 con todos los dispositivos que están
 enlazados con el pinpad e355, quedan
@@ -812,6 +845,7 @@ anteriormente enlazados.
 ![](/images/documentacion/host2host/borrar-equipos-paso-2.png)  
 
 **Paso 3**  
+
 Si seleccionamos el dispositivo, aparecerá este
 menú que nos mostrar 2 opciones.
 Si seleccionamos **SI** eliminamos el enlace, y

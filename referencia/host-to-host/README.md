@@ -1337,19 +1337,6 @@ CÓDIGO DE RESPUESTA         | GLOSA
 
 # ANEXO ONUS
 
-### Objetivos  
-
-Esta documentación describe la forma de operar, la funcionalidad y el detalle de la mensajería de un PINPAD TRANSBANK trabajando bajo la modalidad OnUs.  
-La aplicación del PINPAD, supone la existencia de un ECR inteligente (por ejemplo una caja registradora) que enviará los requerimientos al PINPAD, para que este los procese y entregue los resultados cuando corresponda.
-
-### Audiencia  
-Para entender completamente esta documentación es necesario tener conocimientos transaccionales y conocer las funciones implementadas habitualmente en los PINPAD usados en las transacciones bancarias.  
-En particular este manual está dirigido exclusivamente a los comercio ONUS que tienen tarjetas propias y utilizan el pinpad de Transabank para leer sus tarjetas, pero las transacciones las realizan y autorizan ellos mismos. 
-
-### Alcance
-Aplica para el equipo Verifone vx805 (Conexión Serial o USB)  
-Aplica para el equipo Verifone e355 (Conexión Bluetooth)
-
 ## Protocolo de mensajería según tipo de comunicación
 
 ### Protocolo de comunicación serial (Interface RS232)
