@@ -196,7 +196,7 @@ Patpass Comercio | `27082157` Código de comercio <br> `J7xYiUS7xqD7LkbWSUHI` La
  Los siguientes productos están disponibles para que puedas realizar la integración. Revisa su documentación acá:
   
 * [Webpay Plus](/referencia/webpay#webpay-plus)
-* [Oneclick Mall](/referencia/webpay#oneclick-mall)
+* [Oneclick Mall](/referencia/oneclick)
 * [Transacción Completa](/referencia/webpay#transaccion-completa)
 
 ## Seguridad

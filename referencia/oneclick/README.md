@@ -139,9 +139,9 @@ Revisa la [documentación de Oneclick Mall](/documentacion/oneclick) para tener 
 el producto y tener más detalles sobre como realizar tu integración.
 
 ### Crear una inscripción
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#crear-una-inscripcion)
 
-Permite gatillar el inicio del proceso de inscripción.
-Más información en [la documentación](/documentacion/oneclick).
+Permite comenzar con el proceso de inscripción.
 
 ```java
 OneclickMallInscriptionStartResponse response = OneclickMall.Inscription.start(userName, email, responseUrl);
@@ -172,6 +172,15 @@ MallInscription.start(
         user_name=user_name,
         email=email,
         response_url=response_url)
+```
+
+```javascript
+const Oneclick = require("transbank-sdk").Oneclick; // CommonJS
+import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+
+const response = await Oneclick.MallInscription.start(
+  userName, email, responseUrl
+);
 ```
 
 ```http
@@ -219,6 +228,11 @@ response.url_webpay
 ```
 
 ```python
+response.token
+response.url_webpay
+```
+
+```javascript
 response.token
 response.url_webpay
 ```
@@ -273,6 +287,13 @@ response = Transbank::Webpay::Oneclick::MallInscription::finish(token: token)
 response = MallInscription.finish(token=token)
 ```
 
+```javascript
+const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
+import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+
+const response = await Oneclick.MallInscription.finish(token);
+```
+
 ```http
 PUT /rswebpaytransaction/api/oneclick/v1.0/inscriptions/{token}
 
@@ -298,11 +319,11 @@ response.getTbkUser();
 ```
 
 ```php
-response->getAuthorizationCode();
-response->getCardType();
-response->getCardNumber();
-response->getResponseCode();
-response->getTbkUser();
+$response->getAuthorizationCode();
+$response->getCardType();
+$response->getCardNumber();
+$response->getResponseCode();
+$response->getTbkUser();
 ```
 
 ```csharp
@@ -322,6 +343,14 @@ response.card_number
 ```
 
 ```python
+response.response_code
+response.transbank_user
+response.authorization_code
+response.card_type
+response.card_number
+```
+
+```javascript
 response.response_code
 response.transbank_user
 response.authorization_code
@@ -352,6 +381,7 @@ card_type <br> <i> cardType </i> | Indica el tipo de tarjeta inscrita por el cli
 card_number <br> <i> String </i> | Últimos 4 dígitos de la tarjeta inscrito: <br> Largo: 4.
 
 ### Eliminar una inscripción
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#eliminar-una-inscripcion)
 
 Una vez finalizado el proceso de inscripción es posible eliminarla de ser necesario. Para esto debes usar el método llamado `Inscription.remove()`.
 
@@ -383,6 +413,13 @@ MallInscription::delete(user_name: user_name, tbk_user: tbk_user)
 MallInscription.delete(tbk_user, user_name)
 ```
 
+```javascript
+const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
+import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+
+const response = await Oneclick.MallInscription.delete(tbkUser, userName);
+```
+
 ```http
 DELETE /rswebpaytransaction/api/oneclick/v1.0/inscriptions
 
@@ -406,6 +443,8 @@ username  <br> <i> String </i> | Identificador del usuario en los sistemas del 
 
 <strong>Respuesta Eliminar una inscripción</strong>
 
+Esta petición no posee cuerpo de respuesta, solo entrega un 204 cuando se realiza correctamente
+
 ```java
 // 204 OK
 ```
@@ -426,12 +465,17 @@ username  <br> <i> String </i> | Identificador del usuario en los sistemas del 
 # 204 OK
 ```
 
+```javascript
+// 204 OK
+```
+
 ```http
 204 OK
 Content-Type: application/json
 ```
 
 ### Autorizar un pago
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#autorizar-un-pago)
 
 Una vez realizada la inscripción, el comercio puede usar el `tbkUser` recibido
 para realizar transacciones. Para eso debes usar el método `Transaction.authorize()`.
@@ -513,6 +557,21 @@ MallTransaction.authorize(
   buy_order=buy_order,
   details=details
 )
+```
+
+```javascript
+const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
+const TransactionDetail = require('transbank-sdk').TransactionDetail; // CommonJS
+import { Oneclick, TransactionDetail } from 'transbank-sdk'; // ES6 Modules
+
+const details = [
+  new TransactionDetail(amount, commerceCode, childBuyOrder),
+  new TransactionDetail(amount2, commerceCode2, childBuyOrder2)
+];
+
+const response = await Oneclick.MallTransaction.authorize(
+  userName, tbkUser, buyOrder, details
+);
 ```
 
 ```http
@@ -651,6 +710,27 @@ for detail in details:
   detail.status
 ```
 
+```javascript
+response.accounting_date
+response.buy_order
+cardDetail = response.card_detail
+cardDetail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+for(detail on details) {
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+}
+```
+
 ```http
 200 OK
 Content-Type: application/json
@@ -699,6 +779,7 @@ inexistencia del campo o nulo) será asumido como cero, es decir "Sin cuotas".
 </aside>
 
 ### Consultar un pago realizado
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#obtener-estado-de-una-transaccion)
 
 Permite consultar el estado de pago realizado a través de Oneclick.
 Retorna el resultado de la autorización.
@@ -728,6 +809,13 @@ response = Transbank::Webpay::Oneclick::MallTransaction::status(buy_order: buy_o
 
 ```python
 var response = MallTransaction.status(buy_order)
+```
+
+```javascript
+const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
+import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+
+const response = await Oneclick.MallTransaction.status(token);
 ```
 
 ```http
@@ -767,11 +855,11 @@ for (Detail detail : detailsResp) {
 ```php
 $response->getAccountingDate();
 $response->getBuyOrder();
-$card_detail = response->getCardDetail();
+$card_detail = $response->getCardDetail();
 $card_detail->getCardNumber();
 $response->getTransactionDate();
 $response->getVci();
-$details = response->getDetails();
+$details = $response->getDetails();
 foreach($details as $detail){
     detail->getAmount();
     detail->getAuthorizationCode();
@@ -846,6 +934,27 @@ for detail in details:
   detail.status
 ```
 
+```javascript
+response.accounting_date
+response.buy_order
+cardDetail = response.card_detail
+cardDetail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+for(detail on details) {
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+}
+```
+
 ```http
 200 OK
 Content-Type: application/json
@@ -893,7 +1002,7 @@ balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago
 
 ### Reversar o Anular un pago Oneclick Mall
 
-Revisa la [documentación](/documentacion/oneclick#anular-una-transaccion) de este método para mayor detalle.
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#reversar-o-anular-una-transaccion)
 
 ```java
 final OneclickMallTransactionRefundResponse response =
@@ -923,6 +1032,13 @@ response = Transbank::Webpay::Oneclick::MallTransaction::refund(
 
 ```python
 var response = MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, amount)
+```
+
+```javascript
+const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
+import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+
+const response = await Oneclick.MallTransaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
 
 ```http
@@ -995,12 +1111,21 @@ response.response_code
 response.type
 ```
 
+```javascript
+response.authorization_code
+response.authorization_date
+response.balance
+response.nullified_amount
+response.response_code
+response.type
+```
+
 ```http
 200 OK
 Content-Type: application/json
 
 {
-  "type": "NULLIFY",
+  "type": "NULLIFIED",
   "authorization_code": "123456",
   "authorization_date": "2019-03-20T20:18:20Z",
   "nullified_amount": 1000.00,
@@ -1016,42 +1141,17 @@ En caso de une reversa no devuelve más información
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-type  <br> <i> String </i> | Tipo de reembolso (REVERSE o NULLIFY). Largo máximo: 10
-authorization_code  <br> <i> Boolean </i> | Código de autorización. Largo máximo: 6
-authorization_date  <br> <i> ISO8601 </i> | Fecha de la autorización de la transacción.
-nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
-balance  <br> <i> Decimal </i> | Monto restante de la transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
-response_code <br> <i> Number </i> | Código del resultado del pago, donde: 0 (cero) es aprobado. Largo máximo: 2
-buy_order  <br> <i> String </i> | Orden de compra generada por el comercio hijo para la transacción de pago. Largo máximo: 26.
+type  <br> <i> String </i> | Tipo de reembolso, REVERSED o NULLIFIED, si es REVERSED no se devolverán datos de la transacción (authorization code, etc). Largo máximo: 10
+authorization_code  <br> <i> Boolean </i> | (Solo si es NULLIFIED)  Código de autorización. Largo máximo: 6
+authorization_date  <br> <i> ISO8601 </i> | (Solo si es NULLIFIED)  Fecha de la autorización de la transacción.
+nullified_amount  <br> <i> Decimal </i> | (Solo si es NULLIFIED)  Monto anulado. Largo máximo: 17
+balance  <br> <i> Decimal </i> | (Solo si es NULLIFIED)  Monto restante de la transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
+response_code <br> <i> Number </i> | (Solo si es NULLIFIED)  Código del resultado del pago, donde: 0 (cero) es aprobado. Largo máximo: 2
+buy_order  <br> <i> String </i> | (Solo si es NULLIFIED)  Orden de compra generada por el comercio hijo para la transacción de pago. Largo máximo: 26.
 
 ### Captura Diferida Oneclick Mall
 
-Una transacción Oneclick Mall permite que el tarjetahabiente registre su
-tarjeta de la misma forma en que ocurre con una transacción Oneclick, asociando
-dicha inscripción a un comercio padre. Ahora, una vez realizada la inscripción,
-el comercio padre tiene permitido autorizar transacciones sin captura para
-los comercios “hijo” registrados que tengan habilitado captura diferida.
-Además posterior a la autorización tiene permitido capturar dicho monto reservado.
-La autorización se encarga de validar si es posible realizar el cargo a la
-cuenta asociada a la tarjeta de crédito realizando en el mismo acto la reserva
-de monto de la transacción.
-La captura hace efectiva la reserva hecha previamente o cargo en la cuenta de
-crédito asociada a la tarjeta del titular.
-Estas modalidades, por separado, solo son válidas para tarjetas de crédito.
-
-Para realizar esa captura explícita debe usarse el método `capture()`
-
-<strong>capture()</strong>
-
-Este método permite a los comercios Oneclick Mall habilitados, poder
-realizar capturas diferidas de una transacción previamente autorizada. El método
-contempla una única captura por cada autorización. Para ello se deberá indicar los
-datos asociados a la transacción de venta y el monto requerido para capturar, el cual
-debe ser menor o igual al monto originalmente autorizado.
-Para capturar una transacción, ésta debe haber sido creada por un código de
-comercio configurado para captura diferida. De esta forma la transacción estará
-autorizada pero requerirá una captura explícita posterior para confirmar la
-transacción.
+Revisa más detalles sobre esta modalidad en [la documentación](/doumentacion/oneclick#capturar-una-transaccion)
 
 ```java
 final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTransaction.capture(
@@ -1076,6 +1176,15 @@ response = Transbank::Webpay::Oneclick::MallDeferredTransaction::capture(
 
 ```python
 # Esta funcion aun no se encuentra disponible en el SDK
+```
+
+```javascript
+const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
+import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+
+const response = Oneclick.MallTransaction.capture(
+  childCommerceCode, childBuyOrder, amount, authorizationCode
+);
 ```
 
 ```http
@@ -1115,10 +1224,10 @@ response.getResponseCode();
 ```
 
 ```php
-response->getAuthorizationCode();
-response->getAuthorizationDate();
-response->getCapturedAmount();
-response->getResponseCode();
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getCapturedAmount();
+$response->getResponseCode();
 ```
 
 ```csharp
@@ -1134,6 +1243,13 @@ response.response_code
 
 ```python
 # Esta función aun no se encuentra disponible en el SDK
+```
+
+```javascript
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
 ```
 
 ```http
@@ -1159,181 +1275,6 @@ En caso de error apareceran los mismos códigos exclusivos del método `capture
 para captura simpultanea.
 </aside>
 
-## Captura Diferida
-
-Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo el cargo al tarjetahabiente.
-
-**Válido para :**
-
-* Webpay Plus Captura Diferida
-* Transacción Completa Captura Diferida
-
-### Ejecutar captura diferida
-
-Este método permite a todo comercio habilitado realizar capturas de una
-transacción autorizada sin captura generada en Webpay Plus o Transacción Completa.
-El método contempla una única captura por cada autorización. Para ello se
-deberá indicar los datos asociados a la transacción de venta con autorización
-sin captura y el monto requerido para capturar el cual debe ser menor o igual al
-monto originalmente autorizado.
-
-Para capturar una transacción, ésta debe haber sido creada (según lo visto
-anteriormente para Webpay Plus o Webpay Plus Mall) por un código de
-comercio configurado para captura diferida. De esa forma la transacción estará
-autorizada pero requerirá una captura explícita posterior para confirmar la
-transacción.
-
-Puedes [leer más sobre la captura en la información del
-producto Webpay](/producto/webpay#autorizacion-y-captura)
-para conocer más detalles y restricciones.
-
-Para realizar esa captura explícita debe usarse el método `Transaction.capture()`
-
-<strong>Transaction.capture()</strong>
-
-Permite solicitar a Webpay la captura diferida de una transacción con
-autorización y sin captura simultánea.
-
-> Los SDKs permiten indicar opcionalmente el código de comercio de la
-> transacción a capturar, para soportar la captura en comercios Webpay Plus
-> Mall o Transacción Completa Mall. En comercios sin modalidad Mall no es necesario especificar el código
-> de comercio, ya que se usa el indicado en la configuración.
-
-<aside class="notice">
-El método `Transaction.capture()` debe ser invocado siempre indicando el código del
-comercio que realizó la transacción. En el caso de comercios modalidad Mall,
-el código debe ser el código de la tienda virtual específica.
-</aside>
-
-```java
-final CaptureWebpayPlusTransactionResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
-```
-
-```php
-use Transbank\Webpay\WebpayPlus;
-
-$response = Transaction::capture($token, $buyOrder, $authCode, $amount);
-```
-
-```csharp
-var response = DeferredTransaction.Capture(token, buyOrder, authorizationCode, captureAmount);
-```
-
-```ruby
-response = Transbank::Webpay::WebpayPlus::DeferredTransaction::capture(
-  token: @token,
-  buy_order: @buy_order,
-  authorization_code: @auth_code,
-  capture_amount: @amount
-)
-```
-
-```python
-response = MallDeferredTransaction.capture(
-  token=token, capture_amount=amount, commerce_code=commerce_code,
-  buy_order=buy_order, authorization_code=authorization_code
-)
-```
-
-```http
-PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
-Tbk-Api-Key-Id: 597055555531
-Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
-Content-Type: application/json
-
-{
-  "commerce_code": "597055555531",
-  "buy_order": "415034240",
-  "authorization_code": "12345",
-  "capture_amount": 1000
-}
-```
-
-<strong>Parámetros Ejecutar captura diferida</strong>
-
-Nombre  <br> <i> tipo </i> | Descripción
-------   | -----------
-token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
-commerce_code  <br> <i> Number </i> | (Opcional, solo usar en caso Mall) Tienda hija que realizó la transacción. Largo: 12.
-buy_order  <br> <i> String </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
-authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
-capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo máximo: 17.
-
-<strong>Respuesta Ejecutar captura diferida</strong>
-
-```java
-response.getAuthorizationCode();
-response.getAuthorizationDate();
-response.getCapturedAmount();
-response.getResponseCode();
-```
-
-```php
-response->getAuthorizationCode();
-response->getAuthorizationDate();
-response->getCapturedAmount();
-response->getResponseCode();
-```
-
-```csharp
-response.AuthorizationCode;
-response.AuthorizationDate;
-response.CapturedAmount;
-response.ResponseCode;
-```
-
-```ruby
-response.authorization_code
-response.authorization_date
-response.captured_amount
-response.response_code
-```
-
-```python
-response.authorization_code
-response.authorization_date
-response.captured_amount
-response.response_code
-```
-
-```http
-200 OK
-Content-Type: application/json
-{
-  "token": "e074d38c628122c63e5c0986368ece22974d6fee1440617d85873b7b4efa48a3",
-  "authorization_code": "123456",
-  "authorization_date": "2019-03-20T20:18:20Z",
-  "captured_amount": 1000,
-  "response_code": 0
-}
-```
-
-Nombre  <br> <i> tipo </i> | Descripción
-------   | -----------
-token  <br> <i> String </i> | Token de la transacción. Largo máximo: 64
-authorization_code  <br> <i> String </i> | Código de autorización de la captura diferida. Largo máximo: 6
-authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
-captured_amount  <br> <i> Decimal </i> | Monto capturado. Largo máximo: 6
-response_code  <br> <i> Number </i> | Código de resultado de la captura. Si es exitoso es 0,de lo contrario la captura no fue realizada. Largo máximo: 2
-
-En caso de error pueden aparecer los siguientes códigos exclusivos del método
-`Transaction.capture()`:
-
-Código | Descripción
------- | -----------
-304 | Validación de campos de entrada nulos
-245 | Código de comercio no existe
-22 | El comercio no se encuentra activo
-316 | El comercio indicado no corresponde al certificado o no es hijo del comercio Mall en caso de transacciones MALL
-308 | Operación no permitida
-274 | Transacción no encontrada
-16 | La transacción no es de captura diferida
-292 | La transacción no está autorizada
-284 | Periodo de captura excedido
-310 | Transacción reversada previamente
-309 | Transacción capturada previamente
-311 | Monto a capturar excede el monto autorizado
-315 | Error del autorizador
 
 ## Códigos y mensajes de error
 
@@ -1408,21 +1349,158 @@ Nunca dejes tu código de comercio y secreto compartido directamente en tu códi
 
 1. Asignar el código de comercio productivo, entregado por Transbank al momento de contratar el producto.
 
-    ```java
-    // Para Oneclick
-    OneclickMall.setCommerceCode('TU_CODIGO_DE_COMERCIO');
-    ```
+```java
+// Para Oneclick
+OneclickMall.setCommerceCode('TU_CODIGO_DE_COMERCIO');
+```
+
+```php
+// Esta función aun no se encuentra disponible en el SDK
+```
+
+```csharp
+// Esta función aun no se encuentra disponible en el SDK
+```
+
+```ruby
+# Esta función aun no se encuentra disponible en el SDK
+
+```
+
+```python
+# Esta función aun no se encuentra disponible en el SDK
+```
+
+```javascript
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
+```http
+200 OK
+Content-Type: application/json
+{
+    "authorization_code": "152759",
+    "authorization_date": "2020-04-03T01:49:50.181Z",
+    "captured_amount": 50,
+    "response_code": 0
+}
+```
+
+```php
+// Esta función aun no se encuentra disponible en el SDK
+```
+
+```csharp
+// Esta función aun no se encuentra disponible en el SDK
+```
+
+```ruby
+# Esta función aun no se encuentra disponible en el SDK
+
+```
+
+```python
+# Esta función aun no se encuentra disponible en el SDK
+```
+
+```javascript
+const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
+import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+
+Oneclick.commerceCode = 'TU_CODIGO_DE_COMERCIO';
+```
 
 2. Configuración del secreto compartido.
 
-    ```java
-    // Para Oneclick
-    OneclickMall.setApiKey('TU_API_KEY');
-    ```
+```java
+// Para Oneclick
+OneclickMall.setApiKey('TU_API_KEY');
+```
+
+```php
+// Esta función aun no se encuentra disponible en el SDK
+```
+
+```csharp
+// Esta función aun no se encuentra disponible en el SDK
+```
+
+```ruby
+# Esta función aun no se encuentra disponible en el SDK
+
+```
+
+```python
+# Esta función aun no se encuentra disponible en el SDK
+```
+
+```javascript
+const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
+import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+
+Oneclick.apiKey = 'TU_API_KEY';
+```
 
 3. Selección del ambiente productivo.
 
 ```java
 // Para Oneclick
 OneclickMall.setIntegrationType(IntegrationType.LIVE);
+```
+
+```php
+// Esta función aun no se encuentra disponible en el SDK
+```
+
+```csharp
+// Esta función aun no se encuentra disponible en el SDK
+```
+
+```ruby
+# Esta función aun no se encuentra disponible en el SDK
+
+```
+
+```python
+# Esta función aun no se encuentra disponible en el SDK
+```
+
+```javascript
+const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
+const Environment = require('transbank-sdk').Environment // CommonJS
+import { Oneclick, Environment } from 'transbank-sdk'; // ES6 Modules
+
+Oneclick.environment = Environment.Production;
+```
+
+Alternativamente algunos SDK ofrecen un método para configurar directamente a producción
+```java
+// Esta función aun no se encuentra disponible en el SDK
+```
+
+```php
+// Esta función aun no se encuentra disponible en el SDK
+```
+
+```csharp
+// Esta función aun no se encuentra disponible en el SDK
+```
+
+```ruby
+# Esta función aun no se encuentra disponible en el SDK
+
+```
+
+```python
+# Esta función aun no se encuentra disponible en el SDK
+```
+
+```javascript
+const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
+import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+
+Oneclick.configureForProduction('TU_CODIGO_DE_COMERCIO', 'TU_API_KEY');
 ```
