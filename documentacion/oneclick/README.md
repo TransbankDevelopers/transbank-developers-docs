@@ -1,7 +1,7 @@
 # Oneclick Mall
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/oneclick' tbk-link-name='Referencia API'></div>
 </div>
 
 La modalidad de pago Oneclick permite al tarjetahabiente realizar pagos en el

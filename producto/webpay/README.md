@@ -51,7 +51,7 @@ manera, la recaudación que la plataforma realice irá directo al cliente a nomb
 ### Oneclick Mall
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#oneclick-mall' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/oneclick' tbk-link-name='Referencia Api'></div>
 </div>
 
 Oneclick Mall permite agrupar pagos en una única transacción Oneclick hacia múltiples códigos de comercios 
