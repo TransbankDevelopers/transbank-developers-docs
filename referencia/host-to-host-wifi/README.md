@@ -260,10 +260,10 @@ requiere desplegar en pantalla (Aprobado).
 
 DATO | LARGO | COMENTARIO | VALOR POR DEFECTO
 ---- | ----- | ---------- | ------------------
-LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes |
+LARGO_DATA | 4 | Valor numérico (0000 -> 9999) Indicando el largo del mensaje, sin incluir estos 4 bytes | 
 Comando | 4 | Valor 0520 | 
-`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
-Indicador de contexto | 16  | Valor alfanumérico Formato aaaammddhhmmssmm
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` | 
+Indicador de contexto | 16  | Valor alfanumérico Formato aaaammddhhmmssmm |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |
 Largo mensaje | 4 | Valor Numérico |
 `Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c` |

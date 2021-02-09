@@ -259,7 +259,7 @@ Para entender completamente este documento es necesario tener conocimientos
 transaccionales y conocer las funciones implementadas habitualmente en los PINPAD usados
 en las transacciones bancarias.
 
-Puedes revisar la [Referencia](/referencia/host-to-hosts-wifi) para ver la información asociada a la comunicación y los comandos.
+Puedes revisar la [Referencia](/referencia/host-to-host-wifi) para ver la información asociada a la comunicación y los comandos.
 
 
 # Especificaciones técnicas y salidas especiales
@@ -355,7 +355,7 @@ Dktt-Tr-Reg | Valor fijo "TR" | Alfanumérico | 2 | 2
 Dktt-Tr-Fech-Proc | Fecha De Proceso Formato "AAMMDD" | Numérico | 6 | 8
 Dktt-Tr-Hora-Proc | Hora De Proceso Formato "HHMMSS" | Numérico | 6 | 14
 Dktt-Tr-Cant-Reg | Total De Registros | Numérico | 7 | 21
-Dktt-Tr-Acum-Monto Monto | Total. 11 enteros 2 decimales Numérico 13 34
+Dktt-Tr-Acum-Monto | Total. 11 enteros 2 decimales | Numérico | 13 | 34
 Dktt-Tr-Fech-Desde | Fecha menor de Txs <br> Formato "AAMMDD". De entre las transacciones registradas en el archivo indica la fecha en la que se realizó la más temprana.  | Numérico | 6 | 40
 Dktt-Tr-Hora-Desde | Hora menor de Txs <br> Formato "HHMMSS". De entre las transacciones registradas en el archivo indica la hora en la que se realizó la más temprana.  | Numérico | 6 | 46
 Dktt-Tr-Fech-Hasta | Fecha mayor de Txs. <br> Formato "AAMMDD". De entre las transacciones registradas en el archivo indica la fecha en la que se realizó la más tardía. | Numérico | 6 | 52
@@ -410,13 +410,13 @@ Filler | Disponible |  Alfanumérico | 201 | 240
 
 Nombre | Descripción | Formato | Largo | Total
 ------ | ----------- | ------- | ----- | -----
-DSK-TR-REG | Tipo de Registro. Valor "TR" | Alfanumérico 2 | 2
+DSK-TR-REG | Tipo de Registro. Valor "TR" | Alfanumérico | 2 | 2
 DSK-TR-FECHA-PROC | Fecha de Proceso | Numérico | 6 | 8
 DSK-TR-HORA-PROC | Hora de proceso | Numérico | 6 | 14
 DSK-TR-TOT-REG | Total Registros | Numérico | 7 | 21
 DSK-TR-MONTO | Monto Total. 11 enteros 2 decimales | Numérico | 13 | 34
 DSK-TR-MONTO-COM | Monto Comisiones Total. 11 enteros 2 | Numérico | 13 | 47
-FILLER | Alfanumérico | 193 | 240
+FILLER | | Alfanumérico | 193 | 240
 
 **Detalle**
 
