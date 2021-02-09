@@ -139,9 +139,10 @@ Revisa la [documentación de Oneclick Mall](/documentacion/oneclick) para tener 
 el producto y tener más detalles sobre como realizar tu integración.
 
 ### Crear una inscripción
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#crear-una-inscripcion)
 
-Permite gatillar el inicio del proceso de inscripción.
-Más información en [la documentación](/documentacion/oneclick).
+
+ Permite gatillar el inicio del proceso de inscripción.		Permite comenzar con el proceso de inscripción.
 
 ```java
 OneclickMallInscriptionStartResponse response = OneclickMall.Inscription.start(userName, email, responseUrl);
@@ -172,6 +173,10 @@ MallInscription.start(
         user_name=user_name,
         email=email,
         response_url=response_url)
+```
+
+```javascript
+// El SDK aun no soporta este producto
 ```
 
 ```http
@@ -298,11 +303,11 @@ response.getTbkUser();
 ```
 
 ```php
-response->getAuthorizationCode();
-response->getCardType();
-response->getCardNumber();
-response->getResponseCode();
-response->getTbkUser();
+$response->getAuthorizationCode();
+$response->getCardType();
+$response->getCardNumber();
+$response->getResponseCode();
+$response->getTbkUser();
 ```
 
 ```csharp
@@ -352,6 +357,7 @@ card_type <br> <i> cardType </i> | Indica el tipo de tarjeta inscrita por el cli
 card_number <br> <i> String </i> | Últimos 4 dígitos de la tarjeta inscrito: <br> Largo: 4.
 
 ### Eliminar una inscripción
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#eliminar-una-inscripcion)
 
 Una vez finalizado el proceso de inscripción es posible eliminarla de ser necesario. Para esto debes usar el método llamado `Inscription.remove()`.
 
@@ -432,6 +438,7 @@ Content-Type: application/json
 ```
 
 ### Autorizar un pago
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#autorizar-un-pago)
 
 Una vez realizada la inscripción, el comercio puede usar el `tbkUser` recibido
 para realizar transacciones. Para eso debes usar el método `Transaction.authorize()`.
@@ -699,6 +706,7 @@ inexistencia del campo o nulo) será asumido como cero, es decir "Sin cuotas".
 </aside>
 
 ### Consultar un pago realizado
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#obtener-estado-de-una-transaccion)
 
 Permite consultar el estado de pago realizado a través de Oneclick.
 Retorna el resultado de la autorización.
@@ -767,11 +775,11 @@ for (Detail detail : detailsResp) {
 ```php
 $response->getAccountingDate();
 $response->getBuyOrder();
-$card_detail = response->getCardDetail();
+$card_detail = $response->getCardDetail();
 $card_detail->getCardNumber();
 $response->getTransactionDate();
 $response->getVci();
-$details = response->getDetails();
+$details = $response->getDetails();
 foreach($details as $detail){
     detail->getAmount();
     detail->getAuthorizationCode();
@@ -893,7 +901,7 @@ balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago
 
 ### Reversar o Anular un pago Oneclick Mall
 
-Revisa la [documentación](/documentacion/oneclick#anular-una-transaccion) de este método para mayor detalle.
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#reversar-o-anular-una-transaccion)
 
 ```java
 final OneclickMallTransactionRefundResponse response =
@@ -1000,7 +1008,7 @@ response.type
 Content-Type: application/json
 
 {
-  "type": "NULLIFY",
+  "type": "NULLIFIED",
   "authorization_code": "123456",
   "authorization_date": "2019-03-20T20:18:20Z",
   "nullified_amount": 1000.00,
@@ -1016,42 +1024,17 @@ En caso de une reversa no devuelve más información
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-type  <br> <i> String </i> | Tipo de reembolso (REVERSE o NULLIFY). Largo máximo: 10
-authorization_code  <br> <i> Boolean </i> | Código de autorización. Largo máximo: 6
-authorization_date  <br> <i> ISO8601 </i> | Fecha de la autorización de la transacción.
-nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17
-balance  <br> <i> Decimal </i> | Monto restante de la transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
-response_code <br> <i> Number </i> | Código del resultado del pago, donde: 0 (cero) es aprobado. Largo máximo: 2
-buy_order  <br> <i> String </i> | Orden de compra generada por el comercio hijo para la transacción de pago. Largo máximo: 26.
+type  <br> <i> String </i> | Tipo de reembolso, REVERSED o NULLIFIED, si es REVERSED no se devolverán datos de la transacción (authorization code, etc). Largo máximo: 10
+authorization_code  <br> <i> Boolean </i> | (Solo si es NULLIFIED)  Código de autorización. Largo máximo: 6
+authorization_date  <br> <i> ISO8601 </i> | (Solo si es NULLIFIED)  Fecha de la autorización de la transacción.
+nullified_amount  <br> <i> Decimal </i> | (Solo si es NULLIFIED)  Monto anulado. Largo máximo: 17
+balance  <br> <i> Decimal </i> | (Solo si es NULLIFIED)  Monto restante de la transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
+response_code <br> <i> Number </i> | (Solo si es NULLIFIED)  Código del resultado del pago, donde: 0 (cero) es aprobado. Largo máximo: 2
+buy_order  <br> <i> String </i> | (Solo si es NULLIFIED)  Orden de compra generada por el comercio hijo para la transacción de pago. Largo máximo: 26.
 
 ### Captura Diferida Oneclick Mall
 
-Una transacción Oneclick Mall permite que el tarjetahabiente registre su
-tarjeta de la misma forma en que ocurre con una transacción Oneclick, asociando
-dicha inscripción a un comercio padre. Ahora, una vez realizada la inscripción,
-el comercio padre tiene permitido autorizar transacciones sin captura para
-los comercios “hijo” registrados que tengan habilitado captura diferida.
-Además posterior a la autorización tiene permitido capturar dicho monto reservado.
-La autorización se encarga de validar si es posible realizar el cargo a la
-cuenta asociada a la tarjeta de crédito realizando en el mismo acto la reserva
-de monto de la transacción.
-La captura hace efectiva la reserva hecha previamente o cargo en la cuenta de
-crédito asociada a la tarjeta del titular.
-Estas modalidades, por separado, solo son válidas para tarjetas de crédito.
-
-Para realizar esa captura explícita debe usarse el método `capture()`
-
-<strong>capture()</strong>
-
-Este método permite a los comercios Oneclick Mall habilitados, poder
-realizar capturas diferidas de una transacción previamente autorizada. El método
-contempla una única captura por cada autorización. Para ello se deberá indicar los
-datos asociados a la transacción de venta y el monto requerido para capturar, el cual
-debe ser menor o igual al monto originalmente autorizado.
-Para capturar una transacción, ésta debe haber sido creada por un código de
-comercio configurado para captura diferida. De esta forma la transacción estará
-autorizada pero requerirá una captura explícita posterior para confirmar la
-transacción.
+Revisa más detalles sobre esta modalidad en [la documentación](/doumentacion/oneclick#capturar-una-transaccion)
 
 ```java
 final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTransaction.capture(
@@ -1115,10 +1098,10 @@ response.getResponseCode();
 ```
 
 ```php
-response->getAuthorizationCode();
-response->getAuthorizationDate();
-response->getCapturedAmount();
-response->getResponseCode();
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getCapturedAmount();
+$response->getResponseCode();
 ```
 
 ```csharp
@@ -1269,10 +1252,10 @@ response.getResponseCode();
 ```
 
 ```php
-response->getAuthorizationCode();
-response->getAuthorizationDate();
-response->getCapturedAmount();
-response->getResponseCode();
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getCapturedAmount();
+$response->getResponseCode();
 ```
 
 ```csharp
@@ -1422,7 +1405,7 @@ Nunca dejes tu código de comercio y secreto compartido directamente en tu códi
 
 3. Selección del ambiente productivo.
 
-```java
-// Para Oneclick
-OneclickMall.setIntegrationType(IntegrationType.LIVE);
-```
+    ```java
+    // Para Oneclick
+    OneclickMall.setIntegrationType(IntegrationType.LIVE);
+    ```
