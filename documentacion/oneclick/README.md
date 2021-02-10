@@ -103,7 +103,7 @@ pues es posible que el emisor de la tarjeta autorice algunas y otras no.
 ### Crear una inscripción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#crear-una-inscripcion-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/oneclick#crear-una-inscripcion' tbk-link-name='Referencia API'></div>
 </div>
 
 Este permite realizar la inscripción del tarjetahabiente e información de su
@@ -234,7 +234,7 @@ Tal como en el caso de Oneclick Normal, debes redireccionar vía `POST` el naveg
 ### Confirmar una inscripción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#confirmar-una-inscripcion-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/oneclick#confirmar-una-inscripcion' tbk-link-name='Referencia API'></div>
 </div>
 
 Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a
@@ -349,7 +349,7 @@ response.card_number
 ### Eliminar una inscripción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#eliminar-una-inscripcion-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/oneclick#eliminar-una-inscripcion' tbk-link-name='Referencia API'></div>
 </div>
 
 En el caso que el comercio requiera eliminar la inscripción de un usuario en OneClick Mall ya sea por la eliminación
@@ -441,10 +441,10 @@ Si se quiere comprobar si se eliminó correctamente, la función retorna un bool
 Recuerda que por cada transacción que hayas enviado en el arreglo (array de `details`) recibiras una respuesta.
 Debes validarlas de manera independiente, ya que unas podrías estar aprobadas y otras no.
 
-### Autorizar un pago
+### Autorizar una transacción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#autorizar-un-pago-con-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/oneclick#autorizar-una-transaccion' tbk-link-name='Referencia API'></div>
 </div>
 
 Con el `tbkUser` retornado de la confirmación (`PUT /inscriptions/{token}`) puedes autorizar transacciones:
@@ -708,11 +708,11 @@ for(let detail on details) {
 ### Obtener estado de una transacción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#consultar-un-pago-realizado-con-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/oneclick#obtener-estado-de-una-transaccion' tbk-link-name='Referencia API'></div>
 </div>
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
-Revisa la [referencia](/referencia/webpay#consultar-un-pago-realizado-con-oneclick-mall) de este método para mayor detalle en los parámetros de entrada y respuesta.
+Revisa la [referencia](/referencia/oneclick#obtener-estado-de-una-transaccion) de este método para mayor detalle en los parámetros de entrada y respuesta.
 
 <strong>Transaction.status()</strong>
 
@@ -878,7 +878,7 @@ for(detail on details) {
 ### Reversar o anular una transacción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#reversar-o-anular-un-pago-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/oneclick#reversar-o-anular-una-transaccion' tbk-link-name='Referencia API'></div>
 </div>
 
 Para Oneclick Mall hay dos operaciones diferentes para dejar sin efecto
@@ -978,7 +978,7 @@ const response = await Oneclick.MallTransaction.refund(buyOrder, childCommerceCo
 ### Capturar una transacción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#captura-diferida-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/oneclick#captura-diferida-de-una-transaccion' tbk-link-name='Referencia API'></div>
 </div>
 
 En el caso de que tengas contratada la modalidad de Captura diferida, necesitas llamar al método `capture` después
@@ -1168,7 +1168,7 @@ encontrar y conciliar los parámetros devueltos por el SDK al confirmar una tran
 parámetros que recibirás al momento de confirmar una transacción y a que fila
 de la tabla "Detalles de la transacción" corresponden (la lista completa de
 parámetros de Oneclick la puedes encontrar
-[acá](/referencia/webpay-soap#autorizar-un-pago-con-webpay-oneclick))
+[acá](/referencia/oneclick#autorizar-una-transacción))
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
