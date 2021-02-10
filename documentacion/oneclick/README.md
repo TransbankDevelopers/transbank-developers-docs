@@ -1,4 +1,4 @@
-# Oneclick Mall
+# Oneclick
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/oneclick' tbk-link-name='Referencia API'></div>
@@ -16,6 +16,10 @@ El proceso de integración con Oneclick consiste en desarrollar por parte
 del comercio las llamadas a los servicios web dispuestos por Transbank para la
 inscripción de los tarjetahabientes, así como para la realización de los
 pagos.
+
+<aside class="notice">
+Oneclick solo opera en modalidad Mall. 
+</aside>
 
 ## Flujo de inscripción y pago
 
@@ -184,7 +188,45 @@ tbk_token = resp.token
 ```
 
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
+const username = 'nombre_de_usuario';
+const email = 'nombre_de_usuario@email.com';
+const responseUrl = 'https://callback/resultado/de/inscripcion';
+
+const response = await Oneclick.MallInscription.start(username, email, responseUrl);
+```
+
+<strong>Respuesta de crear una inscripción</strong>
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+response.getToken();
+response.getUrlWebpay();
+```
+
+```php
+$response->getToken();
+$response->getUrlWebpay();
+```
+
+```csharp
+response.Token;
+response.UrlWebpay
+```
+
+```ruby
+response.token
+response.url_webpay
+```
+
+```python
+response.token
+response.url_webpay
+```
+
+```javascript
+response.token
+response.url_webpay
 ```
 
 Tal como en el caso de Oneclick Normal, debes redireccionar vía `POST` el navegador del usuario a la url retornada en `url_webpay`. **Recordando que el nombre del parámetro que contiene el token se debe llamar `TBK_TOKEN`**.
@@ -241,13 +283,67 @@ var tbkUser = result.TbkUser;
 
 ```python
 #...
-tbk_token = "tbkToken" // token que llega por POST en el parámetro "TBK_TOKEN"
+tbk_token = "tbkToken" # token que llega por POST en el parámetro "TBK_TOKEN"
 resp = MallInscription.finish(token=tbk_token)
 tbkUser = resp.tbk_user
 ```
 
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
+//...
+const token = 'tbkToken' // token que llega por POST en el parámetro "TBK_TOKEN"
+const response = Oneclick.MallInscription.finish(token);
+```
+
+<strong>Respuesta de confirmar una inscripción</strong>
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+response.getAuthorizationCode();
+response.getCardType();
+response.getCardNumber();
+response.getResponseCode();
+response.getTbkUser();
+```
+
+```php
+$response->getAuthorizationCode();
+$response->getCardType();
+$response->getCardNumber();
+$response->getResponseCode();
+$response->getTbkUser();
+```
+
+```csharp
+response.ResponseCode;
+response.TransbankUser;
+response.AuthorizationCode;
+response.CardType;
+response.CardNumber;
+```
+
+```ruby
+response.response_code
+response.transbank_user
+response.authorization_code
+response.card_type
+response.card_number
+```
+
+```python
+response.response_code
+response.transbank_user
+response.authorization_code
+response.card_type
+response.card_number
+```
+
+```javascript
+response.response_code
+response.transbank_user
+response.authorization_code
+response.card_type
+response.card_number
 ```
 
 ### Eliminar una inscripción
@@ -301,14 +397,44 @@ var result = Inscription.Delete(username, tbkUser);
 
 ```python
 #...
-tbkUser = "tbkUserRetornadoPorInscriptionFinish"
 username = "nombre_de_usuario"
+tbkUser = "tbkUserRetornadoPorInscriptionFinish"
 
 resp = MallInscription.delete(tbk_user=tbkUser, user_name=username)
 ```
 
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
+username = 'nombre_de_usuario';
+tbkUser = 'tbkUserRetornadoPorInscriptionFinish';
+const response = await Oneclick.MallInscription.delete(tbkUser, username);
+```
+
+<strong>Respuesta Eliminar una inscripción</strong>
+
+Esta petición no posee cuerpo de respuesta, solo entrega un 204 cuando se realiza correctamente
+
+```java
+// 204 OK
+```
+
+```php
+// 204 OK
+```
+
+```csharp
+// 204 OK
+```
+
+```ruby
+# 204 OK
+```
+
+```python
+# 204 OK
+```
+
+```javascript
+// 204 OK
 ```
 
 Si se quiere comprobar si se eliminó correctamente, la función retorna un boolean, el cual será `true` en caso de éxito y `false` en otro caso.
@@ -444,7 +570,139 @@ resp = MallTransaction.authorize(user_name=username, tbk_user=tbkUser, buy_order
 ```
 
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
+const details = [
+  new TransactionDetail(amount, commerceCode, childBuyOrder),
+  new TransactionDetail(amount2, commerceCode2, childBuyOrder2)
+];
+
+const response = await Oneclick.MallTransaction.authorize(
+  userName, tbkUser, buyOrder, details
+);
+```
+
+<strong>Respuesta Autorizar un pago</strong>
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+response.getAccountingDate();
+response.getBuyOrder();
+response.getTransactionDate();
+final CardDetail cardDetail = response.getCardDetail();
+cardDetail.getCardNumber();
+final List<Detail> detailsResp = response.getDetails();
+for (Detail detail : detailsResp) {
+    detail.getAmount();
+    detail.getAuthorizationCode();
+    detail.getBuyOrder();
+    detail.getCommerceCode();
+    detail.getInstallmentsNumber();
+    detail.getPaymentTypeCode();
+    detail.getStatus();
+}
+```
+
+```php
+$response->getAccountingDate();
+$response->getBuyOrder();
+$card_detail = response->getCardDetail();
+$card_detail->getCardNumber();
+$response->getTransactionDate();
+$response->getVci();
+$details = response->getDetails();
+foreach($details as $detail){
+    detail->getAmount();
+    detail->getAuthorizationCode();
+    detail->getBuyOrder();
+    detail->getCommerceCode();
+    detail->getInstallmentsNumber();
+    detail->getPaymentTypeCode();
+    detail->getResponseCode();
+    detail->getStatus();
+}
+```
+
+```csharp
+response.AccountingDate;
+response.BuyOrder;
+var cardDetail = response.CardDetail;
+cardDetail.CardNumber;
+response.SessionId;
+response.TransactionDate;
+response.Vci;
+var details = response.Details;
+foreach (var detail in details) {
+    detail.Amount;
+    detail.AuthorizationCode;
+    detail.BuyOrder;
+    detail.CommerceCode;
+    detail.InstallmentsNumber;
+    detail.PaymentTypeCode;
+    detail.ResponseCode;
+    detail.Status;
+}
+```
+
+```ruby
+response.accounting_date
+response.buy_order
+card_detail = response.card_detail
+card_detail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+details.each do |detail|
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+end
+```
+
+```python
+response.accounting_date
+response.buy_order
+card_detail = response.card_detail
+card_detail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+for detail in details:
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+```
+
+```javascript
+response.accounting_date
+response.buy_order
+cardDetail = response.card_detail
+cardDetail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+for(let detail on details) {
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+}
 ```
 
 ### Obtener estado de una transacción
@@ -460,6 +718,8 @@ Revisa la [referencia](/referencia/webpay#consultar-un-pago-realizado-con-onecli
 
 Permite consultar el estado de pago realizado a través de Oneclick.
 Retorna el resultado de la autorización.
+
+<div class="language-simple" data-multiple-language></div>
 
 ```java
 final OneclickMallTransactionStatusResponse response =
@@ -484,6 +744,135 @@ response = Transbank::Webpay::Oneclick::MallTransaction::status(buy_order: buy_o
 
 ```python
 var response = MallTransaction.status(buy_order)
+```
+
+```javascript
+const response = await Oneclick.MallTransaction.status(token);
+```
+
+<strong>Respuesta de consulta de estado</strong>
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+response.getAccountingDate();
+response.getBuyOrder();
+response.getTransactionDate();
+final CardDetail cardDetail = response.getCardDetail();
+cardDetail.getCardNumber();
+final List<Detail> detailsResp = response.getDetails();
+for (Detail detail : detailsResp) {
+    detail.getAmount();
+    detail.getAuthorizationCode();
+    detail.getBuyOrder();
+    detail.getCommerceCode();
+    detail.getInstallmentsNumber();
+    detail.getPaymentTypeCode();
+    detail.getStatus();
+}
+```
+
+```php
+$response->getAccountingDate();
+$response->getBuyOrder();
+$card_detail = $response->getCardDetail();
+$card_detail->getCardNumber();
+$response->getTransactionDate();
+$response->getVci();
+$details = $response->getDetails();
+foreach($details as $detail){
+    detail->getAmount();
+    detail->getAuthorizationCode();
+    detail->getBuyOrder();
+    detail->getCommerceCode();
+    detail->getInstallmentsNumber();
+    detail->getPaymentTypeCode();
+    detail->getResponseCode();
+    detail->getStatus();
+}
+```
+
+```csharp
+response.AccountingDate;
+response.BuyOrder;
+var cardDetail = response.CardDetail;
+cardDetail.CardNumber;
+response.SessionId;
+response.TransactionDate;
+response.Vci;
+var details = response.Details;
+foreach (var detail in details) {
+    detail.Amount;
+    detail.AuthorizationCode;
+    detail.BuyOrder;
+    detail.CommerceCode;
+    detail.InstallmentsNumber;
+    detail.PaymentTypeCode;
+    detail.ResponseCode;
+    detail.Status;
+}
+```
+
+```ruby
+response.accounting_date
+response.buy_order
+card_detail = response.card_detail
+card_detail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+details.each do |detail|
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+end
+```
+
+```python
+response.accounting_date
+response.buy_order
+card_detail = response.card_detail
+card_detail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+for detail in details:
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+```
+
+```javascript
+response.accounting_date
+response.buy_order
+cardDetail = response.card_detail
+cardDetail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+for(detail on details) {
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+}
 ```
 
 ### Reversar o anular una transacción
@@ -526,7 +915,7 @@ Este método retorna como respuesta un identificador único de la transacció
 String buyOrder = "buyOrderIndicadoEnTransactionAuthorize";
 String childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
 String childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
-double amount = (byte) 1;
+double amount = 10000;
 
 OneclickMallTransactionRefundResponse response = OneclickMall.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
@@ -534,10 +923,10 @@ OneclickMallTransactionRefundResponse response = OneclickMall.Transaction.refund
 ```php
 //...
 
-$buyOrder = $buyOrderIndicadoEnTransactionAuthorize;
-$childCommerceCode = $childCommerceCodeIndicadoEnTransactionAuthorize;
-$childBuyOrder = $childBuyOrderIndicadoEnTransactionAuthorize;
-$amount = $amountIndicadoEnTransactionAuthorize;
+$buyOrder = "buyOrderIndicadoEnTransactionAuthorize";
+$childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
+$childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
+$amount = 10000;
 
 //Parámetro opcional
 $options = new Options($apiKey, $parentCommerceCode);
@@ -548,10 +937,10 @@ $response = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrde
 ```csharp
 //...
 
-var buyOrder = Request.Form["buy_order"];
-var childCommerceCode = Request.Form["child_commerce_code"];
-var childBuyOrder = Request.Form["child_buy_order"];
-var amount = decimal.Parse(Request.Form["amount"]);
+var buyOrder = "buyOrderIndicadoEnTransactionAuthorize";
+var childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
+var childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
+var amount = 10000;
 
 var result = MallTransaction.Refund(buyOrder, childCommerceCode,childBuyOrder,amount);
 ```
@@ -559,10 +948,10 @@ var result = MallTransaction.Refund(buyOrder, childCommerceCode,childBuyOrder,am
 ```ruby
 #...
 
-@buy_order = "12345" + Time.now.to_i.to_s
-@child_commerce_code = "597055555542"
-@child_buy_order = "abcdef" + Time.now.to_i.to_s
-@amount = 1000
+@buy_order = "buyOrderIndicadoEnTransactionAuthorize"
+@child_commerce_code = "childCommerceCodeIndicadoEnTransactionAuthorize"
+@child_buy_order = "childBuyOrderIndicadoEnTransactionAuthorize"
+@amount = 10_000
 
 @resp = Transbank::Webpay::Oneclick::MallTransaction::refund(buy_order: @buy_order, child_commerce_code: @child_commerce_code, child_buy_order: @child_buy_order, amount: @amount)
 ```
@@ -570,16 +959,20 @@ var result = MallTransaction.Refund(buyOrder, childCommerceCode,childBuyOrder,am
 ```python
 #...
 
-buy_order = str(random.randrange(1000000, 99999999))
-child_commerce_code = '597055555542'
-child_buy_order = str(random.randrange(1000000, 99999999))
+buy_order = "buyOrderIndicadoEnTransactionAuthorize"
+child_commerce_code = "childCommerceCodeIndicadoEnTransactionAuthorize"
+child_buy_order = "childBuyOrderIndicadoEnTransactionAuthorize"
 amount = 10000
 
 resp = MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, amount)
 ```
 
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
+const buyOrder = "buyOrderIndicadoEnTransactionAuthorize";
+const childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
+const childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
+const amount = 10000;
+const response = await Oneclick.MallTransaction.refund(buyOrder, childCommerceCode, buyOrderChild, amount);
 ```
 
 ### Capturar una transacción
@@ -619,6 +1012,8 @@ transacción.
 En esta modalidad no se aceptan tarjetas de débito ni prepago.
 </aside>
 
+<div class="language-simple" data-multiple-language></div>
+
 ```java
 final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTransaction.capture(
   childCommerceCode, childBuyOrder, amount, authorizationCode
@@ -642,6 +1037,50 @@ response = Transbank::Webpay::Oneclick::MallDeferredTransaction::capture(
 
 ```python
 # Este SDK aún no tiene implementada esta funcionalidad. Se puede consumir el método del API REST directamente, sin usar el SDK de momento.
+```
+
+```javascript
+const response = await Oneclick.DeferredTransaction.capture(commerceCode, buyOrder, amount, authorizationCode);
+```
+
+<strong>Respuesta de captura diferida</strong>
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getCapturedAmount();
+response.getResponseCode();
+```
+
+```php
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getCapturedAmount();
+$response->getResponseCode();
+```
+
+```csharp
+// Esta función aun no se encuentra disponible en el SDK
+```
+
+```ruby
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
+```python
+# Esta función aun no se encuentra disponible en el SDK
+```
+
+```javascript
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
 ```
 
 ## Credenciales y Ambientes
