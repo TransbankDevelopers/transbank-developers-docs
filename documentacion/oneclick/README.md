@@ -1096,46 +1096,50 @@ Asegúrate de que estés usando el código de comercio de integración que tenga
 Puedes revisar los códigos de comercio del ambiente de integración de todos nuestros productos y variaciones
 [en este link](/documentacion/como_empezar#ambiente-de-integracion).
 
-### Oneclick: Configuración SDK
+### Configuración SDK
 
 Los SDK vienen preconfigurados para operar con Oneclick Mall captura simultanea. Si necesitas operar con otra modalidad,
 como captura diferida, debes configurar explícitamente el [código de comercio que usarás](/documentacion/como_empezar#ambiente-de-integracion).
-No es necesario definir el Api Key Secret (llave secreta) ya que en este ambiente, todos los productos usan la misma y
+No es necesario definir el Api Key ya que en este ambiente, todos los productos usan la misma y
 ya viene preconfigurada.
 
 ```java
-// OneclickMall Live Config
-OneclickMall.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+OneclickMall.setCommerceCode("Pon el Código de Comercio");
 ```
 
 ```php
-\Transbank\Webpay\OneClick::setCommerceCode("{commerce-code}");
+\Transbank\Webpay\OneClick::setCommerceCode("Pon el Código de Comercio");
 ```
 
 ```csharp
 using Transbank.Webpay.Oneclick;
 
-Oneclick.CommerceCode = "5970TuCodigo";
+Oneclick.CommerceCode = "Pon el Código de Comercio";
 ```
 
 ```ruby
-# Oneclick
-Transbank::Webpay::OneClick::Base.commerce_code = "commercecode"
+Transbank::Webpay::OneClick::Base.commerce_code = "Pon el Código de Comercio"
 ```
 
 ```python
-# Oneclick
 from transbank import oneclick as BaseOneClick
 from transbank.common.integration_type import IntegrationType
 
-BaseOneClick.commerce_code = "codigo-comercio-aca"
+BaseOneClick.commerce_code = "Pon el Código de Comercio"
+```
+
+```javascript
+// Este SDK posee métodos para configurar las distintas modalidades
+Oneclick.configureForIntegration(commerceCode, apiKey); // Manual
+Oneclick.configureOneclickMallForTesting();
+Oneclick.configureOneclickMallDeferredForTesting();
 ```
 
 ### Apuntar a producción
 
-Antes de operar en el ambiente de producción, debes pasar por un [proceso de validación](/documentacion/como_empezar#el-proceso-de-validacion), luego del cual te entregaremos tu Secret Key (**llave secreta**).  
+Antes de operar en el ambiente de producción, debes pasar por un [proceso de validación](/documentacion/como_empezar#el-proceso-de-validacion), luego del cual te entregaremos tu Api Key.  
 
-Si ya tienes tu llave secreta, puedes revisar como configurar el SDK para usar este ambiente de producción en [esta sección](/documentacion/como_empezar#configuracion-de-produccion)
+Si ya tienes tu Api Key, puedes revisar como configurar el SDK para usar este ambiente de producción en [esta sección](/documentacion/como_empezar#configuracion-de-produccion)
 
 ## Conciliación de Transacciones
 
@@ -1143,8 +1147,6 @@ Una vez hayas realizado transacciones en producción quedará un historial de
 transacciones que puedes revisar entrando a
 [www.transbank.cl](https://www.transbank.cl/). Si lo deseas  puedes realizar una
 conciliación entre tu sistema y el reporte que entrega el portal.
-
-### Oneclick
 
 Para realizar la conciliación debes seguir los siguientes pasos:
 
