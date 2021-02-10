@@ -340,6 +340,39 @@ Definir que se usará el ambiente de producción y pasar el Api Key (Código de 
 
 <div class="language-simple" data-multiple-language></div>
 
+```java
+import cl.transbank.common.IntegrationType;
+import cl.transbank.patpass.PatpassComercio;
+import cl.transbank.transaccioncompleta.FullTransaction;
+import cl.transbank.webpay.oneclick.OneclickMall;
+import cl.transbank.webpay.webpayplus.WebpayPlus;
+
+//WebpayPlus Live config
+WebpayPlus.Transaction.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+WebpayPlus.Transaction.setApiKey("pon-tu-llave-secreta-aca");
+WebpayPlus.Transaction.setIntegrationType(IntegrationType.LIVE);
+
+//WebpayPlus.MallTransaction Live config
+WebpayPlus.MallTransaction.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+WebpayPlus.MallTransaction.setApiKey("pon-tu-llave-secreta-aca");
+WebpayPlus.MallTransaction.setIntegrationType(IntegrationType.LIVE);
+
+// OneclickMall Live Config
+OneclickMall.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+OneclickMall.setApiKey("pon-tu-llave-secreta-aca");
+OneclickMall.setIntegrationType(IntegrationType.LIVE);
+
+//PatpassComercio Live Config
+PatpassComercio.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+PatpassComercio.setApiKey("pon-tu-llave-secreta-aca");
+PatpassComercio.setIntegrationType(IntegrationType.LIVE);
+
+//FullTransaction Live Config
+FullTransaction.Transaction.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+FullTransaction.Transaction.setApiKey("pon-tu-llave-secreta-aca");
+FullTransaction.Transaction.setIntegrationType(IntegrationType.LIVE);
+```
+
 ```php
 // Webpay Plus
 \Transbank\Webpay\WebpayPlus::setIntegrationType("LIVE");
@@ -381,39 +414,6 @@ TransaccionCompleta.Webpay.ApiKey = "VeryLongKey";
 TransaccionCompleta.Webpay.IntegrationType = WebpayIntegrationType.Live;
 ```
 
-```java
-import cl.transbank.common.IntegrationType;
-import cl.transbank.patpass.PatpassComercio;
-import cl.transbank.transaccioncompleta.FullTransaction;
-import cl.transbank.webpay.oneclick.OneclickMall;
-import cl.transbank.webpay.webpayplus.WebpayPlus;
-
-//WebpayPlus Live config
-WebpayPlus.Transaction.setCommerceCode("pon-tu-codigo-de-comercio-aca");
-WebpayPlus.Transaction.setApiKey("pon-tu-llave-secreta-aca");
-WebpayPlus.Transaction.setIntegrationType(IntegrationType.LIVE);
-
-//WebpayPlus.MallTransaction Live config
-WebpayPlus.MallTransaction.setCommerceCode("pon-tu-codigo-de-comercio-aca");
-WebpayPlus.MallTransaction.setApiKey("pon-tu-llave-secreta-aca");
-WebpayPlus.MallTransaction.setIntegrationType(IntegrationType.LIVE);
-
-// OneclickMall Live Config
-OneclickMall.setCommerceCode("pon-tu-codigo-de-comercio-aca");
-OneclickMall.setApiKey("pon-tu-llave-secreta-aca");
-OneclickMall.setIntegrationType(IntegrationType.LIVE);
-
-//PatpassComercio Live Config
-PatpassComercio.setCommerceCode("pon-tu-codigo-de-comercio-aca");
-PatpassComercio.setApiKey("pon-tu-llave-secreta-aca");
-PatpassComercio.setIntegrationType(IntegrationType.LIVE);
-
-//FullTransaction Live Config
-FullTransaction.Transaction.setCommerceCode("pon-tu-codigo-de-comercio-aca");
-FullTransaction.Transaction.setApiKey("pon-tu-llave-secreta-aca");
-FullTransaction.Transaction.setIntegrationType(IntegrationType.LIVE);
-```
-
 ```ruby
 # Webpay Plus
 Transbank::Webpay::WebpayPlus::Base.commerce_code = "commercecode"
@@ -442,6 +442,34 @@ from transbank.common.integration_type import IntegrationType
 BaseTransaccionCompleta.commerce_code = "commercecode"
 BaseTransaccionCompleta.api_key = "apikey"
 BaseTransaccionCompleta.integration_type = IntegrationType.LIVE
+```
+
+```javascript
+// Webpay Plus
+WebpayPlus.configureForIntegration(commerceCode, apiKey);
+WebpayPlus.configureForProduction(commerceCode, apiKey);
+WebpayPlus.configureWebpayPlusForTesting();
+WebpayPlus.configureWebpayPlusDeferredForTesting();
+WebpayPlus.configureWebpayPlusMallForTesting();
+WebpayPlus.configureWebpayPlusMallDeferredForTesting();
+
+// Oneclick
+Oneclick.configureForIntegration(commerceCode, apiKey);
+Oneclick.configureForProduction(commerceCode, apiKey);
+Oneclick.configureOneclickMallForTesting();
+Oneclick.configureWebpayPlusMallDeferredForTesting();
+
+// Transacción Completa
+TransaccionCompleta.configureForIntegration(commerceCode, apiKey);
+TransaccionCompleta.configureForProduction(commerceCode, apiKey);
+TransaccionCompleta.configureTransaccionCompletaForTesting();
+TransaccionCompleta.configureTransaccionCompletaNoCvvForTesting();
+TransaccionCompleta.configureTransaccionCompletaDeferredForTesting();
+TransaccionCompleta.configureTransaccionCompletaDeferredNoCvvForTesting();
+TransaccionCompleta.configureTransaccionCompletaMallForTesting();
+TransaccionCompleta.configureTransaccionCompletaMallNoCvvForTesting();
+TransaccionCompleta.configureTransaccionCompletaMallDeferredForTesting();
+TransaccionCompleta.configureTransaccionCompletaMallDeferredNoCvvForTesting();
 ```
 
 ### C) Utilizando el API
