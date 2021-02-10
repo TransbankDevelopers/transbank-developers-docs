@@ -669,6 +669,8 @@ comercio que realizó la transacción. En el caso de comercios modalidad Mall,
 el código debe ser el código de la tienda virtual específica.
 </aside>
 
+<div class="language-simple" data-multiple-language></div>
+
 ```java
 final CaptureWebpayPlusTransactionResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
 ```
@@ -706,6 +708,9 @@ Una vez realizada la captura, recibirás un objeto con la respuesta. Revisa la [
 sobre los posibles resultados.  
 
 <strong>Respuesta de una captura</strong>
+
+<div class="language-simple" data-multiple-language></div>
+
 ```java
 response.getAuthorizationCode();
 response.getAuthorizationDate();
@@ -763,7 +768,7 @@ Es la tienda Mall la que agrupa múltiples tiendas, son estas últimas las que p
 generar transacciones. Tanto el mall como las tiendas asociadas son
 identificadas a través de un número denominado código de comercio.
 
-### Flujo Webpay Plus Mall
+### Flujo
 
 El flujo de Webpay Plus Mall es en general el mismo que el de [Webpay Plus](#webpay-plus-normal)
 tanto de cara al tarjeta habiente como de cara al integrador.
@@ -779,7 +784,7 @@ Las diferencias son:
   individualmente, pues es posible que el emisor de la tarjeta autorice algunas
   y otras no.
 
-### Crear una transacción mall
+### Crear una transacción 
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#crear-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
@@ -910,6 +915,8 @@ Observar que existe un <code>buyOrder</code> generado para el comercio mall y un
 
 La respuesta de Webpay Plus Mall a la creación de es el token de la transacción y la URL a la cual debes redirigir al tarjetahabiente.
 
+<div class="language-simple" data-multiple-language></div>
+
 ```java
 response.getToken();
 response.getUrl();
@@ -964,7 +971,7 @@ el RUT 11.111.111-1 y la clave 123. Para pruebas exhaustivas <a href="https://ww
 tarjetas de prueba en la sección de Ambientes</a>.
 </aside>
 
-### Confirmar una transacción mall
+### Confirmar una transacción
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#confirmar-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
@@ -1139,7 +1146,7 @@ details.forEach(detail => {
 });
 ```
 
-### Obtener estado de una transacción mall
+### Obtener estado de una transacción
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#obtener-estado-de-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
@@ -1308,7 +1315,7 @@ details.forEach(detail => {
 });
 ```
 
-### Reversar o Anular una transacción mall
+### Reversar o Anular una transacción
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#reversar-o-anular-un-pago-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
@@ -1406,8 +1413,7 @@ Para obtener la información contenida en la respuesta puedes hacerlo de la sigu
   response.type
 ```
 
-### Capturar una transacción mall
-
+### Capturar una transacción
 <div class="pos-title-nav">
   <div tbk-link='/referencia/webpay#capturar-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
 </div>
