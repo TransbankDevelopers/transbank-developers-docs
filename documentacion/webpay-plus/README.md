@@ -1518,8 +1518,6 @@ transacciones que puedes revisar entrando a
 [www.transbank.cl](https://www.transbank.cl/). Si lo deseas  puedes realizar una
 conciliación entre tu sistema y el reporte que entrega el portal.
 
-### Conciliación Webpay Plus
-
 Para realizar la conciliación debes seguir los siguientes pasos:
 
 1. Iniciar sesión con tu usuario y contraseña en [www.transbank.cl](https://www.transbank.cl)
