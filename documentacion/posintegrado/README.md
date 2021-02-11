@@ -50,7 +50,7 @@ npm install transbank-pos-sdk-web
 También se puede incluir directamente el tag script
 
 ```html
-<script src="https://unpkg.com/transbank-pos-sdk-web@2.1.0/dist/pos.js"></script>
+<script src="https://unpkg.com/transbank-pos-sdk-web@2/dist/pos.js"></script>
 <script>
 // En este caso, el objeto en vez de ser POS, es Transbank.POS
 // Ej: Transbank.POS.connect(...); en vez de POS.connect(...) como se especifica en los ejemplos de mas abajo.
@@ -143,6 +143,12 @@ Para compilar en windows necesitarás lo siguiente:
 <aside class="notice">
 Procura seguir todos los pasos descritos en el sitio de msys2
 </aside>
+
+## Prueba tu POS
+La manera más simple de hacer una prueba de conexión con tu POS es usar el SDK Web. 
+1) [Descarga](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent/releases) e instala el agente POS
+2) Entra a [pos.digitalpartner.cl](https://pos.digitalpartner.cl) donde verás el proyecto de ejemplo del SDK Web ya montado y funcionando. 
+3) Prueba la conexión, y las diferentes operaciones. 
 
 ## Proyectos de ejemplo
 
