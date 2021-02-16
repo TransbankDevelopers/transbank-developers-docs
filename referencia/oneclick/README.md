@@ -719,7 +719,7 @@ response.session_id
 response.transaction_date
 response.vci
 details = response.details
-for(let detail on details) {
+for(let detail of details) {
   detail.amount
   detail.authorization_code
   detail.buy_order
