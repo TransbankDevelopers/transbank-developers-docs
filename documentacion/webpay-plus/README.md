@@ -634,7 +634,7 @@ response.type
   <div tbk-link='/referencia/webpay#capturar-una-transaccion' tbk-link-name='Referencia Api'></div>
 </div>
 
-Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo el cargo al tarjetahabiente.
+Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo al tarjetahabiente.
 
 Este método permite a todo comercio habilitado realizar capturas de una
 transacción autorizada sin captura generada en Webpay Plus. 
