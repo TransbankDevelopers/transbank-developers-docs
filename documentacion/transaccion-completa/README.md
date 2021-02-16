@@ -1697,28 +1697,27 @@ No es necesario definir el Api Key ya que en este ambiente, todos los productos 
 ya viene preconfigurada.
 
 ```java
-OneclickMall.setCommerceCode("Pon el Código de Comercio");
+MallFullTransaction.setCommerceCode("Pon el Código de Comercio");
 ```
 
 ```php
-\Transbank\Webpay\OneClick::setCommerceCode("Pon el Código de Comercio");
+Transbank\TransaccionCompleta::setCommerceCode("Pon el Código de Comercio");
 ```
 
 ```csharp
-using Transbank.Webpay.Oneclick;
+using Transbank.Webpay.TransaccionCompleta;
 
-Oneclick.CommerceCode = "Pon el Código de Comercio";
+TransaccionCompleta.CommerceCode = "Pon el Código de Comercio";
 ```
 
 ```ruby
-Transbank::Webpay::OneClick::Base.commerce_code = "Pon el Código de Comercio"
+Transbank::Webpay::TransaccionCompleta::Base.commerce_code = "Pon el Código de Comercio"
 ```
 
 ```python
-from transbank import oneclick as BaseOneClick
-from transbank.common.integration_type import IntegrationType
+from transbank import transaccion_completa as BaseTransaccionCompleta
 
-BaseOneClick.commerce_code = "Pon el Código de Comercio"
+BaseTransaccionCompleta.commerce_code = "Pon el Código de Comercio"
 ```
 
 ```javascript
