@@ -102,7 +102,7 @@ el flujo cambia y los pasos son los siguientes:
 ### Crear una transacción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#crear-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/webpay#crear-una-transaccion' tbk-link-name='Referencia Api'></div>
 </div>
 
 Esta operación te permite iniciar o crear una transacción, Webpay Plus procesa el requerimiento y entrega
@@ -218,7 +218,7 @@ tarjetas de prueba en la sección de Ambientes</a>.
 ### Confirmar una transacción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#confirmar-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/webpay#confirmar-una-transaccion' tbk-link-name='Referencia Api'></div>
 </div>
 
 Una vez que el tarjetahabiente ha pagado, Webpay Plus retornará
@@ -370,7 +370,7 @@ response.balance
 ### Obtener estado de una transacción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#obtener-estado-de-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/webpay#obtener-estado-de-una-transaccion' tbk-link-name='Referencia Api'></div>
 </div>
 
 Esta operación permite obtener el estado de la transacción en los siguientes 7 días desde su creación.
@@ -520,7 +520,7 @@ response.balance
 ### Reversar o Anular una transacción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#reversar-o-anular-un-pago-webpay-plus' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/webpay#reversar-o-anular-un-pago' tbk-link-name='Referencia Api'></div>
 </div>
 
 Esta operación permite a todo comercio habilitado, reembolsar o anular una
@@ -631,10 +631,10 @@ response.type
 ### Capturar una transacción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#capturar-una-transaccion-webpay-plus' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/webpay#capturar-una-transaccion' tbk-link-name='Referencia Api'></div>
 </div>
 
-Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo el cargo al tarjetahabiente.
+Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo al tarjetahabiente.
 
 Este método permite a todo comercio habilitado realizar capturas de una
 transacción autorizada sin captura generada en Webpay Plus. 
@@ -668,6 +668,8 @@ El método `Transaction.capture()` debe ser invocado siempre indicando el cód
 comercio que realizó la transacción. En el caso de comercios modalidad Mall,
 el código debe ser el código de la tienda virtual específica.
 </aside>
+
+<div class="language-simple" data-multiple-language></div>
 
 ```java
 final CaptureWebpayPlusTransactionResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
@@ -706,6 +708,9 @@ Una vez realizada la captura, recibirás un objeto con la respuesta. Revisa la [
 sobre los posibles resultados.  
 
 <strong>Respuesta de una captura</strong>
+
+<div class="language-simple" data-multiple-language></div>
+
 ```java
 response.getAuthorizationCode();
 response.getAuthorizationDate();
@@ -763,7 +768,7 @@ Es la tienda Mall la que agrupa múltiples tiendas, son estas últimas las que p
 generar transacciones. Tanto el mall como las tiendas asociadas son
 identificadas a través de un número denominado código de comercio.
 
-### Flujo Webpay Plus Mall
+### Flujo
 
 El flujo de Webpay Plus Mall es en general el mismo que el de [Webpay Plus](#webpay-plus-normal)
 tanto de cara al tarjeta habiente como de cara al integrador.
@@ -782,7 +787,7 @@ Las diferencias son:
 ### Crear una transacción mall
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#crear-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/webpay#crear-una-transaccion-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
 Esta operación te permite iniciar o crear varias transacciones de una sola vez, Webpay Plus Mall procesa el requerimiento y entrega
@@ -910,6 +915,8 @@ Observar que existe un <code>buyOrder</code> generado para el comercio mall y un
 
 La respuesta de Webpay Plus Mall a la creación de es el token de la transacción y la URL a la cual debes redirigir al tarjetahabiente.
 
+<div class="language-simple" data-multiple-language></div>
+
 ```java
 response.getToken();
 response.getUrl();
@@ -967,7 +974,7 @@ tarjetas de prueba en la sección de Ambientes</a>.
 ### Confirmar una transacción mall
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#confirmar-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/webpay#confirmar-una-transaccion-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
 Una vez que el tarjetahabiente ha pagado, Webpay Plus retornará
@@ -1142,7 +1149,7 @@ details.forEach(detail => {
 ### Obtener estado de una transacción mall
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#obtener-estado-de-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/webpay#obtener-estado-de-una-transaccion-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
@@ -1311,7 +1318,7 @@ details.forEach(detail => {
 ### Reversar o Anular una transacción mall
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#reversar-o-anular-un-pago-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/webpay#reversar-o-anular-una-transaccion-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
 Esta operación permite a todo comercio habilitado reversar o anular una transacción
@@ -1407,9 +1414,8 @@ Para obtener la información contenida en la respuesta puedes hacerlo de la sigu
 ```
 
 ### Capturar una transacción mall
-
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#capturar-una-transaccion-webpay-plus-mall' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/webpay#capturar-una-transaccion-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
 <div class="language-simple" data-multiple-language></div>
@@ -1512,8 +1518,6 @@ transacciones que puedes revisar entrando a
 [www.transbank.cl](https://www.transbank.cl/). Si lo deseas  puedes realizar una
 conciliación entre tu sistema y el reporte que entrega el portal.
 
-### Conciliación Webpay Plus
-
 Para realizar la conciliación debes seguir los siguientes pasos:
 
 1. Iniciar sesión con tu usuario y contraseña en [www.transbank.cl](https://www.transbank.cl)
@@ -1536,7 +1540,7 @@ compra para abrir los detalles de la transacción. Es en esta sección donde pod
 parámetros que recibirás al momento de confirmar una transacción y a que fila
 de la tabla "Detalles de la transacción" corresponden (la lista detallada de
 parámetros de Webpay Plus la puedes encontrar
-[acá](/referencia/webpay#obtener-estado-de-una-transaccion-webpay-plus))
+[acá](/referencia/webpay#obtener-estado-de-una-transaccion))
 
 Nombre | Descripción
 ------ | -----------

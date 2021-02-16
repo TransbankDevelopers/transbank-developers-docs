@@ -1,4 +1,4 @@
-# Oneclick Mall
+# Oneclick
 
 <div class="pos-title-nav">
   <div tbk-link='/referencia/oneclick' tbk-link-name='Referencia API'></div>
@@ -16,6 +16,10 @@ El proceso de integración con Oneclick consiste en desarrollar por parte
 del comercio las llamadas a los servicios web dispuestos por Transbank para la
 inscripción de los tarjetahabientes, así como para la realización de los
 pagos.
+
+<aside class="notice">
+Oneclick solo opera en modalidad Mall. 
+</aside>
 
 ## Flujo de inscripción y pago
 
@@ -99,7 +103,7 @@ pues es posible que el emisor de la tarjeta autorice algunas y otras no.
 ### Crear una inscripción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#crear-una-inscripcion-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/oneclick#crear-una-inscripcion' tbk-link-name='Referencia API'></div>
 </div>
 
 Este permite realizar la inscripción del tarjetahabiente e información de su
@@ -184,7 +188,45 @@ tbk_token = resp.token
 ```
 
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
+const username = 'nombre_de_usuario';
+const email = 'nombre_de_usuario@email.com';
+const responseUrl = 'https://callback/resultado/de/inscripcion';
+
+const response = await Oneclick.MallInscription.start(username, email, responseUrl);
+```
+
+<strong>Respuesta de crear una inscripción</strong>
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+response.getToken();
+response.getUrlWebpay();
+```
+
+```php
+$response->getToken();
+$response->getUrlWebpay();
+```
+
+```csharp
+response.Token;
+response.UrlWebpay
+```
+
+```ruby
+response.token
+response.url_webpay
+```
+
+```python
+response.token
+response.url_webpay
+```
+
+```javascript
+response.token
+response.url_webpay
 ```
 
 Tal como en el caso de Oneclick Normal, debes redireccionar vía `POST` el navegador del usuario a la url retornada en `url_webpay`. **Recordando que el nombre del parámetro que contiene el token se debe llamar `TBK_TOKEN`**.
@@ -192,7 +234,7 @@ Tal como en el caso de Oneclick Normal, debes redireccionar vía `POST` el naveg
 ### Confirmar una inscripción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#confirmar-una-inscripcion-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/oneclick#confirmar-una-inscripcion' tbk-link-name='Referencia API'></div>
 </div>
 
 Una vez terminado el flujo de inscripción en Transbank el usuario es enviado a
@@ -241,19 +283,73 @@ var tbkUser = result.TbkUser;
 
 ```python
 #...
-tbk_token = "tbkToken" // token que llega por POST en el parámetro "TBK_TOKEN"
+tbk_token = "tbkToken" # token que llega por POST en el parámetro "TBK_TOKEN"
 resp = MallInscription.finish(token=tbk_token)
 tbkUser = resp.tbk_user
 ```
 
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
+//...
+const token = 'tbkToken' // token que llega por POST en el parámetro "TBK_TOKEN"
+const response = Oneclick.MallInscription.finish(token);
+```
+
+<strong>Respuesta de confirmar una inscripción</strong>
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+response.getAuthorizationCode();
+response.getCardType();
+response.getCardNumber();
+response.getResponseCode();
+response.getTbkUser();
+```
+
+```php
+$response->getAuthorizationCode();
+$response->getCardType();
+$response->getCardNumber();
+$response->getResponseCode();
+$response->getTbkUser();
+```
+
+```csharp
+response.ResponseCode;
+response.TransbankUser;
+response.AuthorizationCode;
+response.CardType;
+response.CardNumber;
+```
+
+```ruby
+response.response_code
+response.transbank_user
+response.authorization_code
+response.card_type
+response.card_number
+```
+
+```python
+response.response_code
+response.transbank_user
+response.authorization_code
+response.card_type
+response.card_number
+```
+
+```javascript
+response.response_code
+response.transbank_user
+response.authorization_code
+response.card_type
+response.card_number
 ```
 
 ### Eliminar una inscripción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#eliminar-una-inscripcion-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/oneclick#eliminar-una-inscripcion' tbk-link-name='Referencia API'></div>
 </div>
 
 En el caso que el comercio requiera eliminar la inscripción de un usuario en OneClick Mall ya sea por la eliminación
@@ -301,24 +397,54 @@ var result = Inscription.Delete(username, tbkUser);
 
 ```python
 #...
-tbkUser = "tbkUserRetornadoPorInscriptionFinish"
 username = "nombre_de_usuario"
+tbkUser = "tbkUserRetornadoPorInscriptionFinish"
 
 resp = MallInscription.delete(tbk_user=tbkUser, user_name=username)
 ```
 
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
+username = 'nombre_de_usuario';
+tbkUser = 'tbkUserRetornadoPorInscriptionFinish';
+const response = await Oneclick.MallInscription.delete(tbkUser, username);
+```
+
+<strong>Respuesta Eliminar una inscripción</strong>
+
+Esta petición no posee cuerpo de respuesta, solo entrega un 204 cuando se realiza correctamente
+
+```java
+// 204 OK
+```
+
+```php
+// 204 OK
+```
+
+```csharp
+// 204 OK
+```
+
+```ruby
+# 204 OK
+```
+
+```python
+# 204 OK
+```
+
+```javascript
+// 204 OK
 ```
 
 Si se quiere comprobar si se eliminó correctamente, la función retorna un boolean, el cual será `true` en caso de éxito y `false` en otro caso.
 Recuerda que por cada transacción que hayas enviado en el arreglo (array de `details`) recibiras una respuesta.
 Debes validarlas de manera independiente, ya que unas podrías estar aprobadas y otras no.
 
-### Autorizar un pago
+### Autorizar una transacción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#autorizar-un-pago-con-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/oneclick#autorizar-una-transaccion' tbk-link-name='Referencia API'></div>
 </div>
 
 Con el `tbkUser` retornado de la confirmación (`PUT /inscriptions/{token}`) puedes autorizar transacciones:
@@ -444,22 +570,156 @@ resp = MallTransaction.authorize(user_name=username, tbk_user=tbkUser, buy_order
 ```
 
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
+const details = [
+  new TransactionDetail(amount, commerceCode, childBuyOrder),
+  new TransactionDetail(amount2, commerceCode2, childBuyOrder2)
+];
+
+const response = await Oneclick.MallTransaction.authorize(
+  userName, tbkUser, buyOrder, details
+);
+```
+
+<strong>Respuesta Autorizar un pago</strong>
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+response.getAccountingDate();
+response.getBuyOrder();
+response.getTransactionDate();
+final CardDetail cardDetail = response.getCardDetail();
+cardDetail.getCardNumber();
+final List<Detail> detailsResp = response.getDetails();
+for (Detail detail : detailsResp) {
+    detail.getAmount();
+    detail.getAuthorizationCode();
+    detail.getBuyOrder();
+    detail.getCommerceCode();
+    detail.getInstallmentsNumber();
+    detail.getPaymentTypeCode();
+    detail.getStatus();
+}
+```
+
+```php
+$response->getAccountingDate();
+$response->getBuyOrder();
+$card_detail = response->getCardDetail();
+$card_detail->getCardNumber();
+$response->getTransactionDate();
+$response->getVci();
+$details = response->getDetails();
+foreach($details as $detail){
+    detail->getAmount();
+    detail->getAuthorizationCode();
+    detail->getBuyOrder();
+    detail->getCommerceCode();
+    detail->getInstallmentsNumber();
+    detail->getPaymentTypeCode();
+    detail->getResponseCode();
+    detail->getStatus();
+}
+```
+
+```csharp
+response.AccountingDate;
+response.BuyOrder;
+var cardDetail = response.CardDetail;
+cardDetail.CardNumber;
+response.SessionId;
+response.TransactionDate;
+response.Vci;
+var details = response.Details;
+foreach (var detail in details) {
+    detail.Amount;
+    detail.AuthorizationCode;
+    detail.BuyOrder;
+    detail.CommerceCode;
+    detail.InstallmentsNumber;
+    detail.PaymentTypeCode;
+    detail.ResponseCode;
+    detail.Status;
+}
+```
+
+```ruby
+response.accounting_date
+response.buy_order
+card_detail = response.card_detail
+card_detail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+details.each do |detail|
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+end
+```
+
+```python
+response.accounting_date
+response.buy_order
+card_detail = response.card_detail
+card_detail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+for detail in details:
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+```
+
+```javascript
+response.accounting_date
+response.buy_order
+cardDetail = response.card_detail
+cardDetail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+for(let detail on details) {
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+}
 ```
 
 ### Obtener estado de una transacción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#consultar-un-pago-realizado-con-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/oneclick#obtener-estado-de-una-transaccion' tbk-link-name='Referencia API'></div>
 </div>
 
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
-Revisa la [referencia](/referencia/webpay#consultar-un-pago-realizado-con-oneclick-mall) de este método para mayor detalle en los parámetros de entrada y respuesta.
+Revisa la [referencia](/referencia/oneclick#obtener-estado-de-una-transaccion) de este método para mayor detalle en los parámetros de entrada y respuesta.
 
 <strong>Transaction.status()</strong>
 
 Permite consultar el estado de pago realizado a través de Oneclick.
 Retorna el resultado de la autorización.
+
+<div class="language-simple" data-multiple-language></div>
 
 ```java
 final OneclickMallTransactionStatusResponse response =
@@ -486,10 +746,139 @@ response = Transbank::Webpay::Oneclick::MallTransaction::status(buy_order: buy_o
 var response = MallTransaction.status(buy_order)
 ```
 
+```javascript
+const response = await Oneclick.MallTransaction.status(token);
+```
+
+<strong>Respuesta de consulta de estado</strong>
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+response.getAccountingDate();
+response.getBuyOrder();
+response.getTransactionDate();
+final CardDetail cardDetail = response.getCardDetail();
+cardDetail.getCardNumber();
+final List<Detail> detailsResp = response.getDetails();
+for (Detail detail : detailsResp) {
+    detail.getAmount();
+    detail.getAuthorizationCode();
+    detail.getBuyOrder();
+    detail.getCommerceCode();
+    detail.getInstallmentsNumber();
+    detail.getPaymentTypeCode();
+    detail.getStatus();
+}
+```
+
+```php
+$response->getAccountingDate();
+$response->getBuyOrder();
+$card_detail = $response->getCardDetail();
+$card_detail->getCardNumber();
+$response->getTransactionDate();
+$response->getVci();
+$details = $response->getDetails();
+foreach($details as $detail){
+    detail->getAmount();
+    detail->getAuthorizationCode();
+    detail->getBuyOrder();
+    detail->getCommerceCode();
+    detail->getInstallmentsNumber();
+    detail->getPaymentTypeCode();
+    detail->getResponseCode();
+    detail->getStatus();
+}
+```
+
+```csharp
+response.AccountingDate;
+response.BuyOrder;
+var cardDetail = response.CardDetail;
+cardDetail.CardNumber;
+response.SessionId;
+response.TransactionDate;
+response.Vci;
+var details = response.Details;
+foreach (var detail in details) {
+    detail.Amount;
+    detail.AuthorizationCode;
+    detail.BuyOrder;
+    detail.CommerceCode;
+    detail.InstallmentsNumber;
+    detail.PaymentTypeCode;
+    detail.ResponseCode;
+    detail.Status;
+}
+```
+
+```ruby
+response.accounting_date
+response.buy_order
+card_detail = response.card_detail
+card_detail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+details.each do |detail|
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+end
+```
+
+```python
+response.accounting_date
+response.buy_order
+card_detail = response.card_detail
+card_detail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+for detail in details:
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+```
+
+```javascript
+response.accounting_date
+response.buy_order
+cardDetail = response.card_detail
+cardDetail.card_number
+response.session_id
+response.transaction_date
+response.vci
+details = response.details
+for(detail on details) {
+  detail.amount
+  detail.authorization_code
+  detail.buy_order
+  detail.commerce_code
+  detail.installments_number
+  detail.payment_type_code
+  detail.response_code
+  detail.status
+}
+```
+
 ### Reversar o anular una transacción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#reversar-o-anular-un-pago-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/oneclick#reversar-o-anular-una-transaccion' tbk-link-name='Referencia API'></div>
 </div>
 
 Para Oneclick Mall hay dos operaciones diferentes para dejar sin efecto
@@ -526,7 +915,7 @@ Este método retorna como respuesta un identificador único de la transacció
 String buyOrder = "buyOrderIndicadoEnTransactionAuthorize";
 String childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
 String childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
-double amount = (byte) 1;
+double amount = 10000;
 
 OneclickMallTransactionRefundResponse response = OneclickMall.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
@@ -534,10 +923,10 @@ OneclickMallTransactionRefundResponse response = OneclickMall.Transaction.refund
 ```php
 //...
 
-$buyOrder = $buyOrderIndicadoEnTransactionAuthorize;
-$childCommerceCode = $childCommerceCodeIndicadoEnTransactionAuthorize;
-$childBuyOrder = $childBuyOrderIndicadoEnTransactionAuthorize;
-$amount = $amountIndicadoEnTransactionAuthorize;
+$buyOrder = "buyOrderIndicadoEnTransactionAuthorize";
+$childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
+$childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
+$amount = 10000;
 
 //Parámetro opcional
 $options = new Options($apiKey, $parentCommerceCode);
@@ -548,10 +937,10 @@ $response = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrde
 ```csharp
 //...
 
-var buyOrder = Request.Form["buy_order"];
-var childCommerceCode = Request.Form["child_commerce_code"];
-var childBuyOrder = Request.Form["child_buy_order"];
-var amount = decimal.Parse(Request.Form["amount"]);
+var buyOrder = "buyOrderIndicadoEnTransactionAuthorize";
+var childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
+var childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
+var amount = 10000;
 
 var result = MallTransaction.Refund(buyOrder, childCommerceCode,childBuyOrder,amount);
 ```
@@ -559,10 +948,10 @@ var result = MallTransaction.Refund(buyOrder, childCommerceCode,childBuyOrder,am
 ```ruby
 #...
 
-@buy_order = "12345" + Time.now.to_i.to_s
-@child_commerce_code = "597055555542"
-@child_buy_order = "abcdef" + Time.now.to_i.to_s
-@amount = 1000
+@buy_order = "buyOrderIndicadoEnTransactionAuthorize"
+@child_commerce_code = "childCommerceCodeIndicadoEnTransactionAuthorize"
+@child_buy_order = "childBuyOrderIndicadoEnTransactionAuthorize"
+@amount = 10_000
 
 @resp = Transbank::Webpay::Oneclick::MallTransaction::refund(buy_order: @buy_order, child_commerce_code: @child_commerce_code, child_buy_order: @child_buy_order, amount: @amount)
 ```
@@ -570,22 +959,26 @@ var result = MallTransaction.Refund(buyOrder, childCommerceCode,childBuyOrder,am
 ```python
 #...
 
-buy_order = str(random.randrange(1000000, 99999999))
-child_commerce_code = '597055555542'
-child_buy_order = str(random.randrange(1000000, 99999999))
+buy_order = "buyOrderIndicadoEnTransactionAuthorize"
+child_commerce_code = "childCommerceCodeIndicadoEnTransactionAuthorize"
+child_buy_order = "childBuyOrderIndicadoEnTransactionAuthorize"
 amount = 10000
 
 resp = MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, amount)
 ```
 
 ```javascript
-// No está implementado en el SDK. De momento puedes usar la referencia del API o usar una librería externa.
+const buyOrder = "buyOrderIndicadoEnTransactionAuthorize";
+const childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
+const childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
+const amount = 10000;
+const response = await Oneclick.MallTransaction.refund(buyOrder, childCommerceCode, buyOrderChild, amount);
 ```
 
 ### Capturar una transacción
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#captura-diferida-oneclick-mall' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/oneclick#captura-diferida-de-una-transaccion' tbk-link-name='Referencia API'></div>
 </div>
 
 En el caso de que tengas contratada la modalidad de Captura diferida, necesitas llamar al método `capture` después
@@ -619,6 +1012,8 @@ transacción.
 En esta modalidad no se aceptan tarjetas de débito ni prepago.
 </aside>
 
+<div class="language-simple" data-multiple-language></div>
+
 ```java
 final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTransaction.capture(
   childCommerceCode, childBuyOrder, amount, authorizationCode
@@ -644,6 +1039,50 @@ response = Transbank::Webpay::Oneclick::MallDeferredTransaction::capture(
 # Este SDK aún no tiene implementada esta funcionalidad. Se puede consumir el método del API REST directamente, sin usar el SDK de momento.
 ```
 
+```javascript
+const response = await Oneclick.DeferredTransaction.capture(commerceCode, buyOrder, amount, authorizationCode);
+```
+
+<strong>Respuesta de captura diferida</strong>
+
+<div class="language-simple" data-multiple-language></div>
+
+```java
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getCapturedAmount();
+response.getResponseCode();
+```
+
+```php
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getCapturedAmount();
+$response->getResponseCode();
+```
+
+```csharp
+// Esta función aun no se encuentra disponible en el SDK
+```
+
+```ruby
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
+```python
+# Esta función aun no se encuentra disponible en el SDK
+```
+
+```javascript
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
 ## Credenciales y Ambientes
 
 ### Ambiente de integración
@@ -657,46 +1096,50 @@ Asegúrate de que estés usando el código de comercio de integración que tenga
 Puedes revisar los códigos de comercio del ambiente de integración de todos nuestros productos y variaciones
 [en este link](/documentacion/como_empezar#ambiente-de-integracion).
 
-### Oneclick: Configuración SDK
+### Configuración SDK
 
 Los SDK vienen preconfigurados para operar con Oneclick Mall captura simultanea. Si necesitas operar con otra modalidad,
 como captura diferida, debes configurar explícitamente el [código de comercio que usarás](/documentacion/como_empezar#ambiente-de-integracion).
-No es necesario definir el Api Key Secret (llave secreta) ya que en este ambiente, todos los productos usan la misma y
+No es necesario definir el Api Key ya que en este ambiente, todos los productos usan la misma y
 ya viene preconfigurada.
 
 ```java
-// OneclickMall Live Config
-OneclickMall.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+OneclickMall.setCommerceCode("Pon el Código de Comercio");
 ```
 
 ```php
-\Transbank\Webpay\OneClick::setCommerceCode("{commerce-code}");
+\Transbank\Webpay\OneClick::setCommerceCode("Pon el Código de Comercio");
 ```
 
 ```csharp
 using Transbank.Webpay.Oneclick;
 
-Oneclick.CommerceCode = "5970TuCodigo";
+Oneclick.CommerceCode = "Pon el Código de Comercio";
 ```
 
 ```ruby
-# Oneclick
-Transbank::Webpay::OneClick::Base.commerce_code = "commercecode"
+Transbank::Webpay::OneClick::Base.commerce_code = "Pon el Código de Comercio"
 ```
 
 ```python
-# Oneclick
 from transbank import oneclick as BaseOneClick
 from transbank.common.integration_type import IntegrationType
 
-BaseOneClick.commerce_code = "codigo-comercio-aca"
+BaseOneClick.commerce_code = "Pon el Código de Comercio"
+```
+
+```javascript
+// Este SDK posee métodos para configurar las distintas modalidades
+Oneclick.configureForIntegration(commerceCode, apiKey); // Manual
+Oneclick.configureOneclickMallForTesting();
+Oneclick.configureOneclickMallDeferredForTesting();
 ```
 
 ### Apuntar a producción
 
-Antes de operar en el ambiente de producción, debes pasar por un [proceso de validación](/documentacion/como_empezar#el-proceso-de-validacion), luego del cual te entregaremos tu Secret Key (**llave secreta**).  
+Antes de operar en el ambiente de producción, debes pasar por un [proceso de validación](/documentacion/como_empezar#el-proceso-de-validacion), luego del cual te entregaremos tu Api Key.  
 
-Si ya tienes tu llave secreta, puedes revisar como configurar el SDK para usar este ambiente de producción en [esta sección](/documentacion/como_empezar#configuracion-de-produccion)
+Si ya tienes tu Api Key, puedes revisar como configurar el SDK para usar este ambiente de producción en [esta sección](/documentacion/como_empezar#configuracion-de-produccion)
 
 ## Conciliación de Transacciones
 
@@ -704,8 +1147,6 @@ Una vez hayas realizado transacciones en producción quedará un historial de
 transacciones que puedes revisar entrando a
 [www.transbank.cl](https://www.transbank.cl/). Si lo deseas  puedes realizar una
 conciliación entre tu sistema y el reporte que entrega el portal.
-
-### Oneclick
 
 Para realizar la conciliación debes seguir los siguientes pasos:
 
@@ -729,7 +1170,7 @@ encontrar y conciliar los parámetros devueltos por el SDK al confirmar una tran
 parámetros que recibirás al momento de confirmar una transacción y a que fila
 de la tabla "Detalles de la transacción" corresponden (la lista completa de
 parámetros de Oneclick la puedes encontrar
-[acá](/referencia/webpay-soap#autorizar-un-pago-con-webpay-oneclick))
+[acá](/referencia/oneclick#autorizar-una-transacción))
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------

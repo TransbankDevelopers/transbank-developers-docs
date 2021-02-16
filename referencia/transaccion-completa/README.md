@@ -1957,7 +1957,7 @@ response_code <br> <i> Number </i> | Código del resultado del pago. Si es exito
 
 ## Captura Diferida
 
-Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo el cargo al tarjetahabiente.
+Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo al tarjetahabiente.
 
 **Válido para :**
 

@@ -1,4 +1,4 @@
-# Oneclick REST
+# Oneclick
 
 ___
 
@@ -474,8 +474,8 @@ Esta petición no posee cuerpo de respuesta, solo entrega un 204 cuando se reali
 Content-Type: application/json
 ```
 
-### Autorizar un pago
-Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#autorizar-un-pago)
+### Autorizar una transacción
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#autorizar-una-transaccion)
 
 Una vez realizada la inscripción, el comercio puede usar el `tbkUser` recibido
 para realizar transacciones. Para eso debes usar el método `Transaction.authorize()`.
@@ -719,7 +719,7 @@ response.session_id
 response.transaction_date
 response.vci
 details = response.details
-for(detail on details) {
+for(let detail of details) {
   detail.amount
   detail.authorization_code
   detail.buy_order
@@ -778,13 +778,12 @@ Cualquier valor distinto de número en `installmentsNumber` (incluyendo letras,
 inexistencia del campo o nulo) será asumido como cero, es decir "Sin cuotas".
 </aside>
 
-### Consultar un pago realizado
-Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#obtener-estado-de-una-transaccion)
+### Obtener estado de una transacción
 
 Permite consultar el estado de pago realizado a través de Oneclick.
 Retorna el resultado de la autorización.
 
-Revisa la [documentación](/documentacion/oneclick#consultar-un-pago-realizado) de este método para mayor detalle.
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#obtener-estado-de-una-transaccion)
 
 ```java
 final OneclickMallTransactionStatusResponse response =
@@ -1000,7 +999,7 @@ details [].buy_order  <br> <i> String </i> | Orden de compra generada por el com
 status  <br> <i> Text </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago original: monto inicial – monto anulado. Largo máximo: 17
 
-### Reversar o Anular un pago Oneclick Mall
+### Reversar o anular una transacción
 
 Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#reversar-o-anular-una-transaccion)
 
@@ -1149,7 +1148,7 @@ balance  <br> <i> Decimal </i> | (Solo si es NULLIFIED)  Monto restante de la t
 response_code <br> <i> Number </i> | (Solo si es NULLIFIED)  Código del resultado del pago, donde: 0 (cero) es aprobado. Largo máximo: 2
 buy_order  <br> <i> String </i> | (Solo si es NULLIFIED)  Orden de compra generada por el comercio hijo para la transacción de pago. Largo máximo: 26.
 
-### Captura Diferida Oneclick Mall
+### Captura diferida de una transacción
 
 Revisa más detalles sobre esta modalidad en [la documentación](/doumentacion/oneclick#capturar-una-transaccion)
 
