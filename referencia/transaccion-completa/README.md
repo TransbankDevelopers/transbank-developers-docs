@@ -1,4 +1,4 @@
-# Transacción Completa REST
+# Transacción Completa
 
 ___
 
@@ -38,6 +38,10 @@ Las URLs de endpoints de producción están alojados dentro de
 Host: https://webpay3g.transbank.cl
 ```
 
+```javascript
+// Host: https://webpay3g.transbank.cl
+```
+
 ### Ambiente de Integración
 
 Las URLs de endpoints de integración están alojados dentro de
@@ -65,6 +69,10 @@ Las URLs de endpoints de integración están alojados dentro de
 
 ```http
 Host: https://webpay3gint.transbank.cl
+```
+
+```javascript
+// Host: https://webpay3gint.transbank.cl
 ```
 
 ### Tarjetas y usuarios de prueba
@@ -110,6 +118,12 @@ Tbk-Api-Key-Secret: Llave secreta
 Content-Type: application/json
 ```
 
+```javascript
+// Tbk-Api-Key-Id: Código de comercio
+// Tbk-Api-Key-Secret: Llave secreta
+// Content-Type: application/json
+```
+
 Todas las peticiones que hagas deben incluir el código de comercio y la llave
 secreta entregada por Transbank, actuando ambas como las credenciales que autorizan
 distintas operaciones.
@@ -135,11 +149,9 @@ Este producto tiene requerimientos comerciales más estrictos que el resto de lo
 No inicies la integración si aún no completan la afiliación comercial.
 </aside>
 
-Una transacción completa permite al comercio presentar al tarjetahabiente un
-formulario propio para almacenar los datos de la tarjeta, fecha de vencimiento
-y cvv (no necesario para comercios con la opción `sin cvv` habilitada).
-
 ### Crear una Transacción Completa
+
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/transaccion-completa#crear-una-transaccion)
 
 Para crear una transacción completa basta llamar al método `Transaction.create()`
 
@@ -230,6 +242,12 @@ Content-Type: application/json
 }
 ```
 
+```javascript
+const response = await TransaccionCompleta.transaction.create(buyOrder, sessionId, amount, cvv, cardNumber, cardExpirationDate);
+
+```
+
+
 <strong>Parámetros Transaction.create</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -270,6 +288,10 @@ Content-Type: application/json
 {
   "token": "e074d38c628122c63e5c0986368ece22974d6fee1440617d85873b7b4efa48a3",
 }
+```
+
+```javascript
+response.token
 ```
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -350,6 +372,10 @@ Content-Type: application/json
 }
 ```
 
+```javascript
+const response = await TransaccionCompleta.Transaction.installments(token, installmentsNumber);
+```
+
 <strong>Parámetros Transaction.installments</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -386,6 +412,12 @@ response.deferred_periods
 ```
 
 ```python
+response.installments_amount
+response.id_query_installments
+response.deferred_periods
+```
+
+```javascript
 response.installments_amount
 response.id_query_installments
 response.deferred_periods
@@ -487,6 +519,11 @@ Content-Type: application/json
   "deferred_period_index": 1,
   "grace_period": false
 }
+```
+
+```javascript
+const response = await TransaccionCompleta.Transaction.commit(
+    token, idQueryInstallments, deferredPeriodIndex, gracePeriod);
 ```
 
 <strong>Parámetros Transaction.commit</strong>
@@ -600,6 +637,22 @@ Content-Type: application/json
 }
 ```
 
+```javascript
+response.amount
+response.status
+response.buy_order
+response.session_id
+response.card_number
+response.accounting_date
+response.transaction_date
+response.authorization_code
+response.payment_type_code
+response.response_code
+response.installments_number
+response.installments_amount
+response.balance
+```
+
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 amount  <br> <i> Number </i> | Monto de la transacción. Sólo en caso de dolar acepta dos decimales. Largo máximo: 17
@@ -658,6 +711,10 @@ GET /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
 Tbk-Api-Key-Id: 597055555530
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
+```
+
+```javascript
+const response = await TransaccionCompleta.Transaction.status(token);
 ```
 
 <strong>Parámetros Transaction.status</strong>
@@ -767,6 +824,22 @@ Content-Type: application/json
 }
 ```
 
+```javascript
+response.amount
+response.status
+response.buy_order
+response.session_id
+response.card_number
+response.accounting_date
+response.transaction_date
+response.authorization_code
+response.payment_type_code
+response.response_code
+response.installments_number
+response.installments_amount
+response.balance
+```
+
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 amount  <br> <i> Number </i> | Monto de la transacción. Sólo en caso de dolar acepta dos decimales. Largo máximo: 17
@@ -854,6 +927,10 @@ Content-Type: application/json
 }
 ```
 
+```javascript
+const response = await TransaccionCompleta.Transaction.refund(token, amount);
+```
+
 <strong>Parámetros Transaction.refund</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -921,6 +998,15 @@ Content-Type: application/json
 }
 ```
 
+```javascript
+response.type
+response.authorization_code
+response.authorization_date
+response.nullified_amount
+response.balance
+response.response_code
+```
+
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 type  <br> <i> String </i> | Tipo de reembolso (REVERSE. NULLIFY). Largo máximo: 10
@@ -930,6 +1016,104 @@ nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17. Solo
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17. Solo viene en caso de anulación.
 response_code  <br> <i> Number </i> | Código de resultado de la anulación. Si es exitoso es 0, de lo contrario la anulación no fue realizada. Largo máximo: 2. Solo viene en caso de anulación.
 
+## Captura Diferida
+
+Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo al tarjetahabiente.
+
+**Válido para :**
+
+* Webpay Plus Captura Diferida
+* Transacción Completa Captura Diferida
+
+### Ejecutar captura diferida Transaccion Completa
+
+Puedes [leer más sobre la captura en la información del
+producto Webpay](/producto/webpay#autorizacion-y-captura)
+para conocer más detalles y restricciones.
+
+Para realizar esa captura explícita debe usarse el método `Transaction.capture()`
+
+<strong>Transaction.capture()</strong>
+
+Permite solicitar a Webpay la captura diferida de una transacción con
+autorización y sin captura simultánea.
+
+```http
+PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
+Tbk-Api-Key-Id: 597055555531
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "buy_order": "415034240",
+  "authorization_code": "12345",
+  "capture_amount": 1000
+}
+```
+
+```javascript
+const response = TransaccionCompleta.DeferredTransaction.capture(
+  token, buyOrder, authorizationCode, amount
+);
+```
+<strong>Parámetros Transaction.capture</strong>
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
+buy_order  <br> <i> String </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
+authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
+capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo máximo: 17.
+
+<strong>Respuesta Transaction.capture</strong>
+
+```http
+200 OK
+Content-Type: application/json
+{
+  "token": "e074d38c628122c63e5c0986368ece22974d6fee1440617d85873b7b4efa48a3",
+  "authorization_code": "123456",
+  "authorization_date": "2019-03-20T20:18:20Z",
+  "captured_amount": 1000,
+  "response_code": 0
+}
+```
+
+```javascript
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+token  <br> <i> String </i> | Token de la transacción. Largo máximo: 64
+authorization_code  <br> <i> String </i> | Código de autorización de la captura diferida. Largo máximo: 6
+authorization_date  <br> <i> String </i> | Fecha y hora de la autorización.
+captured_amount  <br> <i> Decimal </i> | Monto capturado. Largo máximo: 6
+response_code  <br> <i> Number </i> | Código de resultado de la captura. Si es exitoso es 0,de lo contrario la captura no fue realizada. Largo máximo: 2
+
+En caso de error pueden aparecer los siguientes códigos exclusivos del método
+`Transaction.capture()`:
+
+Código  | Descripción
+------  | -----------
+304     | Validación de campos de entrada nulos
+245     | Código de comercio no existe
+22      | El comercio no se encuentra activo
+316     | El comercio indicado no corresponde al certificado o no es hijo del comercio Mall en caso de transacciones MALL
+308     | Operación no permitida
+274     | Transacción no encontrada
+16      | La transacción no es de captura diferida
+292     | La transacción no está autorizada
+284     | Periodo de captura excedido
+310     | Transacción reversada previamente
+309     | Transacción capturada previamente
+311     | Monto a capturar excede el monto autorizado
+315     | Error del autorizador
+
+
 ## Transacción Completa Mall
 
 <aside class="warning">
@@ -937,33 +1121,7 @@ Este producto tiene requerimientos comerciales más estrictos que el resto de lo
 No inicies la integración si aún no completan la afiliación comercial.
 </aside>
 
-Una transacción Completa Mall corresponde a una solicitud de transacciones completas
-de un conjunto de pagos con tarjetas de crédito, en donde quién realiza el pago
-ingresa al sitio del comercio, selecciona productos o
-servicios, y el ingreso asociado a los datos de la tarjeta de crédito
-lo realiza una única vez en forma segura en Webpay para el conjunto de pagos.
-Cada pago tendrá su propio resultado, autorizado o rechazado.
-
-![Desagregación de un pago Webpay Mall](/images/pago-webpay-mall.png)
-
-El Mall Webpay agrupa múltiples tiendas, son estas últimas las que pueden
-generar transacciones. Tanto el mall como las tiendas asociadas son
-identificadas a través de un número denominado código de comercio.
-
-### Flujo Transacción Completa Mall
-
-El flujo de Transacción Completa Mall es en general el mismo que el de [Transacción Completa](#webpay-transaccion-completa) tanto de cara al tarjeta habiente como de cara al integrador.
-
-Las diferencias son:
-
-* Se debe usar un código de comercio configurado para modalidad Mall en
-  Transbank, el cual debe ser indicado al iniciar la transacción.
-* Se pueden indicar múltiples transacciones, cada una asociada a un código de
-  comercio de tienda (que debe estar configurada en Transbank como perteneciente
-  al mall).
-* Se debe verificar por separado el resultado de cada una de esas transacciones
-  individualmente, pues es posible que el emisor de la tarjeta autorice algunas
-  y otras no.
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/transaccion-completa#)
 
 ### Crear una Transacción Completa Mall
 
@@ -1113,6 +1271,22 @@ Content-Type: application/json
 }
 ```
 
+```javascript
+const details = [
+  new TransactionDetail(amount, commerceCode, childBuyOrder),
+  new TransactionDetail(amount2, commerceCode2, childBuyOrder2)
+];
+
+const response = await TransaccionCompleta.MallTransaction.create(		
+  parentBuyOrder,		
+  sessionId,		
+  cvv,		
+  cardNumber,		
+  cardExpirationDate,		
+  details
+);
+```
+
 <strong>Parámetros Transaction.create Completa Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -1155,6 +1329,10 @@ Content-Type: application/json
 {
   "token": "e074d38c628122c63e5c0986368ece22974d6fee1440617d85873b7b4efa48a3",
 }
+```
+
+```javascript
+response.token
 ```
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -1266,6 +1444,18 @@ Content-Type: application/json
 }
 ```
 
+```javascript
+const details = [
+  new InstallmentDetail(childCommerceCode, childBuyOrder, installmentsNumber),
+  new InstallmentDetail(childCommerceCode2, childBuyOrder2, installmentsNumber2)
+  ];		
+
+const response = await TransaccionCompleta.MallTransaction.installments(		
+  token,		
+  details
+);
+```
+
 <strong>Parámetros Transaction.installments Completa Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -1333,6 +1523,14 @@ Content-Type: application/json
 }
 ```
 
+```javascript
+response.installment_amount
+response.id_query_installment
+deferred_period = response.deferred_periods[0]
+deferred_period.amount
+deferred_period.period
+```
+
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 installments_amount  <br> <i> String </i> | Monto de cada cuota. Largo: 17.
@@ -1341,7 +1539,7 @@ deferred_periods  <br> <i> Array </i> | Arreglo con periodos diferidos.
 deferred_periods [].amount  <br> <i> String </i> | Monto. Largo: 17.
 deferred_periods [].period  <br> <i> String </i> | Índice de periodo. Largo: 2.
 
-### Confirmación de la transacción Completa Mall
+### Confirmación de la transacción Completa Mall  
 
 Una vez iniciada la transacción y consultado el monto de las cuotas por cada subtransacción, puedes confirmar y obtener el resultado de una transacción completa usando el metodo `Transaction.commit()`.
 
@@ -1474,6 +1672,17 @@ Content-Type: application/json
 }
 ```
 
+```javascript
+let commitDetails = [
+  new CommitDetail(commerceCode, childBuyOrder),
+  new CommitDetail(commerceCode2, childBuyOrder2)
+];		
+const response = await TransaccionCompleta.MallTransaction.commit(		
+  token,		
+  commitDetails
+);
+```
+
 <strong>Parámetros Transaction.commit Completa Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -1604,6 +1813,24 @@ Content-Type: application/json
 }
 ```
 
+```javascript
+response.buy_order
+response.card_number
+response.accounting_date
+response.transaction_date
+detail = response.details[0]
+detail.authorization_code
+detail.payment_code_type
+detail.response_code
+detail.installments_amount
+detail.installments_number
+detail.amount
+detail.commerce_code
+detail.buy_order
+detail.status
+detail.balance
+```
+
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 buy_order  <br> <i> String </i> | Orden de compra del mall. Largo máximo: 26
@@ -1623,7 +1850,7 @@ details [].commerce_code  <br> <i> String </i> | Código comercio de la tienda.
 details [].buy_order  <br> <i> String </i> | Orden de compra de la tienda. Largo máximo: 26
 prepaid_balance <br> <i> Number </i> | Saldo de la tarjeta de prepago. Se envía solo si se informa saldo. <br> <i> Largo máximo 17 </i>
 
-### Consultar estado de una transacción Completa Mall
+### Consultar estado de una Transacción Completa Mall
 
 Esta operación permite obtener el estado de la transacción Completa Mall en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
@@ -1660,6 +1887,10 @@ GET /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
 Tbk-Api-Key-Id: 597055555551
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
+```
+
+```javascript
+const response = await TransaccionCompleta.MallTransaction.status(token);
 ```
 
 <strong>Parámetros Transaction.status Completa Mall</strong>
@@ -1785,6 +2016,23 @@ Content-Type: application/json
   ]
 }
 ```
+```javascript
+response.buy_order
+response.card_number
+response.accounting_date
+response.transaction_date
+detail = response.details[0]
+detail.authorization_code
+detail.payment_code_type
+detail.response_code
+detail.installments_amount
+detail.installments_number
+detail.amount
+detail.commerce_code
+detail.buy_order
+detail.status
+detail.balance
+```
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
@@ -1877,6 +2125,15 @@ Content-Type: application/json
 }
 ```
 
+```javascript
+const refundResponse = await TransaccionCompleta.MallTransaction.refund(		
+  token,	
+  buyOrder,		
+  commerceCode,
+  amount		
+);
+```
+
 <strong>Parámetros Transaction.refund Completa Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -1946,6 +2203,15 @@ Content-Type: application/json
 }
 ```
 
+```javascript
+response.type
+response.authorization_code
+response.authorization_date
+response.nullified_amount
+response.balance
+response.response_code
+```
+
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 type  <br> <i> String </i> | Tipo de reembolso (REVERSE o NULLIFY). Si es REVERSE no se devolverán datos de la transacción. Largo máximo: 10
@@ -1955,7 +2221,7 @@ nullified_amount  <br> <i> Decimal </i> | Monto anulado. Largo máximo: 17. Solo
 balance  <br> <i> Decimal </i> | Saldo actualizado de la transacción (considera la venta menos el monto anulado). Largo máximo: 17. Solo viene en caso de anulación.
 response_code <br> <i> Number </i> | Código del resultado del pago. Si es exitoso es 0, de lo contrario el pago no fue realizado. Largo máximo: 2. Solo viene en caso de anulación.
 
-## Captura Diferida
+## Captura Diferida mall
 
 Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo al tarjetahabiente.
 
@@ -1964,20 +2230,7 @@ Los comercios que están configurados para operar con captura diferida deben eje
 * Webpay Plus Captura Diferida
 * Transacción Completa Captura Diferida
 
-### Ejecutar captura diferida
-
-Este método permite a todo comercio habilitado realizar capturas de una
-transacción autorizada sin captura generada en Webpay Plus o Transacción Completa.
-El método contempla una única captura por cada autorización. Para ello se
-deberá indicar los datos asociados a la transacción de venta con autorización
-sin captura y el monto requerido para capturar el cual debe ser menor o igual al
-monto originalmente autorizado.
-
-Para capturar una transacción, ésta debe haber sido creada (según lo visto
-anteriormente para Webpay Plus o Webpay Plus Mall) por un código de
-comercio configurado para captura diferida. De esa forma la transacción estará
-autorizada pero requerirá una captura explícita posterior para confirmar la
-transacción.
+### Ejecutar captura diferida mall
 
 Puedes [leer más sobre la captura en la información del
 producto Webpay](/producto/webpay#autorizacion-y-captura)
@@ -1987,13 +2240,11 @@ Para realizar esa captura explícita debe usarse el método `Transaction.capture
 
 <strong>Transaction.capture()</strong>
 
-Permite solicitar a Webpay la captura diferida de una transacción con
-autorización y sin captura simultánea.
-
 > Los SDKs permiten indicar opcionalmente el código de comercio de la
 > transacción a capturar, para soportar la captura en comercios Webpay Plus
 > Mall o Transacción Completa Mall. En comercios sin modalidad Mall no es necesario especificar el código
 > de comercio, ya que se usa el indicado en la configuración.
+
 
 <aside class="notice">
 El método `Transaction.capture()` debe ser invocado siempre indicando el código del
@@ -2001,35 +2252,6 @@ comercio que realizó la transacción. En el caso de comercios modalidad Mall,
 el código debe ser el código de la tienda virtual específica.
 </aside>
 
-```java
-final CaptureWebpayPlusTransactionResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
-```
-
-```php
-use Transbank\Webpay\WebpayPlus;
-
-$response = Transaction::capture($token, $buyOrder, $authCode, $amount);
-```
-
-```csharp
-var response = DeferredTransaction.Capture(token, buyOrder, authorizationCode, captureAmount);
-```
-
-```ruby
-response = Transbank::Webpay::WebpayPlus::DeferredTransaction::capture(
-  token: @token,
-  buy_order: @buy_order,
-  authorization_code: @auth_code,
-  capture_amount: @amount
-)
-```
-
-```python
-response = MallDeferredTransaction.capture(
-  token=token, capture_amount=amount, commerce_code=commerce_code,
-  buy_order=buy_order, authorization_code=authorization_code
-)
-```
 
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
@@ -2045,6 +2267,12 @@ Content-Type: application/json
 }
 ```
 
+```javascript
+const response = TransaccionCompleta.MallDeferredTransaction.capture(
+  token, commerceCode, buyOrder, authorizationCode, amount
+);
+```
+
 <strong>Parámetros Transaction.capture</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -2057,41 +2285,6 @@ capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo má
 
 <strong>Respuesta Transaction.capture</strong>
 
-```java
-response.getAuthorizationCode();
-response.getAuthorizationDate();
-response.getCapturedAmount();
-response.getResponseCode();
-```
-
-```php
-response->getAuthorizationCode();
-response->getAuthorizationDate();
-response->getCapturedAmount();
-response->getResponseCode();
-```
-
-```csharp
-response.AuthorizationCode;
-response.AuthorizationDate;
-response.CapturedAmount;
-response.ResponseCode;
-```
-
-```ruby
-response.authorization_code
-response.authorization_date
-response.captured_amount
-response.response_code
-```
-
-```python
-response.authorization_code
-response.authorization_date
-response.captured_amount
-response.response_code
-```
-
 ```http
 200 OK
 Content-Type: application/json
@@ -2102,6 +2295,13 @@ Content-Type: application/json
   "captured_amount": 1000,
   "response_code": 0
 }
+```
+
+```javascript
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
 ```
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -2167,31 +2367,7 @@ Código de estado HTTP | Descripción
 
 ## Puesta en Producción
 
-1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](/referencia/webpay#proceso-de-validacion).
-2. Una vez que Transbank confirme que la planilla de integración se encuentra correcta (no aplica para plugins), se enviará al comercio la confirmación y se generará su **secreto compartido**, que en conjunto con el código de comercio, permiten operar en producción.
-
-3. Cuando recibas el correo, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-para-produccion-utilizando-los-sdk)
-
-4. Con la configuración del ambiente de producción ya lista, será necesario realizar una compra de $10 para validar el correcto funcionamiento.
-
-### Proceso de validación
-
-Durante la validación de la integración se pretende verificar que el comercio transacciona de manera segura y sin problemas, por lo que se solicitarán una serie de pruebas y su posterior envío de evidencias para validar la integración. Esta validación es un requisito para que el comercio pueda operar en el ambiente de producción (bancos y dinero real) y no se permitirá que un comercio utilice productivamente el servicio sin poseer una validación.
-
-Transbank solo validará las integraciones de aquellos comercios que tengan un código de comercio productivo. Para obtenerlo, sigue las instrucciones para hacerte cliente en el portal [http://www.transbank.cl](http://www.transbank.cl) o contacta a tu ejecutivo comercial.
-
-En esta etapa, el comercio envía las evidencias a [soporte@transbank.cl](mailto:soporte@transbank.cl) en **formato PDF** empleando el formulario correspondiente al producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones. Para integraciones Webpay que utilicen algún [plugin oficial](https://transbankdevelopers.cl/plugin) existe un formulario especial.
-
-[Descargar el formulario de envidencias](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-rest.docx)
-
-Soporte validará que los casos de prueba sean consistentes con los registrados en los sistemas de Webpay y, de estar todo correcto, se le notificará al comercio la conformidad para pasar a producción, recibiendo las instrucciones para ello. De no estar consistentes las pruebas, se le hará alcances al comercio respecto de su integración, para que realices las correcciones correspondientes y vuelvas a enviar las evidencias una vez terminadas dichas correcciones.
-
-En el proceso de contratación recibiste tu código de comercio, y junto con el **secreto compartido** que se te entregó luego de la certificación puedes completar tus credenciales, las cuales **debes custodiar y evitar que estén en manos de terceros** ya que permiten hacer (o anular) transacciones en nombre de tu comercio.
-
-* Código de comercio (*API Key*)
-* Secreto compartido (*Shared Secret*)
-
-Luego que el proceso de validación de tu integración está terminado, debes realizar la configuración para que tu sitio se encuentre en producción.
+Puedes revisar el proceso necesario para operar en el ambiente de producción en [la documentación](/documentacion/como_empezar#puesta-en-produccion)
 
 ### Configuración para producción utilizando los SDK
 
@@ -2201,23 +2377,5 @@ Si estas utilizando algún SDK oficial de Transbank, entonces debes seguir los s
 Nunca dejes tu código de comercio y secreto compartido directamente en tu código, te recomendamos utilizar variables de entorno u otro método que te permita mantener tus credenciales seguras.
 </aside>
 
-1. Asignar el código de comercio productivo, entregado por Transbank al momento de contratar el producto.
+Revisa [esta sección](/documentacion/como_empezar#b-utilizando-los-sdk) de la documentación para ver el código necesario para configurar tu propio código de comercio y Api Key Secret. 
 
-    ```java
-    // Para Oneclick
-    OneclickMall.setCommerceCode('TU_CODIGO_DE_COMERCIO');
-    ```
-
-2. Configuración del secreto compartido.
-
-    ```java
-    // Para OneClick
-    OneclickMall.setApiKey('TU_API_KEY');
-    ```
-
-3. Selección del ambiente productivo.
-
-    ```java
-    // Para Oneclick
-    OneclickMall.setIntegrationType(IntegrationType.LIVE);
-    ```
