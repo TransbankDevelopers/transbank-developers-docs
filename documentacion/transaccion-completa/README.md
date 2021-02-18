@@ -1,7 +1,7 @@
 # Transacción Completa
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/webpay#transaccion-completa' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/transaccion-completa' tbk-link-name='Referencia API'></div>
 </div>
 
 Una Transacción Completa permite al comercio presentar al tarjetahabiente un
@@ -16,7 +16,7 @@ No inicies la integración si aún no completan la afiliación comercial.
 ## Transacción Completa
 ### Crear una transacción
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/transaccion-completa#crear-una-transaccion' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/transaccion-completa#crear-una-transaccion-completa' tbk-link-name='Referencia API'></div>
 </div>
 
 Esta operación te permite iniciar o crear una transacción, Transbank procesa el requerimiento y entrega
@@ -155,6 +155,10 @@ response.token
 ```
 
 ### Consulta de cuotas
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/transaccion-completa#cconsulta-de-cuotas' tbk-link-name='Referencia API'></div>
+</div>
+
 Antes de confirmar una transaccion es necesario confirmar la cantidad de cuotas y entregar el valor de estas.
 
 <div class="language-simple" data-multiple-language></div>
@@ -472,6 +476,7 @@ response.balance
 <div class="pos-title-nav">
   <div tbk-link='/referencia/transaccion-completa#consultar-estado-de-una-transaccion-completa' tbk-link-name='Referencia API'></div>
 </div>
+
 Esta operación permite obtener el estado de la transacción en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
 Este método puede ser invocado los 7 días siguientes luego de realizada la transacción. Después de esto no será posible.
@@ -615,6 +620,7 @@ response.balance
 <div class="pos-title-nav">
   <div tbk-link='/referencia/transaccion-completa#reversar-o-anular-un-pago-transaccion-completa' tbk-link-name='Referencia API'></div>
 </div>
+
 Este método permite a todo comercio habilitado reversar o anular una transacción
 completa. El método permite generar el reembolso del total o parte del monto de
 una transacción dependiendo de la siguiente lógica de negocio la invocación a
@@ -730,10 +736,11 @@ response.balance
 response.response_code
 ```
 
-### Captura diferida
+### Captura diferida Transacción completa
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/transaccion-completa#ejecutar-captura-diferida' tbk-link-name='Referencia API'></div>
+  <div tbk-link='/referencia/transaccion-completa#ejecutar-captura-diferida-transaccion-completa' tbk-link-name='Referencia API'></div>
 </div>
+
 Este método permite a todo comercio habilitado realizar capturas de una
 transacción autorizada sin captura generada en Transacción Completa.
 El método contempla una única captura por cada autorización. Para ello se
@@ -811,6 +818,10 @@ response.response_code
 
 ## Transaccción Completa Mall
 
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/transaccion-completa#transaccion-completa-mall' tbk-link-name='Referencia API'></div>
+</div>
+
 Una transacción Mall corresponde a una solicitud de autorización financiera de un conjunto de pagos con tarjetas de crédito, en donde quién realiza el pago ingresa al sitio del comercio, selecciona productos o servicios, y el ingreso asociado a los datos de la tarjeta de crédito lo realiza una única vez para el conjunto de pagos. 
 Cada pago tendrá su propio resultado, autorizado o rechazado.
 
@@ -837,6 +848,10 @@ Las diferencias son:
   y otras no.
 
 ### Crear una transacción mall
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/transaccion-completa#crear-una-transaccion-completa-mall' tbk-link-name='Referencia API'></div>
+</div>
+
 Esta operación te permite iniciar o crear varias transacciones de una sola vez, Transbank procesa el requerimiento y entrega
 como resultado de la operación el token de la transacción.
 
@@ -960,7 +975,7 @@ const details = [
   new TransactionDetail(amount2, commerceCode2, childBuyOrder2)
 ];
 
-const response = await TransaccionCompleta.Mallransaction.create(		
+const response = await TransaccionCompleta.MallTransaction.create(		
   parentBuyOrder,		
   sessionId,		
   cvv,		
@@ -999,6 +1014,11 @@ response.token
 ```
 
 ### Consulta de cuotas mall
+
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/transaccion-completa#consulta-de-cuotas-completa-mall' tbk-link-name='Referencia API'></div>
+</div>
+
 Para consultar el valor de las cuotas que pagará el tarjeta habiente en cada transacción dentro transacción completa mall, es necesario llamar al método `Transaction.installments()`
 
 Operación que permite obtener el monto de la cuota a partir del número de cuotas.
@@ -1104,6 +1124,10 @@ const installmentsResponse = await TransaccionCompleta.MallTransaction.installme
 ```
 
 ### Confirmar una transacción mall
+
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/transaccion-completa#confirmacion-de-la-transaccion-completa-mall' tbk-link-name='Referencia API'></div>
+</div>
 
 Una vez iniciada la transacción y consultado el monto de las cuotas por cada subtransacción, puedes confirmar y obtener el resultado de una transacción completa usando el metodo `Transaction.commit()`.
 
@@ -1340,6 +1364,10 @@ detail.balance
 
 ### Obtener estado de una transacción mall
 
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/transaccion-completa#consultar-estado-de-una-transaccion-completa-mall' tbk-link-name='Referencia API'></div>
+</div>
+
 Esta operación permite obtener el estado de la transacción Completa Mall en cualquier momento. En condiciones normales es probable que no se requiera ejecutar, pero en caso de ocurrir un error inesperado permite conocer el estado y tomar las acciones que correspondan.
 
 Obtiene resultado de transacción a partir de un token.
@@ -1488,6 +1516,10 @@ detail.balance
 
 ### Reversar o anular una transacción mall
 
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/transaccion-completa#anulacion-transaccion-completa-mall' tbk-link-name='Referencia API'></div>
+</div>
+
 Permite generar el reembolso del total o parte del monto de una transacción completa.
 Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una reversa o una anulación:
 
@@ -1602,7 +1634,21 @@ response.balance
 response.response_code
 ```
 
+```javascript
+response.type
+response.authorization_code
+response.authorization_date
+response.nullified_amount
+response.balance
+response.response_code
+```
+
 ### Captura diferida de una transacción mall
+
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/transaccion-completa#ejecutar-captura-diferida-mall' tbk-link-name='Referencia API'></div>
+</div>
+
 Este método permite a todo comercio habilitado realizar capturas de una
 transacción autorizada sin captura generada en Transacción Completa.
 El método contempla una única captura por cada autorización. Para ello se
@@ -1643,7 +1689,7 @@ para conocer más detalles y restricciones.
 
 ```javascript
 const response = TransaccionCompleta.MallDeferredTransaction.capture(
-  token, buyOrder, authorizationCode, amount
+  token, commerceCode, buyOrder, authorizationCode, amount
 );
 ```
 
