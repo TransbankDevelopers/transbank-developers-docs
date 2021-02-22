@@ -73,6 +73,8 @@ De momento, ponemos a tu disposición los siguientes documentos en formato PDF
 
 * **Manual de comandos HOST** - _RS20.1_ | [Descargar](/files/manual-comandos-2-9.pdf) <br />
 _Este documento describe la forma de operar, la funcionalidad y el detalle de la mensajería entre el PINPAD de TRANSBANK y tu sistema de caja mediante comandos por puerto USB o SERIAL._
+* **Manual de especificaciones técnicas Host RS20.1** - _v2.2_ | [Descargar](/files/manual-especificaciones-host-40-22.pdf) <br />
+_Este documento contiene las especificaciones técnicas para poder utilizar el producto Host to Host. ya con una mirada de lo que se requiere por la caja y por el servidor host del comercio._
 * **Manual de comandos ONUS HOST** - _2018.06.01 v1.6_ | [Descargar](/files/manual-comandos-pinpad-anexo-onus-1-6.pdf) <br />
 _Este documento describe la forma de operar, la funcionalidad y el detalle de la mensajería de un PINPAD TRANSBANK trabajando bajo la modalidad OnUs._
 * **Manual de comandos HOST Wifi** - _18.2 v2.4_ | [Descargar](/files/manual-comandos-pinpad-host-wifi.pdf) <br />
@@ -85,6 +87,7 @@ Los archivos de cuadratura (conciliación) son archivos planos que contienen los
 (de venta y anulación)_
 * **Manual para enlazar Pinpad Bluetooth** - _v3.0_ | [Descargar](/files/manual-enlazar-pinpad-bluetooth-3-0.pdf) <br />
 _Procedimiento enlace y conexión Pinpad Bluetooth e355_
+
 
 <div class="container slate">
   <div class='slate-after-footer'>
