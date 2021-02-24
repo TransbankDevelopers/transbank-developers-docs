@@ -106,8 +106,9 @@ Ponemos a tu disposición una serie de repositorios en nuestro Github para ayuda
 * [Ejemplo en Java](https://github.com/TransbankDevelopers/transbank-sdk-java-webpay-rest-example)
 * [Ejemplo en Ruby](https://github.com/TransbankDevelopers/transbank-sdk-ruby-webpay-rest-example)
 * [Ejemplo en Python](https://github.com/TransbankDevelopers/transbank-sdk-python-webpay-rest-example)
+* [Ejemplo en NodeJS](https://github.com/TransbankDevelopers/transbank-sdk-nodejs-webpay-rest-example)
 
-Adicionalmente, puedes revisar el proyecto de ejemplo de PHP [funcionando acá](https://transbank-rest-demo.herokuapp.com/)
+Adicionalmente, puedes revisar el proyecto de ejemplo de NodeJS [funcionando acá](https://transbank-rest-demo.herokuapp.com/)
 
 En el caso de integrar webpay en una aplicación móvil Android, usando webview, debes tener presente la siguiente configuración:
 
