@@ -4,7 +4,7 @@
   <div class="video" data-toggle="modal" data-src="/public/resourse/mooc/webpay/menu/index.html" data-target="#ModalCenterData">Introducción E-learning <i class="op-link"></i></div>
 </div>
 
-Webpay es la pasarela de pago de Transbank para realizar transacciones desde Internet con tarjetas bancarias de crédito y débito Redcompra de manera eficaz y segura.
+Webpay es la pasarela de pago de Transbank para realizar transacciones desde Internet con tarjetas bancarias de crédito y débito Redcompra de manera eficaz y segura.
 
 Un flujo de pago en Webpay generalmente cuenta con los siguientes pasos:
 
@@ -14,7 +14,7 @@ Un flujo de pago en Webpay generalmente cuenta con los siguientes pasos:
 
 3. Durante el proceso de pago, el emisor de la tarjeta autentica al tarjetahabiente antes de realizar la transacción financiera, con el objetivo de validar que la tarjeta esté siendo utilizada por el titular.
 
-4. Una vez resuelta la autenticación se procede a autorizar el pago. Webpay entrega al sistema del comercio el resultado de la autorización.
+4. Una vez resuelta la autenticación se procede a autorizar el pago. Webpay entrega al sistema del comercio el resultado de la autorización.
 
 ## Productos Webpay
 
@@ -23,12 +23,12 @@ A continuación se describen los productos que se ofrecen en los servicios web d
 ### Webpay Plus
 
 <div class="pos-title-nav">
-  <div tbk-link='/documentacion/webpay#webpay-plus' tbk-link-name='Documentación'></div>
+  <div tbk-link='/documentacion/webpay-plus#webpay-plus' tbk-link-name='Documentación'></div>
   <div tbk-link='/referencia/webpay#webpay-plus-normal' tbk-link-name='Referencia Api'></div>
   <div tbk-link='/plugin/webpay' tbk-link-name='Plugins'></div>
 </div>
 
-Webpay Plus permite realizar una solicitud de autorización financiera **de un pago** con tarjetas de crédito, débito Redcompra o prepago en donde quién realiza el pago ingresa al sitio del comercio, selecciona productos o servicio, e indica los datos asociados a la tarjeta del medio de pago seleccionado anteriormente, esta acción lo realiza en forma segura en Webpay. El comercio que recibe pagos mediante Webpay Plus es identificado mediante un código de comercio.
+Webpay Plus permite realizar una solicitud de autorización financiera **de un pago** con tarjetas de crédito, débito Redcompra o prepago en donde quién realiza el pago ingresa al sitio del comercio, selecciona productos o servicio, e indica los datos asociados a la tarjeta del medio de pago seleccionado anteriormente, esta acción lo realiza en forma segura en Webpay. El comercio que recibe pagos mediante Webpay Plus es identificado mediante un código de comercio.
 
 Es el tipo de transacción mas común, usada para un pago puntual en una tienda simple. Se generará un único cobro para 
 todos los productos o servicios adquiridos por el tarjetahabiente.
@@ -39,7 +39,7 @@ todos los productos o servicios adquiridos por el tarjetahabiente.
   <div tbk-link='/referencia/webpay#webpay-plus-mall' tbk-link-name='Referencia Api'></div>
 </div>
 
-Webpay Plus Mall permite realizar una solicitud de autorización financiera de **un conjunto de pagos** con tarjetas de crédito, débito o prepago, a través de una sola transacción unificada. Quién realiza el pago, ingresa al sitio del comercio, selecciona varios productos o servicios (pertenecientes a diferentes códigos de comercio), y selecciona Webpay Plus como medio de pago, realizando la transacción de forma segura en Webpay para el conjunto de pagos. **Cada pago tendrá su propio resultado, autorizado o rechazado.**
+Webpay Plus Mall permite realizar una solicitud de autorización financiera de **un conjunto de pagos** con tarjetas de crédito, débito o prepago, a través de una sola transacción unificada. Quién realiza el pago, ingresa al sitio del comercio, selecciona varios productos o servicios (pertenecientes a diferentes códigos de comercio), y selecciona Webpay Plus como medio de pago, realizando la transacción de forma segura en Webpay para el conjunto de pagos. **Cada pago tendrá su propio resultado, autorizado o rechazado.**
 El concepto de "mall" agrupa múltiples tiendas. Son dichas tiendas las que pueden generar transacciones. Tanto el mall 
 como cada una de las tiendas asociadas son identificadas por un código de comercio diferente.
 
@@ -54,11 +54,11 @@ manera, la recaudación que la plataforma realice irá directo al cliente a nomb
   <div tbk-link='/referencia/oneclick' tbk-link-name='Referencia Api'></div>
 </div>
 
-Oneclick Mall permite agrupar pagos en una única transacción Oneclick hacia múltiples códigos de comercios 
-(similar a una transacción Mall). En una transacción de este tipo, al igual que en Oneclick, el tarjetahabiente podrá 
-realizar pagos sin la necesidad de ingresar la información de su tarjeta de crédito en cada uno de ellos. Este tipo de 
-pago facilita la venta, centraliza los pagos, disminuye el tiempo de la transacción y reduce los riesgos de ingreso 
-erróneo de los datos del medio de pago.
+Oneclick Mall permite agrupar pagos en una única transacción Oneclick hacia múltiples códigos de comercios 
+(similar a una transacción Mall). En una transacción de este tipo, al igual que en Oneclick, el tarjetahabiente podrá 
+realizar pagos sin la necesidad de ingresar la información de su tarjeta de crédito en cada uno de ellos. Este tipo de 
+pago facilita la venta, centraliza los pagos, disminuye el tiempo de la transacción y reduce los riesgos de ingreso 
+erróneo de los datos del medio de pago.
 
 **Oneclick Mall opera con tarjetas de crédito, prepago y débito Redcompra.** El modelo de pago contempla el mismo proceso de enrolamiento que la transacción Oneclick.
 
@@ -92,7 +92,7 @@ Por este motivo este producto no se encuentra dentro de la oferta publica de Tra
 
 ## Tipos de Pago
 
-Los tipos de pago disponibles actualmente a través de Webpay dependen del tipo de tarjeta usada por el tarjetahabiente y los que tenga activado el comercio.
+Los tipos de pago disponibles actualmente a través de Webpay dependen del tipo de tarjeta usada por el tarjetahabiente y los que tenga activado el comercio.
 
 Para tarjeta de crédito pueden ser los siguientes tipos de pago (con las abreviaciones entre paréntesis):
 
@@ -114,15 +114,15 @@ Para tarjeta de débito Redcompra el tipo de pago siempre corresponde a:
   <div tbk-link='/documentacion/webpay-plus#capturar-una-transaccion' tbk-link-name='Documentación'></div>
 </div>
 
-Las transacciones Webpay cuentan con 2 fases: autorización y captura. La **autorización** se encarga de validar si es posible realizar el cargo a la cuenta asociada a la tarjeta de crédito realizando en el mismo acto la reserva de monto de la transacción. La **captura** hace efectiva la reserva hecha previamente o cargo en la cuenta de crédito asociada a la tarjeta del titular.
+Las transacciones Webpay cuentan con 2 fases: autorización y captura. La **autorización** se encarga de validar si es posible realizar el cargo a la cuenta asociada a la tarjeta de crédito realizando en el mismo acto la reserva de monto de la transacción. La **captura** hace efectiva la reserva hecha previamente o cargo en la cuenta de crédito asociada a la tarjeta del titular.
 
 Para tarjetas de débito Redcompra y prepago, la autorización y captura es siempre simultánea. Para tarjetas de crédito, la autorización y captura puede ser simultánea o separada. En este último caso, se trata de una **captura diferida**.
 
 Desde el punto de vista de la transacción, lo que ocurre es lo siguiente:
 
-* **Autorización y captura simultánea:** La transacción es validada en línea por Transbank. El cargo del pago se hace simultáneamente en la tarjeta de crédito o débito Redcompra del cliente.
+* **Autorización y captura simultánea:** La transacción es validada en línea por Transbank. El cargo del pago se hace simultáneamente en la tarjeta de crédito o débito Redcompra del cliente.
 
-* **Autorización y captura diferida (Sólo válida para tarjetas de crédito):** Se retiene el valor de la compra del saldo de la tarjeta de crédito del cliente, reservando cupo pero sin realizar la transacción  definitivamente hasta que el comercio confirma la compra (vía captura diferida) y lo comunique a Transbank. Existe un **tiempo máximo de 7 días calendario** para realizar la captura. Superado ese tiempo la retención de la tarjeta de crédito será reversada y el cupo liberado. La captura puede realizarse a través del [portal Transbank](https://www.transbank.cl/web/login) o mediante [el servicio web de captura diferida](/referencia/webpay-soap#captura-diferida-webpay-plus).
+* **Autorización y captura diferida (Sólo válida para tarjetas de crédito):** Se retiene el valor de la compra del saldo de la tarjeta de crédito del cliente, reservando cupo pero sin realizar la transacción  definitivamente hasta que el comercio confirma la compra (vía captura diferida) y lo comunique a Transbank. Existe un **tiempo máximo de 7 días calendario** para realizar la captura. Superado ese tiempo la retención de la tarjeta de crédito será reversada y el cupo liberado. La captura puede realizarse a través del [portal Transbank](https://www.transbank.cl/web/login) o mediante [el servicio web de captura diferida](/referencia/webpay-soap#captura-diferida-webpay-plus).
 
 ## Anulaciones
 
@@ -132,9 +132,9 @@ Desde el punto de vista de la transacción, lo que ocurre es lo siguiente:
 
 Las transacciones Webpay **realizadas con tarjeta de crédito** pueden ser anuladas mediante servicios web. Esta funcionalidad no aplica para tarjetas de débito Redcompra.
 
-Las anulaciones pueden ser totales o parciales. **Las anulaciones parciales solo están permitidas en la modalidad de Venta Normal (VN)**. En caso que la transacción haya sido abonada al comercio, la anulación generará una retención en los siguientes abonos por el monto previamente autorizado.
+Las anulaciones pueden ser totales o parciales. **Las anulaciones parciales solo están permitidas en la modalidad de Venta Normal (VN)**. En caso que la transacción haya sido abonada al comercio, la anulación generará una retención en los siguientes abonos por el monto previamente autorizado.
 
-El comercio tiene un plazo de 90 días desde la fecha de venta para anular transacciones vía servicios web.
+El comercio tiene un plazo de 90 días desde la fecha de venta para anular transacciones vía servicios web.
 
 <div class="container slate">
   <div class='slate-after-footer'>
