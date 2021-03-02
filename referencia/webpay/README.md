@@ -505,7 +505,30 @@ payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos
 response_code  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> -1 = Rechazo de transacción - Reintente <i>(Posible error en el ingreso de datos de la transacción)</i> <br> -2 = Rechazo de transacción <i>(Se produjo fallo al procesar la transacción. Este mensaje de rechazo está relacionado a parámetros de la tarjeta y/o su cuenta asociada)</i> <br> -3 = Error en transacción <i>(Interno Transbank)</i> <br> -4 = Rechazo emisor <i>(Rechazada por parte del emisor)</i><br> -5 = Rechazo - Posible Fraude <i>(Transacción con riesgo de posible fraude)</i> <br>
 installments_amount <br> <i> Number </i> | Monto de las cuotas. Largo máximo: 17
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
-balance  <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
+balance  <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17  
+
+Importante: a partir del 01/03/2021 quedará disponible el nivel 2 de códigos de respuesta de rechazos.  
+Estos entregarán información del rechazo, con redefinición de criterios actuales y de forma más específica.  
+Para la activación del nivel 2, debes enviar un correo a soporte@transbank.cl indicando el código de comercio al cual 
+deseas realizar esta activación. 
+
+Serás informado oportunamente el día en el cuál se realizará la activación.
+
+Puedes ver el detalle a continuación:
+
+Respuestas al <br> comercio | Descripción
+------   | -----------
+-1 | Tarjeta inválida
+-2 | Error de conexión
+-3 | Excede monto máximo
+-4 | Fecha de expiración inválida
+-5 | Problema en autenticación
+-6 | Rechazo general
+-7 | Tarjeta bloqueada
+-8 | Tarjeta vencida
+-9 | Transacción no soportada
+-10 | Problema en la transacción
+
 
 ### Obtener estado de una transacción
 Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#obtener-estado-de-una-transaccion)
