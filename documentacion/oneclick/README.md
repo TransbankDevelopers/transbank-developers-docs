@@ -44,7 +44,7 @@ inscripción.
   de pago actual de Webpay Plus, para que el cliente ingrese los datos de su
   tarjeta. El tiempo en el cual permanece el formulario de Webpay en espera para
    incluir los datos de la tarjeta es de 5 minutos, en caso extender dicho plazo
-   y no haber terminado, esta será abortada automáticamente.
+   y no haber terminado la transacción, esta será abortada automáticamente.
 6. El cliente será autenticado por su banco emisor, de forma similar al flujo
   normal de pago. En este punto se realiza una transacción de $50 pesos, la cual
   no se captura (no se verá reflejada en su estado de cuenta).
