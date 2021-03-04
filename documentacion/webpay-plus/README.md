@@ -41,7 +41,7 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
 7. Tarjetahabiente ingresa los datos de la tarjeta, hace clic en pagar en
    formulario Webpay. El tiempo en el cual permanece el formulario de Webpay en espera para
    incluir los datos de la tarjeta es de 5 minutos, en caso extender dicho plazo
-   y no haber culminado la transacción la misma será abortada.
+   y no haber terminado la transacción, esta será abortada automáticamente.
 8. Webpay procesa la solicitud de autorización (primero autenticación bancaria
    y luego la autorización de la transacción).
 9. Una vez resuelta la autorización, Webpay retorna el control al comercio,
