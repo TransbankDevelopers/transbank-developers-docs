@@ -42,6 +42,10 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
    formulario Webpay. El tiempo en el cual permanece el formulario de Webpay en espera para
    incluir los datos de la tarjeta es de 5 minutos, en caso extender dicho plazo
    y no haber terminado la transacción, esta será abortada automáticamente.
+   
+    <aside class="warning">
+   En caso de que se cumpla el tiempo máximo para completar el formulario, el comercio recibirá las variables TBK_ID_SESSION y TBK_ORDEN_COMPRA.
+    </aside>
 8. Webpay procesa la solicitud de autorización (primero autenticación bancaria
    y luego la autorización de la transacción).
 9. Una vez resuelta la autorización, Webpay retorna el control al comercio,
@@ -93,6 +97,7 @@ el flujo cambia y los pasos son los siguientes:
 8. Webpay retorna el control al comercio, realizando un redireccionamiento
    HTTPS hacia la página de **retorno del comercio**, en donde se envía por
    método POST el token de la transacción en la variable `TBK_TOKEN` además de las variables `TBK_ORDEN_COMPRA` y `TBK_ID_SESION`.
+   
     <aside class="warning">
     Nota que el nombre de las variables recibidas es diferente. En lugar de `token_ws` acá el token viene en la variable `TBK_TOKEN`.
     </aside>

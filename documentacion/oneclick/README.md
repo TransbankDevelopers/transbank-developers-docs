@@ -45,6 +45,10 @@ inscripción.
   tarjeta. El tiempo en el cual permanece el formulario de Webpay en espera para
    incluir los datos de la tarjeta es de 5 minutos, en caso extender dicho plazo
    y no haber terminado la transacción, esta será abortada automáticamente.
+   
+   <aside class="warning">
+   En caso de que se cumpla el tiempo máximo para completar el formulario, el comercio recibirá las variables TBK_ID_SESSION y TBK_ORDEN_COMPRA.
+   </aside>
 6. El cliente será autenticado por su banco emisor, de forma similar al flujo
   normal de pago. En este punto se realiza una transacción de $50 pesos, la cual
   no se captura (no se verá reflejada en su estado de cuenta).
