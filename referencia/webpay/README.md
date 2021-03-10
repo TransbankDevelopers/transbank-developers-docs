@@ -273,8 +273,8 @@ response.getToken();
 ```
 
 ```php
-$response.getUrl();
-$response.getToken();
+$response->getUrl();
+$response->getToken();
 ```
 
 ```csharp
