@@ -111,7 +111,7 @@ Para tarjeta de débito Redcompra el tipo de pago siempre corresponde a:
 ## Códigos de respuesta de autorización
 
 Cuando una transacción es rechazada, Transbank envía un código de respuesta al comercio indicando que esta no pudo efectuarse correctamente.
-Actualmente, los comercios tienen configurado el nivel 1, el cuál es el estandar para Webpay y entrega información del rechazo de caracter general,
+Actualmente, los comercios tienen configurado el nivel 1, el cuál es el estandar para Webpay y entrega información del rechazo de carácter general,
  agrupando en el mismo distintos tipos de rechazo.
 
 Puedes ver el detalle del nivel 1 a continuación:
@@ -124,13 +124,13 @@ Respuestas al <br> comercio | Descripción
 -4 | Rechazo - Rechazada por parte del emisor
 -5 | Rechazo - Transacción con riesgo de posible fraude
 
-A partir del 01 de marzo de 2021, estara disponible el <b> nivel 2 </b> de códigos de respuesta de autorización los cuales 
+A partir del 01 de marzo de 2021, se encuentra disponible el <b> nivel 2 </b> de códigos de respuesta de autorización los cuales 
 entregan información del rechazo de forma más específica.  
 
 Para la activación del nivel 2, debes enviar un correo a soporte@transbank.cl indicando el código de comercio al cual 
 deseas realizar esta activación.
 
-Serás informado oportunamente el día en el cuál se realizará la activación.
+Serás informado oportunamente el día en el cual se realizará la activación.
 
 Puedes ver el detalle del nivel 2 a continuación:
 
