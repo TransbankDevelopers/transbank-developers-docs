@@ -119,7 +119,7 @@ Puedes ver el detalle del nivel 1 a continuación:
 Respuestas al <br> comercio | Descripción
 ------   | -----------
 -1 | Rechazo - Posible error en el ingreso de datos de la transacción
--2 | Rechazo -  Se produjo fallo al procesar la transacción, este mensaje de rechazo se encuentra relacionado
+-2 | Rechazo - Se produjo fallo al procesar la transacción, este mensaje de rechazo se encuentra relacionado a parámetros de la tarjeta y/o su cuenta asociada
 -3 | Rechazo - Interno Transbank
 -4 | Rechazo - Rechazada por parte del emisor
 -5 | Rechazo - Transacción con riesgo de posible fraude
@@ -127,7 +127,7 @@ Respuestas al <br> comercio | Descripción
 A partir del 01 de marzo de 2021, estara disponible el <b> nivel 2 </b> de códigos de respuesta de autorización los cuales 
 entregan información del rechazo de forma más específica.  
 
-Para la activación del nivel 2, debes enviar un correo a soporte@transbank.cl indicando el código de comercio al cual
+Para la activación del nivel 2, debes enviar un correo a soporte@transbank.cl indicando el código de comercio al cual 
 deseas realizar esta activación.
 
 Serás informado oportunamente el día en el cuál se realizará la activación.
