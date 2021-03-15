@@ -1541,7 +1541,7 @@ DATO                    | LARGO         | COMENTARIO
 `<ACK>`                 |  1            | Indica correcta recepción del comando <br><i>valor hexadecimal</i>: `0x06`
 
 <aside class="notice">
-Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en modo Integrado siguiendo estas instrucciones [Cambio a POS Integrado](referencia/posintegrado#cambio-modalidad-pos-integrado)
+Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en modo Integrado siguiendo estas instrucciones [Cambio a POS Integrado](/referencia/posintegrado#cambio-modalidad-pos-integrado)
 </aside>
 
 ## Operación y Configuración del POS
