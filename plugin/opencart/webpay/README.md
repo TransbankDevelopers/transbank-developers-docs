@@ -7,7 +7,7 @@
     <h4>Compatibilidad</h4>
     <ul>
       <li>OpenCart >= 3.x</li>
-      <li>PHP >= 5.6 y PHP <= 7.1</li>
+      <li>PHP >= 5.6 y PHP <= 7.3</li>
     </ul>
     <h4>Recuerda</h4>
     <ol>
