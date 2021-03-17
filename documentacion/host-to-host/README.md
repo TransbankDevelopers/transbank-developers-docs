@@ -228,7 +228,7 @@ Se debe imprimir este voucher solo si:
 
 ![](/images/documentacion/host2host/voucher-pel-3.png)
 
-## OnUs Host
+## ONUS Host
 
 ### Objetivos  
 

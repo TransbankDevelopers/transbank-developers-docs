@@ -1559,7 +1559,7 @@ CÓDIGO DE RESPUESTA     | GLOSA
 98                      | ERROR DE FORMATO DEL MENSAJE
 99                      | CANCELACIÓN POR LA TECLA \[CANCEL\] o TIMEOUT
 
-### Código de local OnUs
+### Código de local ONUS
 
 Para soportar la utilización de transacciones no financieras que necesitan la lectura de tarjeta sin tener aún el monto1 se define un desplazamiento de 50 al código de local asociado al comercio OnUs, por ejemplo:  
 
