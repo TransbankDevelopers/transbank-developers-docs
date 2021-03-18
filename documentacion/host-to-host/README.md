@@ -51,7 +51,7 @@ Equipo Fijo USB o Serial Pinpad host
 
 Estos equipos funcionan tanto con puerto serial RS232 y USB (generalmente plug and play), para el cual puedes necesitar instalar un [driver de verifone](/files/verifone.zip). 
 
-Este driver es compatible con los siguientes sistemas operativos informados por Verifone:
+Este driver es compatible con los siguientes sistemas operativos, informados por Verifone:
 * Windows 10 de 32/64 bits
 * Windows 8/8.1 de 32/64 bits
 * Windows 7 de 32/64 bits
