@@ -56,7 +56,7 @@ Este driver es compatible con los siguientes sistemas operativos, informados por
 * Windows 8/8.1 de 32/64 bits
 * Windows 7 de 32/64 bits
 
-Por normas PCI los comercios no deben utilizar un Sistema Operativo bajo obsolescencia, además es muy importante mantener su Sistema Operativo con los últimos parches instalados, esto principalmente por un tema de seguridad.
+Por normas PCI, los comercios no deben utilizar un sistema operativo bajo obsolescencia. Además es muy importante mantener su Sistema Operativo con los últimos parches instalados, esto principalmente por un tema de seguridad.
 
 ### Verifone vx680
 
