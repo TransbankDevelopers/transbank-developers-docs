@@ -47,6 +47,17 @@ Para el desarrollo y pruebas del comercio Transbank entrega un set de pruebas qu
 Equipo Fijo USB o Serial Pinpad host
 <img src="/images/documentacion/host2host/vx805.png" alt="Verifone vx805">
 
+<strong>Driver</strong>
+
+Estos equipos funcionan tanto con puerto serial RS232 y USB (generalmente plug and play), para el cual puedes necesitar instalar un [driver de verifone](/files/verifone.zip). 
+
+Este driver es compatible con los siguientes sistemas operativos, informados por Verifone:
+* Windows 10 de 32/64 bits
+* Windows 8/8.1 de 32/64 bits
+* Windows 7 de 32/64 bits
+
+Por normas PCI, los comercios no deben utilizar un sistema operativo bajo obsolescencia. Además es muy importante mantener su Sistema Operativo con los últimos parches instalados, esto principalmente por un tema de seguridad.
+
 ### Verifone vx680
 
 Equipo Movil wifi Pinpad host
