@@ -82,7 +82,7 @@ De momento, ponemos a tu disposición los siguientes documentos en formato PDF
 
 ### Documentos disponibles
 
-* **Manual de comandos HOST** - _RS20.1_ | [Descargar](/files/manual-comandos-2-9.pdf) <br />
+* **Manual de comandos HOST** - _RS20.1_ | [Descargar](/files/manual-comandos-3-0.pdf) <br />
 _Este documento describe la forma de operar, la funcionalidad y el detalle de la mensajería entre el PINPAD de TRANSBANK y tu sistema de caja mediante comandos por puerto USB o SERIAL._
 * **Manual de especificaciones técnicas Host RS20.1** - _v2.2_ | [Descargar](/files/manual-especificaciones-host-40-22.pdf) <br />
 _Este documento contiene las especificaciones técnicas para poder utilizar el producto Host to Host. ya con una mirada de lo que se requiere por la caja y por el servidor host del comercio._
@@ -96,7 +96,7 @@ _El pinpad entregará el voucher listo para imprimir, pero también entregará t
 _En este anexo se describen los archivos de cuadratura (conciliación) y liquidación que se entregan al cliente Host.
 Los archivos de cuadratura (conciliación) son archivos planos que contienen los registros de las transacciones
 (de venta y anulación)_
-* **Manual para enlazar Pinpad Bluetooth** - _v3.0_ | [Descargar](/files/manual-enlazar-pinpad-bluetooth-3-0.pdf) <br />
+* **Manual para enlazar Pinpad Bluetooth** - _v3.0_ | [Descargar](/files/manual-enlazar-pinpad-bluetooth-3-1.pdf) <br />
 _Procedimiento enlace y conexión Pinpad Bluetooth e355_
 
 
