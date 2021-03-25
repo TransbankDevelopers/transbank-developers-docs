@@ -3,7 +3,7 @@
   <div class="btn-side-right"><span><img src="/images/navbar.png"></span></div>
   <div class="block-cantainer">
     <h4>Descarga nuestro plugin.</h4>
-    <a class="td_btn-more" target="_blank"  href="https://wordpress.org/plugins/transbank-webpay-plus-rest/">Descargar Plugin</a>
+    <a class="td_btn-more" target="_blank"  href="https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest/releases/latest">Descargar Plugin</a>
     <br>
     <h4>Compatibilidad</h4>
     <ul>
