@@ -72,7 +72,7 @@ Como se puede ver en el video, los pasos para instalar el plugin son los siguien
 ### Instalación manual (obsoleta)
 Si no puedes instalarlo de manera automática, también puedes descargar el archivo .zip del plugin y cargarlo manualmente en tu Wordpress. 
 
-1. [Descargar el archivo .zip del plugin](https://wordpress.org/plugins/transbank-webpay-plus-rest/)
+1. [Descargar el archivo .zip del plugin](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest/releases/latest)
 2. Sube el archivo zip en la sección Plugin > Subir nuevo plugin en el administrador de tu Wordpress
 Las instrucciones detalladas de instalación las puedes encontrar en el [siguiente link](https://github.com/TransbankDevelopers/transbank-plugin-woocommerce-webpay-rest/blob/master/docs/INSTALLATION.md).
    
