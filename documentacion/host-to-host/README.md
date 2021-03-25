@@ -96,7 +96,7 @@ _El pinpad entregará el voucher listo para imprimir, pero también entregará t
 _En este anexo se describen los archivos de cuadratura (conciliación) y liquidación que se entregan al cliente Host.
 Los archivos de cuadratura (conciliación) son archivos planos que contienen los registros de las transacciones
 (de venta y anulación)_
-* **Manual para enlazar Pinpad Bluetooth** - _v3.0_ | [Descargar](/files/manual-enlazar-pinpad-bluetooth-3-1.pdf) <br />
+* **Manual para enlazar Pinpad Bluetooth** - _v3.1_ | [Descargar](/files/manual-enlazar-pinpad-bluetooth-3-1.pdf) <br />
 _Procedimiento enlace y conexión Pinpad Bluetooth e355_
 
 
