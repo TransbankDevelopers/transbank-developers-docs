@@ -50,7 +50,7 @@ npm install transbank-pos-sdk-web
 También se puede incluir directamente el tag script
 
 ```html
-<script src="https://unpkg.com/transbank-pos-sdk-web@2.1.0/dist/pos.js"></script>
+<script src="https://unpkg.com/transbank-pos-sdk-web@2/dist/pos.js"></script>
 <script>
 // En este caso, el objeto en vez de ser POS, es Transbank.POS
 // Ej: Transbank.POS.connect(...); en vez de POS.connect(...) como se especifica en los ejemplos de mas abajo.
@@ -76,34 +76,32 @@ Actualmente contamos con 2 equipos POS Integrado en circulación.
 
 <strong>Verifone VX520 y VX520C</strong>
 
-Este equipo esta certificado para operar mediante conexión serial, utilizando el puerto RS232.
-En este caso solo debes tener instalados los drivers de tu adaptador USB-Serial o tu tarjeta RS232.
+Estos equipos funcionan tanto con puerto serial RS232 y USB (Generalmente plug and play), para el cual puedes necesitar instalar un [driver de verifone](/files/verifone.zip). 
 
-<aside class="warning">
-Existe la posibilidad que puedas utilizar el puerto USB incluido en este equipo, sin embargo Transbank no puede garantizar el correcto funcionamiento de este.
-</aside>
+Este driver es compatible con los siguientes sistemas operativos informados por Verifone:
+* Windows 10 de 32/64 bits
+* Windows 8/8.1 de 32/64 bits
+* Windows 7 de 32/64 bits
 
-<aside class="notice">
-La comunicación con el POS Integrado se realiza mediante puerto serial RS232 y tú eres el/la responsable de instalar el driver correcto para tu tarjeta o adaptador serial.
-</aside>
+Por normas PCI los comercios no deben utilizar un Sistema Operativo bajo obsolescencia, además es muy importante mantener su Sistema Operativo con los últimos parches instalado, esto principalmente por un tema de seguridad.
 
 <aside class="success">
-Estos drivers son conocidos por funcionar con Adaptadores genéricos que utilicen el [chip CH340](http://www.wch.cn/download/CH341SER_EXE.html). También puedes encontrar drivers para adaptadores con [chip Prolific](http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041)
+Si vas a utilizar el puerto serial, estos drivers son conocidos por funcionar con Adaptadores genéricos que utilicen el [chip CH340](http://www.wch.cn/download/CH341SER_EXE.html). También puedes encontrar drivers para adaptadores con [chip Prolific](http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041)
 </aside>
 
 <strong>Ingenico Desk 3500</strong>
 
-Estos equipos funcionan tanto con puerto serial RS232 y USB (Generalmente plug and play), para el cual puedes necesitar instalar un [driver de Ingenico](http://transbankdevelopers.cl/files/Ingenico-USB-driver-3.10.zip).
+Estos equipos funcionan tanto con puerto serial RS232 y USB (Generalmente plug and play), para el cual puedes necesitar instalar un [driver de Ingenico](http://transbankdevelopers.cl/files/ingenico.zip).
 
-Este driver es compatible con los siguiente sistemas operativos.
+Este driver es compatible con los siguientes sistemas operativos:
 
-* Windows 7 (SP3) 32 bits
-* Windows 7 (SP3) 64 bits
-* Windows 8/8.1 32 bits
-* Windows 8/8.1 64 bits
-* Windows Server 2012
-* Windows Server 2016
-* Windows 10
+* Windows 10 de 32/64 bits 
+* Windows Server 2016 
+* Windows Server 2012 
+* Windows 8/8.1 de 32/64 bits 
+* Windows 7 de 32/64 bits
+  
+Por normas PCI los comercios no deben utilizar un Sistema Operativo bajo obsolescencia, además es muy importante mantener su Sistema Operativo con los últimos parches instalado, esto principalmente por un tema de seguridad.
 
   
 <aside class="warning">
@@ -145,6 +143,12 @@ Para compilar en windows necesitarás lo siguiente:
 <aside class="notice">
 Procura seguir todos los pasos descritos en el sitio de msys2
 </aside>
+
+## Prueba tu POS
+La manera más simple de hacer una prueba de conexión con tu POS es usar el SDK Web. 
+1) [Descarga](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent/releases) e instala el agente POS
+2) Entra a [pos.digitalpartner.cl](https://pos.digitalpartner.cl) donde verás el proyecto de ejemplo del SDK Web ya montado y funcionando. 
+3) Prueba la conexión, y las diferentes operaciones. 
 
 ## Proyectos de ejemplo
 
@@ -1063,7 +1067,7 @@ POS.setNormalMode().then(result => console.log(result));
 ```
 
 <aside class="notice">
-Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en el POS para regresar al modo Integrado, siguiendo las instrucciones disponibles descritas en [Cambio a POS Integrado](referencia/posintegrado#cambio-modalidad-pos-integrado), pues no es posible realizar esta configuración a través del SDK.
+Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en el POS para regresar al modo Integrado, siguiendo las instrucciones disponibles descritas en [Cambio a POS Integrado](/referencia/posintegrado#cambio-modalidad-pos-integrado), pues no es posible realizar esta configuración a través del SDK.
 </aside>
 
 ## Ejemplos de integración

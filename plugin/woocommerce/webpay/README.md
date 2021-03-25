@@ -8,7 +8,7 @@
     <h4>Compatibilidad</h4>
     <ul>
       <li>WooCommerce >= 3.2</li>
-      <li>PHP >= 5.6</li>
+      <li>PHP >= 7.0</li>
     </ul>
     <h4>Recuerda</h4>
     <ol>
@@ -45,7 +45,7 @@ Estás viendo la nueva documentación REST de este plugin. Si aún estás usando
 Debes tener instalado previamente [WooCommerce](https://woocommerce.com/).
 Asegúrate de tener habilitados los siguientes módulos / extensiones para PHP:
 
-* Extensión de PHP JSON 
+* Extensión de PHP JSON (ext-json)
 * OpenSSL 1.0.1 o superior
 * DOM 2.7.8 o superior
 * PHP 7.0 o superior
