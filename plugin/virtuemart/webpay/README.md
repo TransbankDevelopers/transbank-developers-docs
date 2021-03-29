@@ -51,7 +51,7 @@ _Esta pantalla de diagnóstico se encuentra en la sección de configuración del
 ## Instalación
 
 1. [Descargar el archivo .zip del plugin](https://github.com/TransbankDevelopers/transbank-plugin-virtuemart-webpay-rest/releases/latest)
-2. Sube el archivo zip en la sección Plugin > Subir nuevo plugin en el administrador de tu Wordpress
+2. Sube el archivo zip en la sección Plugin > Subir nuevo plugin en el administrador de tu Virtuemart
 
 Las instrucciones detalladas de instalación las puedes encontrar en el [siguiente link](https://github.com/TransbankDevelopers/transbank-plugin-virtuemart-webpay-rest/blob/master/docs/INSTALLATION.md).
 
@@ -70,15 +70,6 @@ Al finalizar este proceso de validación, obtendrás tu **llave secreta**.
 Nota: Esta **llave secreta** es como la contraseña de tu código de comercio, por lo que no debes compartirla. Se usa para identificar que tu comercio es quién realmente está realizando cada operación (transacción, anulación de un pago, etc).
 
 ## Puesta en producción
-
-<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/embed/B9sb7SyROVk" >
-  <div class="container-embed">
-    <div class="data-info-url">
-      <b>Cómo pasar a producción</b>
-    </div>
-    <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
-  </div>
-</div>
 
 Si ya tienes tu código de comercio de producción y llave secreta, solo debes entrar a la configuración de tu plugin ([instrucciones en este link](https://github.com/TransbankDevelopers/transbank-plugin-virtuemart-webpay-rest/blob/master/docs/INSTALLATION.md#configuraci%C3%B3n)) y colocar:
 
