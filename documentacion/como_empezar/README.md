@@ -192,62 +192,6 @@ Transacción Completa Mall Captura Diferida | `597055555576` Mall <br> `59705555
 Transacción Completa Mall Captura Diferida sin CVV | `597055555561` Mall <br> `597055555562` Tienda 1 <br> `597055555563` Tienda 2
 Patpass Comercio | `27082157` Código de comercio <br> `J7xYiUS7xqD7LkbWSUHI` Lave secreta (Api Key Secret)
 
-## Productos disponibles
-
- Los siguientes productos están disponibles para que puedas realizar la integración. Revisa su documentación acá:
-  
-* [Webpay Plus](/referencia/webpay#webpay-plus)
-* [Oneclick Mall](/referencia/oneclick)
-* [Transacción Completa](/referencia/webpay#transaccion-completa)
-
-## Seguridad
-
-Los servicios Web de Transbank están protegidos para garantizar que solamente
-miembros autorizados por Transbank hagan uso de las operaciones disponibles.
-
-El mecanismo de seguridad implementado está basado en un canal de comunicación
-seguro TLS 1.2 sumado a WS-Security (para servicios SOAP) o API Keys + Mensajes
-firmados (para servicios REST). Esto provee autenticación, confidencialidad e
-integridad a los Servicios Web.
-
-Los plugins y SDK para Webpay que distribuye Transbank ya están construidos con
-las librerías necesarias para realizar las validaciones requeridas, pero es
-deber del comercio asegurarse que la solución o desarrollo de medio de pago que
-utilice, cumpla con los protocolos de seguridad.
-
-## Deberes del Comercio
-
-### Actualizaciones de plugins y SDK
-
-Si el comercio está utilizando una solución basada en Plugins o SDK, debe
-estar atento a las actualizaciones que periódicamente Transbank realizará.
-Estas actualizaciones pueden responder a mantener compatibilidad con los CMS o
-Shopping Cart, modificaciones por seguridad, adición de propiedades o
-funciones, o correcciones a las comunicaciones. La comunicación oficial siempre
-se realizará a través del sitio <http://www.transbankdevelopers.cl>.
-
-### Uso de HTTPS
-
-Los servidores del comercio tanto en ambientes de
-integración como en ambiente de producción deben hacer uso
-de HTTPS para sus _endpoints_ web (tanto de cara al
-tarjetahabiente como en los _callbacks_ expuestos a
-Transbank). El no uso de HTTPS puede provocar problemas en
-las redirecciones en navegadores modernos (ej: Safari en iOS
-11.3 o superior), impidiendo que se complete el flujo de
-pago.
-
-<aside class="warning">
-**Advertencia**: A partir del 1 de Diciembre de 2018 Transbank no aceptará
-integraciones que no operen con HTTPS.
-</aside>
-
-### Validación de montos y órdenes de compra
-
-El comercio debe verificar al completar cualquier transacción que los valores
-informados por Transbank (monto de la compra, _buyOrder_, etc.) coinciden con los
-valores entregados por el comercio al principio del flujo transaccional.
-
 ## Puesta en Producción
 
 1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](#el-proceso-de-validacion). Si realizaste la integración con un plugin, considera que junto con la planilla de integración debes enviar el logo (GIF, 130x59) a soporte@transbank.cl.
@@ -520,6 +464,62 @@ Las posibles causas de este rechazo son:
 * Su tarjeta de crédito o débito no cuenta con saldo suficiente.
 * Tarjeta aún no habilitada en el sistema financiero.
 ```
+
+## Productos disponibles
+
+ Los siguientes productos están disponibles para que puedas realizar la integración. Revisa su documentación acá:
+  
+* [Webpay Plus](/referencia/webpay#webpay-plus)
+* [Oneclick Mall](/referencia/oneclick)
+* [Transacción Completa](/referencia/webpay#transaccion-completa)
+
+## Seguridad
+
+Los servicios Web de Transbank están protegidos para garantizar que solamente
+miembros autorizados por Transbank hagan uso de las operaciones disponibles.
+
+El mecanismo de seguridad implementado está basado en un canal de comunicación
+seguro TLS 1.2 sumado a WS-Security (para servicios SOAP) o API Keys + Mensajes
+firmados (para servicios REST). Esto provee autenticación, confidencialidad e
+integridad a los Servicios Web.
+
+Los plugins y SDK para Webpay que distribuye Transbank ya están construidos con
+las librerías necesarias para realizar las validaciones requeridas, pero es
+deber del comercio asegurarse que la solución o desarrollo de medio de pago que
+utilice, cumpla con los protocolos de seguridad.
+
+## Deberes del Comercio
+
+### Actualizaciones de plugins y SDK
+
+Si el comercio está utilizando una solución basada en Plugins o SDK, debe
+estar atento a las actualizaciones que periódicamente Transbank realizará.
+Estas actualizaciones pueden responder a mantener compatibilidad con los CMS o
+Shopping Cart, modificaciones por seguridad, adición de propiedades o
+funciones, o correcciones a las comunicaciones. La comunicación oficial siempre
+se realizará a través del sitio <http://www.transbankdevelopers.cl>.
+
+### Uso de HTTPS
+
+Los servidores del comercio tanto en ambientes de
+integración como en ambiente de producción deben hacer uso
+de HTTPS para sus _endpoints_ web (tanto de cara al
+tarjetahabiente como en los _callbacks_ expuestos a
+Transbank). El no uso de HTTPS puede provocar problemas en
+las redirecciones en navegadores modernos (ej: Safari en iOS
+11.3 o superior), impidiendo que se complete el flujo de
+pago.
+
+<aside class="warning">
+**Advertencia**: A partir del 1 de Diciembre de 2018 Transbank no aceptará
+integraciones que no operen con HTTPS.
+</aside>
+
+### Validación de montos y órdenes de compra
+
+El comercio debe verificar al completar cualquier transacción que los valores
+informados por Transbank (monto de la compra, _buyOrder_, etc.) coinciden con los
+valores entregados por el comercio al principio del flujo transaccional.
 
 <aside class="notice">
 Esta nueva documentación hace referencia a los nuevos servicios REST de Transbank.
