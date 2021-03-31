@@ -1089,8 +1089,6 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` e
     "Ticket": "AB123",
     "Autorization Code": "XZ123456",
     "Ammount": 15000,
-    "Shares Number": 3,
-    "Shares Amount": 5000,
     "Last 4 Digits": 6677,
     "Operation Number": 60,
     "Card Type": "CR",
@@ -1100,6 +1098,8 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` e
     "Real Date": "28/10/2019 22:35:12",
     "Employee Id": ,
     "Tip": 1500,
+    "Shares Amount": 5000,
+    "Shares Number": 3,
   },
   {
     "Function": 261,
@@ -1109,8 +1109,6 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` e
     "Ticket": "AB123",
     "Autorization Code": "XZ123456",
     "Ammount": 15000,
-    "Shares Number": 3,
-    "Shares Amount": 5000,
     "Last 4 Digits": 6677,
     "Operation Number": 60,
     "Card Type": "CR",
@@ -1119,7 +1117,9 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` e
     "Card Brand": "AX",
     "Real Date": "28/10/2019 22:35:12",
     "Employee Id": ,
-    "Tip": 1500
+    "Tip": 1500,
+    "Shares Amount": 5000,
+    "Shares Number": 3,
   }
 ]
 ```
