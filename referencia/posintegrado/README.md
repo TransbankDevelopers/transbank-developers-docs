@@ -315,7 +315,7 @@ DATO        | LARGO     | Comentario
 DATO                    | LARGO     | COMENTARIO
 ------                  | ------    | ------
 `<STX>`                 |  1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
-`Comando`               |  4        | <i>Valor ASCII</i>:  `0510` <br><i>valor hexadecimal</i>: `0x30 0x35 0x31 0x30`
+`Comando`               |  4        | <i>Valor ASCII</i>:  `0210` <br><i>valor hexadecimal</i>: `0x30 0x32 0x31 0x30`
 `Separador`             |  1        | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Código Respuesta`      |  2        | Valor Numérico
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
@@ -474,7 +474,7 @@ DATO                    | LARGO     | Comentario
 DATO                    | LARGO     | COMENTARIO
 ------                  | ------    | ------
 `<STX>`                 |  1        | Indica inicio de texto o comando <br><i>valor hexadecimal</i>: `0x02`
-`Comando`               |  4        | <i>Valor ASCII</i>:  `0510` <br><i>valor hexadecimal</i>: `0x30 0x35 0x31 0x30`
+`Comando`               |  4        | <i>Valor ASCII</i>:  `0210` <br><i>valor hexadecimal</i>: `0x30 0x35 0x31 0x30`
 `Separador`             |  1        | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Código Respuesta`      |  2        | Valor Numérico
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
@@ -1089,8 +1089,6 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` e
     "Ticket": "AB123",
     "Autorization Code": "XZ123456",
     "Ammount": 15000,
-    "Shares Number": 3,
-    "Shares Amount": 5000,
     "Last 4 Digits": 6677,
     "Operation Number": 60,
     "Card Type": "CR",
@@ -1100,6 +1098,8 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` e
     "Real Date": "28/10/2019 22:35:12",
     "Employee Id": ,
     "Tip": 1500,
+    "Shares Amount": 5000,
+    "Shares Number": 3,
   },
   {
     "Function": 261,
@@ -1109,8 +1109,6 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` e
     "Ticket": "AB123",
     "Autorization Code": "XZ123456",
     "Ammount": 15000,
-    "Shares Number": 3,
-    "Shares Amount": 5000,
     "Last 4 Digits": 6677,
     "Operation Number": 60,
     "Card Type": "CR",
@@ -1119,7 +1117,9 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` e
     "Card Brand": "AX",
     "Real Date": "28/10/2019 22:35:12",
     "Employee Id": ,
-    "Tip": 1500
+    "Tip": 1500,
+    "Shares Amount": 5000,
+    "Shares Number": 3,
   }
 ]
 ```
@@ -1375,7 +1375,7 @@ El resultado de la carga de llaves se entrega en la forma de un objeto `LoadKeys
 
 ```json
 {
-    "FunctionCode": 510,
+    "FunctionCode": 810,
     "ResponseMessage": "Aprobado",
     "Success": true,
     "CommerceCode": 550062700310,
