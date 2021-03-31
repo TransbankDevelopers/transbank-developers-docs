@@ -1375,7 +1375,7 @@ El resultado de la carga de llaves se entrega en la forma de un objeto `LoadKeys
 
 ```json
 {
-    "FunctionCode": 510,
+    "FunctionCode": 810,
     "ResponseMessage": "Aprobado",
     "Success": true,
     "CommerceCode": 550062700310,
