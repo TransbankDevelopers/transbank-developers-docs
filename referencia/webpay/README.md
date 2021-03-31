@@ -1251,7 +1251,7 @@ var response = MallTransaction.commit(token);
 ```
 
 ```ruby
-response = MallTransaction.commit(token)
+response = MallTransaction.commit(token: token)
 ```
 
 ```python
@@ -1478,7 +1478,7 @@ var response = MallTransaction.status(token)
 ```
 
 ```ruby
-response = MallTransaction.status(token)
+response = MallTransaction.status(token: token)
 ```
 
 ```python
@@ -1701,7 +1701,7 @@ var response = Transaction.refund(token, buyOrder, commerceCode, amount);
 ```
 
 ```ruby
-response = Transaction.refund(token, buy_order, commerce_code, amount)
+response = Transaction.refund(token: token, buy_order: buy_order, commerce_code: commerce_code, amount: amount)
 ```
 
 ```python
