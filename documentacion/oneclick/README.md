@@ -937,7 +937,7 @@ $amount = 10000;
 //Parámetro opcional
 $options = new Options($apiKey, $parentCommerceCode);
 
-$response = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrder, $amount, $options);
+$response = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrder, $amount);
 ```
 
 ```csharp
@@ -948,7 +948,7 @@ var childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
 var childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
 var amount = 10000;
 
-var result = MallTransaction.Refund(buyOrder, childCommerceCode,childBuyOrder,amount);
+var result = MallTransaction.Refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
 
 ```ruby
