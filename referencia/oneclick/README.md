@@ -275,7 +275,7 @@ $response = MallInscription::finish($token);
 ```csharp
 using Transbank.Webpay.Oneclick;
 
-var response = Inscription.Finish(token);
+var response = MallInscription.Finish(token);
 
 ```
 
