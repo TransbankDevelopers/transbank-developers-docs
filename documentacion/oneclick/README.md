@@ -389,7 +389,7 @@ $response = MallInscription::delete($tbkUser, $username, $options);
 var username = "nombre_de_usuario";
 var tbkUser = "tbkUserRetornadoPorInscriptionFinish";
 
-var result = Inscription.Delete(username, tbkUser);
+var result = MallInscription.Delete(username, tbkUser);
 ```
 
 ```ruby
