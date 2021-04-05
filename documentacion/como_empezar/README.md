@@ -342,23 +342,23 @@ using Transbank.Webpay.Common;
 // Webpay Plus
 using Transbank.Webpay.WebpayPlus;
 
-WebpayPlus.CommerceCode = "5970TuCodigo";
-WebpayPlus.ApiKey = "VeryLongKey";
-WebpayPlus.IntegrationType = WebpayIntegrationType.Live;
+Transaction.CommerceCode = "5970TuCodigo";
+Transaction.ApiKey = "VeryLongKey";
+Transaction.IntegrationType = WebpayIntegrationType.Live;
 
 // Oneclick
 using Transbank.Webpay.Oneclick;
 
-Oneclick.CommerceCode = "5970TuCodigo";
-Oneclick.ApiKey = "VeryLongKey";
-Oneclick.IntegrationType = WebpayIntegrationType.Live;
+MallTransaction.CommerceCode = "5970TuCodigo";
+MallTransaction.ApiKey = "VeryLongKey";
+MallTransaction.IntegrationType = WebpayIntegrationType.Live;
 
 // TransacciónCompleta
 using Transbank.Webpay.TransaccionCompleta;
 
-TransaccionCompleta.Webpay.CommerceCode = "5970TuCodigo";
-TransaccionCompleta.Webpay.ApiKey = "VeryLongKey";
-TransaccionCompleta.Webpay.IntegrationType = WebpayIntegrationType.Live;
+FullTransaction.CommerceCode = "5970TuCodigo";
+FullTransaction.ApiKey = "VeryLongKey";
+FullTransaction.IntegrationType = WebpayIntegrationType.Live;
 ```
 
 ```ruby
