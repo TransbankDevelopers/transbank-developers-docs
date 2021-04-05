@@ -244,10 +244,12 @@ En esta etapa, el comercio envía las evidencias a [soporte@transbank.cl](mailt
 producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones. Para integraciones
 Webpay que utilicen algún [plugin oficial](/plugin) existe un formulario especial.
 
-Descargar el formulario de envidencias...
+**Para integración con plugins**, creamos un nuevo formulario online para que comiences el proceso de validación: <a class="typeform-share button" href="https://form.typeform.com/to/fZqOJyFZ?typeform-medium=embed-snippet" data-mode="popup" data-size="100" target="_blank"> Comenzar formulario de integración </a> 
 
+Descargar el formulario de envidencias: 
+
+* Para integraciones Webpay que usen un plugin oficial: usa el formulario indicado más arriba. 
 * Para integraciones Webpay (Webpay Plus, Webpay OneClick, Webpay transacción completa): [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-rest.docx)
-* Para integraciones Webpay que usen un plugin oficial: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-plugins-rest.docx)
 * Para integraciones Onepay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx)
 * Para integraciones Patpass Comercio: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-patpass-comercio.docx)
 
