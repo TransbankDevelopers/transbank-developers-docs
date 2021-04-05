@@ -192,40 +192,6 @@ Transacción Completa Mall Captura Diferida | `597055555576` Mall <br> `59705555
 Transacción Completa Mall Captura Diferida sin CVV | `597055555561` Mall <br> `597055555562` Tienda 1 <br> `597055555563` Tienda 2
 Patpass Comercio | `27082157` Código de comercio <br> `J7xYiUS7xqD7LkbWSUHI` Lave secreta (Api Key Secret)
 
-## Puesta en Producción
-
-1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](#el-proceso-de-validacion). Si realizaste la integración con un plugin, considera que junto con la planilla de integración debes enviar el logo (GIF, 130x59) a soporte@transbank.cl.
-2. Transbank informará via correo electrónico el resultado de la validación enviado por el comercio. En caso de que la validación sea aprobada, Transbank indicará la **llave secreta** (_API Key Secret_) para poder usar el ambiente de producción. Posterior a ello, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#configuracion-de-produccion)
-3. Con la configuración del ambiente de producción ya lista, será necesario realizar una compra de $50 para validar el correcto funcionamiento.
-4. Ya estás operando en producción.
-
-### Onepay
-
-En el caso de Onepay las credenciales consisten en:
-
-* Un API Key
-* Un secreto ("shared secret").
-
-Estos valores serán provistos por Transbank y en su conjunto permiten hacer
-transacciones a nombre del comercio. **Debes custodiar estas credenciales para
-evitar que caigan en manos de terceros**.
-
-### Webpay, Oneclick y Transacción Completa
-
-En el caso de Webpay, las credenciales consisten en:
-
-* Un código de comercio (Api-Key-Id).
-* Una llave secreta (Api-Key-Secret).
-
-### Obtener tu llave secreta (proceso de validación)
-
-Para usar el ambiente de producción (donde se utiliza dinero real), necesitas tener tu **llave secreta**, que es un código especial que está asociado a tu código de comercio.
-Para obtenerla necesitas pasar un proceso de validación, que está [explicado a continuación](#el-proceso-de-validacion).
-
-Al finalizar este proceso de validación, obtendrás tu **llave secreta**.
-<aside class="notice">
-Nota: Esta **llave secreta** es como la contraseña de tu código de comercio, por lo que no debes compartirla. Se usa para identificar que tu comercio es quién realmente está realizando cada operación (transacción, anulación de un pago, etc).
-</aside>
 
 ## El proceso de validación
 
@@ -263,11 +229,44 @@ Durante el paso a producción se te exigirá realizar, al menos, una
 transacción de prueba real, con la que finalizará oficialmente la puesta en
 producción.
 
-## Configuración de producción
+## Puesta en Producción
+
+1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](#el-proceso-de-validacion). Si realizaste la integración con un plugin, considera que junto con la planilla de integración debes enviar el logo (GIF, 130x59) a soporte@transbank.cl.
+2. Transbank informará via correo electrónico el resultado de la validación enviado por el comercio. En caso de que la validación sea aprobada, Transbank indicará la **llave secreta** (_API Key Secret_) para poder usar el ambiente de producción. Posterior a ello, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#puesta-en-produccion)
+3. Con la configuración del ambiente de producción ya lista, será necesario realizar una compra de $50 para validar el correcto funcionamiento.
+4. Ya estás operando en producción.
+
+**Onepay**
+
+En el caso de Onepay las credenciales consisten en:
+
+* Un API Key
+* Un secreto ("shared secret").
+
+Estos valores serán provistos por Transbank y en su conjunto permiten hacer
+transacciones a nombre del comercio. **Debes custodiar estas credenciales para
+evitar que caigan en manos de terceros**.
+
+**Webpay, Oneclick y Transacción Completa**
+
+En el caso de Webpay, las credenciales consisten en:
+
+* Un código de comercio (Api-Key-Id).
+* Una llave secreta (Api-Key-Secret).
+
+**Obtener tu llave secreta (proceso de validación)**
+
+Para usar el ambiente de producción (donde se utiliza dinero real), necesitas tener tu **llave secreta**, que es un código especial que está asociado a tu código de comercio.
+Para obtenerla necesitas pasar un proceso de validación, que está [explicado a continuación](#el-proceso-de-validacion).
+
+Al finalizar este proceso de validación, obtendrás tu **llave secreta**.
+<aside class="notice">
+Nota: Esta **llave secreta** es como la contraseña de tu código de comercio, por lo que no debes compartirla. Se usa para identificar que tu comercio es quién realmente está realizando cada operación (transacción, anulación de un pago, etc).
+</aside>
 
 ### A) Utilizando Plugins
 
-Si ya tienes tu código de comercio de producción y llave secreta, solo debes entrar a la configuración de tu plugin ([ver documentacion de plugins](/plugin)) y colocar:
+Si ya tienes tu código de comercio de producción y llave secreta, solo debes entrar a la configuración de tu plugin ([ver documentación de plugins](/plugin)) y colocar:
 
 * Ambiente: Producción
 * Código de comercio: tu código de comercio de producción
