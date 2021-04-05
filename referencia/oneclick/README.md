@@ -402,7 +402,7 @@ MallInscription::delete($tbkUser, $userName);
 ```csharp
 using Transbank.Webpay.Oneclick;
 
-Inscription.Delete(userName, tbkUser);
+MallInscription.Delete(userName, tbkUser);
 ```
 
 ```ruby
