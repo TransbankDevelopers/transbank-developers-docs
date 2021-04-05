@@ -165,7 +165,7 @@ var username = "nombre_de_usuario";
 var email = "nombre_de_usuario@gmail.com";
 var response_url = "https://callback/resultado/de/inscripcion";
 
-var response = Inscription.start(username, email, response_url);
+var response = MallInscription.start(userame, email, response_url);
 
 var url_webpay = response.Url;
 var tbk_token = response.Token;
