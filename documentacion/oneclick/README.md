@@ -1120,7 +1120,7 @@ OneclickMall.setCommerceCode("Pon el Código de Comercio");
 ```csharp
 using Transbank.Webpay.Oneclick;
 
-Oneclick.CommerceCode = "Pon el Código de Comercio";
+MallTransaction.CommerceCode = "Pon el Código de Comercio";
 ```
 
 ```ruby
