@@ -156,7 +156,7 @@ $response = MallInscription::start($userName, $email, $responseUrl);
 ```csharp
 using Transbank.Webpay.Oneclick;
 
-var response = Inscription.Start(userName, email, returnUrl);
+var response = MallInscription.Start(userName, email, returnUrl);
 ```
 
 ```ruby
