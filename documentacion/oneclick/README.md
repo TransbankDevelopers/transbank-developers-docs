@@ -275,7 +275,7 @@ $tbkUser = $resp->getTbkUser();
 ```csharp
 //...
 var token = "tbkToken"; // token que llega por POST en el parámetro "TBK_TOKEN"
-var result = Inscription.Finish(tbk_token);
+var result = MallInscription.Finish(tbk_token);
 var tbkUser = result.TbkUser;
 
 ```
