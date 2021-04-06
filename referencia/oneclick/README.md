@@ -156,7 +156,7 @@ $response = MallInscription::start($userName, $email, $responseUrl);
 ```csharp
 using Transbank.Webpay.Oneclick;
 
-var response = Inscription.Start(userName, email, returnUrl);
+var response = MallInscription.Start(userName, email, returnUrl);
 ```
 
 ```ruby
@@ -275,7 +275,7 @@ $response = MallInscription::finish($token);
 ```csharp
 using Transbank.Webpay.Oneclick;
 
-var response = Inscription.Finish(token);
+var response = MallInscription.Finish(token);
 
 ```
 
@@ -402,7 +402,7 @@ MallInscription::delete($tbkUser, $userName);
 ```csharp
 using Transbank.Webpay.Oneclick;
 
-Inscription.Delete(userName, tbkUser);
+MallInscription.Delete(userName, tbkUser);
 ```
 
 ```ruby

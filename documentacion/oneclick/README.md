@@ -165,7 +165,7 @@ var username = "nombre_de_usuario";
 var email = "nombre_de_usuario@gmail.com";
 var response_url = "https://callback/resultado/de/inscripcion";
 
-var response = Inscription.start(username, email, response_url);
+var response = MallInscription.start(userame, email, response_url);
 
 var url_webpay = response.Url;
 var tbk_token = response.Token;
@@ -275,7 +275,7 @@ $tbkUser = $resp->getTbkUser();
 ```csharp
 //...
 var token = "tbkToken"; // token que llega por POST en el parámetro "TBK_TOKEN"
-var result = Inscription.Finish(tbk_token);
+var result = MallInscription.Finish(tbk_token);
 var tbkUser = result.TbkUser;
 
 ```
@@ -389,7 +389,7 @@ $response = MallInscription::delete($tbkUser, $username, $options);
 var username = "nombre_de_usuario";
 var tbkUser = "tbkUserRetornadoPorInscriptionFinish";
 
-var result = Inscription.Delete(username, tbkUser);
+var result = MallInscription.Delete(username, tbkUser);
 ```
 
 ```ruby
@@ -937,7 +937,7 @@ $amount = 10000;
 //Parámetro opcional
 $options = new Options($apiKey, $parentCommerceCode);
 
-$response = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrder, $amount, $options);
+$response = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrder, $amount);
 ```
 
 ```csharp
@@ -948,7 +948,7 @@ var childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
 var childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
 var amount = 10000;
 
-var result = MallTransaction.Refund(buyOrder, childCommerceCode,childBuyOrder,amount);
+var result = MallTransaction.Refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
 
 ```ruby
@@ -1120,7 +1120,7 @@ OneclickMall.setCommerceCode("Pon el Código de Comercio");
 ```csharp
 using Transbank.Webpay.Oneclick;
 
-Oneclick.CommerceCode = "Pon el Código de Comercio";
+MallTransaction.CommerceCode = "Pon el Código de Comercio";
 ```
 
 ```ruby
