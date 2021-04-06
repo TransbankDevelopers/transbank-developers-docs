@@ -57,7 +57,7 @@ puedes usar composer (si no lo tienes, puedes instalarlo desde [acá](https://ge
 ejecutando esto en la línea de comandos cuando estés en la raíz de tu proyecto:
 
 ```bash
-composer require transbank/transbank-sdk:^1.8
+composer require transbank/transbank-sdk:^2.0
 ```
 
 Te recomendamos leer [las instrucciones de instalación detalladas para el SDK PHP](https://github.com/TransbankDevelopers/transbank-sdk-php#instalaci%C3%B3n) para más opciones de instalación.
