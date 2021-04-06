@@ -899,7 +899,7 @@ final CreateWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransact
 
 ```php
 use Transbank\Webpay\WebpayPlus\MallTransaction;
-use Transbank\Webpay\WebpayPlus\WebpayPlus; // opcional
+use Transbank\Webpay\WebpayPlus; // opcional
 // SDK 2.x
 // Por defecto, la clase MallTransaction viene configurada para integración con un código Webpay Plus Mall Captura simultanea
 // También se puede configurar WebpayPlus::configureForTestingMall() y  WebpayPlus::configureForTestingMallDeferred()

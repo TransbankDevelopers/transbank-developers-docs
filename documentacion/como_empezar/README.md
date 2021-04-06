@@ -320,6 +320,56 @@ FullTransaction.Transaction.setIntegrationType(IntegrationType.LIVE);
 ```
 
 ```php
+// SDK 2.X
+// Para este SDK se pueden configurar los productos de diferentes formas. 
+
+// Opción A: Crear objeto options y pasarlo en el contructor
+$options = Transbank\Webpay\Options::forProduction($commerceCode, $apiKeySecret);
+$transaction = new Transaction($options);
+
+// Opción B: Configurar globalmente y no pasr un objeto options en el constructor
+WebpayPlus::configureForProduction($commerceCode, $apiKeySecret);
+$transaction = new Transaction(); 
+
+// Opción C: Configurar en la instancia del producto (en este ejemplo, WebpayPlus\Transaction)
+$transaction = (new WebpayPlus\Transaction())->configureForProduction($commerceCode, $apiKeySecret); 
+
+// Para todos los productos aplican los mismo métodos, pero como ejemplo, usaremos la opción C. 
+
+// Webpay Plus
+(new Transbank\Webpay\WebpayPlus\Transaction)->configureForProduction($commerceCode, $apiKeySecret); 
+
+// Webpay Plus Mall
+(new Transbank\Webpay\WebpayPlus\MallTransaction)->configureForProduction($commerceCode, $apiKeySecret);
+
+// Webpay Oneclick Mall 
+(new Transbank\Webpay\Oneclick\MallInscription)->configureForProduction($commerceCode, $apiKeySecret);
+(new Transbank\Webpay\Oneclick\MallTransaction)->configureForProduction($commerceCode, $apiKeySecret);
+// Para evitar configurar las credenciales dos veces, también se puede usar el método de configuración global 
+\Transbank\Webpay\Oneclick::configureForProduction($commerceCode, $apiKeySecret);
+$inscription = new Transbank\Webpay\Oneclick\MallInscription; // Si no se le pasa el objeto Options al constructor, usará e configurado globalmente
+$transaction = new Transbank\Webpay\Oneclick\MallTransaction; // Si no se le pasa el objeto Options al constructor, usará e configurado globalmente
+
+// Transacción Completa
+(new Transbank\TransaccionCompleta\Transaction)->configureForProduction($commerceCode, $apiKeySecret);
+
+// Transacción Completa Mall
+(new Transbank\TransaccionCompleta\MallTransaction)->configureForProduction($commerceCode, $apiKeySecret);
+
+// Webpay Modal
+(new Transbank\Webpay\WebpayModal)->configureForProduction($commerceCode, $apiKeySecret);
+
+// PatPass Comercio
+(new Transbank\Patpass\PatpassComercio)->configureForProduction($commerceCode, $apiKeySecret);
+
+// PatPassByWebpay
+(new Transbank\Patpass\PatpassByWebpay)->configureForProduction($commerceCode, $apiKeySecret);
+
+
+
+// SDK 1.x
+
+
 // Webpay Plus
 \Transbank\Webpay\WebpayPlus::setIntegrationType("LIVE");
 \Transbank\Webpay\WebpayPlus::setCommerceCode("{commerce-code}");
@@ -418,9 +468,9 @@ TransaccionCompleta.configureTransaccionCompletaMallDeferredForTesting();
 TransaccionCompleta.configureTransaccionCompletaMallDeferredNoCvvForTesting();
 ```
 
-### C) Utilizando el API
+### C) Utilizando la API directamente
 
-Si estás consumiendo el API directamente, solo debes de preocuparte de usar el
+Si estás consumiendo la API directamente, solo debes de preocuparte de usar el 
 [host correspondiente al ambiente de producción](/referencia/webpay#ambiente-de-produccion), el código de comercio productivo y llave
 secreta obtenida en el proceso de validación.
 
@@ -489,7 +539,7 @@ las librerías necesarias para realizar las validaciones requeridas, pero es
 deber del comercio asegurarse que la solución o desarrollo de medio de pago que
 utilice, cumpla con los protocolos de seguridad.
 
-## Deberes del Comercio
+## Deberes del comercio
 
 ### Actualizaciones de plugins y SDK
 
