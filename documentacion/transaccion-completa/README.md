@@ -757,8 +757,6 @@ Puedes [leer más sobre la captura en la información del
 producto Webpay](/producto/webpay#autorizacion-y-captura)
 para conocer más detalles y restricciones.
 
-Para realizar esa captura explícita debe usarse el método `DeferredTransaction.capture()`
-
 <div class="language-simple" data-multiple-language></div>
 
 ```java
@@ -774,7 +772,12 @@ Para realizar esa captura explícita debe usarse el método `DeferredTransaction
 ```
 
 ```ruby
-# Aun no está disponible en este SDK
+Transbank::TransaccionCompleta::Transaction.capture(
+  token: token,
+  buy_order: buy_order,
+  authorization_code: authorization_code,
+  capture_amount: capture_amount
+)
 ```
 
 ```python
@@ -1680,7 +1683,13 @@ para conocer más detalles y restricciones.
 ```
 
 ```ruby
-# Aun no está disponible en este SDK
+Transbank::TransaccionCompleta::MallTransaction.capture(
+  token: token,
+  commerce_code: commerce_code,
+  buy_order: buy_order,
+  authorization_code: authorization_code,
+  capture_amount: capture_amount
+)
 ```
 
 ```python
