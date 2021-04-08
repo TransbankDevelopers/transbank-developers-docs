@@ -325,7 +325,7 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta. L
 * `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
 * `Enviar Status`: (Opcional) Indica si se envian los mensajes intermedios (verdader) o se omiten (falso, por defecto)
 
-En el caso de C#, los mensajes intermedios se reciven mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`.
+En el caso de C#, los mensajes intermedios se reciben mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`.
 
 Si usas mensajes intermedios en Javascript, entonces puedes pasar un callback como tercer parámetro.
 
