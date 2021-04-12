@@ -1051,6 +1051,15 @@ Content-Type: application/json
 }
 ```
 
+```ruby
+Transbank::TransaccionCompleta::Transaction.capture(
+  token: token,
+  buy_order: buy_order,
+  authorization_code: authorization_code,
+  capture_amount: capture_amount
+)
+```
+
 ```javascript
 const response = TransaccionCompleta.DeferredTransaction.capture(
   token, buyOrder, authorizationCode, amount
@@ -2265,6 +2274,16 @@ Content-Type: application/json
   "authorization_code": "12345",
   "capture_amount": 1000
 }
+```
+
+```ruby
+Transbank::TransaccionCompleta::MallTransaction.capture(
+  token: token,
+  commerce_code: commerce_code,
+  buy_order: buy_order,
+  authorization_code: authorization_code,
+  capture_amount: capture_amount
+)
 ```
 
 ```javascript
