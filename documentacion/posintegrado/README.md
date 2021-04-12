@@ -70,6 +70,10 @@ La primera vez que se ejecuta el agente, este se configura automáticamente para
 
 Una vez instalado, ya puedes usar el SDK Javascript. Pruebes probar la conexión con tu POS usando el [proyecto web de ejemplo](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-example)
 
+### Integración Nativa
+
+Es recomendable utilizar un SDK disponible a la hora de desarrollar la integración, lo que ahorra tiempo y te despreocupa de desarrollar las comunicaciones con el equipo POS Integrado, facilitando bastante la integración, pero en el caso que prefieras realizar la integración por tu cuenta y utilizar los comandos nativos, puedes revisarlos en la [Referencia](/referencia/posintegrado).
+
 ### Drivers
 
 Actualmente contamos con 2 equipos POS Integrado en circulación.
