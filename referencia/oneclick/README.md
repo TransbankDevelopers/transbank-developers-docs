@@ -986,7 +986,7 @@ buy_order  <br> <i> String </i> | Orden de compra generada por el comercio padre
 card_detail  <br> <i> cardDetail </i> | Objeto que contiene información de la tarjeta utilizado por el tarjetahabiente.
 card_detail.card_number  <br> <i> String </i> | Los últimos 4 dígitos de la tarjeta usada en la transacción.
 accounting_date  <br> <i> String </i> | Fecha contable de la autorización del pago.
-transaction_date  <br> <i> DateTime </i> | Fecha completa (timestamp) de la autorización del pago.
+transaction_date  <br> <i> DateTime </i> | Fecha completa (timestamp) de la autorización del pago. Largo: 24, formato: ISO 8601 (Ej: yyyy-mm-ddTHH:mm:ss.xxxZ)
 details  <br> <i> Array </i> | Lista con el resultado de cada transacción de las tiendas hijas.
 details [].amount  <br> <i> Decimal </i> | Monto de la sub-transacción de pago.
 details [].status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED).
