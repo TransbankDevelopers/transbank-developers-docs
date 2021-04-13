@@ -86,9 +86,7 @@ el ambiente de integración](/documentacion/como_empezar#ambientes).
 ```
 
 ```php
-// Tbk-Api-Key-Id: Código de comercio
-// Tbk-Api-Key-Secret: Llave secreta
-// Content-Type: application/json
+
 ```
 
 ```csharp
@@ -148,9 +146,39 @@ OneclickMallInscriptionStartResponse response = OneclickMall.Inscription.start(u
 ```
 
 ```php
-use Transbank\Webpay\Oneclick;
+// Versión 2.x del SDK
+// ----------------------- 
+use Transbank\Webpay\Oneclick\MallInscription;
 
-$response = MallInscription::start($userName, $email, $responseUrl);
+// Identificador del usuario en el comercio
+$username = "nombre_de_usuario";
+// Correo electrónico del usuario
+$email = "nombre_de_usuario@gmail.com";
+// URL donde llegará el usuario con su token luego de finalizar la inscripción
+$response_url = "https://callback/resultado/de/inscripcion";
+
+$response = (new MallInscription)->start($username, $email, $response_url);
+
+$url_webpay = $response->getUrlWebpay();
+$token = $response->getToken();
+
+
+
+// Versión 1.x del SDK
+// -----------------------
+
+use Transbank\Webpay\Oneclick\MallInscription;
+// Identificador del usuario en el comercio
+$username = "nombre_de_usuario";
+// Correo electrónico del usuario
+$email = "nombre_de_usuario@gmail.com";
+// URL donde llegará el usuario con su token luego de finalizar la inscripción
+$response_url = "https://callback/resultado/de/inscripcion";
+
+$response = MallInscription::start($username, $email, $response_url);
+
+$url_webpay = $response->getUrlWebpay();
+$tbk_token = $response->getToken();
 ```
 
 ```csharp
@@ -267,9 +295,22 @@ final OneclickMallInscriptionFinishResponse response = OneclickMall.Inscription.
 ```
 
 ```php
-use Transbank\Webpay\Oneclick;
 
-$response = MallInscription::finish($token);
+// Versión 2.x del SDK
+// ----------------------- 
+use Transbank\Webpay\Oneclick\MallInscription;
+
+// Identificador del usuario en el comercio
+$tbk_token = $_GET['TBK_TOKEN']; // token que llega por GET en el parámetro "TBK_TOKEN"
+$response = (new MallInscription)->finish($tbk_token);
+$tbkUser = $response->getTbkUser();
+
+
+// Versión 1.x del SDK
+// ----------------------- 
+$tbk_token = "tbkToken"; // token que llega por POST en el parámetro "TBK_TOKEN"
+$response = MallInscription::finish($tbk_token);
+$tbkUser = $response->getTbkUser();
 ```
 
 ```csharp
@@ -394,9 +435,28 @@ Oneclick.MallInscription.delete(tbkUser, userName)
 ```
 
 ```php
-use Transbank\Webpay\Oneclick;
+// Versión 2.x del SDK
+// ----------------------- 
+use Transbank\Webpay\Oneclick\MallInscription;
 
-MallInscription::delete($tbkUser, $userName);
+$username = 'nombre_de_usuario';
+$tbkUser = 'tbkUserRetornadoPorInscriptionFinish';
+
+$response = (new MallInscription)->delete($tbkUser, $username);
+
+
+// Versión 1.x del SDK
+// ----------------------- 
+use Transbank\Webpay\Oneclick\MallInscription;
+
+//...
+// Identificador del usuario en el comercio
+$username = 'nombre_de_usuario';
+$tbkUser = 'tbkUserRetornadoPorInscriptionFinish';
+
+//Parámetro opcional
+$options = new Options($apiKey, $parentCommerceCode);
+$response = MallInscription::delete($tbkUser, $username, $options);
 ```
 
 ```csharp
@@ -493,19 +553,67 @@ final OneclickMallTransactionAuthorizeResponse response = OneclickMall.Transacti
 ```
 
 ```php
+// Versión 2.x del SDK
+// ----------------------- 
+use Transbank\Webpay\Oneclick\MallTransaction;
 use Transbank\Webpay\Oneclick;
+
+// Identificador del usuario en el comercio
+$parentBuyOrder = rand(100000, 999999999);
 
 $details = [
     [
-        "commerce_code" => "597055555542",
-        "buy_order" => "ordenCompra123445",
-        "amount" => 1000,
-        "installments_number" => 5
+        "commerce_code" => Oneclick::DEFAULT_CHILD_COMMERCE_CODE_1,
+        "buy_order" => rand(100000, 999999999), // Tu propio buyOrder
+        "amount" => 50000,
+        "installments_number" => 1
+    ],
+    [
+        "commerce_code" => Oneclick::DEFAULT_CHILD_COMMERCE_CODE_2,
+        "buy_order" => rand(100000, 999999999), // Tu propio buyOrder
+        "amount" => 20000,
+        "installments_number" => 1  
     ]
 ];
 
+$response = (new MallTransaction)->authorize($username, $tbkUser, $parentBuyOrder, $details);
 
-$response = MallTransaction::authorize($userName, $tbkUser, $parentBuyOrder, $details);
+
+// Versión 1.x del SDK
+// ----------------------- 
+use Transbank\Webpay\Oneclick\MallInscription;
+
+// Identificador del usuario en el comercio
+$username = "nombre_de_usuario";
+$tbkUser = $tbkUserRetornadoPorInscriptionFinish;
+$parentBuyOrder = rand(100000, 999999999);
+
+$childCommerceCode1 = "597055555543";
+$childBuyOrder1 = strval(rand(100000, 999999999));
+$amount1 = 50000;
+$installmentsNumber1 = 1;
+
+$childCommerceCode2 = "597055555543";
+$childBuyOrder2 = strval(rand(100000, 999999999));
+$amount2 = 50000;
+$installmentsNumber2 = 1;
+
+$details = [
+    [
+        "commerce_code" => $childCommerceCode1,
+        "buy_order" => $childBuyOrder1,
+        "amount" => $amount1,
+        "installments_number" => $installmentsNumber1
+    ],
+    [
+        "commerce_code" => $childCommerceCode2,
+        "buy_order" => $childBuyOrder2,
+        "amount" => $amount2,
+        "installments_number" => $installmentsNumber2
+    ]
+];
+
+$response = MallTransaction::authorize($username, $tbkUser, $parentBuyOrder, $details);
 ```
 
 ```csharp
@@ -629,23 +737,61 @@ for (Detail detail : detailsResp) {
 ```
 
 ```php
+print_r($response);
 $response->getAccountingDate();
 $response->getBuyOrder();
-$card_detail = response->getCardDetail();
-$card_detail->getCardNumber();
 $response->getTransactionDate();
-$response->getVci();
-$details = response->getDetails();
+$details = $response->getDetails();
 foreach($details as $detail){
-    detail->getAmount();
-    detail->getAuthorizationCode();
-    detail->getBuyOrder();
-    detail->getCommerceCode();
-    detail->getInstallmentsNumber();
-    detail->getPaymentTypeCode();
-    detail->getResponseCode();
-    detail->getStatus();
+    $detail->getAmount();
+    $detail->getAuthorizationCode();
+    $detail->getBuyOrder();
+    $detail->getCommerceCode();
+    $detail->getInstallmentsNumber();
+    $detail->getPaymentTypeCode();
+    $detail->getResponseCode();
+    $detail->getStatus();
 }
+
+// Transbank\Webpay\Oneclick\Responses\MallTransactionAuthorizeResponse Object
+// (
+//     [buyOrder] => 433025339
+//     [sessionId] => 
+//     [cardNumber] => 6623
+//     [expirationDate] => 
+//     [accountingDate] => 0413
+//     [transactionDate] => 2021-04-13T22:59:53.767Z
+//     [details] => Array
+//         (
+//             [0] => Transbank\Webpay\Oneclick\Responses\TransactionDetail Object
+//                 (
+//                     [amount] => 50000
+//                     [status] => AUTHORIZED
+//                     [authorizationCode] => 1213
+//                     [paymentTypeCode] => VN
+//                     [responseCode] => 0
+//                     [installmentsNumber] => 0
+//                     [installmentsAmount] => 
+//                     [commerceCode] => 597055555542
+//                     [buyOrder] => 523485045
+//                 )
+
+//             [1] => Transbank\Webpay\Oneclick\Responses\TransactionDetail Object
+//                 (
+//                     [amount] => 20000
+//                     [status] => AUTHORIZED
+//                     [authorizationCode] => 1213
+//                     [paymentTypeCode] => VN
+//                     [responseCode] => 0
+//                     [installmentsNumber] => 0
+//                     [installmentsAmount] => 
+//                     [commerceCode] => 597055555543
+//                     [buyOrder] => 224502696
+//                 )
+
+//         )
+
+// )
 ```
 
 ```csharp
@@ -791,7 +937,15 @@ final OneclickMallTransactionStatusResponse response =
 ```
 
 ```php
-use Transbank\Webpay\Oneclick;
+// Versión 2.x del SDK
+// ----------------------- 
+use Transbank\Webpay\Oneclick\MallTransaction;
+$response = (new MallTransaction)->status($buyOrder);
+
+
+// Versión 1.x del SDK
+// ----------------------- 
+use Transbank\Webpay\Oneclick\MallTransaction;
 
 $response = MallTransaction::getStatus($buyOrder);
 ```
@@ -852,23 +1006,61 @@ for (Detail detail : detailsResp) {
 ```
 
 ```php
+print_r($response);
 $response->getAccountingDate();
 $response->getBuyOrder();
-$card_detail = $response->getCardDetail();
-$card_detail->getCardNumber();
 $response->getTransactionDate();
-$response->getVci();
 $details = $response->getDetails();
 foreach($details as $detail){
-    detail->getAmount();
-    detail->getAuthorizationCode();
-    detail->getBuyOrder();
-    detail->getCommerceCode();
-    detail->getInstallmentsNumber();
-    detail->getPaymentTypeCode();
-    detail->getResponseCode();
-    detail->getStatus();
+    $detail->getAmount();
+    $detail->getAuthorizationCode();
+    $detail->getBuyOrder();
+    $detail->getCommerceCode();
+    $detail->getInstallmentsNumber();
+    $detail->getPaymentTypeCode();
+    $detail->getResponseCode();
+    $detail->getStatus();
 }
+
+// Transbank\Webpay\Oneclick\Responses\MallTransactionAuthorizeResponse Object
+// (
+//     [buyOrder] => 433025339
+//     [sessionId] => 
+//     [cardNumber] => 6623
+//     [expirationDate] => 
+//     [accountingDate] => 0413
+//     [transactionDate] => 2021-04-13T22:59:53.767Z
+//     [details] => Array
+//         (
+//             [0] => Transbank\Webpay\Oneclick\Responses\TransactionDetail Object
+//                 (
+//                     [amount] => 50000
+//                     [status] => AUTHORIZED
+//                     [authorizationCode] => 1213
+//                     [paymentTypeCode] => VN
+//                     [responseCode] => 0
+//                     [installmentsNumber] => 0
+//                     [installmentsAmount] => 
+//                     [commerceCode] => 597055555542
+//                     [buyOrder] => 523485045
+//                 )
+
+//             [1] => Transbank\Webpay\Oneclick\Responses\TransactionDetail Object
+//                 (
+//                     [amount] => 20000
+//                     [status] => AUTHORIZED
+//                     [authorizationCode] => 1213
+//                     [paymentTypeCode] => VN
+//                     [responseCode] => 0
+//                     [installmentsNumber] => 0
+//                     [installmentsAmount] => 
+//                     [commerceCode] => 597055555543
+//                     [buyOrder] => 224502696
+//                 )
+
+//         )
+
+// )
 ```
 
 ```csharp
@@ -1009,7 +1201,33 @@ final OneclickMallTransactionRefundResponse response =
 ```
 
 ```php
-use Transbank\Webpay\Oneclick;
+// Versión 2.x del SDK
+// ----------------------- 
+use Transbank\Webpay\Oneclick\MallTransaction;
+
+$response = (new MallTransaction)->refund($buyOrder, $childCommerceCode, $childBuyOrder, $amount);
+
+// Transbank\Webpay\Oneclick\Responses\MallTransactionRefundResponse Object
+// (
+//     [type] => NULLIFIED
+//     [authorizationCode] => 183633
+//     [authorizationDate] => 2021-04-13T23:07:37.683Z
+//     [nullifiedAmount] => 10000
+//     [balance] => 40000
+//     [responseCode] => 0
+// )
+
+
+
+
+
+
+
+// Versión 1.x del SDK
+// ----------------------- 
+
+//Parámetro opcional
+$options = new Options($apiKey, $parentCommerceCode);
 
 $response = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrder, $amount);
 ```
@@ -1075,12 +1293,12 @@ response.getType();
 ```
 
 ```php
-response->getAuthorizationCode;
-response->getAuthorizationDate;
-response->getBalance;
-response->getNullifiedAmount;
-response->getResponseCode;
-response->getType;
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getBalance();
+$response->getNullifiedAmount();
+$response->getResponseCode();
+$response->getType();
 ```
 
 ```csharp
@@ -1159,8 +1377,15 @@ final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTra
 ```
 
 ```php
-$response = MallTransaction::capture($commerce_code, $buy_order, $authorization_code, $amount);
-```
+// Versión 2.x del SDK
+// ----------------------- 
+use Transbank\Webpay\Oneclick\MallTransaction;
+$response = (new MallTransaction)->capture($commerce_code, $buy_order, $authorization_code, $amount);
+
+// Versión 1.x del SDK
+// ----------------------- 
+use Transbank\Webpay\Oneclick\MallTransaction;
+$response = MallTransaction::capture($commerce_code, $buy_order, $authorization_code, $amount);```
 
 ```csharp
 // Esta funcion aun no se encuentra disponible en el SDK
@@ -1354,7 +1579,30 @@ OneclickMall.setCommerceCode('TU_CODIGO_DE_COMERCIO');
 ```
 
 ```php
-// Esta función aun no se encuentra disponible en el SDK
+// Sin configurar nada, el SDK viene preconfigurado con las credenciales de prueba de Oneclick mall captura simultanea para el ambiente de integración
+// Para configurar en producción: 
+use \Transbank\Webpay\OneClick;
+OneClick:configureForProduction('597012345678', 'ApiKey');
+
+// Para configurar en integración: 
+OneClick::configureForIntgration('597012345678', 'ApiKey');
+OneClick::configureForTesting();
+OneClick::configureForTestingDeferred();
+
+// También puedes crear un objeto Options y pasarlo directo a la instancia
+use \Transbank\Webpay\Options;
+use \Transbank\Webpay\Oneclick\MallTransaction;
+use \Transbank\Webpay\Oneclick\MallInscription;
+
+$options = Options::forProduction('codigo-comercio', 'apikey'); // o Options::forIntegration('comercio', 'key')
+$transaction = new MallTransaction($options);
+$transaction->authorize(...);
+$inscription = new MallInscription($options);
+$inscription->start(...);
+
+// También es posible así: 
+$transaction = (new MallTransaction())->configureForProduction('codigo-comercio', 'api-key');
+$transaction->authorize();
 ```
 
 ```csharp
@@ -1389,7 +1637,6 @@ Content-Type: application/json
 ```
 
 ```php
-// Esta función aun no se encuentra disponible en el SDK
 ```
 
 ```csharp
@@ -1420,7 +1667,6 @@ OneclickMall.setApiKey('TU_API_KEY');
 ```
 
 ```php
-// Esta función aun no se encuentra disponible en el SDK
 ```
 
 ```csharp
@@ -1451,7 +1697,6 @@ OneclickMall.setIntegrationType(IntegrationType.LIVE);
 ```
 
 ```php
-// Esta función aun no se encuentra disponible en el SDK
 ```
 
 ```csharp
@@ -1481,7 +1726,6 @@ Alternativamente algunos SDK ofrecen un método para configurar directamente a p
 ```
 
 ```php
-// Esta función aun no se encuentra disponible en el SDK
 ```
 
 ```csharp
