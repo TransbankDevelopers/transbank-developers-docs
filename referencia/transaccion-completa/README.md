@@ -180,7 +180,8 @@ final FullTransactionCreateResponse response =  FullTransaction.Transaction.crea
 ```php
 use Transbank\TransaccionCompleta\Transaction;
 
-$response = Transaction::create(
+$transaction = new Transaction();
+$response = $transaction->create(
   $buy_order,                       // ordenCompra12345678
   $session_id,                      // sesion1234564
   $amount,                          // 10000
@@ -332,7 +333,14 @@ final FullTransactionInstallmentsResponse response =  FullTransaction.Transactio
 ```php
 use Transbank\TransaccionCompleta\Transaction;
 
-$installments = Transaction::installments($token_ws, $installments_number);
+$token = "token obtenido como respuesta de la creacion de transaccion";
+$installmentsNumber = 10; // numero de cuotas;
+
+$transaction = new Transaction();
+$response = $transaction->installments(
+    $token,
+    $installmentsNumber
+);
 ```
 
 ```csharp
@@ -394,9 +402,9 @@ deferredPeriod.getPeriod();
 ```
 
 ```php
-response->getInstallmentsAmount();
-response->getIdQueryInstallments();
-response->getDeferredPeriods();
+$response->getInstallmentsAmount();
+$response->getIdQueryInstallments();
+$response->getDeferredPeriods();
 ```
 
 ```csharp
@@ -471,7 +479,8 @@ final FullTransactionCommitResponse response = FullTransaction.Transaction.commi
 ```php
 use Transbank\TransaccionCompleta\Transaction;
 //...
-Transaction::commit(
+$transaction = new Transaction();
+$transaction->commit(
   $token_ws,
   $id_query_installments,
   $deferred_period_index,
@@ -553,18 +562,18 @@ response.getTransactionDate();
 ```
 
 ```php
-response->getAccountingDate();
-response->getAmount();
-response->getAuthorizationCode();
-response->getBuyOrder();
-cardDetail = response->getCardDetail();
-cardDetail->getCardNumber();
-response->getInstallmentsAmount();
-response->getInstallmentsNumber();
-response->getPaymentCodeType();
-response->getResponseCode();
-response->getSessionId();
-response->getTransactionDate();
+$response->getAccountingDate();
+$response->getAmount();
+$response->getAuthorizationCode();
+$response->getBuyOrder();
+$cardDetail = $response->getCardDetail();
+$cardDetail->getCardNumber();
+$response->getInstallmentsAmount();
+$response->getInstallmentsNumber();
+$response->getPaymentCodeType();
+$response->getResponseCode();
+$response->getSessionId();
+$response->getTransactionDate();
 ```
 
 ```csharp
@@ -687,7 +696,8 @@ final FullTransactionStatusResponse response = FullTransaction.Transaction.statu
 ```php
 use Transbank\TransaccionCompleta\Transaction;
 
-Transaction::getStatus($token_ws);
+$transaction = new Transaction();
+$transaction->status($token_ws);
 ```
 
 ```csharp
@@ -741,18 +751,18 @@ response.getTransactionDate();
 ```
 
 ```php
-response->getAccountingDate();
-response->getAmount();
-response->getAuthorizationCode();
-response->getBuyOrder();
-cardDetail = response->getCardDetail();
-cardDetail->getCardNumber();
-response->getInstallmentsAmount();
-response->getInstallmentsNumber();
-response->getPaymentCodeType();
-response->getResponseCode();
-response->getSessionId();
-response->getTransactionDate();
+$response->getAccountingDate();
+$response->getAmount();
+$response->getAuthorizationCode();
+$response->getBuyOrder();
+$cardDetail = $response->getCardDetail();
+$cardDetail->getCardNumber();
+$response->getInstallmentsAmount();
+$response->getInstallmentsNumber();
+$response->getPaymentCodeType();
+$response->getResponseCode();
+$response->getSessionId();
+$response->getTransactionDate();
 ```
 
 ```csharp
@@ -897,7 +907,8 @@ final FullTransactionRefundResponse response = FullTransaction.Transaction.refun
 ```php
 use Transbank\TransaccionCompleta\Transaction;
 
-Transaction::refund($token, $amount);
+$transaction = new Transaction();
+$transaction->refund($token, $amount);
 ```
 
 ```csharp
@@ -950,12 +961,12 @@ response.getResponse();
 ```
 
 ```php
-response->getType();
-response->getAuthorizationCode();
-response->getAuthorizationDate();
-response->getNullifiedAmount();
-response->getBalance();
-response->getResponse();
+$response->getType();
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getNullifiedAmount();
+$response->getBalance();
+$response->getResponse();
 ```
 
 ```csharp
@@ -1065,6 +1076,13 @@ const response = TransaccionCompleta.DeferredTransaction.capture(
   token, buyOrder, authorizationCode, amount
 );
 ```
+```php
+use Transbank\TransaccionCompleta\Transaction;
+
+$transaction = new Transaction();
+$transaction->capture($token, $buyOrder, $authorizationCode, $captureAmount);
+```
+
 <strong>Parámetros Transaction.capture</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -1093,6 +1111,14 @@ response.authorization_code
 response.authorization_date
 response.captured_amount
 response.response_code
+```
+
+```php
+$response->getToken();
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getCapturedAmount();
+$response->getResponseCode();
 ```
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -1162,28 +1188,35 @@ final MallFullTransactionCreateResponse response = MallFullTransaction.Transacti
 ```
 
 ```php
-use Transbank\TransaccionCompleta\MallTransaccionCompleta;
+use Transbank\TransaccionCompleta\MallTransaction;
+use Transbank\TransaccionCompleta\TransaccionCompleta;
 
 $transaction_details = [
-  {
-      "amount": 10000,
-      "commerce_code": 597055555552,
-      "buy_order": "123456789"
-  },
-  {
-     "amount": 12000,
-     "commerce_code": 597055555553,
-     "buy_order": "123456790"
-  },
+    [
+        'amount' => 10000,
+        'commerce_code' => TransaccionCompleta::DEFAULT_MALL_CHILD_COMMERCE_CODE_1,
+        'buy_order' => '123456789'
+    ],
+    [
+        'amount' => 12000,
+        'commerce_code' => TransaccionCompleta::DEFAULT_MALL_CHILD_COMMERCE_CODE_2,
+        'buy_order' => '123456790'
+    ],
 ];
+$cardNumber = '4051885600446623';
+$cardExpirationDate = '22/12';
+$cvv = '123';
 
-$response = MallTransaction::create(
-  $buy_order,                         // ordenCompra12345678
-  $session_id,                        // sesion1234564
-  $card_number,                       // 4239000000000000
-  $card_expiration_date,              // 22/10
-  $transaction_details
-);
+$transaction = new MallTransaction();
+$response = $transaction->create(
+    'buyOrder1',                         // ordenCompra12345678
+    'sessionId' ,                        // sesion1234564
+    $cardNumber,                       // 4239000000000000
+    $cardExpirationDate,              // 22/10
+    $transaction_details,
+    $cvv);
+
+print_r($response);
 ```
 
 ```csharp
@@ -1316,7 +1349,7 @@ response.getToken();
 ```
 
 ```php
-response->getToken();
+$response->getToken();
 ```
 
 ```csharp
@@ -1364,23 +1397,27 @@ final MallFullTransactionInstallmentsResponse response = MallFullTransaction.Tra
 ```
 
 ```php
+use Transbank\TransaccionCompleta;
+use Transbank\TransaccionCompleta\MallTransaction;
+
+$transaction = new MallTransaction();
+
 $installments_details = [
-  {
-    "commerce_code": 597055555552,
-    "buy_order": "123456789",
-    "installments_number": 2
-  },
-  {
-    "commerce_code": 597055555553,
-    "buy_order": "123456790",
-    "installments_number": 2
-  },
+    [
+        'commerce_code' => TransaccionCompleta::DEFAULT_MALL_CHILD_COMMERCE_CODE_1,
+        'buy_order' => '123456789',
+        'installments_number' => 2
+    ],
+    [
+        'commerce_code' => TransaccionCompleta::DEFAULT_MALL_CHILD_COMMERCE_CODE_2,
+        'buy_order' => '123456790',
+        'installments_number' => 2
+    ],
 ];
 
-$res = MallTransaction::installments(
-  $token,
-  $installments_details
-);
+$response = $transaction->installments($token, $installments_details);
+print_r($response);
+
 ```
 
 ```csharp
@@ -1485,11 +1522,15 @@ deferredPeriod.getPeriod();
 ```
 
 ```php
-$response->getInstallmentsAmount();
-$response->getIdQueryInstallments();
-$deferredPeriod = response->getDeferredPeriods()[0];
-$deferredPeriod->getAmount();
-$deferredPeriod->getPeriod();
+$firstResponse = $response[0];
+$firstResponse->getInstallmentsAmount();
+$firstResponse->getIdQueryInstallments();
+$deferredPeriods = $firstResponse->getDeferredPeriods();
+if (isset($deferredPeriods[0])) {
+    $deferredPeriod = $deferredPeriods[0];
+    $deferredPeriod->getAmount();
+    $deferredPeriod->getPeriod();
+}
 ```
 
 ```csharp
@@ -1566,29 +1607,29 @@ final MallFullTransactionCommitResponse response = MallFullTransaction.Transacti
 ```
 
 ```php
-use Transbank\TransaccionCompleta\Transaction;
+use Transbank\TransaccionCompleta;
+use Transbank\TransaccionCompleta\MallTransaction;
 
 $details = [
-  {
-    "commerce_code": '597055555552',
-    "buy_order": 'ordenCompra1234',
-    "id_query_installments": 12,
-    "deferred_period_index": 1,
-    "grace_period": false
-  },
-  {
-    "commerce_code": '597055555553',
-    "buy_order": 'ordenCompra12345',
-    "id_query_installments": 12,
-    "deferred_period_index": 1,
-    "grace_period": false
-  }
-]
+    [
+        'commerce_code' => TransaccionCompleta::DEFAULT_MALL_CHILD_COMMERCE_CODE_1,
+        'buy_order' => '123456789',
+        'id_query_installments' => $firstInstallmentResponse->getIdQueryInstallments(),
+        'deferred_period_index' => null,
+        'grace_period' => false
+    ],
+    [
+        'commerce_code' => TransaccionCompleta::DEFAULT_MALL_CHILD_COMMERCE_CODE_2,
+        'buy_order' => '123456790',
+        'id_query_installments' => $secondInstallmentResponse->getIdQueryInstallments(),
+        'deferred_period_index' => null,
+        'grace_period' => false
+    ]
+];
 
-$res = MallTransaction::commit(
-  $token,
-  $details
-);
+$transaction = new MallTransaction();
+$response = $transaction->commit($token, $details);
+print_r($response);
 ```
 
 ```csharp
@@ -1692,6 +1733,51 @@ const response = await TransaccionCompleta.MallTransaction.commit(
 );
 ```
 
+```php
+print_r($response);
+//Transbank\TransaccionCompleta\Responses\MallTransactionCommitResponse Object
+//(
+//    [buyOrder] => buyOrder1
+//    [cardDetail] => Array
+//        (
+//            [card_number] => 6623
+//        )
+//
+//    [accountingDate] => 0414
+//    [transactionDate] =>
+//    [details] => Array
+//        (
+//            [0] => Array
+//                (
+//                    [amount] => 10000
+//                    [status] => AUTHORIZED
+//                    [authorization_code] => 1213
+//                    [payment_type_code] => S2
+//                    [response_code] => 0
+//                    [installments_amount] => 5000
+//                    [installments_number] => 2
+//                    [commerce_code] => 597055555574
+//                    [buy_order] => 123456789
+//                )
+//
+//            [1] => Array
+//                (
+//                    [amount] => 12000
+//                    [status] => AUTHORIZED
+//                    [authorization_code] => 1213
+//                    [payment_type_code] => S2
+//                    [response_code] => 0
+//                    [installments_amount] => 5000
+//                    [installments_number] => 2
+//                    [commerce_code] => 597055555575
+//                    [buy_order] => 123456790
+//                )
+//
+//        )
+//
+//)
+```
+
 <strong>Parámetros Transaction.commit Completa Mall</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -1725,21 +1811,20 @@ detail.getBalance();
 ```
 
 ```php
-$response.getBuyOrder();
-$response.getCardNumber();
-$response.getAccountingDate();
-$response.getTransactionDate();
-$detail = response.getDetails()[0];
-$detail.getAuthorizationCode();
-$detail.getPaymentCodeType();
-$detail.getResponseCode();
-$detail.getInstallmentsAmount();
-$detail.getInstallmentsNumber();
-$detail.getAmount();
-$detail.getCommerceCode();
-$detail.getBuyOrder();
-$detail.getStatus();
-$detail.getBalance();
+$response->getBuyOrder();
+$response->getCardNumber();
+$response->getAccountingDate();
+$response->getTransactionDate();
+$detail = $response->getDetails()[0];
+$detail->getAuthorizationCode();
+$detail->getPaymentTypeCode();
+$detail->getResponseCode();
+$detail->getInstallmentsAmount();
+$detail->getInstallmentsNumber();
+$detail->getAmount();
+$detail->getCommerceCode();
+$detail->getBuyOrder();
+$detail->getStatus();
 ```
 
 ```csharp
@@ -1872,9 +1957,9 @@ MallFullTransaction.Transaction.status(token)
 ```
 
 ```php
-use Transbank\TransaccionCompleta\Transaction;
+use Transbank\TransaccionCompleta\MallTransaction;
 
-$response = MallTransaction::status(token)
+$response = (new MallTransaction)->status(token);
 ```
 
 ```csharp
@@ -1929,21 +2014,20 @@ detail.getBalance();
 ```
 
 ```php
-$response.getBuyOrder();
-$response.getCardNumber();
-$response.getAccountingDate();
-$response.getTransactionDate();
-$detail = response.getDetails()[0];
-$detail.getAuthorizationCode();
-$detail.getPaymentCodeType();
-$detail.getResponseCode();
-$detail.getInstallmentsAmount();
-$detail.getInstallmentsNumber();
-$detail.getAmount();
-$detail.getCommerceCode();
-$detail.getBuyOrder();
-$detail.getStatus();
-$detail.getBalance();
+$response->getBuyOrder();
+$response->getCardNumber();
+$response->getAccountingDate();
+$response->getTransactionDate();
+$detail = $response->getDetails()[0];
+$detail->getAuthorizationCode();
+$detail->getPaymentTypeCode();
+$detail->getResponseCode();
+$detail->getInstallmentsAmount();
+$detail->getInstallmentsNumber();
+$detail->getAmount();
+$detail->getCommerceCode();
+$detail->getBuyOrder();
+$detail->getStatus();
 ```
 
 ```csharp
@@ -2083,13 +2167,13 @@ final MallFullTransactionRefundResponse response = MallFullTransaction.Transacti
 ```
 
 ```php
-use Transbank\TransaccionCompleta\Transaction;
+use Transbank\TransaccionCompleta\MallTransaction;
 
-MallTransaction::refund(
-  token,
-  child_buy_order,
-  child_commerce_code,
-  amount
+(new MallTransaction)->refund(
+  $token,
+  $childBuyOrder,
+  $childCommerceCode,
+  $amount
 );
 ```
 
@@ -2164,12 +2248,12 @@ response.getResponseCode();
 ```
 
 ```php
-response->getType();
-response->getAuthorizationCode();
-response->getAuthorizationDate();
-response->getNullifiedAmount();
-response->getBalance();
-response->getResponseCode();
+$response->getType();
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getNullifiedAmount();
+$response->getBalance();
+$response->getResponseCode();
 ```
 
 ```csharp
@@ -2286,6 +2370,13 @@ Transbank::TransaccionCompleta::MallTransaction.capture(
 )
 ```
 
+```php
+use Transbank\TransaccionCompleta\MallTransaction;
+
+$transaction = new MallTransaction();
+$transaction->capture($token, $commerceCode, $buyOrder, $authorizationCode, $captureAmount);
+```
+
 ```javascript
 const response = TransaccionCompleta.MallDeferredTransaction.capture(
   token, commerceCode, buyOrder, authorizationCode, amount
@@ -2314,6 +2405,14 @@ Content-Type: application/json
   "captured_amount": 1000,
   "response_code": 0
 }
+```
+
+```php
+$response->getToken();
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getCapturedAmount();
+$response->getResponseCode();
 ```
 
 ```javascript
