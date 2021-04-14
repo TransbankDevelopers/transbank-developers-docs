@@ -511,8 +511,8 @@ comercio **tienda** diferente. No olvidar que para realizar el cargo correctamen
 "pertenecer" o estar asociados a tu código de comercio Mall cuando se contratan.
 Al tarjetahabiente se le realizará un solo cobro por la suma del monto de todas las "sub-transacciones" soliticadas, pero
 el dinero será procesado y enviado a cada código de comercio por separado. 
-Para aclararlo con un emeplo, si solicito una autorización por $1500 para el comercio A, y $2,500 para el comercio B, el 
-tarjetahabiente verá un único cobro de $4.000 en su cartola, pero el comercio A recibirá los $1.500  y el comercio B los 
+Para aclararlo con un ejemplo, si solicito una autorización por $1.500 para el comercio A, y $2.500 para el comercio B, el 
+tarjetahabiente verá un único cobro de $4.000 en su cartola, pero el comercio A recibirá los $1.500 y el comercio B los 
 $2.500 (en ambos casos, restando la comisión). 
 
 Cada "sub-transacción" de la autorización requiere de un código de comercio, un identificador de compra (ojalá único y 
