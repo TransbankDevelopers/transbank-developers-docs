@@ -288,6 +288,11 @@ Recibirás también el parámetro `token_ws` que te permitirá conocer el result
 En caso de que el tarjetahabiente haya declinado, o haya ocurrido un error, recibirás la variable `TBK_TOKEN`
 además de las variables `TBK_ORDEN_COMPRA` y `TBK_ID_SESION`.
 
+<aside class="notice">
+Para verificar si una transacción fue aprobada, debes confirmar el que código de respuesta `response_code` sea 
+exactamente `0` y que el estado `status` sea exactamente `AUTHORIZED`.
+</aside>
+
 <div class="language-simple" data-multiple-language></div>
 
 ```java
@@ -1086,11 +1091,16 @@ tarjetas de prueba en la sección de Ambientes</a>.
 </div>
 
 Una vez que el tarjetahabiente ha pagado, Webpay Plus retornará
-el control vía `POST` a la `URL` que indicaste en el `return_url`.
+el control vía `POST` (o `GET` si usas la API v1.1 o posterior) a la `URL` que indicaste en el `return_url`.
 Recibirás también el parámetro `token_ws` que te permitirá conocer el resultado de la transacción.
 
 En caso de que el tarjetahabiente haya declinado, o haya ocurrido un error, recibirás la variable `TBK_TOKEN`
 además de las variables `TBK_ORDEN_COMPRA` y `TBK_ID_SESION`.
+
+<aside class="notice">
+Para verificar si una transacción fue aprobada, debes confirmar el que código de respuesta `response_code` sea 
+exactamente `0` y que el estado `status` sea exactamente `AUTHORIZED` por cada una de las "sub-transacciones".
+</aside>
 
 <div class="language-simple" data-multiple-language></div>
 
