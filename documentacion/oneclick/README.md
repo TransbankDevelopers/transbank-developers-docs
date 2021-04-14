@@ -502,6 +502,23 @@ Debes validarlas de manera independiente, ya que unas podrías estar aprobadas y
 
 Con el `tbkUser` retornado de la confirmación (`PUT /inscriptions/{token}`) puedes autorizar transacciones:
 
+Una vez que ya tienes la tarjeta del usuario inscrita (ya tienes el token `tbk_user` para ese usuario), puedes realizar 
+cargos a esa tarjeta en cualquier momento, solo llamando a este método de autorización, enviando el `tbk_user`, el 
+`username` del usuario, un identificador de compra `parentBuyOrder` y los datos de la transacción.
+
+Como Oneclick opera en modalidad Mall, en una misma autorización puedes realizar varios cobros, cada uno a códigos de 
+comercio **tienda** diferente. No olvidar que para realizar el cargo correctamente, esos código de comercio tienda deben 
+"pertenecer" o estar asociados a tu código de comercio Mall cuando se contratan.
+Al tarjetahabiente se le realizará un solo cobro por la suma del monto de todas las "sub-transacciones" soliticadas, pero
+el dinero será procesado y enviado a cada código de comercio por separado. 
+Para aclararlo con un ejemplo, si solicito una autorización por $1.500 para el comercio A, y $2.500 para el comercio B, el 
+tarjetahabiente verá un único cobro de $4.000 en su cartola, pero el comercio A recibirá los $1.500 y el comercio B los 
+$2.500 (en ambos casos, restando la comisión). 
+
+Cada "sub-transacción" de la autorización requiere de un código de comercio, un identificador de compra (ojalá único y 
+diferente al identificador de compra padre), un monto y, opcionalmente, el número de cuotas en que se realizará el cobro. 
+
+
 <div class="language-simple" data-multiple-language></div>
 
 ```java
@@ -664,6 +681,22 @@ const response = await Oneclick.MallTransaction.authorize(
 ```
 
 <strong>Respuesta Autorizar un pago</strong>
+
+Luego de llamar a este método, se obtendrá el estado del cobro inmediatamente, sin que el usuario tenga que pasar por el 
+proceso de autorización bancaria. 
+
+En este punto, ya puedes saber si la transacción fue aprobada o rechazada.
+
+<aside class="notice">
+Para verificar si una transacción fue aprobada, debes confirmar el que código de respuesta `response_code` sea 
+exactamente `0` y que el estado `status` sea exactamente `AUTHORIZED` por cada una de las "sub-transacciones" recibidas.
+</aside>
+
+Verás que el mensaje de respuesta devuelve datos generales sobre la operación, y un detalle del cobro por cada una de 
+las "sub-transacciones" enviadas. Es importante verificar cada una de ellas, ya que eventualmente (poco probable pero 
+posible), una podría salir aprobada y otra rechazada. 
+
+Revisa los posibles códigos de respuesta y el detalle de los parametros en [la referencia](/referencia/oneclick#autorizar-una-transaccion)
 
 <div class="language-simple" data-multiple-language></div>
 
