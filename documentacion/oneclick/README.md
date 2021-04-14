@@ -112,17 +112,21 @@ pues es posible que el emisor de la tarjeta autorice algunas y otras no.
   <div tbk-link='/referencia/oneclick#crear-una-inscripcion' tbk-link-name='Referencia API'></div>
 </div>
 
-Este permite realizar la inscripción del tarjetahabiente e información de su
-tarjeta de crédito. Retorna como respuesta un token que representa la
-transacción de inscripción y una URL (`urlWebpay`), que corresponde a la URL
-de inscripción de Oneclick.
+Permite comenzar con la inscripción de de la tarjeta del usuario. Retorna como respuesta un token, que representa la 
+inscripción, y una URL (`urlWebpay`). 
 
-Una vez que se llama a este servicio Web, el usuario debe ser redireccionado
-vía POST a `urlWebpay` con parámetro `TBK_TOKEN` igual al token obtenido.
+El usuario debe ser redireccionado a `urlWebpay`, enviando como parámetro `TBK_TOKEN` el token recibido (Puede ser una redirección por POST o GET).
 
 <aside class="notice">
 Nota que a diferencia de Webpay Plus, donde el parámetro se llama `token_ws`, en
 Oneclick el parámetro se llama `TBK_TOKEN`.
+</aside>
+
+<aside class="notice">
+Un mismo `username` solo puede tener una tarjeta inscrita en tu comercio. Si eventualmente se solicita una nueva 
+inscripción a un username previamente registrado, al finalizar la nueva inscripción el `tbk_user` de la tarjeta anterior 
+será inválido. 
+Como recomendación, si un usuario en tu sistema ya tiene una tarjeta inscrita, no debería poder volver a inscribir una nueva a menos que elimine la anterior.
 </aside>
 
 <div class="language-simple" data-multiple-language></div>
@@ -143,6 +147,7 @@ String tbk_token = response.getToken();
 ```
 
 ```php
+// -----------------------
 // Versión 2.x del SDK
 // ----------------------- 
 use Transbank\Webpay\Oneclick\MallInscription;
@@ -156,11 +161,7 @@ $response_url = "https://callback/resultado/de/inscripcion";
 
 $response = (new MallInscription)->start($username, $email, $response_url);
 
-$url_webpay = $response->getUrlWebpay();
-$token = $response->getToken();
-
-
-
+// -----------------------
 // Versión 1.x del SDK
 // -----------------------
 
@@ -173,9 +174,6 @@ $email = "nombre_de_usuario@gmail.com";
 $response_url = "https://callback/resultado/de/inscripcion";
 
 $response = MallInscription::start($username, $email, $response_url);
-
-$url_webpay = $response->getUrlWebpay();
-$tbk_token = $response->getToken();
 ```
 
 ```csharp
@@ -275,7 +273,7 @@ de recibir el token en la URL de fin de inscripción (`returnUrl`). Pasados los
 el usuario serán eliminados.
 </aside>
 
-Una vez que se autorice la inscripción del usuario, se retornará el control al comercio vía `POST` en la url indicada en `response_url`, con el parámetro `TBK_TOKEN` identificando la transacción. Con esa información se puede finalizar la inscripción:
+Una vez que se autorice la inscripción del usuario, se retornará el control al comercio vía `POST` (`GET` si usas el API 1.1 o superior) en la url indicada en `response_url`, con el parámetro `TBK_TOKEN` identificando la transacción. Con esa información se puede finalizar la inscripción:
 
 <div class="language-simple" data-multiple-language></div>
 
