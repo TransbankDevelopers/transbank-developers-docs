@@ -279,6 +279,11 @@ Si el comercio no tiene configurado periodos diferidos, la respuesta de `deferre
 Una vez obtenido la respuesta de la consulta de cuotas, con los datos de esta se puede realizar la 
 confirmación de la transaccion utilizando el metodo `commit`
 
+<aside class="notice">
+Para verificar si una transacción fue aprobada, debes confirmar el que código de respuesta `response_code` sea 
+exactamente `0` y que el estado `status` sea exactamente `AUTHORIZED`. 
+</aside>
+
 <div class="language-simple" data-multiple-language></div>
 
 ```java
@@ -1152,6 +1157,11 @@ Una vez iniciada la transacción y consultado el monto de las cuotas por cada su
 
 Es una operación que permite confirmar una transacción. Retorna el estado de la
 transacción.
+
+<aside class="notice">
+Para verificar si una transacción fue aprobada, debes confirmar el que código de respuesta `response_code` sea 
+exactamente `0` y que el estado `status` sea exactamente `AUTHORIZED` por cada una de las "sub-transacciones" recibidas.
+</aside>
 
 <div class="language-simple" data-multiple-language></div>
 
