@@ -1343,7 +1343,7 @@ OneclickMall.setCommerceCode("Pon el Código de Comercio");
 ```php
 // Sin configurar nada, el SDK viene preconfigurado con las credenciales de prueba de Oneclick mall captura simultanea para el ambiente de integración
 // Para configurar en producción: 
-use \Transbank\Webpay\OneClick;
+use \Transbank\Webpay\Oneclick;
 OneClick:configureForProduction('597012345678', 'ApiKey');
 
 // Para configurar en integración: 
