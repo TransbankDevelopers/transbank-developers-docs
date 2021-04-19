@@ -63,12 +63,12 @@ PM> Install-Package TransbankPosSDK
 ```
 ### Integración Nativa
 
-Es recomendable utilizar un SDK disponible a la hora de desarrollar la integración, lo que ahorra tiempo y te despreocupa de desarrollar las comunicaciones con el equipo POS Autoservicio, facilitando bastante la integración, pero en el caso que prefieras realizar la integración por tu cuenta y utilizar los comandos nativos, puedes revisarlos en la [Referencia](/referencia/posautoservicio).
+Es recomendable utilizar un SDK disponible a la hora de desarrollar la integración, lo que ahorra tiempo y te despreocupa de desarrollar las comunicaciones con el equipo POS Autoservicio, facilitando bastante la integración, pero en el caso que prefieras realizar la integración por tu cuenta y utilizar los comandos nativos, puedes revisarlos en la [Referencia](/referencia/pos-autoservicio).
 
 ## Primeros pasos
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/posautoservicio?csharp#primeros-pasos' tbk-link-name='Referencia'></div>
+  <div tbk-link='/referencia/pos-autoservicio?csharp#primeros-pasos' tbk-link-name='Referencia'></div>
 </div>
 
 Para usar el SDK es necesario incluir las siguientes referencias.
@@ -94,6 +94,21 @@ using Transbank.POSAutoservicio;
 List<string> ports = POSAutoservicio.Instance.ListPorts();
 ```
 
+### Abrir un puerto Serial
+
+Para abrir un puerto serial y comunicarte con el POS Autoservicio, necesitarás el nombre del puerto (el cual puedes identificar usando [la función mencionada en el apartado anterior](/documentacion/pos-autoservicio#listar-puertos-disponibles)). También necesitarás el _baudrate_ al cual esta configurado el puerto serial del POS Autoservicio (por defecto es **9600**).
+
+Si el puerto no puede ser abierto, se lanzará una excepción `TransbankException` en .NET y Java.
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POS;
+using Transbank.POS.Utils;
+//...
+string portName = "COM3";
+POSAutoservicio.Instance.OpenPort(portName);
+```
 
 
 
