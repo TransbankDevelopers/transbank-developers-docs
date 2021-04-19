@@ -63,12 +63,12 @@ PM> Install-Package TransbankPosSDK
 ```
 ### Integración Nativa
 
-Es recomendable utilizar un SDK disponible a la hora de desarrollar la integración, lo que ahorra tiempo y te despreocupa de desarrollar las comunicaciones con el equipo POS Integrado, facilitando bastante la integración, pero en el caso que prefieras realizar la integración por tu cuenta y utilizar los comandos nativos, puedes revisarlos en la [Referencia](/referencia/posautoservicio).
+Es recomendable utilizar un SDK disponible a la hora de desarrollar la integración, lo que ahorra tiempo y te despreocupa de desarrollar las comunicaciones con el equipo POS Autoservicio, facilitando bastante la integración, pero en el caso que prefieras realizar la integración por tu cuenta y utilizar los comandos nativos, puedes revisarlos en la [Referencia](/referencia/posautoservicio).
 
 ## Primeros pasos
 
 <div class="pos-title-nav">
-  <div tbk-link='/referencia/posintegrado?csharp#primeros-pasos' tbk-link-name='Referencia'></div>
+  <div tbk-link='/referencia/posautoservicio?csharp#primeros-pasos' tbk-link-name='Referencia'></div>
 </div>
 
 Para usar el SDK es necesario incluir las siguientes referencias.
@@ -84,7 +84,7 @@ using Transbank.Responses.AutoservicioResponse;
 ### Listar puertos disponibles
 
 Si los respectivos drivers están instalados, entonces puedes usar la función `ListPorts()` para identificar los puertos que se encuentren disponibles y seleccionar el que
-corresponda con el puerto donde conectaste el POS Integrado.
+corresponda con el puerto donde conectaste el POS Autoservicio.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -93,6 +93,9 @@ using Transbank.POSAutoservicio;
 //...
 List<string> ports = POSAutoservicio.Instance.ListPorts();
 ```
+
+
+
 
 ## Documentación disponible
 
