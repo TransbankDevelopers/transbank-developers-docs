@@ -50,6 +50,50 @@ POS autoservicio con conexión LAN y Serial
 * Venta Crédito, con o sin cuotas
 * Venta Débito
 
+## Cómo empezar
+
+Por el momento, hay un SDK para [.NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet).
+
+### SDK .NET
+
+Para .NET lo puedes encontrar en [NuGet.org](https://www.nuget.org/packages/TransbankPosSDK/) para instalarlo puedes utilizar por ejemplo el package manager de VisualStudio.
+
+```bash
+PM> Install-Package TransbankPosSDK
+```
+### Integración Nativa
+
+Es recomendable utilizar un SDK disponible a la hora de desarrollar la integración, lo que ahorra tiempo y te despreocupa de desarrollar las comunicaciones con el equipo POS Integrado, facilitando bastante la integración, pero en el caso que prefieras realizar la integración por tu cuenta y utilizar los comandos nativos, puedes revisarlos en la [Referencia](/referencia/posautoservicio).
+
+## Primeros pasos
+
+<div class="pos-title-nav">
+  <div tbk-link='/referencia/posintegrado?csharp#primeros-pasos' tbk-link-name='Referencia'></div>
+</div>
+
+Para usar el SDK es necesario incluir las siguientes referencias.
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POSAutoservicio;
+using Transbank.Responses.CommonResponses;
+using Transbank.Responses.AutoservicioResponse;
+```
+
+### Listar puertos disponibles
+
+Si los respectivos drivers están instalados, entonces puedes usar la función `ListPorts()` para identificar los puertos que se encuentren disponibles y seleccionar el que
+corresponda con el puerto donde conectaste el POS Integrado.
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POSAutoservicio;
+//...
+List<string> ports = POSAutoservicio.Instance.ListPorts();
+```
+
 ## Documentación disponible
 
 A continuación, encontrarás la documentación en formato PDF:
