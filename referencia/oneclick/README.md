@@ -1581,13 +1581,13 @@ OneclickMall.setCommerceCode('TU_CODIGO_DE_COMERCIO');
 ```php
 // Sin configurar nada, el SDK viene preconfigurado con las credenciales de prueba de Oneclick mall captura simultanea para el ambiente de integración
 // Para configurar en producción: 
-use \Transbank\Webpay\OneClick;
-OneClick:configureForProduction('597012345678', 'ApiKey');
+use \Transbank\Webpay\Oneclick;
+Oneclick:configureForProduction('597012345678', 'ApiKey');
 
 // Para configurar en integración: 
-OneClick::configureForIntgration('597012345678', 'ApiKey');
-OneClick::configureForTesting();
-OneClick::configureForTestingDeferred();
+Oneclick::configureForIntgration('597012345678', 'ApiKey');
+Oneclick::configureForTesting();
+Oneclick::configureForTestingDeferred();
 
 // También puedes crear un objeto Options y pasarlo directo a la instancia
 use \Transbank\Webpay\Options;
