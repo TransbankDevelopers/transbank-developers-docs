@@ -103,13 +103,23 @@ Si el puerto no puede ser abierto, se lanzará una excepción `TransbankExceptio
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS;
-using Transbank.POS.Utils;
+using Transbank.POSAutoservicio;
 //...
 string portName = "COM3";
 POSAutoservicio.Instance.OpenPort(portName);
 ```
 
+### Cerrar un puerto Serial
+
+Al finalizar el uso del POS, o si se desea desconectar de la Caja se debe liberar el puerto serial abierto anteriormente.
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POSAutoservicio;
+//...
+POSAutoservicio.Instance.ClosePort();
+```
 
 
 ## Documentación disponible
