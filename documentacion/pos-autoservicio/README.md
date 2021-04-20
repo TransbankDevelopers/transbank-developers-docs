@@ -307,6 +307,37 @@ El resultado de la transacción última venta devuelve los mismos datos que una 
 Si se solicita que el POS envie en la respuesta el voucher formateado, se entregará una lista de strings que contendra cada linea del voucher.
 </aside>
 
+### Transacción de Anulación
+
+Esta transacción siempre será responsabilidad de la caja y es quien decide cuando realizar una anulación.
+
+<aside class="warning">
+Las anulaciones <strong>sólo</strong> pueden realizarse para transacciones con tarjeta de crédito y considerando que solo puede ser anulada la última transacción.
+</aside>
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POSAutoservicio;
+using Transbank.Responses.CommonResponses;
+//...
+Task<RefundResponse> response = POSAutoservicio.Instance.Refund();
+```
+
+Como respuesta el **POS** enviará un código de aprobación, acompañado de un código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas del manual de integración POS Autoservicio. <!-- [Ver tabla de respuestas](/referencia/pos-autoservicio#tabla-de-respuestas) -->
+
+```json
+{
+  "FunctionCode": 1210,
+  "ResponseCode": 0,
+  "CommerceCode": 597029414300,
+  "TerminalId": "ABCD1234",
+  "AuthorizationCode": "ABCD1234",
+  "OperationID": 123456
+}
+```
+
+
 ## Documentación disponible
 
 A continuación, encontrarás la documentación en formato PDF:
