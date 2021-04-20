@@ -257,7 +257,55 @@ Si se solicita que el POS envie en la respuesta el voucher formateado, se entreg
 No se permite realizar transacciones que requieran firma ni operar tarjetas no bancarias.
 </aside>
 
+### Transacción de última venta
 
+Este comando es enviado por la caja, solicitando al POS los datos de la última venta realizada.
+
+Si el POS recibe el comando de Última Venta y no existen transacciones en memoria del POS, se envía la respuesta a la caja indicando el código de respuesta 11. 
+<!-- ([Ver tabla de respuestas](/referencia/pos-autoservicio#tabla-de-respuestas)) -->
+Los siguientes parámetros deben ser enviados desde la caja:
+
+* `Enviar voucher`: (Opcional) Indica si el POS al finalizar la transacción envia el voucher formateado en la respuesta (verdader) o se omite (falso, por defecto).
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POSAutoservicio;
+using Transbank.Responses.AutoservicioResponse;
+//...
+Task<LastSaleResponse> response = POSAutoservicio.Instance.LastSale();
+```
+
+El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `LastSaleResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLastSaleException` en .NET.
+
+```json
+{
+  "Function": 260,
+  "Response": "Aprobado",
+  "Commerce Code": 550062700310,
+  "Terminal Id": "ABC1234C",
+  "Ticket": "ABC123",
+  "Autorization Code": "XZ123456",
+  "Ammount": 15000,
+  "Last 4 Digits": 6677,
+  "Operation Number": 60,
+  "Card Type": "CR",
+  "Accounting Date": "28/10/2019 22:35:12",
+  "Account Number": "30000000000",
+  "Card Brand": "AX",
+  "Real Date": "28/10/2019 22:35:12",
+  "Printing Field:": List<string>,
+  "Shares Type": 3,
+  "Shares Number": 3,
+  "Shares Amount": 5000,
+  "Shares Type Gloss": " "
+}
+```
+
+
+<aside class="notice">
+Si se solicita que el POS envie en la respuesta el voucher formateado, se entregará una lista de strings que contendra cada linea del voucher.
+</aside>
 
 ## Documentación disponible
 
