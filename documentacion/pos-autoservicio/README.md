@@ -63,13 +63,13 @@ PM> Install-Package TransbankPosSDK
 ```
 ### Integración Nativa
 
-Es recomendable utilizar un SDK disponible a la hora de desarrollar la integración, lo que ahorra tiempo y te despreocupa de desarrollar las comunicaciones con el equipo POS Autoservicio, facilitando bastante la integración, pero en el caso que prefieras realizar la integración por tu cuenta y utilizar los comandos nativos, puedes revisarlos en la [Referencia](/referencia/pos-autoservicio).
+Es recomendable utilizar un SDK disponible a la hora de desarrollar la integración, lo que ahorra tiempo y te despreocupa de desarrollar las comunicaciones con el equipo POS Autoservicio, facilitando bastante la integración, pero en el caso que prefieras realizar la integración por tu cuenta y utilizar los comandos nativos, puedes revisarlos en el manual de integración disponible en la sección de [documentación](/documentacion/pos-autoservicio#documentacion-disponible).
 
 ## Primeros pasos
 
-<div class="pos-title-nav">
+<!-- <div class="pos-title-nav">
   <div tbk-link='/referencia/pos-autoservicio?csharp#primeros-pasos' tbk-link-name='Referencia'></div>
-</div>
+</div> -->
 
 Para usar el SDK es necesario incluir las siguientes referencias.
 
@@ -263,7 +263,7 @@ Este comando es enviado por la caja, solicitando al POS los datos de la última 
 
 Si el POS recibe el comando de Última Venta y no existen transacciones en memoria del POS, se envía la respuesta a la caja indicando el código de respuesta 11. 
 <!-- ([Ver tabla de respuestas](/referencia/pos-autoservicio#tabla-de-respuestas)) -->
-Los siguientes parámetros deben ser enviados desde la caja:
+El siguiente parámetro debe ser enviado desde la caja:
 
 * `Enviar voucher`: (Opcional) Indica si el POS al finalizar la transacción envia el voucher formateado en la respuesta (verdader) o se omite (falso, por defecto).
 
