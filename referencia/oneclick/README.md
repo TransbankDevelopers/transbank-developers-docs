@@ -2,9 +2,9 @@
 
 ___
 
-<aside class="notice">
-Estás viendo la <strong>nueva referencia REST</strong>. Si quieres ver la referencia anterior (deprecada)
-(SOAP) haz [click aquí](/referencia/webpay-soap)
+<aside class="warning">
+Estás viendo la <strong>nueva referencia REST</strong>. La referencia anterior (SOAP) se encuentra en proceso de 
+obsolescencia programada para Julio 2022. Si necesitas revisarla haz [click aquí](/referencia/webpay-soap)
 </aside>
 
 ## Ambientes y Credenciales
@@ -281,7 +281,7 @@ token  <br> <i> String </i> | Identificador, único, del proceso de inscripcio
 url_webpay  <br> <i> String </i> | URL de Webpay para iniciar la inscripción. Largo: 255.
 
 <aside class="notice">
-Una vez que se llama a este webservice el usuario debe ser redireccionado vía
+Una vez que se llama a este endpoint, el usuario debe ser redireccionado vía
 POST a `urlInscriptionForm` con parámetro `TBK_TOKEN` igual al token.
 </aside>
 
