@@ -337,6 +337,45 @@ Como respuesta el **POS** enviará un código de aprobación, acompañado de un 
 }
 ```
 
+### Transacción de Cierre
+
+Este comando es gatillado por la caja. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Autoservicio enviará un aprobado o rechazado. <!-- (Puedes ver la tabla de respuestas en este [link](/referencia/pos-autoservicio#tabla-de-respuestas)) -->
+
+El siguiente parámetro debe ser enviado desde la caja:
+
+* `Enviar voucher`: (Opcional) Indica si el POS al finalizar la transacción envia el voucher formateado en la respuesta (verdader) o se omite (falso, por defecto).
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POSAutoservicio;
+using Transbank.Responses.AutoservicioResponse;
+//...
+Task<CloseResponse> response = POSAutoservicio.Instance.Close();
+```
+
+El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException` en .NET.
+
+```json
+{
+  "FunctionCode": 510,
+  "ResponseMessage": "Aprobado",
+  "Success": true,
+  "CommerceCode": 550062700310,
+  "TerminalId": "ABC1234C",
+  "Printing Field:": List<string>
+}
+```
+
+<aside class="notice">
+Si se solicita que el POS envie en la respuesta el voucher formateado, se entregará una lista de strings que contendra cada linea del voucher.
+</aside>
+
+<aside class="notice">
+Para el cierre no se solicitará tarjeta supervisora.
+</aside>
+
+
 
 ## Documentación disponible
 
