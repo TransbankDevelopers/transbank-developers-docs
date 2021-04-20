@@ -189,6 +189,75 @@ Si se solicita que el POS envie en la respuesta el voucher formateado, se entreg
 No se permite realizar transacciones que requieran firma ni operar tarjetas no bancarias.
 </aside>
 
+### Transacción de Venta Multicodigo
+
+Este comando es enviado por la caja para solicitar la ejecución de una venta multicódigo. Los siguientes parámetros deben ser enviados desde la caja:
+
+* `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
+* `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
+* `CodigoDeComercio`: Código de comercio que realiza la venta. (No es el mismo código del POS, ya que en multicódigo el código padre no puede realizar ventas.)
+* `Enviar voucher`: (Opcional) Indica si el POS al finalizar la transacción envia el voucher formateado en la respuesta (verdader) o se omite (falso, por defecto).
+* `Enviar Status`: (Opcional) Indica si se envian los mensajes intermedios (verdader) o se omiten (falso, por defecto).
+
+En el caso de C#, los mensajes intermedios se reciben mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`.
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POSAutoservicio;
+using Transbank.Responses.CommonResponses;
+using Transbank.Responses.AutoservicioResponse;
+//...
+
+POSAutoservicio.Instance.IntermediateResponseChange += NewIntermadiateMessageRecived; //EventHandler para los mensajes intermedios.
+Task<MultiCodeSaleResponse> response = POSAutoservicio.Instance.MultiCodeSale(ammount, ticket, commerceCode, true, true);
+
+//...
+//Manejador de mensajes intermedios...
+private static void NewIntermadiateMessageRecived(object sender, IntermediateResponse e){
+  //...
+}
+//...
+```
+
+El resultado de la venta se entrega en la forma de un objeto `MultiCodeSaleResponse` Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException` en .NET.
+
+El objeto MultiCodeSaleResponse retornará un objeto con los siguientes datos.
+
+```json
+{
+  "Function": 271,
+  "Response": "Aprobado",
+  "Commerce Code": 550062700310,
+  "Terminal Id": "ABC1234C",
+  "Ticket": "ABC123",
+  "Autorization Code": "XZ123456",
+  "Ammount": 15000,
+  "Last 4 Digits": 6677,
+  "Operation Number": 60,
+  "Card Type": "CR",
+  "Accounting Date": "28/10/2019 22:35:12",
+  "Account Number": "30000000000",
+  "Card Brand": "AX",
+  "Real Date": "28/10/2019 22:35:12",
+  "CommerceProviderCode:": 550062712310,
+  "Printing Field:": List<string>,
+  "Shares Type": 3,
+  "Shares Number": 3,
+  "Shares Amount": 5000,
+  "Shares Type Gloss": " "
+}
+```
+
+<aside class="notice">
+Si se solicita que el POS envie en la respuesta el voucher formateado, se entregará una lista de strings que contendra cada linea del voucher.
+</aside>
+
+<aside class="warning">
+No se permite realizar transacciones que requieran firma ni operar tarjetas no bancarias.
+</aside>
+
+
 
 ## Documentación disponible
 
