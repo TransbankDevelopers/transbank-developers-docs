@@ -404,6 +404,18 @@ El resultado de la carga de llaves entrega en la forma de un objeto `LoadKeysRes
 }
 ```
 
+### Transacción de Poll
+
+Esta mensaje es enviado por la caja para saber si el POS está conectado. En el SDK el resultado de esta operación es un `Booleano`. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankException`.
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POSAutoservicio;
+//...
+Task<bool> connected = POSAutoservicio.Instance.Poll();
+```
+
 ### Transacción de Inicialización
 
 Esta mensaje es enviado por la caja para que el POS autoservicio pueda cargar los parámetros y aplicativo. En el SDK el resultado de esta operación es un `Booleano`. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankException` en .NET.
@@ -446,6 +458,18 @@ El resultado de la inicialización se entrega en la forma de un objeto `Initiali
   "Success": true,
   "Real Date": "28/10/2019 22:35:12"
 }
+```
+
+### Transacción de Poll
+
+Esta mensaje es enviado por la caja para saber si el POS está conectado. En el SDK el resultado de esta operación es un `Booleano`. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankException` en .NET.
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POSAutoservicio;
+//...
+Task<bool> connected = POSAutoservicio.Instance.Poll();
 ```
 
 ## Documentación disponible
