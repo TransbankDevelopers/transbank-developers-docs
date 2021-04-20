@@ -375,7 +375,34 @@ Si se solicita que el POS envie en la respuesta el voucher formateado, se entreg
 Para el cierre no se solicitará tarjeta supervisora.
 </aside>
 
+### Transacción de Carga de Llaves
 
+Esta transacción permite al POS Autoservicio del comercio requerir cargar nuevas _Working Keys_ desde Transbank. Como respuesta el POS Autoservicio enviará un aprobado o rechazado. <!-- (Puedes ver la tabla de respuestas en este [link](/referencia/pos-autoservicio#tabla-de-respuestas)) -->
+
+<aside class="success">
+Su uso debe ser limitado como prueba de comunicación IP para validar conectividad hacia el exterior.
+</aside>
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POSAutoservicio;
+using Transbank.Responses.CommonResponses;
+//...
+Task<LoadKeysResponse> response = POSAutoservicio.Instance.LoadKeys();
+```
+
+El resultado de la carga de llaves entrega en la forma de un objeto `LoadKeysResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLoadKeysException` en .NET.
+
+```json
+{
+  "FunctionCode": 810,
+  "ResponseMessage": "Aprobado",
+  "Success": true,
+  "CommerceCode": 550062700310,
+  "TerminalId": "ABC1234C"
+}
+```
 
 ## Documentación disponible
 
