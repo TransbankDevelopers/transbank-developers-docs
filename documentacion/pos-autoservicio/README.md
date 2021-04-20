@@ -404,6 +404,26 @@ El resultado de la carga de llaves entrega en la forma de un objeto `LoadKeysRes
 }
 ```
 
+### Transacción de Inicialización
+
+Esta mensaje es enviado por la caja para que el POS autoservicio pueda cargar los parámetros y aplicativo. En el SDK el resultado de esta operación es un `Booleano`. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankException` en .NET.
+
+Debido a que la transacción de Inicialización tiene un tiempo superior a una venta normal y el tiempo en que el POS autoservicio queda fuera de comunicación con la caja es variable, se dividió en 2 comandos:
+- Transacción de Inicialización: Realiza la operación de inicialización.
+- Respuesta de Inicialización: Se utiliza para conocer el resultado de la operación de inicialización.
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POSAutoservicio;
+//...
+Task<bool> initialized = POSAutoservicio.Instance.Initialization();
+```
+
+<aside class="notice">
+La operación de inicialización es usada por los técnicos al realizar la instalación de los equipos en el comercio. Previo a la ejecución de esta transacción, es necesario realizar una transacción de cierre.
+</aside>
+
 ## Documentación disponible
 
 A continuación, encontrarás la documentación en formato PDF:
