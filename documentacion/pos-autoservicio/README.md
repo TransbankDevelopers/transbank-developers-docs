@@ -424,6 +424,30 @@ Task<bool> initialized = POSAutoservicio.Instance.Initialization();
 La operación de inicialización es usada por los técnicos al realizar la instalación de los equipos en el comercio. Previo a la ejecución de esta transacción, es necesario realizar una transacción de cierre.
 </aside>
 
+### Transacción de Respuesta Inicialización
+
+Esta mensaje es enviado por la caja para conocer el resultado de la última operación de inicialización realizada po el POS autoservicio.
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POSAutoservicio;
+using Transbank.Responses.AutoservicioResponse;
+//...
+Task<InitializationResponse> response = POSAutoservicio.Instance.InitializationResponse();
+```
+
+El resultado de la inicialización se entrega en la forma de un objeto `InitializationResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankInitializationResponseException` en .NET.
+
+```json
+{
+  "FunctionCode": 1080,
+  "Response": "Aprobado",
+  "Success": true,
+  "Real Date": "28/10/2019 22:35:12"
+}
+```
+
 ## Documentación disponible
 
 A continuación, encontrarás la documentación en formato PDF:
