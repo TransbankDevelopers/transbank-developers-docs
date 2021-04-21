@@ -1099,7 +1099,7 @@ reversa o una anulación:
 
 <strong>Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
 
-Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.</strong>
+Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado **(una hora)**, de lo contrario se ejecutará una anulación.</strong>
 
 <strong>Transaction.refund()</strong>
 
