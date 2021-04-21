@@ -614,7 +614,7 @@ Puedes generar el reembolso del total o parte del monto de una transacción, dep
 siguiente lógica de negocio la invocación a esta operación generará una reversa o una anulación:
 
 * Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
-* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
+* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla **(una hora)** no ha terminado, de lo contrario se ejecutará una anulación.
 
 La anulación puede realizarse máximo 90 días después de la fecha de la
 transacción original.
