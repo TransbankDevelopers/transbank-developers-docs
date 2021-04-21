@@ -126,7 +126,7 @@ Para obtenerla necesitas pasar un proceso de validación, que está [explicado a
 Este proceso pretende verificar que el comercio transacciona de manera segura y sin problemas. Esta validación es un requisito para dejar al comercio en producción y no se permitirá que un comercio utilice productivamente el servicio Webpay sin poseer esta validación.
 En esta etapa, debes envíar las evidencias a [soporte@transbank.cl](mailto:soporte@transbank.cl).
 
-Planilla de validación para plugins oficiales: [Descargar](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-plugins-rest.docx)
+**Para integración con plugins**, creamos un nuevo formulario online para que comiences el proceso de validación: <a class="typeform-share button" href="https://form.typeform.com/to/fZqOJyFZ?typeform-medium=embed-snippet" data-mode="popup" data-size="100" target="_blank"> Comenzar formulario de integración </a> 
 
 Soporte validará el formulario enviado y, de estar todo correcto, se te notificará la conformidad para pasar a producción, recibiendo tu **llave secreta** (_Api Key Secret_) de producción y algunas instrucciones.
 
