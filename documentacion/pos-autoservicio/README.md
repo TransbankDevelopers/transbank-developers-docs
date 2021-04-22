@@ -2,7 +2,7 @@
 
 La solución Autoservicio se integra al kiosco de tu comercio, con la particularidad de que no necesita la intervención
 de un dependiente de tu establecimiento, sino que permite que los mismos clientes realicen la transacción de pago de
-manera completa y autónoma. Ideal para negocios como estacionamientos, bencineras y cines, entre otros.
+manera completa y autónoma. Es ideal para negocios como estacionamientos, bencineras y cines, entre otros.
 
 ## Cómo funciona
 
@@ -20,21 +20,21 @@ Este proceso verificará que el desarrollo de integración que hiciste,
 cumple con los que te entregamos en las especificaciones, o si requiere alguna corrección o mejora.
 
 4. **Etapa piloto**
-En un lugar que acordemos juntos, llevamos a producción tu punto de venta autoservicio, donde con cliente reales haremos monitoreo en conjunto de su funcionamiento, por un periodo acotado de 2 semanas. Evaluamos los resultados, y acordamos masificación, también si se requiere algún ajuste.
+En un lugar que acordemos juntos, llevamos a producción tu punto de venta autoservicio, donde con clientes reales haremos monitoreo en conjunto de su funcionamiento, por un periódo acotado de 2 semanas. Evaluamos los resultados, y acordamos masificación, también si se requiere algún ajuste.
 
 5. **Masificación**
 Construimos en conjunto un plan de instalación de los puntos de ventas.
 
 <aside class="notice">
-Para el desarrollo y pruebas del comercio Transbank entrega un set de pruebas que se deben ejecutar y un set de tarjetas físicas para estos casos, estas tarjetas solo funcionan en ambiente de desarrollo, certificación o integración.
+Para el desarrollo y pruebas del comercio, Transbank entrega un set de pruebas que se deben ejecutar y un set de tarjetas físicas para estos casos, estas tarjetas solo funcionan en ambiente de desarrollo, certificación o integración.
 </aside>
 
 **Flujo de venta en POS autoservicio:**
 
-1. El cliente realiza la selección del producto o servicio a comprar
-2. El cliente selecciona la forma de pago que disponga el kiosko, efectivo o tarjeta crédito, tarjeta débito.
+1. El cliente realiza la selección del producto o servicio a comprar.
+2. El cliente selecciona la forma de pago que disponga el kiosko, efectivo o tarjeta de crédito, tarjeta de débito.
 3. El kiosco invoca al POS pasándole el monto a cobrar.
-4. El cliente opera tarjeta, selecciona cuotas si corresponde, e ingresa su pin.
+4. El cliente opera la tarjeta, selecciona cuotas si corresponde, e ingresa su pin.
 5. El POS informa al kiosco el resultado de la venta (aprobada o rechazada).
 6. El kiosko libera el producto e imprime los comprobantes.
 
@@ -56,7 +56,7 @@ Por el momento, hay un SDK para [.NET](https://github.com/TransbankDevelopers/tr
 
 ### SDK .NET
 
-Para .NET lo puedes encontrar en [NuGet.org](https://www.nuget.org/packages/TransbankPosSDK/) para instalarlo puedes utilizar por ejemplo el package manager de VisualStudio.
+Para .NET lo puedes encontrar en [NuGet.org](https://www.nuget.org/packages/TransbankPosSDK/). Para instalarlo puedes utilizar por ejemplo el package manager de VisualStudio.
 
 ```bash
 PM> Install-Package TransbankPosSDK
@@ -129,8 +129,8 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta. L
 
 * `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
 * `Número Ticket/Boleta`: Este número es entregado por el POS en la respuesta o en el voucher que se genera luego de la venta.
-* `Enviar voucher`: (Opcional) Indica si el POS al finalizar la transacción envia el voucher formateado en la respuesta (verdader) o se omite (falso, por defecto).
-* `Enviar Status`: (Opcional) Indica si se envian los mensajes intermedios (verdader) o se omiten (falso, por defecto).
+* `Enviar voucher`: (Opcional) Indica si el POS al finalizar la transacción envía el voucher formateado en la respuesta (verdadero) o se omite (falso, por defecto).
+* `Enviar Status`: (Opcional) Indica si se envían los mensajes intermedios (verdadero) o se omiten (falso, por defecto).
 
 En el caso de C#, los mensajes intermedios se reciben mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`.
 
@@ -155,7 +155,7 @@ private static void NewIntermadiateMessageRecived(object sender, IntermediateRes
 
 El resultado de la venta se entrega en la forma de un objeto `SaleResponse>`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException` en .NET.
 
-El objeto SaleResponse retornará un objeto con los siguientes datos.
+El objeto SaleResponse retornará un objeto con los siguientes datos:
 
 ```json
 {
@@ -182,22 +182,22 @@ El objeto SaleResponse retornará un objeto con los siguientes datos.
 ```
 
 <aside class="notice">
-Si se solicita que el POS envie en la respuesta el voucher formateado, se entregará una lista de strings que contendra cada linea del voucher.
+Si se solicita que el POS envíe en la respuesta el voucher formateado, se entregará una lista de strings que contendrá cada línea del voucher.
 </aside>
 
 <aside class="warning">
 No se permite realizar transacciones que requieran firma ni operar tarjetas no bancarias.
 </aside>
 
-### Transacción de Venta Multicodigo
+### Transacción de Venta Multicódigo
 
 Este comando es enviado por la caja para solicitar la ejecución de una venta multicódigo. Los siguientes parámetros deben ser enviados desde la caja:
 
 * `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
 * `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
 * `CodigoDeComercio`: Código de comercio que realiza la venta. (No es el mismo código del POS, ya que en multicódigo el código padre no puede realizar ventas.)
-* `Enviar voucher`: (Opcional) Indica si el POS al finalizar la transacción envia el voucher formateado en la respuesta (verdader) o se omite (falso, por defecto).
-* `Enviar Status`: (Opcional) Indica si se envian los mensajes intermedios (verdader) o se omiten (falso, por defecto).
+* `Enviar voucher`: (Opcional) Indica si el POS al finalizar la transacción envía el voucher formateado en la respuesta (verdadero) o se omite (falso, por defecto).
+* `Enviar Status`: (Opcional) Indica si se envían los mensajes intermedios (verdadero) o se omiten (falso, por defecto).
 
 En el caso de C#, los mensajes intermedios se reciben mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`.
 
@@ -222,7 +222,7 @@ private static void NewIntermadiateMessageRecived(object sender, IntermediateRes
 
 El resultado de la venta se entrega en la forma de un objeto `MultiCodeSaleResponse` Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException` en .NET.
 
-El objeto MultiCodeSaleResponse retornará un objeto con los siguientes datos.
+El objeto MultiCodeSaleResponse retornará un objeto con los siguientes datos:
 
 ```json
 {
@@ -250,7 +250,7 @@ El objeto MultiCodeSaleResponse retornará un objeto con los siguientes datos.
 ```
 
 <aside class="notice">
-Si se solicita que el POS envie en la respuesta el voucher formateado, se entregará una lista de strings que contendra cada linea del voucher.
+Si se solicita que el POS envie en la respuesta el voucher formateado, se entregará una lista de strings que contendrá cada línea del voucher.
 </aside>
 
 <aside class="warning">
@@ -265,7 +265,7 @@ Si el POS recibe el comando de Última Venta y no existen transacciones en memor
 <!-- ([Ver tabla de respuestas](/referencia/pos-autoservicio#tabla-de-respuestas)) -->
 El siguiente parámetro debe ser enviado desde la caja:
 
-* `Enviar voucher`: (Opcional) Indica si el POS al finalizar la transacción envia el voucher formateado en la respuesta (verdader) o se omite (falso, por defecto).
+* `Enviar voucher`: (Opcional) Indica si el POS al finalizar la transacción envía el voucher formateado en la respuesta (verdadero) o se omite (falso, por defecto).
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -302,17 +302,16 @@ El resultado de la transacción última venta devuelve los mismos datos que una 
 }
 ```
 
-
 <aside class="notice">
-Si se solicita que el POS envie en la respuesta el voucher formateado, se entregará una lista de strings que contendra cada linea del voucher.
+Si se solicita que el POS envíe en la respuesta el voucher formateado, se entregará una lista de strings que contendrá cada línea del voucher.
 </aside>
 
 ### Transacción de Anulación
 
-Esta transacción siempre será responsabilidad de la caja y es quien decide cuando realizar una anulación.
+Esta transacción siempre será responsabilidad de la caja y es quien decide cuándo realizar una anulación.
 
 <aside class="warning">
-Las anulaciones <strong>sólo</strong> pueden realizarse para transacciones con tarjeta de crédito y considerando que solo puede ser anulada la última transacción.
+Las anulaciones <strong>solo</strong> pueden realizarse para transacciones con tarjeta de crédito y considerando que solo puede ser anulada la última transacción.
 </aside>
 
 <div class="language-simple" data-multiple-language></div>
@@ -339,11 +338,11 @@ Como respuesta el **POS** enviará un código de aprobación, acompañado de un 
 
 ### Transacción de Cierre
 
-Este comando es gatillado por la caja. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Autoservicio enviará un aprobado o rechazado. <!-- (Puedes ver la tabla de respuestas en este [link](/referencia/pos-autoservicio#tabla-de-respuestas)) -->
+Este comando es gatillado por la caja. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta, el POS Autoservicio enviará un aprobado o rechazado. <!-- (Puedes ver la tabla de respuestas en este [link](/referencia/pos-autoservicio#tabla-de-respuestas)) -->
 
 El siguiente parámetro debe ser enviado desde la caja:
 
-* `Enviar voucher`: (Opcional) Indica si el POS al finalizar la transacción envia el voucher formateado en la respuesta (verdader) o se omite (falso, por defecto).
+* `Enviar voucher`: (Opcional) Indica si el POS al finalizar la transacción envía el voucher formateado en la respuesta (verdadero) o se omite (falso, por defecto).
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -368,7 +367,7 @@ El resultado del cierre de caja se entrega en la forma de un objeto `CloseRespon
 ```
 
 <aside class="notice">
-Si se solicita que el POS envie en la respuesta el voucher formateado, se entregará una lista de strings que contendra cada linea del voucher.
+Si se solicita que el POS envíe en la respuesta el voucher formateado, se entregará una lista de strings que contendrá cada línea del voucher.
 </aside>
 
 <aside class="notice">
@@ -392,7 +391,7 @@ using Transbank.Responses.CommonResponses;
 Task<LoadKeysResponse> response = POSAutoservicio.Instance.LoadKeys();
 ```
 
-El resultado de la carga de llaves entrega en la forma de un objeto `LoadKeysResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLoadKeysException` en .NET.
+El resultado de la carga de llaves se entrega en la forma de un objeto `LoadKeysResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLoadKeysException` en .NET.
 
 ```json
 {
@@ -418,7 +417,7 @@ Task<bool> connected = POSAutoservicio.Instance.Poll();
 
 ### Transacción de Inicialización
 
-Esta mensaje es enviado por la caja para que el POS autoservicio pueda cargar los parámetros y aplicativo. En el SDK el resultado de esta operación es un `Booleano`. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankException` en .NET.
+Este mensaje es enviado por la caja para que el POS autoservicio pueda cargar los parámetros y el aplicativo. En el SDK el resultado de esta operación es un `Booleano`. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankException` en .NET.
 
 Debido a que la transacción de Inicialización tiene un tiempo superior a una venta normal y el tiempo en que el POS autoservicio queda fuera de comunicación con la caja es variable, se dividió en 2 comandos:
 - Transacción de Inicialización: Realiza la operación de inicialización.
@@ -438,7 +437,7 @@ La operación de inicialización es usada por los técnicos al realizar la insta
 
 ### Transacción de Respuesta Inicialización
 
-Esta mensaje es enviado por la caja para conocer el resultado de la última operación de inicialización realizada po el POS autoservicio.
+Esta mensaje es enviado por la caja para conocer el resultado de la última operación de inicialización realizada por el POS autoservicio.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -479,7 +478,7 @@ A continuación, encontrarás la documentación en formato PDF:
 * **Manual de integración POS Autoservicio UX100/300/400** - _20.1_ | [Descargar](/files/manual-integracion-pos-autoservicio-20-1.pdf)
 _Este documento tiene por objetivo explicar las funcionalidades que debe implementar el
 Cliente o su proveedor de caja para el desarrollo del módulo de autoservicio (en este caso los
-ejemplos se efectuaran con el teclado Verifone UX100, el lector de tarjeta Verifone UX300 y el
+ejemplos se efectuarán con el teclado Verifone UX100, el lector de tarjeta Verifone UX300 y el
 lector de tarjetas Contactless Verifone UX400 (pago sin contacto)), permitiendo realizar
 transacciones bancarias de Crédito o Débito (redcompra)_
 
