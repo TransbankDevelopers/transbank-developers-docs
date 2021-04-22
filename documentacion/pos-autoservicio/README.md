@@ -459,18 +459,6 @@ El resultado de la inicialización se entrega en la forma de un objeto `Initiali
 }
 ```
 
-### Transacción de Poll
-
-Esta mensaje es enviado por la caja para saber si el POS está conectado. En el SDK el resultado de esta operación es un `Booleano`. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankException` en .NET.
-
-<div class="language-simple" data-multiple-language></div>
-
-```csharp
-using Transbank.POSAutoservicio;
-//...
-Task<bool> connected = POSAutoservicio.Instance.Poll();
-```
-
 ## Documentación disponible
 
 A continuación, encontrarás la documentación en formato PDF:
@@ -478,7 +466,7 @@ A continuación, encontrarás la documentación en formato PDF:
 * **Manual de integración POS Autoservicio UX100/300/400** - _20.1_ | [Descargar](/files/manual-integracion-pos-autoservicio-20-1.pdf)
 _Este documento tiene por objetivo explicar las funcionalidades que debe implementar el
 Cliente o su proveedor de caja para el desarrollo del módulo de autoservicio (en este caso los
-ejemplos se efectuarán con el teclado Verifone UX100, el lector de tarjeta Verifone UX300 y el
+ejemplos se efectuaráqn con el teclado Verifone UX100, el lector de tarjeta Verifone UX300 y el
 lector de tarjetas Contactless Verifone UX400 (pago sin contacto)), permitiendo realizar
 transacciones bancarias de Crédito o Débito (redcompra)_
 
