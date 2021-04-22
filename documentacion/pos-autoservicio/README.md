@@ -160,7 +160,8 @@ El objeto SaleResponse retornará un objeto con los siguientes datos:
 ```json
 {
   "Function": 210,
-  "Response": "Aprobado",
+  "ResponseCode": 0,
+  "ResponseMessage": "Aprobado",
   "Commerce Code": 550062700310,
   "Terminal Id": "ABC1234C",
   "Ticket": "ABC123",
@@ -227,7 +228,8 @@ El objeto MultiCodeSaleResponse retornará un objeto con los siguientes datos:
 ```json
 {
   "Function": 271,
-  "Response": "Aprobado",
+  "ResponseCode": 0,
+  "ResponseMessage": "Aprobado",
   "Commerce Code": 550062700310,
   "Terminal Id": "ABC1234C",
   "Ticket": "ABC123",
@@ -283,7 +285,8 @@ El objeto LastSaleResponse retornará un objeto con los siguientes datos:
 ```json
 {
   "Function": 260,
-  "Response": "Aprobado",
+  "ResponseCode": 0,
+  "ResponseMessage": "Aprobado",
   "Commerce Code": 550062700310,
   "Terminal Id": "ABC1234C",
   "Ticket": "ABC123",
@@ -335,6 +338,7 @@ El objeto RefundResponse retornará un objeto con los siguientes datos:
 {
   "FunctionCode": 1210,
   "ResponseCode": 0,
+  "ResponseMessage": "Aprobado",
   "CommerceCode": 597029414300,
   "TerminalId": "ABCD1234",
   "AuthorizationCode": "ABCD1234",
@@ -366,6 +370,7 @@ El objeto CloseResponse retornará un objeto con los siguientes datos:
 ```json
 {
   "FunctionCode": 510,
+  "ResponseCode": 0,
   "ResponseMessage": "Aprobado",
   "Success": true,
   "CommerceCode": 550062700310,
@@ -406,6 +411,7 @@ El objeto LoadKeysResponse retornará un objeto con los siguientes datos:
 ```json
 {
   "FunctionCode": 810,
+  "ResponseCode": 0,
   "ResponseMessage": "Aprobado",
   "Success": true,
   "CommerceCode": 550062700310,
@@ -465,7 +471,8 @@ El objeto InitializationResponse retornará un objeto con los siguientes datos:
 ```json
 {
   "FunctionCode": 1080,
-  "Response": "Aprobado",
+  "ResponseCode": 0,
+  "ResponseMessage": "Aprobado",
   "Success": true,
   "Real Date": "28/10/2019 22:35:12"
 }
