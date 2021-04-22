@@ -478,6 +478,41 @@ El objeto InitializationResponse retornará un objeto con los siguientes datos:
 }
 ```
 
+##Voucher
+
+Los voucher serán generados por el POS Autoservicio cuando el párametro `Enviar voucher` sea verdadero, el voucher puede ser retornado en la respuesta de las transacciones de venta, venta multicódigo, última venta, anulación y cierre.
+
+Cada línea contendrá 40 caracteres, los que se concatenarán en un solo buffer que será enviado en el campo de impresión en las respuesta de las transacciones mencionadas anteriormente. Al recibir el buffer se debe considerar que cada 40 caracteres se compone una línea del voucher.
+
+En el SDK de .NET se entregará una lista con cada línea del voucher.
+
+```json
+[
+  "       REPORTE DE CIERRE DEL TERMINAL   ",
+  "           OPERACIONES TRANSBANK        ",
+  "           CALLE HUERFANOS 770 10       ",
+  "                SANTIAGO                ",
+  "            597029983518-V18.1A2        ",
+  "FECHA            HORA           TERMINAL",
+  "22/04/21        14:14:56        70000933",
+  "                                        ",
+  "                 NUMERO            TOTAL",
+  "DEBITO             003           $ 3.000",
+  "MAESTRO            001           $ 2.000",
+  "VISA               010         $ 111.100",
+  "MASTERCARD         004          $ 80.000",
+  "AMEX               000               $ 0",
+  "MAGNA              000               $ 0",
+  "DINERS             002             $ 500",
+  "----------------------------------------",
+  "TOTAL CAPTURAS     020         $ 196.600"
+]
+```
+
+<aside class="notice">
+La cantidad de líneas del voucher dependerá del tipo de transacción.
+</aside>
+
 ## Documentación disponible
 
 A continuación, encontrarás la documentación en formato PDF:
@@ -485,7 +520,7 @@ A continuación, encontrarás la documentación en formato PDF:
 * **Manual de integración POS Autoservicio UX100/300/400** - _20.1_ | [Descargar](/files/manual-integracion-pos-autoservicio-20-1.pdf)
 _Este documento tiene por objetivo explicar las funcionalidades que debe implementar el
 Cliente o su proveedor de caja para el desarrollo del módulo de autoservicio (en este caso los
-ejemplos se efectuaráqn con el teclado Verifone UX100, el lector de tarjeta Verifone UX300 y el
+ejemplos se efectuarán con el teclado Verifone UX100, el lector de tarjeta Verifone UX300 y el
 lector de tarjetas Contactless Verifone UX400 (pago sin contacto)), permitiendo realizar
 transacciones bancarias de Crédito o Débito (redcompra)_
 
