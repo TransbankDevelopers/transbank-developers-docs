@@ -208,17 +208,19 @@ Transbank solo validará las integraciones de aquellos comercios que tengan un c
 Para obtenerlo, sigue las instrucciones en cómo hacerse cliente en el portal <http://www.transbank.cl> o contacte a su
 ejecutivo comercial.
 
-En esta etapa, el comercio envía las evidencias a [soporte@transbank.cl](mailto:soporte@transbank.cl) empleando el formulario correspondiente al
-producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones. Para integraciones
-Webpay que utilicen algún [plugin oficial](/plugin) existe un formulario especial.
-
 **Para integración con plugins**, creamos un nuevo formulario online para que comiences el proceso de validación: <a class="typeform-share button" href="https://form.typeform.com/to/fZqOJyFZ?typeform-medium=embed-snippet" data-mode="popup" data-size="100" target="_blank"> Comenzar formulario de integración </a> 
 
-Descargar el formulario de envidencias: 
+**Para integraciones Webpay Plus, Webpay Plus Mall y OneClick Mall (con SDK o integración directa al API)**, creamos un nuevo formulario online para que comiences el proceso de validación: <a class="typeform-share button" href="https://form.typeform.com/to/ibXdg6Av?typeform-medium=embed-snippet" data-mode="popup" data-size="100" target="_blank"> Comenzar formulario de integración </a> 
 
+
+Para otro tipo de integraciones (Onepay, PatPass, Transacción Completa), el comercio debe enviar las evidencias a [soporte@transbank.cl](mailto:soporte@transbank.cl) empleando el formulario correspondiente al producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones.
+
+Descargar el formulario de envidencias: 
 * Para integraciones Webpay que usen un plugin oficial: usa el formulario indicado más arriba. 
-* Para integraciones Webpay (Webpay Plus, Webpay OneClick, Webpay transacción completa): [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-rest.docx)
+* Para integraciones Webpay Plus, Webpay Plus Mall y OneClick Mall con SDK o intgración directa al API: usa el formulario indicado más arriba. 
+
 * Para integraciones Onepay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx)
+* Para integraciones Transacción Completa: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-rest.docx)
 * Para integraciones Patpass Comercio: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-patpass-comercio.docx)
 
 Soporte validará que los casos de prueba sean consistentes con los registrados
