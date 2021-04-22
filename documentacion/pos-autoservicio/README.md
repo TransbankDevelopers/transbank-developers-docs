@@ -278,6 +278,8 @@ Task<LastSaleResponse> response = POSAutoservicio.Instance.LastSale();
 
 El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `LastSaleResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLastSaleException` en .NET.
 
+El objeto LastSaleResponse retornará un objeto con los siguientes datos:
+
 ```json
 {
   "Function": 260,
@@ -325,6 +327,10 @@ Task<RefundResponse> response = POSAutoservicio.Instance.Refund();
 
 Como respuesta el **POS** enviará un código de aprobación, acompañado de un código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas del manual de integración POS Autoservicio. <!-- [Ver tabla de respuestas](/referencia/pos-autoservicio#tabla-de-respuestas) -->
 
+El resultado de la anulación se entrega en la forma de un objeto `RefundResponse` Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankRefundException` en .NET.
+
+El objeto RefundResponse retornará un objeto con los siguientes datos:
+
 ```json
 {
   "FunctionCode": 1210,
@@ -354,6 +360,8 @@ Task<CloseResponse> response = POSAutoservicio.Instance.Close();
 ```
 
 El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException` en .NET.
+
+El objeto CloseResponse retornará un objeto con los siguientes datos:
 
 ```json
 {
@@ -392,6 +400,8 @@ Task<LoadKeysResponse> response = POSAutoservicio.Instance.LoadKeys();
 ```
 
 El resultado de la carga de llaves se entrega en la forma de un objeto `LoadKeysResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLoadKeysException` en .NET.
+
+El objeto LoadKeysResponse retornará un objeto con los siguientes datos:
 
 ```json
 {
@@ -449,6 +459,8 @@ Task<InitializationResponse> response = POSAutoservicio.Instance.InitializationR
 ```
 
 El resultado de la inicialización se entrega en la forma de un objeto `InitializationResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankInitializationResponseException` en .NET.
+
+El objeto InitializationResponse retornará un objeto con los siguientes datos:
 
 ```json
 {
