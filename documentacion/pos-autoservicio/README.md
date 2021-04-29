@@ -32,7 +32,7 @@ Para el desarrollo y pruebas del comercio, Transbank entrega un set de pruebas q
 **Flujo de venta en POS autoservicio:**
 
 1. El cliente realiza la selección del producto o servicio a comprar.
-2. El cliente selecciona la forma de pago que disponga el kiosko, efectivo o tarjeta de crédito, tarjeta de débito.
+2. El cliente selecciona la forma de pago que disponga el kiosko, efectivo, tarjeta de crédito o tarjeta de débito.
 3. El kiosco invoca al POS pasándole el monto a cobrar.
 4. El cliente opera la tarjeta, selecciona cuotas si corresponde, e ingresa su pin.
 5. El POS informa al kiosco el resultado de la venta (aprobada o rechazada).
