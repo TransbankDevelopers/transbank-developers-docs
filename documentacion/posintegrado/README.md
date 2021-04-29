@@ -173,9 +173,9 @@ Para usar el SDK es necesario incluir las siguientes referencias.
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS;
-using Transbank.POS.Utils;
-using Transbank.POS.Responses:
+using Transbank.POSIntegrado;
+using Transbank.Responses.CommonResponses;
+using Transbank.Responses.IntegradoResponse;
 ```
 
 ```c
@@ -212,9 +212,9 @@ corresponda con el puerto donde conectaste el POS Integrado.
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS.Utils;
+using Transbank.POSIntegrado;
 //...
-List<string> ports = Serial.ListPorts();
+List<string> ports = POSAutoservicio.Instance.ListPorts();
 ```
 
 ```c
@@ -249,11 +249,10 @@ Si el puerto no puede ser abierto, se lanzará una excepción `TransbankExceptio
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS;
-using Transbank.POS.Utils;
+using Transbank.POSIntegrado;
 //...
 string portName = "COM3";
-POS.Instance.OpenPort(portName);
+POSIntegrado.Instance.OpenPort(portName);
 ```
 
 ```c
@@ -293,9 +292,9 @@ Al finalizar el uso del POS, o si se desea desconectar de la Caja se debe libera
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS;
+using Transbank.POSIntegrado;
 //...
-bool closed = POS.Instance.ClosePort();
+POSIntegrado.Instance.ClosePort();
 ```
 
 ```c
@@ -336,12 +335,13 @@ Si usas mensajes intermedios en Javascript, entonces puedes pasar un callback co
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS;
-using Transbank.POS.Responses;
+using Transbank.POSIntegrado;
+using Transbank.Responses.CommonResponses;
+using Transbank.Responses.IntegradoResponse;
 //...
 
-POS.Instance.IntermediateResponseChange += NewIntermadiateMessageRecived; //EventHandler para los mensajes intermedios.
-SaleResponse response = POS.Instance.Sale(ammount, ticket, true);
+POSIntegrado.Instance.IntermediateResponseChange += NewIntermadiateMessageRecived; //EventHandler para los mensajes intermedios.
+Task<SaleResponse> response = POSIntegrado.Instance.Sale(ammount, ticket, true);
 
 //...
 //Manejador de mensajes intermedios...
@@ -428,12 +428,13 @@ Si usas mensajes intermedios en Javascript, entonces puedes pasar un callback co
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS;
-using Transbank.POS.Responses;
+using Transbank.POSIntegrado;
+using Transbank.Responses.CommonResponses;
+using Transbank.Responses.IntegradoResponse;
 //...
 
-POS.Instance.IntermediateResponseChange += NewIntermadiateMessageRecived; //EventHandler para los mensajes intermedios.
-MultiCodeSaleResponse response = POS.Instance.MultiCodeSale(ammount, ticket, commerceCode, true);
+POSIntegrado.Instance.IntermediateResponseChange += NewIntermadiateMessageRecived; //EventHandler para los mensajes intermedios.
+Task<MultiCodeSaleResponse> response = POSIntegrado.Instance.MultiCodeSale(ammount, ticket, commerceCode, true);
 
 //...
 //Manejador de mensajes intermedios...
@@ -512,10 +513,10 @@ Si el POS recibe el comando de Última Venta y no existen transacciones en memor
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS;
-using Transbank.POS.Responses;
+using Transbank.POSIntegrado;
+using Transbank.Responses.IntegradoResponse;
 //...
-LastSaleResponse response = POS.Instance.LastSale();
+Task<LastSaleResponse> response = POSIntegrado.Instance.LastSale();
 ```
 
 ```c
@@ -578,10 +579,10 @@ Si el POS recibe el comando de última venta y no existen transacciones en memor
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS;
-using Transbank.POS.Responses;
+using Transbank.POSIntegrado;
+using Transbank.Responses.IntegradoResponse;
 //...
-MultiCodeLastSaleResponse response = POS.Instance.MultiCodeLastSale(true); //bool indica si pos envia o no el voucher como parte de la respuesta
+Task<MultiCodeLastSaleResponse> response = POSIntegrado.Instance.MultiCodeLastSale(true); //bool indica si pos envia o no el voucher como parte de la respuesta
 ```
 
 ```c
@@ -642,17 +643,18 @@ El comando de anulación soporta los siguientes parámetros que pueden ser envia
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS;
-using Transbank.POS.Responses;
+using Transbank.POSIntegrado;
+using Transbank.Responses.CommonResponses;
+
 //...
-RefundResp response = POS.Instance.Refund(21);
+Task<RefundResponse> response = POSIntegrado.Instance.Refund(21);
 ```
 
 ```c
 #include "transbank.h"
 #include "transbank_serial_utils.h"
 //...
-RefundResponse response = refund(21);
+char *refundResponse = refund(21);
 ```
 
 ```java
@@ -697,10 +699,10 @@ La transacción de cierre borra todas las transacciones almacenadas en la memori
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS;
-using Transbank.POS.Responses;
+using Transbank.POSIntegrado;
+using Transbank.Responses.IntegradoResponse;
 //...
-CloseResponse response = POS.Instance.Close();
+Task<CloseResponse> response = POSIntegrado.Instance.Close();
 ```
 
 ```c
@@ -749,10 +751,10 @@ haciendo una comparación de los totales entre la caja y el _POS_. La impresión
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS;
-using Transbank.POS.Responses;
+using Transbank.POSIntegrado;
+using Transbank.Responses.IntegradoResponse;
 //...
-TotalsResponse response = POS.Instance.Totals();
+Task<TotalsResponse> response = POSIntegrado.Instance.Totals();
 ```
 
 ```c
@@ -793,11 +795,11 @@ Esta transacción solicita al POS **todas** las transacciones que se han realiza
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS;
-using Transbank.POS.Responses;
+using Transbank.POSIntegrado;
+using Transbank.Responses.IntegradoResponse;
 //...
 bool printOnPOS = false;
-List<DetailResponse> details = POS.Instance.Details(printOnPOS)
+Task<List<DetailResponse>> details = POSIntegrado.Instance.Details(printOnPOS)
 ```
 
 ```c
@@ -876,11 +878,11 @@ Esta transacción solicita al POS **todas** las transacciones que se han realiza
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS;
-using Transbank.POS.Responses;
+using Transbank.POSIntegrado;
+using Transbank.Responses.IntegradoResponse;
 //...
 bool printOnPOS = false;
-List<MultiCodeDetailResponse> details = POS.Instance.MultiCodeDetails(printOnPOS)
+Task<List<MultiCodeDetailResponse>> details = POSIntegrado.Instance.MultiCodeDetails(printOnPOS)
 ```
 
 ```c
@@ -957,10 +959,10 @@ Las llaves se deben cambiar automáticamente todos los días. Puedes usar este m
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS;
-using Transbank.POS.Responses;
+using Transbank.POSIntegrado;
+using Transbank.Responses.CommonResponses;
 //...
-LoadKeysResponse response = POS.Instance.LoadKeys();
+Task<LoadKeysResponse> response = POSIntegrado.Instance.LoadKeys();
 ```
 
 ```c
@@ -1007,9 +1009,9 @@ Esta mensaje es enviado por la caja para saber si el POS está conectado. En el 
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS;
+using Transbank.POSIntegrado;
 //...
-bool connected = POS.Instance.Poll();
+Task<bool> connected = POSIntegrado.Instance.Poll();
 ```
 
 ```c
@@ -1042,9 +1044,9 @@ Este comando le permitirá a la caja realizar el cambio de modalidad a través d
 <div class="language-simple" data-multiple-language></div>
 
 ```csharp
-using Transbank.POS;
+using Transbank.POSIntegrado;
 //...
-bool connected = POS.Instance.SetNormalMode();
+Task<bool> connected = POSIntegrado.Instance.SetNormalMode();
 ```
 
 ```c
