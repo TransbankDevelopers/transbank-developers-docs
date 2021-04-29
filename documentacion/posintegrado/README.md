@@ -214,7 +214,7 @@ corresponda con el puerto donde conectaste el POS Integrado.
 ```csharp
 using Transbank.POSIntegrado;
 //...
-List<string> ports = POSAutoservicio.Instance.ListPorts();
+List<string> ports = POSIntegrado.Instance.ListPorts();
 ```
 
 ```c
