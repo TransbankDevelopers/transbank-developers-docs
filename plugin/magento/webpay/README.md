@@ -7,7 +7,7 @@
     <br>
     <h4>Compatibilidad</h4>
     <ul>
-      <li>Magento2 2.2.X y 2.3.X</li>
+      <li>Magento2 2.2.X , 2.3.X y 2.4.X</li>
       <li>PHP >= 5.6</li>
     </ul>
     <h4>Recuerda</h4>
@@ -92,15 +92,6 @@ Al finalizar este proceso de validación, obtendrás tu **llave secreta**.
 Nota: Esta **llave secreta** es como la contraseña de tu código de comercio, por lo que no debes compartirla. Se usa para identificar que tu comercio es quién realmente está realizando cada operación (transacción, anulación de un pago, etc).
 
 ## Puesta en producción
-
-<div class='url-modal-embed' data-toggle-embedYT="modal" data-src="https://www.youtube.com/embed/B9sb7SyROVk" >
-  <div class="container-embed">
-    <div class="data-info-url">
-      <b>Cómo pasar a producción</b>
-    </div>
-    <img class="icon-video-YT td_img-night" src="{{dir}}/images/yt_icon.png" alt="Youtube">
-  </div>
-</div>
 
 Si ya tienes tu código de comercio de producción y llave secreta, solo debes entrar a la configuración de tu plugin ([instrucciones en este link](https://github.com/TransbankDevelopers/transbank-plugin-magento2-webpay-rest/blob/master/docs/INSTALLATION.md#configuraci%C3%B3n)) y colocar:
 
