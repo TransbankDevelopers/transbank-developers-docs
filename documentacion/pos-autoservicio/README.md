@@ -478,7 +478,7 @@ El objeto InitializationResponse retornará un objeto con los siguientes datos:
 }
 ```
 
-##Voucher
+## Voucher
 
 Los voucher serán generados por el POS Autoservicio cuando el párametro `Enviar voucher` sea verdadero, el voucher puede ser retornado en la respuesta de las transacciones de venta, venta multicódigo, última venta, anulación y cierre.
 
