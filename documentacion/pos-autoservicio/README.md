@@ -96,7 +96,7 @@ List<string> ports = POSAutoservicio.Instance.ListPorts();
 
 ### Abrir un puerto Serial
 
-Para abrir un puerto serial y comunicarte con el POS Autoservicio, necesitarás el nombre del puerto (el cual puedes identificar usando [la función mencionada en el apartado anterior](/documentacion/pos-autoservicio#listar-puertos-disponibles)). También necesitarás el _baudrate_ al cual esta configurado el puerto serial del POS Autoservicio (por defecto es **9600**).
+Para abrir un puerto serial y comunicarte con el POS Autoservicio, necesitarás el nombre del puerto (el cual puedes identificar usando [la función mencionada en el apartado anterior](/documentacion/pos-autoservicio#listar-puertos-disponibles)). También necesitarás el _baudrate_ al cual esta configurado el puerto serial del POS Autoservicio (por defecto es **19200**).
 
 Si el puerto no puede ser abierto, se lanzará una excepción `TransbankException` en .NET y Java.
 
@@ -478,7 +478,7 @@ El objeto InitializationResponse retornará un objeto con los siguientes datos:
 }
 ```
 
-## Voucher
+### Voucher
 
 Los voucher serán generados por el POS Autoservicio cuando el párametro `Enviar voucher` sea verdadero, el voucher puede ser retornado en la respuesta de las transacciones de venta, venta multicódigo, última venta, anulación y cierre.
 
