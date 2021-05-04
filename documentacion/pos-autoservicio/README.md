@@ -517,7 +517,7 @@ La cantidad de líneas del voucher dependerá del tipo de transacción.
 
 A continuación, encontrarás la documentación en formato PDF:
 
-* **Manual de integración POS Autoservicio UX100/300/400** - _20.1_ | [Descargar](/files/manual-integracion-pos-autoservicio-20-1.pdf)
+* **Manual de integración POS Autoservicio UX100/300/400** - _20.1_ | [Descargar](/files/manual-integracion-pos-autoservicio-4.9.pdf)
 _Este documento tiene por objetivo explicar las funcionalidades que debe implementar el
 Cliente o su proveedor de caja para el desarrollo del módulo de autoservicio (en este caso los
 ejemplos se efectuarán con el teclado Verifone UX100, el lector de tarjeta Verifone UX300 y el
