@@ -40,9 +40,10 @@ Para el desarrollo y pruebas del comercio, Transbank entrega un set de pruebas q
 
 ## Equipos y conexiones disponibles
 
+El POS autoservicio cuenta con un puerto LAN, serial y USB para realizar la conexión con la caja y los servidores de Transbank. Al conectar el equipo mediante la conexión serial, es posible establecer la velocidad de conexión, la que puede ir desde los 1200 Bps hasta 115200 Bps. Por defecto la velocidad de conexión es 19200 Bps 8N1. Cuando se conecta por USB la velocidad se establece automáticamente en 115200 y no puede ser cambiada.
+
 ### Verifone ux100, ux400, ux300
 
-POS autoservicio con conexión LAN y Serial
 <img src="/images/documentacion/autoatencion/ux100completo.png" alt="Verifone ux100, ux300 y ux400">
 
 ## Funciones de pago disponibles en HOST
