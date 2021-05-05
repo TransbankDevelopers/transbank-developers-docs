@@ -8,7 +8,7 @@
     <h4>Compatibilidad</h4>
     <ul>
       <li>Magento2 2.2.X , 2.3.X y 2.4.X</li>
-      <li>PHP >= 5.6</li>
+      <li>PHP >= 7.0</li>
     </ul>
     <h4>Recuerda</h4>
     <ol>
@@ -38,7 +38,7 @@ Asegúrate de tener habilitados los siguientes módulos / extensiones para PHP:
 * OpenSSL 1.0.1 o superior
 * SimpleXML
 * DOM 2.7.8 o superior
-* PHP 5.6 o superior
+* PHP 7.0 o superior
 
 Al instalar el plugin, podrás revisar si todas estos requisitos se cumplen, a través de la pantalla de diagnóstico que se incluye.
 
