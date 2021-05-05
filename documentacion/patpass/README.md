@@ -62,7 +62,6 @@ String secondLastName = "sapellido";
 String rut = "14140066-5";
 String serviceId = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));;
 String finalUrl = request.getRequestURL().toString().replace("start","voucher-generated");
-String commerceCode = "28299257";
 double maxAmount = 1500;
 String phoneNumber = "123456734";
 String mobileNumber = "123456723";
@@ -79,7 +78,6 @@ final PatpassComercioInscriptionStartResponse response = PatpassComercio.Inscrip
                     rut,
                     serviceId,
                     finalUrl,
-                    commerceCode,
                     maxAmount,
                     phoneNumber,
                     mobileNumber,
@@ -101,7 +99,6 @@ $lastname2 = "Segundo Apellido";
 $rut = "11111111-1";
 $serviceId = "Identificador del servicio unico de suscripción";
 $finalUrl = "https://callback/final/comprobante/transacción";
-$commerceCode = "Código de comercio";
 $maxAmount = 10000; # monto máximo de la suscripción
 $telephone = "numero telefono fijo de suscrito";
 $mobilePhone = "numero de telefono móvil de suscrito";
@@ -119,7 +116,6 @@ $response = PatpassComercio\Inscription::Start(
   $rut,
   $serviceId,
   $finalUrl,
-  $commerceCode,
   $maxAmount,
   $telephone,
   $mobilePhone,
@@ -142,7 +138,6 @@ var lastname2 = "Segundo Apellido";
 var rut = "11111111-1";
 var serviceId = "Identificador del servicio unico de suscripción";
 var finalUrl = "https://callback/final/comprobante/transacción";
-var commerceCode = "Código de comercio";
 var maxAmount = 10000; # monto máximo de la suscripción
 var telephone = "numero telefono fijo de suscrito";
 var mobilePhone = "numero de telefono móvil de suscrito";
@@ -160,7 +155,6 @@ var response = Inscription.Start(
     rut,
     serviceId,
     finalUrl,
-    commerceCode,
     maxAmount,
     telephone,
     mobilePhone,
