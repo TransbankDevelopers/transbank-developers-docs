@@ -88,6 +88,11 @@ Te recomendamos leer [las instrucciones de instalación detalladas para el SDK R
 pip install transbank-sdk
 ```
 
+[En **NodeJS**](https://github.com/TransbankDevelopers/transbank-sdk-nodejs#instalación) puedes instalar el SDK desde NPM:
+```bash
+npm install transbank-sdk 
+```
+
 Te recomendamos leer [las instrucciones de instalación detalladas para el SDK Python](https://github.com/TransbankDevelopers/transbank-sdk-python#instalaci%C3%B3n) para más opciones de instalación.
 
 ### C) Usando el API REST
