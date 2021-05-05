@@ -8,6 +8,8 @@ Para crear una transacción **PatPass Comercio** que registre una suscripción, 
 
 Una forma fácil de comenzar es utilizar la configuración para pruebas que viene incluida en el SDK.
 
+<div class="language-simple" data-multiple-language></div>
+
 ```java
 import cl.transbank.patpass.PatpassComercio;
 import cl.transbank.patpass.model.PatpassComercioInscriptionStartResponse;
@@ -49,6 +51,8 @@ PatpassComercio.IntegrationType = "TEST / LIVE dependiendo de tu ambiente de int
 Te recomendamos encapsular estas asignaciones en una función para que puedas reutilizarlas en los demás métodos.
 
 Una vez este preparado el ambiente y la integración, puedes iniciar la transacción sin problemas.
+
+<div class="language-simple" data-multiple-language></div>
 
 ```java
 import cl.transbank.patpass.PatpassComercio;
@@ -232,6 +236,8 @@ response = Inscription.start(return_url, name, first_last_name, second_last_name
 
 Para confirmar la suscripción se debe enviar el token generado en la respuesta a la url tambien generada en la respuesta con el metodo post en un formulario.
 
+<div class="language-simple" data-multiple-language></div>
+
 ```java
 <form action="${model.url_webpay}" method="post" name="tokenForm">
     <input type="hidden" name="tokenComercio" value="${model.tbk_token}">
@@ -271,6 +277,8 @@ Para confirmar la suscripción se debe enviar el token generado en la respuesta 
 ### Estado de la suscripción
 
 Una vez que el tarjetahabiente ha pagado (o declinado, o ha ocurrido un error), Webpay retornará el control vía POST a la URL que indicaste en el returnUrl. Recibirás también el parámetro token_ws que te permitirá conocer el resultado de la transacción:
+
+<div class="language-simple" data-multiple-language></div>
 
 ```java
 import cl.transbank.patpass.model.PatpassComercioTransactionStatusResponse;
