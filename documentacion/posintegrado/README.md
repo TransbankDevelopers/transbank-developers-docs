@@ -418,7 +418,7 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta mu
 
 * `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
 * `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
-* `CodigoDeComercio`: Código de comercio que realiza la venta. (No es el mismo código del POS, ya que en multicódigo el código padre no puede realizar ventas.)
+* `Código De Comercio`: Código de comercio que realiza la venta. (No es el mismo código del POS, ya que en multicódigo el código padre no puede realizar ventas.)
 * `Enviar Status`: (Opcional) Indica si se envian los mensajes intermedios (verdader) o se omiten (falso, por defecto)
 
 En el caso de C#, los mensajes intermedios se reciben mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`
