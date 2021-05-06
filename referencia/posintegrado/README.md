@@ -381,7 +381,7 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta pa
 using Transbank.POSIntegrado;
 using Transbank.Responses.IntegradoResponse;
 //...
-Task<MultiCodeSaleResponse> response = POSIntegrado.Instance.MultiCodeSale(ammount, ticket);
+Task<MultiCodeSaleResponse> response = POSIntegrado.Instance.MultiCodeSale(ammount, ticket, commerceCode, true);
 ```
 
 ```c
