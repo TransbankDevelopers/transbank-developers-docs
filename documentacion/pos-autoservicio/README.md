@@ -53,7 +53,9 @@ El POS autoservicio cuenta con un puerto LAN, serial y USB para realizar la cone
 
 ## Cómo empezar
 
-Por el momento, hay un SDK para [.NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet).
+Con el objetivo de facilitar la integración a los equipos POS Autoservicio, se han creado algunos SDKs para diferentes lenguajes de programación, utilizando licencias Open Source, para que puedan modificar, mejorar o añadir alguna corrección en caso de ser necesario. También pueden reportar incidencias en los respectivos repositorios o indicarlas en la comunidad de Transbank Developers en [Slack](transbankdevelopers.slack.com).
+
+Por el momento, hay un SDK para [.NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet) y estamos trabajando para añadir otros lenguajes a futuro.
 
 ### SDK .NET
 
