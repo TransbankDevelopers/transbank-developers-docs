@@ -194,7 +194,7 @@ No se permite realizar transacciones que requieran firma ni operar tarjetas no b
 ### Transacción de Venta Multicódigo
 
 <aside class="alert">
-Este método está disponible desde la versión 20.1 del aplicativo de POS Autoservicio y se debe solicitar la activación de la funcionalidad de venta multicódigo.
+Este método está disponible desde la versión 20.1 firmware de POS Autoservicio y se debe solicitar la activación de la funcionalidad de venta multicódigo.
 </aside>
 
 Este comando es enviado por la caja para solicitar la ejecución de una venta multicódigo. Los siguientes parámetros deben ser enviados desde la caja:
