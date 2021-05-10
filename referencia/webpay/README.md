@@ -910,12 +910,11 @@ const response  = await WebpayPlus.DeferredTransaction.capture(token, buyOrder, 
 
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
-Tbk-Api-Key-Id: 597055555531
+Tbk-Api-Key-Id: 597055555540
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
-  "commerce_code": "597055555531",
   "buy_order": "415034240",
   "authorization_code": "12345",
   "capture_amount": 1000
@@ -927,10 +926,9 @@ Content-Type: application/json
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
-commerce_code  <br> <i> Number </i> | (Opcional, solo usar en caso Mall) Tienda hija que realizó la transacción. Largo: 12.
 buy_order  <br> <i> String </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
-authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
-capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo máximo: 17.
+authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
+capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo máximo: 17.
 
 <strong>Respuesta Transaction.capture</strong>
 
@@ -1874,14 +1872,14 @@ response = MallDeferredTransaction.capture(
 
 ```http
 PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
-Tbk-Api-Key-Id: 597055555531
+Tbk-Api-Key-Id: 597055555581
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 
 {
-  "commerce_code": "597055555531",
-  "buy_order": "415034240",
-  "authorization_code": "12345",
+  "commerce_code": "597055555582",
+  "buy_order": "your_buy_order_here",
+  "authorization_code": "your_authorization_code_here",
   "capture_amount": 1000
 }
 ```
@@ -1891,13 +1889,12 @@ Content-Type: application/json
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía en la URL, no en el body)
-commerce_code  <br> <i> Number </i> | (Opcional, solo usar en caso Mall) Tienda hija que realizó la transacción. Largo: 12.
+commerce_code  <br> <i> Number </i> | Tienda **hija** (no usar el código de comercio mall) que realizó la transacción. Largo: 12.
 buy_order  <br> <i> String </i> | Orden de compra de la transacción que se requiere capturar. Largo máximo: 26.
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción que se requiere capturar Largo máximo: 6.
 capture_amount  <br> <i> Decimal </i> | Monto que se desea capturar. Largo máximo: 17.
 
 <strong>Respuesta Transaction.capture</strong>
-
 ```java
 response.getAuthorizationCode();
 response.getAuthorizationDate();
@@ -1906,6 +1903,7 @@ response.getResponseCode();
 ```
 
 ```php
+$response->getAuthorizationCode();
 $response->getAuthorizationCode();
 $response->getAuthorizationDate();
 $response->getCapturedAmount();
