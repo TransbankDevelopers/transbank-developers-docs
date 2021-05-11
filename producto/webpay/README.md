@@ -120,7 +120,7 @@ Respuestas al <br> comercio | Descripción
 ------   | -----------
 -1 | Rechazo - Posible error en el ingreso de datos de la transacción
 -2 | Rechazo - Se produjo fallo al procesar la transacción, este mensaje de rechazo se encuentra relacionado a parámetros de la tarjeta y/o su cuenta asociada
--3 | Rechazo - Interno Transbank
+-3 | Rechazo - Error en Transacción
 -4 | Rechazo - Rechazada por parte del emisor
 -5 | Rechazo - Transacción con riesgo de posible fraude
 
