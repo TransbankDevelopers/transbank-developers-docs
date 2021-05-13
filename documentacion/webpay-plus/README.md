@@ -116,6 +116,10 @@ Hay 4 diferentes flujos, donde cada uno llega con datos distintos:
 3. **Pago abortado (con botón anular compra en el formulario de Webpay)**: Llegará `TBK_TOKEN` (notar que no se llama `token_ws`, pero igualmente contiene el token de la transacción), `TBK_ID_SESION`, `TBK_ORDEN_COMRA`
 4. **Si ocurre un error en el formulario de pago, y hace click en el link de "volver al sitio" de la pantalla de error*: (replicable solo en producción si inicias una transacción, abres el formulario de pago, cierras el tab de Chrome y luego lo recuperas) Llegará `token_ws`, `TBK_TOKEN`, `TBK_ID_SESION`, `TBK_ORDEN_COMRA`. 
 
+### Proyectos de ejemplo
+Recuerda que tienes varios proyectos de ejemplos para cada lenguaje, que puedes [revisar acá](documentacion/como_empezar#ejemplos)
+
+Para PHP, [en el mismo repositorio](https://github.com/TransbankDevelopers/transbank-sdk-php/examples/) puedes encontrar algunos ejemplos básicos también.  
 
 ### Crear una transacción
 
@@ -150,6 +154,12 @@ use Transbank\Webpay\WebpayPlus\Transaction;
 // Versión 2.x del SDK
 $transaction = new Transaction();
 $response = $transaction->create($buy_order, $session_id, $amount, $return_url);
+
+
+
+////////////////////////////////////////////////////////////
+// Otras opciones.... 
+////////////////////////////////////////////////////////////
 
 // Adicionalmente, ahora existen varias formas de crear una instancia del Objeto "Transaction". Todas son igual de válidas.    
 // Opción 2: 
@@ -186,8 +196,12 @@ WebpayPlus::configureForProduction($commerceCode, $apiKeySecret);
 $options = Transbank\Webpay\Options::forIntegration($commerceCode, $apiKeySecret);
 $transaction = new Transaction($options); //Pasarle el objeto $options a la instancia
 
-// -------------------
-// SDK 1.X - No hay más opciones. Solo método estático, no recomendado. 
+
+
+
+// -------------------------------------------------
+// SDK 1.X - No hay más opciones. Solo método estático, no recomendado.
+ 
 $response = Transaction::create($buy_order, $session_id, $amount, $return_url);
 
 ```
@@ -301,10 +315,23 @@ final CreateWebpayPlusTransactionResponse response = WebpayPlus.Transaction.comm
 
 ```php
 use Transbank\Webpay\WebpayPlus\Transaction;
-
-
 // SDK Versión 2.x
-$response = (new Transaction)->commit($token); // O cualquiera de los métodos detallados en el ejemplo anterior del método create.
+$token = $_GET['token_ws'] ?? $_POST['token_ws'] ?? null;
+if (!$token) {
+    // Revisa más detalles en Revisar más detalles más arriba en los distintos flujos y ejemplos de código de esto en https://github.com/TransbankDevelopers/transbank-sdk-php/examples/webpay-plus/index.php
+    die ('No es un flujo de pago normal.');  
+}
+
+$response = (new Transaction)->commit($token); // ó cualquiera de los métodos detallados en el ejemplo anterior del método create.
+if ($response->isApproved()) {
+ // Transacción Aprobada
+} else {
+ // Transacción rechazada
+}
+
+
+
+
 
 // SDK Versión 1.x
 $response = Transaction::commit($token);
@@ -354,6 +381,9 @@ response.getBalance();
 ```
 
 ```php
+// Del objeto $response de respuesta, puedes obtener cualquier de estos datos.
+// Para validar la transacción recomendamos usar $response->isApproved();
+// pero puedes usar el resto de la información para guardar detalles de la respuesta en tu base de datos
 $response->getVci();
 $response->getAmount();
 $response->getStatus();
@@ -513,6 +543,7 @@ response.getBalance();
 ```
 
 ```php
+
 $response->getVci();
 $response->getAmount();
 $response->getStatus();
@@ -904,10 +935,9 @@ final CreateWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransact
 
 ```php
 use Transbank\Webpay\WebpayPlus\MallTransaction;
-use Transbank\Webpay\WebpayPlus; // opcional
 // SDK 2.x
 // Por defecto, la clase MallTransaction viene configurada para integración con un código Webpay Plus Mall Captura simultanea
-// También se puede configurar WebpayPlus::configureForTestingMall() y  WebpayPlus::configureForTestingMallDeferred()
+// También se puede configurar \Transbank\Webpay\WebpayPlus::configureForTestingMall() y  \Transbank\Webpay\WebpayPlus::configureForTestingMallDeferred()
 $transaction_details = [
   [
       "amount" => 10000,
@@ -1362,7 +1392,7 @@ Para obtener la información contenida en la respuesta puedes hacerlo de la sigu
 ```
 
 ```php
-  $response->getAccountingDate();
+$response->getAccountingDate();
 $response->getBuyOrder();
 $response->getCardDetail();
 $response->getCardNumber(); // Solo en SDK 2.x
