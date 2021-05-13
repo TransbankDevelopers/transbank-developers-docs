@@ -117,9 +117,9 @@ Hay 4 diferentes flujos, donde cada uno llega con datos distintos:
 4. **Si ocurre un error en el formulario de pago, y hace click en el link de "volver al sitio" de la pantalla de error*: (replicable solo en producción si inicias una transacción, abres el formulario de pago, cierras el tab de Chrome y luego lo recuperas) Llegará `token_ws`, `TBK_TOKEN`, `TBK_ID_SESION`, `TBK_ORDEN_COMRA`. 
 
 ### Proyectos de ejemplo
-Recuerda que tienes varios proyectos de ejemplos para cada lenguaje, que puedes [revisar acá](documentacion/como_empezar#ejemplos)
+Recuerda que tienes varios proyectos de ejemplos para cada lenguaje, que puedes [revisar acá.](/documentacion/como_empezar#ejemplos)
 
-Para PHP, [en el mismo repositorio](https://github.com/TransbankDevelopers/transbank-sdk-php/examples/) puedes encontrar algunos ejemplos básicos también.  
+Para PHP, [en el mismo repositorio](https://github.com/TransbankDevelopers/transbank-sdk-php/tree/master/examples) también puedes encontrar algunos ejemplos básicos.  
 
 ### Crear una transacción
 
