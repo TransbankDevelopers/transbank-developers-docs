@@ -151,6 +151,10 @@ use Transbank\Webpay\WebpayPlus\Transaction;
 $transaction = new Transaction();
 $response = $transaction->create($buy_order, $session_id, $amount, $return_url);
 
+
+
+
+
 // Adicionalmente, ahora existen varias formas de crear una instancia del Objeto "Transaction". Todas son igual de válidas.    
 // Opción 2: 
 $response = WebpayPlus::transaction()->create($buy_order, $session_id, $amount, $return_url);
@@ -227,6 +231,7 @@ response.getToken();
 ```
 
 ```php
+// Puedes obtener el token y la url que devuelve esta operación usando estos métodos del objeto de respuesta
 $response->getUrl();
 $response->getToken();
 ```
@@ -282,11 +287,11 @@ tarjetas de prueba en la sección de Ambientes</a>.
 </div>
 
 Una vez que el tarjetahabiente ha pagado, Webpay Plus retornará
-el control vía `POST` a la `URL` que indicaste en el `return_url`.
+el control vía `GET` (o `POST` si usas la API v1.0) a la `URL` que indicaste en el `return_url`.
 Recibirás también el parámetro `token_ws` que te permitirá conocer el resultado de la transacción.
 
 En caso de que el tarjetahabiente haya declinado, o haya ocurrido un error, recibirás la variable `TBK_TOKEN`
-además de las variables `TBK_ORDEN_COMPRA` y `TBK_ID_SESION`.
+además de las variables `TBK_ORDEN_COMPRA` y `TBK_ID_SESION`. 
 
 <aside class="notice">
 Para verificar si una transacción fue aprobada, debes confirmar el que código de respuesta `response_code` sea 
@@ -304,7 +309,16 @@ use Transbank\Webpay\WebpayPlus\Transaction;
 
 
 // SDK Versión 2.x
-$response = (new Transaction)->commit($token); // O cualquiera de los métodos detallados en el ejemplo anterior del método create.
+$token = $_GET['token_ws'] ?? $_POST['token_ws'] ?? null; // Obtener el token de un flujo normal
+
+if ($token === null) { // Si no viene el token, puede ser porque la transacción
+  $tbkToken = $_GET['TBK_TOKEN'] ?? $_POST['TBK_TOKEN'] ?? null;
+  if ($tbkToken === null) {
+    
+  }
+}
+
+$response = (new Transaction)->commit($token); // ó cualquiera de los métodos detallados en el ejemplo anterior.
 
 // SDK Versión 1.x
 $response = Transaction::commit($token);
@@ -354,6 +368,7 @@ response.getBalance();
 ```
 
 ```php
+// Puedes obtener la información que devuelve esta operación usando estos métodos del objeto de respuesta:
 $response->getVci();
 $response->getAmount();
 $response->getStatus();
@@ -370,8 +385,8 @@ $response->getInstallmentsAmount();
 $response->getInstallmentsNumber();
 $response->getBalance();
 
-// Adicionalmente en el SDK 2.x existe
-$response->isApproved(); // Devuelve true si response_code es 0 y status es AUTHORIZED, y false en caso contrario.
+// Adicionalmente en el SDK 2.x existe...
+$response->isApproved(); // Devuelve true si response_code es 0 y status es AUTHORIZED, y false en caso contrario. 
 ```
 
 ```csharp
