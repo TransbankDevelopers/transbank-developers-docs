@@ -139,10 +139,12 @@ WebpayPlus.Transaction.setIntegrationType(IntegrationType.TEST);
 ```
 
 ```php
+// SDK Versión 2.x
 // El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
-Transbank\Webpay\WebpayPlus::setCommerceCode('597055555532');
-Transbank\Webpay\WebpayPlus::setApiKey('579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C');
-Transbank\Webpay\WebpayPlus::setIntegrationType('TEST');
+\Transbank\Webpay\WebpayPlus::configureForIntegration('597055555532', '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C');
+
+// Si deseas apuntar a producción: 
+\Transbank\Webpay\WebpayPlus::configureForProduction('tu-codigo-comercio', 'tu-api-key');
 ```
 
 ```csharp
@@ -211,9 +213,10 @@ final WebpayPlusTransactionCreateResponse response = WebpayPlus.Transaction.crea
 ```
 
 ```php
+// SDK Versión 2.x
 use Transbank\Webpay\WebpayPlus\Transaction;
 
-$response = Transaction::create($buy_order, $session_id, $amount, $return_url);
+$response = (new Transaction)->create($buy_order, $session_id, $amount, $return_url);
 ```
 
 ```csharp
@@ -273,6 +276,8 @@ response.getToken();
 ```
 
 ```php
+// Puedes obtener la URL y el token devuelo utilizando estos métodos del objeto de respuesta:
+
 $response->getUrl();
 $response->getToken();
 ```
@@ -325,9 +330,10 @@ final CreateWebpayPlusTransactionResponse response = WebpayPlus.Transaction.comm
 ```
 
 ```php
+// SDK Versión 2.x
 use Transbank\Webpay\WebpayPlus\Transaction;
 
-$response = Transaction::commit($token);
+$response = (new Transaction)->commit($token);
 ```
 
 ```csharp
@@ -523,9 +529,10 @@ final StatusWebpayPlusTransactionResponse response = WebpayPlus.Transaction.stat
 ```
 
 ```php
+// SDK Versión 2.x
 use Transbank\Webpay\WebpayPlus\Transaction;
 
-$response = Transaction::getStatus($token);  
+$response = (new Transaction)->status('token-de-la-transaccion');
 ```
 
 ```csharp
@@ -727,9 +734,11 @@ final RefundWebpayPlusTransactionResponse response = WebpayPlus.Transaction.refu
 ```
 
 ```php
+// SDK Versión 2.x
 use Transbank\Webpay\WebpayPlus\Transaction;
 
-$response = Transaction::refund($token, $amount);
+$amount = 1000; // Monto que se desea devolver
+$response = (new Transaction)->refund('token-de-la-transaccion', $amount);
 ```
 
 ```csharp
@@ -782,6 +791,8 @@ response.getType();
 ```
 
 ```php
+// Puedes obtener los datos de la respuesta usando cualquiera de estos métedos del objeto de respuesta: 
+
 $response->getAuthorizationCode();
 $response->getAuthorizationDate();
 $response->getBalance();
@@ -880,9 +891,10 @@ final CaptureWebpayPlusTransactionResponse response = WebpayPlus.DeferredTransac
 ```
 
 ```php
-use Transbank\Webpay\WebpayPlus;
+// SDK Versión 2.x
+use Transbank\Webpay\WebpayPlus\Transaction;
 
-$response = Transaction::capture($token, $buyOrder, $authCode, $amount);
+$response = (new Transaction)->capture($token, $buyOrder, $authCode, $amount);
 ```
 
 ```csharp
@@ -1040,11 +1052,10 @@ final CreateWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransact
 ```
 
 ```php
-use Transbank\Webpay\WebpayPlus;
-use Transbank\Webpay\WebpayPlus\Transaction;
-
-WebpayPlus::configureMallForTesting();
-
+use Transbank\Webpay\WebpayPlus\MallTransaction;
+// SDK 2.x
+// Por defecto, la clase MallTransaction viene configurada para integración con un código Webpay Plus Mall Captura simultanea
+// También se puede configurar \Transbank\Webpay\WebpayPlus::configureForTestingMall() y  \Transbank\Webpay\WebpayPlus::configureForTestingMallDeferred()
 $transaction_details = [
   [
       "amount" => 10000,
@@ -1052,13 +1063,14 @@ $transaction_details = [
       "buy_order" => "ordenCompraDetalle1234"
   ],
   [
-     "amount" => 12000,
+     "amount" =>12000,
      "commerce_code" => 597055555537,
      "buy_order" => "ordenCompraDetalle4321"
   ],
 ];
   
-$response = Transaction::createMall($buy_order, $session_id, $return_url, $transaction_details);
+$response = (new MallTransaction)->create($buy_order, $session_id, $return_url, $transaction_details);
+
 ```
 
 ```csharp
@@ -1237,9 +1249,9 @@ final CommitWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransact
 ```
 
 ```php
-use Transbank\Webpay\WebpayPlus\Transaction;
-
-$response = Transaction::commitMall($token);
+// SDK 2.x
+use Transbank\Webpay\WebpayPlus\MallTransaction;
+$response = (new MallTransaction)->commit($token);
 ```
 
 ```csharp
@@ -1301,13 +1313,13 @@ for (Detail detail : details) {
 ```php
 $response->getAccountingDate();
 $response->getBuyOrder();
-$card_detail = $response->getCardDetail();
-$card_detail->getCardNumber();
+$response->getCardDetail();
+$response->getCardNumber(); // Solo en SDK 2.x
 $response->getSessionId();
 $response->getTransactionDate();
 $response->getVci();
 $details = $response->getDetails();
-foreach($details as $detail){
+foreach($details as $detail){ // En SDk 2.x cada $detail es un Objeto TransactionDetails
     $detail->getAmount();
     $detail->getAuthorizationCode();
     $detail->getBuyOrder();
@@ -1316,7 +1328,10 @@ foreach($details as $detail){
     $detail->getPaymentTypeCode();
     $detail->getResponseCode();
     $detail->getStatus();
+    $detail->isApproved(); // Solo en SDK 2.x - Indica si esta sub transacción puede ser considerada como aprobada
+
 }
+$response->isApproved(); // Solo en SDK 2.x - Devuelve true si al menos una de las subtransacciones fue autorizada. 
 ```
 
 ```csharp
@@ -1464,9 +1479,10 @@ final StatusWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransact
 ```
 
 ```php
-use Transbank\Webpay\WebpayPlus\Transaction;
+// SDK 2.x
+use Transbank\Webpay\WebpayPlus\MallTransaction;
+$response = (new MallTransaction)->status($token);
 
-$response = Transaction::getMallStatus($token);
 ```
 
 ```csharp
@@ -1528,13 +1544,13 @@ for (Detail detail : details) {
 ```php
 $response->getAccountingDate();
 $response->getBuyOrder();
-$card_detail = $response->getCardDetail();
-$card_detail->getCardNumber();
+$response->getCardDetail();
+$response->getCardNumber(); // Solo en SDK 2.x
 $response->getSessionId();
 $response->getTransactionDate();
 $response->getVci();
 $details = $response->getDetails();
-foreach($details as $detail){
+foreach($details as $detail){ // En SDk 2.x cada $detail es un Objeto TransactionDetails
     $detail->getAmount();
     $detail->getAuthorizationCode();
     $detail->getBuyOrder();
@@ -1543,7 +1559,10 @@ foreach($details as $detail){
     $detail->getPaymentTypeCode();
     $detail->getResponseCode();
     $detail->getStatus();
+    $detail->isApproved(); // Solo en SDK 2.x - Indica si esta sub transacción puede ser considerada como aprobada
+
 }
+$response->isApproved(); // Solo en SDK 2.x - Devuelve true si al menos una de las subtransacciones fue autorizada.
 ```
 
 ```csharp
@@ -1691,7 +1710,9 @@ final RefundWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransact
 ```
 
 ```php
-$response = Transaction::refundMall($token, $buy_order, $commerce_code, $amount);
+//SDK 2.x
+$response = (new \Transbank\Webpay\WebpayPlus\MallTransaction)->refund($token, $buy_order, $commerce_code, $amount);
+
 ```
 
 ```csharp
@@ -1844,9 +1865,10 @@ final WebpayPlusMallTransactionCaptureResponse response = WebpayPlus.MallDeferre
 ```
 
 ```php
-use Transbank\Webpay\WebpayPlus;
+//SDK 2.x
+use Transbank\Webpay\WebpayPlus\MallTransaction;
+$response = (new MallTransaction)->capture($childCommerceCode, $token, $buyOrder, $authorizationCode, $captureAmount);
 
-$response = Transaction::captureMall($childCommerceCode, $token, $buyOrder, $authorizationCode, $captureAmount);
 ```
 
 ```csharp
