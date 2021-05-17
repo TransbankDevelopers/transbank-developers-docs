@@ -6,6 +6,9 @@
 
 ## Cómo empezar
 
+La solución de POS integrado se comunica con la caja de tu comercio, permitiendo tener el control del cobro desde tu caja, y que el cliente pueda finalizar la operación sin mayor intervención del operador de la caja de tu comercio. Es importante antes de  comenzar tu integración que el equipo se encuentre en modo integrado. Para colocar el equipo en modo integrado puedes seguir las instrucciones disponibles descritas en [Cambio a POS Integrado](/referencia/posintegrado#cambio-modalidad-pos-integrado).
+
+
 Por el momento, hay un SDK para [.NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet), [Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java) y [Javascript (tecnologías web)](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js).
 
 ### SDK .NET
