@@ -1083,6 +1083,19 @@ $transaction = new Transaction();
 $transaction->capture($token, $buyOrder, $authorizationCode, $captureAmount);
 ```
 
+```java
+import cl.transbank.transaccioncompleta.FullTransaction;
+
+final FullTransactionCaptureResponse response = FullTransaction.Transaction.capture(token, buyOrder, authorizationCode, captureAmount);
+```
+
+```python
+from transbank.transaccion_completa.transaction import Transaction
+
+Transaction.capture(token, buy_order, authorization_code, capture_amount)
+```
+
+
 <strong>Parámetros Transaction.capture</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -1119,6 +1132,30 @@ $response->getAuthorizationCode();
 $response->getAuthorizationDate();
 $response->getCapturedAmount();
 $response->getResponseCode();
+```
+
+```ruby
+response.token
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
+```python
+response.token
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
+```java
+response.getToken();
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getCapturedAmount();
+response.getResponseCode();
 ```
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -2383,6 +2420,20 @@ const response = TransaccionCompleta.MallDeferredTransaction.capture(
 );
 ```
 
+```python
+from transbank.transaccion_completa_mall.transaction import Transaction
+
+Transaction.capture(
+  token, child_commerce_code, child_buy_order, authorization_code, capture_amount
+)
+```
+
+```java
+final MallFullTransactionCaptureResponse response = MallFullTransaction.Transaction.capture(
+  token, commerceCode, buyOrder, authorizationCode, captureAmount
+);
+```
+
 <strong>Parámetros Transaction.capture</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -2416,6 +2467,30 @@ $response->getResponseCode();
 ```
 
 ```javascript
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
+```java
+response.getToken();
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getCapturedAmount();
+response.getResponseCode();
+```
+
+```ruby
+response.token
+response.authorization_code
+response.authorization_date
+response.captured_amount
+response.response_code
+```
+
+```python
+response.token
 response.authorization_code
 response.authorization_date
 response.captured_amount
