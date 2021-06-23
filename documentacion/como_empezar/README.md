@@ -145,11 +145,11 @@ En el caso de integrar webpay en una aplicación móvil Android, usando webview,
 
 Transbank provee dos ambientes: **Integración** y **Producción**.
 
-**Ambiente de integración**: En este ambiente el comercio realiza la integración del producto a contratar y testea
+**Ambiente de integración**: En este ambiente el comercio realiza la integración del producto a contratar y testea
 su solución de medio pago.
 `HOST: https://webpay3gint.transbank.cl`
 
-**Ambiente de producción**: En este ambiente el comercio operará luego de finalizar el [proceso de puesta en producción](#puesta-en-produccion) y realizará transacciones
+**Ambiente de producción**: En este ambiente el comercio operará luego de finalizar el [proceso de puesta en producción](#puesta-en-produccion) y realizará transacciones
 con tarjetas de crédito, débito o prepago **reales**.  
 `HOST: https://webpay3g.transbank.cl`
 
@@ -202,12 +202,12 @@ Patpass Comercio | `27082157` Código de comercio <br> `J7xYiUS7xqD7LkbWSUHI` La
 
 ## El proceso de validación
 
-Durante la validación de la integración se pretende verificar que el comercio
-transacciona de manera segura y sin problemas, por lo que se solicitarán una
-serie de pruebas y su posterior envío de evidencias para validar la
-integración. Esta validación es requisito necesario para dejar al comercio en
-producción y no se permitirá que un comercio utilice productivamente el
-servicio Webpay sin poseer una validación.
+Durante la validación de la integración se pretende verificar que el comercio
+transacciona de manera segura y sin problemas, por lo que se solicitarán una
+serie de pruebas y su posterior envío de evidencias para validar la
+integración. Esta validación es requisito necesario para dejar al comercio en
+producción y no se permitirá que un comercio utilice productivamente el
+servicio Webpay sin poseer una validación.
 
 Transbank solo validará las integraciones de aquellos comercios que tengan un código de comercio productivo.
 Para obtenerlo, sigue las instrucciones en cómo hacerse cliente en el portal <http://www.transbank.cl> o contacte a su
@@ -218,7 +218,7 @@ ejecutivo comercial.
 **Para integraciones Webpay Plus, Webpay Plus Mall y OneClick Mall (con SDK o integración directa al API)**, creamos un nuevo formulario online para que comiences el proceso de validación: <a class="typeform-share button" href="https://form.typeform.com/to/ibXdg6Av?typeform-medium=embed-snippet" data-mode="popup" data-size="100" target="_blank"> Comenzar formulario de integración </a> 
 
 
-Para otro tipo de integraciones (Onepay, PatPass, Transacción Completa), el comercio debe enviar las evidencias a [soporte@transbank.cl](mailto:soporte@transbank.cl) empleando el formulario correspondiente al producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones.
+Para otro tipo de integraciones (Onepay, PatPass, Transacción Completa), el comercio debe enviar las evidencias a [soporte@transbank.cl](mailto:soporte@transbank.cl) empleando el formulario correspondiente al producto integrado indicando claramente las órdenes de compra, fecha y hora de las transacciones.
 
 Descargar el formulario de envidencias: 
 * Para integraciones Webpay que usen un plugin oficial: usa el formulario indicado más arriba. 
@@ -228,21 +228,21 @@ Descargar el formulario de envidencias:
 * Para integraciones Transacción Completa: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-rest.docx)
 * Para integraciones Patpass Comercio: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-patpass-comercio.docx)
 
-Soporte validará que los casos de prueba sean consistentes con los registrados
-en los sistemas de Webpay y, de estar todo correcto, se le notificará al
-comercio la conformidad para pasar a producción, recibiendo las instrucciones
-para ello. De no estar consistentes las pruebas, se le hará alcances al
-comercio respecto de su integración, para que realices las correcciones
+Soporte validará que los casos de prueba sean consistentes con los registrados
+en los sistemas de Webpay y, de estar todo correcto, se le notificará al
+comercio la conformidad para pasar a producción, recibiendo las instrucciones
+para ello. De no estar consistentes las pruebas, se le hará alcances al
+comercio respecto de su integración, para que realices las correcciones
 correspondientes y vuelvas a enviar las evidencias una vez terminadas dichas
 correcciones.
 
-Durante el paso a producción se te exigirá realizar, al menos, una
-transacción de prueba real, con la que finalizará oficialmente la puesta en
-producción.
+Durante el paso a producción se te exigirá realizar, al menos, una
+transacción de prueba real, con la que finalizará oficialmente la puesta en
+producción.
 
 ## Puesta en Producción
 
-1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](#el-proceso-de-validacion). Si realizaste la integración con un plugin, considera que junto con la planilla de integración debes enviar el logo (GIF, 130x59) a soporte@transbank.cl.
+1. Una vez que el comercio determine que ha finalizado su integración, se debe realizar un [proceso de validación](#el-proceso-de-validacion).
 2. Transbank informará via correo electrónico el resultado de la validación enviado por el comercio. En caso de que la validación sea aprobada, Transbank indicará la **llave secreta** (_API Key Secret_) para poder usar el ambiente de producción. Posterior a ello, será necesario [cambiar la configuración del e-commerce para funcionar en producción](#puesta-en-produccion)
 3. Con la configuración del ambiente de producción ya lista, será necesario realizar una compra de $50 para validar el correcto funcionamiento.
 4. Ya estás operando en producción.
@@ -483,7 +483,7 @@ Si estás consumiendo la API directamente, solo debes de preocuparte de usar el
 [host correspondiente al ambiente de producción](/referencia/webpay#ambiente-de-produccion), el código de comercio productivo y llave
 secreta obtenida en el proceso de validación.
 
-## Requerimientos de página de resultado
+## Requerimientos de página de resultado
 
 ### Webpay Plus
 
@@ -493,35 +493,35 @@ De esta forma, al finalizar el proceso de pago, el usuario llega directamente al
 debe presentarle un comprobante de pago (una pantalla donde quede claro que el pago fue exitoso o fallido).  
 </aside>
 
-**La página de resultado** de comercio, es la página que muestra el comercio
-cuando Webpay le entrega el control, después del proceso de autorización. Aplica para todos los tipos de transacciones.
+**La página de resultado** de comercio, es la página que muestra el comercio
+cuando Webpay le entrega el control, después del proceso de autorización. Aplica para todos los tipos de transacciones.
 
-**Una vez finalizada a transacción**, el comercio debe presentar una página al
-tarjetahabiente para que este se informe del resultado de la transacción. La
-información a presentar dependerá de si la transacción fue autorizada o no.
+**Una vez finalizada a transacción**, el comercio debe presentar una página al
+tarjetahabiente para que este se informe del resultado de la transacción. La
+información a presentar dependerá de si la transacción fue autorizada o no.
 
-Se recomienda, como mínimo, que posea:
+Se recomienda, como mínimo, que posea:
 
-* Número de orden de pedido
+* Número de orden de pedido
 * Nombre del comercio (Tienda de Mall)
-* Monto y moneda de la transacción
-* Código de autorización de la transacción
-* Fecha de la transacción
-* Tipo de pago realizado (Débito o Crédito)
+* Monto y moneda de la transacción
+* Código de autorización de la transacción
+* Fecha de la transacción
+* Tipo de pago realizado (Débito o Crédito)
 * Tipo de cuota
 * Cantidad de cuotas
 * Monto de cada cuota
-* Cuatro últimos dígitos de la tarjeta bancaria
-* Descripción de los bienes y/o servicios
+* Cuatro últimos dígitos de la tarjeta bancaria
+* Descripción de los bienes y/o servicios
 
-**Cuando la transacción no sea autorizada**, se recomienda informar al tarjetahabiente al respecto. Puede presentar un texto explicativo como:
+**Cuando la transacción no sea autorizada**, se recomienda informar al tarjetahabiente al respecto. Puede presentar un texto explicativo como:
 
 ```bash
 Orden de Compra XXXXXXX rechazada
 
 Las posibles causas de este rechazo son:
-* Error en el ingreso de los datos de su tarjeta de crédito o débito (fecha y/o código de seguridad).
-* Su tarjeta de crédito o débito no cuenta con saldo suficiente.
+* Error en el ingreso de los datos de su tarjeta de crédito o débito (fecha y/o código de seguridad).
+* Su tarjeta de crédito o débito no cuenta con saldo suficiente.
 * Tarjeta aún no habilitada en el sistema financiero.
 ```
 
@@ -535,29 +535,29 @@ Las posibles causas de este rechazo son:
 
 ## Seguridad
 
-Los servicios Web de Transbank están protegidos para garantizar que solamente
+Los servicios Web de Transbank están protegidos para garantizar que solamente
 miembros autorizados por Transbank hagan uso de las operaciones disponibles.
 
-El mecanismo de seguridad implementado está basado en un canal de comunicación
+El mecanismo de seguridad implementado está basado en un canal de comunicación
 seguro TLS 1.2 sumado a WS-Security (para servicios SOAP) o API Keys + Mensajes
-firmados (para servicios REST). Esto provee autenticación, confidencialidad e
+firmados (para servicios REST). Esto provee autenticación, confidencialidad e
 integridad a los Servicios Web.
 
-Los plugins y SDK para Webpay que distribuye Transbank ya están construidos con
-las librerías necesarias para realizar las validaciones requeridas, pero es
-deber del comercio asegurarse que la solución o desarrollo de medio de pago que
+Los plugins y SDK para Webpay que distribuye Transbank ya están construidos con
+las librerías necesarias para realizar las validaciones requeridas, pero es
+deber del comercio asegurarse que la solución o desarrollo de medio de pago que
 utilice, cumpla con los protocolos de seguridad.
 
 ## Deberes del comercio
 
 ### Actualizaciones de plugins y SDK
 
-Si el comercio está utilizando una solución basada en Plugins o SDK, debe
-estar atento a las actualizaciones que periódicamente Transbank realizará.
+Si el comercio está utilizando una solución basada en Plugins o SDK, debe
+estar atento a las actualizaciones que periódicamente Transbank realizará.
 Estas actualizaciones pueden responder a mantener compatibilidad con los CMS o
-Shopping Cart, modificaciones por seguridad, adición de propiedades o
-funciones, o correcciones a las comunicaciones. La comunicación oficial siempre
-se realizará a través del sitio <http://www.transbankdevelopers.cl>.
+Shopping Cart, modificaciones por seguridad, adición de propiedades o
+funciones, o correcciones a las comunicaciones. La comunicación oficial siempre
+se realizará a través del sitio <http://www.transbankdevelopers.cl>.
 
 ### Uso de HTTPS
 
