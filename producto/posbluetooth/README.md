@@ -10,7 +10,7 @@ Especial para comercio que requieren gran movilidad de puntos de ventas dentro d
 
 Permite mantener una gestión integrada de los puntos de venta con información en línea de cada una de sus transacciones.
 
-Sin costo de reparación o atención de fallas
+Sin costo de reparación o atención de fallas.
 
 Pos Integrado Bluetooth         | Funcionalidades
 -------                         | -------

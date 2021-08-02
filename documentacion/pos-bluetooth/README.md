@@ -1,5 +1,12 @@
 # POS Integrado Bluetooth
 
+## Modelo de Operación
+
+<img src="/images/documentacion/pos_flow.png" alt="Modelo de operación">
+
+***La caja movilizadora del comercio es la encargada de entregar internet al POS Integrado Bluetooth mediante la conexión bluetooth que se establece entre los dos dispositivos.**
+****Es el POS Integrado Bluetooth quien se comunica con Transbank para toda transacción financiera**
+
 ## Requerimientos
 ### Componentes
 *  Librería POS Integrado Bluetooth: Librería encargada de manejar la transacción de POS  integrado Bluetooth, iniciándola y obteniendo la respuesta. 
@@ -25,44 +32,45 @@ Es importante aclarar que la librería cuenta con dos componentes, uno por el la
 * Copiar el archivo “mposintegrado.aar” en el directorio de librerías (en este caso libs) de la aplicación.
 * En el archivo build.gradle a nivel de proyecto agregar en la sección allprojects->repositories , lo siguiente:
 
-´´´java
+```java
 flatDir {dirs 'libs'}
-´´´
+```
 
 * En el archivo build.gradle a nivel de la aplicación en la sección dependencies agregar:
 
-´´´java
+```java  
+
 implementation (name:'mposintegrado', ext:'aar')
-´´´
+```
 
 Esto agregara la librería para su uso en el proyecto, luego para importarlo en el código se utiliza:
 
-´´´java
+```java  
 import com.ingenico.pclservice.PclService;
 import com.ingenico.pclutilities.PclUtilities;
 import com.ingenico.pclutilities.PclUtilities.BluetoothCompanion;
 import com.ingenico.pclutilities.SslObject;
 import posintegrado.ingenico.com.mposintegrado.mposLib;
-´´´
+```
 
 ### Requerimientos
 Para el correcto funcionamiento de la librería se deben agregar los siguientes permisos al tag “manifest” del Android manifest de la aplicación:
 
-´´´xml
+```xml
 <uses-permission android:name="android.permission.INTERNET"/>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 <uses-permission android:name="android.permission.BLUETOOTH"/>
 <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-´´´
+```
 
 Adicional es necesario agregar los siguientes servicios dentro del tag application del Android manifest:
 
-´´´xml
+```xml
 <service android:name="com.ingenico.pclservice.PclService" />
 <service android:name="com.ingenico.pclservice.BluetoothService"/>
-´´´
+```
 
 ## Estableciendo comunicación con el terminal de pago
 
@@ -101,7 +109,7 @@ Lo siguiente es definir las siguientes variables utilizadas en el proceso de con
 Se define la siguiente clase para la interacción con el terminal la cual se encarga de hacerle Bind al servicio
 de PCL para la comunicación entre terminal y smartphone:
 
-´´´java
+```java
 // Implement ServiceConnection
 class PclServiceConnection implements ServiceConnection
 {
@@ -119,18 +127,18 @@ class PclServiceConnection implements ServiceConnection
       mPclService = null;
     }
 };
-´´´
+```
 
 Esta clase tiene dos métodos definidos para la desconexión y conexión respectivamente.
 Luego de ser definida esta clase es importante agregar una instancia de esta, es decir:
 
-´´´java
+```java
 private PclServiceConnection mServiceConnection;
-´´´
+```
 
 Adicional se definen los siguientes métodos para iniciar el servicio de PCL y hacer release de este.
 
-´´´java
+```java
 // You can call this method in onCreate for instance
 protected void initService()
 {
@@ -150,7 +158,7 @@ protected void releaseService()
     mBound = false;
   }
 }
-´´´
+```
 
 ### Manejo de estado de la conexión
 
@@ -160,7 +168,7 @@ esta implementación se usa la segunda opción:
 
 Primero se implementa la clase **StateReceiver** la cual extiende de **BroadcastReceiver**:
 
-´´´java
+```java
 private class StateReceiver extends BroadcastReceiver
 {
     private CommonActivity ViewOwner = null;
@@ -176,16 +184,16 @@ private class StateReceiver extends BroadcastReceiver
       ViewOwner = receiver;
     }
 }
-´´´
+```
 
 Luego de definida esta clase es importante agregar una instancia de esta, es decir:
 
-´´´java
+```java
 private StateReceiver m_StateReceiver = null;
-´´´
+```
 
 Luego se agrega los métodos que permiten iniciar o detener el broadcast receiver
-´´´java
+```java
 private void initStateReceiver()
 {
   if(m_StateReceiver == null)
@@ -204,17 +212,17 @@ private void releaseStateReceiver()
     m_StateReceiver = null;
   }
 }
-´´´
+```
 
 El objetivo es de escuchar por **"com.ingenico.pclservice.intent.action.STATE_CHANGED"** y obtener el string
 extra de “state” el cual puede ser **“CONNECTED”** o **“DISCONNECTED”**
 
 Adicional se agregan las siguientes definiciones abstractas:
 
-´´´java
+```java
 abstract void onStateChanged(String state);
 abstract void onPclServiceConnected();
-´´´
+```
 
 Las cuales deben ser implementadas por las distintas clases que extiendan de esta. Con el fin de que cada
 una de ellas pueda decidir qué hacer al momento de conectarse o desconectarse a nivel de dispositivo y
@@ -223,7 +231,7 @@ servicio.
 Se agrega a los eventos **onResume** y **onPause** la llamada a los métodos **initStateReceiver** y **releaseStateReceiver** implementados anteriormente para controlar cuando se está escuchando y cuando no.
 
 
-´´´java
+```java
 @Override
 protected void onResume()
 {
@@ -236,13 +244,13 @@ protected void onPause()
   super.onPause();
   releaseStateReceiver();
 }
-´´´
+```
 
 Otra función importante de implementar es una en la cual se utilice el api de PCL “serverStatus” la cual
 permite validar si hay algún dispositivo conectado actualmente. La forma de implementación de esto queda
 a definición del desarrollador. En el ejemplo se implementó de la siguiente forma:
 
-´´´java
+```java
 public boolean isCompanionConnected()
 {
   boolean bRet = false;
@@ -261,7 +269,7 @@ public boolean isCompanionConnected()
   }
   return bRet;
 }
-´´´
+```
 
 ### Main Activity
 
@@ -270,13 +278,13 @@ Esta es la actividad principal de implementación y la cual extiende a **CommonA
 Lo primero a realizar, es instanciar en el método **onCreate** el evento **“mPclUtil”** que revisa si hay algún dispositivo ya activado de la siguiente forma:
 
 
-´´´java
+```java
 mPclUtil = new PclUtilities(this, "posintegrado.ingenico.com.sampleandroidapp", "pairing_addr.txt");
-´´´
+```
 
 Luego se crean los siguientes métodos para iniciar o detener el servicio de PCL(comunicación)
 
-´´´java
+```java
 private void startPclService()
 {
   if (!mServiceStarted)
@@ -300,11 +308,11 @@ private void stopPclService()
         mServiceStarted = false;
   }
 }
-´´´
+```
 
 En las siguientes líneas de código se realiza la elección de terminal y se llama a la función de inicio de la comunicación.
 
-´´´java
+```java
 /*Variable de control si ya se encontró un dispositivo*/
 boolean bFound = false;
 /*Se obtiene con esto la lista de los dipositivos ingenico paired con el
@@ -326,11 +334,9 @@ if (btComps != null && (btComps.size() > 0)) {
         }
     }
 }
-´´´
+```
 
 Para efectos de este ejemplo si no encuentra ninguno activado, activa el primer dispositivo pareado con el Smartphone. Esta lógica debe ser implementada según defina el desarrollador ya que es un flujo que depende de la aplicación misma.  
-
-Esta información se debe tomar como ejemplo ya que la parte relacionada con la comunicación de mposIntegrado (componente PCL) cuenta con su propia documentación y ejemplos (Carpeta PCL for Android) la cual se entregará en conjunto con este documento.
 
 ## Realizar un pago con POS Integrado Bluetooth
 
@@ -338,7 +344,7 @@ Luego de tener el terminal con la comunicación establecida como se explicó ant
 Lo primero es crear un método que gatillara la acción para transaccionar con el POS integrado bluetooth:
 
 
-´´´java
+```java
 mposLibobj = new mposLib(mPclService);
 String stx = "02";
 String ext = "03";
@@ -353,11 +359,11 @@ String obtenerLrc = calcularLRC(trxToHex);
 String trxCompleta = stx+trxToHex+ext+ obtenerLrc;
 /*Envio el comando completo para que el POS integrado bluetooth lo procese*/
 mposLibobj.stratTransaction(trxCompleta);
-´´´
+```
 
 El método que calcula el LRC del comando de transacción en hex es el siguiente:
 
-´´´java
+```java
 private String calcularLRC(String input){
     String LRC = "";
     int uintVal = 0;
@@ -384,11 +390,11 @@ private String calcularLRC(String input){
         return hex.toString();
     }
 }
-´´´
+```
 
 Luego se debe implementar el callback de la librería de POS Integrado Bluetooth encargado de capturar la respuesta luego de finalizada la transacción. Esto se hace de la siguiente forma
 
-´´´java
+```java
 mposLibobj.setOnTransactionFinishedListener(new mposLib.onTransactionFinishedListener() {
     public void onFinish(String response) {
     /*EJEMPLO DE RESPONSE*/
@@ -396,7 +402,7 @@ mposLibobj.setOnTransactionFinishedListener(new mposLib.onTransactionFinishedLis
         Log.i("Respuesta response: ", respToString);
     }
 });
-´´´
+```
 Acá el integrador deberá decidir qué hacer con la respuesta obtenida en la variable response, cuando se gatille este callback.  
 
 El parámetro payload corresponde al Hex String que se arma en base al documento “MANUAL POS
