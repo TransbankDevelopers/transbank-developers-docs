@@ -2,9 +2,10 @@
 
 ## Modelo de Operación
 
-<img src="/images/documentacion/pos_flow.png" alt="Modelo de operación">
+<img src="/images/documentacion/flujo-POS-bt.svg" alt="Modelo de operación">
 
-***La caja movilizadora del comercio es la encargada de entregar internet al POS Integrado Bluetooth mediante la conexión bluetooth que se establece entre los dos dispositivos.**
+***La caja movilizadora del comercio es la encargada de entregar internet al POS Integrado Bluetooth mediante la conexión bluetooth que se establece entre los dos dispositivos.**  
+
 ****Es el POS Integrado Bluetooth quien se comunica con Transbank para toda transacción financiera**
 
 ## Requerimientos
