@@ -43,16 +43,16 @@ Operaciones Administrativas         | Sincronización<br>Desincronización
 
 ## Contratación del producto
 
-Disponibles a través de ejecutivo comercial o por solicitud al  call center.  
+Disponibles a través de ejecutivo comercial o por solicitud al  Call Center.  
 Los comercios deberán firmar un anexo de contrato de afiliación para el producto “POS Integrado Bluetooth”.  
 Las tarifas de arriendo de los terminales están divididas por tramos de cantidad de equipos.  
-Las comisiones por venta están sujeta a lo indicado en el sitio web de transbank, según rubros de cada comercio.
+Las comisiones por venta están sujeta a lo indicado en el sitio web de Transbank, según rubros de cada comercio.
 
 
 
 ## Requisitos Tecnológicos del Comercio
 
-**Punto de Venta**: contar con un sistema de caja movilizado instalado en un equipo Tablet, Smartphone o equipo móvil, con sistema operativo Android o iOS, con conexión Bluetooth 4.x.
+**Punto de Venta**: contar con un sistema de caja movilizado instalado en un equipo Tablet, Smartphone o equipo móvil, con sistema operativo Android, con conexión Bluetooth 4.x.
 
 **Conexión Internet**: el comercio deberá proveer acceso a servicio de Internet para operación de la caja móvil con una conexión GPRS o WiFi según corresponda.
 
@@ -64,13 +64,13 @@ Las comisiones por venta están sujeta a lo indicado en el sitio web de transban
 
 Canal   | Atención Remota   | Visita a Terreno
 ------- | -------           | -------
-Contact Center | * Dudas Comerciales<br>* Dudas Transaccionales<br>* Uso del equipo | * Instalación y configuración
+Contact Center<br> **+56 226612700**| * Dudas Comerciales<br>* Dudas Transaccionales<br>* Uso del equipo | * Instalación y configuración
 
 **Fallas**
 
 Canal   | Atención Remota   | Visita a Terreno
 ------- | -------           | -------
-Call Center Fallas | Tradicional para clientes de venta o arriendo | * Resposición de equipos<br>* Visitas evaluacion y atención
+Call Center Fallas<br>**600 368 6380** | Tradicional para clientes de venta o arriendo | *Reposición de equipos<br> *Visitas evaluacion y atención
 
 
 <div class="container slate">

@@ -4,7 +4,7 @@
 
 <img src="/images/documentacion/flujo-POS-bt.svg" alt="Modelo de operación">
 
-***La caja movilizadora del comercio es la encargada de entregar internet al POS Integrado Bluetooth mediante la conexión bluetooth que se establece entre los dos dispositivos.**  
+***La caja movilizada del comercio es la encargada de entregar internet al POS Integrado Bluetooth mediante la conexión bluetooth que se establece entre los dos dispositivos.**  
 
 ****Es el POS Integrado Bluetooth quien se comunica con Transbank para toda transacción financiera**
 
@@ -28,9 +28,11 @@
 ##  Instalación y Configuración
 
 ### Instalación
-Es importante aclarar que la librería cuenta con dos componentes, uno por el lado de la comunicación con el terminal llamado PCL y la parte de POS Integrado Bluetoothla cual se encarga de la transacción.Esta sección explica que es necesario para establecer la comunicación bluetooth entre el terminal de pago (Link2500) y el smarthphone.
+Es importante aclarar que la librería cuenta con dos componentes, uno por el lado de la comunicación con el terminal 
+llamado PCL y la parte de POS Integrado Bluetooth la cual se encarga de la transacción. Esta sección explica que es 
+necesario para establecer la comunicación bluetooth entre el terminal de pago (Link2500) y el smarthphone.
 
-* Copiar el archivo “mposintegrado.aar” en el directorio de librerías (en este caso libs) de la aplicación.
+* Copiar el archivo “mposintegrado.aar” [**Descargar**](https://transbankdevelopers.cl/files/mposintegrado.aar) en el directorio de librerías (en este caso libs) de la aplicación.
 * En el archivo build.gradle a nivel de proyecto agregar en la sección allprojects->repositories , lo siguiente:
 
 ```java
@@ -85,7 +87,8 @@ actividades.
 * MainActivity: Clase que extiende commonActivity, esta contiene la lógica de la aplicación en sí.
 
 
-*Obs:El uso de una clase abstracta en común para las distintas actividades del app es recomendado, pero esto queda a decisión del desarrollador. Para efectos del ejemplo se ira detallando lo que se encuentra en cada clase y su objetivo.*
+*Observación: El uso de una clase abstracta en común para las distintas actividades del app es recomendado, pero esto 
+queda a decisión del desarrollador. Para efectos del ejemplo se irá detallando lo que se encuentra en cada clase y su objetivo.*
 
 ### CommonActivity
 
@@ -339,18 +342,31 @@ if (btComps != null && (btComps.size() > 0)) {
 
 Para efectos de este ejemplo si no encuentra ninguno activado, activa el primer dispositivo pareado con el Smartphone. Esta lógica debe ser implementada según defina el desarrollador ya que es un flujo que depende de la aplicación misma.  
 
-## Realizar un pago con POS Integrado Bluetooth
+## Efectuando transacciones con POS Integrado Bluetooth
 
-Luego de tener el terminal con la comunicación establecida como se explicó anteriormente en este documento, se puede dar inicio al proceso de pago.  
-Lo primero es crear un método que gatillara la acción para transaccionar con el POS integrado bluetooth:
+Luego de tener el terminal con la comunicación establecida con la caja
+movilizada como se explicó anteriormente, se puede dar inicio a la
+implementación de las diversas transacciones disponibles en la Integración
+Nativa de POS Integrado:
+- [Transacción de Venta](/referencia/posintegrado#mensaje-de-venta)
+- [Transacción Última Venta](/referencia/posintegrado#mensaje-de-ultima-venta)
+- [Transacción Anulación Venta](/referencia/posintegrado#mensaje-de-anulacion)
+- [Transacción de Cierre](/referencia/posintegrado#mensaje-de-cierre)
+- [Transacción Detalle de Ventas](/referencia/posintegrado#mensaje-detalle-de-ventas)
+- [Transacción Totales](/referencia/posintegrado#mensaje-de-totales)
+- [Transacción Carga de Llaves](/referencia/posintegrado#mensaje-de-carga-de-llaves)
+- [Transacción Polling](/referencia/posintegrado#mensaje-de-poll)
+- [Cambio de modalidad a POS Normal](/referencia/posintegrado#mensaje-de-cambio-a-pos-normal)  
+  
+Por ejemplo, para implementar una Transacción de Venta, lo primero es crear un método que gatillara la 
+acción para transaccionar con el POS integrado bluetooth:
 
 
 ```java
 mposLibobj = new mposLib(mPclService);
 String stx = "02";
 String ext = "03";
-/*Armo mensajeria de ejemplo en base a documento de POS integrado proporcionado
-por Transbank*/
+
 String mensajeriaTrx = "0200|20000|123456|||0";
 /*Convierto mi string de trx a hex*/
 String trxToHex = mposLibobj.convertStringToHex(mensajeriaTrx);
@@ -404,27 +420,7 @@ mposLibobj.setOnTransactionFinishedListener(new mposLib.onTransactionFinishedLis
     }
 });
 ```
-Acá el integrador deberá decidir qué hacer con la respuesta obtenida en la variable response, cuando se gatille este callback.  
-
-El parámetro payload corresponde al Hex String que se arma en base al documento “MANUAL POS
-INTEGRADO versión 4.0.pdf” para iniciar una transacción.  
-
-El resultado será capturado en el callback y es un Hex String según el formato del documento “MANUAL POS
-INTEGRADO versión 4.0.pdf”
-
-## Transacción de obtener detalle de ventas
-
-La respuesta de esta transacción tiene el siguiente formato:
-`<STX>0261|Datostransacion1<ENQ>Datostransaccion2<ENQ>Datostransaccion3<ENQ>….DatostransaccionN<ETX><LRC>`
-
-El siguiente sería un ejemplo de la respuesta en hex string:
-
-`02303236317C30307C3539373035353535303030317C49334445533137317C307C3735383039387C38313030307C30307C307C383634337C3232377C44427C3030303030307C202020202020202020202020202020202020207C44427C31323039323031387C3132303332367C307C300530307C3539373035353535303030317C49334445533137317C307C3936393233347C38313030307C30307C307C383634337C3232387C44427C3030303030307C202020202020202020202020202020202020207C44427C31323039323031387C3137323431367C307C307C034`
-
-Si traducimos la trama de hex a text veremos el resultado de la trx obtenida:
-
-`0261|00|597055550001|I3DES171|0|758098|81000|00|0|8643|227|DB|000000||DB|12092018|120326|0|000|597055550001|I3DES171|0|969234|81000|00|0|8643|228|DB|000000||DB|12092018|172416|0|0|`
-
+Acá el integrador deberá decidir qué hacer con la respuesta obtenida en la variable response, cuando se gatille este callback.
 
 <div class="container slate">
   <div class='slate-after-footer'>
