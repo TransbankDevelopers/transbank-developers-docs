@@ -2,7 +2,7 @@
 
 ## Modelo de Operación
 
-<img src="/images/documentacion/flujo-POS-bt.svg" alt="Modelo de operación">
+<img src="/images/documentacion/flujo-POS-bt.svg" class="td_img-night" alt="Modelo de operación">
 
 ***La caja movilizada del comercio es la encargada de entregar internet al POS Integrado Bluetooth mediante la conexión bluetooth que se establece entre los dos dispositivos.**  
 

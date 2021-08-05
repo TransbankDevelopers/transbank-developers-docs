@@ -64,13 +64,13 @@ Las comisiones por venta están sujeta a lo indicado en el sitio web de Transban
 
 Canal   | Atención Remota   | Visita a Terreno
 ------- | -------           | -------
-Contact Center<br> **+56 226612700**| * Dudas Comerciales<br>* Dudas Transaccionales<br>* Uso del equipo | * Instalación y configuración
+Contact Center<br>Desde celulares: **+56 226612700**<br> Desde Red fija: **600 368 6380**| * Dudas Comerciales<br>* Dudas Transaccionales<br>* Uso del equipo | * Instalación y configuración
 
 **Fallas**
 
 Canal   | Atención Remota   | Visita a Terreno
 ------- | -------           | -------
-Call Center Fallas<br>**600 368 6380** | Tradicional para clientes de venta o arriendo | *Reposición de equipos<br> *Visitas evaluacion y atención
+Call Center Fallas<br>Desde celulares: **+56 226612700**<br>Desde Red fija: **600 368 6380** <br>Opción **2**| Tradicional para clientes de venta o arriendo | *Reposición de equipos<br> *Visitas evaluacion y atención
 
 
 <div class="container slate">
