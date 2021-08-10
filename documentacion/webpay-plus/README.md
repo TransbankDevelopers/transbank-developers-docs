@@ -926,11 +926,11 @@ token es caducado y no podrá ser utilizado en un pago.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-CreateMallTransactionDetails transactionDetails = CreateMallTransactionDetails.build()
-    .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne)
-    .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo);
+MallTransactionCreateDetails transactionDetails = MallTransactionCreateDetails.build()
+                .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne)
+                .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo);    
 
-final CreateWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.create(buyOrder, sessionId, returnUrl, transactionDetails);
+final WebpayPlusMallTransactionCreateResponse response = WebpayPlus.MallTransaction.create(buyOrder, sessionId, returnUrl, transactionDetails);
 ```
 
 ```php
