@@ -112,9 +112,9 @@ Para resumir los diferentes flujos que pueden existir, y las diferentes respuest
 Hay 4 diferentes flujos, donde cada uno llega con datos distintos:
 
 1. **Flujo normal**: El usuario al finalizar la transacción (tanto si es un rechazo o una aprobación) llegará solamente `token_ws`. 
-2. **Timeout (más de 10 minutos en el formulario de Transbank)**: Llegará solamente `TBK_ID_SESION` que contiene el `session_id` enviado al crear la transacción, `TBK_ORDEN_COMRA` que representa el `buy_order` enviado. No llegará token. 
-3. **Pago abortado (con botón anular compra en el formulario de Webpay)**: Llegará `TBK_TOKEN` (notar que no se llama `token_ws`, pero igualmente contiene el token de la transacción), `TBK_ID_SESION`, `TBK_ORDEN_COMRA`
-4. **Si ocurre un error en el formulario de pago, y hace click en el link de "volver al sitio" de la pantalla de error*: (replicable solo en producción si inicias una transacción, abres el formulario de pago, cierras el tab de Chrome y luego lo recuperas) Llegará `token_ws`, `TBK_TOKEN`, `TBK_ID_SESION`, `TBK_ORDEN_COMRA`. 
+2. **Timeout (más de 10 minutos en el formulario de Transbank)**: Llegará solamente `TBK_ID_SESION` que contiene el `session_id` enviado al crear la transacción, `TBK_ORDEN_COMPRA` que representa el `buy_order` enviado. No llegará token. 
+3. **Pago abortado (con botón anular compra en el formulario de Webpay)**: Llegará `TBK_TOKEN` (notar que no se llama `token_ws`, pero igualmente contiene el token de la transacción), `TBK_ID_SESION`, `TBK_ORDEN_COMPRA`
+4. **Si ocurre un error en el formulario de pago, y hace click en el link de "volver al sitio" de la pantalla de error*: (replicable solo en producción si inicias una transacción, abres el formulario de pago, cierras el tab de Chrome y luego lo recuperas) Llegará `token_ws`, `TBK_TOKEN`, `TBK_ID_SESION`, `TBK_ORDEN_COMPRA`. 
 
 ### Proyectos de ejemplo
 Recuerda que tienes varios proyectos de ejemplos para cada lenguaje, que puedes [revisar acá.](/documentacion/como_empezar#ejemplos)
