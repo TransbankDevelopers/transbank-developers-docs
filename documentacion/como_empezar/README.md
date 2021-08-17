@@ -125,8 +125,6 @@ En el caso de integrar webpay en una aplicación móvil Android, usando webview,
         CookieManager.getInstance().setAcceptThirdPartyCookies(myWebPayView, true); // myWebPayView es el WebView
     else
         CookieManager.getInstance().setAcceptCookie(true);
-    // Asignar el caché en el webview
-    webPayView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
     ```
 
 2. Al momento de cerrar el webview
