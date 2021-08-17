@@ -23,6 +23,20 @@ PM> Install-Package TransbankPosSDK
 
 Primero, debes instalar en tu máquina la librería/SDK en C, puedes encontrar el código fuente en [GitHub](https://github.com/TransbankDevelopers/transbank-pos-sdk-c) y seguir las instrucciones para compilarlo. También puede usar las DLLs ya compiladas que se adjuntan en el [último release](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest)
 
+Para que la librería de Java pueda encontrar la librería nativa, utiliza una variable de ambiente llamada NATIVE_TRANSBANK_WRAP que debe apuntar al archivo de esta variable.
+
+Por ejemplo en MacOS se debe correr el comando export en el mismo Shell en que se ejecutará el programa que utiliza la librería.
+
+```shell
+export NATIVE_TRANSBANK_WRAP=/usr/local/lib/libTransbankWrap.dylib
+```
+
+en Windows, se debe correr este comando en la consola antes de ejecutar el programa que utiliza la librería.
+
+```shell
+setx NATIVE_TRANSBANK_WRAP=c:\TransbankLib\TransbankWrap.dll
+```
+
 Esta librería y sus dependencias (libserialport) son requisitos para utilizar el SDK.
 Para Java se puede incluir el paquete por [Maven.](https://search.maven.org/artifact/com.github.transbankdevelopers/transbank-pos-sdk-java/)
 
