@@ -1368,7 +1368,7 @@ buy_order  <br> <i> String </i> | (Solo si es NULLIFIED)  Orden de compra gener
 
 ### Captura diferida de una transacción
 
-Revisa más detalles sobre esta modalidad en [la documentación](/doumentacion/oneclick#capturar-una-transaccion)
+Revisa más detalles sobre esta modalidad en [la documentación](/documentacion/oneclick#capturar-una-transaccion)
 
 ```java
 final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTransaction.capture(
