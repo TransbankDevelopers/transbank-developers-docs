@@ -59,7 +59,7 @@ En caso que un cobro no sea exitoso o el pago automático sea dado de baja, el t
 
 <div class="pos-title-nav">
   <div tbk-link='/documentacion/patpass' tbk-link-name='Documentación'></div>
-  <div tbk-link='referencia/patpasscomercio' tbk-link-name='Referencia Api'></div>
+  <div tbk-link='/referencia/patpasscomercio' tbk-link-name='Referencia Api'></div>
 </div>
 
 Mediante PatPass Comercio el tarjetahabiente genera una suscripción de pago automático con Tarjeta de Crédito por un producto o servicio por un monto fijo, efectuando **el primer pago en línea a través de Plataforma PatPass y luego efectuándose el cobro mensualmente de forma automática** a traves del mismo motor PatPass, con una fecha de término definida por el comercio.
