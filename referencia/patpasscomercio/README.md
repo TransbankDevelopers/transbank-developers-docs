@@ -98,8 +98,8 @@ Host: https://pagoautomaticocontarjetasint.transbank.cl/
 ```
 
 ```http
-Tbk-Api-Key-Id: 27082157
-Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
+Tbk-Api-Key-Id: 28299257
+Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
 Content-Type: application/json
 ```
 
@@ -217,8 +217,8 @@ response = Inscription.start(
 
 ```http
 POST restpatpass/v1/services/patInscription
-Tbk-Api-Key-Id: 27082157
-Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
+Tbk-Api-Key-Id: 28299257
+Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
 Content-Type: application/json
 {
     "url": "http://misitio.cl/finalizar_suscripcion",
@@ -228,6 +228,7 @@ Content-Type: application/json
     "rut": "12345678-9",
     "serviceId": "323123",
     "finalUrl": "http://misitio.cl/voucher",
+    "commerceCode": "28299257",
     "montoMaximo": "",
     "telefonoFijo": "57508624",
     "telefonoCelular": "57508624",
@@ -351,8 +352,8 @@ response = Inscription.status(token)
 
 ```http
 POST restpatpass/v1/services/status
-Tbk-Api-Key-Id: 27082157
-Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
+Tbk-Api-Key-Id: 28299257
+Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
 Content-Type: application/json
 {
     "token": "21383fe8ba4c4cdd9e18518daf4e9bcbaffd9e8e3ad4ec36f66ae2b4e80cc4b5"
