@@ -432,6 +432,9 @@ Transbank::Webpay::Oneclick::Base.integration_type = :LIVE
 ```
 
 ```python
+# Webpay Plus
+WebpayPlus.configure_for_production('commerce_code', 'apikey')
+
 # Oneclick
 from transbank import oneclick as BaseOneClick
 from transbank.common.integration_type import IntegrationType
