@@ -464,7 +464,7 @@ El resultado de la venta se entrega en la forma de un objeto `SaleResponse` o un
 
 El objeto SaleResponse retornará un objeto con los siguientes datos.
 
-```javascripton
+```json
 {
   "Function": 210,
   "Response": "Aprobado",
@@ -551,7 +551,7 @@ El resultado de la venta se entrega en la forma de un objeto `SaleResponse` o un
 
 El objeto SaleResponse retornará un objeto con los siguientes datos.
 
-```javascripton
+```json
 {
 
   "Function": 210,
@@ -631,7 +631,7 @@ POS.getLastSale().then((response) => {
 
 El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `LastSaleResponse` o un `char*` en el caso de la librería C, o un objeto `SaleResponse` en el caso de Java. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLastSaleException` en .NET o `TransbankException` en Java.
 
-```javascripton
+```json
 {
 
   "Function": 260,
@@ -685,7 +685,7 @@ Task<MultiCodeLastSaleResponse> response = POSIntegrado.Instance.MultiCodeLastSa
 
 El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `MultiCodeLastSaleResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankMultiCodeLastSaleException`.
 
-```javascripton
+```json
 {
 
   "Function": 260,
@@ -766,7 +766,7 @@ POS.refund(21).then(response => console.log(response));
 
 Como respuesta el **POS** enviará un código de aprobación, acompañado de un código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas. [Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas)
 
-```javascripton
+```json
 {
   "FunctionCode": 1210,
   "ResponseCode": 0,
@@ -830,7 +830,7 @@ POS.close()
 
 El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse` o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException`.
 
-```javascripton
+```json
 {
   "FunctionCode": 510,
   "ResponseMessage": "Aprobado",
@@ -890,7 +890,7 @@ POS.getTotals().then(response => console.log(response));
 
 El resultado de la transacción entrega en la forma de un objeto `TotalsResponse` o una estructura `TotalsCResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankTotalsException`.
 
-```javascripton
+```json
 {
   "Function": 710,
   "Response": "Aprobado",
@@ -945,7 +945,7 @@ POS.details(printOnPOS).then(response => console.log(response));
 
 El resultado de la transacción entrega una lista de objetos  `DetailResponse` o un `char *` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSalesDetailException`.
 
-```javascripton
+```json
 [
   {
     "Function": 261,
@@ -1018,7 +1018,7 @@ Task<List<MultiCodeDetailResponse>> details = POSIntegrado.Instance.MultiCodeDet
 
 El resultado de la transacción entrega una lista de objetos  `MultiCodeDetailResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankMultiCodeDetailException`.
 
-```javascripton
+```json
 [
   {
     "Function": 261,
@@ -1116,7 +1116,7 @@ POS.loadKeys();
 
 El resultado de la carga de llaves entrega en la forma de un objeto `LoadKeysResponse` o una estructura `BaseResponse` en el caso de la librería C, un objeto `KeysResponse` para Java. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLoadKeysException` en .NET o `TransbankException` en Java.
 
-```javascripton
+```json
 {
   "FunctionCode": 810,
   "ResponseMessage": "Aprobado",
