@@ -216,18 +216,18 @@ import cl.transbank.pos.exceptions.*;
 import cl.transbank.pos.responses.*;
 ```
 
-```nodejs
+```js
 import POS from "transbank-pos-sdk"; // Si se instala por NPM
 ```
 
-```js
+```javascript
 import POS from "transbank-pos-sdk-web"; // Si se instala por NPM
 ```
 
 <aside class="notice">
 Si decides insertar directamente el script en el HTML
 
-```js
+```javascript
 <script src="https://unpkg.com/transbank-pos-sdk-web@2/dist/pos.js"></script>
 ```
 
@@ -261,7 +261,7 @@ POS pos = POS.getInstance();
 List<String> ports = pos.listPorts();
 ```
 
-```nodejs
+```js
 import POS from "transbank-pos-sdk";
 
 POS.getPorts().then((ports) => {
@@ -271,7 +271,7 @@ POS.getPorts().then((ports) => {
 })
 ```
 
-```js
+```javascript
 import POS from "transbank-pos-sdk-web";
 
 pos.listPorts().then( (ports) => {
@@ -315,7 +315,7 @@ String port = "COM4";
 pos.openPort(port);
 ```
 
-```nodejs
+```js
 let portName = '/dev/tty.usb2412412'; //Ejemplo En caso de mac
 let portName = 'COM4'; //Ejempo en caso de windows
 pos.connect(portName).then( (response) => {
@@ -325,7 +325,7 @@ pos.connect(portName).then( (response) => {
 });
 ```
 
-```js
+```javascript
 import POS from "transbank-pos-sdk-web";
 POS.openPort("COM4").then((result) => {
     if (result === true) {
@@ -364,7 +364,7 @@ import cl.transbank.pos.POS;
 pos.closePort();
 ```
 
-```nodejs
+```js
 pos.disconnect().then( (response) => {
     console.log('Puerto descontactado correctamente');
 }).catch( (err) => {
@@ -372,7 +372,7 @@ pos.disconnect().then( (response) => {
 });
 ```
 
-```js
+```javascript
 import POS from "transbank-pos-sdk-web";
 POS.closePort();
 ```
@@ -423,7 +423,7 @@ import cl.transbank.pos.POS;
 SaleResponse saleResponse = POS.getInstance().sale(amount, ticket);
 ```
 
-```nodejs
+```js
 // Venta simple sin estados intermedios
 pos.sale(1500, '12423').then( (response) => {
     console.log('sale finalizado. Respuesta: ', response);
@@ -443,7 +443,7 @@ pos.sale(1500, '12423', true, callback)
 }); 
 ```
 
-```js
+```javascript
 import POS from "transbank-pos-sdk-web";
 
 POS.doSale(this.total, "ticket1", (data) => {
@@ -464,7 +464,7 @@ El resultado de la venta se entrega en la forma de un objeto `SaleResponse` o un
 
 El objeto SaleResponse retornará un objeto con los siguientes datos.
 
-```json
+```javascripton
 {
   "Function": 210,
   "Response": "Aprobado",
@@ -530,7 +530,7 @@ private static void NewIntermadiateMessageRecived(object sender, IntermediateRes
 ```java
 //No Soportado
 ```
-```js
+```javascript
 import POS from "transbank-pos-sdk-web";
 
 POS.doMulticodeSale(this.total, "ticket2", "597029414301", (data) => {
@@ -551,7 +551,7 @@ El resultado de la venta se entrega en la forma de un objeto `SaleResponse` o un
 
 El objeto SaleResponse retornará un objeto con los siguientes datos.
 
-```json
+```javascripton
 {
 
   "Function": 210,
@@ -611,7 +611,7 @@ import cl.transbank.pos.POS;
 SaleResponse saleResponse = POS.getInstance().getLastSale();
 ```
 
-```nodejs
+```js
 pos.getLastSale().then( (response) => {
     console.log('getLastSale ejecutado. Respuesta: ', response);
 }).catch( (err) => {
@@ -619,7 +619,7 @@ pos.getLastSale().then( (response) => {
 });
 ```
 
-```js
+```javascript
 import POS from "transbank-pos-sdk-web";
 
 POS.getLastSale().then((response) => {
@@ -631,7 +631,7 @@ POS.getLastSale().then((response) => {
 
 El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `LastSaleResponse` o un `char*` en el caso de la librería C, o un objeto `SaleResponse` en el caso de Java. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLastSaleException` en .NET o `TransbankException` en Java.
 
-```json
+```javascripton
 {
 
   "Function": 260,
@@ -679,13 +679,13 @@ Task<MultiCodeLastSaleResponse> response = POSIntegrado.Instance.MultiCodeLastSa
 // No Soportado
 ```
 
-```js
+```javascript
 // No Soportado
 ```
 
 El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `MultiCodeLastSaleResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankMultiCodeLastSaleException`.
 
-```json
+```javascripton
 {
 
   "Function": 260,
@@ -750,7 +750,7 @@ RefundResponse response = POS.getInstance().refund(21);
 ```
 
 
-```nodejs
+```js
 pos.refund('102').then( (response) => {
     console.log('refund ejecutado. Respuesta: ', response);
 }).catch( (err) => {
@@ -758,7 +758,7 @@ pos.refund('102').then( (response) => {
 });
 ```
 
-```js
+```javascript
 import POS from "transbank-pos-sdk-web";
 
 POS.refund(21).then(response => console.log(response));
@@ -766,7 +766,7 @@ POS.refund(21).then(response => console.log(response));
 
 Como respuesta el **POS** enviará un código de aprobación, acompañado de un código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas. [Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas)
 
-```json
+```javascripton
 {
   "FunctionCode": 1210,
   "ResponseCode": 0,
@@ -814,7 +814,7 @@ import cl.transbank.pos.POS;
 CloseResponse cr = POS.getInstance().close();
 ```
 
-```nodejs
+```js
 pos.closeDay().then( (response) => {
     console.log('closeDay ejecutado. Respuesta: ', response);
 }).catch( (err) => {
@@ -822,7 +822,7 @@ pos.closeDay().then( (response) => {
 });
 ```
 
-```js
+```javascript
 import POS from "transbank-pos-sdk-web";
 
 POS.close()
@@ -830,7 +830,7 @@ POS.close()
 
 El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse` o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException`.
 
-```json
+```javascripton
 {
   "FunctionCode": 510,
   "ResponseMessage": "Aprobado",
@@ -874,7 +874,7 @@ import cl.transbank.pos.POS;
 TotalsResponse response = POS.getInstance().getTotals();
 ```
 
-```nodejs
+```js
 pos.getTotals().then( (response) => {
     console.log('getTotals ejecutado. Respuesta: ', response);
 }).catch( (err) => {
@@ -882,7 +882,7 @@ pos.getTotals().then( (response) => {
 });
 ```
 
-```js
+```javascript
 import POS from "transbank-pos-sdk-web";
 
 POS.getTotals().then(response => console.log(response));
@@ -890,7 +890,7 @@ POS.getTotals().then(response => console.log(response));
 
 El resultado de la transacción entrega en la forma de un objeto `TotalsResponse` o una estructura `TotalsCResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankTotalsException`.
 
-```json
+```javascripton
 {
   "Function": 710,
   "Response": "Aprobado",
@@ -928,7 +928,7 @@ import cl.transbank.pos.POS;
 List<DetailResponse> ldr = POS.getInstance().details(false);
 ```
 
-```nodejs
+```js
 pos.salesDetail().then( (response) => {
     console.log('salesDetail ejecutado. Respuesta: ', response);
 }).catch( (err) => {
@@ -936,7 +936,7 @@ pos.salesDetail().then( (response) => {
 });
 ```
 
-```js
+```javascript
 import POS from "transbank-pos-sdk-web";
 
 let printOnPOS = false;
@@ -945,7 +945,7 @@ POS.details(printOnPOS).then(response => console.log(response));
 
 El resultado de la transacción entrega una lista de objetos  `DetailResponse` o un `char *` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSalesDetailException`.
 
-```json
+```javascripton
 [
   {
     "Function": 261,
@@ -1012,13 +1012,13 @@ Task<List<MultiCodeDetailResponse>> details = POSIntegrado.Instance.MultiCodeDet
 // No Soportado
 ```
 
-```js
+```javascript
 // No Soportado
 ```
 
 El resultado de la transacción entrega una lista de objetos  `MultiCodeDetailResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankMultiCodeDetailException`.
 
-```json
+```javascripton
 [
   {
     "Function": 261,
@@ -1099,7 +1099,7 @@ KeysResponse kr = POS.getInstance().loadKeys();
 ```
 
 
-```nodejs
+```js
 pos.loadKeys().then( (response) => {
     console.log('loadKeys ejecutado. Respuesta: ', response);
 }).catch( (err) => {
@@ -1107,7 +1107,7 @@ pos.loadKeys().then( (response) => {
 });
 ```
 
-```js
+```javascript
 import POS from "transbank-pos-sdk-web";
 
 let printOnPOS = false;
@@ -1116,7 +1116,7 @@ POS.loadKeys();
 
 El resultado de la carga de llaves entrega en la forma de un objeto `LoadKeysResponse` o una estructura `BaseResponse` en el caso de la librería C, un objeto `KeysResponse` para Java. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLoadKeysException` en .NET o `TransbankException` en Java.
 
-```json
+```javascripton
 {
   "FunctionCode": 810,
   "ResponseMessage": "Aprobado",
@@ -1158,7 +1158,7 @@ import cl.transbank.pos.POS;
 boolean pollResult = POS.getInstance().poll();
 ```
 
-```js
+```javascript
 import POS from "transbank-pos-sdk-web";
 
 let printOnPOS = false;
@@ -1193,7 +1193,7 @@ import cl.transbank.pos.POS;
 boolean normal = POS.getInstance().setNormalMode();
 ```
 
-```nodejs
+```js
 pos.changeToNormalMode().then( (response) => {
     console.log('changeToNormalMode ejecutado. Respuesta: ', response);
 }).catch( (err) => {
@@ -1201,7 +1201,7 @@ pos.changeToNormalMode().then( (response) => {
 });
 ```
 
-```js
+```javascript
 import POS from "transbank-pos-sdk-web";
 
 let printOnPOS = false;
