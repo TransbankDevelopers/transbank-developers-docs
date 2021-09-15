@@ -19,6 +19,16 @@ Para .NET lo puedes encontrar en [NuGet.org](https://www.nuget.org/packages/Tran
 PM> Install-Package TransbankPosSDK
 ```
 
+### SDK Node.js
+
+El SDK de Node.js está disponible en `npm` como `transbank-pos-sdk`. Puedes instalarlo usando
+
+
+```bash
+npm install transbank-pos-sdk
+```
+Puedes ver más documentación en el README del proyecto: [https://github.com/TransbankDevelopers/transbank-pos-sdk-nodejs](https://github.com/TransbankDevelopers/transbank-pos-sdk-nodejs)
+
 ### SDK Java
 
 Primero, debes instalar en tu máquina la librería/SDK en C, puedes encontrar el código fuente en [GitHub](https://github.com/TransbankDevelopers/transbank-pos-sdk-c) y seguir las instrucciones para compilarlo. También puede usar las DLLs ya compiladas que se adjuntan en el [último release](https://github.com/TransbankDevelopers/transbank-pos-sdk-c/releases/latest)
@@ -206,6 +216,10 @@ import cl.transbank.pos.exceptions.*;
 import cl.transbank.pos.responses.*;
 ```
 
+```nodejs
+import POS from "transbank-pos-sdk"; // Si se instala por NPM
+```
+
 ```js
 import POS from "transbank-pos-sdk-web"; // Si se instala por NPM
 ```
@@ -247,14 +261,24 @@ POS pos = POS.getInstance();
 List<String> ports = pos.listPorts();
 ```
 
-```js
-import POS from "transbank-pos-sdk-web";
+```nodejs
+import POS from "transbank-pos-sdk";
 
 POS.getPorts().then((ports) => {
     console.log('ports');
 }).catch(() => {
     alert("No se pudo obtener puertos. ¿Está corriendo el servicio Transbank POS?");
 })
+```
+
+```js
+import POS from "transbank-pos-sdk-web";
+
+pos.listPorts().then( (ports) => {
+    console.log(ports);
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
 ```
 
 ### Abrir un puerto Serial
@@ -289,6 +313,16 @@ import cl.transbank.pos.POS;
 POS pos = POS.getInstance();
 String port = "COM4";
 pos.openPort(port);
+```
+
+```nodejs
+let portName = '/dev/tty.usb2412412'; //Ejemplo En caso de mac
+let portName = 'COM4'; //Ejempo en caso de windows
+pos.connect(portName).then( (response) => {
+    console.log('Conectado correctamente');
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
 ```
 
 ```js
@@ -328,6 +362,14 @@ if(retval == SP_OK){
 import cl.transbank.pos.POS;
 //...
 pos.closePort();
+```
+
+```nodejs
+pos.disconnect().then( (response) => {
+    console.log('Puerto descontactado correctamente');
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
 ```
 
 ```js
@@ -379,6 +421,26 @@ char* response = sale(ammount, ticket, false);
 import cl.transbank.pos.POS;
 //...
 SaleResponse saleResponse = POS.getInstance().sale(amount, ticket);
+```
+
+```nodejs
+// Venta simple sin estados intermedios
+pos.sale(1500, '12423').then( (response) => {
+    console.log('sale finalizado. Respuesta: ', response);
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
+
+// Venta con estados intermedios
+let callback = function (data) {
+    console.log('Mensaje intermedio recibido:  ', data)
+}
+pos.sale(1500, '12423', true, callback)
+    .then( (response) => {
+        console.log('sale finalizado. Respuesta: ', response);
+    }).catch( (err) => {
+        console.log('Ocurrió un error inesperado', err);
+}); 
 ```
 
 ```js
@@ -468,7 +530,6 @@ private static void NewIntermadiateMessageRecived(object sender, IntermediateRes
 ```java
 //No Soportado
 ```
-
 ```js
 import POS from "transbank-pos-sdk-web";
 
@@ -548,6 +609,14 @@ char *lastSaleResponse = last_sale();
 import cl.transbank.pos.POS;
 //...
 SaleResponse saleResponse = POS.getInstance().getLastSale();
+```
+
+```nodejs
+pos.getLastSale().then( (response) => {
+    console.log('getLastSale ejecutado. Respuesta: ', response);
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
 ```
 
 ```js
@@ -680,6 +749,15 @@ import cl.transbank.pos.POS;
 RefundResponse response = POS.getInstance().refund(21);
 ```
 
+
+```nodejs
+pos.refund('102').then( (response) => {
+    console.log('refund ejecutado. Respuesta: ', response);
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
+```
+
 ```js
 import POS from "transbank-pos-sdk-web";
 
@@ -736,6 +814,14 @@ import cl.transbank.pos.POS;
 CloseResponse cr = POS.getInstance().close();
 ```
 
+```nodejs
+pos.closeDay().then( (response) => {
+    console.log('closeDay ejecutado. Respuesta: ', response);
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
+```
+
 ```js
 import POS from "transbank-pos-sdk-web";
 
@@ -788,6 +874,14 @@ import cl.transbank.pos.POS;
 TotalsResponse response = POS.getInstance().getTotals();
 ```
 
+```nodejs
+pos.getTotals().then( (response) => {
+    console.log('getTotals ejecutado. Respuesta: ', response);
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
+```
+
 ```js
 import POS from "transbank-pos-sdk-web";
 
@@ -832,6 +926,14 @@ char *response = sales_detail(print_on_pos);
 import cl.transbank.pos.POS;
 //...
 List<DetailResponse> ldr = POS.getInstance().details(false);
+```
+
+```nodejs
+pos.salesDetail().then( (response) => {
+    console.log('salesDetail ejecutado. Respuesta: ', response);
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
 ```
 
 ```js
@@ -996,6 +1098,15 @@ import cl.transbank.pos.POS;
 KeysResponse kr = POS.getInstance().loadKeys();
 ```
 
+
+```nodejs
+pos.loadKeys().then( (response) => {
+    console.log('loadKeys ejecutado. Respuesta: ', response);
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
+```
+
 ```js
 import POS from "transbank-pos-sdk-web";
 
@@ -1080,6 +1191,14 @@ if (retval == TBK_OK){
 import cl.transbank.pos.POS;
 //...
 boolean normal = POS.getInstance().setNormalMode();
+```
+
+```nodejs
+pos.changeToNormalMode().then( (response) => {
+    console.log('changeToNormalMode ejecutado. Respuesta: ', response);
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
 ```
 
 ```js
