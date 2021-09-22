@@ -197,7 +197,7 @@ Transacción Completa Mall | `597055555573` Mall <br> `597055555574` Tienda 1 <b
 Transacción Completa Mall sin CVV| `597055555551` Mall <br> `597055555552` Tienda 1 <br> `597055555553` Tienda 2
 Transacción Completa Mall Captura Diferida | `597055555576` Mall <br> `597055555577` Tienda 1 <br> `597055555578` Tienda 2
 Transacción Completa Mall Captura Diferida sin CVV | `597055555561` Mall <br> `597055555562` Tienda 1 <br> `597055555563` Tienda 2
-Patpass Comercio | `27082157` Código de comercio <br> `J7xYiUS7xqD7LkbWSUHI` Lave secreta (Api Key Secret)
+Patpass Comercio | `28299257` Código de comercio <br> `cxxXQgGD9vrVe4M41FIt` Lave secreta (Api Key Secret)
 
 
 ## El proceso de validación

@@ -73,28 +73,28 @@ Host: https://pagoautomaticocontarjetasint.transbank.cl/
 ### Credenciales del Comercio
 
 ```java
-// Tbk-Api-Key-Id: 27082157
-// Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
+// Tbk-Api-Key-Id: 28299257
+// Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
 ```
 
 ```php
-// Tbk-Api-Key-Id: 27082157
-// Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
+// Tbk-Api-Key-Id: 28299257
+// Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
 ```
 
 ```csharp
-// Tbk-Api-Key-Id: 27082157
-// Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
+// Tbk-Api-Key-Id: 28299257
+// Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
 ```
 
 ```ruby
-# Tbk-Api-Key-Id: 27082157
-# Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
+# Tbk-Api-Key-Id: 28299257
+# Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
 ```
 
 ```python
-# Tbk-Api-Key-Id: 27082157
-# Tbk-Api-Key-Secret: J7xYiUS7xqD7LkbWSUHI
+# Tbk-Api-Key-Id: 28299257
+# Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
 ```
 
 ```http
