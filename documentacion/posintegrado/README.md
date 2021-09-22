@@ -176,10 +176,13 @@ Procura seguir todos los pasos descritos en el sitio de msys2
 </aside>
 
 ## Prueba tu POS
-La manera más simple de hacer una prueba de conexión con tu POS es usar el SDK Web. 
-1) [Descarga](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent/releases) e instala el agente POS
-2) Entra a [pos.digitalpartner.cl](https://pos.digitalpartner.cl) donde verás el proyecto de ejemplo del SDK Web ya montado y funcionando. 
-3) Prueba la conexión, y las diferentes operaciones. 
+La manera más simple de hacer una prueba de conexión con tu POS es usar el SDK Web.
+
+1. [Descarga](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent/releases) e instala el agente POS
+2. Entra a [pos.digitalpartner.cl](https://pos.digitalpartner.cl) donde verás el proyecto de ejemplo del SDK Web ya montado y funcionando. 
+3. Prueba la conexión, y las diferentes operaciones. 
+
+**Nota**: No olvides colocar tu [POS en modo POS integrado](#cambio-modalidad-pos-integrado). 
 
 ## Proyectos de ejemplo
 
@@ -1248,3 +1251,37 @@ Ponemos a tu disposición un ejemplo en nuestro Github para ayudarte a entender 
     </div>
   </div>
 </div>
+
+## Operación y Configuración del POS
+
+### Cambio Modalidad POS Integrado
+
+1. Primero debes ingresar al menú `Comercio` en el POS seleccionando la opción correspondiente en la pantalla del POS.
+
+2. Luego debes seleccionar la opción `Func. Comercio` e ingresar la **Clave Supervisora** confirmando con la tecla `Enter` (verde).
+<img src="/images/referencia/posintegrado/cambio-pos-integrado-1.png" alt="Ingresar al menu Comercio">
+
+3. A continuación  selecciona la opción `POS Integrado` desde la pantalla 2-2
+
+4. Ingresa nuevamente la **Clave Supervisora** confirmando con la tecla `Enter`
+<img src="/images/referencia/posintegrado/cambio-pos-integrado-2.png" alt="Pantalla POS Integrado">
+
+5. Finalmente, debes seleccionar la opción `Conectar Caja`
+<img src="/images/referencia/posintegrado/cambio-pos-integrado-3.png" alt="Pantalla POS Integrado">
+
+<aside class="notice">
+La <strong>Clave Supervisora</strong> por defecto es 123456
+</aside>
+
+<aside class="warning">
+Este flujo es referencial y las opciones pueden depender de los equipos que el comercio tenga contratados.
+</aside>
+
+### Cambio Modalidad POS Normal
+
+Si el POS se encuentra en modo Integrado, podrás ver una imagen de Transbank en la pantalla. Para volver al modo Normal de forma manual:
+
+1. Presionar la tecla Asterisco (`*`) e ingresar la clave supervisora.
+2. Seleccionar la opción `Desconectar Caja`.
+3. Luego de este el equipo volverá a modo Normal, y veras el menu de venta nuevamente.
+
