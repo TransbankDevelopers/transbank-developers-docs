@@ -139,6 +139,11 @@ En el caso de integrar webpay en una aplicación móvil Android, usando webview,
     myWebPayView.clearCache(true);
   ```
 
+Para resolver el problema relacionado al direccionamiento con la app 'Onepay' puede revisar los ejemplos para tomarlos como guia
+
+* [Ejemplo en Kotlin](https://github.com/TransbankDevelopers/transbank-sdk-webpay-android-client-example)
+* [Ejemplo en Java](https://github.com/TransbankDevelopers/transbank-sdk-webpay-android-java-client-example)
+
 ## Ambientes
 
 Transbank provee dos ambientes: **Integración** y **Producción**.
