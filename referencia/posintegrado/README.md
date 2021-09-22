@@ -1545,39 +1545,6 @@ DATO                    | LARGO         | COMENTARIO
 Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en modo Integrado siguiendo estas instrucciones [Cambio a POS Integrado](/referencia/posintegrado#cambio-modalidad-pos-integrado)
 </aside>
 
-## Operación y Configuración del POS
-
-### Cambio Modalidad POS Integrado
-
-1. Primero debes ingresar al menú `Comercio` en el POS seleccionando la opción correspondiente en la pantalla del POS.
-
-2. Luego debes seleccionar la opción `Func. Comercio` e ingresar la **Clave Supervisora** confirmando con la tecla `Enter` (verde).
-<img src="/images/referencia/posintegrado/cambio-pos-integrado-1.png" alt="Ingresar al menu Comercio">
-
-3. A continuación  selecciona la opción `POS Integrado` desde la pantalla 2-2
-
-4. Ingresa nuevamente la **Clave Supervisora** confirmando con la tecla `Enter`
-<img src="/images/referencia/posintegrado/cambio-pos-integrado-2.png" alt="Pantalla POS Integrado">
-
-5. Finalmente, debes seleccionar la opción `Conectar Caja`
-<img src="/images/referencia/posintegrado/cambio-pos-integrado-3.png" alt="Pantalla POS Integrado">
-
-<aside class="notice">
-La <strong>Clave Supervisora</strong> por defecto es 123456
-</aside>
-
-<aside class="warning">
-Este flujo es referencial y las opciones pueden depender de los equipos que el comercio tenga contratados.
-</aside>
-
-### Cambio Modalidad POS Normal
-
-Si el POS se encuentra en modo Integrado, podrás ver una imagen de Transbank en la pantalla. Para volver al modo Normal de forma manual:
-
-1. Presionar la tecla Asterisco (`*`) e ingresar la clave supervisora.
-2. Seleccionar la opción `Desconectar Caja`.
-3. Luego de este el equipo volverá a modo Normal, y veras el menu de venta nuevamente.
-
 ## Tabla de respuestas
 
 Respuesta                                               | Código
