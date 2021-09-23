@@ -319,112 +319,70 @@ except TransbankError as e:
 
 ## Credenciales y Ambiente
 
-Las credenciales de PatPass by Webpay se configuran de igual forma a las
-transacciones Webpay: en base a un objeto `Configuration`. Y si bien para hacer
-pruebas iniciales pueden usarse las credenciales pre-configuradas (como se puede
-ver en todos los ejemplos anteriores), para poder superar el [proceso de
-validación](/documentacion/como_empezar#el-proceso-de-validacion-y-puesta-en-produccion)
-en el ambiente de integración será necesario configurar explícitamente tu código
-de comercio y certificados:
+Las credenciales de PatPass Comercio se configuran de la siguiente forma:
 
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-import cl.transbank.webpay.configuration.Configuration;
-import cl.transbank.webpay.Webpay;
-import cl.transbank.patpass.PatPassByWebpayNormal;
-
+import cl.transbank.common.IntegrationType;
+import cl.transbank.patpass.PatpassComercio;
 //...
 
-Configuration configuration = new Configuration();
-configuration.setCommerceCode("12345"); // acá va tu código de comercio
-configuration.setPrivateKey( // pega acá la llave privada de tu certificado
-    "-----BEGIN RSA PRIVATE KEY-----\n" +
-    "MIIEpQIBAAKCAQEA0ClVcH8RC1u+KpCPUnzYSIcmyXI87REsBkQzaA1QJe4w/B7g\n" +
-    //....
-    "MtdweTnQt73lN2cnYedRUhw9UTfPzYu7jdXCUAyAD4IEjFQrswk2x04=\n" +
-    "-----END RSA PRIVATE KEY-----");
-configuration.setPublicCert( // pega acá tu certificado público
-    "-----BEGIN CERTIFICATE-----\n" +
-    "MIIDujCCAqICCQCZ42cY33KRTzANBgkqhkiG9w0BAQsFADCBnjELMAkGA1UEBhMC\n" +
-    //....
-    "-----END CERTIFICATE-----");
-
-// Default significa usar pesos o UF (dependiendo del código de comercio).
-configuration.setPatPassCurency(PatPassByWebpayNormal.Currency.DEFAULT);
-// Si se quiere usar UFs, especificar PatPassByWebpayNormal.Currency.UF.
-configuration.commerceMail("mail-para-notificaciones-patpass@micomercio.cl");
-
-Webpay webpay = new Webpay(configuration);
-// Ahora puedes obtener las instancias de las transacciones
-// que usarás, por ejemplo:
-PatPassByWebpayNormal patPassTransaction = webpay.getPatPassByWebpayTransaction();
+PatpassComercio.setIntegrationType(IntegrationType.TEST);
+PatpassComercio.setApiKey("******");
+PatpassComercio.setCommerceCode("******");
 ```
 
 ```php
-PENDIENTE
+use Transbank\Patpass\PatpassComercio;
+//...
+
+PatpassComercio::configureForTesting();
 ```
 
 ```csharp
-using Transbank.PatPass;
-using Transbank.Webpay;
-using Transbank.Webpay.Wsdl.Normal;
+using Transbank.Patpass.PatpassComercio;
 //..
 
-Configuration configuration = new Configuration()
-{
-    CommerceCode = "12345", // acá va tu código de comercio
-    PrivateCertPfxPath = @"C:\Certs\certificado.pfx", // pega acá la ruta a tu archivo pfx o p12
-    Password = "secret123" // pega acá el secreto con el cual se genero el archivo pfx o p12
-    CommerceMail = "mail-para-notificaciones-patpass@micomercio.cl",
-    PatPassCurrency = PatPassByWebpayNormal.Currency.DEFAULT
-};
-
-Webpay webpay = new Webpay(configuration);
-// Ahora puedes obtener las instancias de las transacciones
-// que usarás, por ejemplo:
-PatPassByWebpayNormal patPassTransaction = webpay.PatPassByWebpayTransaction;
+Inscription.IntegrationType = PatpassComercioIntegrationType.Test;
+Inscription.CommerceCode = "*******";
+Inscription.ApiKey = "*******";
 ```
-
-<aside class="warning">
-A diferencia de otros SDK, en .NET debes especificar la ruta a un archivo pfx o p12
-el cual debes generar tu a partir de tu llave privada y certificado público.
-
-Puedes mirar el siguiente enlace para obtener una guía rápida de como generar tu
-propio archivo: [Crear archivo pfx usando openssl](https://www.ssl.com/how-to/create-a-pfx-p12-certificate-file-using-openssl/)
-</aside>
 
 ### Apuntar a producción
 
-Para cambiar el ambiente al que apunta el SDK (que por defecto es integración),
-también debes usar el objeto `Configuration` (antes de crear una instancia de
-`Webpay`):
+Para cambiar el ambiente al que apunta el SDK (que por defecto es integración), debes hacer lo siguiente:
 
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-Configuration configuration = new Configuration();
-configuration.setEnvironment(Webpay.Environment.PRODUCCION);
-// agregar también configuración del código de comercio y certificados
+import cl.transbank.common.IntegrationType;
+import cl.transbank.patpass.PatpassComercio;
+//...
+
+PatpassComercio.setIntegrationType(IntegrationType.LIVE);
 ```
 
 ```php
-PENDIENTE
+use Transbank\Patpass\PatpassComercio;
+//...
+
+PatpassComercio::setCommerceCode('*********');
+PatpassComercio::setApiKey('*********');
+PatpassComercio::setIntegrationType('LIVE');
 ```
 
 ```csharp
-Configuration configuration = new Configuration();
-configuration.Environment("PRODUCCION");
-// agregar también configuración del código de comercio y certificados
+using Transbank.Patpass.PatpassComercio;
+//..
+
+Inscription.IntegrationType = PatpassComercioIntegrationType.Live;
 ```
 
-<aside class="warning">
-Los SDKs se encarga de configurar el certificado público de Transbank
-correspondiente al ambiente seleccionado. Pero es tu responsabilidad
-actualizar periódicamente la versión del SDK para recibir actualizaciones a
-dicho certificado. De lo contrario, expirará el certificado y dejarás de poder
-operar con Transbank.
-</aside>
+## Ejemplos de integración
+
+Ponemos a tu disposición una serie de repositorios en nuestro Github para ayudarte a entender la integración de mejor forma.
+Puedes encontrar una lista de [proyectos de ejemplo acá](/documentacion/como_empezar#ejemplos).
 
 <div class="container slate">
   <div class='slate-after-footer'>
