@@ -77,7 +77,7 @@ npm install transbank-pos-sdk-web
 También se puede incluir directamente el tag script
 
 ```html
-<script src="https://unpkg.com/transbank-pos-sdk-web@2/dist/pos.js"></script>
+<script src="https://unpkg.com/transbank-pos-sdk-web@3/dist/pos.js"></script>
 <script>
 // En este caso, el objeto en vez de ser POS, es Transbank.POS
 // Ej: Transbank.POS.connect(...); en vez de POS.connect(...) como se especifica en los ejemplos de mas abajo.
