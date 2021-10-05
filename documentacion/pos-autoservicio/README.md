@@ -487,7 +487,7 @@ El objeto InitializationResponse retornará un objeto con los siguientes datos:
 
 ### Voucher
 
-Los voucher serán generados por el POS Autoservicio cuando el párametro `Enviar voucher` sea verdadero, el voucher puede ser retornado en la respuesta de las transacciones de venta, <!-- venta multicódigo -->, última venta, anulación y cierre.
+Los voucher serán generados por el POS Autoservicio cuando el párametro `Enviar voucher` sea verdadero, el voucher puede ser retornado en la respuesta de las transacciones de venta, <!-- venta multicódigo, --> última venta, anulación y cierre.
 
 Cada línea contendrá 40 caracteres, los que se concatenarán en un solo buffer que será enviado en el campo de impresión en las respuesta de las transacciones mencionadas anteriormente. Al recibir el buffer se debe considerar que cada 40 caracteres se compone una línea del voucher.
 
