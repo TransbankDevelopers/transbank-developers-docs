@@ -193,7 +193,7 @@ Si se solicita que el POS envíe en la respuesta el voucher formateado, se entre
 No se permite realizar transacciones que requieran firma ni operar tarjetas no bancarias.
 </aside>
 
-### Transacción de Venta Multicódigo
+<!-- ### Transacción de Venta Multicódigo
 
 <aside class="alert">
 Este método está disponible desde la versión 20.1 firmware de POS Autoservicio y se debe solicitar la activación de la funcionalidad de venta multicódigo.
@@ -264,7 +264,7 @@ Si se solicita que el POS envie en la respuesta el voucher formateado, se entreg
 
 <aside class="warning">
 No se permite realizar transacciones que requieran firma ni operar tarjetas no bancarias.
-</aside>
+</aside> -->
 
 ### Transacción de última venta
 
@@ -487,7 +487,7 @@ El objeto InitializationResponse retornará un objeto con los siguientes datos:
 
 ### Voucher
 
-Los voucher serán generados por el POS Autoservicio cuando el párametro `Enviar voucher` sea verdadero, el voucher puede ser retornado en la respuesta de las transacciones de venta, venta multicódigo, última venta, anulación y cierre.
+Los voucher serán generados por el POS Autoservicio cuando el párametro `Enviar voucher` sea verdadero, el voucher puede ser retornado en la respuesta de las transacciones de venta, <!-- venta multicódigo -->, última venta, anulación y cierre.
 
 Cada línea contendrá 40 caracteres, los que se concatenarán en un solo buffer que será enviado en el campo de impresión en las respuesta de las transacciones mencionadas anteriormente. Al recibir el buffer se debe considerar que cada 40 caracteres se compone una línea del voucher.
 
@@ -524,7 +524,8 @@ La cantidad de líneas del voucher dependerá del tipo de transacción.
 
 A continuación, encontrarás la documentación en formato PDF:
 
-* **Manual de integración POS Autoservicio UX100/300/400** - _20.1_ | [Descargar](/files/manual-integracion-pos-autoservicio-4.9.pdf)
+<!-- * **Manual de integración POS Autoservicio UX100/300/400** - _20.1_ | [Descargar](/files/manual-integracion-pos-autoservicio-4.9.pdf) -->
+* **Manual de integración POS Autoservicio UX100/300/400** | [Descargar](/files/manual-integracion-pos-autoservicio-4.3.pdf)
 _Este documento tiene por objetivo explicar las funcionalidades que debe implementar el
 Cliente o su proveedor de caja para el desarrollo del módulo de autoservicio (en este caso los
 ejemplos se efectuarán con el teclado Verifone UX100, el lector de tarjeta Verifone UX300 y el
