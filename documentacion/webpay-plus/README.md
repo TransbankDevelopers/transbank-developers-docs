@@ -141,7 +141,7 @@ token es caducado y no podrá ser utilizado en un pago.
 
 ```java
 import cl.transbank.webpay.webpayplus.WebpayPlus;
-import cl.transbank.webpay.webpayplus.model.CreateWebpayPlusTransactionResponse;
+import cl.transbank.webpay.webpayplus.model.WebpayPlusTransactionCreateResponse;
 
 final WebpayPlusTransactionCreateResponse response = WebpayPlus.Transaction.create(
   buyOrder, sessionId, amount, returnUrl
@@ -310,7 +310,7 @@ exactamente `0` y que el estado `status` sea exactamente `AUTHORIZED`.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final CreateWebpayPlusTransactionResponse response = WebpayPlus.Transaction.commit(token);
+final WebpayPlusTransactionCommitResponse response = WebpayPlus.Transaction.commit(token);
 ```
 
 ```php
@@ -369,7 +369,7 @@ response.getAmount();
 response.getStatus();
 response.getBuyOrder();
 response.getSessionId();
-response.getCardDetail();
+response.getCardDetail().getCardNumber();
 response.getAccountingDate();
 response.getTransactionDate();
 response.getAuthorizationCode();
@@ -487,7 +487,7 @@ Debes enviar el `token` dela transacción de la cual desees obtener el estado.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final StatusWebpayPlusTransactionResponse response = WebpayPlus.Transaction.status(token);
+final WebpayPlusTransactionStatusResponse response = WebpayPlus.Transaction.status(token);
 ```
 
 ```php
@@ -531,7 +531,7 @@ response.getAmount();
 response.getStatus();
 response.getBuyOrder();
 response.getSessionId();
-response.getCardDetail();
+response.getCardDetail().getCardNumber();
 response.getAccountingDate();
 response.getTransactionDate();
 response.getAuthorizationCode();
@@ -661,7 +661,7 @@ El método `Transaction.refund()` debe ser invocado siempre indicando el código
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final RefundWebpayPlusTransactionResponse response = WebpayPlus.Transaction.refund(token, amount);
+final WebpayPlusMallTransactionCaptureResponse response = WebpayPlus.Transaction.refund(token, amount);
 ```
 
 ```php
@@ -791,7 +791,7 @@ el código debe ser el código de la tienda virtual específica.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final CaptureWebpayPlusTransactionResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
+final WebpayPlusTransactionCaptureResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
 ```
 
 ```php
@@ -1135,7 +1135,7 @@ exactamente `0` y que el estado `status` sea exactamente `AUTHORIZED` por cada u
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final CommitWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.commit(token);
+final WebpayPlusMallTransactionCommitResponse response = WebpayPlus.MallTransaction.commit(token);
 ```
 
 ```php
@@ -1312,7 +1312,7 @@ Esta operación permite obtener el estado de la transacción en cualquier moment
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final StatusWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.status(token);
+final WebpayPlusMallTransactionStatusResponse response = WebpayPlus.MallTransaction.status(token);
 ```
 
 ```php
@@ -1501,7 +1501,7 @@ más detalles y restricciones.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final RefundWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.refund(token, buyOrder, commerceCode, amount);
+final WebpayPlusMallTransactionRefundResponse response = WebpayPlus.MallTransaction.refund(token, buyOrder, commerceCode, amount);
 ```
 
 ```php
