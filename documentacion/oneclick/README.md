@@ -140,7 +140,7 @@ String email = "nombre_de_usuario@gmail.com";
 // URL donde llegará el usuario con su token luego de finalizar la inscripción
 String response_url = "https://callback/resultado/de/inscripcion";
 
-OneclickMallInscriptionStartResponse response = OneclickMall.Inscription.start(username, email, response_url);
+OneclickMallInscriptionStartResponse response = Oneclick.MallInscription.start(username, email, response_url);
 
 String url_webpay = response.getUrlWebpay();
 String tbk_token = response.getToken();
@@ -280,7 +280,7 @@ Una vez que se autorice la inscripción del usuario, se retornará el control al
 ```java
 //...
 String tbk_token = "elTokenQueLlegaPorPOST"; // token que llega por POST en el parámetro "TBK_TOKEN"
-OneclickMallInscriptionFinishResponse response = OneclickMall.Inscription.finish(tbk_token);
+OneclickMallInscriptionFinishResponse response = Oneclick.MallInscription.finish(tbk_token);
 String tbkUser = response.getTbkUser();
 ```
 
@@ -400,7 +400,7 @@ el comercio deberá invocar a removeInscription() con el identificador de usuar
 // Identificador del usuario en el comercio
 String username = "nombre_de_usuario";
 String tbkUser = "tbkUserRetornadoPorInscriptionFinish";
-OneclickMall.Inscription.delete(username, tbkUser);
+Oneclick.MallInscription.delete(username, tbkUser);
 ```
 
 ```php
@@ -540,7 +540,7 @@ MallTransactionCreateDetails details = MallTransactionCreateDetails.build()
                 .add(amuntTwo, MallTwoCommerceCode, buyOrderMallTwo, installmentNumberTwo);
 
 
-OneclickMallTransactionAuthorizeResponse response = OneclickMall.Transaction.authorize(username, tbkUser, buyOrder, details);
+OneclickMallTransactionAuthorizeResponse response = Oneclick.Transaction.authorize(username, tbkUser, buyOrder, details);
 ```
 
 ```php
@@ -875,7 +875,7 @@ Retorna el resultado de la autorización.
 
 ```java
 final OneclickMallTransactionStatusResponse response =
-  OneclickMall.Transaction.status(buyOrder);
+  Oneclick.Transaction.status(buyOrder);
 ```
 
 ```php
@@ -1115,7 +1115,7 @@ String childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
 String childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
 double amount = 10000;
 
-OneclickMallTransactionRefundResponse response = OneclickMall.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+OneclickMallTransactionRefundResponse response = Oneclick.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
 
 ```php
@@ -1337,7 +1337,7 @@ No es necesario definir el Api Key ya que en este ambiente, todos los productos 
 ya viene preconfigurada.
 
 ```java
-OneclickMall.setCommerceCode("Pon el Código de Comercio");
+Oneclick.setCommerceCode("Pon el Código de Comercio");
 ```
 
 ```php

@@ -931,7 +931,7 @@ String username = "nombre_de_usuario";
 String email = "nombre_de_usuario@gmail.com";
 String response_url = "https://callback/resultado/de/transaccion";
 
-OneclickMallInscriptionStartResponse response = OneclickMall.Inscription.start(username, email, response_url);
+OneclickMallInscriptionStartResponse response = Oneclick.MallInscription.start(username, email, response_url);
 
 String url_webpay = response.getUrlWebpay();
 String tbk_token = response.getToken();
@@ -1002,7 +1002,7 @@ Una vez que se autorice la inscripción del usuario, se retornará el control al
 ```java
 //...
 String tbk_token = "tbkTokenRetornadoPorInscriptionStart";
-OneclickMallInscriptionFinishResponse response = OneclickMall.Inscription.finish(tbk_token);
+OneclickMallInscriptionFinishResponse response = Oneclick.MallInscription.finish(tbk_token);
 String tbkUser = response.getTbkUser();
 ```
 
@@ -1056,7 +1056,7 @@ Si en algún momento se quiere eliminar la inscripción de un usuario, se debe i
 String username = "nombre_de_usuario";
 String tbkUser = "tbkUserRetornadoPorInscriptionFinish";
 
-OneclickMall.Inscription.delete(username, tbkUser);
+Oneclick.MallInscription.delete(username, tbkUser);
 ```
 
 ```php
@@ -1130,7 +1130,7 @@ MallTransactionCreateDetails details = MallTransactionCreateDetails.build()
                 .add(amountOne, MallOneCommerceCode, buyOrderMallOne, installmentNumberOne)
                 .add(amuntTwo, MallTwoCommerceCode, buyOrderMallTwo, installmentNumberTwo);
 
-OneclickMallTransactionAuthorizeResponse response = OneclickMall.Transaction.authorize(username, tbkUser, buyOrder, details);
+OneclickMallTransactionAuthorizeResponse response = Oneclick.Transaction.authorize(username, tbkUser, buyOrder, details);
 ```
 
 ```php
@@ -1244,7 +1244,7 @@ String childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
 String childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
 double amount = (byte) 1;
 
-OneclickMallTransactionRefundResponse response = OneclickMall.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+OneclickMallTransactionRefundResponse response = Oneclick.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
 
 ```php

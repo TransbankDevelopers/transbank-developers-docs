@@ -204,7 +204,7 @@ Para crear una transacción basta llamar al método `Transaction.create()`
 
 ```java
 import cl.transbank.webpay.webpayplus.WebpayPlus;
-import cl.transbank.webpay.webpayplus.model.CreateWebpayPlusTransactionResponse;
+import cl.transbank.webpay.webpayplus.model.WebpayPlusTransactionCreateResponse;
 
 final WebpayPlusTransactionCreateResponse response = WebpayPlus.Transaction.create(
   buyOrder, sessionId, amount, returnUrl
@@ -325,7 +325,7 @@ Cuando el comercio retoma el control mediante `return_url` debes confirmar y obt
 el resultado de una transacción usando el método  `Transaction.commit()`.
 
 ```java
-final CreateWebpayPlusTransactionResponse response = WebpayPlus.Transaction.commit(token);
+final WebpayPlusTransactionCommitResponse response = WebpayPlus.Transaction.commit(token);
 ```
 
 ```php
@@ -376,7 +376,7 @@ response.getAmount();
 response.getStatus();
 response.getBuyOrder();
 response.getSessionId();
-response.getCardDetail();
+response.getCardDetail().getCardNumber();
 response.getAccountingDate();
 response.getTransactionDate();
 response.getAuthorizationCode();
@@ -524,7 +524,7 @@ acciones que correspondan.
 
 
 ```java
-final StatusWebpayPlusTransactionResponse response = WebpayPlus.Transaction.status(token);
+final WebpayPlusTransactionStatusResponse response = WebpayPlus.Transaction.status(token);
 ```
 
 ```php
@@ -575,7 +575,7 @@ response.getAmount();
 response.getStatus();
 response.getBuyOrder();
 response.getSessionId();
-response.getCardDetail();
+response.getCardDetail().getCardNumber();
 response.getAccountingDate();
 response.getTransactionDate();
 response.getAuthorizationCode();
@@ -729,7 +729,7 @@ El método `Transaction.refund()` debe ser invocado siempre indicando el códi
 </aside>
 
 ```java
-final RefundWebpayPlusTransactionResponse response = WebpayPlus.Transaction.refund(token, amount);
+final WebpayPlusMallTransactionRefundResponse response = WebpayPlus.Transaction.refund(token, amount);
 ```
 
 ```php
@@ -886,7 +886,7 @@ autorización y sin captura simultánea.
 <strong>Transaction.capture()</strong>
 
 ```java
-final CaptureWebpayPlusTransactionResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
+final WebpayPlusMallTransactionCaptureResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
 ```
 
 ```php
@@ -1043,11 +1043,11 @@ Para crear una transacción basta llamar al método `Transaction.create()`
 <strong>Transaction.create() Mall</strong>
 
 ```java
-CreateMallTransactionDetails transactionDetails = CreateMallTransactionDetails.build()
+MallTransactionCreateDetails transactionDetails = MallTransactionCreateDetails.build()
     .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne)
     .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo);
 
-final CreateWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.create(buyOrder, sessionId, returnUrl, transactionDetails);
+final WebpayPlusMallTransactionCreateResponse response = WebpayPlus.MallTransaction.create(buyOrder, sessionId, returnUrl, transactionDetails);
 ```
 
 ```php
@@ -1244,7 +1244,7 @@ una vez que Webpay ha resueltosu autorización financiera.
 <strong>Transaction.commit() Mall</strong>
 
 ```java
-final CommitWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.commit(token);
+final WebpayPlusMallTransactionCommitResponse response = WebpayPlus.MallTransaction.commit(token);
 ```
 
 ```php
@@ -1474,7 +1474,7 @@ Esta operación permite obtener el estado de la transacción en cualquier mome
 Obtiene resultado de transacción a partir de un token.
 
 ```java
-final StatusWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.status(token);
+final WebpayPlusMallTransactionStatusResponse response = WebpayPlus.MallTransaction.status(token);
 ```
 
 ```php
@@ -1705,7 +1705,7 @@ Para anular una transacción se debe invocar al método `Transaction.refund()`.
 <strong>Transaction.refund() Mall</strong>
 
 ```java
-final RefundWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.refund(token, buyOrder, commerceCode, amount);
+final WebpayPlusMallTransactionRefundResponse response = WebpayPlus.MallTransaction.refund(token, buyOrder, commerceCode, amount);
 ```
 
 ```php

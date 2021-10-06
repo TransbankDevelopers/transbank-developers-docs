@@ -318,9 +318,9 @@ WebpayPlus.MallTransaction.setApiKey("pon-tu-llave-secreta-aca");
 WebpayPlus.MallTransaction.setIntegrationType(IntegrationType.LIVE);
 
 // OneclickMall Live Config
-OneclickMall.setCommerceCode("pon-tu-codigo-de-comercio-aca");
-OneclickMall.setApiKey("pon-tu-llave-secreta-aca");
-OneclickMall.setIntegrationType(IntegrationType.LIVE);
+Oneclick.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+Oneclick.setApiKey("pon-tu-llave-secreta-aca");
+Oneclick.setIntegrationType(IntegrationType.LIVE);
 
 //PatpassComercio Live Config
 PatpassComercio.setCommerceCode("pon-tu-codigo-de-comercio-aca");

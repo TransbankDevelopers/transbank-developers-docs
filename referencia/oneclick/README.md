@@ -142,7 +142,7 @@ Puedes revisar más detalles de esta operación en [su documentación](/document
 Permite comenzar con el proceso de inscripción.
 
 ```java
-OneclickMallInscriptionStartResponse response = OneclickMall.Inscription.start(userName, email, responseUrl);
+OneclickMallInscriptionStartResponse response = Oneclick.MallInscription.start(userName, email, responseUrl);
 ```
 
 ```php
@@ -291,7 +291,7 @@ Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
 Más información en [la documentación](/documentacion/oneclick).
 
 ```java
-final OneclickMallInscriptionFinishResponse response = OneclickMall.Inscription.finish(token);
+final OneclickMallInscriptionFinishResponse response = Oneclick.MallInscription.finish(token);
 ```
 
 ```php
@@ -549,7 +549,7 @@ MallTransactionCreateDetails transactionDetails = MallTransactionCreateDetails.b
   .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne, installmentsNumberMallOne)
   .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo, installmentsNumberMallTwo);
 
-final OneclickMallTransactionAuthorizeResponse response = OneclickMall.Transaction.authorize(username, tbkUser, buyOrder, transactionDetails);
+final OneclickMallTransactionAuthorizeResponse response = Oneclick.Transaction.authorize(username, tbkUser, buyOrder, transactionDetails);
 ```
 
 ```php
@@ -933,7 +933,7 @@ Puedes revisar más detalles de esta operación en [su documentación](/document
 
 ```java
 final OneclickMallTransactionStatusResponse response =
-  OneclickMall.Transaction.status(buyOrder);
+  Oneclick.Transaction.status(buyOrder);
 ```
 
 ```php
@@ -1197,7 +1197,7 @@ Puedes revisar más detalles de esta operación en [su documentación](/document
 
 ```java
 final OneclickMallTransactionRefundResponse response =
-  OneclickMall.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+  Oneclick.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
 
 ```php
@@ -1575,7 +1575,7 @@ Nunca dejes tu código de comercio y secreto compartido directamente en tu códi
 
 ```java
 // Para Oneclick
-OneclickMall.setCommerceCode('TU_CODIGO_DE_COMERCIO');
+Oneclick.setCommerceCode('TU_CODIGO_DE_COMERCIO');
 ```
 
 ```php
@@ -1663,7 +1663,7 @@ Oneclick.commerceCode = 'TU_CODIGO_DE_COMERCIO';
 
 ```java
 // Para Oneclick
-OneclickMall.setApiKey('TU_API_KEY');
+Oneclick.setApiKey('TU_API_KEY');
 ```
 
 ```php
@@ -1693,7 +1693,7 @@ Oneclick.apiKey = 'TU_API_KEY';
 
 ```java
 // Para Oneclick
-OneclickMall.setIntegrationType(IntegrationType.LIVE);
+Oneclick.setIntegrationType(IntegrationType.LIVE);
 ```
 
 ```php
