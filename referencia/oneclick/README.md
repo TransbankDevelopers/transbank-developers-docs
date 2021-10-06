@@ -1496,8 +1496,301 @@ response_code  <br> <i> Number </i> | Código de resultado de la captura. Si es 
 
 <aside class="notice">
 En caso de error apareceran los mismos códigos exclusivos del método `capture()`
-para captura simpultanea.
+para captura simultanea.
 </aside>
+
+### Incrementar el monto de una transacción
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#incrementar-monto-transaccion)
+
+A contar de la versión 1.3 de la API podrás aumentar el monto previamente autorizado todas las veces que lo necesites (solo podrá aplicarse a transacciones no capturadas). Es soportado por tarjetas Visa y Mastercard.
+
+Para tarjetas AMEX esta transacción no es soportada y Webpay retornará un código HTTP 422 con la glosa “Unsupported Operation” en el body de respuesta.
+
+```php
+// SDK Versión 2.x
+use Transbank\Webpay\WebpayPlus\Transaction;
+
+$response = (new Transaction)->increaseAmount($token, $buyOrder, $authorizationCode, $amount, $commerceCode);
+```
+
+```http
+PUT /rswebpaytransaction/api/webpay/v1.3/transactions/amount
+Tbk-Api-Key-Id: 597055555547
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "commerce_code": "597055555548"
+  "buy_order": "OC20190320T",
+  "authorization_code": "07Z123",
+  "capture_amount": 1000
+}
+```
+<strong>Parámetros Transaction.increaseAmount</strong>
+
+Nombre  <br> <i> tipo </i> | Tamaño | Descripción | Obligatorio
+------   | ----------- | --------- | ------
+token  <br> <i> String </i> | 64 | Token de la transacción. | Sí
+commerce_code  <br> <i> String </i> | 12 | Código de comercio de la tienda que hizo la transacción. | Sí
+buy_order  <br> <i> String </i> | 26 | Orden de compra de la pre-autorización original. | Sí
+authorization_code  <br> <i> String </i>| 6 | Código de autorización de la pre-autorización original. | Sí
+amount  <br> <i> Number </i> | 17 | Monto que se requiere incrementar de la pre-autorización original. | Sí
+
+```php
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getTotalAmount();
+$response->getExpirationDate();
+$response->getResponseCode();
+```
+
+```http
+200 OK
+Content-Type: application/json
+{
+  "authorization_code": 123456,
+  "authorization_date": "2021-03-05T20:18:20Z",
+  "total_amount": 3000,
+  "expiration_date": "2021-03-20T20:18:20Z",
+  "response_code": 0
+}
+```
+
+<strong>Respuesta Transaction.increaseAmount</strong>
+
+Nombre  <br> <i> tipo </i> | Descripción <br><i>tamaño</i>
+------   | -----------
+authorization_code  <br> <i> String </i> | Código de autorización de la pre-autorización incremental de monto. <br><i>Tamaño: 6</i>
+authorization_date  <br> <i> ISO8601 </i> | Fecha de autorización de la pre-autorización incremental de monto.
+total_amount <br><i>Number</i>| Monto total pre-autorizado hasta el momento (sumando incrementos y restando decrementos por reversas).<br><i>Tamaño: 17</i>
+expiration_date  <br> <i> ISO8601 </i> | Fecha límite para capturar el monto total.
+response_code  <br> <i> Number </i> | Código de resultado de la operación. Será 0 para éxito y cualquier otro valor para fracaso. <br><i>Tamaño: 2</i>
+
+
+### Incrementar el plazo de una Captura
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#incrementar-monto-transaccion)
+
+Permite aumentar de manera directa el plazo para llevar a cabo la captura de monto previamente autorizado (todas las veces que lo necesite). Esta operación solo es soportada por VISA y MASTERCARD.
+
+Para tarjetas AMEX esta transacción no es soportada y Webpay retornará un código HTTP 422 con la glosa “Unsupported Operation” en el body de respuesta.
+
+```php
+// SDK Versión 2.x
+use Transbank\Webpay\WebpayPlus\Transaction;
+
+$response = (new Transaction)->increaseAuthorizationDate($token, $buyOrder, $authorizationCode, $commerceCode);
+```
+
+```http
+PUT /rswebpaytransaction/api/webpay/v1.3/transactions/{token}/authorization_date
+Tbk-Api-Key-Id: 597055555547
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+"commerce_code": "597055555548",
+"buy_order": "ordenCompra12345678",
+"authorization_code": "123456",
+}
+```
+<strong>Parámetros Transaction.increaseAuthorizationDate</strong>
+
+Nombre  <br> <i> tipo </i> | Tamaño | Descripción | Obligatorio
+------   | ----------- | --------- | -------
+token  <br> <i> String </i> | 64 | Token identificador de la transacción de pre-autorización original. | Sí
+commerce_code  <br> <i> String </i> | 12 | Código de comercio de la tienda que hizo la transacción. | Sí
+buy_order  <br> <i> String </i> | 26 | Orden de compra de la pre-autorización original. | Sí
+authorization_code  <br> <i> String </i>| 6 | Código de autorización de la pre-autorización original. | Sí
+
+```php
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getTotalAmount();
+$response->getExpirationDate();
+$response->getResponseCode();
+```
+
+```http
+200 OK
+Content-Type: application/json
+{
+  "authorization_code": 123456,
+  "authorization_date": "2021-03-05T20:18:20Z",
+  "total_amount": 3000,
+  "expiration_date": "2021-03-20T20:18:20Z",
+  "response_code": 0
+}
+
+```
+
+<strong>Respuesta Transaction.increaseAuthorizationDate</strong>
+
+Nombre  <br> <i> tipo </i> | Descripción <br><i>tamaño</i>
+------   | -----------
+authorization_code  <br> <i> String </i> | Código de autorización de la pre-autorización incremental de plazo. <br><i>Tamaño: 6</i>
+authorization_date  <br> <i> ISO8601 </i> | Fecha de autorización de la pre-autorización incremental de plazo.
+total_amount <br><i>Number</i>| Monto total pre-autorizado hasta el momento (sumando incrementos y restando decrementos por reversas).<br><i>Tamaño: 17</i>
+expiration_date  <br> <i> ISO8601 </i> | Fecha límite (nueva) para capturar el monto total.
+response_code  <br> <i> Number </i> | Código de resultado de la operación. Será 0 para éxito y cualquier otro valor para fracaso. <br><i>Tamaño: 2</i>
+
+
+### Reversar el monto pre-autorizado
+A diferencia del método refund, esta operación actúa sobre los montos pre-autorizados y no sobre los montos ya capturados. Por lo tanto, esta operación permitirá disminuir de manera directa el monto previamente autorizado, tanto de forma parcial (todas las veces que lo necesite) como total. Estará soportada por marcas MASTER y VISA, en el caso de AMEX esta transacción no está soportada.
+
+Para tarjetas AMEX esta transacción no es soportada y Webpay retornará un código HTTP 422 con la glosa “Unsupported Operation” en el body de respuesta.
+
+```php
+// SDK Versión 2.x
+use Transbank\Webpay\WebpayPlus\Transaction;
+
+$response = (new Transaction)->reversePreAuthorizedAmount($token, $buyOrder, $authorizationCode, $amount, $commerceCode);
+```
+
+```http
+PUT /rswebpaytransaction/api/webpay/v1.3/transactions/{token}/reverse/amount
+Tbk-Api-Key-Id: 597055555547
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "commerce_code": "597055555548",
+  "buy_order": "ordenCompra12345678",
+  "authorization_code": "123456",
+  "amount": 1000,
+}
+```
+<strong>Parámetros Transaction.reversePreAuthorizedAmount</strong>
+
+Nombre  <br> <i> tipo </i> | Tamaño | Descripción | Obligatorio
+------   | ----------- | ---------- | --------
+token  <br> <i> String </i> | 64 | Token identificador de la transacción de pre-autorización original. | Sí
+commerce_code  <br> <i> String </i> | 12 | Código de comercio de la tienda que hizo la transacción. | Sí
+buy_order  <br> <i> String </i> | 26 | Orden de compra de la pre-autorización original. | Sí
+authorization_code  <br> <i> String </i>| 6 | Código de autorización de la pre-autorización original. | Sí
+amount  <br> <i> Numeric </i>| 17 | Monto que se requiere disminuir de la pre-autorización original. | Sí
+
+Nota: Si el monto a disminuir es el mismo que el monto total pre-autorizado previamente (sumando incrementos y restando decrementos) se considerará esta reversa como una reversa total y por lo tanto la pre-autorización quedará en estado final y por lo tanto no podrá recibir nuevas pre-autorizaciones incrementales, nuevas reversas ni una captura final.
+
+```php
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getTotalAmount();
+$response->getExpirationDate();
+$response->getResponseCode();
+```
+
+```http
+200 OK
+Content-Type: application/json
+{
+  "authorization_code": 123456,
+  "authorization_date": "2021-03-05T20:18:20Z",
+  "total_amount": 3000,
+  "expiration_date": "2021-03-20T20:18:20Z",
+  "response_code": 0
+}
+
+```
+
+<strong>Respuesta Transaction.increaseAuthorizationDate</strong>
+
+Nombre  <br> <i> tipo </i> | Descripción <br><i>tamaño</i>
+------   | -----------
+authorization_code  <br> <i> String </i> | Código de autorización de la pre-autorización incremental de plazo. <br><i>Tamaño: 6</i>
+authorization_date  <br> <i> ISO8601 </i> | Fecha de autorización de la pre-autorización incremental de plazo.
+total_amount <br><i>Number</i>| Monto total pre-autorizado hasta el momento (sumando incrementos y restando decrementos por reversas).<br><i>Tamaño: 17</i>
+expiration_date  <br> <i> ISO8601 </i> | Fecha límite (nueva) para capturar el monto total.
+response_code  <br> <i> Number </i> | Código de resultado de la operación. Será 0 para éxito y cualquier otro valor para fracaso. <br><i>Tamaño: 2</i>
+
+
+### Historial de transacciones Captura Diferida
+Este método permitirá visualizar el historial de operaciones ejecutadas sobre una pre-autorización de captura diferida.
+
+```http
+PUT /rswebpaytransaction/api/oneclick/v1.3/transactions/details
+Tbk-Api-Key-Id: 597055555547
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+   "commerce_code": "597055555548",
+   "buy_order": "ordenCompra12345678",
+   "authorization_code": "123456",
+   "amount": 30000
+}
+```
+
+<strong>Parámetros Transaction.deferredCaptureHistory</strong>
+
+Nombre  <br> <i> tipo </i> | Tamaño | Descripción | Obligatorio
+------   | ----------- | -------- | ------
+commerce_code  <br> <i> String </i> | 12 | Código de comercio. | Sí
+buy_order  <br> <i> String </i> | 26 | Orden de compra de la pre-autorización original. | Sí
+authorization_code  <br> <i> String </i> | 6 | Código de autorización de la pre-autorización original. | Sí
+
+```http
+200 OK
+Content-Type: application/json
+{
+  "type": "Preauthorization",
+  "amount": 30000,
+  "authorization_code": 123456,
+  "authorization_date": "2021-03-05T20:18:20Z",
+  "total_amount": 30000,
+  "expiration_date": "2021-04-05T20:18:20Z",
+  "response_code": 0
+},
+{
+  "type": "Amount adjustment",
+  "amount": 15000,
+  "authorization_code": 123456,
+  "authorization_date": "2021-03-10T17:21:15Z",
+  "total_amount": 45000,
+  "expiration_date": "2021-04-05T20:18:20Z",
+  "response_code": 0
+},
+{
+  "type": "Amount adjustment",
+  "amount": -3000,
+  "authorization_code": 123456,
+  "authorization_date": "2021-03-11T22:11:01Z",
+  "total_amount": 42000,
+  "expiration_date": "2021-04-05T20:18:20Z",
+  "response_code": 0
+},
+{
+  "type": "Expiration date adjustment",
+  "amount": 0,
+  "authorization_code": 123456,
+  "authorization_date": "2021-04-01T11:24:57Z",
+  "total_amount": 42000,
+  "expiration_date": "2021-05-01T11:24:57Z",
+  "response_code": 0
+},
+{
+  "type": "Capture",
+  "amount": 42000,
+  "authorization_code": 123456,
+  "authorization_date": "2021-04-22T11:24:57Z",
+  "total_amount": 0,
+  "expiration_date": "2021-05-01T11:24:57Z",
+  "response_code": 0
+}
+
+
+```
+
+<strong>Respuesta Transaction.deferredCaptureHistory</strong>
+
+Nombre  <br> <i> tipo </i> | Descripción <br><i>tamaño</i>
+------   | -----------
+type  <br> <i> String </i> | Tipo de operación. Los valores posibles son:<br>“Preauthorization”, “Nullification”, “Capture”, “Amount adjustment” y “Expiration date adjustment”
+amount  <br> <i> Number </i> | Monto involucrado en la operación.<br><i>Tamaño: 17</i>
+authorization_code  <br> <i> String </i> | Código de autorización de la pre-autorización incremental de monto. <br><i>Tamaño: 6</i>
+authorization_date  <br> <i> ISO8601 </i> | Fecha de autorización de la pre-autorización incremental de monto.
+total_amount <br><i>Number</i>| Monto total pre-autorizado hasta el momento (sumando incrementos y restando decrementos por reversas).<br><i>Tamaño: 17</i>
+expiration_date  <br> <i> ISO8601 </i> | Fecha límite para capturar el monto total.
+response_code  <br> <i> Number </i> | Código de resultado de la operación. Será 0 para éxito y cualquier otro valor para fracaso. <br><i>Tamaño: 2</i>
 
 
 ## Códigos y mensajes de error
