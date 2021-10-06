@@ -167,10 +167,10 @@ Desde el punto de vista de la transacción, lo que ocurre es lo siguiente:
 ## Anulaciones
 
 <div class="pos-title-nav">
-  <div tbk-link='/documentacion/webpay-plus#reversar-o-anular-una-transaccion-mall' tbk-link-name='Documentación'></div>
+  <div tbk-link='/documentacion/webpay-plus#reversar-o-anular-una-transaccion' tbk-link-name='Documentación'></div>
 </div>
 
-Las transacciones Webpay **realizadas con tarjeta de crédito** pueden ser anuladas mediante servicios web. Esta funcionalidad no aplica para tarjetas de débito Redcompra.
+Las transacciones Webpay **realizadas con tarjeta de crédito** pueden ser anuladas mediante servicios web. También puedes realizar reversas de las transacciones realizadas con tarjetas de **débito y prepago** con un tiempo máximo de 1 hora desde la creación de la transacción.
 
 Las anulaciones pueden ser totales o parciales. **Las anulaciones parciales solo están permitidas en la modalidad de Venta Normal (VN)**. En caso que la transacción haya sido abonada al comercio, la anulación generará una retención en los siguientes abonos por el monto previamente autorizado.
 
