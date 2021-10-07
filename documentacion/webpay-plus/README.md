@@ -641,11 +641,17 @@ response.balance
 
 Esta operación permite a todo comercio habilitado, reembolsar o anular una
 transacción que fue generada en Webpay Plus.
-Puedes generar el reembolso del total o parte del monto de una transacción, dependiendo de la
-siguiente lógica de negocio la invocación a esta operación generará una reversa o una anulación:
 
-* Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
-* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla **(una hora)** no ha terminado, de lo contrario se ejecutará una anulación.
+Puedes realizar un reembolso invocando al método refund(), dependiendo de algunas condiciones correspondera a una **Reversa** o **Anulación**.  
+
+* Si haces un reembolso por el monto total de la venta y ha pasado menos de **una hora** desde que se realizó la transacción, entonces será una **REVERSA**
+* En cualquier otro caso, corresponderá a una **ANULACIÓN**
+
+Las compras con tarjeta de crédito se pueden REVERSAR y ANULAR.
+Si la compra es con tarjeta de débito o prepago, entonces solo se puede REVERSAR.
+
+En el caso de que se ejecute una Reversa, el valor de la transacción no se verá reflejado en la cartola de movimientos del cliente (** dependiendo del Banco), 
+a diferencia de la Anulación, en donde queda registro tanto del movimiento de cobro como la posterior anulación.
 
 La anulación puede realizarse máximo 90 días después de la fecha de la
 transacción original.
