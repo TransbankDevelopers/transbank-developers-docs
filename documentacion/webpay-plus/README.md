@@ -648,7 +648,7 @@ Puedes realizar un reembolso invocando al método refund(), dependiendo de algun
 * En cualquier otro caso, corresponderá a una **ANULACIÓN**
 
 Las compras con tarjeta de crédito se pueden REVERSAR y ANULAR.
-Si la compra es con tarjeta de débito, entonces solo se puede REVERSAR.
+Si la compra es con tarjeta de débito o prepago, entonces solo se puede REVERSAR.
 
 En el caso de que se ejecute una Reversa, el valor de la transacción no se verá reflejado en la cartola de movimientos del cliente (** dependiendo del Banco), 
 a diferencia de la Anulación, en donde queda registro tanto del movimiento de cobro como la posterior anulación.
