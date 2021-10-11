@@ -1773,64 +1773,19 @@ response.response_code
 
 ### Ambiente de integración
 
-En el ambiente de integración existen códigos de comercio previamente creados para todos los productos (Webpay Plus,
-Oneclick, Transacción Completa, etc), para cada una de sus variaciones (Captura Diferida, Mall, Mall Captura Diferida, etc) y dependiendo de
-la moneda que acepten (USD o CLP).
-
-Asegúrate de que estés usando el código de comercio de integración que tenga la misma configuración del producto que contrataste.
-
-Puedes revisar los códigos de comercio del ambiente de integración de todos nuestros productos y variaciones
-[en este link](/documentacion/como_empezar#ambiente-de-integracion).
+Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#ambiente-de-integracion)
 
 ### Configuración SDK
 
-Los SDK vienen preconfigurados para operar con Oneclick Mall captura simultanea. Si necesitas operar con otra modalidad,
-como captura diferida, debes configurar explícitamente el [código de comercio que usarás](/documentacion/como_empezar#ambiente-de-integracion).
+Los SDK vienen preconfigurados para operar directamente en el ambiente de integración. Si necesitas operar con otra modalidad, debes configurar explícitamente el [código de comercio que usarás](/documentacion/como_empezar#codigos-de-comercio).
 No es necesario definir el Api Key ya que en este ambiente, todos los productos usan la misma y
 ya viene preconfigurada.
 
-```java
-MallFullTransaction.setCommerceCode("Pon el Código de Comercio");
-```
+Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#b-utilizando-los-sdk)
 
-```php
-Transbank\TransaccionCompleta::setCommerceCode("Pon el Código de Comercio");
-```
+### Puesta en Producción
 
-```csharp
-using Transbank.Webpay.TransaccionCompleta;
-
-TransaccionCompleta.CommerceCode = "Pon el Código de Comercio";
-```
-
-```ruby
-Transbank::Webpay::TransaccionCompleta::Base.commerce_code = "Pon el Código de Comercio"
-```
-
-```python
-from transbank import transaccion_completa as BaseTransaccionCompleta
-
-BaseTransaccionCompleta.commerce_code = "Pon el Código de Comercio"
-```
-
-```javascript
-// Este SDK posee métodos para configurar las distintas modalidades
-TransaccionCompleta.configureForIntegration(commerceCode, apiKey);
-TransaccionCompleta.configureTransaccionCompletaForTesting();
-TransaccionCompleta.configureTransaccionCompletaNoCvvForTesting();
-TransaccionCompleta.configureTransaccionCompletaDeferredForTesting();
-TransaccionCompleta.configureTransaccionCompletaDeferredNoCvvForTesting();
-TransaccionCompleta.configureTransaccionCompletaMallForTesting();
-TransaccionCompleta.configureTransaccionCompletaMallNoCvvForTesting();
-TransaccionCompleta.configureTransaccionCompletaMallDeferredForTesting();
-TransaccionCompleta.configureTransaccionCompletaMallDeferredNoCvvForTesting();
-```
-
-### Apuntar a producción
-
-Antes de operar en el ambiente de producción, debes pasar por un [proceso de validación](/documentacion/como_empezar#el-proceso-de-validacion), luego del cual te entregaremos tu Api Key.  
-
-Si ya tienes tu Api Key, puedes revisar como configurar el SDK para usar este ambiente de producción en [esta sección](/documentacion/como_empezar#puesta-en-produccion)
+Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#puesta-en-produccion)
 
 ## Ejemplos de integración
 

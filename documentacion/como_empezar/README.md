@@ -158,7 +158,13 @@ con tarjetas de crédito, débito o prepago **reales**.
 
 ### Ambiente de integración
 
-Para las transacciones Webpay en este ambiente se deben usar estas
+En el ambiente de integración existen códigos de comercio previamente creados para todos los productos (Webpay Plus, Oneclick, etc), para cada una de sus variaciones (Captura Diferida, Mall, Mall Captura Diferida, etc) y dependiendo de la moneda que acepten (USD o CLP).
+
+Asegúrate de que estés usando el código de comercio de integración que tenga la misma configuración del producto que contrataste.
+
+### Tarjetas de Prueba
+
+Para las transacciones Webpay en el ambiente de integración se deben usar estas
 tarjetas:
 
 Tipo de tarjeta | Detalle | Resultado

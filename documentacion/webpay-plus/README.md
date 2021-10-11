@@ -1680,13 +1680,19 @@ Esta operación funciona de la misma manera que la [captura de Webpay Plus norma
 
 ## Credenciales y Ambiente
 
-Para Webpay Plus, las credenciales del comercio (código de comercio y API Key) varían según el la modalidad del producto usado (Webpay Plus, Webpay Plus Mall. Webpay Plus Diferido, Webpay Plus Mall Diferido). También varían si la moneda a manejar es pesos chilenos (CLP) o dólares (USD).
+### Ambiente de integración
 
-Por lo tanto, es clave que antes de operar con las clases que permiten realizar transacciones se configure correctamente el SDK para con estas credenciales para utilizar el producto correcto
+Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#ambiente-de-integracion)
 
-Los SDK pueden ser configurados para apuntar a un ambiente por defecto, estos ya vienen apuntados al ambiente de integración. Si quieres apuntar a producción tienes dos opciones; puedes re-configurar el SDK para que apunte a producción utilizando el código de comercio y API Key. O puedes configurar cada llamada a las operaciones siguientes para pasar un objeto `Options` en el cual configuras donde quieres apuntar.
+### Configuración SDK
+
+Los SDK vienen preconfigurados para operar directamente en el ambiente de integración. Si quieres apuntar a producción tienes dos opciones; puedes re-configurar el SDK para que apunte a producción utilizando el código de comercio y API Key. O puedes configurar cada llamada a las operaciones siguientes para pasar un objeto `Options` en el cual configuras donde quieres apuntar.
 
 Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#b-utilizando-los-sdk)
+
+### Puesta en Producción
+
+Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#puesta-en-produccion)
 
 ## Conciliación de Transacciones
 
