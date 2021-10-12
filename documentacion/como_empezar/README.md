@@ -158,7 +158,7 @@ con tarjetas de crédito, débito o prepago **reales**.
 
 ### Ambiente de integración
 
-En el ambiente de integración existen códigos de comercio previamente creados para todos los productos (Webpay Plus, Oneclick, etc), para cada una de sus variaciones (Captura Diferida, Mall, Mall Captura Diferida, etc) y dependiendo de la moneda que acepten (USD o CLP).
+En el ambiente de integración existen códigos de comercio previamente creados para todos los productos (Webpay Plus, Oneclick, etc), para cada una de sus modalidades (Captura Diferida, Mall, Mall Captura Diferida, etc) y dependiendo de la moneda que acepten (USD o CLP).
 
 Asegúrate de que estés usando el código de comercio de integración que tenga la misma configuración del producto que contrataste.
 
