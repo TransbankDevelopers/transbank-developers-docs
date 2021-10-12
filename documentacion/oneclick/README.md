@@ -1320,82 +1320,20 @@ response.response_code
 
 ### Ambiente de integración
 
-En el ambiente de integración existen códigos de comercio previamente creados para todos los productos (Webpay Plus,
-Oneclick, etc), para cada una de sus variaciones (Captura Diferida, Mall, Mall Captura Diferida, etc) y dependiendo de
-la moneda que acepten (USD o CLP).
-
-Asegúrate de que estés usando el código de comercio de integración que tenga la misma configuración del producto que contrataste.
-
-Puedes revisar los códigos de comercio del ambiente de integración de todos nuestros productos y variaciones
-[en este link](/documentacion/como_empezar#ambiente-de-integracion).
+Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#ambiente-de-integracion)
 
 ### Configuración SDK
 
 Los SDK vienen preconfigurados para operar con Oneclick Mall captura simultanea. Si necesitas operar con otra modalidad,
-como captura diferida, debes configurar explícitamente el [código de comercio que usarás](/documentacion/como_empezar#ambiente-de-integracion).
+como captura diferida, debes configurar explícitamente el [código de comercio que usarás](/documentacion/como_empezar#codigos-de-comercio).
 No es necesario definir el Api Key ya que en este ambiente, todos los productos usan la misma y
 ya viene preconfigurada.
 
-```java
-Oneclick.setCommerceCode("Pon el Código de Comercio");
-```
+Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#b-utilizando-los-sdk)
 
-```php
-// Sin configurar nada, el SDK viene preconfigurado con las credenciales de prueba de Oneclick mall captura simultanea para el ambiente de integración
-// Para configurar en producción: 
-use \Transbank\Webpay\Oneclick;
-Oneclick:configureForProduction('597012345678', 'ApiKey');
+### Puesta en Producción
 
-// Para configurar en integración: 
-Oneclick::configureForIntgration('597012345678', 'ApiKey');
-Oneclick::configureForTesting();
-Oneclick::configureForTestingDeferred();
-
-// También puedes crear un objeto Options y pasarlo directo a la instancia
-use \Transbank\Webpay\Options;
-use \Transbank\Webpay\Oneclick\MallTransaction;
-use \Transbank\Webpay\Oneclick\MallInscription;
-
-$options = Options::forProduction('codigo-comercio', 'apikey'); // o Options::forIntegration('comercio', 'key')
-$transaction = new MallTransaction($options);
-$transaction->authorize(...);
-$inscription = new MallInscription($options);
-$inscription->start(...);
-
-// También es posible así: 
-$transaction = (new MallTransaction())->configureForProduction('codigo-comercio', 'api-key');
-$transaction->authorize();
-```
-
-```csharp
-using Transbank.Webpay.Oneclick;
-
-MallTransaction.CommerceCode = "Pon el Código de Comercio";
-```
-
-```ruby
-Transbank::Webpay::OneClick::Base.commerce_code = "Pon el Código de Comercio"
-```
-
-```python
-from transbank import oneclick as BaseOneClick
-from transbank.common.integration_type import IntegrationType
-
-BaseOneClick.commerce_code = "Pon el Código de Comercio"
-```
-
-```javascript
-// Este SDK posee métodos para configurar las distintas modalidades
-Oneclick.configureForIntegration(commerceCode, apiKey); // Manual
-Oneclick.configureOneclickMallForTesting();
-Oneclick.configureOneclickMallDeferredForTesting();
-```
-
-### Apuntar a producción
-
-Antes de operar en el ambiente de producción, debes pasar por un [proceso de validación](/documentacion/como_empezar#el-proceso-de-validacion), luego del cual te entregaremos tu Api Key.  
-
-Si ya tienes tu Api Key, puedes revisar como configurar el SDK para usar este ambiente de producción en [esta sección](/documentacion/como_empezar#puesta-en-produccion)
+Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#puesta-en-produccion)
 
 ## Conciliación de Transacciones
 
