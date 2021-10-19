@@ -799,9 +799,7 @@ response.AccountingDate;
 response.BuyOrder;
 var cardDetail = response.CardDetail;
 cardDetail.CardNumber;
-response.SessionId;
 response.TransactionDate;
-response.Vci;
 var details = response.Details;
 foreach (var detail in details) {
     detail.Amount;
@@ -820,9 +818,7 @@ response.accounting_date
 response.buy_order
 card_detail = response.card_detail
 card_detail.card_number
-response.session_id
 response.transaction_date
-response.vci
 details = response.details
 details.each do |detail|
   detail.amount
@@ -841,9 +837,7 @@ response.accounting_date
 response.buy_order
 card_detail = response.card_detail
 card_detail.card_number
-response.session_id
 response.transaction_date
-response.vci
 details = response.details
 for detail in details:
   detail.amount
@@ -861,9 +855,7 @@ response.accounting_date
 response.buy_order
 cardDetail = response.card_detail
 cardDetail.card_number
-response.session_id
 response.transaction_date
-response.vci
 details = response.details
 for(let detail of details) {
   detail.amount
