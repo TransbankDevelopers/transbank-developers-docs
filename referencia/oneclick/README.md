@@ -1275,6 +1275,8 @@ amount  <br> <i> Formato número entero para transacciones en peso. Sólo en ca
 
 <strong>Respuesta Reversar o Anular</strong>
 
+En el caso de que la transacción corresponda a una Reversa solo se retorna el parámetro <i>type<i> (REVERSED).
+
 ```java
 response.getAuthorizationCode();
 response.getAuthorizationDate();
@@ -1342,7 +1344,7 @@ Content-Type: application/json
   "response_code": 0
 }
 
-En caso de une reversa no devuelve más información
+En caso de una reversa no devuelve más información
 {
   "type": "REVERSED",
 }

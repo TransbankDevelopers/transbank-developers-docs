@@ -780,6 +780,8 @@ amount  <br> <i> Formato número entero para transacciones en peso. Sólo en ca
 
 <strong>Respuesta Transaction.refund</strong>
 
+En el caso de que la transacción corresponda a una Reversa solo se retorna el parámetro <i>type<i> (REVERSED).
+
 ```java
 response.getAuthorizationCode();
 response.getAuthorizationDate();
@@ -1755,6 +1757,8 @@ amount  <br> <i> Formato número entero para transacciones en peso. Sólo en ca
 commerce_code  <br> <i> Number </i> | Código de comercio de la tienda mall que realizó la transacción. Largo: 12.
 
 <strong>Respuesta Transaction.refund Mall</strong>
+
+En el caso de que la transacción corresponda a una Reversa solo se retorna el parámetro <i>type<i> (REVERSED).
 
 ```java
 response.getAuthorizationCode();
