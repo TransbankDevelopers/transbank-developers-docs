@@ -951,6 +951,8 @@ amount  <br> <i> Formato número entero para transacciones en peso. Sólo en ca
 
 <strong>Respuesta Transaction.refund</strong>
 
+En el caso de que la transacción corresponda a una Reversa solo se retorna el parámetro <i>type<i> (REVERSED).
+
 ```java
 response.getType();
 response.getAuthorizationCode();
@@ -2276,6 +2278,8 @@ commerce_code  <br> <i> Number </i> | Tienda hija que realizó la transacción
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> |  Monto que se desea anular o reversar de la transacción. Largo máximo: 17
 
 <strong>Respuesta Transaction.refund Completa Mall</strong>
+
+En el caso de que la transacción corresponda a una Reversa solo se retorna el parámetro <i>type<i> (REVERSED).
 
 ```java
 response.getType();
