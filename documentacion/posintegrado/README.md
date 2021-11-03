@@ -1256,18 +1256,16 @@ Ponemos a tu disposición un ejemplo en nuestro Github para ayudarte a entender 
 
 ### Cambio Modalidad POS Integrado
 
-1. Primero debes ingresar al menú `Comercio` en el POS seleccionando la opción correspondiente en la pantalla del POS.
+1. Primero debes ingresar al menú `Comercio` en el POS seleccionando la opción correspondiente en la pantalla del POS e ingresar la **Clave Supervisora** confirmando con la tecla `Enter` (verde).
+<img src="/images/documentacion/pos-integrado/modo-pos-integrado-1.png" alt="Ingresar al menu Comercio">
 
-2. Luego debes seleccionar la opción `Func. Comercio` e ingresar la **Clave Supervisora** confirmando con la tecla `Enter` (verde).
-<img src="/images/referencia/posintegrado/cambio-pos-integrado-1.png" alt="Ingresar al menu Comercio">
+2. Luego debes seleccionar la opción `POS Integrado` desde la pantalla 2-2. Para ingresar a la pantalla 2 debes apretar la tecla `Enter`.
+<img src="/images/documentacion/pos-integrado/modo-pos-integrado-2.png" alt="Pantalla Comercio">
 
-3. A continuación  selecciona la opción `POS Integrado` desde la pantalla 2-2
+3. Ingresa nuevamente la **Clave Supervisora** confirmando con la tecla `Enter`.
 
-4. Ingresa nuevamente la **Clave Supervisora** confirmando con la tecla `Enter`
-<img src="/images/referencia/posintegrado/cambio-pos-integrado-2.png" alt="Pantalla POS Integrado">
-
-5. Finalmente, debes seleccionar la opción `Conectar Caja`
-<img src="/images/referencia/posintegrado/cambio-pos-integrado-3.png" alt="Pantalla POS Integrado">
+4. Finalmente, debes seleccionar la opción `Conectar Caja`. El equipo indicara que esta cambiando a modo integrado.
+<img src="/images/documentacion/pos-integrado/modo-pos-integrado-3.png" alt="Pantalla POS Integrado">
 
 <aside class="notice">
 La <strong>Clave Supervisora</strong> por defecto es 123456
@@ -1283,5 +1281,4 @@ Si el POS se encuentra en modo Integrado, podrás ver una imagen de Transbank en
 
 1. Presionar la tecla Asterisco (`*`) e ingresar la clave supervisora.
 2. Seleccionar la opción `Desconectar Caja`.
-3. Luego de este el equipo volverá a modo Normal, y veras el menu de venta nuevamente.
-
+3. Luego de esto el equipo volverá a modo Normal, y veras el menu de venta nuevamente.
