@@ -179,6 +179,7 @@ $response = Transaction::commit($token);
 
 
 ```php
+$response->getVci();
 $response->getAmount();
 $response->getStatus();
 $response->getBuyOrder();
