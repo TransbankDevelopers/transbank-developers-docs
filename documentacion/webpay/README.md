@@ -352,7 +352,7 @@ Como necesitarás ese objeto `transaction` en múltiples ocasiones, es buena ide
 
 <aside class="notice">
 Tip: Para pruebas en el ambiente de integración te recomendamos crear un identificador único <i>buy_order</i> para cada 
-una de las transacciones. (Ejemplo: buy_order = nombre-de-mi-empresa-mall-1234, buy_order = nombre-de-mi-tienda-1).
+una de las transacciones. (Ejemplo: buy_order = nombre-de-mi-empresa-mall-1234, child_buy_order = nombre-de-mi-tienda-1).
 </aside>
 
 Una vez que ya cuentas con esa preparación, puedes iniciar transacciones:

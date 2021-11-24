@@ -518,7 +518,7 @@ diferente al identificador de compra padre), un monto y, opcionalmente, el núme
 
 <aside class="notice">
 Tip: Para pruebas en el ambiente de integración te recomendamos crear un identificador único <i>buy_order</i> para cada 
-una de las transacciones. (Ejemplo: buy_order = nombre-de-mi-empresa-mall-1234, buy_order = nombre-de-mi-tienda-1).
+una de las transacciones. (Ejemplo: buy_order = nombre-de-mi-empresa-mall-1234, child_buy_order = nombre-de-mi-tienda-1).
 </aside>
 
 <div class="language-simple" data-multiple-language></div>
