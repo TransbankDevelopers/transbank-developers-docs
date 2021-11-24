@@ -137,6 +137,11 @@ entregado tiene un periodo reducido de vida de 5 minutos, posterior a esto el
 token es caducado y no podrá ser utilizado en un pago.
 </aside>
 
+<aside class="notice">
+Tip: Para pruebas en el ambiente de integración te recomendamos crear un identificador único para el <i>buy_order</i>.
+(Ejemplo: buy_order = nombre-de-mi-empresa-328493)
+</aside>
+
 <div class="language-simple" data-multiple-language></div>
 
 ```java
@@ -927,6 +932,11 @@ se deberá redirigir al tarjetahabiente.
 Es importante considerar que una vez invocado este método, el token que es
 entregado tiene un periodo reducido de vida de 5 minutos, posterior a esto el
 token es caducado y no podrá ser utilizado en un pago.
+</aside>
+
+<aside class="notice">
+Tip: Para pruebas en el ambiente de integración te recomendamos crear un identificador único <i>buy_order</i> para cada 
+una de las transacciones. (Ejemplo: buy_order = nombre-de-mi-empresa-mall-1234, child_buy_order = nombre-de-mi-tienda-1).
 </aside>
 
 <div class="language-simple" data-multiple-language></div>
