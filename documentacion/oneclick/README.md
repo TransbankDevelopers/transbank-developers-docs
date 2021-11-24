@@ -517,6 +517,10 @@ $2.500 (en ambos casos, restando la comisión).
 Cada "sub-transacción" de la autorización requiere de un código de comercio, un identificador de compra (ojalá único y 
 diferente al identificador de compra padre), un monto y, opcionalmente, el número de cuotas en que se realizará el cobro. 
 
+<aside class="notice">
+Tip: Para pruebas en el ambiente de integración te recomendamos crear un identificador único <i>buy_order</i> para cada 
+una de las transacciones. (Ejemplo: buy_order = nombre-de-mi-empresa-mall-1234, child_buy_order = nombre-de-mi-tienda-1).
+</aside>
 
 <div class="language-simple" data-multiple-language></div>
 
