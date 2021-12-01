@@ -148,6 +148,11 @@ transaction.initTransaction(amount, buyOrder, sessionId, returnUrl, finalUrl)
       console.log(error.toString())
   });
 ```
+<aside class="notice">
+Tip: Para pruebas en el ambiente de integración te recomendamos crear un identificador único para el <i>buy_order</i>.
+(Ejemplo: buy_order = nombre-de-mi-empresa-328493)
+</aside>
+
 
 La URL y el token retornados te indican donde debes redirigir al usuario para
 que comience el flujo de pago. Esta redirección debe ser vía `POST` por lo que
@@ -343,6 +348,11 @@ const transaction = new Transbank.Webpay(
 
 <aside class="notice">
 Como necesitarás ese objeto `transaction` en múltiples ocasiones, es buena idea encapsular la lógica que lo genera en algún método que puedas reutilizar.
+</aside>
+
+<aside class="notice">
+Tip: Para pruebas en el ambiente de integración te recomendamos crear un identificador único <i>buy_order</i> para cada 
+una de las transacciones. (Ejemplo: buy_order = nombre-de-mi-empresa-mall-1234, child_buy_order = nombre-de-mi-tienda-1).
 </aside>
 
 Una vez que ya cuentas con esa preparación, puedes iniciar transacciones:

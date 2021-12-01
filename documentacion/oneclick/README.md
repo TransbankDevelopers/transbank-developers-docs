@@ -47,7 +47,8 @@ inscripción.
    y no haber terminado la transacción, esta será abortada automáticamente.
    
    <aside class="warning">
-   En caso de que se cumpla el tiempo máximo para completar el formulario, el comercio recibirá las variables TBK_ID_SESSION y TBK_ORDEN_COMPRA.
+   En caso de que se cumpla el tiempo máximo para completar el formulario o el tarjetahabiente presione el botón para anular la inscripción, 
+   el comercio recibirá las variables TBK_ID_SESSION y TBK_ORDEN_COMPRA.
    </aside>
 6. El cliente será autenticado por su banco emisor, de forma similar al flujo
   normal de pago. En este punto se realiza una transacción de $50 pesos, la cual
@@ -507,7 +508,7 @@ cargos a esa tarjeta en cualquier momento, solo llamando a este método de autor
 Como Oneclick opera en modalidad Mall, en una misma autorización puedes realizar varios cobros, cada uno a códigos de 
 comercio **tienda** diferente. No olvidar que para realizar el cargo correctamente, esos código de comercio tienda deben 
 "pertenecer" o estar asociados a tu código de comercio Mall cuando se contratan.
-Al tarjetahabiente se le realizará un solo cobro por la suma del monto de todas las "sub-transacciones" soliticadas, pero
+Al tarjetahabiente se le realizará un solo cobro por la suma del monto de todas las "sub-transacciones" solicitadas, pero
 el dinero será procesado y enviado a cada código de comercio por separado. 
 Para aclararlo con un ejemplo, si solicito una autorización por $1.500 para el comercio A, y $2.500 para el comercio B, el 
 tarjetahabiente verá un único cobro de $4.000 en su cartola, pero el comercio A recibirá los $1.500 y el comercio B los 
@@ -516,6 +517,10 @@ $2.500 (en ambos casos, restando la comisión).
 Cada "sub-transacción" de la autorización requiere de un código de comercio, un identificador de compra (ojalá único y 
 diferente al identificador de compra padre), un monto y, opcionalmente, el número de cuotas en que se realizará el cobro. 
 
+<aside class="notice">
+Tip: Para pruebas en el ambiente de integración te recomendamos crear un identificador único <i>buy_order</i> para cada 
+una de las transacciones. (Ejemplo: buy_order = nombre-de-mi-empresa-mall-1234, child_buy_order = nombre-de-mi-tienda-1).
+</aside>
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -1089,9 +1094,9 @@ Permite generar el reembolso del total o parte del monto de una transacción co
 Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una
 reversa o una anulación:
 
-<strong>Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
+<strong>* Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial. </strong>
 
-Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado **(una hora)**, de lo contrario se ejecutará una anulación.</strong>
+<strong>* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado **(una hora)**, de lo contrario se ejecutará una anulación.</strong>
 
 <strong>Transaction.refund()</strong>
 
