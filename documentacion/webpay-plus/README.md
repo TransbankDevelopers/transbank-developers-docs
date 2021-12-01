@@ -101,9 +101,9 @@ el flujo cambia y los pasos son los siguientes:
     <aside class="warning">
     Nota que el nombre de las variables recibidas es diferente. En lugar de `token_ws` acá el token viene en la variable `TBK_TOKEN`.
     </aside>
-9. El comercio con la variable `TBK_TOKEN` debe invocar el método
-   de confirmación de transacción para obtener el resultado de la autorización. En
-   este caso debe obtener una excepción, pues el pago fue abortado.
+9. El comercio con la variable `TBK_TOKEN` consulta la transacción para validar el estado (no es necesario  
+confirmar la transacción).
+
 10. El comercio debe informar al tarjetahabiente que su pago no se completó.
 
 ### Resumen de flujos
