@@ -101,9 +101,9 @@ el flujo cambia y los pasos son los siguientes:
     <aside class="warning">
     Nota que el nombre de las variables recibidas es diferente. En lugar de `token_ws` acá el token viene en la variable `TBK_TOKEN`.
     </aside>
-9. El comercio con la variable `TBK_TOKEN` debe invocar el método
-   de confirmación de transacción para obtener el resultado de la autorización. En
-   este caso debe obtener una excepción, pues el pago fue abortado.
+9. El comercio con la variable `TBK_TOKEN` consulta la transacción para validar el estado (no es necesario  
+confirmar la transacción).
+
 10. El comercio debe informar al tarjetahabiente que su pago no se completó.
 
 ### Resumen de flujos
@@ -135,6 +135,11 @@ se deberá redirigir al tarjetahabiente.
 Es importante considerar que una vez invocado este método, el token que es
 entregado tiene un periodo reducido de vida de 5 minutos, posterior a esto el
 token es caducado y no podrá ser utilizado en un pago.
+</aside>
+
+<aside class="notice">
+Tip: Para pruebas en el ambiente de integración te recomendamos crear un identificador único para el <i>buy_order</i>.
+(Ejemplo: buy_order = nombre-de-mi-empresa-328493)
 </aside>
 
 <div class="language-simple" data-multiple-language></div>
@@ -927,6 +932,11 @@ se deberá redirigir al tarjetahabiente.
 Es importante considerar que una vez invocado este método, el token que es
 entregado tiene un periodo reducido de vida de 5 minutos, posterior a esto el
 token es caducado y no podrá ser utilizado en un pago.
+</aside>
+
+<aside class="notice">
+Tip: Para pruebas en el ambiente de integración te recomendamos crear un identificador único <i>buy_order</i> para cada 
+una de las transacciones. (Ejemplo: buy_order = nombre-de-mi-empresa-mall-1234, child_buy_order = nombre-de-mi-tienda-1).
 </aside>
 
 <div class="language-simple" data-multiple-language></div>
