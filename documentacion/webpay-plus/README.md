@@ -75,7 +75,7 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
 Si el tarjetahabiente anula la transacción en el formulario de pago de Webpay,
 el flujo cambia y los pasos son los siguientes:
 
-<img class="td_img-night" src="/images/referencia/webpayrest/diagrama-secuencia-webpayrest-abortar.png" alt="Diagrama de secuencia si usuario aborta el pago">
+<img class="td_img-night" src="/images/referencia/webpayrest/diagrama-secuencias-webpayrest-abortar.png" alt="Diagrama de secuencia si usuario aborta el pago">
 
 1. Una vez seleccionado los bienes o servicios, tarjetahabiente decide pagar a
    través de Webpay.
