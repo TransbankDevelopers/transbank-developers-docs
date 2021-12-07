@@ -356,10 +356,8 @@ Nativa de POS Integrado:
 - [Transacción Totales](/referencia/posintegrado#mensaje-de-totales)
 - [Transacción Carga de Llaves](/referencia/posintegrado#mensaje-de-carga-de-llaves)
 - [Transacción Polling](/referencia/posintegrado#mensaje-de-poll)
-- [Cambio de modalidad a POS Normal](/referencia/posintegrado#mensaje-de-cambio-a-pos-normal)  
   
-Por ejemplo, para implementar una Transacción de Venta, lo primero es crear un método que gatillara la 
-acción para transaccionar con el POS integrado bluetooth:
+Por ejemplo, para implementar una Transacción de Venta, lo primero es crear un método que gatillara la acción para transaccionar con el POS integrado bluetooth:
 
 
 ```java
