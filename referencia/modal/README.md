@@ -128,9 +128,7 @@ En la documentación puedes revisar [el código de comercio para Webpay Modal](/
 
 ```java
 // El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
-WebpayModal.Transaction.setCommerceCode(597055555584);
-WebpayModal.Transaction.setApiKey('579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C');
-WebpayModal.Transaction.setIntegrationType(IntegrationType.TEST);
+WebpayPlusModal.Transaction tx = new WebpayPlusModal.Transaction();
 ```
 
 ```php

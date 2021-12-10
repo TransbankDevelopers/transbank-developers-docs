@@ -141,6 +141,11 @@ String email = "nombre_de_usuario@gmail.com";
 // URL donde llegará el usuario con su token luego de finalizar la inscripción
 String response_url = "https://callback/resultado/de/inscripcion";
 
+// Versión 3.x del SDK
+Oneclick.MallInscription inscription = new Oneclick.MallInscription(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallInscriptionStartResponse response = inscription.start(username, email, response_url);
+
+// Versión 2.x del SDK
 OneclickMallInscriptionStartResponse response = Oneclick.MallInscription.start(username, email, response_url);
 
 String url_webpay = response.getUrlWebpay();
@@ -281,7 +286,14 @@ Una vez que se autorice la inscripción del usuario, se retornará el control al
 ```java
 //...
 String tbk_token = "elTokenQueLlegaPorPOST"; // token que llega por POST en el parámetro "TBK_TOKEN"
+
+// Versión 3.x del SDK
+Oneclick.MallInscription inscription = new Oneclick.MallInscription(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallInscriptionFinishResponse response = inscription.finish(tbk_token);
+
+// Versión 2.x del SDK
 OneclickMallInscriptionFinishResponse response = Oneclick.MallInscription.finish(tbk_token);
+
 String tbkUser = response.getTbkUser();
 ```
 
@@ -401,6 +413,12 @@ el comercio deberá invocar a removeInscription() con el identificador de usuar
 // Identificador del usuario en el comercio
 String username = "nombre_de_usuario";
 String tbkUser = "tbkUserRetornadoPorInscriptionFinish";
+
+// Versión 3.x del SDK
+Oneclick.MallInscription inscription = new Oneclick.MallInscription(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+inscription.delete(tbkUser, username);
+
+// Versión 2.x del SDK
 Oneclick.MallInscription.delete(username, tbkUser);
 ```
 
@@ -544,7 +562,11 @@ MallTransactionCreateDetails details = MallTransactionCreateDetails.build()
                 .add(amountOne, MallOneCommerceCode, buyOrderMallOne, installmentNumberOne)
                 .add(amuntTwo, MallTwoCommerceCode, buyOrderMallTwo, installmentNumberTwo);
 
+// Versión 3.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallTransactionAuthorizeResponse response = tx.authorize(username, tbkUser, buyOrder, details);
 
+// Versión 2.x del SDK
 OneclickMallTransactionAuthorizeResponse response = Oneclick.Transaction.authorize(username, tbkUser, buyOrder, details);
 ```
 
@@ -871,8 +893,15 @@ Retorna el resultado de la autorización.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallTransactionStatusResponse response = tx.status(buyOrder);
+
+// Versión 2.x del SDK
 final OneclickMallTransactionStatusResponse response =
   Oneclick.Transaction.status(buyOrder);
+
+
 ```
 
 ```php
@@ -1112,6 +1141,11 @@ String childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
 String childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
 double amount = 10000;
 
+// Versión 3.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallTransactionRefundResponse response = tx.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+
+// Versión 2.x del SDK
 OneclickMallTransactionRefundResponse response = Oneclick.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
 
@@ -1237,6 +1271,11 @@ En esta modalidad no se aceptan tarjetas de débito ni prepago.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallTransactionCaptureResponse response = tx.capture(childCommerceCode, childBuyOrder, authorizationCode, amount);
+
+// Versión 2.x del SDK
 final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTransaction.capture(
   childCommerceCode, childBuyOrder, amount, authorizationCode
 );
