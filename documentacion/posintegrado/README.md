@@ -1215,43 +1215,6 @@ POS.setNormalMode().then(result => console.log(result));
 Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en el POS para regresar al modo Integrado, siguiendo las instrucciones disponibles descritas en [Cambio a POS Integrado](/documentacion/posintegrado#cambio-modalidad-pos-integrado), pues no es posible realizar esta configuración a través del SDK.
 </aside>
 
-## Ejemplos de integración
-
-Ponemos a tu disposición un ejemplo en nuestro Github para ayudarte a entender mejor la integración.
-
-* [Ejemplo .Net](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet-example)
-* [Ejemplo Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java-example)
-* [Ejemplo Web](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-example)
-
-<div class="container slate">
-  <div class='slate-after-footer'>
-    <div class='row d-flex align-items-stretch'>
-      <div class='col-12 col-lg-6'>
-        <h3 class='toc-ignore fo-size-22 text-center'>¿Tienes alguna duda de integración?</h3>
-        <a href='https://join-transbankdevelopers-slack.herokuapp.com/' target='_blank'>
-          <div class='td_block_gray'>
-            <img src="https://p9.zdassets.com/hc/theme_assets/138842/200037786/logo.png" alt="" >
-            <div class='td_pa-txt'>
-              Únete a la comunidad de integradores en Slack y comparte buenos tips ayudando a los nuevos o buscando soluciones alternativas. Nuestro equipo está ahí para ayudarte.
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class='mt-3 mt-lg-0 col-12 col-lg-6'>
-        <h3 class='toc-ignore fo-size-22 text-center'>Si aún tienes dudas envíanos un mensaje</h3>
-        <a class="pointer magenta" data-toggle='modal' data-target='#modalContactForm'>
-          <div class='td_block_gray'>
-            <div class="fo-size-20 text-center sub-title_bloq"><i class="fas fa-envelope"></i> Envíanos un mensaje.</div>
-            <div class='td_pa-txt'>
-              Si necesitas resolver algún tipo de incidencia en el portal o si existe algún problema con tu integración y  que no has podido resolver, contáctanos a través de nuestro formulario.
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
 ## Operación y Configuración del POS
 
 ### Cambio Modalidad POS Integrado
@@ -1310,3 +1273,32 @@ Configurar de forma incorrecta los parámetros de dirección IP pueden dejar tu 
 <aside class="warning">
 El menú de técnico permite configurar parámetros de conexión con los servidores de Transbank, el cambio de otros parámetros puede provocar que el POS Integrado no pueda realizar operaciones ni descargar actualizaciones.
 </aside>
+
+<div class="container slate">
+  <div class='slate-after-footer'>
+    <div class='row d-flex align-items-stretch'>
+      <div class='col-12 col-lg-6'>
+        <h3 class='toc-ignore fo-size-22 text-center'>¿Tienes alguna duda de integración?</h3>
+        <a href='https://join-transbankdevelopers-slack.herokuapp.com/' target='_blank'>
+          <div class='td_block_gray'>
+            <img src="https://p9.zdassets.com/hc/theme_assets/138842/200037786/logo.png" alt="" >
+            <div class='td_pa-txt'>
+              Únete a la comunidad de integradores en Slack y comparte buenos tips ayudando a los nuevos o buscando soluciones alternativas. Nuestro equipo está ahí para ayudarte.
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class='mt-3 mt-lg-0 col-12 col-lg-6'>
+        <h3 class='toc-ignore fo-size-22 text-center'>Si aún tienes dudas envíanos un mensaje</h3>
+        <a class="pointer magenta" data-toggle='modal' data-target='#modalContactForm'>
+          <div class='td_block_gray'>
+            <div class="fo-size-20 text-center sub-title_bloq"><i class="fas fa-envelope"></i> Envíanos un mensaje.</div>
+            <div class='td_pa-txt'>
+              Si necesitas resolver algún tipo de incidencia en el portal o si existe algún problema con tu integración y  que no has podido resolver, contáctanos a través de nuestro formulario.
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
