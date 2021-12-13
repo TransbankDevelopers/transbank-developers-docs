@@ -167,6 +167,11 @@ token es caducado y no podrá ser utilizado en un pago.
 </aside>
 
 ```java
+// Versión 3.x del SDK
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+FullTransactionCreateResponse response = tx.create(buyOrder, sessionId, amount, cvv, cardNumber, cardExpirationDate);
+
+// Versión 2.x del SDK
 final FullTransactionCreateResponse response =  FullTransaction.Transaction.create(
   buyOrder,                         // ordenCompra12345678
   sessionId,                        // sesion1234564
@@ -327,6 +332,11 @@ El id de la consulta que selecciona el tarjetahabiente debe ser informado en la
 invocación de la confirmación.
 
 ```java
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionInstallmentsResponse response = tx.installments(token, installmentsDetails);
+
+// Versión 2.x del SDK
 final FullTransactionInstallmentsResponse response =  FullTransaction.Transaction.installment(token, installments_number);
 ```
 
@@ -470,7 +480,11 @@ transacción.
 
 ```java
 import cl.transbank.transaccioncompleta.FullTransaction;
+// Versión 3.x del SDK
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final FullTransactionCommitResponse response = tx.commit(token, idQueryInstallments, deferredPeriodIndex, gracePeriod);
 
+// Versión 2.x del SDK
 final FullTransactionCommitResponse response = FullTransaction.Transaction.commit(
   token, idQueryInstallments, deferredPeriodIndex, gracePeriod
 );
@@ -688,9 +702,17 @@ Esta operación permite obtener el estado de la transacción en cualquier mome
 Obtiene resultado de transacción a partir de un token.
 
 ```java
+// Versión 3.x del SDK
+import cl.transbank.webpay.transaccioncompleta.responses.FullTransactionStatusResponse;
+
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final FullTransactionStatusResponse response = tx.status(token);
+
+// Versión 2.x del SDK
 import cl.transbank.transaccioncompleta.FullTransaction;
 
 final FullTransactionStatusResponse response = FullTransaction.Transaction.status(token);
+
 ```
 
 ```php
@@ -899,6 +921,12 @@ Dependiendo de la siguiente lógica de negocio la invocación a esta operacio�
 Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentre vigente.
 
 ```java
+// Versión 3.x del SDK
+import cl.transbank.webpay.transaccioncompleta.responses.FullTransactionRefundResponse;
+
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final FullTransactionRefundResponse response = tx.refund(token, amount);
+// Versión 3.x del SDK
 import cl.transbank.transaccioncompleta.FullTransaction;
 
 final FullTransactionRefundResponse response = FullTransaction.Transaction.refund(token,amount);
@@ -1086,6 +1114,13 @@ $transaction->capture($token, $buyOrder, $authorizationCode, $captureAmount);
 ```
 
 ```java
+// Versión 3.x del SDK
+import cl.transbank.webpay.transaccioncompleta.responses.FullTransactionCaptureResponse;
+
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final FullTransactionCaptureResponse response = tx.capture(token, buyOrder, authorizationCode, captureAmount);
+
+// Versión 3.x del SDK
 import cl.transbank.transaccioncompleta.FullTransaction;
 
 final FullTransactionCaptureResponse response = FullTransaction.Transaction.capture(token, buyOrder, authorizationCode, captureAmount);
@@ -1217,6 +1252,11 @@ MallTransactionCreateDetails transactionDetails = MallTransactionCreateDetails.b
   .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne, installmentsNumberMallOne)
   .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo, installmentsNumberMallTwo);
 
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+MallFullTransactionCreateResponse response = tx.create(buyOrder, sessionId, cardNumber, cardExpirationDate, transactionDetails);
+
+// Versión 2.x del SDK
 final MallFullTransactionCreateResponse response = MallFullTransaction.Transaction.create(
   buyOrder,                           // ordenCompra12345678
   sessionId,                          // sesion1234564
@@ -1434,6 +1474,12 @@ invocación de la confirmación.
 
 ```java
 MallFullTransactionInstallmentsDetails installmentsDetails = MallFullTransactionInstallmentsDetails.build().add(commerceCode, buyOrder, installmentsNumber);
+
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionInstallmentsResponse response = tx.installments(token,installmentsDetails);
+
+// Versión 2.x del SDK
 final MallFullTransactionInstallmentsResponse response = MallFullTransaction.Transaction.installment(token, installmentsDetails);
 ```
 
@@ -1644,6 +1690,11 @@ MallTransactionCommitDetails details = MallTransactionCommitDetails.build().add(
   commerceCode,buyOrder,idQueryInstallments,deferredPeriodIndex,gracePeriod
 );
 
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionCommitResponse response = tx.commit(token, details);
+
+// Versión 2.x del SDK
 final MallFullTransactionCommitResponse response = MallFullTransaction.Transaction.commit(token, details);
 ```
 
@@ -1994,7 +2045,12 @@ Esta operación permite obtener el estado de la transacción Completa Mall en 
 Obtiene resultado de transacción a partir de un token.
 
 ```java
-MallFullTransaction.Transaction.status(token)
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionStatusResponse response = tx.status(tokenWs);
+
+// Versión 2.x del SDK
+MallFullTransaction.Transaction.status(token);
 ```
 
 ```php
@@ -2202,6 +2258,11 @@ Dependiendo de la siguiente lógica de negocio la invocación a esta operacio�
 Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentre vigente.
 
 ```java
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionRefundResponse response = tx.refund(token, buyOrder, childCommerceCode, amount);
+
+// Versión 2.x del SDK
 final MallFullTransactionRefundResponse response = MallFullTransaction.Transaction.refund(
   token, amount, commerceCode, buyOrder
 );
@@ -2435,9 +2496,15 @@ Transaction.capture(
 ```
 
 ```java
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionCaptureResponse response = tx.capture(token, commerceCode, buyOrder, authorizationCode, captureAmount);
+
+// Versión 2.x del SDK
 final MallFullTransactionCaptureResponse response = MallFullTransaction.Transaction.capture(
   token, commerceCode, buyOrder, authorizationCode, captureAmount
 );
+
 ```
 
 <strong>Parámetros Transaction.capture</strong>

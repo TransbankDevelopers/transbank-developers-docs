@@ -142,6 +142,10 @@ Puedes revisar más detalles de esta operación en [su documentación](/document
 Permite comenzar con el proceso de inscripción.
 
 ```java
+// Versión 3.x del SDK
+Oneclick.MallInscription inscription = new Oneclick.MallInscription(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallInscriptionStartResponse response = inscription.start(username, email, response_url);
+// Versión 2.x del SDK
 OneclickMallInscriptionStartResponse response = Oneclick.MallInscription.start(userName, email, responseUrl);
 ```
 
@@ -291,6 +295,11 @@ Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
 Más información en [la documentación](/documentacion/oneclick).
 
 ```java
+// Versión 3.x del SDK
+Oneclick.MallInscription inscription = new Oneclick.MallInscription(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallInscriptionFinishResponse response = inscription.finish(tbk_token);
+
+// Versión 2.x del SDK
 final OneclickMallInscriptionFinishResponse response = Oneclick.MallInscription.finish(token);
 ```
 
@@ -431,6 +440,11 @@ Una vez finalizado el proceso de inscripción es posible eliminarla de ser neces
 Permite eliminar un usuario enrolado a Oneclick Mall.
 
 ```java
+// Versión 3.x del SDK
+Oneclick.MallInscription inscription = new Oneclick.MallInscription(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+inscription.delete(tbkUser, username);
+
+// Versión 2.x del SDK
 Oneclick.MallInscription.delete(tbkUser, userName)
 ```
 
@@ -545,11 +559,16 @@ para realizar transacciones. Para eso debes usar el método `Transaction.authori
 Permite autorizar un pago.
 
 ```java
-MallTransactionCreateDetails transactionDetails = MallTransactionCreateDetails.build()
+MallTransactionCreateDetails details = MallTransactionCreateDetails.build()
   .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne, installmentsNumberMallOne)
   .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo, installmentsNumberMallTwo);
 
-final OneclickMallTransactionAuthorizeResponse response = Oneclick.Transaction.authorize(username, tbkUser, buyOrder, transactionDetails);
+// Versión 3.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallTransactionAuthorizeResponse response = tx.authorize(username, tbkUser, buyOrder, details);
+
+// Versión 2.x del SDK
+final OneclickMallTransactionAuthorizeResponse response = Oneclick.Transaction.authorize(username, tbkUser, buyOrder, details);
 ```
 
 ```php
@@ -924,6 +943,11 @@ Retorna el resultado de la autorización.
 Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#obtener-estado-de-una-transaccion)
 
 ```java
+// Versión 3.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallTransactionStatusResponse response = tx.status(buyOrder);
+
+// Versión 2.x del SDK
 final OneclickMallTransactionStatusResponse response =
   Oneclick.Transaction.status(buyOrder);
 ```
@@ -1188,6 +1212,11 @@ balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago
 Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#reversar-o-anular-una-transaccion)
 
 ```java
+// Versión 3.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallTransactionRefundResponse response = tx.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+
+// Versión 2.x del SDK
 final OneclickMallTransactionRefundResponse response =
   Oneclick.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
@@ -1365,6 +1394,11 @@ buy_order  <br> <i> String </i> | (Solo si es NULLIFIED)  Orden de compra gener
 Revisa más detalles sobre esta modalidad en [la documentación](/documentacion/oneclick#capturar-una-transaccion)
 
 ```java
+// Versión 3.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallTransactionCaptureResponse response = tx.capture(childCommerceCode, childBuyOrder, authorizationCode, amount);
+
+// Versión 2.x del SDK
 final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTransaction.capture(
   childCommerceCode, childBuyOrder, amount, authorizationCode
 );

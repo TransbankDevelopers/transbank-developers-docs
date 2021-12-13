@@ -31,7 +31,11 @@ token es caducado y no podrá ser utilizado en un pago.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+import cl.transbank.webpay.transaccioncompleta.responses.FullTransactionCreateResponse;
+// Versión 2.x del SDK
 import cl.transbank.transaccioncompleta.FullTransaction;
+
 
 String buyOrder = "Orden de compra de la transaccion";
 String sessionId = "Identificador del servicio unico de transacción";
@@ -40,6 +44,10 @@ String cardNumber= "Numero de Tarjeta";
 String cardExpirationDate= "Fecha de expiracion en formato AA/MM";
 short cvv = 123; // CVV de la tarjeta.
 
+// Versión 3.x del SDK
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+FullTransactionCreateResponse response = tx.create(buyOrder, sessionId, amount, cvv, cardNumber, cardExpirationDate);
+// Versión 2.x del SDK
 FullTransactionCreateResponse response = FullTransaction.Transaction.create(buyOrder, sessionId, amount, cardNumber, cardExpirationDate, cvv);
 ```
 
@@ -165,11 +173,19 @@ Antes de confirmar una transaccion es necesario confirmar la cantidad de cuotas 
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+import cl.transbank.webpay.transaccioncompleta.responses.FullTransactionCommitResponse;
+// Versión 2.x del SDK
 import cl.transbank.transaccioncompleta.FullTransaction;
 
 String token = "token obtenido como respuesta de la creacion de transaccion";
 int installmentsNumber = 10; // numero de cuotas;
 
+// Versión 3.x del SDK
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final FullTransactionInstallmentResponse response = tx.installments(token, installmentsNumber);
+
+// Versión 2.x del SDK
 FullTransactionInstallmentResponse response = FullTransaction.Transaction.installment(
   token,
   installmentsNumber
@@ -287,21 +303,27 @@ exactamente `0` y que el estado `status` sea exactamente `AUTHORIZED`.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+import cl.transbank.webpay.transaccioncompleta.responses.FullTransactionCommitResponse;
+// Versión 2.x del SDK
 import cl.transbank.transaccioncompleta.FullTransaction;
-
 
 String token = "token obtenido como respuesta de la creacion de transaccion";
 int idQueryInstallments = 12345679; // numero identificador de las cuotas.
 byte deferredPeriodIndex= 1;
 Boolean gracePeriod = false;
 
+// Versión 3.x del SDK
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final FullTransactionCommitResponse response = tx.commit(token, idQueryInstallments, deferredPeriodIndex, gracePeriod);
+
+// Versión 2.x del SDK
 FullTransactionCommitResponse response = FullTransaction.Transaction.commit(
   token,
   idQueryInstallments,
   deferredPeriodIndex,
   gracePeriod
 );
-
 ```
 
 ```php
@@ -492,6 +514,13 @@ Este método puede ser invocado los 7 días siguientes luego de realizada la tra
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+import cl.transbank.webpay.transaccioncompleta.responses.FullTransactionStatusResponse;
+
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final FullTransactionStatusResponse response = tx.status(token);
+
+// Versión 2.x del SDK
 import cl.transbank.transaccioncompleta.FullTransaction;
 
 final FullTransactionStatusResponse response = FullTransaction.Transaction.status(token);
@@ -653,9 +682,18 @@ Dependiendo de la siguiente lógica de negocio la invocación a esta operacio�
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+import cl.transbank.webpay.transaccioncompleta.responses.FullTransactionRefundResponse;
+
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final FullTransactionRefundResponse response = tx.refund(token, amount);
+
+// Versión 2.x del SDK
 import cl.transbank.transaccioncompleta.FullTransaction;
 
 final FullTransactionRefundResponse response = FullTransaction.Transaction.refund(token,amount);
+
+
 ```
 
 ```php
@@ -770,7 +808,10 @@ para conocer más detalles y restricciones.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-// Aun no está disponible en este SDK
+
+// Versión 3.x del SDK
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final FullTransactionCaptureResponse response = tx.capture(token, buyOrder, authorizationCode, captureAmount);
 ```
 
 ```php
@@ -803,7 +844,10 @@ const response = TransaccionCompleta.DeferredTransaction.capture(
 <strong>Respuesta captura</strong>
 
 ```java
-// Aun no está disponible en este SDK
+response.getResponseCode()
+response.getCapturedAmount()
+response.getAuthorizationDate()
+response.getAuthorizationCode()
 ```
 
 ```php
@@ -881,6 +925,11 @@ MallTransactionCreateDetails transactionDetails = MallTransactionCreateDetails.b
   .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne, installmentsNumberMallOne)
   .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo, installmentsNumberMallTwo);
 
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+MallFullTransactionCreateResponse response = tx.create(buyOrder, sessionId, cardNumber, cardExpirationDate, transactionDetails);
+
+// Versión 2.x del SDK
 final MallFullTransactionCreateResponse response = MallFullTransaction.Transaction.create(
   buyOrder,                           // ordenCompra12345678
   sessionId,                          // sesion1234564
@@ -1050,8 +1099,16 @@ invocación de la confirmación.
 ```java
 MallFullTransactionInstallmentsDetails installmentsDetails = 
   MallFullTransactionInstallmentsDetails.build().add(commerceCode, buyOrder, installmentsNumber);
+
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionInstallmentsResponse response = tx.installments(token, installmentsDetails);
+
+// Versión 2.x del SDK
 final MallFullTransactionInstallmentsResponse response = 
   MallFullTransaction.Transaction.installment(token, installmentsDetails);
+
+
 ```
 
 ```php
@@ -1170,6 +1227,11 @@ MallTransactionCommitDetails details = MallTransactionCommitDetails.build().add(
   commerceCode,buyOrder,idQueryInstallments,deferredPeriodIndex,gracePeriod
 );
 
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionCommitResponse response = tx.commit(token, details);
+
+// Versión 2.x del SDK
 final MallFullTransactionCommitResponse response = MallFullTransaction.Transaction.commit(token, details);
 ```
 
@@ -1403,7 +1465,12 @@ Obtiene resultado de transacción a partir de un token.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-MallFullTransaction.Transaction.status(token)
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionStatusResponse response = tx.status(tokenWs);
+
+// Versión 2.x del SDK
+MallFullTransaction.Transaction.status(token);
 ```
 
 ```php
@@ -1559,6 +1626,11 @@ Permite solicitar a Webpay la anulación de una transacción realizada previam
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionRefundResponse response = tx.refund(token, buyOrder, childCommerceCode, amount);
+
+// Versión 2.x del SDK
 final MallFullTransactionRefundResponse response = MallFullTransaction.Transaction.refund(
   token, amount, commerceCode, buyOrder
 );
@@ -1695,7 +1767,9 @@ para conocer más detalles y restricciones.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-// Aun no está disponible en este SDK
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionCaptureResponse response = tx.capture(token, commerceCode, buyOrder, authorizationCode, captureAmount);
 ```
 
 ```php
@@ -1739,7 +1813,10 @@ const response = TransaccionCompleta.MallDeferredTransaction.capture(
 <strong></strong>
 
 ```java
-// Aun no está disponible en este SDK
+response.getResponseCode()
+response.getCapturedAmount()
+response.getAuthorizationDate()
+response.getAuthorizationCode()
 ```
 
 ```php

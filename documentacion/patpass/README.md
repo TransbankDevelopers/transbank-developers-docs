@@ -15,6 +15,10 @@ import cl.transbank.patpass.PatpassComercio;
 import cl.transbank.patpass.model.PatpassComercioInscriptionStartResponse;
 import cl.transbank.patpass.model.PatpassComercioTransactionStatusResponse;
 
+// Versión 3.x del SDK
+PatpassComercio.Inscription inscription = new PatpassComercio.Inscription(new PatpassOptions(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST));
+
+// Versión 2.x del SDK
 PatpassCommercio = new PatpassOptions();
 ```
 
@@ -75,6 +79,25 @@ String commerceEmail = "otrocomercio@comercio.cl";
 String address = "huerfanos 101";
 String city = "Santiago";
 
+// Versión 3.x del SDK
+PatpassComercio.Inscription inscription = new PatpassComercio.Inscription(new PatpassOptions(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST));
+final PatpassComercioInscriptionStartResponse response = inscription.start(url,
+                    name,
+                    firstLastName,
+                    secondLastName,
+                    rut,
+                    serviceId,
+                    finalUrl,
+                    maxAmount,
+                    phoneNumber,
+                    mobileNumber,
+                    patpassName,
+                    personEmail,
+                    commerceEmail,
+                    address,
+                    city);  
+
+// Versión 2.x del SDK
 final PatpassComercioInscriptionStartResponse response = PatpassComercio.Inscription.start(url,
                     name,
                     firstLastName,
@@ -89,7 +112,7 @@ final PatpassComercioInscriptionStartResponse response = PatpassComercio.Inscrip
                     personEmail,
                     commerceEmail,
                     address,
-                    city);
+                    city);          
 ```
 
 ```php
@@ -281,9 +304,16 @@ Una vez que el tarjetahabiente ha pagado (o declinado, o ha ocurrido un error), 
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+import cl.transbank.patpass.responses.PatpassComercioTransactionStatusResponse;
+
+PatpassComercio.Inscription inscription = new PatpassComercio.Inscription(new PatpassOptions(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST));
+final PatpassComercioTransactionStatusResponse response = inscription.status(token);
+
+// Versión 2.x del SDK
 import cl.transbank.patpass.model.PatpassComercioTransactionStatusResponse;
 
-final WebpayApiRequest request = new PatpassComercioTransactionStatusRequest(token);
+final PatpassComercioTransactionStatusResponse response = PatpassComercio.Transaction.status(token);
 ```
 
 ```php
@@ -328,6 +358,10 @@ import cl.transbank.common.IntegrationType;
 import cl.transbank.patpass.PatpassComercio;
 //...
 
+// Versión 3.x del SDK
+PatpassComercio.Inscription inscription = new PatpassComercio.Inscription(new PatpassOptions(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST));
+
+// Versión 2.x del SDK
 PatpassComercio.setIntegrationType(IntegrationType.TEST);
 PatpassComercio.setApiKey("******");
 PatpassComercio.setCommerceCode("******");
@@ -360,6 +394,10 @@ import cl.transbank.common.IntegrationType;
 import cl.transbank.patpass.PatpassComercio;
 //...
 
+// Versión 3.x del SDK
+PatpassComercio.Inscription inscription = new PatpassComercio.Inscription(new PatpassOptions("***ApiKey****", "***CommerceCode****", IntegrationType.LIVE));
+
+// Versión 2.x del SDK
 PatpassComercio.setIntegrationType(IntegrationType.LIVE);
 ```
 

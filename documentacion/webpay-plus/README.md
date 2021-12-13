@@ -145,8 +145,14 @@ Tip: Para pruebas en el ambiente de integración te recomendamos crear un identi
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+import cl.transbank.webpay.webpayplus.responses.WebpayPlusTransactionCreateResponse;
+
+WebpayPlus.Transaction tx = new WebpayPlus.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusTransactionCreateResponse response = tx.create(buyOrder, sessionId, amount, returnUrl);
+
+// Versión 2.x del SDK
 import cl.transbank.webpay.webpayplus.WebpayPlus;
-import cl.transbank.webpay.webpayplus.model.WebpayPlusTransactionCreateResponse;
 
 final WebpayPlusTransactionCreateResponse response = WebpayPlus.Transaction.create(
   buyOrder, sessionId, amount, returnUrl
@@ -315,6 +321,11 @@ exactamente `0` y que el estado `status` sea exactamente `AUTHORIZED`.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+WebpayPlus.Transaction tx = new WebpayPlus.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusTransactionCommitResponse response = tx.commit(token);
+
+// Versión 2.x del SDK
 final WebpayPlusTransactionCommitResponse response = WebpayPlus.Transaction.commit(token);
 ```
 
@@ -492,6 +503,11 @@ Debes enviar el `token` dela transacción de la cual desees obtener el estado.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+WebpayPlus.Transaction tx = new WebpayPlus.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusTransactionStatusResponse response = tx.status(token);
+
+// Versión 2.x del SDK
 final WebpayPlusTransactionStatusResponse response = WebpayPlus.Transaction.status(token);
 ```
 
@@ -672,7 +688,12 @@ El método `Transaction.refund()` debe ser invocado siempre indicando el código
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final WebpayPlusMallTransactionCaptureResponse response = WebpayPlus.Transaction.refund(token, amount);
+// Versión 3.x del SDK
+WebpayPlus.Transaction tx = new WebpayPlus.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusTransactionRefundResponse response = tx.refund(token, amount);
+
+// Versión 2.x del SDK
+final WebpayPlusTransactionRefundResponse response = WebpayPlus.Transaction.refund(token, amount);
 ```
 
 ```php
@@ -802,6 +823,11 @@ el código debe ser el código de la tienda virtual específica.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+WebpayPlus.Transaction tx = new WebpayPlus.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusTransactionCaptureResponse response = tx.capture(token, buyOrder, authorizationCode, amount);
+
+// Versión 2.x del SDK
 final WebpayPlusTransactionCaptureResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
 ```
 
@@ -942,11 +968,16 @@ una de las transacciones. (Ejemplo: buy_order = nombre-de-mi-empresa-mall-1234, 
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-MallTransactionCreateDetails transactionDetails = MallTransactionCreateDetails.build()
+MallTransactionCreateDetails mallDetails = MallTransactionCreateDetails.build()
                 .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne)
                 .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo);    
 
-final WebpayPlusMallTransactionCreateResponse response = WebpayPlus.MallTransaction.create(buyOrder, sessionId, returnUrl, transactionDetails);
+// Versión 3.x del SDK
+WebpayPlus.MallTransaction tx = new WebpayPlus.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusMallTransactionCreateResponse response = tx.create(buyOrder, sessionId, returnUrl, mallDetails);
+
+// Versión 2.x del SDK
+final WebpayPlusMallTransactionCreateResponse response = WebpayPlus.MallTransaction.create(buyOrder, sessionId, returnUrl, mallDetails);
 ```
 
 ```php
@@ -1151,6 +1182,12 @@ exactamente `0` y que el estado `status` sea exactamente `AUTHORIZED` por cada u
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+WebpayPlus.MallTransaction tx = new WebpayPlus.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusMallTransactionCommitResponse response = tx.commit(token);
+
+```java
+// Versión 2.x del SDK
 final WebpayPlusMallTransactionCommitResponse response = WebpayPlus.MallTransaction.commit(token);
 ```
 
@@ -1328,6 +1365,11 @@ Esta operación permite obtener el estado de la transacción en cualquier moment
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+WebpayPlus.MallTransaction tx = new WebpayPlus.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusMallTransactionStatusResponse response = tx.status(token);
+
+// Versión 2.x del SDK
 final WebpayPlusMallTransactionStatusResponse response = WebpayPlus.MallTransaction.status(token);
 ```
 
@@ -1517,7 +1559,12 @@ más detalles y restricciones.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final WebpayPlusMallTransactionRefundResponse response = WebpayPlus.MallTransaction.refund(token, buyOrder, commerceCode, amount);
+// Versión 3.x del SDK
+WebpayPlus.MallTransaction tx = new WebpayPlus.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusTransactionRefundResponse response = tx.refund(token, childBuyOrder, childCommerceCode, amount);
+
+// Versión 2.x del SDK
+final WebpayPlusMallTransactionRefundResponse response = WebpayPlus.MallTransaction.refund(token, childBuyOrder, childCommerceCode, amount);
 ```
 
 ```php
@@ -1603,7 +1650,12 @@ Para obtener la información contenida en la respuesta puedes hacerlo de la sigu
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final WebpayPlusMallTransactionCaptureResponse response = WebpayPlus.MallDeferredTransaction.capture(token, childCommerceCode, buyOrder, authorizationCode, amount);
+// Versión 3.x del SDK
+WebpayPlus.MallTransaction tx = new WebpayPlus.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusMallTransactionCaptureResponse response = tx.capture(token, childCommerceCode, childBuyOrder, authorizationCode, amount);
+
+// Versión 2.x del SDK
+final WebpayPlusMallTransactionCaptureResponse response = WebpayPlus.MallDeferredTransaction.capture(token, childCommerceCode, childBuyOrder, authorizationCode, amount);
 ```
 
 ```php
