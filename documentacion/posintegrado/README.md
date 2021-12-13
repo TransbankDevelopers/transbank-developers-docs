@@ -1215,13 +1215,6 @@ POS.setNormalMode().then(result => console.log(result));
 Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en el POS para regresar al modo Integrado, siguiendo las instrucciones disponibles descritas en [Cambio a POS Integrado](/documentacion/posintegrado#cambio-modalidad-pos-integrado), pues no es posible realizar esta configuración a través del SDK.
 </aside>
 
-## Ejemplos de integración
-
-Ponemos a tu disposición un ejemplo en nuestro Github para ayudarte a entender mejor la integración.
-
-* [Ejemplo .Net](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet-example)
-* [Ejemplo Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java-example)
-* [Ejemplo Web](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-example)
 
 <div class="container slate">
   <div class='slate-after-footer'>
