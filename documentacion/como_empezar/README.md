@@ -307,6 +307,7 @@ Definir que se usará el ambiente de producción y pasar el Api Key (Código de 
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// SDK 3.X
 import cl.transbank.common.IntegrationType;
 import cl.transbank.patpass.PatpassComercio;
 import cl.transbank.patpass.model.PatpassOptions;
@@ -350,6 +351,38 @@ FullTransaction fullTx = new FullTransaction(new WebpayOptions("pon-tu-codigo-de
 
 // Opción B: Configurar globalmente y no pasar un objeto options en el constructor
 FullTransaction.configureForProduction("pon-tu-codigo-de-comercio-aca", "pon-tu-llave-secreta-aca");
+
+// SDK 2.X
+import cl.transbank.common.IntegrationType;
+import cl.transbank.patpass.PatpassComercio;
+import cl.transbank.transaccioncompleta.FullTransaction;
+import cl.transbank.webpay.oneclick.OneclickMall;
+import cl.transbank.webpay.webpayplus.WebpayPlus;
+
+//WebpayPlus Live config
+WebpayPlus.Transaction.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+WebpayPlus.Transaction.setApiKey("pon-tu-llave-secreta-aca");
+WebpayPlus.Transaction.setIntegrationType(IntegrationType.LIVE);
+
+//WebpayPlus.MallTransaction Live config
+WebpayPlus.MallTransaction.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+WebpayPlus.MallTransaction.setApiKey("pon-tu-llave-secreta-aca");
+WebpayPlus.MallTransaction.setIntegrationType(IntegrationType.LIVE);
+
+// OneclickMall Live Config
+Oneclick.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+Oneclick.setApiKey("pon-tu-llave-secreta-aca");
+Oneclick.setIntegrationType(IntegrationType.LIVE);
+
+//PatpassComercio Live Config
+PatpassComercio.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+PatpassComercio.setApiKey("pon-tu-llave-secreta-aca");
+PatpassComercio.setIntegrationType(IntegrationType.LIVE);
+
+//FullTransaction Live Config
+FullTransaction.Transaction.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+FullTransaction.Transaction.setApiKey("pon-tu-llave-secreta-aca");
+FullTransaction.Transaction.setIntegrationType(IntegrationType.LIVE);
 ```
 
 ```php
