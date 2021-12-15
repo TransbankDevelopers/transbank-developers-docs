@@ -31,7 +31,7 @@ para ser publicado en el sitio transbankdevelopers.cl.
 [![Build
 Status](https://semaphoreci.com/api/v1/continuum/transbankdevelopers-web/branches/master/badge.svg)](https://semaphoreci.com/continuum/transbankdevelopers-web)
 
-# Versionamiento de API
+## Versionamiento de API
 
 Al momento de crear una versión relacionada a **referencia** o **documentación**, se desplegará un selector de versiones en transbankdevelopers.cl, el cual mostrará por defecto la última versión, dejando de visualizar el archivo README.md que se encuentra en la raíz.
 
@@ -39,7 +39,7 @@ _En caso que no exista una **carpeta con el número de versión**, se cargará p
 
 > Ejemplo: al crear la siguiente versión `/referencia-o-documentacion/webpay/1.0.0/README.md`, se dejará de mostrar la información que contiene el siguiente archivo `/referencia-o-documentacion/webpay/README.md`
 
-## Nueva versión
+### Nueva versión
 
 Para nuevas versiones relacionadas a **referencia** o **documentación** respectivamente, se debe **crear una carpeta** con el número de versión y en la siguiente estructura `/referencia-o-documentacion/{{nombre producto}}/{{número versión}}/README.md` que se quiere publicar.
 
