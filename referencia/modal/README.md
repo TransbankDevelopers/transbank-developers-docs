@@ -203,6 +203,15 @@ Content-Type: application/json
 }
 ```
 
+```java
+import cl.transbank.webpay.modal.WebpayPlusModal;
+import cl.transbank.webpay.modal.WebpayModalTransaction.ModalTransactionCreateResponse;
+
+WebpayPlusModal.Transaction tx = new WebpayPlusModal.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MODAL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final ModalTransactionCreateResponse response = tx.create(buyOrder, sessionId, amount);
+
+```
+
 <strong>Parámetros Transaction.create</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -224,6 +233,10 @@ Content-Type: application/json
 {
  "token": "e9d555262db0f989e49d724b4db0b0af367cc415cde41f500a776550fc5fddd3",
 }
+```
+
+```java
+response.getToken();
 ```
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -261,6 +274,14 @@ PUT /rswebpaytransaction/api/webpay/v1.2/transactions/{token}
 Tbk-Api-Key-Id: 597055555584
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
+```
+
+```java
+import cl.transbank.webpay.modal.WebpayPlusModal;
+import cl.transbank.webpay.modal.WebpayModalTransaction.ModalTransactionCommitResponse;
+
+WebpayPlusModal.Transaction tx = new WebpayPlusModal.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MODAL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final ModalTransactionCommitResponse response = tx.commit(token);
 ```
 
 <strong>Parámetros Transaction.commit</strong>
@@ -309,6 +330,23 @@ Content-Type: application/json
 }
 ```
 
+```java
+response.getVci();
+response.getAmount();
+response.getStatus();
+response.getBuyOrder();
+response.getSessionId();
+response.getCardDetail().getCardNumber();
+response.getAccountingDate();
+response.getTransactionDate();
+response.getAuthorizationCode();
+response.getPaymentTypeCode();
+response.getResponseCode();
+response.getInstallmentsAmount();
+response.getInstallmentsNumber();
+response.getBalance();
+```
+
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 vci  <br> <i> String </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure), ACS2 (Autenticación fallida extranjera). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)
@@ -350,6 +388,15 @@ Tbk-Api-Key-Id: 597055555584
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
 ```
+
+```java
+import cl.transbank.webpay.modal.WebpayPlusModal;
+import cl.transbank.webpay.modal.WebpayModalTransaction.ModalTransactionStatusResponse;
+
+WebpayPlusModal.Transaction tx = new WebpayPlusModal.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MODAL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final ModalTransactionStatusResponse response = tx.status(token);
+```
+
 
 <strong>Parámetros Transaction.status</strong>
 
@@ -397,6 +444,23 @@ Content-Type: application/json
     "installments_amount": 1000 }
 ```
 
+```java
+response.getVci();
+response.getAmount();
+response.getStatus();
+response.getBuyOrder();
+response.getSessionId();
+response.getCardDetail().getCardNumber();
+response.getAccountingDate();
+response.getTransactionDate();
+response.getAuthorizationCode();
+response.getPaymentTypeCode();
+response.getResponseCode();
+response.getInstallmentsAmount();
+response.getInstallmentsNumber();
+response.getBalance();
+```
+
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 vci  <br> <i> String </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure), ACS2 (Autenticación fallida extranjera). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)
@@ -439,6 +503,14 @@ Content-Type: application/json
 }
 ```
 
+```java
+import cl.transbank.webpay.modal.WebpayPlusModal;
+import cl.transbank.webpay.modal.WebpayModalTransaction.ModalTransactionRefundResponse;
+
+WebpayPlusModal.Transaction tx = new WebpayPlusModal.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MODAL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final ModalTransactionRefundResponse response = tx.refund(token, amount);
+```
+
 <strong>Parámetros Transaction.refund</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -470,6 +542,16 @@ Content-Type: application/json
   "balance": 0.00,
   "response_code": 0
 }
+```
+
+```java
+response.getType();
+response.getBalance();
+response.getAuthorizationCode();
+response.getResponseCode();
+response.getAuthorizationDate();
+response.getNullifiedAmount();
+response.getPrepaidBalance();
 ```
 
 Nombre  <br> <i> tipo </i> | Descripción
