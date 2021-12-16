@@ -38,6 +38,10 @@ Las URLs de endpoints de producción están alojados dentro de
 Host: https://webpay3g.transbank.cl
 ```
 
+```javascript
+// Host: https://webpay3g.transbank.cl
+```
+
 ### Ambiente de Integración
 
 Las URLs de endpoints de integración están alojados dentro de
@@ -65,6 +69,10 @@ Las URLs de endpoints de integración están alojados dentro de
 
 ```http
 Host: https://webpay3gint.transbank.cl
+```
+
+```javascript
+// Host: https://webpay3g.transbank.cl
 ```
 
 Consulta [la documentación para conocer las tarjetas de prueba que funcionan en
@@ -106,6 +114,12 @@ el ambiente de integración](/documentacion/como_empezar#ambientes).
 Tbk-Api-Key-Id: Código de comercio
 Tbk-Api-Key-Secret: Llave secreta
 Content-Type: application/json
+```
+
+```javascript
+// Tbk-Api-Key-Id: Código de comercio
+// Tbk-Api-Key-Secret: Llave secreta
+// Content-Type: application/json
 ```
 
 Todas las peticiones que hagas deben incluir el código de comercio y la llave
@@ -165,9 +179,9 @@ transbank.webpay.webpay_modal.default_integration_type = IntegrationType.TEST
 ```javascript
 const Environment = require('transbank-sdk').Environment;
 
-WebpayModal.commerceCode = 597055555584;
-WebpayModal.apiKey = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C';
-WebpayModal.environment = Environment.Integration;
+WebpayPlusModal.commerceCode = 597055555584;
+WebpayPlusModal.apiKey = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C';
+WebpayPlusModal.environment = Environment.Integration;
 ```
 
 ```http
@@ -209,7 +223,12 @@ import cl.transbank.webpay.modal.WebpayModalTransaction.ModalTransactionCreateRe
 
 WebpayPlusModal.Transaction tx = new WebpayPlusModal.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MODAL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
 final ModalTransactionCreateResponse response = tx.create(buyOrder, sessionId, amount);
+```
 
+```javascript
+const WebpayPlusModal = require('transbank-sdk').WebpayPlusModal;
+
+const response = await WebpayPlusModal.Transaction.create(buyOrder, sessionId, amount);
 ```
 
 <strong>Parámetros Transaction.create</strong>
@@ -237,6 +256,11 @@ Content-Type: application/json
 
 ```java
 response.getToken();
+```
+
+```javascript
+response.url
+response.token
 ```
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -282,6 +306,12 @@ import cl.transbank.webpay.modal.WebpayModalTransaction.ModalTransactionCommitRe
 
 WebpayPlusModal.Transaction tx = new WebpayPlusModal.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MODAL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
 final ModalTransactionCommitResponse response = tx.commit(token);
+```
+
+```javascript
+const WebpayPlusModal = require('transbank-sdk').WebpayPlusModal;
+
+const response = await WebpayPlusModal.Transaction.commit(token);
 ```
 
 <strong>Parámetros Transaction.commit</strong>
@@ -347,6 +377,23 @@ response.getInstallmentsNumber();
 response.getBalance();
 ```
 
+```javascript
+response.vci
+response.amount
+response.status
+response.buy_order
+response.session_id
+response.card_detail
+response.accounting_date
+response.transaction_date
+response.authorization_code
+response.payment_type_code
+response.response_code
+response.installments_amount
+response.installments_number
+response.balance
+```
+
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 vci  <br> <i> String </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure), ACS2 (Autenticación fallida extranjera). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)
@@ -395,6 +442,12 @@ import cl.transbank.webpay.modal.WebpayModalTransaction.ModalTransactionStatusRe
 
 WebpayPlusModal.Transaction tx = new WebpayPlusModal.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MODAL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
 final ModalTransactionStatusResponse response = tx.status(token);
+```
+
+```javascript
+const WebpayPlusModal = require('transbank-sdk').WebpayPlusModal;
+
+const response = await WebpayPlusModal.Transaction.status(token);
 ```
 
 
@@ -461,6 +514,23 @@ response.getInstallmentsNumber();
 response.getBalance();
 ```
 
+```javascript
+response.vci
+response.amount
+response.status
+response.buy_order
+response.session_id
+response.card_detail
+response.accounting_date
+response.transaction_date
+response.authorization_code
+response.payment_type_code
+response.response_code
+response.installments_amount
+response.installments_number
+response.balance
+```
+
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
 vci  <br> <i> String </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure), ACS2 (Autenticación fallida extranjera). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)
@@ -511,6 +581,12 @@ WebpayPlusModal.Transaction tx = new WebpayPlusModal.Transaction(new WebpayOptio
 final ModalTransactionRefundResponse response = tx.refund(token, amount);
 ```
 
+```javascript
+const WebpayPlusModal = require('transbank-sdk').WebpayPlusModal;
+
+const response = await WebpayPlusModal.Transaction.refund(token, amount);
+```
+
 <strong>Parámetros Transaction.refund</strong>
 
 Nombre  <br> <i> tipo </i> | Descripción
@@ -552,6 +628,15 @@ response.getResponseCode();
 response.getAuthorizationDate();
 response.getNullifiedAmount();
 response.getPrepaidBalance();
+```
+
+```javascript
+response.type
+response.authorization_code
+response.authorization_date
+response.nullified_amount
+response.balance
+response.response_code
 ```
 
 Nombre  <br> <i> tipo </i> | Descripción
