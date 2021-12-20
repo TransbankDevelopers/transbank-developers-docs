@@ -163,14 +163,18 @@ Desde el punto de vista de la transacción, lo que ocurre es lo siguiente:
 * **Autorización y captura simultánea:** La transacción es validada en línea por Transbank. El cargo del pago se hace simultáneamente en la tarjeta de crédito o débito Redcompra del cliente.
 
 * **Autorización y captura diferida (Sólo válida para tarjetas de crédito):** Se retiene el valor de la compra del saldo de la tarjeta de crédito del cliente, reservando cupo pero sin realizar la transacción  definitivamente hasta que el comercio confirma la compra (vía captura diferida) y lo comunique a Transbank. Existe un **tiempo máximo de 7 días calendario** para realizar la captura. Superado ese tiempo la retención de la tarjeta de crédito será reversada y el cupo liberado. La captura puede realizarse a través del [portal Transbank](https://www.transbank.cl/web/login) o mediante [el servicio web de captura diferida](/referencia/webpay#capturar-una-transaccion).
+  
+  <aside class="warning">
+   Importante: en la modalidad de Captura Diferida no se permite la venta en cuotas.
+  </aside>
 
 ## Anulaciones
 
 <div class="pos-title-nav">
-  <div tbk-link='/documentacion/webpay-plus#reversar-o-anular-una-transaccion-mall' tbk-link-name='Documentación'></div>
+  <div tbk-link='/documentacion/webpay-plus#reversar-o-anular-una-transaccion' tbk-link-name='Documentación'></div>
 </div>
 
-Las transacciones Webpay **realizadas con tarjeta de crédito** pueden ser anuladas mediante servicios web. Esta funcionalidad no aplica para tarjetas de débito Redcompra.
+Las transacciones Webpay **realizadas con tarjeta de crédito** pueden ser anuladas mediante servicios web. También puedes realizar reversas de las transacciones realizadas con tarjetas de **débito y prepago** con un tiempo máximo de 1 hora desde la creación de la transacción.
 
 Las anulaciones pueden ser totales o parciales. **Las anulaciones parciales solo están permitidas en la modalidad de Venta Normal (VN)**. En caso que la transacción haya sido abonada al comercio, la anulación generará una retención en los siguientes abonos por el monto previamente autorizado.
 

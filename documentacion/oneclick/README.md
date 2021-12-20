@@ -47,7 +47,8 @@ inscripción.
    y no haber terminado la transacción, esta será abortada automáticamente.
    
    <aside class="warning">
-   En caso de que se cumpla el tiempo máximo para completar el formulario, el comercio recibirá las variables TBK_ID_SESSION y TBK_ORDEN_COMPRA.
+   En caso de que se cumpla el tiempo máximo para completar el formulario o el tarjetahabiente presione el botón para anular la inscripción, 
+   el comercio recibirá las variables TBK_ID_SESSION y TBK_ORDEN_COMPRA.
    </aside>
 6. El cliente será autenticado por su banco emisor, de forma similar al flujo
   normal de pago. En este punto se realiza una transacción de $50 pesos, la cual
@@ -140,7 +141,12 @@ String email = "nombre_de_usuario@gmail.com";
 // URL donde llegará el usuario con su token luego de finalizar la inscripción
 String response_url = "https://callback/resultado/de/inscripcion";
 
-OneclickMallInscriptionStartResponse response = OneclickMall.Inscription.start(username, email, response_url);
+// Versión 3.x del SDK
+Oneclick.MallInscription inscription = new Oneclick.MallInscription(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallInscriptionStartResponse response = inscription.start(username, email, response_url);
+
+// Versión 2.x del SDK
+OneclickMallInscriptionStartResponse response = Oneclick.MallInscription.start(username, email, response_url);
 
 String url_webpay = response.getUrlWebpay();
 String tbk_token = response.getToken();
@@ -280,7 +286,14 @@ Una vez que se autorice la inscripción del usuario, se retornará el control al
 ```java
 //...
 String tbk_token = "elTokenQueLlegaPorPOST"; // token que llega por POST en el parámetro "TBK_TOKEN"
-OneclickMallInscriptionFinishResponse response = OneclickMall.Inscription.finish(tbk_token);
+
+// Versión 3.x del SDK
+Oneclick.MallInscription inscription = new Oneclick.MallInscription(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallInscriptionFinishResponse response = inscription.finish(tbk_token);
+
+// Versión 2.x del SDK
+OneclickMallInscriptionFinishResponse response = Oneclick.MallInscription.finish(tbk_token);
+
 String tbkUser = response.getTbkUser();
 ```
 
@@ -400,7 +413,13 @@ el comercio deberá invocar a removeInscription() con el identificador de usuar
 // Identificador del usuario en el comercio
 String username = "nombre_de_usuario";
 String tbkUser = "tbkUserRetornadoPorInscriptionFinish";
-OneclickMall.Inscription.delete(username, tbkUser);
+
+// Versión 3.x del SDK
+Oneclick.MallInscription inscription = new Oneclick.MallInscription(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+inscription.delete(tbkUser, username);
+
+// Versión 2.x del SDK
+Oneclick.MallInscription.delete(username, tbkUser);
 ```
 
 ```php
@@ -507,7 +526,7 @@ cargos a esa tarjeta en cualquier momento, solo llamando a este método de autor
 Como Oneclick opera en modalidad Mall, en una misma autorización puedes realizar varios cobros, cada uno a códigos de 
 comercio **tienda** diferente. No olvidar que para realizar el cargo correctamente, esos código de comercio tienda deben 
 "pertenecer" o estar asociados a tu código de comercio Mall cuando se contratan.
-Al tarjetahabiente se le realizará un solo cobro por la suma del monto de todas las "sub-transacciones" soliticadas, pero
+Al tarjetahabiente se le realizará un solo cobro por la suma del monto de todas las "sub-transacciones" solicitadas, pero
 el dinero será procesado y enviado a cada código de comercio por separado. 
 Para aclararlo con un ejemplo, si solicito una autorización por $1.500 para el comercio A, y $2.500 para el comercio B, el 
 tarjetahabiente verá un único cobro de $4.000 en su cartola, pero el comercio A recibirá los $1.500 y el comercio B los 
@@ -516,6 +535,10 @@ $2.500 (en ambos casos, restando la comisión).
 Cada "sub-transacción" de la autorización requiere de un código de comercio, un identificador de compra (ojalá único y 
 diferente al identificador de compra padre), un monto y, opcionalmente, el número de cuotas en que se realizará el cobro. 
 
+<aside class="notice">
+Tip: Para pruebas en el ambiente de integración te recomendamos crear un identificador único <i>buy_order</i> para cada 
+una de las transacciones. (Ejemplo: buy_order = nombre-de-mi-empresa-mall-1234, child_buy_order = nombre-de-mi-tienda-1).
+</aside>
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -539,8 +562,12 @@ MallTransactionCreateDetails details = MallTransactionCreateDetails.build()
                 .add(amountOne, MallOneCommerceCode, buyOrderMallOne, installmentNumberOne)
                 .add(amuntTwo, MallTwoCommerceCode, buyOrderMallTwo, installmentNumberTwo);
 
+// Versión 3.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallTransactionAuthorizeResponse response = tx.authorize(username, tbkUser, buyOrder, details);
 
-OneclickMallTransactionAuthorizeResponse response = OneclickMall.Transaction.authorize(username, tbkUser, buyOrder, details);
+// Versión 2.x del SDK
+OneclickMallTransactionAuthorizeResponse response = Oneclick.Transaction.authorize(username, tbkUser, buyOrder, details);
 ```
 
 ```php
@@ -779,9 +806,7 @@ response.AccountingDate;
 response.BuyOrder;
 var cardDetail = response.CardDetail;
 cardDetail.CardNumber;
-response.SessionId;
 response.TransactionDate;
-response.Vci;
 var details = response.Details;
 foreach (var detail in details) {
     detail.Amount;
@@ -800,9 +825,7 @@ response.accounting_date
 response.buy_order
 card_detail = response.card_detail
 card_detail.card_number
-response.session_id
 response.transaction_date
-response.vci
 details = response.details
 details.each do |detail|
   detail.amount
@@ -821,9 +844,7 @@ response.accounting_date
 response.buy_order
 card_detail = response.card_detail
 card_detail.card_number
-response.session_id
 response.transaction_date
-response.vci
 details = response.details
 for detail in details:
   detail.amount
@@ -841,9 +862,7 @@ response.accounting_date
 response.buy_order
 cardDetail = response.card_detail
 cardDetail.card_number
-response.session_id
 response.transaction_date
-response.vci
 details = response.details
 for(let detail on details) {
   detail.amount
@@ -874,8 +893,15 @@ Retorna el resultado de la autorización.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallTransactionStatusResponse response = tx.status(buyOrder);
+
+// Versión 2.x del SDK
 final OneclickMallTransactionStatusResponse response =
-  OneclickMall.Transaction.status(buyOrder);
+  Oneclick.Transaction.status(buyOrder);
+
+
 ```
 
 ```php
@@ -1097,9 +1123,9 @@ Permite generar el reembolso del total o parte del monto de una transacción co
 Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una
 reversa o una anulación:
 
-<strong>Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
+<strong>* Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial. </strong>
 
-Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado **(una hora)**, de lo contrario se ejecutará una anulación.</strong>
+<strong>* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado **(una hora)**, de lo contrario se ejecutará una anulación.</strong>
 
 <strong>Transaction.refund()</strong>
 
@@ -1115,7 +1141,12 @@ String childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
 String childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
 double amount = 10000;
 
-OneclickMallTransactionRefundResponse response = OneclickMall.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+// Versión 3.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallTransactionRefundResponse response = tx.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+
+// Versión 2.x del SDK
+OneclickMallTransactionRefundResponse response = Oneclick.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
 
 ```php
@@ -1240,6 +1271,11 @@ En esta modalidad no se aceptan tarjetas de débito ni prepago.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallTransactionCaptureResponse response = tx.capture(childCommerceCode, childBuyOrder, authorizationCode, amount);
+
+// Versión 2.x del SDK
 final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTransaction.capture(
   childCommerceCode, childBuyOrder, amount, authorizationCode
 );
@@ -1320,82 +1356,20 @@ response.response_code
 
 ### Ambiente de integración
 
-En el ambiente de integración existen códigos de comercio previamente creados para todos los productos (Webpay Plus,
-Oneclick, etc), para cada una de sus variaciones (Captura Diferida, Mall, Mall Captura Diferida, etc) y dependiendo de
-la moneda que acepten (USD o CLP).
-
-Asegúrate de que estés usando el código de comercio de integración que tenga la misma configuración del producto que contrataste.
-
-Puedes revisar los códigos de comercio del ambiente de integración de todos nuestros productos y variaciones
-[en este link](/documentacion/como_empezar#ambiente-de-integracion).
+Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#ambiente-de-integracion)
 
 ### Configuración SDK
 
 Los SDK vienen preconfigurados para operar con Oneclick Mall captura simultanea. Si necesitas operar con otra modalidad,
-como captura diferida, debes configurar explícitamente el [código de comercio que usarás](/documentacion/como_empezar#ambiente-de-integracion).
+como captura diferida, debes configurar explícitamente el [código de comercio que usarás](/documentacion/como_empezar#codigos-de-comercio).
 No es necesario definir el Api Key ya que en este ambiente, todos los productos usan la misma y
 ya viene preconfigurada.
 
-```java
-OneclickMall.setCommerceCode("Pon el Código de Comercio");
-```
+Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#b-utilizando-los-sdk)
 
-```php
-// Sin configurar nada, el SDK viene preconfigurado con las credenciales de prueba de Oneclick mall captura simultanea para el ambiente de integración
-// Para configurar en producción: 
-use \Transbank\Webpay\Oneclick;
-Oneclick:configureForProduction('597012345678', 'ApiKey');
+### Puesta en Producción
 
-// Para configurar en integración: 
-Oneclick::configureForIntgration('597012345678', 'ApiKey');
-Oneclick::configureForTesting();
-Oneclick::configureForTestingDeferred();
-
-// También puedes crear un objeto Options y pasarlo directo a la instancia
-use \Transbank\Webpay\Options;
-use \Transbank\Webpay\Oneclick\MallTransaction;
-use \Transbank\Webpay\Oneclick\MallInscription;
-
-$options = Options::forProduction('codigo-comercio', 'apikey'); // o Options::forIntegration('comercio', 'key')
-$transaction = new MallTransaction($options);
-$transaction->authorize(...);
-$inscription = new MallInscription($options);
-$inscription->start(...);
-
-// También es posible así: 
-$transaction = (new MallTransaction())->configureForProduction('codigo-comercio', 'api-key');
-$transaction->authorize();
-```
-
-```csharp
-using Transbank.Webpay.Oneclick;
-
-MallTransaction.CommerceCode = "Pon el Código de Comercio";
-```
-
-```ruby
-Transbank::Webpay::OneClick::Base.commerce_code = "Pon el Código de Comercio"
-```
-
-```python
-from transbank import oneclick as BaseOneClick
-from transbank.common.integration_type import IntegrationType
-
-BaseOneClick.commerce_code = "Pon el Código de Comercio"
-```
-
-```javascript
-// Este SDK posee métodos para configurar las distintas modalidades
-Oneclick.configureForIntegration(commerceCode, apiKey); // Manual
-Oneclick.configureOneclickMallForTesting();
-Oneclick.configureOneclickMallDeferredForTesting();
-```
-
-### Apuntar a producción
-
-Antes de operar en el ambiente de producción, debes pasar por un [proceso de validación](/documentacion/como_empezar#el-proceso-de-validacion), luego del cual te entregaremos tu Api Key.  
-
-Si ya tienes tu Api Key, puedes revisar como configurar el SDK para usar este ambiente de producción en [esta sección](/documentacion/como_empezar#puesta-en-produccion)
+Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#puesta-en-produccion)
 
 ## Conciliación de Transacciones
 

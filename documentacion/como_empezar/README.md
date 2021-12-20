@@ -158,7 +158,13 @@ con tarjetas de crédito, débito o prepago **reales**.
 
 ### Ambiente de integración
 
-Para las transacciones Webpay en este ambiente se deben usar estas
+En el ambiente de integración existen códigos de comercio previamente creados para todos los productos (Webpay Plus, Oneclick, etc), para cada una de sus modalidades (Captura Diferida, Mall, Mall Captura Diferida, etc) y dependiendo de la moneda que acepten (USD o CLP).
+
+Asegúrate de que estés usando el código de comercio de integración que tenga la misma configuración del producto que contrataste.
+
+### Tarjetas de Prueba
+
+Para las transacciones Webpay en el ambiente de integración se deben usar estas
 tarjetas:
 
 Tipo de tarjeta | Detalle | Resultado
@@ -301,6 +307,52 @@ Definir que se usará el ambiente de producción y pasar el Api Key (Código de 
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// SDK 3.X
+import cl.transbank.common.IntegrationType;
+import cl.transbank.patpass.PatpassComercio;
+import cl.transbank.patpass.model.PatpassOptions;
+import cl.transbank.webpay.common.WebpayOptions;
+import cl.transbank.webpay.oneclick.Oneclick;
+import cl.transbank.webpay.transaccioncompleta.FullTransaction;
+import cl.transbank.webpay.webpayplus.WebpayPlus;
+
+//WebpayPlus Live config
+// Opción A: Crear objeto options y pasarlo en el contructor
+WebpayPlus.Transaction tx = new WebpayPlus.Transaction(new WebpayOptions("pon-tu-codigo-de-comercio-aca", "pon-tu-llave-secreta-aca", IntegrationType.LIVE));
+
+// Opción B: Configurar globalmente y no pasar un objeto options en el constructor
+WebpayPlus.configureForProduction("pon-tu-codigo-de-comercio-aca", "pon-tu-llave-secreta-aca");
+
+//WebpayPlus.MallTransaction Live config
+// Opción A: Crear objeto options y pasarlo en el contructor
+WebpayPlus.MallTransaction mallTx = new WebpayPlus.MallTransaction(new WebpayOptions("pon-tu-codigo-de-comercio-aca", "pon-tu-llave-secreta-aca", IntegrationType.LIVE));
+
+// Opción B: Configurar globalmente y no pasar un objeto options en el constructor
+WebpayPlus.configureForProduction("pon-tu-codigo-de-comercio-aca", "pon-tu-llave-secreta-aca");
+
+// OneclickMall Live Config
+// Opción A: Crear objeto options y pasarlo en el contructor
+Oneclick.MallInscription oneclickMallInscription = new Oneclick.MallInscription(new WebpayOptions("pon-tu-codigo-de-comercio-aca", "pon-tu-llave-secreta-aca", IntegrationType.LIVE));
+Oneclick.MallTransaction oneclickMallTx = new Oneclick.MallTransaction(new WebpayOptions("pon-tu-codigo-de-comercio-aca", "pon-tu-llave-secreta-aca", IntegrationType.LIVE));
+
+// Opción B: Configurar globalmente y no pasar un objeto options en el constructor
+Oneclick.configureForProduction("pon-tu-codigo-de-comercio-aca", "pon-tu-llave-secreta-aca");
+
+//PatpassComercio Live Config
+// Opción A: Crear objeto options y pasarlo en el contructor
+PatpassComercio.Inscription patpassInscription = new PatpassComercio.Inscription(new PatpassOptions("pon-tu-codigo-de-comercio-aca", "pon-tu-llave-secreta-aca", IntegrationType.LIVE));
+
+// Opción B: Configurar globalmente y no pasar un objeto options en el constructor
+PatpassComercio.configureForProduction("pon-tu-codigo-de-comercio-aca", "pon-tu-llave-secreta-aca");
+
+//FullTransaction Live Config
+// Opción A: Crear objeto options y pasarlo en el contructor
+FullTransaction fullTx = new FullTransaction(new WebpayOptions("pon-tu-codigo-de-comercio-aca", "pon-tu-llave-secreta-aca", IntegrationType.LIVE));
+
+// Opción B: Configurar globalmente y no pasar un objeto options en el constructor
+FullTransaction.configureForProduction("pon-tu-codigo-de-comercio-aca", "pon-tu-llave-secreta-aca");
+
+// SDK 2.X
 import cl.transbank.common.IntegrationType;
 import cl.transbank.patpass.PatpassComercio;
 import cl.transbank.transaccioncompleta.FullTransaction;
@@ -318,9 +370,9 @@ WebpayPlus.MallTransaction.setApiKey("pon-tu-llave-secreta-aca");
 WebpayPlus.MallTransaction.setIntegrationType(IntegrationType.LIVE);
 
 // OneclickMall Live Config
-OneclickMall.setCommerceCode("pon-tu-codigo-de-comercio-aca");
-OneclickMall.setApiKey("pon-tu-llave-secreta-aca");
-OneclickMall.setIntegrationType(IntegrationType.LIVE);
+Oneclick.setCommerceCode("pon-tu-codigo-de-comercio-aca");
+Oneclick.setApiKey("pon-tu-llave-secreta-aca");
+Oneclick.setIntegrationType(IntegrationType.LIVE);
 
 //PatpassComercio Live Config
 PatpassComercio.setCommerceCode("pon-tu-codigo-de-comercio-aca");

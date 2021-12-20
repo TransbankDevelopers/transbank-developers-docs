@@ -75,7 +75,7 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
 Si el tarjetahabiente anula la transacción en el formulario de pago de Webpay,
 el flujo cambia y los pasos son los siguientes:
 
-<img class="td_img-night" src="/images/referencia/webpayrest/diagrama-secuencia-webpayrest-abortar.png" alt="Diagrama de secuencia si usuario aborta el pago">
+<img class="td_img-night" src="/images/referencia/webpayrest/diagrama-secuencias-webpayrest-abortar.png" alt="Diagrama de secuencia si usuario aborta el pago">
 
 1. Una vez seleccionado los bienes o servicios, tarjetahabiente decide pagar a
    través de Webpay.
@@ -101,9 +101,9 @@ el flujo cambia y los pasos son los siguientes:
     <aside class="warning">
     Nota que el nombre de las variables recibidas es diferente. En lugar de `token_ws` acá el token viene en la variable `TBK_TOKEN`.
     </aside>
-9. El comercio con la variable `TBK_TOKEN` debe invocar el método
-   de confirmación de transacción para obtener el resultado de la autorización. En
-   este caso debe obtener una excepción, pues el pago fue abortado.
+9. El comercio con la variable `TBK_TOKEN` consulta la transacción para validar el estado (no es necesario  
+confirmar la transacción).
+
 10. El comercio debe informar al tarjetahabiente que su pago no se completó.
 
 ### Resumen de flujos
@@ -137,11 +137,22 @@ entregado tiene un periodo reducido de vida de 5 minutos, posterior a esto el
 token es caducado y no podrá ser utilizado en un pago.
 </aside>
 
+<aside class="notice">
+Tip: Para pruebas en el ambiente de integración te recomendamos crear un identificador único para el <i>buy_order</i>.
+(Ejemplo: buy_order = nombre-de-mi-empresa-328493)
+</aside>
+
 <div class="language-simple" data-multiple-language></div>
 
 ```java
+// Versión 3.x del SDK
+import cl.transbank.webpay.webpayplus.responses.WebpayPlusTransactionCreateResponse;
+
+WebpayPlus.Transaction tx = new WebpayPlus.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusTransactionCreateResponse response = tx.create(buyOrder, sessionId, amount, returnUrl);
+
+// Versión 2.x del SDK
 import cl.transbank.webpay.webpayplus.WebpayPlus;
-import cl.transbank.webpay.webpayplus.model.CreateWebpayPlusTransactionResponse;
 
 final WebpayPlusTransactionCreateResponse response = WebpayPlus.Transaction.create(
   buyOrder, sessionId, amount, returnUrl
@@ -310,7 +321,12 @@ exactamente `0` y que el estado `status` sea exactamente `AUTHORIZED`.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final CreateWebpayPlusTransactionResponse response = WebpayPlus.Transaction.commit(token);
+// Versión 3.x del SDK
+WebpayPlus.Transaction tx = new WebpayPlus.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusTransactionCommitResponse response = tx.commit(token);
+
+// Versión 2.x del SDK
+final WebpayPlusTransactionCommitResponse response = WebpayPlus.Transaction.commit(token);
 ```
 
 ```php
@@ -369,7 +385,7 @@ response.getAmount();
 response.getStatus();
 response.getBuyOrder();
 response.getSessionId();
-response.getCardDetail();
+response.getCardDetail().getCardNumber();
 response.getAccountingDate();
 response.getTransactionDate();
 response.getAuthorizationCode();
@@ -487,7 +503,12 @@ Debes enviar el `token` dela transacción de la cual desees obtener el estado.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final StatusWebpayPlusTransactionResponse response = WebpayPlus.Transaction.status(token);
+// Versión 3.x del SDK
+WebpayPlus.Transaction tx = new WebpayPlus.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusTransactionStatusResponse response = tx.status(token);
+
+// Versión 2.x del SDK
+final WebpayPlusTransactionStatusResponse response = WebpayPlus.Transaction.status(token);
 ```
 
 ```php
@@ -531,7 +552,7 @@ response.getAmount();
 response.getStatus();
 response.getBuyOrder();
 response.getSessionId();
-response.getCardDetail();
+response.getCardDetail().getCardNumber();
 response.getAccountingDate();
 response.getTransactionDate();
 response.getAuthorizationCode();
@@ -641,11 +662,17 @@ response.balance
 
 Esta operación permite a todo comercio habilitado, reembolsar o anular una
 transacción que fue generada en Webpay Plus.
-Puedes generar el reembolso del total o parte del monto de una transacción, dependiendo de la
-siguiente lógica de negocio la invocación a esta operación generará una reversa o una anulación:
 
-* Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
-* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla **(una hora)** no ha terminado, de lo contrario se ejecutará una anulación.
+Puedes realizar un reembolso invocando al método refund(), dependiendo de algunas condiciones correspondera a una **Reversa** o **Anulación**.  
+
+* Si haces un reembolso por el monto total de la venta y ha pasado menos de **una hora** desde que se realizó la transacción, entonces será una **REVERSA**
+* En cualquier otro caso, corresponderá a una **ANULACIÓN**
+
+Las compras con tarjeta de crédito se pueden REVERSAR y ANULAR.
+Si la compra es con tarjeta de débito o prepago, entonces solo se puede REVERSAR.
+
+En el caso de que se ejecute una Reversa, el valor de la transacción no se verá reflejado en la cartola de movimientos del cliente (** dependiendo del Banco), 
+a diferencia de la Anulación, en donde queda registro tanto del movimiento de cobro como la posterior anulación.
 
 La anulación puede realizarse máximo 90 días después de la fecha de la
 transacción original.
@@ -661,7 +688,12 @@ El método `Transaction.refund()` debe ser invocado siempre indicando el código
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final RefundWebpayPlusTransactionResponse response = WebpayPlus.Transaction.refund(token, amount);
+// Versión 3.x del SDK
+WebpayPlus.Transaction tx = new WebpayPlus.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusTransactionRefundResponse response = tx.refund(token, amount);
+
+// Versión 2.x del SDK
+final WebpayPlusTransactionRefundResponse response = WebpayPlus.Transaction.refund(token, amount);
 ```
 
 ```php
@@ -791,7 +823,12 @@ el código debe ser el código de la tienda virtual específica.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final CaptureWebpayPlusTransactionResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
+// Versión 3.x del SDK
+WebpayPlus.Transaction tx = new WebpayPlus.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusTransactionCaptureResponse response = tx.capture(token, buyOrder, authorizationCode, amount);
+
+// Versión 2.x del SDK
+final WebpayPlusTransactionCaptureResponse response = WebpayPlus.DeferredTransaction.capture(token, buyOrder, authorizationCode, amount);
 ```
 
 ```php
@@ -923,14 +960,24 @@ entregado tiene un periodo reducido de vida de 5 minutos, posterior a esto el
 token es caducado y no podrá ser utilizado en un pago.
 </aside>
 
+<aside class="notice">
+Tip: Para pruebas en el ambiente de integración te recomendamos crear un identificador único <i>buy_order</i> para cada 
+una de las transacciones. (Ejemplo: buy_order = nombre-de-mi-empresa-mall-1234, child_buy_order = nombre-de-mi-tienda-1).
+</aside>
+
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-MallTransactionCreateDetails transactionDetails = MallTransactionCreateDetails.build()
+MallTransactionCreateDetails mallDetails = MallTransactionCreateDetails.build()
                 .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne)
                 .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo);    
 
-final WebpayPlusMallTransactionCreateResponse response = WebpayPlus.MallTransaction.create(buyOrder, sessionId, returnUrl, transactionDetails);
+// Versión 3.x del SDK
+WebpayPlus.MallTransaction tx = new WebpayPlus.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusMallTransactionCreateResponse response = tx.create(buyOrder, sessionId, returnUrl, mallDetails);
+
+// Versión 2.x del SDK
+final WebpayPlusMallTransactionCreateResponse response = WebpayPlus.MallTransaction.create(buyOrder, sessionId, returnUrl, mallDetails);
 ```
 
 ```php
@@ -1135,7 +1182,13 @@ exactamente `0` y que el estado `status` sea exactamente `AUTHORIZED` por cada u
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final CommitWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.commit(token);
+// Versión 3.x del SDK
+WebpayPlus.MallTransaction tx = new WebpayPlus.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusMallTransactionCommitResponse response = tx.commit(token);
+
+```java
+// Versión 2.x del SDK
+final WebpayPlusMallTransactionCommitResponse response = WebpayPlus.MallTransaction.commit(token);
 ```
 
 ```php
@@ -1312,7 +1365,12 @@ Esta operación permite obtener el estado de la transacción en cualquier moment
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final StatusWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.status(token);
+// Versión 3.x del SDK
+WebpayPlus.MallTransaction tx = new WebpayPlus.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusMallTransactionStatusResponse response = tx.status(token);
+
+// Versión 2.x del SDK
+final WebpayPlusMallTransactionStatusResponse response = WebpayPlus.MallTransaction.status(token);
 ```
 
 ```php
@@ -1501,7 +1559,12 @@ más detalles y restricciones.
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final RefundWebpayPlusMallTransactionResponse response = WebpayPlus.MallTransaction.refund(token, buyOrder, commerceCode, amount);
+// Versión 3.x del SDK
+WebpayPlus.MallTransaction tx = new WebpayPlus.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusTransactionRefundResponse response = tx.refund(token, childBuyOrder, childCommerceCode, amount);
+
+// Versión 2.x del SDK
+final WebpayPlusMallTransactionRefundResponse response = WebpayPlus.MallTransaction.refund(token, childBuyOrder, childCommerceCode, amount);
 ```
 
 ```php
@@ -1587,7 +1650,12 @@ Para obtener la información contenida en la respuesta puedes hacerlo de la sigu
 <div class="language-simple" data-multiple-language></div>
 
 ```java
-final WebpayPlusMallTransactionCaptureResponse response = WebpayPlus.MallDeferredTransaction.capture(token, childCommerceCode, buyOrder, authorizationCode, amount);
+// Versión 3.x del SDK
+WebpayPlus.MallTransaction tx = new WebpayPlus.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final WebpayPlusMallTransactionCaptureResponse response = tx.capture(token, childCommerceCode, childBuyOrder, authorizationCode, amount);
+
+// Versión 2.x del SDK
+final WebpayPlusMallTransactionCaptureResponse response = WebpayPlus.MallDeferredTransaction.capture(token, childCommerceCode, childBuyOrder, authorizationCode, amount);
 ```
 
 ```php
@@ -1674,13 +1742,19 @@ Esta operación funciona de la misma manera que la [captura de Webpay Plus norma
 
 ## Credenciales y Ambiente
 
-Para Webpay Plus, las credenciales del comercio (código de comercio y API Key) varían según el la modalidad del producto usado (Webpay Plus, Webpay Plus Mall. Webpay Plus Diferido, Webpay Plus Mall Diferido). También varían si la moneda a manejar es pesos chilenos (CLP) o dólares (USD).
+### Ambiente de integración
 
-Por lo tanto, es clave que antes de operar con las clases que permiten realizar transacciones se configure correctamente el SDK para con estas credenciales para utilizar el producto correcto
+Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#ambiente-de-integracion)
 
-Los SDK pueden ser configurados para apuntar a un ambiente por defecto, estos ya vienen apuntados al ambiente de integración. Si quieres apuntar a producción tienes dos opciones; puedes re-configurar el SDK para que apunte a producción utilizando el código de comercio y API Key. O puedes configurar cada llamada a las operaciones siguientes para pasar un objeto `Options` en el cual configuras donde quieres apuntar.
+### Configuración SDK
+
+Los SDK vienen preconfigurados para operar directamente en el ambiente de integración. Si quieres apuntar a producción tienes dos opciones; puedes re-configurar el SDK para que apunte a producción utilizando el código de comercio y API Key. O puedes configurar cada llamada a las operaciones siguientes para pasar un objeto `Options` en el cual configuras donde quieres apuntar.
 
 Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#b-utilizando-los-sdk)
+
+### Puesta en Producción
+
+Puede encontrar más información al respecto [en este link](/documentacion/como_empezar#puesta-en-produccion)
 
 ## Conciliación de Transacciones
 

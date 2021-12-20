@@ -116,6 +116,25 @@ Es importante considerar que una vez invocado este método, el token que es ent
 </aside>
 
 ```java
+// Versión 3.x del SDK
+PatpassComercio.Inscription inscription = new PatpassComercio.Inscription(new PatpassOptions(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST));
+final PatpassComercioInscriptionStartResponse response = inscription.start(url,
+                    name,
+                    firstLastName,
+                    secondLastName,
+                    rut,
+                    serviceId,
+                    finalUrl,
+                    maxAmount,
+                    phoneNumber,
+                    mobileNumber,
+                    patpassName,
+                    personEmail,
+                    commerceEmail,
+                    address,
+                    city);  
+
+// Versión 2.x del SDK
 final PatpassComercioInscriptionStartResponse response = PatpassComercio.Inscription.start(
     'http://misitio.cl/finalizar_suscripcion',          // URL
     'Diego',                                            // Nombre
@@ -330,6 +349,12 @@ token que se generó en la inscripción
 La respuesta del método contiene el estado y la URL para desplegar el voucher.
 
 ```java
+// Versión 3.x del SDK
+
+PatpassComercio.Inscription inscription = new PatpassComercio.Inscription(new PatpassOptions(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST));
+final PatpassComercioTransactionStatusResponse response = inscription.status(token);
+
+// Versión 2.x del SDK
 final PatpassComercioTransactionStatusResponse response =
     PatpassComercio.Transaction.status(token);
 ```

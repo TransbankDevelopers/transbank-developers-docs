@@ -142,7 +142,11 @@ Puedes revisar más detalles de esta operación en [su documentación](/document
 Permite comenzar con el proceso de inscripción.
 
 ```java
-OneclickMallInscriptionStartResponse response = OneclickMall.Inscription.start(userName, email, responseUrl);
+// Versión 3.x del SDK
+Oneclick.MallInscription inscription = new Oneclick.MallInscription(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallInscriptionStartResponse response = inscription.start(username, email, response_url);
+// Versión 2.x del SDK
+OneclickMallInscriptionStartResponse response = Oneclick.MallInscription.start(userName, email, responseUrl);
 ```
 
 ```php
@@ -212,7 +216,7 @@ const response = await Oneclick.MallInscription.start(
 ```
 
 ```http
-POST /rswebpaytransaction/api/oneclick/v1.0/inscriptions
+POST /rswebpaytransaction/api/oneclick/v1.2/inscriptions
 
 Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -291,7 +295,12 @@ Permite finalizar el proceso de inscripción obteniendo el usuario tbk.
 Más información en [la documentación](/documentacion/oneclick).
 
 ```java
-final OneclickMallInscriptionFinishResponse response = OneclickMall.Inscription.finish(token);
+// Versión 3.x del SDK
+Oneclick.MallInscription inscription = new Oneclick.MallInscription(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallInscriptionFinishResponse response = inscription.finish(tbk_token);
+
+// Versión 2.x del SDK
+final OneclickMallInscriptionFinishResponse response = Oneclick.MallInscription.finish(token);
 ```
 
 ```php
@@ -336,7 +345,7 @@ const response = await Oneclick.MallInscription.finish(token);
 ```
 
 ```http
-PUT /rswebpaytransaction/api/oneclick/v1.0/inscriptions/{token}
+PUT /rswebpaytransaction/api/oneclick/v1.2/inscriptions/{token}
 
 Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -418,7 +427,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 response_code <br> <i> Number </i> | Código de respuesta de la autorización. <br> Largo: 2. <br> Valores posibles: <br> 0 = Transacción aprobada <br> Puedes revisar los códigos de respuesta de rechazo en el siguiente [link](/producto/webpay#codigos-de-respuesta-de-autorizacion)<br>
 tbk_user <br> <i> String </i> | Identificador único de la inscripción del cliente en Oneclick, que debe ser usado para realizar pagos o borrar la inscripción. <br> Largo: 40.
 authorization_code  <br> <i> String </i> | Código que identifica la autorización de la inscripción. <br> Largo: 6.
-card_type <br> <i> cardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna, Redcompra). <br> Largo: 15.
+card_type <br> <i> cardType </i> | Indica el tipo de tarjeta inscrita por el cliente (Visa, AmericanExpress, MasterCard, Diners, Magna, Redcompra, Prepago). <br> Largo: 15.
 card_number <br> <i> String </i> | Últimos 4 dígitos de la tarjeta inscrito.
 
 ### Eliminar una inscripción
@@ -431,6 +440,11 @@ Una vez finalizado el proceso de inscripción es posible eliminarla de ser neces
 Permite eliminar un usuario enrolado a Oneclick Mall.
 
 ```java
+// Versión 3.x del SDK
+Oneclick.MallInscription inscription = new Oneclick.MallInscription(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+inscription.delete(tbkUser, username);
+
+// Versión 2.x del SDK
 Oneclick.MallInscription.delete(tbkUser, userName)
 ```
 
@@ -481,7 +495,7 @@ const response = await Oneclick.MallInscription.delete(tbkUser, userName);
 ```
 
 ```http
-DELETE /rswebpaytransaction/api/oneclick/v1.0/inscriptions
+DELETE /rswebpaytransaction/api/oneclick/v1.2/inscriptions
 
 Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -545,11 +559,16 @@ para realizar transacciones. Para eso debes usar el método `Transaction.authori
 Permite autorizar un pago.
 
 ```java
-MallTransactionCreateDetails transactionDetails = MallTransactionCreateDetails.build()
+MallTransactionCreateDetails details = MallTransactionCreateDetails.build()
   .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne, installmentsNumberMallOne)
   .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo, installmentsNumberMallTwo);
 
-final OneclickMallTransactionAuthorizeResponse response = OneclickMall.Transaction.authorize(username, tbkUser, buyOrder, transactionDetails);
+// Versión 3.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallTransactionAuthorizeResponse response = tx.authorize(username, tbkUser, buyOrder, details);
+
+// Versión 2.x del SDK
+final OneclickMallTransactionAuthorizeResponse response = Oneclick.Transaction.authorize(username, tbkUser, buyOrder, details);
 ```
 
 ```php
@@ -683,7 +702,7 @@ const response = await Oneclick.MallTransaction.authorize(
 ```
 
 ```http
-POST /rswebpaytransaction/api/oneclick/v1.0/transactions
+POST /rswebpaytransaction/api/oneclick/v1.2/transactions
 
 Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -799,9 +818,7 @@ response.AccountingDate;
 response.BuyOrder;
 var cardDetail = response.CardDetail;
 cardDetail.CardNumber;
-response.SessionId;
 response.TransactionDate;
-response.Vci;
 var details = response.Details;
 foreach (var detail in details) {
     detail.Amount;
@@ -820,9 +837,7 @@ response.accounting_date
 response.buy_order
 card_detail = response.card_detail
 card_detail.card_number
-response.session_id
 response.transaction_date
-response.vci
 details = response.details
 details.each do |detail|
   detail.amount
@@ -841,9 +856,7 @@ response.accounting_date
 response.buy_order
 card_detail = response.card_detail
 card_detail.card_number
-response.session_id
 response.transaction_date
-response.vci
 details = response.details
 for detail in details:
   detail.amount
@@ -861,9 +874,7 @@ response.accounting_date
 response.buy_order
 cardDetail = response.card_detail
 cardDetail.card_number
-response.session_id
 response.transaction_date
-response.vci
 details = response.details
 for(let detail of details) {
   detail.amount
@@ -932,8 +943,13 @@ Retorna el resultado de la autorización.
 Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#obtener-estado-de-una-transaccion)
 
 ```java
+// Versión 3.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallTransactionStatusResponse response = tx.status(buyOrder);
+
+// Versión 2.x del SDK
 final OneclickMallTransactionStatusResponse response =
-  OneclickMall.Transaction.status(buyOrder);
+  Oneclick.Transaction.status(buyOrder);
 ```
 
 ```php
@@ -972,7 +988,7 @@ const response = await Oneclick.MallTransaction.status(token);
 ```
 
 ```http
-GET /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}
+GET /rswebpaytransaction/api/oneclick/v1.2/transactions/{buyOrder}
 
 Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -1196,8 +1212,13 @@ balance  <br> <i> Decimal </i> | Monto restante de la sub-transacción de pago
 Puedes revisar más detalles de esta operación en [su documentación](/documentacion/oneclick#reversar-o-anular-una-transaccion)
 
 ```java
+// Versión 3.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallTransactionRefundResponse response = tx.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+
+// Versión 2.x del SDK
 final OneclickMallTransactionRefundResponse response =
-  OneclickMall.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+  Oneclick.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
 
 ```php
@@ -1259,7 +1280,7 @@ const response = await Oneclick.MallTransaction.refund(buyOrder, childCommerceCo
 ```
 
 ```http
-POST /rswebpaytransaction/api/oneclick/v1.0/transactions/{buyOrder}/refunds
+POST /rswebpaytransaction/api/oneclick/v1.2/transactions/{buyOrder}/refunds
 
 Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -1282,6 +1303,8 @@ detail_buy_order  <br> <i> String </i> | Orden de compra hija de la transacció
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> | Monto que se desea anular o reversar de la transacción. Largo máximo: 17
 
 <strong>Respuesta Reversar o Anular</strong>
+
+En el caso de que la transacción corresponda a una Reversa solo se retorna el parámetro <i>type<i> (REVERSED).
 
 ```java
 response.getAuthorizationCode();
@@ -1350,7 +1373,7 @@ Content-Type: application/json
   "response_code": 0
 }
 
-En caso de une reversa no devuelve más información
+En caso de una reversa no devuelve más información
 {
   "type": "REVERSED",
 }
@@ -1371,6 +1394,11 @@ buy_order  <br> <i> String </i> | (Solo si es NULLIFIED)  Orden de compra gener
 Revisa más detalles sobre esta modalidad en [la documentación](/documentacion/oneclick#capturar-una-transaccion)
 
 ```java
+// Versión 3.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final OneclickMallTransactionCaptureResponse response = tx.capture(childCommerceCode, childBuyOrder, authorizationCode, amount);
+
+// Versión 2.x del SDK
 final OneclickMallTransactionCaptureResponse response = Oneclick.MallDeferredTransaction.capture(
   childCommerceCode, childBuyOrder, amount, authorizationCode
 );
@@ -1412,7 +1440,7 @@ const response = Oneclick.MallTransaction.capture(
 ```
 
 ```http
-PUT /rswebpaytransaction/api/oneclick/mall/v1.0/transactions/capture
+PUT /rswebpaytransaction/api/oneclick/mall/v1.2/transactions/capture
 Tbk-Api-Key-Id: 597055555547
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -1868,7 +1896,7 @@ Nunca dejes tu código de comercio y secreto compartido directamente en tu códi
 
 ```java
 // Para Oneclick
-OneclickMall.setCommerceCode('TU_CODIGO_DE_COMERCIO');
+Oneclick.setCommerceCode('TU_CODIGO_DE_COMERCIO');
 ```
 
 ```php
@@ -1956,7 +1984,7 @@ Oneclick.commerceCode = 'TU_CODIGO_DE_COMERCIO';
 
 ```java
 // Para Oneclick
-OneclickMall.setApiKey('TU_API_KEY');
+Oneclick.setApiKey('TU_API_KEY');
 ```
 
 ```php
@@ -1986,7 +2014,7 @@ Oneclick.apiKey = 'TU_API_KEY';
 
 ```java
 // Para Oneclick
-OneclickMall.setIntegrationType(IntegrationType.LIVE);
+Oneclick.setIntegrationType(IntegrationType.LIVE);
 ```
 
 ```php

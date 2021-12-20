@@ -167,6 +167,11 @@ token es caducado y no podrá ser utilizado en un pago.
 </aside>
 
 ```java
+// Versión 3.x del SDK
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+FullTransactionCreateResponse response = tx.create(buyOrder, sessionId, amount, cvv, cardNumber, cardExpirationDate);
+
+// Versión 2.x del SDK
 final FullTransactionCreateResponse response =  FullTransaction.Transaction.create(
   buyOrder,                         // ordenCompra12345678
   sessionId,                        // sesion1234564
@@ -227,7 +232,7 @@ Transaction.create(
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.0/transactions
+POST /rswebpaytransaction/api/webpay/v1.2/transactions
 
 Tbk-Api-Key-Id: 597055555530
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -327,6 +332,11 @@ El id de la consulta que selecciona el tarjetahabiente debe ser informado en la
 invocación de la confirmación.
 
 ```java
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionInstallmentsResponse response = tx.installments(token, installmentsDetails);
+
+// Versión 2.x del SDK
 final FullTransactionInstallmentsResponse response =  FullTransaction.Transaction.installment(token, installments_number);
 ```
 
@@ -369,7 +379,7 @@ Transaction.installments(
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/installments
+POST /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/installments
 
 Tbk-Api-Key-Id: 597055555530
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -470,7 +480,11 @@ transacción.
 
 ```java
 import cl.transbank.transaccioncompleta.FullTransaction;
+// Versión 3.x del SDK
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final FullTransactionCommitResponse response = tx.commit(token, idQueryInstallments, deferredPeriodIndex, gracePeriod);
 
+// Versión 2.x del SDK
 final FullTransactionCommitResponse response = FullTransaction.Transaction.commit(
   token, idQueryInstallments, deferredPeriodIndex, gracePeriod
 );
@@ -517,7 +531,7 @@ Transaction.commit(
 ```
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
+PUT /rswebpaytransaction/api/webpay/v1.2/transactions/{token}
 
 Tbk-Api-Key-Id: 597055555530
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -688,9 +702,17 @@ Esta operación permite obtener el estado de la transacción en cualquier mome
 Obtiene resultado de transacción a partir de un token.
 
 ```java
+// Versión 3.x del SDK
+import cl.transbank.webpay.transaccioncompleta.responses.FullTransactionStatusResponse;
+
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final FullTransactionStatusResponse response = tx.status(token);
+
+// Versión 2.x del SDK
 import cl.transbank.transaccioncompleta.FullTransaction;
 
 final FullTransactionStatusResponse response = FullTransaction.Transaction.status(token);
+
 ```
 
 ```php
@@ -717,7 +739,7 @@ Transaction.status(token=token)
 ```
 
 ```http
-GET /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
+GET /rswebpaytransaction/api/webpay/v1.2/transactions/{token}
 Tbk-Api-Key-Id: 597055555530
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -899,6 +921,12 @@ Dependiendo de la siguiente lógica de negocio la invocación a esta operacio�
 Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentre vigente.
 
 ```java
+// Versión 3.x del SDK
+import cl.transbank.webpay.transaccioncompleta.responses.FullTransactionRefundResponse;
+
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final FullTransactionRefundResponse response = tx.refund(token, amount);
+// Versión 3.x del SDK
 import cl.transbank.transaccioncompleta.FullTransaction;
 
 final FullTransactionRefundResponse response = FullTransaction.Transaction.refund(token,amount);
@@ -928,7 +956,7 @@ Transaction.refund(token=token, amount=amount)
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refunds
+POST /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/refunds
 Tbk-Api-Key-Id: 597055555530
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -950,6 +978,8 @@ token  <br> <i> String </i> | Token de la transacción. Largo: 64. (Se envía e
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> |  Monto que se desea anular o reversar de la transacción. Largo máximo: 17.
 
 <strong>Respuesta Transaction.refund</strong>
+
+En el caso de que la transacción corresponda a una Reversa solo se retorna el parámetro <i>type<i> (REVERSED).
 
 ```java
 response.getType();
@@ -1050,7 +1080,7 @@ Permite solicitar a Webpay la captura diferida de una transacción con
 autorización y sin captura simultánea.
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
+PUT /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/capture
 Tbk-Api-Key-Id: 597055555531
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -1084,6 +1114,13 @@ $transaction->capture($token, $buyOrder, $authorizationCode, $captureAmount);
 ```
 
 ```java
+// Versión 3.x del SDK
+import cl.transbank.webpay.transaccioncompleta.responses.FullTransactionCaptureResponse;
+
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final FullTransactionCaptureResponse response = tx.capture(token, buyOrder, authorizationCode, captureAmount);
+
+// Versión 3.x del SDK
 import cl.transbank.transaccioncompleta.FullTransaction;
 
 final FullTransactionCaptureResponse response = FullTransaction.Transaction.capture(token, buyOrder, authorizationCode, captureAmount);
@@ -1503,6 +1540,11 @@ MallTransactionCreateDetails transactionDetails = MallTransactionCreateDetails.b
   .add(amountMallOne, commerceCodeMallOne, buyOrderMallOne, installmentsNumberMallOne)
   .add(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo, installmentsNumberMallTwo);
 
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+MallFullTransactionCreateResponse response = tx.create(buyOrder, sessionId, cardNumber, cardExpirationDate, transactionDetails);
+
+// Versión 2.x del SDK
 final MallFullTransactionCreateResponse response = MallFullTransaction.Transaction.create(
   buyOrder,                           // ordenCompra12345678
   sessionId,                          // sesion1234564
@@ -1612,7 +1654,7 @@ response = Transaction.create(
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.0/transactions
+POST /rswebpaytransaction/api/webpay/v1.2/transactions
 
 Tbk-Api-Key-Id: 597055555551
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -1622,6 +1664,7 @@ Content-Type: application/json
   "buy_order": "ordenCompra12345678",
   "session_id": "sesion1234564",
   "card_number": "4239000000000000",
+  "cvv": 123,
   "card_expiration_date": "22/10",
   "details": [
     {
@@ -1661,6 +1704,7 @@ Nombre  <br> <i> tipo </i> | Descripción
 buy_order  <br> <i> String </i> | Es el código único de la orden de compra generada por el comercio mall. Largo máximo: 26
 session_id  <br> <i> String </i> |  Identificador de sesión, uso interno de comercio, este valor es devuelto al final de la transacción. Largo máximo: 61
 card_number  <br> <i> String </i> | Número de la tarjeta con la que se debe hacer la transacción. Largo máximo: 19
+cvv  <br> <i> String </i> | (Opcional) Código que se utiliza como método de seguridad en transacciones en las que la tarjeta no está físicamente presente. Largo máximo: 4. No se debe enviar para comercios con la opción `sin cvv` habilitada.
 card_expiration_date  <br> <i> String </i> | Fecha de expiración de la tarjeta con la que se realiza la transacción. Largo máximo: 5
 details  <br> <i> Array </i> | Lista de objetos, uno por cada tienda diferente del mall que participa en la transacción.
 details [].amount  <br> <i> Decimal </i> | Monto de la transacción de una tienda del mall. Máximo 2 decimales para USD. Largo máximo: 17.
@@ -1718,6 +1762,12 @@ invocación de la confirmación.
 
 ```java
 MallFullTransactionInstallmentsDetails installmentsDetails = MallFullTransactionInstallmentsDetails.build().add(commerceCode, buyOrder, installmentsNumber);
+
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionInstallmentsResponse response = tx.installments(token,installmentsDetails);
+
+// Versión 2.x del SDK
 final MallFullTransactionInstallmentsResponse response = MallFullTransaction.Transaction.installment(token, installmentsDetails);
 ```
 
@@ -1802,7 +1852,7 @@ response = Transaction.installments(token=token, details=details)
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/installments
+POST /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/installments
 
 Tbk-Api-Key-Id: 597055555551
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -1928,6 +1978,11 @@ MallTransactionCommitDetails details = MallTransactionCommitDetails.build().add(
   commerceCode,buyOrder,idQueryInstallments,deferredPeriodIndex,gracePeriod
 );
 
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionCommitResponse response = tx.commit(token, details);
+
+// Versión 2.x del SDK
 final MallFullTransactionCommitResponse response = MallFullTransaction.Transaction.commit(token, details);
 ```
 
@@ -2028,7 +2083,7 @@ response = Transaction.commit(
 ```
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
+PUT /rswebpaytransaction/api/webpay/v1.2/transactions/{token}
 
 Tbk-Api-Key-Id: 597055555551
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -2278,7 +2333,12 @@ Esta operación permite obtener el estado de la transacción Completa Mall en 
 Obtiene resultado de transacción a partir de un token.
 
 ```java
-MallFullTransaction.Transaction.status(token)
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionStatusResponse response = tx.status(tokenWs);
+
+// Versión 2.x del SDK
+MallFullTransaction.Transaction.status(token);
 ```
 
 ```php
@@ -2302,7 +2362,7 @@ Transaction.status(token)
 ```
 
 ```http
-GET /rswebpaytransaction/api/webpay/v1.0/transactions/{token}
+GET /rswebpaytransaction/api/webpay/v1.2/transactions/{token}
 Tbk-Api-Key-Id: 597055555551
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -2486,6 +2546,11 @@ Dependiendo de la siguiente lógica de negocio la invocación a esta operacio�
 Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentre vigente.
 
 ```java
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionRefundResponse response = tx.refund(token, buyOrder, childCommerceCode, amount);
+
+// Versión 2.x del SDK
 final MallFullTransactionRefundResponse response = MallFullTransaction.Transaction.refund(
   token, amount, commerceCode, buyOrder
 );
@@ -2531,7 +2596,7 @@ Transaction.refund(
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/refunds
+POST /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/refunds
 Tbk-Api-Key-Id: 597055555551
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -2562,6 +2627,8 @@ commerce_code  <br> <i> Number </i> | Tienda hija que realizó la transacción
 amount  <br> <i> Formato número entero para transacciones en peso. Sólo en caso de dólar acepta dos decimales. </i> |  Monto que se desea anular o reversar de la transacción. Largo máximo: 17
 
 <strong>Respuesta Transaction.refund Completa Mall</strong>
+
+En el caso de que la transacción corresponda a una Reversa solo se retorna el parámetro <i>type<i> (REVERSED).
 
 ```java
 response.getType();
@@ -2672,7 +2739,7 @@ el código debe ser el código de la tienda virtual específica.
 
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.0/transactions/{token}/capture
+PUT /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/capture
 Tbk-Api-Key-Id: 597055555531
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -2717,9 +2784,15 @@ Transaction.capture(
 ```
 
 ```java
+// Versión 3.x del SDK
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final MallFullTransactionCaptureResponse response = tx.capture(token, commerceCode, buyOrder, authorizationCode, captureAmount);
+
+// Versión 2.x del SDK
 final MallFullTransactionCaptureResponse response = MallFullTransaction.Transaction.capture(
   token, commerceCode, buyOrder, authorizationCode, captureAmount
 );
+
 ```
 
 <strong>Parámetros Transaction.capture</strong>

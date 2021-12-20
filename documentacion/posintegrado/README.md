@@ -6,7 +6,7 @@
 
 ## Cómo empezar
 
-La solución de POS integrado se comunica con la caja de tu comercio, permitiendo tener el control del cobro desde tu caja, y que el cliente pueda finalizar la operación sin mayor intervención del operador de la caja de tu comercio. Es importante que antes de  comenzar tu integración el equipo se encuentre en modo integrado. Para colocar el equipo en modo integrado puedes seguir las instrucciones disponibles descritas en [Cambio a POS Integrado](/referencia/posintegrado#cambio-modalidad-pos-integrado).
+La solución de POS integrado se comunica con la caja de tu comercio, permitiendo tener el control del cobro desde tu caja, y que el cliente pueda finalizar la operación sin mayor intervención del operador de la caja de tu comercio. Es importante que antes de  comenzar tu integración el equipo se encuentre en modo integrado. Para colocar el equipo en modo integrado puedes seguir las instrucciones disponibles descritas en [Cambio a POS Integrado](/documentacion/posintegrado#cambio-modalidad-pos-integrado).
 
 
 Por el momento, hay un SDK para [.NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet), [Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java) y [Javascript (tecnologías web)](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-js).
@@ -1212,16 +1212,67 @@ POS.setNormalMode().then(result => console.log(result));
 ```
 
 <aside class="notice">
-Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en el POS para regresar al modo Integrado, siguiendo las instrucciones disponibles descritas en [Cambio a POS Integrado](/referencia/posintegrado#cambio-modalidad-pos-integrado), pues no es posible realizar esta configuración a través del SDK.
+Si el POS Integrado se cambia a modo normal, debe ser configurado nuevamente en el POS para regresar al modo Integrado, siguiendo las instrucciones disponibles descritas en [Cambio a POS Integrado](/documentacion/posintegrado#cambio-modalidad-pos-integrado), pues no es posible realizar esta configuración a través del SDK.
 </aside>
 
-## Ejemplos de integración
+## Operación y Configuración del POS
 
-Ponemos a tu disposición un ejemplo en nuestro Github para ayudarte a entender mejor la integración.
+### Cambio Modalidad POS Integrado
 
-* [Ejemplo .Net](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet-example)
-* [Ejemplo Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java-example)
-* [Ejemplo Web](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-example)
+1. Primero debes ingresar al menú `Comercio` en el POS, seleccionando la opción correspondiente en la pantalla del POS e ingresar la **Clave Supervisora** confirmando con la tecla `Enter` (verde).
+<img src="/images/documentacion/pos-integrado/modo-pos-integrado-1.png" alt="Ingresar al menu Comercio">
+
+2. Luego debes seleccionar la opción `POS Integrado` desde la pantalla 2-2. Para ingresar a la pantalla 2 debes apretar la tecla `Enter`.
+<img src="/images/documentacion/pos-integrado/modo-pos-integrado-2.png" alt="Pantalla Comercio">
+
+3. Ingresa nuevamente la **Clave Supervisora** confirmando con la tecla `Enter`.
+
+4. Finalmente, debes seleccionar la opción `Conectar Caja`. El equipo indicará que se está activando el modo integrado.
+<img src="/images/documentacion/pos-integrado/modo-pos-integrado-3.png" alt="Pantalla POS Integrado">
+
+<aside class="notice">
+La <strong>Clave Supervisora</strong> por defecto es 123456
+</aside>
+
+<aside class="warning">
+Este flujo es referencial y las opciones pueden depender de los equipos que el comercio tenga contratados.
+</aside>
+
+### Cambio Modalidad POS Normal
+
+Si el POS se encuentra en modo Integrado, podrás ver una imagen de Transbank en la pantalla. Para volver al modo Normal de forma manual debes realizar lo siguiente:
+
+1. Presionar la tecla Asterisco (`*`) e ingresar la clave supervisora.
+2. Seleccionar la opción `Desconectar Caja`.
+3. Luego de esto el equipo volverá a modo Normal, y verás el menú de venta nuevamente.
+
+### Cambio de dirección IP
+
+El POS Integrado puede ser configurado con DHCP y dirección IP fija, para configurar la dirección IP se deben seguir los siguientes pasos:
+
+1. Con el equipo en modo normal, se debe ingresar a la opción `Técnico` desde la pantalla 2-2. Para ingresar a la pantalla 2 debes apretar la tecla `Enter` (verde).
+<img src="/images/documentacion/pos-integrado/ip-pos-integrado-1.png" alt="Ingresar al menú técnico">
+
+2. Luego debes seleccionar la opción `Func. Instalación` e ingresar el RUT y la clave de técnico correspondiente.
+<img src="/images/documentacion/pos-integrado/ip-pos-integrado-2.png" alt="Pantalla Técnico">
+
+3. Seleccionar la opción `Mod Param Conexión`.
+
+4. Seleccionar la opción `Ethernet`.
+<img src="/images/documentacion/pos-integrado/ip-pos-integrado-3.png" alt="Pantalla Func. Instalación">
+
+5. En el menú `Ethernet` seleccionar la opción `Conf IP Comercio`.
+
+6. Seleccionar `IP Fija` e ingresar la configuración de red (IP, Máscara de red y Puerta de enlace).
+<img src="/images/documentacion/pos-integrado/ip-pos-integrado-4.png" alt="Pantalla Ethernet">
+
+<aside class="warning">
+Configurar de forma incorrecta los parámetros de dirección IP pueden dejar tu equipo sin conexión a los servidores de Transbank.
+</aside>
+
+<aside class="warning">
+El menú de técnico permite configurar parámetros de conexión con los servidores de Transbank, el cambio de otros parámetros puede provocar que el POS Integrado no pueda realizar operaciones ni descargar actualizaciones.
+</aside>
 
 <div class="container slate">
   <div class='slate-after-footer'>
@@ -1251,37 +1302,3 @@ Ponemos a tu disposición un ejemplo en nuestro Github para ayudarte a entender 
     </div>
   </div>
 </div>
-
-## Operación y Configuración del POS
-
-### Cambio Modalidad POS Integrado
-
-1. Primero debes ingresar al menú `Comercio` en el POS seleccionando la opción correspondiente en la pantalla del POS.
-
-2. Luego debes seleccionar la opción `Func. Comercio` e ingresar la **Clave Supervisora** confirmando con la tecla `Enter` (verde).
-<img src="/images/referencia/posintegrado/cambio-pos-integrado-1.png" alt="Ingresar al menu Comercio">
-
-3. A continuación  selecciona la opción `POS Integrado` desde la pantalla 2-2
-
-4. Ingresa nuevamente la **Clave Supervisora** confirmando con la tecla `Enter`
-<img src="/images/referencia/posintegrado/cambio-pos-integrado-2.png" alt="Pantalla POS Integrado">
-
-5. Finalmente, debes seleccionar la opción `Conectar Caja`
-<img src="/images/referencia/posintegrado/cambio-pos-integrado-3.png" alt="Pantalla POS Integrado">
-
-<aside class="notice">
-La <strong>Clave Supervisora</strong> por defecto es 123456
-</aside>
-
-<aside class="warning">
-Este flujo es referencial y las opciones pueden depender de los equipos que el comercio tenga contratados.
-</aside>
-
-### Cambio Modalidad POS Normal
-
-Si el POS se encuentra en modo Integrado, podrás ver una imagen de Transbank en la pantalla. Para volver al modo Normal de forma manual:
-
-1. Presionar la tecla Asterisco (`*`) e ingresar la clave supervisora.
-2. Seleccionar la opción `Desconectar Caja`.
-3. Luego de este el equipo volverá a modo Normal, y veras el menu de venta nuevamente.
-

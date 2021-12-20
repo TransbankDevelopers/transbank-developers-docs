@@ -148,6 +148,11 @@ transaction.initTransaction(amount, buyOrder, sessionId, returnUrl, finalUrl)
       console.log(error.toString())
   });
 ```
+<aside class="notice">
+Tip: Para pruebas en el ambiente de integración te recomendamos crear un identificador único para el <i>buy_order</i>.
+(Ejemplo: buy_order = nombre-de-mi-empresa-328493)
+</aside>
+
 
 La URL y el token retornados te indican donde debes redirigir al usuario para
 que comience el flujo de pago. Esta redirección debe ser vía `POST` por lo que
@@ -343,6 +348,11 @@ const transaction = new Transbank.Webpay(
 
 <aside class="notice">
 Como necesitarás ese objeto `transaction` en múltiples ocasiones, es buena idea encapsular la lógica que lo genera en algún método que puedas reutilizar.
+</aside>
+
+<aside class="notice">
+Tip: Para pruebas en el ambiente de integración te recomendamos crear un identificador único <i>buy_order</i> para cada 
+una de las transacciones. (Ejemplo: buy_order = nombre-de-mi-empresa-mall-1234, child_buy_order = nombre-de-mi-tienda-1).
 </aside>
 
 Una vez que ya cuentas con esa preparación, puedes iniciar transacciones:
@@ -931,7 +941,7 @@ String username = "nombre_de_usuario";
 String email = "nombre_de_usuario@gmail.com";
 String response_url = "https://callback/resultado/de/transaccion";
 
-OneclickMallInscriptionStartResponse response = OneclickMall.Inscription.start(username, email, response_url);
+OneclickMallInscriptionStartResponse response = Oneclick.MallInscription.start(username, email, response_url);
 
 String url_webpay = response.getUrlWebpay();
 String tbk_token = response.getToken();
@@ -1002,7 +1012,7 @@ Una vez que se autorice la inscripción del usuario, se retornará el control al
 ```java
 //...
 String tbk_token = "tbkTokenRetornadoPorInscriptionStart";
-OneclickMallInscriptionFinishResponse response = OneclickMall.Inscription.finish(tbk_token);
+OneclickMallInscriptionFinishResponse response = Oneclick.MallInscription.finish(tbk_token);
 String tbkUser = response.getTbkUser();
 ```
 
@@ -1056,7 +1066,7 @@ Si en algún momento se quiere eliminar la inscripción de un usuario, se debe i
 String username = "nombre_de_usuario";
 String tbkUser = "tbkUserRetornadoPorInscriptionFinish";
 
-OneclickMall.Inscription.delete(username, tbkUser);
+Oneclick.MallInscription.delete(username, tbkUser);
 ```
 
 ```php
@@ -1130,7 +1140,7 @@ MallTransactionCreateDetails details = MallTransactionCreateDetails.build()
                 .add(amountOne, MallOneCommerceCode, buyOrderMallOne, installmentNumberOne)
                 .add(amuntTwo, MallTwoCommerceCode, buyOrderMallTwo, installmentNumberTwo);
 
-OneclickMallTransactionAuthorizeResponse response = OneclickMall.Transaction.authorize(username, tbkUser, buyOrder, details);
+OneclickMallTransactionAuthorizeResponse response = Oneclick.Transaction.authorize(username, tbkUser, buyOrder, details);
 ```
 
 ```php
@@ -1244,7 +1254,7 @@ String childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
 String childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
 double amount = (byte) 1;
 
-OneclickMallTransactionRefundResponse response = OneclickMall.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+OneclickMallTransactionRefundResponse response = Oneclick.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
 
 ```php
