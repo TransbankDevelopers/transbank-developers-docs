@@ -175,6 +175,28 @@ $response = PatpassComercio\Inscription::start(
 ```
 
 ```csharp
+
+// Versión 4.x del SDK
+var inscription = new Inscription(new Options(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, PatpassComercioIntegrationType.Test));
+var result = inscription.Start(
+    url: 'http://misitio.cl/finalizar_suscripcion',
+    name: 'Diego',
+    fLastname: 'Sanchez',
+    sLastname: 'Valdovinos',
+    rut: '12345678-9',
+    serviceId: '323123',
+    finalUrl: 'http://misitio.cl/voucher',
+    maxAmount: 0,
+    phoneNumber: '57508624',
+    mobileNumber: '57508624',
+    patpassName: 'Help - 8050014',
+    personEmail: 'persona@test.cl',
+    commerceEmail: 'comercio@test.cl',
+    address: 'Merced 156, Santiago, Chile',
+    city: 'Santiago'
+);
+
+// Versión 3.x del SDK
 var response = Inscription.Start(
     url: 'http://misitio.cl/finalizar_suscripcion',
     name: 'Diego',
@@ -364,6 +386,11 @@ $response = PatpassComercio\Inscription::getStatus($token);
 ```
 
 ```csharp
+// Versión 4.x del SDK
+var inscription = new Inscription(new Options(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, PatpassComercioIntegrationType.Test));
+var response = inscription.Status(token);
+
+// Versión 3.x del SDK
 var response = Inscription.Status(token);
 ```
 
