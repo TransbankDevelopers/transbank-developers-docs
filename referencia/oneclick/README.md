@@ -188,6 +188,11 @@ $tbk_token = $response->getToken();
 ```csharp
 using Transbank.Webpay.Oneclick;
 
+// Versión 4.x del SDK
+var ins = new MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = ins.Start(userName, email, returnUrl);
+
+// Versión 3.x del SDK
 var response = MallInscription.Start(userName, email, returnUrl);
 ```
 
@@ -325,6 +330,11 @@ $tbkUser = $response->getTbkUser();
 ```csharp
 using Transbank.Webpay.Oneclick;
 
+// Versión 4.x del SDK
+var ins = new MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = ins.Finish(token);
+
+// Versión 3.x del SDK
 var response = MallInscription.Finish(token);
 
 ```
@@ -476,6 +486,11 @@ $response = MallInscription::delete($tbkUser, $username, $options);
 ```csharp
 using Transbank.Webpay.Oneclick;
 
+// Versión 4.x del SDK
+var ins = new MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = ins.Delete(tbkUser, username);
+
+// Versión 3.x del SDK
 MallInscription.Delete(userName, tbkUser);
 ```
 
@@ -646,6 +661,11 @@ details.Add(new PaymentRequest(
   childCommerceCodeTwo, buyOrderMallTwo, amountMallTwo, installmentsNumber
 ));
 
+// Versión 4.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var result = tx.Authorize(userName, tbkUser, buyOrder, details);
+
+// Versión 3.x del SDK
 var result = MallTransaction.Authorize(userName, tbkUser, buyOrder, details);
 ```
 
@@ -968,7 +988,11 @@ $response = MallTransaction::getStatus($buyOrder);
 
 ```csharp
 using Transbank.Webpay.Oneclick;
+// Versión 4.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var result = tx.Status(buyOrder);
 
+// Versión 3.x del SDK
 var result = MallTransaction.Status(buyOrder);
 ```
 
@@ -1256,6 +1280,11 @@ $response = MallTransaction::refund($buyOrder, $childCommerceCode, $childBuyOrde
 ```csharp
 using Transbank.Webpay.Oneclick;
 
+// Versión 4.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var result = tx.Refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+
+// Versión 3.x del SDK
 var response = MallTransaction.Refund(buyOrder, childCommerceCode,childBuyOrder,amount);
 ```
 
@@ -1416,7 +1445,9 @@ use Transbank\Webpay\Oneclick\MallTransaction;
 $response = MallTransaction::capture($commerce_code, $buy_order, $authorization_code, $amount);```
 
 ```csharp
-// Esta funcion aun no se encuentra disponible en el SDK
+// Versión 4.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var result = tx.Capture(ChildcommerceCode, ChildbuyOrder, authorizationCode, amount);
 ```
 
 ```ruby
@@ -1483,7 +1514,10 @@ $response->getResponseCode();
 ```
 
 ```csharp
-// Esta función aun no se encuentra disponible en el SDK
+response.AuthorizationCode;
+response.AuthorizationDate;
+response.CapturedAmount;
+response.ResponseCode;
 ```
 
 ```ruby

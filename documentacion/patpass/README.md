@@ -39,6 +39,10 @@ PatpassComercio::setIntegrationType($integrationType);
 using Transbank.Common;
 using Transbank.Patpass.PatpassComercio;
 
+// Versión 4.x del SDK
+var inscription = new Inscription(new Options(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST));
+
+// Versión 3.x del SDK
 PatpassComercio.CommerceCode = "codigo de comercio en String";
 PatpassComercio.ApiKey = "Api Key en String";
 PatpassComercio.IntegrationType = "TEST / LIVE dependiendo de tu ambiente de integracion";
@@ -174,6 +178,26 @@ var commerceEmail = "Correo de comercio";
 var address = "Dirección de Suscrito";
 var city = "Ciudad de suscrito";
 
+// Versión 4.x del SDK
+var inscription = new Inscription(new Options(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, PatpassComercioIntegrationType.Test));
+var result = inscription.Start(
+                url: url,
+                name: name,
+                lastName: f_lastname,
+                secondLastName: s_lastname,
+                rut: rut,
+                serviceId: service_id,
+                finalUrl: final_url,
+                maxAmount: max_amount,
+                phone: phone_number,
+                cellPhone: mobile_number,
+                patpassName: patpass_name,
+                personEmail: client_email,
+                commerceEmail: commerce_email,
+                address: address,
+                city: city);
+
+// Versión 3.x del SDK
 var response = Inscription.Start(
     returnUrl,
     name,
@@ -326,6 +350,12 @@ $response = PatpassComercio\Inscription::Status($token);
 using Transbank.Patpass.PatpassComercio;
 
 var token = Request.Form["token_ws"];
+
+// Versión 4.x del SDK
+var inscription = new Inscription(new Options(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, PatpassComercioIntegrationType.Test));
+var result = inscription.Status(token);
+
+// Versión 3.x del SDK
 var result = Inscription.Status(token);
 
 ```
@@ -378,6 +408,10 @@ PatpassComercio::configureForTesting();
 using Transbank.Patpass.PatpassComercio;
 //..
 
+// Versión 4.x del SDK
+var inscription = new Inscription(new Options(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, PatpassComercioIntegrationType.Test));
+
+// Versión 3.x del SDK
 Inscription.IntegrationType = PatpassComercioIntegrationType.Test;
 Inscription.CommerceCode = "*******";
 Inscription.ApiKey = "*******";
@@ -413,7 +447,10 @@ PatpassComercio::setIntegrationType('LIVE');
 ```csharp
 using Transbank.Patpass.PatpassComercio;
 //..
+// Versión 4.x del SDK
+var inscription = new Inscription(new Options("***ApiKey****", "***CommerceCode****", PatpassComercioIntegrationType.Live));
 
+// Versión 3.x del SDK
 Inscription.IntegrationType = PatpassComercioIntegrationType.Live;
 ```
 

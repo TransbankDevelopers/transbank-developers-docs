@@ -75,6 +75,17 @@ var card_number = "Numero de Tarjeta";
 var card_expiration_date = "Fecha de expiracion en formato AA/MM";
 var cvv = 123; // CVV de la tarjeta.
 
+// Versión 4.x del SDK
+var tx = new FullTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+var response = tx.Create(
+                buyOrder: buy_order,
+                sessionId: session_id,
+                amount: amount,
+                cvv: cvv,
+                cardNumber: card_number,
+                cardExpirationDate: card_expiration_date);
+
+// Versión 3.x del SDK
 var response = FullTransaction.Create(
                 buyOrder: buy_order,
                 sessionId: session_id,
@@ -211,6 +222,13 @@ using Transbank.Webpay.TransaccionCompleta;
 var token = "token obtenido como respuesta de la creacion de transaccion";
 var installments_number = 10; // numero de cuotas;
 
+// Versión 4.x del SDK
+var tx = new FullTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+var response = tx.Installments(
+                token,
+                installments_number);
+
+// Versión 3.x del SDK
 var response = FullTransaction.Installments(
   token: token,
   installmentsNumber: installments_number
@@ -351,6 +369,11 @@ var idQueryInstallments = 12345679; // numero identificador de las cuotas.
 var deferredPeriodsIndex = 1;
 var gracePeriods = false;
 
+// Versión 4.x del SDK
+var tx = new FullTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+var response = tx.Commit(token, idQueryInstallments, deferredPeriodsIndex, gracePeriods);
+
+// Versión 3.x del SDK
 var result = FullTransaction.Commit(
   token:token,
   idQueryInstallments: idQueryInstallments,
@@ -536,6 +559,11 @@ $transaction->status($token_ws);
 ```csharp
 using Transbank.Webpay.TransaccionCompleta;
 
+// Versión 4.x del SDK
+var tx = new FullTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+var response = tx.Status(token);
+
+// Versión 3.x del SDK
 FullTransaction.Status(token);
 ```
 
@@ -706,6 +734,11 @@ $transaction->refund($token, $amount);
 ```csharp
 using Transbank.Webpay.TransaccionCompleta;
 
+// Versión 4.x del SDK
+var tx = new FullTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+var response = tx.Refund(token, amount);
+
+// Versión 3.x del SDK
 FullTransaction.Refund(token, amount);
 ```
 
@@ -810,7 +843,7 @@ para conocer más detalles y restricciones.
 ```java
 
 // Versión 3.x del SDK
-FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
 final FullTransactionCaptureResponse response = tx.capture(token, buyOrder, authorizationCode, captureAmount);
 ```
 
@@ -819,7 +852,9 @@ final FullTransactionCaptureResponse response = tx.capture(token, buyOrder, auth
 ```
 
 ```csharp
-// Aun no está disponible en este SDK
+// Versión 4.x del SDK
+var tx = new FullTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+var response = tx.Capture(token, buyOrder, authorizationCode, captureAmount);
 ```
 
 ```ruby
@@ -986,12 +1021,27 @@ transactionDetails.Add(new CreateDetails(
     buyOrderMallTwo
 ));
 
+// Versión 4.x del SDK
+var tx = new MallFullTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+var details = new List<CreateDetails>();
+details.Add(new CreateDetails(amountMallOne, commerceCodeMallOne, buyOrderMallOne));
+details.Add(new CreateDetails(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo));
+var response = tx.Create(
+    buyOrder: buy_order,
+    sessionId: session_id,
+    cardNumber: card_number,
+    cardExpirationDate: card_expiration_date,
+    details,
+    cvv: cvv
+);
+
+// Versión 3.x del SDK
 var response = MallFullTransaction.Create(
   buyOrder,
   sessionId,
   cardNumber,
   cardExpirationDate,
-  transactionDetails
+  details
 );
 ```
 
@@ -1150,8 +1200,18 @@ installmentsDetails.Add(new CreateDetails(
     installmentsNumberMallTwo
 ));
 
+// Versión 4.x del SDK
+var tx = new MallFullTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+var details = new List<CreateDetails>();
+details.Add(new CreateDetails(amountMallOne, commerceCodeMallOne, buyOrderMallOne));
+details.Add(new CreateDetails(amountMallTwo, commerceCodeMallTwo, buyOrderMallTwo));
+var response = tx.Installments(
+  token, installmentsDetails
+);
+
+// Versión 3.x del SDK
 var response = MallFullTransaction.Installments(
-  token, installmentDetails
+  token, installmentsDetails
 );
 ```
 
@@ -1280,6 +1340,13 @@ transactionDetails.Add(new MallCommitDetails(
     gracePeriodTwo
 ));
 
+// Versión 4.x del SDK
+var tx = new MallFullTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+var response = tx.Commit(
+  token, transactionDetails
+);
+
+// Versión 3.x del SDK
 var response = MallFullTransaction.Commit(
   token, transactionDetails
 );
@@ -1481,7 +1548,11 @@ $response = (new MallTransaction)->status(token);
 
 ```csharp
 using Transbank.Webpay.TransaccionCompletaMall;
+// Versión 4.x del SDK
+var tx = new MallFullTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+var response = tx.Status(token);
 
+// Versión 3.x del SDK
 var response = MallFullTransaction.Status(token);
 ```
 
@@ -1649,10 +1720,19 @@ use Transbank\TransaccionCompleta\MallTransaction;
 
 ```csharp
 using Transbank.Webpay.TransaccionCompletaMall;
-
-MallRefundRequest(
+// Versión 4.x del SDK
+var tx = new MallFullTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+var response = tx.Refund(
   token,
-  childBuyOrder,
+  buyOrder,
+  childCommerceCode,
+  amount
+);
+
+// Versión 3.x del SDK
+var response = MallFullTransaction.Refund(
+  token,
+  buyOrder,
   childCommerceCode,
   amount
 );
@@ -1787,7 +1867,16 @@ $transaction->capture($token, $commerceCode, $buyOrder, $authorizationCode, $cap
 ```
 
 ```csharp
-// Aun no está disponible en este SDK
+// Versión 4.x del SDK
+var tx = new MallFullTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+var response = tx.Capture(
+  token, 
+  childCommerceCode, 
+  buyOrder,
+  authorizationCode, 
+  captureAmount
+);
+
 ```
 
 ```ruby
@@ -1825,10 +1914,6 @@ $response->getAuthorizationCode();
 $response->getAuthorizationDate();
 $response->getCapturedAmount();
 $response->getResponseCode();
-```
-
-```csharp
-// Aun no está disponible en este SDK
 ```
 
 ```ruby

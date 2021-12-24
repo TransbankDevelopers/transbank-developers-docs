@@ -152,6 +152,10 @@ WebpayPlus.Transaction.setIntegrationType(IntegrationType.TEST);
 ```
 
 ```csharp
+// Versión 4.x del SDK
+var tx = new Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+
+// Versión 3.x del SDK
 // El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
 WebpayPlus.Transaction.CommerceCode = 597055555532;
 WebpayPlus.Transaction.ApiKey = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C";
@@ -231,6 +235,11 @@ $response = (new Transaction)->create($buy_order, $session_id, $amount, $return_
 ```csharp
 using Transbank.Webpay.WebpayPlus;
 
+// Versión 4.x del SDK
+var tx = new Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = tx.Create(buyOrder, sessionId, amount, returnUrl);
+
+// Versión 3.x del SDK
 var response = Transaction.Create(buyOrder, sessionId, amount, returnUrl);
 ```
 
@@ -353,6 +362,11 @@ $response = (new Transaction)->commit($token);
 ```csharp
 using Transbank.Webpay.WebpayPlus;
 
+// Versión 4.x del SDK
+var tx = new Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = tx.Commit(token);
+
+// Versión 3.x del SDK
 var response = Transaction.Commit(token);
 ```
 
@@ -557,6 +571,11 @@ $response = (new Transaction)->status('token-de-la-transaccion');
 ```csharp
 using Transbank.Webpay.WebpayPlus;
 
+// Versión 4.x del SDK
+var tx = new Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = tx.Status(token);
+
+// Versión 3.x del SDK
 var response = Transaction.Status(token);
 ```
 
@@ -768,7 +787,12 @@ $response = (new Transaction)->refund('token-de-la-transaccion', $amount);
 ```csharp
 using Transbank.Webpay.WebpayPlus;
 
-var response = Transaction.Refund(token, amount);
+// Versión 4.x del SDK
+var tx = new Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = tx.Refund(token, refundAmount);
+
+// Versión 3.x del SDK
+var response = Transaction.Refund(token, refundAmount);
 ```
 
 ```ruby
@@ -929,6 +953,11 @@ $response = (new Transaction)->capture($token, $buyOrder, $authCode, $amount);
 ```
 
 ```csharp
+// Versión 4.x del SDK
+var tx = new Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_DEFERRED, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = tx.Capture(token, buyOrder, authorizationCode, captureAmount);
+
+// Versión 3.x del SDK
 var response = DeferredTransaction.Capture(token, buyOrder, authorizationCode, captureAmount);
 ```
 
@@ -1124,6 +1153,11 @@ transactions.Add(new TransactionDetail(
     buyOrderMallTwo
 ));
 
+// Versión 4.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var result = tx.Create(buyOrder, sessionId, returnUrl, transactions);
+
+// Versión 3.x del SDK
 var result = MallTransaction.Create(buyOrder, sessionId, returnUrl, transactionDetails);
 ```
 
@@ -1297,7 +1331,11 @@ $response = (new MallTransaction)->commit($token);
 
 ```csharp
 using Transbank.Webpay.WebpayPlus;
+// Versión 4.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = tx.Commit(token);
 
+// Versión 3.x del SDK
 var response = MallTransaction.commit(token);
 ```
 
@@ -1533,7 +1571,11 @@ $response = (new MallTransaction)->status($token);
 
 ```csharp
 using Transbank.Webpay.WebpayPlus;
+// Versión 4.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = tx.Status(token);
 
+// Versión 3.x del SDK
 var response = MallTransaction.status(token)
 ```
 
@@ -1767,6 +1809,11 @@ $response = (new \Transbank\Webpay\WebpayPlus\MallTransaction)->refund($token, $
 ```
 
 ```csharp
+// Versión 4.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = tx.Refund(token, buyOrder, commerceCode, amount);
+
+// Versión 3.x del SDK
 var response = Transaction.refund(token, buyOrder, commerceCode, amount);
 ```
 
@@ -1930,6 +1977,11 @@ $response = (new MallTransaction)->capture($childCommerceCode, $token, $buyOrder
 ```
 
 ```csharp
+// Versión 4.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = tx.Capture(token, childCommerceCode, buyOrder, authorizationCode, captureAmount);
+
+// Versión 3.x del SDK
 var response = Transbank.Webpay.WebpayPlus.MallDeferredTransaction.Capture(token, childCommerceCode, buyOrder, authorizationCode, captureAmount);
 ```
 
