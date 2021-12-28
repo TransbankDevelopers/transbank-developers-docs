@@ -183,7 +183,7 @@ Task<SaleResponse> response = POSAutoservicio.Instance.Sale(ammount, ticket, tru
 
 //...
 //Manejador de mensajes intermedios...
-private static void NewIntermadiateMessageRecived(object sender, IntermediateResponse e){
+private static void NewIntermediateMessageReceived(object sender, IntermediateResponse e){
   //...
 }
 //...
@@ -254,7 +254,7 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta mu
 
 * `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
 * `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
-* `CodigoDeComercio`: Código de comercio que realiza la venta. (No es el mismo código del POS, ya que en multicódigo el código padre no puede realizar ventas.)
+* `CódigoDeComercio`: Código de comercio que realiza la venta. (No es el mismo código del POS, ya que en multicódigo el código padre no puede realizar ventas.)
 * `Enviar voucher`: (Opcional) Indica si el POS al finalizar la transacción envía el voucher formateado en la respuesta (verdadero) o se omite (falso, por defecto).
 * `Enviar Status`: (Opcional) Indica si se envían los mensajes intermedios (verdadero) o se omiten (falso, por defecto).
 
@@ -268,12 +268,12 @@ using Transbank.Responses.CommonResponses;
 using Transbank.Responses.AutoservicioResponse;
 //...
 
-POSAutoservicio.Instance.IntermediateResponseChange += NewIntermadiateMessageRecived; //EventHandler para los mensajes intermedios.
-Task<MultiCodeSaleResponse> response = POSAutoservicio.Instance.MultiCodeSale(ammount, ticket, commerceCode, true, true);
+POSAutoservicio.Instance.IntermediateResponseChange += NewIntermediateMessageReceived; //EventHandler para los mensajes intermedios.
+Task<MultiCodeSaleResponse> response = POSAutoservicio.Instance.MultiCodeSale(amount, ticket, commerceCode, true, true);
 
 //...
 //Manejador de mensajes intermedios...
-private static void NewIntermadiateMessageRecived(object sender, IntermediateResponse e){
+private static void NewIntermediateMessageReceived(object sender, IntermediateResponse e){
   //...
 }
 //...
@@ -328,7 +328,7 @@ El objeto MultiCodeSaleResponse retornará un objeto con los siguientes datos:
 ```
 
 <aside class="notice">
-Si se solicita que el POS envie en la respuesta el voucher formateado, se entregará una lista de strings que contendrá cada línea del voucher.
+Si se solicita que el POS envíe en la respuesta el voucher formateado, se entregará una lista de strings que contendrá cada línea del voucher.
 </aside>
 
 <aside class="warning">
@@ -376,8 +376,8 @@ El objeto LastSaleResponse retornará un objeto con los siguientes datos:
   "Commerce Code": 550062700310,
   "Terminal Id": "ABC1234C",
   "Ticket": "ABC123",
-  "Autorization Code": "XZ123456",
-  "Ammount": 15000,
+  "Authorization Code": "XZ123456",
+  "Amount": 15000,
   "Last 4 Digits": 6677,
   "Operation Number": 60,
   "Card Type": "CR",
@@ -618,7 +618,7 @@ El objeto InitializationResponse retornará un objeto con los siguientes datos:
 
 ### Voucher
 
-Los voucher serán generados por el POS Autoservicio cuando el párametro `Enviar voucher` sea verdadero, el voucher puede ser retornado en la respuesta de las transacciones de venta, <!-- venta multicódigo, --> última venta, anulación y cierre.
+Los voucher serán generados por el POS Autoservicio cuando el parámetro `Enviar voucher` sea verdadero, el voucher puede ser retornado en la respuesta de las transacciones de venta, <!-- venta multicódigo, --> última venta, anulación y cierre.
 
 Cada línea contendrá 40 caracteres, los que se concatenarán en un solo buffer que será enviado en el campo de impresión en las respuesta de las transacciones mencionadas anteriormente. Al recibir el buffer se debe considerar que cada 40 caracteres se compone una línea del voucher.
 

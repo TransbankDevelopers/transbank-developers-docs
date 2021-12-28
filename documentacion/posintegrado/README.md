@@ -85,12 +85,12 @@ También se puede incluir directamente el tag script
 ```
 
 <aside class="warning">
-Si utilizas el metodo de tag script, entonces el objeto POS se pasa a llamar Transbank.POS en todos los ejemplos que siguen en esta guia.
+Si utilizas el método de tag script, entonces el objeto POS se pasa a llamar Transbank.POS en todos los ejemplos que siguen en esta guia.
 </aside>
 
 <strong>Instalar el agente desktop</strong>
 
-Revisa la lista de versiones públicadas y [descarga la última versión](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent/releases). Verás que hay un archivo .exe que debes bajar si usas windows, o un archivo .zip si usas MacOS. Luego, solo debes de instalar y ejecutar el programa.
+Revisa la lista de versiones publicadas y [descarga la última versión](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent/releases). Verás que hay un archivo .exe que debes bajar si usas windows, o un archivo .zip si usas MacOS. Luego, solo debes de instalar y ejecutar el programa.
 
 Este agente debe estar ejecutándose siempre para que el SDK Javascript funcione correctamente. Puedes ejecutarlo automáticamente cuando se inicie el computador.
 La primera vez que se ejecuta el agente, este se configura automáticamente para iniciar en el startup del computador.
@@ -394,7 +394,7 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta. L
 
 * `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
 * `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
-* `Enviar Status`: (Opcional) Indica si se envian los mensajes intermedios (verdadero) o se omiten (falso, por defecto)
+* `Enviar Status`: (Opcional) Indica si se envían los mensajes intermedios (verdadero) o se omiten (falso, por defecto)
 
 En el caso de C#, los mensajes intermedios se reciben mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`.
 
@@ -408,12 +408,12 @@ using Transbank.Responses.CommonResponses;
 using Transbank.Responses.IntegradoResponse;
 //...
 
-POSIntegrado.Instance.IntermediateResponseChange += NewIntermadiateMessageRecived; //EventHandler para los mensajes intermedios.
-Task<SaleResponse> response = POSIntegrado.Instance.Sale(ammount, ticket, true);
+POSIntegrado.Instance.IntermediateResponseChange += NewIntermediateMessageReceived; //EventHandler para los mensajes intermedios.
+Task<SaleResponse> response = POSIntegrado.Instance.Sale(amount, ticket, true);
 
 //...
 //Manejador de mensajes intermedios...
-private static void NewIntermadiateMessageRecived(object sender, IntermediateResponse e){
+private static void NewIntermediateMessageReceived(object sender, IntermediateResponse e){
   //...
 }
 //...
@@ -468,7 +468,7 @@ pos.sale(1500, '12423', true, callback)
 import POS from "transbank-pos-sdk-web";
 
 POS.doSale(this.total, "ticket1", (data) => {
-//Este tercer parametro es opcional. Si está presente, se ejecutará cada vez que llegue un mensaje de status de la venta.
+//Este tercer parámetro es opcional. Si está presente, se ejecutará cada vez que llegue un mensaje de status de la venta.
 console.log('Mensaje de status recibido', data);
 }).then((saleResponse) => {
     console.log(saleResponse);
@@ -519,7 +519,7 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta mu
 * `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
 * `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
 * `Código De Comercio`: Código de comercio que realiza la venta. (No es el mismo código del POS, ya que en multicódigo el código padre no puede realizar ventas.)
-* `Enviar Status`: (Opcional) Indica si se envian los mensajes intermedios (verdadero) o se omiten (falso, por defecto)
+* `Enviar Status`: (Opcional) Indica si se envían los mensajes intermedios (verdadero) o se omiten (falso, por defecto)
 
 En el caso de C#, los mensajes intermedios se reciben mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`
 
@@ -697,7 +697,7 @@ El resultado de la transacción última venta devuelve los mismos datos que una 
 
 Este comando es enviado por la caja, solicitando al POS la re-impresión de la última venta realizada, y además permite recepcionar el voucher como parte de la respuesta del pos.
 
-* `Enviar Voucher:` Indica si se envia un voucher formateado en la respuesta del POS (verdadero) o si se debe omitir (false).
+* `Enviar Voucher:` Indica si se envía un voucher formateado en la respuesta del POS (verdadero) o si se debe omitir (false).
 
 Si el POS recibe el comando de última venta y no existen transacciones en memoria del POS, se envía la respuesta a la caja indicando el código de respuesta 11.
 ([Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas))
@@ -708,7 +708,7 @@ Si el POS recibe el comando de última venta y no existen transacciones en memor
 using Transbank.POSIntegrado;
 using Transbank.Responses.IntegradoResponse;
 //...
-Task<MultiCodeLastSaleResponse> response = POSIntegrado.Instance.MultiCodeLastSale(true); //bool indica si pos envia o no el voucher como parte de la respuesta
+Task<MultiCodeLastSaleResponse> response = POSIntegrado.Instance.MultiCodeLastSale(true); //bool indica si pos envía o no el voucher como parte de la respuesta
 ```
 
 ```c
@@ -722,7 +722,7 @@ import cl.transbank.pos.responses.integrado.*;
 
 POSIntegrado pos = new POSIntegrado();
 MultiCodeLastSaleResponse response = pos.multiCodeLastSale(true); 
-//bool indica si pos envia o no el voucher como parte de la respuesta
+//bool indica si pos envía o no el voucher como parte de la respuesta
 ```
 
 ```javascript
@@ -797,7 +797,6 @@ import cl.transbank.pos.responses.common.*;
 POSIntegrado pos = new POSIntegrado();
 RefundResponse response = pos.refund(21);
 ```
-
 
 ```js
 pos.refund('102').then( (response) => {
@@ -950,13 +949,13 @@ El resultado de la transacción entrega en la forma de un objeto `TotalsResponse
   "Function": 710,
   "Response": "Aprobado",
   "TX Count": 3,     // Cantidad de transacciones
-  "TX Total": 15000  // Suma total de los montos de cada transaccion
+  "TX Total": 15000  // Suma total de los montos de cada transacción
 }
 ```
 
 ### Transacción de Detalle de Ventas
 
-Esta transacción solicita al POS **todas** las transacciones que se han realizado y permanecen en la memoria del POS. El parámetro que recibe esta función es de tipo booleano e indica si se realiza la impresión del detalle en el POS. En el caso de que no se solicite la impresión, el POS envía **todas** las transacciones a la caja, una por una. Si se realiza la impresión, la caja recibira una lista vacia de transacciónes.
+Esta transacción solicita al POS **todas** las transacciones que se han realizado y permanecen en la memoria del POS. El parámetro que recibe esta función es de tipo booleano e indica si se realiza la impresión del detalle en el POS. En el caso de que no se solicite la impresión, el POS envía **todas** las transacciones a la caja, una por una. Si se realiza la impresión, la caja recibirá una lista vacía de transacciones.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -1165,7 +1164,6 @@ import cl.transbank.pos.responses.common.*;
 POSIntegrado pos = new POSIntegrado();
 LoadKeysResponse response = pos.loadKeys();
 ```
-
 
 ```js
 pos.loadKeys().then( (response) => {
