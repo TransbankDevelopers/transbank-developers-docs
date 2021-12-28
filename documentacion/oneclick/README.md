@@ -228,6 +228,11 @@ const username = 'nombre_de_usuario';
 const email = 'nombre_de_usuario@email.com';
 const responseUrl = 'https://callback/resultado/de/inscripcion';
 
+// Versión 3.x del SDK
+const ins = new Oneclick.MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await ins.start(username, email, responseUrl);
+
+// Versión 2.x del SDK
 const response = await Oneclick.MallInscription.start(username, email, responseUrl);
 ```
 
@@ -352,6 +357,11 @@ tbkUser = resp.tbk_user
 ```javascript
 //...
 const token = 'tbkToken' // token que llega por POST en el parámetro "TBK_TOKEN"
+// Versión 3.x del SDK
+const ins = new Oneclick.MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await ins.finish(token);
+
+// Versión 2.x del SDK
 const response = Oneclick.MallInscription.finish(token);
 ```
 
@@ -492,6 +502,11 @@ resp = MallInscription.delete(tbk_user=tbkUser, user_name=username)
 ```javascript
 username = 'nombre_de_usuario';
 tbkUser = 'tbkUserRetornadoPorInscriptionFinish';
+// Versión 3.x del SDK
+const ins = new Oneclick.MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await ins.delete(tbkUser, username);
+
+// Versión 2.x del SDK
 const response = await Oneclick.MallInscription.delete(tbkUser, username);
 ```
 
@@ -721,6 +736,11 @@ const details = [
   new TransactionDetail(amount2, commerceCode2, childBuyOrder2)
 ];
 
+// Versión 3.x del SDK
+const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.authorize(userName, tbkUser, buyOrder, details);
+
+// Versión 2.x del SDK
 const response = await Oneclick.MallTransaction.authorize(
   userName, tbkUser, buyOrder, details
 );
@@ -958,6 +978,11 @@ var response = MallTransaction.status(buy_order)
 ```
 
 ```javascript
+// Versión 3.x del SDK
+const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.status(token);
+
+// Versión 2.x del SDK
 const response = await Oneclick.MallTransaction.status(token);
 ```
 
@@ -1258,6 +1283,12 @@ const buyOrder = "buyOrderIndicadoEnTransactionAuthorize";
 const childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
 const childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
 const amount = 10000;
+
+// Versión 3.x del SDK
+const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.refund(buyOrder, childCommerceCode, buyOrderChild, amount);
+
+// Versión 2.x del SDK
 const response = await Oneclick.MallTransaction.refund(buyOrder, childCommerceCode, buyOrderChild, amount);
 ```
 
@@ -1302,7 +1333,7 @@ En esta modalidad no se aceptan tarjetas de débito ni prepago.
 
 ```java
 // Versión 3.x del SDK
-Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
 final OneclickMallTransactionCaptureResponse response = tx.capture(childCommerceCode, childBuyOrder, authorizationCode, amount);
 
 // Versión 2.x del SDK
@@ -1325,7 +1356,7 @@ $response = MallTransaction::capture($commerce_code, $buy_order, $authorization_
 
 ```csharp
 // Versión 4.x del SDK
-var tx = new MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
 var result = tx.Capture(ChildcommerceCode, ChildbuyOrder, authorizationCode, amount);
 
 ```
@@ -1342,6 +1373,11 @@ response = Transbank::Webpay::Oneclick::MallDeferredTransaction::capture(
 ```
 
 ```javascript
+// Versión 3.x del SDK
+const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.capture(commerceCode, buyOrder, authorizationCode, amount);
+
+// Versión 2.x del SDK
 const response = await Oneclick.DeferredTransaction.capture(commerceCode, buyOrder, amount, authorizationCode);
 ```
 

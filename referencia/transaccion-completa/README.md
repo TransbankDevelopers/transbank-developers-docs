@@ -260,6 +260,13 @@ Content-Type: application/json
 ```
 
 ```javascript
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.create(
+  buyOrder, sessionId, amount, cvv, cardNumber, cardExpirationDate
+);
+
+// Versión 2.x del SDK
 const response = await TransaccionCompleta.transaction.create(buyOrder, sessionId, amount, cvv, cardNumber, cardExpirationDate);
 
 ```
@@ -408,6 +415,11 @@ Content-Type: application/json
 ```
 
 ```javascript
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.installments(token, installmentsNumber);
+
+// Versión 2.x del SDK
 const response = await TransaccionCompleta.Transaction.installments(token, installmentsNumber);
 ```
 
@@ -567,6 +579,13 @@ Content-Type: application/json
 ```
 
 ```javascript
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.commit(
+  token, idQueryInstallments, deferredPeriodIndex, gracePeriod
+);
+
+// Versión 2.x del SDK
 const response = await TransaccionCompleta.Transaction.commit(
     token, idQueryInstallments, deferredPeriodIndex, gracePeriod);
 ```
@@ -772,6 +791,12 @@ Content-Type: application/json
 ```
 
 ```javascript
+
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.status(token);
+
+// Versión 2.x del SDK
 const response = await TransaccionCompleta.Transaction.status(token);
 ```
 
@@ -998,6 +1023,11 @@ Content-Type: application/json
 ```
 
 ```javascript
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.refund(token, amount);
+
+// Versión 2.x del SDK
 const response = await TransaccionCompleta.Transaction.refund(token, amount);
 ```
 
@@ -1133,6 +1163,13 @@ Transbank::TransaccionCompleta::Transaction.capture(
 ```
 
 ```javascript
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.capture(
+  token, buyOrder, authorizationCode, amount
+);
+
+// Versión 2.x del SDK
 const response = TransaccionCompleta.DeferredTransaction.capture(
   token, buyOrder, authorizationCode, amount
 );
@@ -1442,12 +1479,24 @@ const details = [
   new TransactionDetail(amount2, commerceCode2, childBuyOrder2)
 ];
 
-const response = await TransaccionCompleta.MallTransaction.create(		
-  parentBuyOrder,		
-  sessionId,		
-  cvv,		
-  cardNumber,		
-  cardExpirationDate,		
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.MallTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.create(
+  parentBuyOrder,
+  sessionId,
+  cardNumber,
+  cardExpirationDate,
+  details,
+  cvv
+);
+
+// Versión 2.x del SDK
+const response = await TransaccionCompleta.MallTransaction.create(
+  parentBuyOrder,
+  sessionId,
+  cvv,
+  cardNumber,
+  cardExpirationDate,
   details
 );
 ```
@@ -1631,10 +1680,18 @@ Content-Type: application/json
 const details = [
   new InstallmentDetail(childCommerceCode, childBuyOrder, installmentsNumber),
   new InstallmentDetail(childCommerceCode2, childBuyOrder2, installmentsNumber2)
-  ];		
+  ];
 
-const response = await TransaccionCompleta.MallTransaction.installments(		
-  token,		
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.MallTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.installments(
+  token,
+  details
+);
+
+// Versión 2.x del SDK
+const response = await TransaccionCompleta.MallTransaction.installments(
+  token,
   details
 );
 ```
@@ -1875,9 +1932,18 @@ Content-Type: application/json
 let commitDetails = [
   new CommitDetail(commerceCode, childBuyOrder),
   new CommitDetail(commerceCode2, childBuyOrder2)
-];		
-const response = await TransaccionCompleta.MallTransaction.commit(		
-  token,		
+];
+
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.MallTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.commit(
+  token,
+  commitDetails
+);
+
+// Versión 2.x del SDK
+const response = await TransaccionCompleta.MallTransaction.commit(
+  token,
   commitDetails
 );
 ```
@@ -2143,6 +2209,11 @@ Content-Type: application/json
 ```
 
 ```javascript
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.MallTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.status(token);
+
+// Versión 2.x del SDK
 const response = await TransaccionCompleta.MallTransaction.status(token);
 ```
 
@@ -2393,11 +2464,21 @@ Content-Type: application/json
 ```
 
 ```javascript
-const refundResponse = await TransaccionCompleta.MallTransaction.refund(		
-  token,	
-  buyOrder,		
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.MallTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.refund(
+  token,
+  buyOrder,
   commerceCode,
-  amount		
+  amount
+);
+
+// Versión 2.x del SDK
+const refundResponse = await TransaccionCompleta.MallTransaction.refund(
+  token,
+  buyOrder,
+  commerceCode,
+  amount
 );
 ```
 
@@ -2554,6 +2635,13 @@ $transaction->capture($token, $commerceCode, $buyOrder, $authorizationCode, $cap
 ```
 
 ```javascript
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.MallTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.refund(
+  token, commerceCode, buyOrder, authorizationCode, amount
+);
+
+// Versión 2.x del SDK
 const response = TransaccionCompleta.MallDeferredTransaction.capture(
   token, commerceCode, buyOrder, authorizationCode, amount
 );
