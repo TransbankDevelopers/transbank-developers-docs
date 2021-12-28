@@ -84,6 +84,14 @@ using Transbank.Responses.CommonResponses;
 using Transbank.Responses.AutoservicioResponse;
 ```
 
+```java
+import cl.transbank.pos.POSAutoservicio;
+import cl.transbank.pos.exceptions.common.*;
+import cl.transbank.pos.exceptions.autoservicio.*;
+import cl.transbank.pos.responses.common.*;
+import cl.transbank.pos.responses.autoservicio.*;
+```
+
 ### Listar puertos disponibles
 
 Si los respectivos drivers están instalados, entonces puedes usar la función `ListPorts()` para identificar los puertos que se encuentren disponibles y seleccionar el que
@@ -95,6 +103,14 @@ corresponda con el puerto donde conectaste el POS Autoservicio.
 using Transbank.POSAutoservicio;
 //...
 List<string> ports = POSAutoservicio.Instance.ListPorts();
+```
+
+```java
+import cl.transbank.pos.POSAutoservicio;
+//...
+
+POSAutoservicio pos = new POSAutoservicio();
+List<String> ports = pos.listPorts();
 ```
 
 ### Abrir un puerto Serial
@@ -112,6 +128,16 @@ string portName = "COM3";
 POSAutoservicio.Instance.OpenPort(portName);
 ```
 
+```java
+import cl.transbank.pos.POSAutoservicio;
+//...
+
+POSAutoservicio pos = new POSAutoservicio();
+String port = "COM4";
+int baudRate = 19200;
+pos.openPort(port, baudRate);
+```
+
 ### Cerrar un puerto Serial
 
 Al finalizar el uso del POS, o si se desea desconectar de la Caja se debe liberar el puerto serial abierto anteriormente.
@@ -122,6 +148,13 @@ Al finalizar el uso del POS, o si se desea desconectar de la Caja se debe libera
 using Transbank.POSAutoservicio;
 //...
 POSAutoservicio.Instance.ClosePort();
+```
+```java
+import cl.transbank.pos.POSAutoservicio;
+//...
+
+POSAutoservicio pos = new POSAutoservicio();
+pos.closePort();
 ```
 
 ## Transacciones
@@ -156,6 +189,24 @@ private static void NewIntermadiateMessageRecived(object sender, IntermediateRes
 //...
 ```
 
+```java
+import cl.transbank.pos.POSAutoservicio;
+import cl.transbank.pos.responses.autoservicio.*;
+//...
+
+POSAutoservicio pos = new POSAutoservicio();
+SaleResponse response = pos.sale(amount, ticket, true);
+
+pos.setOnIntermediateMessageReceivedListener(this::onIntermediateMessageReceived);
+
+//...
+//Manejador de mensajes intermedios...
+private void onIntermediateMessageReceived(IntermediateResponse response) {
+  //...
+}
+//...
+```
+
 El resultado de la venta se entrega en la forma de un objeto `SaleResponse>`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException` en .NET.
 
 El objeto SaleResponse retornará un objeto con los siguientes datos:
@@ -168,8 +219,8 @@ El objeto SaleResponse retornará un objeto con los siguientes datos:
   "Commerce Code": 550062700310,
   "Terminal Id": "ABC1234C",
   "Ticket": "ABC123",
-  "Autorization Code": "XZ123456",
-  "Ammount": 15000,
+  "Authorization Code": "XZ123456",
+  "Amount": 15000,
   "Last 4 Digits": 6677,
   "Operation Number": 60,
   "Card Type": "CR",
@@ -228,6 +279,24 @@ private static void NewIntermadiateMessageRecived(object sender, IntermediateRes
 //...
 ```
 
+```java
+import cl.transbank.pos.POSAutoservicio;
+import cl.transbank.pos.responses.autoservicio.*;
+//...
+
+POSAutoservicio pos = new POSAutoservicio();
+MultiCodeSaleResponse response = pos.multiCodeSale(amount, ticket, commerceCode, true);
+
+pos.setOnIntermediateMessageReceivedListener(this::onIntermediateMessageReceived);
+
+//...
+//Manejador de mensajes intermedios...
+private void onIntermediateMessageReceived(IntermediateResponse response) {
+  //...
+}
+//...
+```
+
 El resultado de la venta se entrega en la forma de un objeto `MultiCodeSaleResponse` Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException` en .NET.
 
 El objeto MultiCodeSaleResponse retornará un objeto con los siguientes datos:
@@ -240,8 +309,8 @@ El objeto MultiCodeSaleResponse retornará un objeto con los siguientes datos:
   "Commerce Code": 550062700310,
   "Terminal Id": "ABC1234C",
   "Ticket": "ABC123",
-  "Autorization Code": "XZ123456",
-  "Ammount": 15000,
+  "Authorization Code": "XZ123456",
+  "Amount": 15000,
   "Last 4 Digits": 6677,
   "Operation Number": 60,
   "Card Type": "CR",
@@ -283,6 +352,16 @@ using Transbank.POSAutoservicio;
 using Transbank.Responses.AutoservicioResponse;
 //...
 Task<LastSaleResponse> response = POSAutoservicio.Instance.LastSale();
+```
+
+
+```java
+import cl.transbank.pos.POSAutoservicio;
+import cl.transbank.pos.responses.autoservicio.*;
+//...
+
+POSAutoservicio pos = new POSAutoservicio();
+LastSaleResponse lastSaleResponse = pos.lastSale();
 ```
 
 El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `LastSaleResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLastSaleException` en .NET.
@@ -335,6 +414,15 @@ using Transbank.Responses.CommonResponses;
 Task<RefundResponse> response = POSAutoservicio.Instance.Refund();
 ```
 
+```java
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.common.*;
+//...
+
+POSAutoservicio pos = new POSAutoservicio();
+RefundResponse response = pos.refund();
+```
+
 Como respuesta el **POS** enviará un código de aprobación, acompañado de un código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas del manual de integración POS Autoservicio. <!-- [Ver tabla de respuestas](/referencia/pos-autoservicio#tabla-de-respuestas) -->
 
 El resultado de la anulación se entrega en la forma de un objeto `RefundResponse` Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankRefundException` en .NET.
@@ -368,6 +456,15 @@ using Transbank.POSAutoservicio;
 using Transbank.Responses.AutoservicioResponse;
 //...
 Task<CloseResponse> response = POSAutoservicio.Instance.Close();
+```
+
+```java
+import cl.transbank.pos.POSAutoservicio;
+import cl.transbank.pos.responses.autoservicio.*;
+//...
+
+POSAutoservicio pos = new POSAutoservicio();
+CloseResponse response = pos.close()
 ```
 
 El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException` en .NET.
@@ -411,6 +508,15 @@ using Transbank.Responses.CommonResponses;
 Task<LoadKeysResponse> response = POSAutoservicio.Instance.LoadKeys();
 ```
 
+```java
+import cl.transbank.pos.POSAutoservicio;
+import cl.transbank.pos.responses.common.*;
+//...
+
+POSAutoservicio pos = new POSAutoservicio();
+LoadKeysResponse response = pos.loadKeys();
+```
+
 El resultado de la carga de llaves se entrega en la forma de un objeto `LoadKeysResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLoadKeysException` en .NET.
 
 El objeto LoadKeysResponse retornará un objeto con los siguientes datos:
@@ -438,6 +544,14 @@ using Transbank.POSAutoservicio;
 Task<bool> connected = POSAutoservicio.Instance.Poll();
 ```
 
+```java
+import cl.transbank.pos.POSAutoservicio;
+//...
+
+POSAutoservicio pos = new POSAutoservicio();
+boolean pollResult = pos.poll();
+```
+
 ### Transacción de Inicialización
 
 Este mensaje es enviado por la caja para que el POS autoservicio pueda cargar los parámetros y el aplicativo. En el SDK el resultado de esta operación es un `Booleano`. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankException` en .NET.
@@ -452,6 +566,14 @@ Debido a que la transacción de Inicialización tiene un tiempo superior a una v
 using Transbank.POSAutoservicio;
 //...
 Task<bool> initialized = POSAutoservicio.Instance.Initialization();
+```
+
+```java
+import cl.transbank.pos.POSAutoservicio;
+//...
+
+POSAutoservicio pos = new POSAutoservicio();
+boolean pollResult = pos.initialization();
 ```
 
 <aside class="notice">
@@ -469,6 +591,15 @@ using Transbank.POSAutoservicio;
 using Transbank.Responses.AutoservicioResponse;
 //...
 Task<InitializationResponse> response = POSAutoservicio.Instance.InitializationResponse();
+```
+
+```java
+import cl.transbank.pos.POSAutoservicio;
+import cl.transbank.pos.responses.autoservicio.*;
+//...
+
+POSAutoservicio pos = new POSAutoservicio();
+InitializationResponse response = pos.initializationResponse();
 ```
 
 El resultado de la inicialización se entrega en la forma de un objeto `InitializationResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankInitializationResponseException` en .NET.
