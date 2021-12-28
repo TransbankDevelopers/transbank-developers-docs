@@ -108,6 +108,7 @@ Ponemos a tu disposición una serie de repositorios en nuestro Github para ayuda
 
 * [Ejemplo en PHP](https://github.com/TransbankDevelopers/transbank-sdk-php-webpay-rest-example)
 * [Ejemplo en .Net](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-rest-example)
+* [Ejemplo en .Net Core](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-core-webpay-rest-example)
 * [Ejemplo en Java](https://github.com/TransbankDevelopers/transbank-sdk-java-webpay-rest-example)
 * [Ejemplo en Ruby](https://github.com/TransbankDevelopers/transbank-sdk-ruby-webpay-rest-example)
 * [Ejemplo en Python](https://github.com/TransbankDevelopers/transbank-sdk-python-webpay-rest-example)
@@ -457,23 +458,46 @@ using Transbank.Webpay.Common;
 // Webpay Plus
 using Transbank.Webpay.WebpayPlus;
 
+// Versión 3.x del SDK
+const tx = new Transaction(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+
+// Versión 2.x del SDK
 Transaction.CommerceCode = "5970TuCodigo";
 Transaction.ApiKey = "VeryLongKey";
 Transaction.IntegrationType = WebpayIntegrationType.Live;
 
 // Oneclick
 using Transbank.Webpay.Oneclick;
+// Versión 3.x del SDK
+const ins = new MallInscription(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+const tx = new MallTransaction(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
 
+// Versión 2.x del SDK
 MallTransaction.CommerceCode = "5970TuCodigo";
 MallTransaction.ApiKey = "VeryLongKey";
 MallTransaction.IntegrationType = WebpayIntegrationType.Live;
 
-// TransacciónCompleta
+// Transacción Completa
 using Transbank.Webpay.TransaccionCompleta;
 
+// Versión 3.x del SDK
+const tx = new FullTransaction(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+
+// Versión 2.x del SDK
 FullTransaction.CommerceCode = "5970TuCodigo";
 FullTransaction.ApiKey = "VeryLongKey";
 FullTransaction.IntegrationType = WebpayIntegrationType.Live;
+
+// Transacción Completa Mall
+using Transbank.Webpay.TransaccionCompleta;
+
+// Versión 3.x del SDK
+const tx = new TransaccionCompletaMall(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+
+// Versión 2.x del SDK
+TransaccionCompletaMall.CommerceCode = "5970TuCodigo";
+TransaccionCompletaMall.ApiKey = "VeryLongKey";
+TransaccionCompletaMall.IntegrationType = WebpayIntegrationType.Live;
 ```
 
 ```ruby
@@ -511,6 +535,16 @@ BaseTransaccionCompleta.integration_type = IntegrationType.LIVE
 
 ```javascript
 // Webpay Plus
+
+// Versión 3.x del SDK
+WebpayPlus.configureForIntegration(commerceCode, apiKey);
+WebpayPlus.configureForProduction(commerceCode, apiKey);
+WebpayPlus.configureForTesting();
+WebpayPlus.configureForTestingDeferred();
+WebpayPlus.configureForTestingMall();
+WebpayPlus.configureForTestingMallDeferred();
+
+// Versión 2.x del SDK
 WebpayPlus.configureForIntegration(commerceCode, apiKey);
 WebpayPlus.configureForProduction(commerceCode, apiKey);
 WebpayPlus.configureWebpayPlusForTesting();
@@ -519,12 +553,34 @@ WebpayPlus.configureWebpayPlusMallForTesting();
 WebpayPlus.configureWebpayPlusMallDeferredForTesting();
 
 // Oneclick
+
+// Versión 3.x del SDK
 Oneclick.configureForIntegration(commerceCode, apiKey);
 Oneclick.configureForProduction(commerceCode, apiKey);
 Oneclick.configureOneclickMallForTesting();
 Oneclick.configureWebpayPlusMallDeferredForTesting();
 
+// Versión 2.x del SDK
+Oneclick.configureForIntegration(commerceCode, apiKey);
+Oneclick.configureForProduction(commerceCode, apiKey);
+Oneclick.configureOneclickMallForTesting();
+Oneclick.configureOneclickMallDeferredForTesting();
+
 // Transacción Completa
+
+// Versión 3.x del SDK
+TransaccionCompleta.configureForIntegration(commerceCode, apiKey);
+TransaccionCompleta.configureForProduction(commerceCode, apiKey);
+TransaccionCompleta.configureForTesting();
+TransaccionCompleta.configureForTestingDeferred();
+TransaccionCompleta.configureForTestingNoCVV();
+TransaccionCompleta.configureForTestingDeferredNoCVV();
+TransaccionCompleta.configureForTestingMall();
+TransaccionCompleta.configureForTestingMallDeferred();
+TransaccionCompleta.configureForTestingMallNoCVV();
+TransaccionCompleta.configureForTestingMallDeferredNoCVV();
+
+// Versión 2.x del SDK
 TransaccionCompleta.configureForIntegration(commerceCode, apiKey);
 TransaccionCompleta.configureForProduction(commerceCode, apiKey);
 TransaccionCompleta.configureTransaccionCompletaForTesting();

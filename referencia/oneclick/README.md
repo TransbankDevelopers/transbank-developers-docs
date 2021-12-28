@@ -215,6 +215,11 @@ MallInscription.start(
 const Oneclick = require("transbank-sdk").Oneclick; // CommonJS
 import { Oneclick } from 'transbank-sdk'; // ES6 Modules
 
+// Versión 3.x del SDK
+const ins = new Oneclick.MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await ins.start(username, email, responseUrl);
+
+// Versión 2.x del SDK
 const response = await Oneclick.MallInscription.start(
   userName, email, responseUrl
 );
@@ -351,6 +356,11 @@ response = MallInscription.finish(token=token)
 const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
 import { Oneclick } from 'transbank-sdk'; // ES6 Modules
 
+// Versión 3.x del SDK
+const ins = new Oneclick.MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await ins.finish(token);
+
+// Versión 2.x del SDK
 const response = await Oneclick.MallInscription.finish(token);
 ```
 
@@ -506,6 +516,11 @@ MallInscription.delete(tbk_user, user_name)
 const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
 import { Oneclick } from 'transbank-sdk'; // ES6 Modules
 
+// Versión 3.x del SDK
+const ins = new Oneclick.MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await ins.delete(tbkUser, username);
+
+// Versión 2.x del SDK
 const response = await Oneclick.MallInscription.delete(tbkUser, userName);
 ```
 
@@ -716,6 +731,11 @@ const details = [
   new TransactionDetail(amount2, commerceCode2, childBuyOrder2)
 ];
 
+// Versión 3.x del SDK
+const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.authorize(userName, tbkUser, buyOrder, details);
+
+// Versión 2.x del SDK
 const response = await Oneclick.MallTransaction.authorize(
   userName, tbkUser, buyOrder, details
 );
@@ -1008,6 +1028,11 @@ var response = MallTransaction.status(buy_order)
 const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
 import { Oneclick } from 'transbank-sdk'; // ES6 Modules
 
+// Versión 3.x del SDK
+const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.status(token);
+
+// Versión 2.x del SDK
 const response = await Oneclick.MallTransaction.status(token);
 ```
 
@@ -1305,6 +1330,11 @@ var response = MallTransaction.refund(buy_order, child_commerce_code, child_buy_
 const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
 import { Oneclick } from 'transbank-sdk'; // ES6 Modules
 
+// Versión 3.x del SDK
+const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+
+// Versión 2.x del SDK
 const response = await Oneclick.MallTransaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
 
@@ -1465,6 +1495,11 @@ response = Transbank::Webpay::Oneclick::MallDeferredTransaction::capture(
 const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
 import { Oneclick } from 'transbank-sdk'; // ES6 Modules
 
+// Versión 3.x del SDK
+const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.capture(commerceCode, buyOrder, authorizationCode, amount);
+
+// Versión 2.x del SDK
 const response = Oneclick.MallTransaction.capture(
   childCommerceCode, childBuyOrder, amount, authorizationCode
 );

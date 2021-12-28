@@ -141,6 +141,13 @@ const cardNumber = 'Numero de Tarjeta';
 const cvv = 123; // CVV de la tarjeta, parametro opcional si tu código de comercio es sin CVV, en cuyo caso debes enviar null o undefined
 const cardExpirationDate = '21/12'; // Fecha de expiración en formato AA/MM
 
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.create(
+  buyOrder, sessionId, amount, cvv, cardNumber, cardExpirationDate
+);
+
+// Versión 2.x del SDK
 const response = await TransaccionCompleta.Transaction.create(
   buyOrder, sessionId, amount, cvv, cardNumber, cardExpirationDate
 );
@@ -259,6 +266,12 @@ const TransaccionCompleta = require('transbank-sdk').TransaccionCompleta; // Com
 import { TransaccionCompleta } from 'transbank-sdk'; // ES6 Modules
 
 const installmentsNumber = 10; // Número de Cuotas
+
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.installments(token, installmentsNumber);
+
+// Versión 2.x del SDK
 const response = await TransaccionCompleta.Transaction.installments(token, installmentsNumber);
 ```
 <strong>Respuesta consulta de cuotas</strong>
@@ -421,6 +434,13 @@ const idQueryInstallments = 123456789 // Número identificador de las cuotas
 const deferredPeriodIndex = 1;
 const gracePeriod = false;
 
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.commit(
+  token, idQueryInstallments, deferredPeriodIndex, gracePeriod
+);
+
+// Versión 2.x del SDK
 const response = await TransaccionCompleta.Transaction.commit(
   token, idQueryInstallments, deferredPeriodIndex, gracePeriod
 );
@@ -581,6 +601,11 @@ Transaction.status(token=token)
 const TransaccionCompleta = require('transbank-sdk').TransaccionCompleta; // CommonJS
 import { TransaccionCompleta } from 'transbank-sdk'; // ES6 Modules
 
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.status(token);
+
+// Versión 2.x del SDK
 const response = await TransaccionCompleta.Transaction.status(token);
 ```
 
@@ -756,6 +781,11 @@ Transaction.refund(token=token, amount=amount)
 const TransaccionCompleta = require('transbank-sdk').TransaccionCompleta; // CommonJS
 import { TransaccionCompleta } from 'transbank-sdk'; // ES6 Modules
 
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.refund(token, amount);
+
+// Versión 2.x del SDK
 const response = await TransaccionCompleta.Transaction.refund(token, amount);
 ```
 
@@ -871,6 +901,14 @@ Transbank::TransaccionCompleta::Transaction.capture(
 ```
 
 ```javascript
+
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.capture(
+  token, buyOrder, authorizationCode, amount
+);
+
+// Versión 2.x del SDK
 const response = TransaccionCompleta.DeferredTransaction.capture(
   token, buyOrder, authorizationCode, amount
 );
@@ -1094,12 +1132,24 @@ const details = [
   new TransactionDetail(amount2, commerceCode2, childBuyOrder2)
 ];
 
-const response = await TransaccionCompleta.MallTransaction.create(		
-  parentBuyOrder,		
-  sessionId,		
-  cvv,		
-  cardNumber,		
-  cardExpirationDate,		
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.MallTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.create(
+  parentBuyOrder,
+  sessionId,
+  cardNumber,
+  cardExpirationDate,
+  details,
+  cvv
+);
+
+// Versión 2.x del SDK
+const response = await TransaccionCompleta.MallTransaction.create(
+  parentBuyOrder,
+  sessionId,
+  cvv,
+  cardNumber,
+  cardExpirationDate,
   details
 );
 ```
@@ -1256,10 +1306,18 @@ response = Transaction.installments(token=token, details=details)
 const details = [
   new InstallmentDetail(childCommerceCode, childBuyOrder, installmentsNumber),
   new InstallmentDetail(childCommerceCode2, childBuyOrder2, installmentsNumber2)
-  ];		
+  ];
 
-const installmentsResponse = await TransaccionCompleta.MallTransaction.installments(		
-  token,		
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.MallTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.installments(
+  token,
+  details
+);
+
+// Versión 2.x del SDK
+const installmentsResponse = await TransaccionCompleta.MallTransaction.installments(
+  token,
   details
 );
 ```
@@ -1402,9 +1460,18 @@ response = Transaction.commit(
 let commitDetails = [
   new CommitDetail(commerceCode, childBuyOrder),
   new CommitDetail(commerceCode2, childBuyOrder2)
-];		
-const response = await TransaccionCompleta.MallTransaction.commit(		
-  token,		
+];
+
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.MallTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.commit(
+  token,
+  commitDetails
+);
+
+// Versión 2.x del SDK
+const response = await TransaccionCompleta.MallTransaction.commit(
+  token,
   commitDetails
 );
 ```
@@ -1565,7 +1632,12 @@ response = Transaction.status(token)
 ```
 
 ```javascript
-const response = await TransaccionCompleta.Transaction.status(token);
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.MallTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.status(token);
+
+// Versión 2.x del SDK
+const response = await TransaccionCompleta.MallTransaction.status(token);
 ```
 
 <strong>Respuesta consulta de estado</strong>
@@ -1756,11 +1828,21 @@ Transaction.refund(
 ```
 
 ```javascript
-const refundResponse = await TransaccionCompleta.MallTransaction.refund(		
-  token,	
-  buyOrder,		
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.MallTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.refund(
+  token,
+  buyOrder,
   commerceCode,
-  amount		
+  amount
+);
+
+// Versión 2.x del SDK
+const refundResponse = await TransaccionCompleta.MallTransaction.refund(
+  token,
+  buyOrder,
+  commerceCode,
+  amount
 );
 ```
 
@@ -1894,6 +1976,13 @@ Transbank::TransaccionCompleta::MallTransaction.capture(
 ```
 
 ```javascript
+// Versión 3.x del SDK
+const tx = new TransaccionCompleta.MallTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.refund(
+  token, commerceCode, buyOrder, authorizationCode, amount
+);
+
+// Versión 2.x del SDK
 const response = TransaccionCompleta.MallDeferredTransaction.capture(
   token, commerceCode, buyOrder, authorizationCode, amount
 );
