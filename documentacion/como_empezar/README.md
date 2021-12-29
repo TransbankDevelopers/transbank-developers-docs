@@ -466,6 +466,17 @@ Transaction.CommerceCode = "5970TuCodigo";
 Transaction.ApiKey = "VeryLongKey";
 Transaction.IntegrationType = WebpayIntegrationType.Live;
 
+//Webpay Plus Mall
+using Transbank.Webpay.WebpayPlus;
+
+//Versión 3.x del SDK
+const tx = new MallTransaction(new Options("5970TuCodigo", "TuAPIKeySecret", WebpayIntegrationType.Live));
+
+//Versión 2.x del SDK
+MallTransaction.CommerceCode = "5970TuCodigo";
+MallTransaction.ApiKey = "TuAPIKeySecret";
+MallTransaction.IntegrationType = WebpayIntegrationType.Live;
+
 // Oneclick
 using Transbank.Webpay.Oneclick;
 // Versión 3.x del SDK
