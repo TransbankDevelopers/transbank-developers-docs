@@ -85,12 +85,12 @@ También se puede incluir directamente el tag script
 ```
 
 <aside class="warning">
-Si utilizas el metodo de tag script, entonces el objeto POS se pasa a llamar Transbank.POS en todos los ejemplos que siguen en esta guia.
+Si utilizas el método de tag script, entonces el objeto POS se pasa a llamar Transbank.POS en todos los ejemplos que siguen en esta guia.
 </aside>
 
 <strong>Instalar el agente desktop</strong>
 
-Revisa la lista de versiones públicadas y [descarga la última versión](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent/releases). Verás que hay un archivo .exe que debes bajar si usas windows, o un archivo .zip si usas MacOS. Luego, solo debes de instalar y ejecutar el programa.
+Revisa la lista de versiones publicadas y [descarga la última versión](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent/releases). Verás que hay un archivo .exe que debes bajar si usas windows, o un archivo .zip si usas MacOS. Luego, solo debes de instalar y ejecutar el programa.
 
 Este agente debe estar ejecutándose siempre para que el SDK Javascript funcione correctamente. Puedes ejecutarlo automáticamente cuando se inicie el computador.
 La primera vez que se ejecuta el agente, este se configura automáticamente para iniciar en el startup del computador.
@@ -214,9 +214,11 @@ using Transbank.Responses.IntegradoResponse;
 ```
 
 ```java
-import cl.transbank.pos.POS;
-import cl.transbank.pos.exceptions.*;
-import cl.transbank.pos.responses.*;
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.exceptions.common.*;
+import cl.transbank.pos.exceptions.integrado.*;
+import cl.transbank.pos.responses.common.*;
+import cl.transbank.pos.responses.integrado.*;
 ```
 
 ```js
@@ -258,9 +260,10 @@ char *ports = list_ports();
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+//...
 
-POS pos = POS.getInstance();
+POSIntegrado pos = new POSIntegrado();
 List<String> ports = pos.listPorts();
 ```
 
@@ -311,9 +314,10 @@ if ( retval == TBK_OK ){
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+//...
 
-POS pos = POS.getInstance();
+POSIntegrado pos = new POSIntegrado();
 String port = "COM4";
 pos.openPort(port);
 ```
@@ -362,14 +366,16 @@ if(retval == SP_OK){
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
 //...
+
+POSIntegrado pos = new POSIntegrado();
 pos.closePort();
 ```
 
 ```js
 pos.disconnect().then( (response) => {
-    console.log('Puerto descontactado correctamente');
+    console.log('Puerto desconectado correctamente');
 }).catch( (err) => {
     console.log('Ocurrió un error inesperado', err);
 });
@@ -388,7 +394,7 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta. L
 
 * `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
 * `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
-* `Enviar Status`: (Opcional) Indica si se envian los mensajes intermedios (verdader) o se omiten (falso, por defecto)
+* `Enviar Status`: (Opcional) Indica si se envían los mensajes intermedios (verdadero) o se omiten (falso, por defecto)
 
 En el caso de C#, los mensajes intermedios se reciben mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`.
 
@@ -402,12 +408,12 @@ using Transbank.Responses.CommonResponses;
 using Transbank.Responses.IntegradoResponse;
 //...
 
-POSIntegrado.Instance.IntermediateResponseChange += NewIntermadiateMessageRecived; //EventHandler para los mensajes intermedios.
-Task<SaleResponse> response = POSIntegrado.Instance.Sale(ammount, ticket, true);
+POSIntegrado.Instance.IntermediateResponseChange += NewIntermediateMessageReceived; //EventHandler para los mensajes intermedios.
+Task<SaleResponse> response = POSIntegrado.Instance.Sale(amount, ticket, true);
 
 //...
 //Manejador de mensajes intermedios...
-private static void NewIntermadiateMessageRecived(object sender, IntermediateResponse e){
+private static void NewIntermediateMessageReceived(object sender, IntermediateResponse e){
   //...
 }
 //...
@@ -417,13 +423,25 @@ private static void NewIntermadiateMessageRecived(object sender, IntermediateRes
 #include "transbank.h"
 #include "transbank_serial_utils.h"
 //...
-char* response = sale(ammount, ticket, false);
+char* response = sale(amount, ticket, false);
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.integrado.*;
 //...
-SaleResponse saleResponse = POS.getInstance().sale(amount, ticket);
+
+POSIntegrado pos = new POSIntegrado();
+SaleResponse response = pos.sale(amount, ticket, true);
+
+pos.setOnIntermediateMessageReceivedListener(this::onIntermediateMessageReceived);
+
+//...
+//Manejador de mensajes intermedios...
+private void onIntermediateMessageReceived(IntermediateResponse response) {
+  //...
+}
+//...
 ```
 
 ```js
@@ -450,11 +468,11 @@ pos.sale(1500, '12423', true, callback)
 import POS from "transbank-pos-sdk-web";
 
 POS.doSale(this.total, "ticket1", (data) => {
-//Este tercer parametro es opcional. Si está presente, se ejecutará cada vez que llegue un mensaje de status de la venta.
+//Este tercer parámetro es opcional. Si está presente, se ejecutará cada vez que llegue un mensaje de status de la venta.
 console.log('Mensaje de status recibido', data);
 }).then((saleResponse) => {
     console.log(saleResponse);
-    //Acá llega la respuesta de la venta. Si saleDetails.responseCode es 0, entonces la comproa fue aprobada
+    //Acá llega la respuesta de la venta. Si saleDetails.responseCode es 0, entonces la compra fue aprobada
     if (saleResponse.responseCode===0) {
   alert("Transacción aprobada", "", "success");
     } else {
@@ -474,8 +492,8 @@ El objeto SaleResponse retornará un objeto con los siguientes datos.
   "Commerce Code": 550062700310,
   "Terminal Id": "ABC1234C",
   "Ticket": "ABC123",
-  "Autorization Code": "XZ123456",
-  "Ammount": 15000,
+  "Authorization Code": "XZ123456",
+  "Amount": 15000,
   "Shares Number": 3,
   "Shares Amount": 5000,
   "Last 4 Digits": 6677,
@@ -491,17 +509,17 @@ El objeto SaleResponse retornará un objeto con los siguientes datos.
 ```
 
 <aside class="warning">
-El SDK de **C** y **Java** no soportan el envío de mensajes intermedios. Por esta razón el 3º parámetro de la función en C es siempre falso.
+El SDK de **C** no soporta el envío de mensajes intermedios. Por esta razón el 3º parámetro de la función en C es siempre falso.
 </aside>
 
-### Transacción de Venta Multicodigo
+### Transacción de Venta Multicódigo
 
 Este comando es enviado por la caja para solicitar la ejecución de una venta multicódigo. Los siguientes parámetros deben ser enviados desde la caja:
 
 * `Monto`: Monto en pesos informados al POS. Este parámetro es remitido a Transbank para realizar la autorización.
 * `Número Ticket/Boleta`: Este número es impreso por el POS en el voucher que se genera luego de la venta.
 * `Código De Comercio`: Código de comercio que realiza la venta. (No es el mismo código del POS, ya que en multicódigo el código padre no puede realizar ventas.)
-* `Enviar Status`: (Opcional) Indica si se envian los mensajes intermedios (verdader) o se omiten (falso, por defecto)
+* `Enviar Status`: (Opcional) Indica si se envían los mensajes intermedios (verdadero) o se omiten (falso, por defecto)
 
 En el caso de C#, los mensajes intermedios se reciben mediante el evento `IntermediateResponseChange` y el argumento retornado es de tipo `IntermediateResponse`
 
@@ -515,12 +533,12 @@ using Transbank.Responses.CommonResponses;
 using Transbank.Responses.IntegradoResponse;
 //...
 
-POSIntegrado.Instance.IntermediateResponseChange += NewIntermadiateMessageRecived; //EventHandler para los mensajes intermedios.
-Task<MultiCodeSaleResponse> response = POSIntegrado.Instance.MultiCodeSale(ammount, ticket, commerceCode, true);
+POSIntegrado.Instance.IntermediateResponseChange += NewIntermediateMessageReceived; //EventHandler para los mensajes intermedios.
+Task<MultiCodeSaleResponse> response = POSIntegrado.Instance.MultiCodeSale(amount, ticket, commerceCode, true);
 
 //...
 //Manejador de mensajes intermedios...
-private static void NewIntermadiateMessageRecived(object sender, IntermediateResponse e){
+private static void NewIntermediateMessageReceived(object sender, IntermediateResponse e){
   //...
 }
 //...
@@ -531,7 +549,21 @@ private static void NewIntermadiateMessageRecived(object sender, IntermediateRes
 ```
 
 ```java
-//No Soportado
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.integrado.*;
+//...
+
+POSIntegrado pos = new POSIntegrado();
+MultiCodeSaleResponse response = pos.multiCodeSale(amount, ticket, commerceCode, true);
+
+pos.setOnIntermediateMessageReceivedListener(this::onIntermediateMessageReceived);
+
+//...
+//Manejador de mensajes intermedios...
+private void onIntermediateMessageReceived(IntermediateResponse response) {
+  //...
+}
+//...
 ```
 ```javascript
 import POS from "transbank-pos-sdk-web";
@@ -541,7 +573,7 @@ POS.doMulticodeSale(this.total, "ticket2", "597029414301", (data) => {
 console.log('Mensaje de status recibido', data);
 }).then((saleResponse) => {
     console.log(saleResponse);
-    //Acá llega la respuesta de la venta. Si saleDetails.responseCode es 0, entonces la comproa fue aprobada
+    //Acá llega la respuesta de la venta. Si saleDetails.responseCode es 0, entonces la compra fue aprobada
     if (saleResponse.responseCode===0) {
   alert("Transacción aprobada", "", "success");
     } else {
@@ -562,8 +594,8 @@ El objeto SaleResponse retornará un objeto con los siguientes datos.
   "Commerce Code": 550062700310,
   "Terminal Id": "ABC1234C",
   "Ticket": "ABC123",
-  "Autorization Code": "XZ123456",
-  "Ammount": 15000,
+  "Authorization Code": "XZ123456",
+  "Amount": 15000,
   "Shares Number": 3,
   "Shares Amount": 5000,
   "Last 4 Digits": 6677,
@@ -581,7 +613,7 @@ El objeto SaleResponse retornará un objeto con los siguientes datos.
 ```
 
 <aside class="warning">
-El SDK de **C** y **Java** no soportan ventas multicodigo.
+El SDK de **C** no soporta ventas multicódigo.
 </aside>
 
 ### Transacción de última venta
@@ -609,9 +641,12 @@ char *lastSaleResponse = last_sale();
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.integrado.*;
 //...
-SaleResponse saleResponse = POS.getInstance().getLastSale();
+
+POSIntegrado pos = new POSIntegrado();
+LastSaleResponse lastSaleResponse = pos.lastSale();
 ```
 
 ```js
@@ -642,8 +677,8 @@ El resultado de la transacción última venta devuelve los mismos datos que una 
   "Commerce Code": 550062700310,
   "Terminal Id": "ABC1234C",
   "Ticket": "ABC086",
-  "Autorization Code": "XZ123456",
-  "Ammount": 15000,
+  "Authorization Code": "XZ123456",
+  "Amount": 15000,
   "Shares Number": 3,
   "Shares Amount": 5000,
   "Last 4 Digits": 6677,
@@ -658,9 +693,11 @@ El resultado de la transacción última venta devuelve los mismos datos que una 
 }
 ```
 
-### Transacción de última venta multicodigo
+### Transacción de última venta multicódigo
 
 Este comando es enviado por la caja, solicitando al POS la re-impresión de la última venta realizada, y además permite recepcionar el voucher como parte de la respuesta del pos.
+
+* `Enviar Voucher:` Indica si se envía un voucher formateado en la respuesta del POS (verdadero) o si se debe omitir (false).
 
 Si el POS recibe el comando de última venta y no existen transacciones en memoria del POS, se envía la respuesta a la caja indicando el código de respuesta 11.
 ([Ver tabla de respuestas](/referencia/posintegrado#tabla-de-respuestas))
@@ -671,7 +708,7 @@ Si el POS recibe el comando de última venta y no existen transacciones en memor
 using Transbank.POSIntegrado;
 using Transbank.Responses.IntegradoResponse;
 //...
-Task<MultiCodeLastSaleResponse> response = POSIntegrado.Instance.MultiCodeLastSale(true); //bool indica si pos envia o no el voucher como parte de la respuesta
+Task<MultiCodeLastSaleResponse> response = POSIntegrado.Instance.MultiCodeLastSale(true); //bool indica si pos envía o no el voucher como parte de la respuesta
 ```
 
 ```c
@@ -679,7 +716,13 @@ Task<MultiCodeLastSaleResponse> response = POSIntegrado.Instance.MultiCodeLastSa
 ```
 
 ```java
-// No Soportado
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.integrado.*;
+//...
+
+POSIntegrado pos = new POSIntegrado();
+MultiCodeLastSaleResponse response = pos.multiCodeLastSale(true); 
+//bool indica si pos envía o no el voucher como parte de la respuesta
 ```
 
 ```javascript
@@ -696,8 +739,8 @@ El resultado de la transacción última venta devuelve los mismos datos que una 
   "Commerce Code": 550062700310,
   "Terminal Id": "ABC1234C",
   "Ticket": "ABC086",
-  "Autorization Code": "XZ123456",
-  "Ammount": 15000,
+  "Authorization Code": "XZ123456",
+  "Amount": 15000,
   "Shares Number": 3,
   "Shares Amount": 5000,
   "Last 4 Digits": 6677,
@@ -747,11 +790,13 @@ char *refundResponse = refund(21);
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.common.*;
 //...
-RefundResponse response = POS.getInstance().refund(21);
-```
 
+POSIntegrado pos = new POSIntegrado();
+RefundResponse response = pos.refund(21);
+```
 
 ```js
 pos.refund('102').then( (response) => {
@@ -812,9 +857,12 @@ BaseResponse response = register_close();
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.integrado.*;
 //...
-CloseResponse cr = POS.getInstance().close();
+
+POSIntegrado pos = new POSIntegrado();
+CloseResponse response = pos.close()
 ```
 
 ```js
@@ -872,9 +920,12 @@ TotalsCResponse response = get_totals();
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.integrado.*;
 //...
-TotalsResponse response = POS.getInstance().getTotals();
+
+POSIntegrado pos = new POSIntegrado();
+TotalsResponse response = pos.totals();
 ```
 
 ```js
@@ -898,13 +949,13 @@ El resultado de la transacción entrega en la forma de un objeto `TotalsResponse
   "Function": 710,
   "Response": "Aprobado",
   "TX Count": 3,     // Cantidad de transacciones
-  "TX Total": 15000  // Suma total de los montos de cada transaccion
+  "TX Total": 15000  // Suma total de los montos de cada transacción
 }
 ```
 
 ### Transacción de Detalle de Ventas
 
-Esta transacción solicita al POS **todas** las transacciones que se han realizado y permanecen en la memoria del POS. El parámetro que recibe esta función es de tipo booleano e indica si se realiza la impresión del detalle en el POS. En el caso de que no se solicite la impresión, el POS envía **todas** las transacciones a la caja, una por una. Si se realiza la impresión, la caja recibira una lista vacia de transacciónes.
+Esta transacción solicita al POS **todas** las transacciones que se han realizado y permanecen en la memoria del POS. El parámetro que recibe esta función es de tipo booleano e indica si se realiza la impresión del detalle en el POS. En el caso de que no se solicite la impresión, el POS envía **todas** las transacciones a la caja, una por una. Si se realiza la impresión, la caja recibirá una lista vacía de transacciones.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -926,9 +977,13 @@ char *response = sales_detail(print_on_pos);
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.integrado.*;
 //...
-List<DetailResponse> ldr = POS.getInstance().details(false);
+
+POSIntegrado pos = new POSIntegrado();
+boolean printOnPOS = false;
+List<DetailResponse> response = pos.details(printOnPOS);
 ```
 
 ```js
@@ -956,8 +1011,8 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` o
     "Commerce Code": 550062700310,
     "Terminal Id": "ABC1234C",
     "Ticket": "AB123",
-    "Autorization Code": "XZ123456",
-    "Ammount": 15000,
+    "Authorization Code": "XZ123456",
+    "Amount": 15000,
     "Last 4 Digits": 6677,
     "Operation Number": 60,
     "Card Type": "CR",
@@ -976,8 +1031,8 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` o
     "Commerce Code": 550062700310,
     "Terminal Id": "ABC1234C",
     "Ticket": "AB123",
-    "Autorization Code": "XZ123456",
-    "Ammount": 15000,
+    "Authorization Code": "XZ123456",
+    "Amount": 15000,
     "Last 4 Digits": 6677,
     "Operation Number": 60,
     "Card Type": "CR",
@@ -993,7 +1048,7 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` o
 ]
 ```
 
-### Transacción de Detalle de Ventas Multicodigo
+### Transacción de Detalle de Ventas Multicódigo
 
 Esta transacción solicita al POS **todas** las transacciones que se han realizado y permanecen en la memoria del POS. El parámetro que recibe esta función es de tipo booleano e indica si se realiza la impresión del detalle en el POS. En el caso de que no se solicite la impresión, el POS envía **todas** las transacciones a la caja, una por una. Si se realiza la impresión, la caja recibirá una lista vacía de transacciones.
 
@@ -1012,7 +1067,13 @@ Task<List<MultiCodeDetailResponse>> details = POSIntegrado.Instance.MultiCodeDet
 ```
 
 ```java
-// No Soportado
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.integrado.*;
+//...
+
+POSIntegrado pos = new POSIntegrado();
+boolean printOnPOS = false;
+List<MultiCodeDetailResponse> response = pos.multiCodeDetails(printOnPOS);
 ```
 
 ```javascript
@@ -1029,8 +1090,8 @@ El resultado de la transacción entrega una lista de objetos  `MultiCodeDetailRe
     "Commerce Code": 550062700310,
     "Terminal Id": "ABC1234C",
     "Ticket": "AB123",
-    "Autorization Code": "XZ123456",
-    "Ammount": 15000,
+    "Authorization Code": "XZ123456",
+    "Amount": 15000,
     "Shares Number": 3,
     "Shares Amount": 5000,
     "Last 4 Digits": 6677,
@@ -1051,8 +1112,8 @@ El resultado de la transacción entrega una lista de objetos  `MultiCodeDetailRe
     "Commerce Code": 550062700310,
     "Terminal Id": "ABC1234C",
     "Ticket": "AB123",
-    "Autorization Code": "XZ123456",
-    "Ammount": 15000,
+    "Authorization Code": "XZ123456",
+    "Amount": 15000,
     "Shares Number": 3,
     "Shares Amount": 5000,
     "Last 4 Digits": 6677,
@@ -1096,11 +1157,13 @@ BaseResponse response = load_keys();
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.common.*;
 //...
-KeysResponse kr = POS.getInstance().loadKeys();
-```
 
+POSIntegrado pos = new POSIntegrado();
+LoadKeysResponse response = pos.loadKeys();
+```
 
 ```js
 pos.loadKeys().then( (response) => {
@@ -1156,9 +1219,11 @@ if (retval == TBK_OK){
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
 //...
-boolean pollResult = POS.getInstance().poll();
+
+POSIntegrado pos = new POSIntegrado();
+boolean pollResult = pos.poll();
 ```
 
 ```javascript
@@ -1177,7 +1242,7 @@ Este comando le permitirá a la caja realizar el cambio de modalidad a través d
 ```csharp
 using Transbank.POSIntegrado;
 //...
-Task<bool> connected = POSIntegrado.Instance.SetNormalMode();
+Task<bool> isInNormalMode = POSIntegrado.Instance.SetNormalMode();
 ```
 
 ```c
@@ -1191,9 +1256,11 @@ if (retval == TBK_OK){
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
 //...
-boolean normal = POS.getInstance().setNormalMode();
+
+POSIntegrado pos = new POSIntegrado();
+boolean isInNormalMode = pos.setNormalMode();
 ```
 
 ```js
