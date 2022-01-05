@@ -1486,9 +1486,9 @@ responseCode  <br> <i> xs:int </i> | Código de respuesta
 Ponemos a tu disposición una serie de repositorios en nuestro Github para ayudarte a entender la integración de mejor forma.
 Puedes encontrar una lista de [proyectos de ejemplo acá](/documentacion/como_empezar#ejemplos).
 
-<aside class="notice">
+<!-- <aside class="notice">
 Si deseas revisar la documentación anterior (SOAP), puedes revisarla [acá](/documentacion/webpay)
-</aside>
+</aside> -->
 
 <div class="container slate">
   <div class='slate-after-footer'>

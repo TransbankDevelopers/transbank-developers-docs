@@ -708,11 +708,11 @@ El comercio debe verificar al completar cualquier transacción que los valores
 informados por Transbank (monto de la compra, _buyOrder_, etc.) coinciden con los
 valores entregados por el comercio al principio del flujo transaccional.
 
-<aside class="notice">
+<!-- <aside class="notice">
 Esta nueva documentación hace referencia a los nuevos servicios REST de Transbank.
 Si deseas revisar la documentación de los productos SOAP,
 [haz click aquí](/documentacion/como_empezar_soap)
-</aside>
+</aside> -->
 
 <div class="container slate">
   <div class='slate-after-footer'>

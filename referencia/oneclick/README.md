@@ -2,10 +2,10 @@
 
 ___
 
-<aside class="warning">
+<!-- <aside class="warning">
 Estás viendo la <strong>nueva referencia REST</strong>. La referencia anterior (SOAP) se encuentra en proceso de 
 obsolescencia programada para Julio 2022. Si necesitas revisarla haz [click aquí](/referencia/webpay-soap)
-</aside>
+</aside> -->
 
 ## Ambientes y Credenciales
 

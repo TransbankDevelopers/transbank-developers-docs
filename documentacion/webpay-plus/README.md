@@ -1915,9 +1915,9 @@ Ponemos a tu disposición una serie de repositorios en nuestro Github para ayuda
 
 [Puedes verlos acá](/documentacion/como_empezar#ejemplos)
 
-<aside class="notice">
+<!-- <aside class="notice">
 Si deseas revisar la documentación anterior (SOAP), puedes revisarla [acá](/documentacion/webpay)
-</aside>
+</aside> -->
 
 <div class="container slate">
   <div class='slate-after-footer'>
