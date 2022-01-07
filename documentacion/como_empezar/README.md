@@ -458,10 +458,17 @@ using Transbank.Webpay.Common;
 // Webpay Plus
 using Transbank.Webpay.WebpayPlus;
 
-// Versión 3.x del SDK
-const tx = new Transaction(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+// Versión 4.x del SDK
 
-// Versión 2.x del SDK
+// Opción A: Crear objeto options y pasarlo en el contructor
+var tx = new Transaction(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+
+// Opción B: Configurar en la instancia 
+var tx = new Transaction();
+tx.ConfigureForProduction("5970TuCodigo", "VeryLongKey");
+
+
+// Versión 3.x del SDK
 Transaction.CommerceCode = "5970TuCodigo";
 Transaction.ApiKey = "VeryLongKey";
 Transaction.IntegrationType = WebpayIntegrationType.Live;
@@ -469,21 +476,35 @@ Transaction.IntegrationType = WebpayIntegrationType.Live;
 //Webpay Plus Mall
 using Transbank.Webpay.WebpayPlus;
 
-//Versión 3.x del SDK
-const tx = new MallTransaction(new Options("5970TuCodigo", "TuAPIKeySecret", WebpayIntegrationType.Live));
+//Versión 4.x del SDK
 
-//Versión 2.x del SDK
+// Opción A: Crear objeto options y pasarlo en el contructor
+var tx = new MallTransaction(new Options("5970TuCodigo", "TuAPIKeySecret", WebpayIntegrationType.Live));
+
+// Opción B: Configurar en la instancia
+var tx = new MallTransaction();
+tx.ConfigureForProduction("5970TuCodigo", "VeryLongKey");
+
+//Versión 3.x del SDK
 MallTransaction.CommerceCode = "5970TuCodigo";
 MallTransaction.ApiKey = "TuAPIKeySecret";
 MallTransaction.IntegrationType = WebpayIntegrationType.Live;
 
 // Oneclick
 using Transbank.Webpay.Oneclick;
-// Versión 3.x del SDK
-const ins = new MallInscription(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
-const tx = new MallTransaction(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+// Versión 4.x del SDK
 
-// Versión 2.x del SDK
+// Opción A: Crear objeto options y pasarlo en el contructor
+var ins = new MallInscription(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+var tx = new MallTransaction(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+
+// Opción B: Configurar en la instancia
+var ins = new MallInscription();
+ins.ConfigureForProduction("5970TuCodigo", "VeryLongKey");
+var tx = new MallTransaction();
+tx.ConfigureForProduction("5970TuCodigo", "VeryLongKey");
+
+// Versión 3.x del SDK
 MallTransaction.CommerceCode = "5970TuCodigo";
 MallTransaction.ApiKey = "VeryLongKey";
 MallTransaction.IntegrationType = WebpayIntegrationType.Live;
@@ -491,21 +512,34 @@ MallTransaction.IntegrationType = WebpayIntegrationType.Live;
 // Transacción Completa
 using Transbank.Webpay.TransaccionCompleta;
 
-// Versión 3.x del SDK
-const tx = new FullTransaction(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+// Versión 4.x del SDK
 
-// Versión 2.x del SDK
+// Opción A: Crear objeto options y pasarlo en el contructor
+var tx = new FullTransaction(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+
+// Opción B: Configurar en la instancia
+var tx = new FullTransaction();
+tx.ConfigureForProduction("5970TuCodigo", "VeryLongKey");
+
+// Versión 3.x del SDK
 FullTransaction.CommerceCode = "5970TuCodigo";
 FullTransaction.ApiKey = "VeryLongKey";
 FullTransaction.IntegrationType = WebpayIntegrationType.Live;
 
 // Transacción Completa Mall
-using Transbank.Webpay.TransaccionCompleta;
+using Transbank.Webpay.TransaccionCompletaMall;
+
+// Versión 4.x del SDK
+
+// Opción A: Crear objeto options y pasarlo en el contructor
+var tx = new MallFullTransaction(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+
+// Opción B: Configurar en la instancia
+var tx = new MallFullTransaction();
+tx.ConfigureForProduction("5970TuCodigo", "VeryLongKey");
 
 // Versión 3.x del SDK
-const tx = new TransaccionCompletaMall(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
 
-// Versión 2.x del SDK
 TransaccionCompletaMall.CommerceCode = "5970TuCodigo";
 TransaccionCompletaMall.ApiKey = "VeryLongKey";
 TransaccionCompletaMall.IntegrationType = WebpayIntegrationType.Live;
