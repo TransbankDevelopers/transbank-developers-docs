@@ -49,7 +49,8 @@ PatpassComercio.IntegrationType = "TEST / LIVE dependiendo de tu ambiente de int
 ```
 
 ```ruby
-# ...
+// Versión 2.x del SDK
+@inscription = Transbank::Patpass::PatpassComercio::Inscription.new(::Transbank::Common::IntegrationCommerceCodes::PATPASS_COMERCIO, ::Transbank::Common::IntegrationApiKeys::PATPASS_COMERCIO, :integration)
 ```
 
 ```python
@@ -234,6 +235,27 @@ var response = Inscription.Start(
 @address = "Dirección de Suscrito"
 @city = "Ciudad de suscrito"
 
+// Versión 2.x del SDK
+@inscription = Transbank::Patpass::PatpassComercio::Inscription.new()
+@resp = @inscription.start(
+      @url,
+      @name,
+      @first_last_name,
+      @second_last_name,
+      @rut,
+      @service_id,
+      @final_url,
+      @max_amount,
+      @phone_number,
+      @mobile_number,
+      @patpass_name,
+      @person_email,
+      @commerce_email,
+      @address,
+      @city
+    )
+
+// Versión 1.x del SDK
 @resp  = Transbank::Patpass::PatpassComercio::Inscription::start(
                                                     url: @url,
                                                     name: @name,
@@ -363,6 +385,12 @@ var result = Inscription.Status(token);
 ```ruby
 @req = params.as_json
 @token = @req['j_token']
+
+// Versión 2.x del SDK
+@inscription = Transbank::Patpass::PatpassComercio::Inscription.new()
+@resp = @inscription.status(token: @token)
+
+// Versión 1.x del SDK
 @resp = Transbank::Patpass::PatpassComercio::Inscription::status(token: @token)
 ```
 
