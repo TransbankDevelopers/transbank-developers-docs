@@ -219,14 +219,26 @@ FullTransaction.Create(
 ```
 
 ```ruby
+@buy_order = "Orden de compra de la transaccion"
+@session_id = "Identificador del servicio unico de transacción"
+@amount = 1000 # monto en pesos
+@card_number = "Numero de Tarjeta"
+@card_expiration_date = "Fecha de expiracion en formato AA/MM"
+@cvv = 123 # CVV de la tarjeta.
+
+// Versión 2.x del SDK
+@tx = Transbank::Webpay::TransaccionCompleta::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::TRANSACCION_COMPLETA)
+@resp = @tx.capture(buy_order: @buy_order, session_id: @session_id, amount: @amount, cvv: @cvv, card_number: @card_number, card_expiration_date: @card_expiration_date) 
+
+// Versión 1.x del SDK
 Transbank::TransaccionCompleta::Transaction::create(
-  buy_order: 'ordenCompra12345678',
-  session_id: 'sesion1234564',
-  amount: 10000,
-  card_number: 4239000000000000,
-  cvv: 123,
-  card_expiration_date: '22/10'
-)
+    buy_order: @buy_order,
+    session_id: @session_id,
+    amount: @amount,
+    card_number: @card_number,
+    cvv: @cvv,
+    card_expiration_date: @card_expiration_date
+  )
 ```
 
 ```python
@@ -387,6 +399,11 @@ FullTransaction.Installments(
 ```
 
 ```ruby
+// Versión 2.x del SDK
+@tx = Transbank::Webpay::TransaccionCompleta::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::TRANSACCION_COMPLETA)
+@resp = @tx.captureinstallments(token: token, installments_number: installments_number )
+
+// Versión 1.x del SDK
 Transbank::TransaccionCompleta::Transaction::installments(
    token: token,
    installments_number: installments_number
@@ -545,6 +562,16 @@ FullTransaction.Commit(
 ```
 
 ```ruby
+// Versión 2.x del SDK
+@tx = Transbank::Webpay::TransaccionCompleta::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::TRANSACCION_COMPLETA)
+@resp = @tx.commit(
+  token: token,
+  id_query_installments: id_query_installments,
+  deferred_period_index:deferred_period_index,
+  grace_period: grace_period
+)
+
+// Versión 1.x del SDK
 Transbank::TransaccionCompleta::Transaction::commit(
   token: token,
   id_query_installments: id_query_installments,
@@ -774,7 +801,12 @@ FullTransaction.Status(token);
 ```
 
 ```ruby
-Transbank::TransaccionCompleta::Transaction::status(token: token)
+// Versión 2.x del SDK
+@tx = Transbank::Webpay::TransaccionCompleta::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::TRANSACCION_COMPLETA)
+@resp = @tx.status(token: token)
+
+// Versión 1.x del SDK
+@resp = Transbank::TransaccionCompleta::Transaction::status(token: token)
 ```
 
 ```python
@@ -1002,7 +1034,12 @@ FullTransaction.Refund(token, amount);
 ```
 
 ```ruby
-Transbank::TransaccionCompleta::Transaction::refund(token: token, amount: amount)
+// Versión 2.x del SDK
+@tx = Transbank::Webpay::TransaccionCompleta::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::TRANSACCION_COMPLETA)
+@resp = @tx.refund(token: token, amount: amount)
+
+// Versión 1.x del SDK
+@resp = Transbank::TransaccionCompleta::Transaction::refund(token: token, amount: amount)
 ```
 
 ```python
@@ -1154,7 +1191,17 @@ Content-Type: application/json
 ```
 
 ```ruby
-Transbank::TransaccionCompleta::Transaction.capture(
+// Versión 2.x del SDK
+@tx = Transbank::Webpay::TransaccionCompleta::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::TRANSACCION_COMPLETA_DEFERRED)
+@resp = @tx.capture(
+  token: token,
+  buy_order: buy_order,
+  authorization_code: authorization_code,
+  capture_amount: capture_amount
+)
+
+// Versión 1.x del SDK
+@resp = Transbank::TransaccionCompleta::Transaction.capture(
   token: token,
   buy_order: buy_order,
   authorization_code: authorization_code,
@@ -1415,7 +1462,13 @@ details = [
     buy_order: '123456790'
   }
 ]
-response = Transbank::TransaccionCompleta::MallTransaction::create(
+
+// Versión 2.x del SDK
+@tx = Transbank::Webpay::TransaccionCompleta::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::TRANSACCION_COMPLETA)
+@resp = @tx.create(buy_order: @buy_order, session_id: @session_id, card_number: @card_number, card_expiration_date: @card_expiration_date, @details, cvv: @cvv)
+
+// Versión 1.x del SDK
+@resp = Transbank::TransaccionCompleta::MallTransaction::create(
   buy_order: 'ordenCompra12345678',
   session_id: 'sesion1234564',
   card_number: 4239000000000000,
@@ -1640,7 +1693,12 @@ installment_details = [
   },
 ]
 
-response = Transbank::TransaccionCompleta::MallTransaction::installments(token, installment_details)
+// Versión 2.x del SDK
+@tx = Transbank::Webpay::TransaccionCompleta::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::TRANSACCION_COMPLETA_MALL)
+@resp = @tx.installments(token, installment_details)
+
+// Versión 1.x del SDK
+@resp = Transbank::TransaccionCompleta::MallTransaction::installments(token, installment_details)
 ```
 
 ```python
@@ -1880,6 +1938,11 @@ details = [
   }
 ]
 
+// Versión 2.x del SDK
+@tx = Transbank::Webpay::TransaccionCompleta::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::TRANSACCION_COMPLETA_MALL)
+@resp = @tx.commit(token: token, details: details)
+
+// Versión 1.x del SDK
 response = Transbank::TransaccionCompleta::MallTransaction::commit(
   token: token, details: details
 )
@@ -2194,7 +2257,12 @@ MallFullTransaction.Status(token);
 ```
 
 ```ruby
-Transbank::TransaccionCompleta::MallTransaction::status(token)
+// Versión 2.x del SDK
+@tx = Transbank::Webpay::TransaccionCompleta::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::TRANSACCION_COMPLETA_MALL)
+@resp = @tx.status(token)
+
+// Versión 1.x del SDK
+@resp = Transbank::TransaccionCompleta::MallTransaction::status(token)
 ```
 
 ```python
@@ -2434,7 +2502,17 @@ var response = MallFullTransaction.Refund(
 ```
 
 ```ruby
-Transbank::TransaccionCompleta::MallTransaction::refund(
+// Versión 2.x del SDK
+@tx = Transbank::Webpay::TransaccionCompleta::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::TRANSACCION_COMPLETA_MALL)
+@resp = @tx.refund(
+  token: token,
+  buy_order: child_buy_order,
+  commerce_code_child: child_commerce_code,
+  amount: amount
+)
+
+// Versión 1.x del SDK
+@resp = Transbank::TransaccionCompleta::MallTransaction::refund(
   token: token,
   child_buy_order: child_buy_order,
   child_commerce_code: child_commerce_code,
@@ -2618,7 +2696,18 @@ Content-Type: application/json
 ```
 
 ```ruby
-Transbank::TransaccionCompleta::MallTransaction.capture(
+// Versión 2.x del SDK
+@tx = Transbank::Webpay::TransaccionCompleta::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::TRANSACCION_COMPLETA_MALL_DEFERRED)
+@resp = @tx.capture(
+  token: token,
+  commerce_code: commerce_code,
+  buy_order: buy_order,
+  authorization_code: authorization_code,
+  amount: capture_amount
+)
+
+// Versión 1.x del SDK
+@resp = Transbank::TransaccionCompleta::MallTransaction.capture(
   token: token,
   commerce_code: commerce_code,
   buy_order: buy_order,

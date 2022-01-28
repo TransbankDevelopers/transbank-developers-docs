@@ -206,6 +206,11 @@ var tbk_token = response.Token;
 @email = "nombre_de_usuario@gmail.com"
 @response_url = "https://callback/resultado/de/inscripcion"
 
+// Versión 2.x del SDK
+@ins = Transbank::Webpay::Oneclick::MallInscription.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL)
+@resp = @ins.start(username: @username, email: @email, response_url: @response_url)
+
+// Versión 1.x del SDK
 @resp = Transbank::Webpay::Oneclick::MallInscription::start(user_name: @username,email: @email,response_url: @response_url)
 
 @url_webpay = @resp.url_webpay
@@ -343,6 +348,12 @@ var tbkUser = result.TbkUser;
 ```ruby
 #...
 @tbk_token = "tbkToken"; # // token que llega por POST en el parámetro "TBK_TOKEN"
+
+// Versión 2.x del SDK
+@ins = Transbank::Webpay::Oneclick::MallInscription.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL)
+@resp = @ins.finish(token: @tbk_token)
+
+// Versión 1.x del SDK
 @resp = Transbank::Webpay::Oneclick::MallInscription::finish(token: @tbk_token)
 @tbkUser = @resp.tbk_user
 ```
@@ -484,10 +495,14 @@ var result = MallInscription.Delete(username, tbkUser);
 
 ```ruby
 #...
-
 @username = "nombre_de_usuario"
 @tbkUser = "tbkUserRetornadoPorInscriptionFinish"
 
+// Versión 2.x del SDK
+@ins = Transbank::Webpay::Oneclick::MallInscription.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL)
+@resp = @ins.delete(tbk_user: @tbkUser, username: @username)
+
+// Versión 1.x del SDK
 @resp = Transbank::Webpay::Oneclick::MallInscription::delete(user_name: @username,tbk_user: @tbkUser)
 ```
 
@@ -706,6 +721,11 @@ var result = MallTransaction.Authorize(username, tbkUser, buyOrder, details);
   }]
 end
 
+// Versión 2.x del SDK
+@tx = Transbank::Webpay::Oneclick::MallTransaction.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL)
+@resp = @tx.authorize(username: @username, tbk_user: @tbkUser, parent_buy_order: @buy_order, details: @details)
+
+// Versión 1.x del SDK
 @resp = Transbank::Webpay::Oneclick::MallTransaction::authorize(username: @username, tbk_user: @tbkUser, parent_buy_order: @buy_order, details: @details)
 ```
 
@@ -970,7 +990,12 @@ var result = MallTransaction.Status(buyOrder);
 ```
 
 ```ruby
-response = Transbank::Webpay::Oneclick::MallTransaction::status(buy_order: buy_order)
+// Versión 2.x del SDK
+@tx = Transbank::Webpay::Oneclick::MallTransaction.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL)
+@resp = @tx.status(buy_order: buy_order)
+
+// Versión 1.x del SDK
+@resp = Transbank::Webpay::Oneclick::MallTransaction::status(buy_order: buy_order)
 ```
 
 ```python
@@ -1264,6 +1289,11 @@ var result = MallTransaction.Refund(buyOrder, childCommerceCode, childBuyOrder, 
 @child_buy_order = "childBuyOrderIndicadoEnTransactionAuthorize"
 @amount = 10_000
 
+// Versión 2.x del SDK
+@tx = Transbank::Webpay::Oneclick::MallTransaction.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL)
+@resp = @tx.refund(buy_order: @buy_order, child_commerce_code: @child_commerce_code, child_buy_order: @child_buy_order, amount: @amount)
+
+// Versión 1.x del SDK
 @resp = Transbank::Webpay::Oneclick::MallTransaction::refund(buy_order: @buy_order, child_commerce_code: @child_commerce_code, child_buy_order: @child_buy_order, amount: @amount)
 ```
 
@@ -1362,7 +1392,12 @@ var result = tx.Capture(ChildcommerceCode, ChildbuyOrder, authorizationCode, amo
 ```
 
 ```ruby
-response = Transbank::Webpay::Oneclick::MallDeferredTransaction::capture(
+// Versión 2.x del SDK
+@tx = Transbank::Webpay::Oneclick::MallTransaction.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL_DEFERRED)
+@resp = @tx.capture(child_commerce_code: @commerce_code, child_buy_order: @buy_order, authorization_code: @authorization_code, amount: @capture_amount)
+
+// Versión 1.x del SDK
+@resp = Transbank::Webpay::Oneclick::MallDeferredTransaction::capture(
   child_commerce_code: @commerce_code, child_buy_order: @buy_order,
   amount: @capture_amount, authorization_code: @authorization_code
 )

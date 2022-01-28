@@ -217,22 +217,60 @@ var response = Inscription.Start(
 ```
 
 ```ruby
+
+@url = "https://callback_url/resultado/de/la/transaccion"
+@name = "Nombre"
+@first_last_name = "Primer Apellido"
+@second_last_name = "Segundo Apellido"
+@rut = "11111111-1"
+@service_id = "Identificador del servicio unico de suscripción"
+@final_url = "https://callback/final/comprobante/transacción"
+@max_amount = 10000; # monto máximo de la suscripció
+@phone_number = "numero telefono fijo de suscrito"
+@mobile_number = "numero de telefono móvil de suscrito"
+@patpass_name = "Nombre asignado a la suscripción"
+@person_email = "Correo de suscrito"
+@commerce_email = "Correo de comercio"
+@address = "Dirección de Suscrito"
+@city = "Ciudad de suscrito"
+
+// Versión 2.x del SDK
+@inscription = Transbank::Patpass::PatpassComercio::Inscription.new()
+@resp = @inscription.start(
+      @url,
+      @name,
+      @first_last_name,
+      @second_last_name,
+      @rut,
+      @service_id,
+      @final_url,
+      @max_amount,
+      @phone_number,
+      @mobile_number,
+      @patpass_name,
+      @person_email,
+      @commerce_email,
+      @address,
+      @city
+    )
+
+// Versión 1.x del SDK
 @resp  = Transbank::Patpass::PatpassComercio::Inscription::start(
-    url: 'http://misitio.cl/finalizar_suscripcion',
-    name: 'Diego',
-    first_last_name: 'Sanchez',
-    second_last_name: 'Valdovinos',
-    rut: '12345678-9',
-    service_id: '323123',
-    final_url: 'http://misitio.cl/voucher',
-    max_amount: 0,
-    phone_number: '57508624',
-    mobile_number: '57508624',
-    patpass_name: 'Help - 8050014',
-    person_email: 'persona@test.cl',
-    commerce_email: 'comercio@test.cl',
-    address: 'Merced 156, Santiago, Chile',
-    city: 'Santiago'
+    url: @url,
+    name: @name,
+    first_last_name: @first_last_name,
+    second_last_name: @second_last_name,
+    rut: @rut,
+    service_id: @service_id,
+    final_url: @final_url,
+    max_amount: @max_amount,
+    phone_number: @phone_number,
+    mobile_number: @mobile_number,
+    patpass_name: @patpass_name,
+    person_email: @person_email,
+    commerce_email: @commerce_email,
+    address: @address,
+    city: @city
 )
 ```
 
@@ -395,6 +433,11 @@ var response = Inscription.Status(token);
 ```
 
 ```ruby
+// Versión 2.x del SDK
+@inscription = Transbank::Patpass::PatpassComercio::Inscription.new()
+@resp = @inscription.status(token: @token)
+
+// Versión 1.x del SDK
 @response = Transbank::Patpass::PatpassComercio::Inscription::status(token)
 ```
 
