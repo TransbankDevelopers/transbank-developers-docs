@@ -163,13 +163,13 @@ WebpayModal.Transaction.IntegrationType = WebpayIntegrationType.Test;
 
 ```ruby
 
-// Versión 2.x del SDK
+## Versión 2.x del SDK
 @tx = Transbank::Webpay::WebpayPlusModal::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::WEBPAY_PLUS_MODAL)
 
 ```
 
 ```python
-// Versión 3.x del SDK
+## Versión 3.x del SDK
 tx = Transaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MODAL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
 
 # El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
