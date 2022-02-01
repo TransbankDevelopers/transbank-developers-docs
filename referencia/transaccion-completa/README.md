@@ -227,7 +227,7 @@ FullTransaction.Create(
 @cvv = 123 # CVV de la tarjeta.
 
 // Versión 2.x del SDK
-@tx = Transbank::Webpay::TransaccionCompleta::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::TRANSACCION_COMPLETA)
+@tx = Transbank::Webpay::TransaccionCompleta::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::TRANSACCION_COMPLETA_DEFERRED)
 @resp = @tx.capture(buy_order: @buy_order, session_id: @session_id, amount: @amount, cvv: @cvv, card_number: @card_number, card_expiration_date: @card_expiration_date) 
 
 // Versión 1.x del SDK
@@ -242,15 +242,30 @@ Transbank::TransaccionCompleta::Transaction::create(
 ```
 
 ```python
+// Versión 3.x del SDK
+from transbank.webpay.transaccion_completa.transaction import Transaction
+// Versión 2.x del SDK
 from transbank.transaccion_completa.transaction import Transaction
-#...
-Transaction.create(
-    buy_order = 'ordenCompra12345678',
-    session_id = 'sesion1234564',
-    amount = 10000,
-    card_number = 4239000000000000,
-    cvv = 123,
-    card_expiration_date = '22/10'
+
+# leyendo variables desde un formulario
+buy_order = 'Orden de compra de la transaccion '
+session_id = 'Identificador del servicio unico de transacción'
+amount = 10000; #monto en pesos
+card_number = 'Numero de Tarjeta'
+cvv = 123 #CVV de la tarjeta.
+card_expiration_date = 'Fecha de expiracion en formato AA/MM'
+
+// Versión 3.x del SDK
+tx = Transaction(WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.create(
+  buy_order: buy_order, session_id: session_id, amount: amount, cvv: cvv, 
+  card_number: card_number, card_expiration_date: card_expiration_date
+)
+
+// Versión 2.x del SDK
+resp = Transaction.create(
+    buy_order=buy_order, session_id=session_id, amount=amount,
+    card_number=card_number, cvv=cvv, card_expiration_date=card_expiration_date
 )
 ```
 
@@ -314,6 +329,10 @@ response.token
 ```
 
 ```python
+// Versión 3.x del SDK
+response['token']
+
+// Versión 2.x del SDK
 response.token
 ```
 
@@ -411,12 +430,22 @@ Transbank::TransaccionCompleta::Transaction::installments(
 ```
 
 ```python
+// Versión 3.x del SDK
+from transbank.webpay.transaccion_completa.transaction import Transaction
+// Versión 2.x del SDK
 from transbank.transaccion_completa.transaction import Transaction
 
-Transaction.installments(
-  token=token,
-  installments_number=installments_number
-)
+#obtener form desde el request
+req = request.form
+token = request.form.get('token') #token obtenido al iniciar la transaccion
+installments_number = 10 #numero de cuotas
+
+// Versión 3.x del SDK
+tx = Transaction(WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.installments(token=token, installments_number=installments_number)
+
+// Versión 2.x del SDK
+resp = Transaction.installments(token=token, installments_number=installments_number)
 ```
 
 ```http
@@ -476,6 +505,12 @@ response.deferred_periods
 ```
 
 ```python
+// Versión 3.x del SDK
+response['installments_amount']
+response['id_query_installments']
+response['deferred_periods']
+
+// Versión 2.x del SDK
 response.installments_amount
 response.id_query_installments
 response.deferred_periods
@@ -581,9 +616,20 @@ Transbank::TransaccionCompleta::Transaction::commit(
 ```
 
 ```python
+// Versión 3.x del SDK
+from transbank.webpay.transaccion_completa.transaction import Transaction
+// Versión 2.x del SDK
 from transbank.transaccion_completa.transaction import Transaction
 
-Transaction.commit(
+// Versión 3.x del SDK
+tx = Transaction(WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.commit(token=token,
+                          id_query_installments=id_query_installments,
+                          deferred_period_index=deferred_period_index,
+                          grace_period=grace_period)
+
+// Versión 2.x del SDK
+resp = Transaction.commit(
   token=token,
   id_query_installments=id_query_installments,
   deferred_period_index=deferred_period_index,
@@ -691,6 +737,22 @@ response.balance
 ```
 
 ```python
+// Versión 3.x del SDK
+response['amount']
+response['status']
+response['buy_order']
+response['session_id']
+response['card_number']
+response['accounting_date']
+response['transaction_date']
+response['authorization_code']
+response['payment_type_code']
+response['response_code']
+response['installments_number']
+response['installments_amount']
+response['balance']
+
+// Versión 2.x del SDK
 response.amount
 response.status
 response.buy_order
@@ -810,9 +872,17 @@ FullTransaction.Status(token);
 ```
 
 ```python
+// Versión 3.x del SDK
+from transbank.webpay.transaccion_completa.transaction import Transaction
+// Versión 2.x del SDK
 from transbank.transaccion_completa.transaction import Transaction
 
-Transaction.status(token=token)
+// Versión 3.x del SDK
+tx = Transaction(WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.status(token=token)
+
+// Versión 2.x del SDK
+resp = Transaction.status(token=token)
 ```
 
 ```http
@@ -903,6 +973,22 @@ response.balance
 ```
 
 ```python
+// Versión 3.x del SDK
+response['amount']
+response['status']
+response['buy_order']
+response['session_id']
+response['card_number']
+response['accounting_date']
+response['transaction_date']
+response['authorization_code']
+response['payment_type_code']
+response['response_code']
+response['installments_number']
+response['installments_amount']
+response['balance']
+
+// Versión 2.x del SDK
 response.amount
 response.status
 response.buy_order
@@ -1043,9 +1129,17 @@ FullTransaction.Refund(token, amount);
 ```
 
 ```python
+// Versión 3.x del SDK
+from transbank.webpay.transaccion_completa.transaction import Transaction
+// Versión 2.x del SDK
 from transbank.transaccion_completa.transaction import Transaction
 
-Transaction.refund(token=token, amount=amount)
+// Versión 3.x del SDK
+tx = Transaction(WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.refund(token=token, amount=amount)
+
+// Versión 2.x del SDK
+resp = Transaction.refund(token=token, amount=amount)
 ```
 
 ```http
@@ -1116,6 +1210,15 @@ response.response_code
 ```
 
 ```python
+// Versión 3.x del SDK
+response['type']
+response['authorization_code']
+response['authorization_date']
+response['nullified_amount']
+response['balance']
+response['response_code']
+
+// Versión 2.x del SDK
 response.type
 response.authorization_code
 response.authorization_date
@@ -1232,7 +1335,7 @@ $transaction->capture($token, $buyOrder, $authorizationCode, $captureAmount);
 // Versión 3.x del SDK
 import cl.transbank.webpay.transaccioncompleta.responses.FullTransactionCaptureResponse;
 
-FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+FullTransaction tx = new FullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
 final FullTransactionCaptureResponse response = tx.capture(token, buyOrder, authorizationCode, captureAmount);
 
 // Versión 3.x del SDK
@@ -1242,9 +1345,12 @@ final FullTransactionCaptureResponse response = FullTransaction.Transaction.capt
 ```
 
 ```python
-from transbank.transaccion_completa.transaction import Transaction
+// Versión 3.x del SDK
+tx = Transaction(WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.capture(token, buy_order, authorization_code, capture_amount)
 
-Transaction.capture(token, buy_order, authorization_code, capture_amount)
+// Versión 2.x del SDK
+resp = Transaction.capture(token, buy_order, authorization_code, capture_amount)
 ```
 
 
@@ -1295,6 +1401,13 @@ response.response_code
 ```
 
 ```python
+// Versión 3.x del SDK
+response['authorization_code']
+response['authorization_date']
+response['captured_amount']
+response['response_code']
+
+// Versión 2.x del SDK
 response.token
 response.authorization_code
 response.authorization_date
@@ -1491,7 +1604,19 @@ details = [
   }
 ]
 
-response = Transaction.create(
+// Versión 3.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.create(
+  buy_order=buy_order,
+  session_id=session_id,
+  card_number=card_number, 
+  card_expiration_date=card_expiration_date, 
+  details=details, 
+  cvv=None
+)
+
+// Versión 2.x del SDK
+resp = Transaction.create(
   buy_order=buy_order,
   session_id=session_id,
   card_number=card_number, card_expiration_date=card_expiration_date, details=details
@@ -1587,6 +1712,10 @@ response.token
 ```
 
 ```python
+// Versión 3.x del SDK
+response['token']
+
+// Versión 2.x del SDK
 response.token
 ```
 
@@ -1702,6 +1831,9 @@ installment_details = [
 ```
 
 ```python
+// Versión 3.x del SDK
+from transbank.webpay.transaccion_completa.mall_transaction import MallTransaction
+// Versión 2.x del SDK
 from transbank.transaccion_completa_mall.transaction import Transaction
 
 details = [
@@ -1717,7 +1849,12 @@ details = [
   }
 ]
 
-response = Transaction.installments(token=token, details=details)
+// Versión 3.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.installments(token=token, details=details)
+
+// Versión 2.x del SDK
+resp = Transaction.installments(token=token, details=details)
 ```
 
 ```http
@@ -1802,6 +1939,12 @@ deferred_period.period
 ```
 
 ```python
+// Versión 3.x del SDK
+response['installments_amount']
+response['id_query_installments']
+response['deferred_periods']
+
+// Versión 2.x del SDK
 response.installments_amount
 response.id_query_installments
 deferred_period = response.deferred_periods[0]
@@ -1966,7 +2109,14 @@ details = [
   }
 ]
 
-response = Transaction.commit(
+// Versión 3.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.commit(
+  token=token, details=details
+)
+
+// Versión 2.x del SDK
+resp = Transaction.commit(
   token=token, details=details
 )
 ```
@@ -2142,6 +2292,14 @@ detail.balance
 ```
 
 ```python
+// Versión 3.x del SDK
+response['buy_order']
+response['card_number']
+response['accounting_date']
+response['transaction_date']
+response['details']
+
+// Versión 2.x del SDK
 response.buy_order
 response.card_number
 response.accounting_date
@@ -2266,7 +2424,12 @@ MallFullTransaction.Status(token);
 ```
 
 ```python
-Transaction.status(token)
+// Versión 3.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.status(token)
+
+// Versión 2.x del SDK
+resp = Transaction.status(token)
 ```
 
 ```http
@@ -2365,6 +2528,14 @@ detail.balance
 ```
 
 ```python
+// Versión 3.x del SDK
+response['buy_order']
+response['card_number']
+response['accounting_date']
+response['transaction_date']
+response['details']
+
+// Versión 2.x del SDK
 response.buy_order
 response.card_number
 response.accounting_date
@@ -2521,9 +2692,17 @@ var response = MallFullTransaction.Refund(
 ```
 
 ```python
+// Versión 3.x del SDK
+from transbank.webpay.transaccion_completa.mall_transaction import MallTransaction
+// Versión 2.x del SDK
 from transbank.transaccion_completa_mall.transaction import Transaction
 
-Transaction.refund(
+// Versión 3.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.refund(token: token, child_buy_order: child_buy_order, child_commerce_code: child_commerce_code, amount: amount)
+
+// Versión 2.x del SDK
+resp = Transaction.refund(
   token=token, amount=amount, child_commerce_code=child_commerce_code, child_buy_order=child_buy_order
 )
 ```
@@ -2610,6 +2789,15 @@ response.response_code
 ```
 
 ```python
+// Versión 3.x del SDK
+response['type']
+response['authorization_code']
+response['authorization_date']
+response['nullified_amount']
+response['balance']
+response['response_code']
+
+// Versión 2.x del SDK
 response.type
 response.authorization_code
 response.authorization_date
@@ -2739,6 +2927,11 @@ const response = TransaccionCompleta.MallDeferredTransaction.capture(
 ```python
 from transbank.transaccion_completa_mall.transaction import Transaction
 
+// Versión 3.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.capture(token, child_commerce_code, child_buy_order, authorization_code, capture_amount)
+
+// Versión 2.x del SDK
 Transaction.capture(
   token, child_commerce_code, child_buy_order, authorization_code, capture_amount
 )
@@ -2746,7 +2939,7 @@ Transaction.capture(
 
 ```java
 // Versión 3.x del SDK
-MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+MallFullTransaction tx = new MallFullTransaction(new WebpayOptions(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
 final MallFullTransactionCaptureResponse response = tx.capture(token, commerceCode, buyOrder, authorizationCode, captureAmount);
 
 // Versión 2.x del SDK
@@ -2812,6 +3005,13 @@ response.response_code
 ```
 
 ```python
+// Versión 3.x del SDK
+response['authorization_code']
+response['authorization_date']
+response['captured_amount']
+response['response_code']
+
+// Versión 2.x del SDK
 response.token
 response.authorization_code
 response.authorization_date
