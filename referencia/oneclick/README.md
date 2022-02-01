@@ -210,7 +210,12 @@ response = Transbank::Webpay::Oneclick::MallInscription::start(
 ```
 
 ```python
-MallInscription.start(
+// Versión 3.x del SDK
+ins = MallInscription(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = ins.start(username=user_name, email=email, response_url=response_url)
+
+// Versión 2.x del SDK
+resp = MallInscription.start(
         user_name=user_name,
         email=email,
         response_url=response_url)
@@ -275,6 +280,11 @@ response.url_webpay
 ```
 
 ```python
+// Versión 3.x del SDK
+response['token']
+response['url_webpay']
+
+// Versión 2.x del SDK
 response.token
 response.url_webpay
 ```
@@ -359,7 +369,12 @@ var response = MallInscription.Finish(token);
 ```
 
 ```python
-response = MallInscription.finish(token=token)
+// Versión 3.x del SDK
+ins = MallInscription(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = ins.finish(token=tbk_token)
+
+// Versión 2.x del SDK
+resp = MallInscription.finish(token=token)
 ```
 
 ```javascript
@@ -423,6 +438,14 @@ response.card_number
 ```
 
 ```python
+// Versión 3.x del SDK
+response['response_code']
+response['transbank_user']
+response['authorization_code']
+response['card_type']
+response['card_number']
+
+// Versión 2.x del SDK
 response.response_code
 response.transbank_user
 response.authorization_code
@@ -525,6 +548,11 @@ MallInscription::delete(user_name: @username, tbk_user: @tbkUser)
 ```
 
 ```python
+// Versión 3.x del SDK
+ins = MallInscription(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+ins.delete(tbk_user=tbkUser, username=username)
+
+// Versión 2.x del SDK
 MallInscription.delete(tbk_user, user_name)
 ```
 
@@ -734,7 +762,12 @@ details = MallTransactionAuthorizeDetails(
   commerce_code2, buy_order_child2, installments_number2, amount2
 )
 
-MallTransaction.authorize(
+// Versión 3.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.authorize(username= username, tbk_user= tbkUser, parent_buy_order= buy_order, details= details)
+
+// Versión 2.x del SDK
+resp = MallTransaction.authorize(
   user_name=user_name,
   tbk_user=tbk_user,
   buy_order=buy_order,
@@ -913,6 +946,14 @@ end
 ```
 
 ```python
+// Versión 3.x del SDK
+response['accounting_date']
+response['buy_order']
+response['card_detail']
+response['transaction_date']
+response['details']
+
+// Versión 2.x del SDK
 response.accounting_date
 response.buy_order
 card_detail = response.card_detail
@@ -1048,7 +1089,12 @@ var result = MallTransaction.Status(buyOrder);
 ```
 
 ```python
-var response = MallTransaction.status(buy_order)
+// Versión 3.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.status(buy_order)
+
+// Versión 2.x del SDK
+resp = MallTransaction.status(buy_order)
 ```
 
 ```javascript
@@ -1198,6 +1244,16 @@ end
 ```
 
 ```python
+// Versión 3.x del SDK
+response['accounting_date']
+response['buy_order']
+response['card_detail']
+response['session_id']
+response['transaction_date']
+response['vci']
+response['details']
+
+// Versión 2.x del SDK
 response.accounting_date
 response.buy_order
 card_detail = response.card_detail
@@ -1355,7 +1411,12 @@ var response = MallTransaction.Refund(buyOrder, childCommerceCode,childBuyOrder,
 ```
 
 ```python
-var response = MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, amount)
+// Versión 3.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.refund(buy_order, child_commerce_code, child_buy_order, amount)
+
+// Versión 2.x del SDK
+resp = MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, amount)
 ```
 
 ```javascript
@@ -1434,12 +1495,17 @@ response.type
 ```
 
 ```python
+// Versión 3.x del SDK
+response['authorization_code']
+response['authorization_date']
+response['captured_amount']
+response['response_code']
+
+// Versión 2.x del SDK
 response.authorization_code
 response.authorization_date
-response.balance
-response.nullified_amount
+response.captured_amount
 response.response_code
-response.type
 ```
 
 ```javascript
@@ -1525,6 +1591,11 @@ var result = tx.Capture(ChildcommerceCode, ChildbuyOrder, authorizationCode, amo
 ```
 
 ```python
+// Versión 3.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.capture(child_commerce_code, child_buy_order, authorization_code, capture_amount)
+
+// Versión 2.x del SDK
 # Esta funcion aun no se encuentra disponible en el SDK
 ```
 
@@ -1600,6 +1671,13 @@ response.response_code
 ```
 
 ```python
+// Versión 3.x del SDK
+response['authorization_code']
+response['authorization_date']
+response['captured_amount']
+response['response_code']
+
+// Versión 2.x del SDK
 # Esta función aun no se encuentra disponible en el SDK
 ```
 

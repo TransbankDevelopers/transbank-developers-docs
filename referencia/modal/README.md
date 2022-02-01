@@ -169,6 +169,9 @@ WebpayModal.Transaction.IntegrationType = WebpayIntegrationType.Test;
 ```
 
 ```python
+// Versión 3.x del SDK
+tx = Transaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MODAL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+
 # El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
 transbank.webpay.webpay_modal.webpay_modal_default_commerce_code = 597055555584
 transbank.webpay.webpay_modal.default_api_key = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C"

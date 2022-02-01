@@ -54,6 +54,8 @@ PatpassComercio.IntegrationType = "TEST / LIVE dependiendo de tu ambiente de int
 ```
 
 ```python
+// Versión 3.x del SDK
+ins = Inscription(PatpassComercioOptions(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST))
 # ...
 ```
 
@@ -276,7 +278,10 @@ var response = Inscription.Start(
 ```
 
 ```python
-from transbank.error.transbank_error import TransbankError
+// Versión 3.x del SDK
+from transbank.patpass_comercio.inscription import Inscription
+
+// Versión 2.x del SDK
 from transbank.patpass_comercio.inscription import Inscription
 
 return_url = "https://callback_url/resultado/de/la/transaccion"
@@ -295,7 +300,13 @@ commerce_mail = "Correo de comercio"
 address = "Dirección de Suscrito"
 city = "Ciudad de suscrito"
 
-response = Inscription.start(return_url, name, first_last_name, second_last_name, rut, service_id, final_url,
+// Versión 3.x del SDK
+ins = Inscription(PatpassComercioOptions(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST))
+resp = ins.start(return_url, name, first_last_name, second_last_name, rut, service_id, None,
+                                       max_amount, phone_number, mobile_number, patpass_name,
+                                       person_email, commerce_mail, address, city)
+// Versión 2.x del SDK
+resp = Inscription.start(return_url, name, first_last_name, second_last_name, rut, service_id, final_url,
                                        max_amount, phone_number, mobile_number, patpass_name,
                                        person_email, commerce_mail, address, city)
 
@@ -395,14 +406,21 @@ var result = Inscription.Status(token);
 ```
 
 ```python
-from transbank.error.transbank_error import TransbankError
+// Versión 3.x del SDK
+from transbank.patpass_comercio.inscription import Inscription
+
+// Versión 2.x del SDK
 from transbank.patpass_comercio.inscription import Inscription
 
 token = request.form.get("tokenComercio")
-try:
-    response = Inscription.status(token)
-except TransbankError as e:
-    print(e.message)
+
+// Versión 3.x del SDK
+ins = Inscription(PatpassComercioOptions(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST))
+resp = ins.status(token)
+
+// Versión 2.x del SDK
+resp = Inscription.status(token)
+
 ```
 
 ## Credenciales y Ambiente
