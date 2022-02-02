@@ -546,7 +546,7 @@ TransaccionCompletaMall.IntegrationType = WebpayIntegrationType.Live;
 ```
 
 ```ruby
-// Versión 2.x del SDK
+## Versión 2.x del SDK
 # Webpay Plus
 tx = Transbank::Webpay::WebpayPlus::Transaction.new("commercecode", "apikey", :production)
 # Oneclick
@@ -556,7 +556,7 @@ tx = Transbank::Webpay::TransaccionCompleta::Transaction.new("commercecode", "ap
 # Transaccion Completa Mall
 tx = Transbank::Webpay::TransaccionCompleta::MallTransaction.new("commercecode", "apikey", :production)
 
-// Versión 1.x del SDK
+## Versión 1.x del SDK
 
 # Webpay Plus
 Transbank::Webpay::WebpayPlus::Base.commerce_code = "commercecode"
@@ -570,7 +570,7 @@ Transbank::Webpay::Oneclick::Base.integration_type = :LIVE
 ```
 
 ```python
-// Versión 3.x del SDK
+## Versión 3.x del SDK
 # Webpay Plus
 from transbank.webpay.webpay_plus.transaction import Transaction
 
@@ -590,7 +590,7 @@ from transbank.webpay.transaccion_completa.mall_transaction import MallTransacti
 
 tx = MallTransaction(WebpayOptions("commercecode", "apikey", IntegrationType.LIVE))
 
-// Versión 2.x del SDK
+## Versión 2.x del SDK
 
 # Webpay Plus
 WebpayPlus.configure_for_production('commerce_code', 'apikey')

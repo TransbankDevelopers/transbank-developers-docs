@@ -234,7 +234,7 @@ var response = Inscription.Start(
 @address = "Dirección de Suscrito"
 @city = "Ciudad de suscrito"
 
-// Versión 2.x del SDK
+## Versión 2.x del SDK
 @inscription = Transbank::Patpass::PatpassComercio::Inscription.new()
 @resp = @inscription.start(
       @url,
@@ -254,7 +254,7 @@ var response = Inscription.Start(
       @city
     )
 
-// Versión 1.x del SDK
+## Versión 1.x del SDK
 @resp  = Transbank::Patpass::PatpassComercio::Inscription::start(
     url: @url,
     name: @name,
@@ -291,12 +291,12 @@ commerce_mail = "Correo de comercio"
 address = "Dirección de Suscrito"
 city = "Ciudad de suscrito"
 
-// Versión 3.x del SDK
+## Versión 3.x del SDK
 ins = Inscription(PatpassComercioOptions(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST))
 resp = ins.start(return_url, name, first_last_name, second_last_name, rut, service_id, None,
                                        max_amount, phone_number, mobile_number, patpass_name,
                                        person_email, commerce_mail, address, city)
-// Versión 2.x del SDK
+## Versión 2.x del SDK
 resp = Inscription.start(return_url, name, first_last_name, second_last_name, rut, service_id, final_url,
                                        max_amount, phone_number, mobile_number, patpass_name,
                                        person_email, commerce_mail, address, city)
@@ -370,11 +370,11 @@ response.url
 ```
 
 ```python
-// Versión 3.x del SDK
+## Versión 3.x del SDK
 response['token']
 respone['url']
 
-// Versión 2.x del SDK
+## Versión 2.x del SDK
 response.token
 respone.url
 ```
@@ -446,20 +446,20 @@ var response = Inscription.Status(token);
 ```
 
 ```ruby
-// Versión 2.x del SDK
+## Versión 2.x del SDK
 @inscription = Transbank::Patpass::PatpassComercio::Inscription.new()
 @resp = @inscription.status(token: @token)
 
-// Versión 1.x del SDK
+## Versión 1.x del SDK
 @response = Transbank::Patpass::PatpassComercio::Inscription::status(token)
 ```
 
 ```python
-// Versión 3.x del SDK
+## Versión 3.x del SDK
 ins = Inscription(PatpassComercioOptions(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST))
 resp = ins.status(token)
 
-// Versión 2.x del SDK
+## Versión 2.x del SDK
 resp = Inscription.status(token)
 ```
 
@@ -501,11 +501,11 @@ response.voucher_url
 ```
 
 ```python
-// Versión 3.x del SDK
+## Versión 3.x del SDK
 response['status']
 respone['voucher_url']
 
-// Versión 2.x del SDK
+## Versión 2.x del SDK
 response.status
 response.voucher_url
 ```
