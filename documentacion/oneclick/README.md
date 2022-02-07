@@ -641,7 +641,7 @@ Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(Int
 final OneclickMallTransactionAuthorizeResponse response = tx.authorize(username, tbkUser, buyOrder, details);
 
 // Versión 2.x del SDK
-OneclickMallTransactionAuthorizeResponse response = Oneclick.Transaction.authorize(username, tbkUser, buyOrder, details);
+OneclickMallTransactionAuthorizeResponse response = Oneclick.MallTransaction.authorize(username, tbkUser, buyOrder, details);
 ```
 
 ```php
@@ -1000,8 +1000,7 @@ Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(Int
 final OneclickMallTransactionStatusResponse response = tx.status(buyOrder);
 
 // Versión 2.x del SDK
-final OneclickMallTransactionStatusResponse response =
-  Oneclick.Transaction.status(buyOrder);
+final OneclickMallTransactionStatusResponse response = Oneclick.MallTransaction.status(buyOrder);
 
 
 ```
@@ -1277,7 +1276,7 @@ Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(Int
 final OneclickMallTransactionRefundResponse response = tx.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 
 // Versión 2.x del SDK
-OneclickMallTransactionRefundResponse response = Oneclick.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+OneclickMallTransactionRefundResponse response = Oneclick.MallTransaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
 
 ```php
