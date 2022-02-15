@@ -190,6 +190,11 @@ var username = "nombre_de_usuario";
 var email = "nombre_de_usuario@gmail.com";
 var response_url = "https://callback/resultado/de/inscripcion";
 
+// Versión 4.x del SDK
+var ins = new MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = ins.Start(userName, email, returnUrl);
+
+// Versión 3.x del SDK
 var response = MallInscription.start(userame, email, response_url);
 
 var url_webpay = response.Url;
@@ -201,6 +206,11 @@ var tbk_token = response.Token;
 @email = "nombre_de_usuario@gmail.com"
 @response_url = "https://callback/resultado/de/inscripcion"
 
+## Versión 2.x del SDK
+@ins = Transbank::Webpay::Oneclick::MallInscription.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL)
+@resp = @ins.start(username: @username, email: @email, response_url: @response_url)
+
+### Versión 1.x del SDK
 @resp = Transbank::Webpay::Oneclick::MallInscription::start(user_name: @username,email: @email,response_url: @response_url)
 
 @url_webpay = @resp.url_webpay
@@ -212,6 +222,11 @@ username = "nombre_de_usuario"
 email = "nombre_de_usuario@gmail.com"
 response_url = "https://callback/resultado/de/inscripcion"
 
+## Versión 3.x del SDK
+ins = MallInscription(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = ins.start(username=user_name, email=email, response_url=response_url)
+
+## Versión 2.x del SDK
 resp = MallInscription.start(user_name=username,email=email,response_url=response_url)
 
 url_webpay = resp.url_webpay
@@ -223,6 +238,11 @@ const username = 'nombre_de_usuario';
 const email = 'nombre_de_usuario@email.com';
 const responseUrl = 'https://callback/resultado/de/inscripcion';
 
+// Versión 3.x del SDK
+const ins = new Oneclick.MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await ins.start(username, email, responseUrl);
+
+// Versión 2.x del SDK
 const response = await Oneclick.MallInscription.start(username, email, responseUrl);
 ```
 
@@ -251,6 +271,11 @@ response.url_webpay
 ```
 
 ```python
+## Versión 3.x del SDK
+response['token']
+response['url_webpay']
+
+## Versión 2.x del SDK
 response.token
 response.url_webpay
 ```
@@ -319,6 +344,12 @@ $tbkUser = $response->getTbkUser();
 ```csharp
 //...
 var token = "tbkToken"; // token que llega por POST en el parámetro "TBK_TOKEN"
+
+// Versión 4.x del SDK
+var ins = new MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = ins.Finish(tbk_token);
+
+// Versión 3.x del SDK
 var result = MallInscription.Finish(tbk_token);
 var tbkUser = result.TbkUser;
 
@@ -327,13 +358,24 @@ var tbkUser = result.TbkUser;
 ```ruby
 #...
 @tbk_token = "tbkToken"; # // token que llega por POST en el parámetro "TBK_TOKEN"
+
+## Versión 2.x del SDK
+@ins = Transbank::Webpay::Oneclick::MallInscription.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL)
+@resp = @ins.finish(token: @tbk_token)
+
+## Versión 1.x del SDK
 @resp = Transbank::Webpay::Oneclick::MallInscription::finish(token: @tbk_token)
 @tbkUser = @resp.tbk_user
 ```
 
 ```python
-#...
 tbk_token = "tbkToken" # token que llega por POST en el parámetro "TBK_TOKEN"
+
+## Versión 3.x del SDK
+ins = MallInscription(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = ins.finish(token=tbk_token)
+
+## Versión 2.x del SDK
 resp = MallInscription.finish(token=tbk_token)
 tbkUser = resp.tbk_user
 ```
@@ -341,6 +383,11 @@ tbkUser = resp.tbk_user
 ```javascript
 //...
 const token = 'tbkToken' // token que llega por POST en el parámetro "TBK_TOKEN"
+// Versión 3.x del SDK
+const ins = new Oneclick.MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await ins.finish(token);
+
+// Versión 2.x del SDK
 const response = Oneclick.MallInscription.finish(token);
 ```
 
@@ -381,6 +428,14 @@ response.card_number
 ```
 
 ```python
+## Versión 3.x del SDK
+response['response_code']
+response['transbank_user']
+response['authorization_code']
+response['card_type']
+response['card_number']
+
+## Versión 2.x del SDK
 response.response_code
 response.transbank_user
 response.authorization_code
@@ -453,15 +508,24 @@ $response = MallInscription::delete($tbkUser, $username, $options);
 var username = "nombre_de_usuario";
 var tbkUser = "tbkUserRetornadoPorInscriptionFinish";
 
+// Versión 4.x del SDK
+var ins = new MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = ins.Delete(tbkUser, username);
+
+// Versión 3.x del SDK
 var result = MallInscription.Delete(username, tbkUser);
 ```
 
 ```ruby
 #...
-
 @username = "nombre_de_usuario"
 @tbkUser = "tbkUserRetornadoPorInscriptionFinish"
 
+## Versión 2.x del SDK
+@ins = Transbank::Webpay::Oneclick::MallInscription.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL)
+@resp = @ins.delete(tbk_user: @tbkUser, username: @username)
+
+## Versión 1.x del SDK
 @resp = Transbank::Webpay::Oneclick::MallInscription::delete(user_name: @username,tbk_user: @tbkUser)
 ```
 
@@ -470,12 +534,22 @@ var result = MallInscription.Delete(username, tbkUser);
 username = "nombre_de_usuario"
 tbkUser = "tbkUserRetornadoPorInscriptionFinish"
 
-resp = MallInscription.delete(tbk_user=tbkUser, user_name=username)
+## Versión 3.x del SDK
+ins = MallInscription(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+ins.delete(tbk_user=tbkUser, username=username)
+
+## Versión 2.x del SDK
+MallInscription.delete(tbk_user=tbkUser, user_name=username)
 ```
 
 ```javascript
 username = 'nombre_de_usuario';
 tbkUser = 'tbkUserRetornadoPorInscriptionFinish';
+// Versión 3.x del SDK
+const ins = new Oneclick.MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await ins.delete(tbkUser, username);
+
+// Versión 2.x del SDK
 const response = await Oneclick.MallInscription.delete(tbkUser, username);
 ```
 
@@ -567,7 +641,7 @@ Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(Int
 final OneclickMallTransactionAuthorizeResponse response = tx.authorize(username, tbkUser, buyOrder, details);
 
 // Versión 2.x del SDK
-OneclickMallTransactionAuthorizeResponse response = Oneclick.Transaction.authorize(username, tbkUser, buyOrder, details);
+OneclickMallTransactionAuthorizeResponse response = Oneclick.MallTransaction.authorize(username, tbkUser, buyOrder, details);
 ```
 
 ```php
@@ -647,6 +721,11 @@ var installmentsNumber = 1;
 List<PaymentRequest> details = new List<PaymentRequest>();
 details.Add(new PaymentRequest(childCommerceCode, childBuyOrder, amount, installmentsNumber));
 
+// Versión 4.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var result = tx.Authorize(userName, tbkUser, buyOrder, details);
+
+// Versión 3.x del SDK
 var result = MallTransaction.Authorize(username, tbkUser, buyOrder, details);
 ```
 
@@ -670,6 +749,11 @@ var result = MallTransaction.Authorize(username, tbkUser, buyOrder, details);
   }]
 end
 
+## Versión 2.x del SDK
+@tx = Transbank::Webpay::Oneclick::MallTransaction.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL)
+@resp = @tx.authorize(username: @username, tbk_user: @tbkUser, parent_buy_order: @buy_order, details: @details)
+
+## Versión 1.x del SDK
 @resp = Transbank::Webpay::Oneclick::MallTransaction::authorize(username: @username, tbk_user: @tbkUser, parent_buy_order: @buy_order, details: @details)
 ```
 
@@ -691,6 +775,11 @@ amount2 = 50000
 details = MallTransactionAuthorizeDetails(commerce_code1, buy_order_child1, installments_number1, amount1) \
     .add(commerce_code2, buy_order_child2, installments_number2, amount2)
 
+## Versión 3.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.authorize(username= username, tbk_user= tbkUser, parent_buy_order= buy_order, details= details)
+
+## Versión 2.x del SDK
 resp = MallTransaction.authorize(user_name=username, tbk_user=tbkUser, buy_order=buy_order, details=details)
 ```
 
@@ -700,6 +789,11 @@ const details = [
   new TransactionDetail(amount2, commerceCode2, childBuyOrder2)
 ];
 
+// Versión 3.x del SDK
+const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.authorize(userName, tbkUser, buyOrder, details);
+
+// Versión 2.x del SDK
 const response = await Oneclick.MallTransaction.authorize(
   userName, tbkUser, buyOrder, details
 );
@@ -840,6 +934,14 @@ end
 ```
 
 ```python
+## Versión 3.x del SDK
+response['accounting_date']
+response['buy_order']
+response['card_detail']
+response['transaction_date']
+response['details']
+
+## Versión 2.x del SDK
 response.accounting_date
 response.buy_order
 card_detail = response.card_detail
@@ -898,8 +1000,7 @@ Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(Int
 final OneclickMallTransactionStatusResponse response = tx.status(buyOrder);
 
 // Versión 2.x del SDK
-final OneclickMallTransactionStatusResponse response =
-  Oneclick.Transaction.status(buyOrder);
+final OneclickMallTransactionStatusResponse response = Oneclick.MallTransaction.status(buyOrder);
 
 
 ```
@@ -919,20 +1020,39 @@ $response = MallTransaction::getStatus($buyOrder);
 ```
 
 ```csharp
-using Transbank.Webpay.Oneclick;
 
+// Versión 4.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var result = tx.Status(buyOrder);
+
+// Versión 3.x del SDK
 var result = MallTransaction.Status(buyOrder);
 ```
 
 ```ruby
-response = Transbank::Webpay::Oneclick::MallTransaction::status(buy_order: buy_order)
+## Versión 2.x del SDK
+@tx = Transbank::Webpay::Oneclick::MallTransaction.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL)
+@resp = @tx.status(buy_order: buy_order)
+
+## Versión 1.x del SDK
+@resp = Transbank::Webpay::Oneclick::MallTransaction::status(buy_order: buy_order)
 ```
 
 ```python
-var response = MallTransaction.status(buy_order)
+## Versión 3.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.status(buy_order)
+
+## Versión 2.x del SDK
+resp = MallTransaction.status(buy_order)
 ```
 
 ```javascript
+// Versión 3.x del SDK
+const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.status(token);
+
+// Versión 2.x del SDK
 const response = await Oneclick.MallTransaction.status(token);
 ```
 
@@ -1059,6 +1179,16 @@ end
 ```
 
 ```python
+## Versión 3.x del SDK
+response['accounting_date']
+response['buy_order']
+response['card_detail']
+response['session_id']
+response['transaction_date']
+response['vci']
+response['details']
+
+## Versión 2.x del SDK
 response.accounting_date
 response.buy_order
 card_detail = response.card_detail
@@ -1146,7 +1276,7 @@ Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(Int
 final OneclickMallTransactionRefundResponse response = tx.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 
 // Versión 2.x del SDK
-OneclickMallTransactionRefundResponse response = Oneclick.Transaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+OneclickMallTransactionRefundResponse response = Oneclick.MallTransaction.refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
 
 ```php
@@ -1198,6 +1328,11 @@ var childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
 var childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
 var amount = 10000;
 
+// Versión 4.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var result = tx.Refund(buyOrder, childCommerceCode, childBuyOrder, amount);
+
+// Versión 3.x del SDK
 var result = MallTransaction.Refund(buyOrder, childCommerceCode, childBuyOrder, amount);
 ```
 
@@ -1209,17 +1344,25 @@ var result = MallTransaction.Refund(buyOrder, childCommerceCode, childBuyOrder, 
 @child_buy_order = "childBuyOrderIndicadoEnTransactionAuthorize"
 @amount = 10_000
 
+## Versión 2.x del SDK
+@tx = Transbank::Webpay::Oneclick::MallTransaction.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL)
+@resp = @tx.refund(buy_order: @buy_order, child_commerce_code: @child_commerce_code, child_buy_order: @child_buy_order, amount: @amount)
+
+## Versión 1.x del SDK
 @resp = Transbank::Webpay::Oneclick::MallTransaction::refund(buy_order: @buy_order, child_commerce_code: @child_commerce_code, child_buy_order: @child_buy_order, amount: @amount)
 ```
 
 ```python
-#...
-
 buy_order = "buyOrderIndicadoEnTransactionAuthorize"
 child_commerce_code = "childCommerceCodeIndicadoEnTransactionAuthorize"
 child_buy_order = "childBuyOrderIndicadoEnTransactionAuthorize"
 amount = 10000
 
+## Versión 3.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.refund(buy_order, child_commerce_code, child_buy_order, amount)
+
+## Versión 2.x del SDK
 resp = MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, amount)
 ```
 
@@ -1228,6 +1371,12 @@ const buyOrder = "buyOrderIndicadoEnTransactionAuthorize";
 const childCommerceCode = "childCommerceCodeIndicadoEnTransactionAuthorize";
 const childBuyOrder = "childBuyOrderIndicadoEnTransactionAuthorize";
 const amount = 10000;
+
+// Versión 3.x del SDK
+const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.refund(buyOrder, childCommerceCode, buyOrderChild, amount);
+
+// Versión 2.x del SDK
 const response = await Oneclick.MallTransaction.refund(buyOrder, childCommerceCode, buyOrderChild, amount);
 ```
 
@@ -1272,7 +1421,7 @@ En esta modalidad no se aceptan tarjetas de débito ni prepago.
 
 ```java
 // Versión 3.x del SDK
-Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
 final OneclickMallTransactionCaptureResponse response = tx.capture(childCommerceCode, childBuyOrder, authorizationCode, amount);
 
 // Versión 2.x del SDK
@@ -1294,21 +1443,39 @@ $response = MallTransaction::capture($commerce_code, $buy_order, $authorization_
 ```
 
 ```csharp
-// Este SDK aún no tiene implementada esta funcionalidad. Se puede consumir el método del API REST directamente, sin usar el SDK de momento.
+// Versión 4.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var result = tx.Capture(ChildcommerceCode, ChildbuyOrder, authorizationCode, amount);
+
 ```
 
 ```ruby
-response = Transbank::Webpay::Oneclick::MallDeferredTransaction::capture(
+## Versión 2.x del SDK
+@tx = Transbank::Webpay::Oneclick::MallTransaction.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL_DEFERRED)
+@resp = @tx.capture(child_commerce_code: @commerce_code, child_buy_order: @buy_order, authorization_code: @authorization_code, amount: @capture_amount)
+
+## Versión 1.x del SDK
+@resp = Transbank::Webpay::Oneclick::MallDeferredTransaction::capture(
   child_commerce_code: @commerce_code, child_buy_order: @buy_order,
   amount: @capture_amount, authorization_code: @authorization_code
 )
 ```
 
 ```python
+## Versión 3.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.capture(child_commerce_code, child_buy_order, authorization_code, capture_amount)
+
+## Versión 2.x del SDK
 # Este SDK aún no tiene implementada esta funcionalidad. Se puede consumir el método del API REST directamente, sin usar el SDK de momento.
 ```
 
 ```javascript
+// Versión 3.x del SDK
+const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.capture(commerceCode, buyOrder, authorizationCode, amount);
+
+// Versión 2.x del SDK
 const response = await Oneclick.DeferredTransaction.capture(commerceCode, buyOrder, amount, authorizationCode);
 ```
 
@@ -1331,7 +1498,10 @@ $response->getResponseCode();
 ```
 
 ```csharp
-// Esta función aun no se encuentra disponible en el SDK
+response.AuthorizationCode;
+response.AuthorizationDate;
+response.CapturedAmount;
+response.ResponseCode;
 ```
 
 ```ruby
@@ -1342,7 +1512,14 @@ response.response_code
 ```
 
 ```python
-# Esta función aun no se encuentra disponible en el SDK
+## Versión 3.x del SDK
+response['authorization_code']
+response['authorization_date']
+response['captured_amount']
+response['response_code']
+
+## Versión 2.x del SDK
+# Este SDK aún no tiene implementada esta funcionalidad. Se puede consumir el método del API REST directamente, sin usar el SDK de momento.
 ```
 
 ```javascript
@@ -1414,9 +1591,9 @@ responseCode  <br> <i> xs:int </i> | Código de respuesta
 Ponemos a tu disposición una serie de repositorios en nuestro Github para ayudarte a entender la integración de mejor forma.
 Puedes encontrar una lista de [proyectos de ejemplo acá](/documentacion/como_empezar#ejemplos).
 
-<aside class="notice">
+<!-- <aside class="notice">
 Si deseas revisar la documentación anterior (SOAP), puedes revisarla [acá](/documentacion/webpay)
-</aside>
+</aside> -->
 
 <div class="container slate">
   <div class='slate-after-footer'>

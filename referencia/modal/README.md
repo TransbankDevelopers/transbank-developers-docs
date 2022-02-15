@@ -162,14 +162,16 @@ WebpayModal.Transaction.IntegrationType = WebpayIntegrationType.Test;
 ```
 
 ```ruby
-# El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
-Transbank::Webpay::WebpayModal::Base.commerce_code = 597055555584;
-Transbank::Webpay::WebpayModal::Base.api_key = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C";
-Transbank::Webpay::WebpayModal::Base.integration_type = "TEST";
+
+## Versión 2.x del SDK
+@tx = Transbank::Webpay::WebpayPlusModal::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::WEBPAY_PLUS_MODAL)
 
 ```
 
 ```python
+## Versión 3.x del SDK
+tx = Transaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MODAL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+
 # El SDK apunta por defecto al ambiente de pruebas, no es necesario configurar lo siguiente
 transbank.webpay.webpay_modal.webpay_modal_default_commerce_code = 597055555584
 transbank.webpay.webpay_modal.default_api_key = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C"

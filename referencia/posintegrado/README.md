@@ -63,8 +63,10 @@ Para usar el SDK es necesario incluir las siguientes referencias.
 
 ```csharp
 using Transbank.POSIntegrado;
+using Transbank.Exceptions.CommonExceptions;
+using Transbank.Exceptions.IntegradoExceptions;
 using Transbank.Responses.CommonResponses;
-using Transbank.Responses.IntegradoResponse;
+using Transbank.Responses.IntegradoResponses;
 ```
 
 ```c
@@ -73,9 +75,11 @@ using Transbank.Responses.IntegradoResponse;
 ```
 
 ```java
-import cl.transbank.pos.POS;
-import cl.transbank.pos.exceptions.*;
-import cl.transbank.pos.responses.*;
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.exceptions.common.*;
+import cl.transbank.pos.exceptions.integrado.*;
+import cl.transbank.pos.responses.common.*;
+import cl.transbank.pos.responses.integrado.*;
 ```
 
 ```js
@@ -103,9 +107,10 @@ char *ports = list_ports();
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+//...
 
-POS pos = POS.getInstance();
+POSIntegrado pos = new POSIntegrado();
 List<String> ports = pos.listPorts();
 ```
 
@@ -146,9 +151,10 @@ if ( retval == TBK_OK ){
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+//...
 
-POS pos = POS.getInstance();
+POSIntegrado pos = new POSIntegrado();
 String port = "COM4";
 pos.openPort(port);
 ```
@@ -187,8 +193,10 @@ if(retval == SP_OK){
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
 //...
+
+POSIntegrado pos = new POSIntegrado();
 pos.closePort();
 ```
 
@@ -224,20 +232,23 @@ El SDK Java y C no soportan el envío de mensajes intermedios. Por esta razón e
 using Transbank.POSIntegrado;
 using Transbank.Responses.IntegradoResponse;
 //...
-Task<SaleResponse> response = POSIntegrado.Instance.Sale(ammount, ticket);
+Task<SaleResponse> response = POSIntegrado.Instance.Sale(amount, ticket);
 ```
 
 ```c
 #include "transbank.h"
 #include "transbank_serial_utils.h"
 //...
-char* response = sale(ammount, ticket, false);
+char* response = sale(amount, ticket, false);
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.integrado.*;
 //...
-SaleResponse saleResponse = POS.getInstance().sale(amount, ticket);
+
+POSIntegrado pos = new POSIntegrado();
+SaleResponse response = pos.sale(amount, ticket, true);
 ```
 
 ```js
@@ -245,7 +256,7 @@ import POS from "transbank-pos-sdk-web";
 
 POS.doSale(this.total, "ticket1").then((saleDetails) => {
     console.log(saleDetails);
-    //Acá llega la respuesta de la venta. Si saleDetails.responseCode es 0, entonces la comproa fue aprobada
+    //Acá llega la respuesta de la venta. Si saleDetails.responseCode es 0, entonces la compra fue aprobada
     if (saleDetails.responseCode===0) {
     alert("Transacción aprobada", "", "success");
     } else {
@@ -263,8 +274,8 @@ El resultado de la venta se entrega en la forma de un objeto `SaleResponse` en .
     "Commerce Code": 550062700310,
     "Terminal Id": "ABC1234C",
     "Ticket": "AB123",
-    "Autorization Code": "XZ123456",
-    "Ammount": 15000,
+    "Authorization Code": "XZ123456",
+    "Amount": 15000,
     "Shares Number": 3,
     "Shares Amount": 5000,
     "Last 4 Digits": 6677,
@@ -355,7 +366,7 @@ DATO                    | LARGO     | COMENTARIO
 `<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
 `LRC`                   |  1        | Resultado del calculo del `LRC` del mensaje
 
-### Mensaje de Venta Multicodigo
+### Mensaje de Venta Multicódigo
 
 <aside class="alert">
 Este metodo esta disponible desde la versión 19.3 del aplicativo de POS Integrado.
@@ -381,7 +392,7 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta pa
 using Transbank.POSIntegrado;
 using Transbank.Responses.IntegradoResponse;
 //...
-Task<MultiCodeSaleResponse> response = POSIntegrado.Instance.MultiCodeSale(ammount, ticket, commerceCode, true);
+Task<MultiCodeSaleResponse> response = POSIntegrado.Instance.MultiCodeSale(amount, ticket, commerceCode, true);
 ```
 
 ```c
@@ -389,7 +400,12 @@ Task<MultiCodeSaleResponse> response = POSIntegrado.Instance.MultiCodeSale(ammou
 ```
 
 ```java
-//No Disponible
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.integrado.*;
+//...
+
+POSIntegrado pos = new POSIntegrado();
+MultiCodeSaleResponse response = pos.multiCodeSale(amount, ticket, commerceCode, true);
 ```
 
 ```js
@@ -421,8 +437,8 @@ El resultado de la venta se entrega en la forma de un objeto `MultiCodeSaleRespo
     "Commerce Code": 550062700310,
     "Terminal Id": "ABC1234C",
     "Ticket": "AB123",
-    "Autorization Code": "XZ123456",
-    "Ammount": 15000,
+    "Authorization Code": "XZ123456",
+    "Amount": 15000,
     "Shares Number": 3,
     "Shares Amount": 5000,
     "Last 4 Digits": 6677,
@@ -462,13 +478,13 @@ DATO                    | LARGO     | Comentario
 `Separador`             | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Status`                | 1         | Indica al POS si debe enviar mensajes intermedios o de estado de la transacción <br><i>1</i>: Envía Mensajes<br><i>0</i>: No envía mensajes
 `Separador`             | 1         | <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Comercio Prestador`    | 12        | Si la modalidad multicodigo esta activada, se debe enviar el codigo de comercio prestador.<br>Si la transacción no es multicodigo este campo puede ir sin valor. (`0` en el SDK).
+`Comercio Prestador`    | 12        | Si la modalidad multicódigo esta activada, se debe enviar el código de comercio prestador.<br>Si la transacción no es multicódigo este campo puede ir sin valor. (`0` en el SDK).
 `<ETX>`                 | 1         | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`.
 `LRC`                   | 1         | Resultado del calculo del `LRC` del mensaje.
 
 *Mensaje* en <i>ASCII</i>: `<STX>0270|{amount}|{ticket}|| |{status}|{commerce code}|<ETX><LRC>`
 
-<strong>Respuesta de Venta Multicodigo</strong>
+<strong>Respuesta de Venta Multicódigo</strong>
 
 DATO                    | LARGO     | COMENTARIO
 ------                  | ------    | ------
@@ -483,7 +499,7 @@ DATO                    | LARGO     | COMENTARIO
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Ticket`                |  6        | Valor ASCII, Número de boleta o ticket
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Codigo de Autorizacion`|  6        | Valor ASCII
+`Código de Autorización`|  6        | Valor ASCII
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Monto`                 |  9        | Valor Numérico <br><i>Largo máximo</i>: 9 <br><i>Largo mínimo</i>: 1
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
@@ -491,7 +507,7 @@ DATO                    | LARGO     | COMENTARIO
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Monto Cuota`           |  9        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 9 <br><i>Largo mínimo</i>: 0
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Últimos 4 Digitos`     |  4        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 4 <br><i>Largo mínimo</i>: 0
+`Últimos 4 Dígitos`     |  4        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 4 <br><i>Largo mínimo</i>: 0
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Número Operación`      |  6        | Valor Numérico, Correlativo de Transacción del POS **(Opcional)** <br><i>Largo máximo</i>: 6 <br><i>Largo mínimo</i>: 0
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
@@ -513,9 +529,9 @@ DATO                    | LARGO     | COMENTARIO
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Filler`                | variable  | Reservado para uso futuro.
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Vuelto`                | 5 (maximo)| Valor númerico que indica el monto del vuelto seleccionado en el POS. Si la transacción corresponde a una transacción sin vuelto o no tienen vuelto habilitado en el campo debe ir un 0.
+`Vuelto`                | 5 (máximo)| Valor numérico que indica el monto del vuelto seleccionado en el POS. Si la transacción corresponde a una transacción sin vuelto o no tienen vuelto habilitado en el campo debe ir un 0.
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Comercio Prestador`    | 12        | Valor que indica el código de comercio del prestarod. Si la transacción no es Multicodigo el campo va sin valor.
+`Comercio Prestador`    | 12        | Valor que indica el código de comercio del prestador. Si la transacción no es Multicódigo el campo va sin valor.
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
 `LRC`                   |  1        | Resultado del calculo del `LRC` del mensaje
@@ -542,9 +558,12 @@ char* response = last_sale();
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.integrado.*;
 //...
-SaleResponse saleResponse = POS.getInstance().getLastSale();
+
+POSIntegrado pos = new POSIntegrado();
+LastSaleResponse lastSaleResponse = pos.lastSale();
 ```
 
 ```js
@@ -566,8 +585,8 @@ El resultado de la transacción última venta devuelve los mismos datos que una 
     "Commerce Code": 550062700310,
     "Terminal Id": "ABC1234C",
     "Ticket": "AB123",
-    "Autorization Code": "XZ123456",
-    "Ammount": 15000,
+    "Authorization Code": "XZ123456",
+    "Amount": 15000,
     "Shares Number": 3,
     "Shares Amount": 5000,
     "Last 4 Digits": 6677,
@@ -623,7 +642,7 @@ DATO                    | LARGO     | COMENTARIO
 `Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
 `Monto Cuota`           |  9        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 9 <br><i>Largo mínimo</i>: 0
 `Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Últimos 4 Digitos`     |  4        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 4 <br><i>Largo mínimo</i>: 0
+`Últimos 4 Dígitos`     |  4        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 4 <br><i>Largo mínimo</i>: 0
 `Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
 `Número Operación`      |  6        | Valor Numérico, Correlativo de Transacción del POS **(Opcional)** <br><i>Largo máximo</i>: 6 <br><i>Largo mínimo</i>: 0
 `Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
@@ -646,7 +665,139 @@ DATO                    | LARGO     | COMENTARIO
 `<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
 `<LRC>`                 |  1        | Resultado del cálculo (byte) `XOR` del mensaje
 
-### Mensaje de Anulación
+### Mensaje de Última Venta Multicódigo
+
+Este comando es enviado por la caja para solicitar la re-impresión de la última venta. A diferencia de la petición de ultima venta normal, esta permite obtener el voucher completo en string desde el POS.
+
+<div class="language-simple" data-multiple-language></div>
+
+```csharp
+using Transbank.POSIntegrado;
+using Transbank.Responses.IntegradoResponse;
+//...
+bool getVoucherInfo = true
+Task<MultiCodeLastSaleResponse> response = POSIntegrado.Instance.MultiCodeLastSale(getVoucherInfo);
+```
+
+```c
+// No disponible
+```
+
+```java
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.integrado.*;
+//...
+
+POSIntegrado pos = new POSIntegrado();
+MultiCodeLastSaleResponse response = pos.multiCodeLastSale(true); 
+//bool indica si pos envía o no el voucher como parte de la respuesta
+```
+
+```js
+// No disponible
+```
+
+El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `MultiCodeLastSaleResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankMultiCodeLastSaleException`.
+
+```json
+{
+    "Function": 260,
+    "Response": "Aprobado",
+    "Commerce Code": 550062700310,
+    "Terminal Id": "ABC1234C",
+    "Ticket": "AB123",
+    "Authorization Code": "XZ123456",
+    "Amount": 15000,
+    "Shares Number": 3,
+    "Shares Amount": 5000,
+    "Last 4 Digits": 6677,
+    "Operation Number": 60,
+    "Card Type": "CR",
+    "Accounting Date": "28/10/2019 22:35:12",
+    "Account Number": "300000000",
+    "Card Brand": "AX",
+    "Real Date": "28/10/2019 22:35:12",
+    "Employee Id": 1,
+    "Tip": 1500,
+    "Voucher": "VOUCHER COMPLETO DE VENTA",
+    "Change": 20000,
+    "CommerceProviderCode": 550062712310
+}
+```
+
+<img class="td_img-night" src="/images/referencia/posintegrado/diagrama-ultima-venta.png" alt="Diagrama de Secuencia Última Venta">
+
+1. La caja envía el requerimiento y espera como respuesta `<ACK>`/`<NAK>`, en caso de que llegue un `<NAK>`, debe reintentar el envío del requerimiento 2 veces. Si recibe un `<ACK>` debe esperar la respuesta de la transacción.
+2. Una vez recibida la respuesta, la caja calcula el `<LRC>` del mensaje y lo compara con el recibido, en el caso de coincidir la caja envía un `<ACK>` al **POS** dando por finalizado el comando; en caso contrario envía `<NAK>` y vuelve a esperar la respuesta del **POS**.
+
+<strong>Solicitud de Última Venta Multicodigo</strong>
+
+DATO        | LARGO     | Comentario
+------      | ------    | ------
+`<STX>`     | 1         | Indica el inicio de texto o comando <br><i>Valor hexadecimal</i>: `0x02`
+`Comando`   | 4         | <i>Valor ASCII</i>: `0250` <br><i>Valor hexadecimal</i>: `0x30 0x32 0x35 0x30`
+`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Voucher`   | 1         | Indica si se retorna el voucher formateado a la caja<br><i>0</i>: No entrega voucher<br><i>1</i>: Entrega voucher en el mensaje
+`<ETX>`     | 1         | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
+`<LRC>`     | 1         | Resultado del cálculo (byte) `XOR` del mensaje
+
+*Mensaje* en <i>ASCII</i>: `<STX>0280|1<ETX>u`
+*Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x32, 0x38, 0x30, 0x7c, 0x31, 0x03, 0x75}`
+
+<strong>Respuesta de Última Venta Multicódigo</strong>
+
+DATO                    | LARGO     | COMENTARIO
+------                  | ------    | ------
+`<STX>`                 |  1        | Indica inicio de texto o comando <br><i>Valor hexadecimal</i>: `0x02`
+`Comando`               |  4        | <i>Valor ASCII</i>:  `0260` <br><i>Valor hexadecimal</i>: `0x30 0x32 0x36 0x30`
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Código Respuesta`      |  2        | Valor Numérico
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Código de comercio`    | 12        | Valor Numérico
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Terminal ID`           |  8        | Valor Alfanumérico
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Ticket`                |  6        | Valor ASCII, Número de boleta o ticket
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Código de Autorización`|  6        | Valor ASCII
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Monto`                 |  9        | Valor Numérico <br><i>Largo máximo</i>: 9 <br><i>Largo mínimo</i>: 1
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Número Cuotas`         |  2        | Valor Numérico <br><i>Largo máximo</i>: 2 <br><i>Largo mínimo</i>: 1
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Monto Cuota`           |  9        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 9 <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Últimos 4 Digitos`     |  4        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 4 <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Número Operación`      |  6        | Valor Numérico, Correlativo de Transacción del POS **(Opcional)** <br><i>Largo máximo</i>: 6 <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Tipo de Tarjeta`       |  2        | Valor ASCII <br><i>CR</i>: Crédito <br><i>DB</i>: Débito
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Fecha Contable`        |  6        | Valor ASCII. Se utiliza solo con ventas Débito **(Opcional)**
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Número de Cuenta`      | 19        | Valor ASCII. Se utiliza solo con ventas Débito **(Opcional)** <br><i>Largo máximo</i>: 19 <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Abreviación Tarjeta`   |  2        | Valor ASCII **(Opcional)** <br>[Ver Tabla de abreviación de Tarjetas](/referencia/posintegrado#tabla-de-abreviacion-de-tarjetas)
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Fecha de Transacción`  |  2        | Valor ASCII **(Opcional)** <br><i>Formato</i>: `DDMMAAAA`
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Hora de Transacción`   |  6        | Valor ASCII **(Opcional)** <br><i> Formato</i>: `HHMMSS`
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Empleado`              |  4        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 4</i> <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Propina`               |  9        | Valor Numérico <br><i>Largo máximo</i>: 9 </i> <br><i>Largo mínimo</i>: 0
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Voucher`               | variable  | Se envía el voucher si el campo Voucher del comando se encuentra en 1
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Vuelto`                |  5 (max)  | Valor numérico que indica el monto del vuelto seleccionado en el POS.
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`Comercio Prestador`    | 12        | Valor que indica el código de comercio del prestador. Si la transacción no es multicódigo no presenta valor.
+`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
+`<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
+`<LRC>`                 |  1        | Resultado del cálculo (byte) `XOR` del mensaje
+
+
+### Mensaje de Anulación
 
 Esta transacción siempre será responsabilidad de la caja y es quien decide cuando realizar una anulación.
 
@@ -677,9 +828,12 @@ RefundResponse response = refund(21);
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.common.*;
 //...
-RefundResponse response = POS.getInstance().refund(21);
+
+POSIntegrado pos = new POSIntegrado();
+RefundResponse response = pos.refund(21);
 ```
 
 ```js
@@ -743,131 +897,6 @@ DATO                      | LARGO     | COMENTARIO
 `<ETX>`                   |  1        | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
 `<LRC>`                   |  1        | Resultado del cálculo (byte) `XOR` del mensaje
 
-### Mensaje de Última Venta Multicodigo
-
-Este comando es enviado por la caja para solicitar la re-impresión de la última venta. A diferencia de la petición de ultima venta normal, esta permite obtener el voucher completo en string desde el POS.
-
-<div class="language-simple" data-multiple-language></div>
-
-```csharp
-using Transbank.POSIntegrado;
-using Transbank.Responses.IntegradoResponse;
-//...
-bool getVoucherInfo = true
-Task<MultiCodeLastSaleResponse> response = POSIntegrado.Instance.MultiCodeLastSale(getVoucherInfo);
-```
-
-```c
-// No disponible
-```
-
-```java
-// No disponible
-```
-
-```js
-// No disponible
-```
-
-El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `MultiCodeLastSaleResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankMultiCodeLastSaleException`.
-
-```json
-{
-    "Function": 260,
-    "Response": "Aprobado",
-    "Commerce Code": 550062700310,
-    "Terminal Id": "ABC1234C",
-    "Ticket": "AB123",
-    "Autorization Code": "XZ123456",
-    "Ammount": 15000,
-    "Shares Number": 3,
-    "Shares Amount": 5000,
-    "Last 4 Digits": 6677,
-    "Operation Number": 60,
-    "Card Type": "CR",
-    "Accounting Date": "28/10/2019 22:35:12",
-    "Account Number": "300000000",
-    "Card Brand": "AX",
-    "Real Date": "28/10/2019 22:35:12",
-    "Employee Id": 1,
-    "Tip": 1500,
-    "Voucher": "VOUCHER COMPLETO DE VENTA",
-    "Change": 20000,
-    "CommerceProviderCode": 550062712310
-}
-```
-
-<img class="td_img-night" src="/images/referencia/posintegrado/diagrama-ultima-venta.png" alt="Diagrama de Secuencia Última Venta">
-
-1. La caja envía el requerimiento y espera como respuesta `<ACK>`/`<NAK>`, en caso de que llegue un `<NAK>`, debe reintentar el envío del requerimiento 2 veces. Si recibe un `<ACK>` debe esperar la respuesta de la transacción.
-2. Una vez recibida la respuesta, la caja calcula el `<LRC>` del mensaje y lo compara con el recibido, en el caso de coincidir la caja envía un `<ACK>` al **POS** dando por finalizado el comando; en caso contrario envía `<NAK>` y vuelve a esperar la respuesta del **POS**.
-
-<strong>Solicitud de Última Venta Multicodigo</strong>
-
-DATO        | LARGO     | Comentario
-------      | ------    | ------
-`<STX>`     | 1         | Indica el inicio de texto o comando <br><i>Valor hexadecimal</i>: `0x02`
-`Comando`   | 4         | <i>Valor ASCII</i>: `0250` <br><i>Valor hexadecimal</i>: `0x30 0x32 0x35 0x30`
-`Separador` | 1         | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Voucher`   | 1         | Indica si se retorna el voucher formateado a la caja<br><i>0</i>: No entrega voucher<br><i>1</i>: Entrega voucher en el mensaje
-`<ETX>`     | 1         | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
-`<LRC>`     | 1         | Resultado del cálculo (byte) `XOR` del mensaje
-
-*Mensaje* en <i>ASCII</i>: `<STX>0280|1<ETX>u`
-*Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x32, 0x38, 0x30, 0x7c, 0x31, 0x03, 0x75}`
-
-<strong>Respuesta de Última Venta Multicodigo</strong>
-
-DATO                    | LARGO     | COMENTARIO
-------                  | ------    | ------
-`<STX>`                 |  1        | Indica inicio de texto o comando <br><i>Valor hexadecimal</i>: `0x02`
-`Comando`               |  4        | <i>Valor ASCII</i>:  `0260` <br><i>Valor hexadecimal</i>: `0x30 0x32 0x36 0x30`
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Código Respuesta`      |  2        | Valor Numérico
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Código de comercio`    | 12        | Valor Numérico
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Terminal ID`           |  8        | Valor Alfanumérico
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Ticket`                |  6        | Valor ASCII, Número de boleta o ticket
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Código de Autorización`|  6        | Valor ASCII
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Monto`                 |  9        | Valor Numérico <br><i>Largo máximo</i>: 9 <br><i>Largo mínimo</i>: 1
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Número Cuotas`         |  2        | Valor Numérico <br><i>Largo máximo</i>: 2 <br><i>Largo mínimo</i>: 1
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Monto Cuota`           |  9        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 9 <br><i>Largo mínimo</i>: 0
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Últimos 4 Digitos`     |  4        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 4 <br><i>Largo mínimo</i>: 0
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Número Operación`      |  6        | Valor Numérico, Correlativo de Transacción del POS **(Opcional)** <br><i>Largo máximo</i>: 6 <br><i>Largo mínimo</i>: 0
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Tipo de Tarjeta`       |  2        | Valor ASCII <br><i>CR</i>: Crédito <br><i>DB</i>: Débito
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Fecha Contable`        |  6        | Valor ASCII. Se utiliza solo con ventas Débito **(Opcional)**
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Número de Cuenta`      | 19        | Valor ASCII. Se utiliza solo con ventas Débito **(Opcional)** <br><i>Largo máximo</i>: 19 <br><i>Largo mínimo</i>: 0
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Abreviación Tarjeta`   |  2        | Valor ASCII **(Opcional)** <br>[Ver Tabla de abreviación de Tarjetas](/referencia/posintegrado#tabla-de-abreviacion-de-tarjetas)
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Fecha de Transacción`  |  2        | Valor ASCII **(Opcional)** <br><i>Formato</i>: `DDMMAAAA`
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Hora de Transacción`   |  6        | Valor ASCII **(Opcional)** <br><i> Formato</i>: `HHMMSS`
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Empleado`              |  4        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 4</i> <br><i>Largo mínimo</i>: 0
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Propina`               |  9        | Valor Numérico <br><i>Largo máximo</i>: 9 </i> <br><i>Largo mínimo</i>: 0
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Voucher`               | variable  | Se envía el vouvher si el campo Voucher del comando se encuentra en 1
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Vuelto`                |  5 (max)  | Valor numérico que indica el monto del vuelto seleccionado en el POS.
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`Comercio Prestador`    | 12        | Valor que indica el código de comercio del prestador. Si la transacción no es multicodigo no presenta valor.
-`Separador`             |  1        | <i>Valor ASCII</i>: <code>&#124;</code> <br><i>Valor hexadecimal</i>: `0x7c`
-`<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>Valor hexadecimal</i>: `0x03`
-`<LRC>`                 |  1        | Resultado del cálculo (byte) `XOR` del mensaje
-
 ### Mensaje de Cierre
 
 Este comando es gatillado por la caja y no recibe parámetros. El POS ejecuta la transacción de cierre contra el Autorizador (no se contempla Batch Upload). Como respuesta el POS Integrado enviará un aprobado o rechazado. (Puedes ver la tabla de respuestas en este [link](/referencia/posintegrado#tabla-de-respuestas))
@@ -894,9 +923,12 @@ BaseResponse response = register_close();
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.integrado.*;
 //...
-CloseResponse cr = POS.getInstance().close();
+
+POSIntegrado pos = new POSIntegrado();
+CloseResponse response = pos.close()
 ```
 
 ```js
@@ -985,9 +1017,12 @@ TotalsCResponse response = get_totals();
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.integrado.*;
 //...
-TotalsResponse response = POS.getInstance().getTotals();
+
+POSIntegrado pos = new POSIntegrado();
+TotalsResponse response = pos.totals();
 ```
 
 ```js
@@ -1003,7 +1038,7 @@ El resultado de la transacción entrega en la forma de un objeto `TotalsResponse
     "Function": 710,
     "Response": "Aprobado",
     "TX Count": 3,     // Cantidad de transacciones
-    "TX Total": 15000 // Suma total de los montos de cada transaccion
+    "TX Total": 15000 // Suma total de los montos de cada transacción
 }
 ```
 
@@ -1071,11 +1106,14 @@ import cl.transbank.pos.POS;
 List<DetailResponse> ldr = POS.getInstance().details(false);
 ```
 
-```js
-import POS from "transbank-pos-sdk-web";
+```java
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.integrado.*;
+//...
 
-let printOnPOS = false;
-POS.details(printOnPOS).then(response => console.log(response));
+POSIntegrado pos = new POSIntegrado();
+boolean printOnPOS = false;
+List<DetailResponse> response = pos.details(printOnPOS);
 ```
 
 El resultado de la transacción entrega una lista de objetos  `DetailResponse` en .NET y Java, o un `char *` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSalesDetailException` o `TransbankException` en Java.
@@ -1088,8 +1126,8 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` e
     "Commerce Code": 550062700310,
     "Terminal Id": "ABC1234C",
     "Ticket": "AB123",
-    "Autorization Code": "XZ123456",
-    "Ammount": 15000,
+    "Authorization Code": "XZ123456",
+    "Amount": 15000,
     "Last 4 Digits": 6677,
     "Operation Number": 60,
     "Card Type": "CR",
@@ -1108,8 +1146,8 @@ El resultado de la transacción entrega una lista de objetos  `DetailResponse` e
     "Commerce Code": 550062700310,
     "Terminal Id": "ABC1234C",
     "Ticket": "AB123",
-    "Autorization Code": "XZ123456",
-    "Ammount": 15000,
+    "Authorization Code": "XZ123456",
+    "Amount": 15000,
     "Last 4 Digits": 6677,
     "Operation Number": 60,
     "Card Type": "CR",
@@ -1158,11 +1196,11 @@ DATO                    | LARGO     | COMENTARIO
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Ticket`                |  6        | Valor ASCII, Número de boleta o ticket
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Codigo de Autorizacion`|  6        | Valor ASCII
+`Código de Autorización`|  6        | Valor ASCII
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Monto`                 |  9        | Valor Numérico <br><i>Largo máximo</i>: 9 <br><i>Largo mínimo</i>: 1
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Últimos 4 Digitos`     |  4        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 4 <br><i>Largo mínimo</i>: 0
+`Últimos 4 Dígitos`     |  4        | Valor Numérico **(Opcional)** <br><i>Largo máximo</i>: 4 <br><i>Largo mínimo</i>: 0
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Número Operación`      |  6        | Valor Numérico, Correlativo de Transacción del POS **(Opcional)** <br><i>Largo máximo</i>: 6 <br><i>Largo mínimo</i>: 0
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
@@ -1189,7 +1227,7 @@ DATO                    | LARGO     | COMENTARIO
 `<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
 `LRC`                   |  1        | Resultado del calculo del `LRC` del mensaje
 
-### Mensaje Detalle de Ventas Multicodigo
+### Mensaje Detalle de Ventas Multicódigo
 
 Esta operación solicita al POS **todas** las transacciones que se han realizado y permanecen en la memoria del POS. El parámetro que recibe esta función es de tipo booleano e indica si se realiza la impresión del detalle en el POS. En el caso de que no se solicite la impresión, el POS envía **todas** las transacciones a la caja, una por una.
 
@@ -1209,7 +1247,13 @@ Task<List<MultiCodeDetailResponse>> response = POSIntegrado.Instance.MultiCodeDe
 ```
 
 ```java
-// No disponible
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.integrado.*;
+//...
+
+POSIntegrado pos = new POSIntegrado();
+boolean printOnPOS = false;
+List<MultiCodeDetailResponse> response = pos.multiCodeDetails(printOnPOS);
 ```
 
 ```js
@@ -1226,8 +1270,8 @@ El resultado de la transacción entrega una lista de objetos  `MultiCodeDetailRe
     "Commerce Code": 550062700310,
     "Terminal Id": "ABC1234C",
     "Ticket": "AB123",
-    "Autorization Code": "XZ123456",
-    "Ammount": 15000,
+    "Authorization Code": "XZ123456",
+    "Amount": 15000,
     "Shares Number": 3,
     "Shares Amount": 5000,
     "Last 4 Digits": 6677,
@@ -1248,8 +1292,8 @@ El resultado de la transacción entrega una lista de objetos  `MultiCodeDetailRe
     "Commerce Code": 550062700310,
     "Terminal Id": "ABC1234C",
     "Ticket": "AB123",
-    "Autorization Code": "XZ123456",
-    "Ammount": 15000,
+    "Authorization Code": "XZ123456",
+    "Amount": 15000,
     "Shares Number": 3,
     "Shares Amount": 5000,
     "Last 4 Digits": 6677,
@@ -1269,7 +1313,7 @@ El resultado de la transacción entrega una lista de objetos  `MultiCodeDetailRe
 
 <img class="td_img-night" src="/images/referencia/posintegrado/diagrama-detalle-ventas.png" alt="Diagrama de Detalle de Ventas">
 
-<strong>Solicitud de Detalle de Ventas Multicodigo</strong>
+<strong>Solicitud de Detalle de Ventas Multicódigo</strong>
 
 DATO                         | LARGO     | COMENTARIO
 ------                       | ------    | ------
@@ -1284,7 +1328,7 @@ DATO                         | LARGO     | COMENTARIO
 *Mensaje* en <i>ASCII</i>: `<STX>0260|1|<ETX><LRC>`
 *Mensaje* en <i>Hexadecimal</i>: `{0x02, 0x30, 0x32, 0x36, 0x30, 0x7c, 0x7c, 0x03, 0x07}`
 
-<strong>Respuesta de Detalle de Ventas Multicodigo</strong>
+<strong>Respuesta de Detalle de Ventas Multicódigo</strong>
 
 DATO                    | LARGO     | COMENTARIO
 ------                  | ------    | ------
@@ -1299,7 +1343,7 @@ DATO                    | LARGO     | COMENTARIO
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Ticket`                |  6        | Valor ASCII, Número de boleta o ticket
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Codigo de Autorizacion`|  6        | Valor ASCII
+`Código de Autorización`|  6        | Valor ASCII
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Monto`                 |  9        | Valor Numérico <br><i>Largo máximo</i>: 9 <br><i>Largo mínimo</i>: 1
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
@@ -1329,7 +1373,7 @@ DATO                    | LARGO     | COMENTARIO
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `Vuelto`                |  5 (max)  | Valor numérico que indica el monto del vuelto seleccionado en el POS.
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
-`Comercio Prestador`    | 12        | Valor que indica el código de comercio del prestador. Si la transacción no es multicodigo no indica valor
+`Comercio Prestador`    | 12        | Valor que indica el código de comercio del prestador. Si la transacción no es multicódigo no indica valor
 `Separador`             |  1        |  <i>valor ASCII</i>: <code>&#124;</code> <br><i>valor hexadecimal</i>: `0x7c`
 `<ETX>`                 |  1        | Indica el fin de texto o comando <br><i>valor hexadecimal</i>: `0x03`
 `LRC`                   |  1        | Resultado del calculo del `LRC` del mensaje
@@ -1360,9 +1404,12 @@ BaseResponse response = load_keys();
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
+import cl.transbank.pos.responses.common.*;
 //...
-KeysResponse kr = POS.getInstance().loadKeys();
+
+POSIntegrado pos = new POSIntegrado();
+LoadKeysResponse response = pos.loadKeys();
 ```
 
 ```js
@@ -1389,7 +1436,7 @@ El resultado de la carga de llaves se entrega en la forma de un objeto `LoadKeys
 1. La caja envía el requerimiento y espera como respuesta `<ACK>`/`<NAK>`, en caso de que la respuesta sea negativa, se debe reintentar el envío del requerimiento 2 veces. Si recibe un `<ACK>` se debe esperar la respuesta de la transacción.
 2. El POS envía el requerimiento al Autorizador, en caso de ser aprobado, se guarda la nueva llave y se envía la respuesta a la caja. En caso de ser rechazada se indica el error a la Caja.
 3. Al recibir la respuesta por parte del POS, se debe enviar un `<ACK>` si el `LRC` del mensaje es correcto, en caso contrario se debe enviar un `<NAK>`.
-4. Si el POS recibe un `<ACK>` vuelve al inicio y espera un nuevo comando, si recibe un `<NAK>` reintentara el envío de la respuesta 2 veces.
+4. Si el POS recibe un `<ACK>` vuelve al inicio y espera un nuevo comando, si recibe un `<NAK>` reintentará el envío de la respuesta 2 veces.
 
 <aside class="warning">
 El uso de esta transacción debe ser limitado a pruebas de comunicación o cuando el POS Integrado pierda las llaves.
@@ -1447,9 +1494,11 @@ if (retval == TBK_OK){
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
 //...
-boolean pollResult = POS.getInstance().poll();
+
+POSIntegrado pos = new POSIntegrado();
+boolean pollResult = pos.poll();
 ```
 
 ```js
@@ -1491,7 +1540,7 @@ Este comando le permitirá a la caja realizar el cambio de modalidad a través d
 ```csharp
 using Transbank.POSIntegrado;
 //...
-Task<bool> connected = POSIntegrado.Instance.SetNormalMode();
+Task<bool> isInNormalMode = POSIntegrado.Instance.SetNormalMode();
 ```
 
 ```c
@@ -1505,9 +1554,11 @@ if (retval == TBK_OK){
 ```
 
 ```java
-import cl.transbank.pos.POS;
+import cl.transbank.pos.POSIntegrado;
 //...
-boolean normal = POS.getInstance().setNormalMode();
+
+POSIntegrado pos = new POSIntegrado();
+boolean isInNormalMode = pos.setNormalMode();
 ```
 
 ```js

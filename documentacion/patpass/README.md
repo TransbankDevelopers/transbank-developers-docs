@@ -39,16 +39,23 @@ PatpassComercio::setIntegrationType($integrationType);
 using Transbank.Common;
 using Transbank.Patpass.PatpassComercio;
 
+// Versión 4.x del SDK
+var inscription = new Inscription(new Options(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST));
+
+// Versión 3.x del SDK
 PatpassComercio.CommerceCode = "codigo de comercio en String";
 PatpassComercio.ApiKey = "Api Key en String";
 PatpassComercio.IntegrationType = "TEST / LIVE dependiendo de tu ambiente de integracion";
 ```
 
 ```ruby
-# ...
+## Versión 2.x del SDK
+@inscription = Transbank::Patpass::PatpassComercio::Inscription.new(::Transbank::Common::IntegrationCommerceCodes::PATPASS_COMERCIO, ::Transbank::Common::IntegrationApiKeys::PATPASS_COMERCIO, :integration)
 ```
 
 ```python
+## Versión 3.x del SDK
+ins = Inscription(PatpassComercioOptions(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST))
 # ...
 ```
 
@@ -174,6 +181,26 @@ var commerceEmail = "Correo de comercio";
 var address = "Dirección de Suscrito";
 var city = "Ciudad de suscrito";
 
+// Versión 4.x del SDK
+var inscription = new Inscription(new Options(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, PatpassComercioIntegrationType.Test));
+var result = inscription.Start(
+                url: url,
+                name: name,
+                lastName: f_lastname,
+                secondLastName: s_lastname,
+                rut: rut,
+                serviceId: service_id,
+                finalUrl: final_url,
+                maxAmount: max_amount,
+                phone: phone_number,
+                cellPhone: mobile_number,
+                patpassName: patpass_name,
+                personEmail: client_email,
+                commerceEmail: commerce_email,
+                address: address,
+                city: city);
+
+// Versión 3.x del SDK
 var response = Inscription.Start(
     returnUrl,
     name,
@@ -210,6 +237,27 @@ var response = Inscription.Start(
 @address = "Dirección de Suscrito"
 @city = "Ciudad de suscrito"
 
+## Versión 2.x del SDK
+@inscription = Transbank::Patpass::PatpassComercio::Inscription.new()
+@resp = @inscription.start(
+      @url,
+      @name,
+      @first_last_name,
+      @second_last_name,
+      @rut,
+      @service_id,
+      @final_url,
+      @max_amount,
+      @phone_number,
+      @mobile_number,
+      @patpass_name,
+      @person_email,
+      @commerce_email,
+      @address,
+      @city
+    )
+
+## Versión 1.x del SDK
 @resp  = Transbank::Patpass::PatpassComercio::Inscription::start(
                                                     url: @url,
                                                     name: @name,
@@ -230,7 +278,10 @@ var response = Inscription.Start(
 ```
 
 ```python
-from transbank.error.transbank_error import TransbankError
+## Versión 3.x del SDK
+from transbank.patpass_comercio.inscription import Inscription
+
+## Versión 2.x del SDK
 from transbank.patpass_comercio.inscription import Inscription
 
 return_url = "https://callback_url/resultado/de/la/transaccion"
@@ -249,7 +300,13 @@ commerce_mail = "Correo de comercio"
 address = "Dirección de Suscrito"
 city = "Ciudad de suscrito"
 
-response = Inscription.start(return_url, name, first_last_name, second_last_name, rut, service_id, final_url,
+## Versión 3.x del SDK
+ins = Inscription(PatpassComercioOptions(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST))
+resp = ins.start(return_url, name, first_last_name, second_last_name, rut, service_id, None,
+                                       max_amount, phone_number, mobile_number, patpass_name,
+                                       person_email, commerce_mail, address, city)
+## Versión 2.x del SDK
+resp = Inscription.start(return_url, name, first_last_name, second_last_name, rut, service_id, final_url,
                                        max_amount, phone_number, mobile_number, patpass_name,
                                        person_email, commerce_mail, address, city)
 
@@ -326,6 +383,12 @@ $response = PatpassComercio\Inscription::Status($token);
 using Transbank.Patpass.PatpassComercio;
 
 var token = Request.Form["token_ws"];
+
+// Versión 4.x del SDK
+var inscription = new Inscription(new Options(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, PatpassComercioIntegrationType.Test));
+var result = inscription.Status(token);
+
+// Versión 3.x del SDK
 var result = Inscription.Status(token);
 
 ```
@@ -333,18 +396,31 @@ var result = Inscription.Status(token);
 ```ruby
 @req = params.as_json
 @token = @req['j_token']
+
+## Versión 2.x del SDK
+@inscription = Transbank::Patpass::PatpassComercio::Inscription.new()
+@resp = @inscription.status(token: @token)
+
+## Versión 1.x del SDK
 @resp = Transbank::Patpass::PatpassComercio::Inscription::status(token: @token)
 ```
 
 ```python
-from transbank.error.transbank_error import TransbankError
+## Versión 3.x del SDK
+from transbank.patpass_comercio.inscription import Inscription
+
+## Versión 2.x del SDK
 from transbank.patpass_comercio.inscription import Inscription
 
 token = request.form.get("tokenComercio")
-try:
-    response = Inscription.status(token)
-except TransbankError as e:
-    print(e.message)
+
+## Versión 3.x del SDK
+ins = Inscription(PatpassComercioOptions(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST))
+resp = ins.status(token)
+
+## Versión 2.x del SDK
+resp = Inscription.status(token)
+
 ```
 
 ## Credenciales y Ambiente
@@ -378,6 +454,10 @@ PatpassComercio::configureForTesting();
 using Transbank.Patpass.PatpassComercio;
 //..
 
+// Versión 4.x del SDK
+var inscription = new Inscription(new Options(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, PatpassComercioIntegrationType.Test));
+
+// Versión 3.x del SDK
 Inscription.IntegrationType = PatpassComercioIntegrationType.Test;
 Inscription.CommerceCode = "*******";
 Inscription.ApiKey = "*******";
@@ -413,7 +493,10 @@ PatpassComercio::setIntegrationType('LIVE');
 ```csharp
 using Transbank.Patpass.PatpassComercio;
 //..
+// Versión 4.x del SDK
+var inscription = new Inscription(new Options("***ApiKey****", "***CommerceCode****", PatpassComercioIntegrationType.Live));
 
+// Versión 3.x del SDK
 Inscription.IntegrationType = PatpassComercioIntegrationType.Live;
 ```
 

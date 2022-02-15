@@ -7,7 +7,7 @@
 La API REST de Patpass está protegida para garantizar que solamente comercios autorizados por Transbank hagan uso de las operaciones disponibles. La seguridad esta implementada mediante los siguientes mecanismos:
 
 * Canal seguro a través de TLSv1.2 para la comunicación del cliente con Webpay.
-* Autenticación y autorización mediante el intercambio de headers `Tbk-Api-Key-Id` y `Tbk-Api-Key-Secret`.
+* Autenticación y autorización mediante el intercambio de headers `Commercecode` y `Authorization`.
   
 <strong>Ambiente de Producción</strong>
 
@@ -175,6 +175,28 @@ $response = PatpassComercio\Inscription::start(
 ```
 
 ```csharp
+
+// Versión 4.x del SDK
+var inscription = new Inscription(new Options(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, PatpassComercioIntegrationType.Test));
+var result = inscription.Start(
+    url: 'http://misitio.cl/finalizar_suscripcion',
+    name: 'Diego',
+    fLastname: 'Sanchez',
+    sLastname: 'Valdovinos',
+    rut: '12345678-9',
+    serviceId: '323123',
+    finalUrl: 'http://misitio.cl/voucher',
+    maxAmount: 0,
+    phoneNumber: '57508624',
+    mobileNumber: '57508624',
+    patpassName: 'Help - 8050014',
+    personEmail: 'persona@test.cl',
+    commerceEmail: 'comercio@test.cl',
+    address: 'Merced 156, Santiago, Chile',
+    city: 'Santiago'
+);
+
+// Versión 3.x del SDK
 var response = Inscription.Start(
     url: 'http://misitio.cl/finalizar_suscripcion',
     name: 'Diego',
@@ -195,43 +217,89 @@ var response = Inscription.Start(
 ```
 
 ```ruby
+
+@url = "https://callback_url/resultado/de/la/transaccion"
+@name = "Nombre"
+@first_last_name = "Primer Apellido"
+@second_last_name = "Segundo Apellido"
+@rut = "11111111-1"
+@service_id = "Identificador del servicio unico de suscripción"
+@final_url = "https://callback/final/comprobante/transacción"
+@max_amount = 10000; # monto máximo de la suscripció
+@phone_number = "numero telefono fijo de suscrito"
+@mobile_number = "numero de telefono móvil de suscrito"
+@patpass_name = "Nombre asignado a la suscripción"
+@person_email = "Correo de suscrito"
+@commerce_email = "Correo de comercio"
+@address = "Dirección de Suscrito"
+@city = "Ciudad de suscrito"
+
+## Versión 2.x del SDK
+@inscription = Transbank::Patpass::PatpassComercio::Inscription.new()
+@resp = @inscription.start(
+      @url,
+      @name,
+      @first_last_name,
+      @second_last_name,
+      @rut,
+      @service_id,
+      @final_url,
+      @max_amount,
+      @phone_number,
+      @mobile_number,
+      @patpass_name,
+      @person_email,
+      @commerce_email,
+      @address,
+      @city
+    )
+
+## Versión 1.x del SDK
 @resp  = Transbank::Patpass::PatpassComercio::Inscription::start(
-    url: 'http://misitio.cl/finalizar_suscripcion',
-    name: 'Diego',
-    first_last_name: 'Sanchez',
-    second_last_name: 'Valdovinos',
-    rut: '12345678-9',
-    service_id: '323123',
-    final_url: 'http://misitio.cl/voucher',
-    max_amount: 0,
-    phone_number: '57508624',
-    mobile_number: '57508624',
-    patpass_name: 'Help - 8050014',
-    person_email: 'persona@test.cl',
-    commerce_email: 'comercio@test.cl',
-    address: 'Merced 156, Santiago, Chile',
-    city: 'Santiago'
+    url: @url,
+    name: @name,
+    first_last_name: @first_last_name,
+    second_last_name: @second_last_name,
+    rut: @rut,
+    service_id: @service_id,
+    final_url: @final_url,
+    max_amount: @max_amount,
+    phone_number: @phone_number,
+    mobile_number: @mobile_number,
+    patpass_name: @patpass_name,
+    person_email: @person_email,
+    commerce_email: @commerce_email,
+    address: @address,
+    city: @city
 )
 ```
 
 ```python
-response = Inscription.start(
-    url = 'http://misitio.cl/finalizar_suscripcion',
-    name = 'Diego',
-    first_last_name = 'Sanchez',
-    second_last_name = 'Valdovinos',
-    rut = '12345678-9',
-    service_id = '323123',
-    final_url = 'http://misitio.cl/voucher',
-    max_amount = 0,
-    phone_number = '57508624',
-    mobile_number = '57508624',
-    patpass_name = 'Help - 8050014',
-    person_email = 'persona@test.cl',
-    commerce_email = 'comercio@test.cl',
-    address = 'Merced 156, Santiago, Chile',
-    city = 'Santiago'
-)
+return_url = "https://callback_url/resultado/de/la/transaccion"
+name = "Nombre"
+first_last_name = "Primer Apellido"
+second_last_name = "Segundo Apellido"
+rut = "11111111-1"
+service_id = "Identificador del servicio unico de suscripción"
+final_url = "https://callback/final/comprobante/transacción"
+max_amount = 10000; # monto máximo de la suscripció
+phone_number = "numero telefono fijo de suscrito"
+mobile_number = "numero de telefono móvil de suscrito"
+patpass_name = "Nombre asignado a la suscripción"
+person_email = "Correo de suscrito"
+commerce_mail = "Correo de comercio"
+address = "Dirección de Suscrito"
+city = "Ciudad de suscrito"
+
+## Versión 3.x del SDK
+ins = Inscription(PatpassComercioOptions(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST))
+resp = ins.start(return_url, name, first_last_name, second_last_name, rut, service_id, None,
+                                       max_amount, phone_number, mobile_number, patpass_name,
+                                       person_email, commerce_mail, address, city)
+## Versión 2.x del SDK
+resp = Inscription.start(return_url, name, first_last_name, second_last_name, rut, service_id, final_url,
+                                       max_amount, phone_number, mobile_number, patpass_name,
+                                       person_email, commerce_mail, address, city)
 ```
 
 ```http
@@ -302,6 +370,11 @@ response.url
 ```
 
 ```python
+## Versión 3.x del SDK
+response['token']
+respone['url']
+
+## Versión 2.x del SDK
 response.token
 respone.url
 ```
@@ -364,15 +437,30 @@ $response = PatpassComercio\Inscription::getStatus($token);
 ```
 
 ```csharp
+// Versión 4.x del SDK
+var inscription = new Inscription(new Options(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, PatpassComercioIntegrationType.Test));
+var response = inscription.Status(token);
+
+// Versión 3.x del SDK
 var response = Inscription.Status(token);
 ```
 
 ```ruby
+## Versión 2.x del SDK
+@inscription = Transbank::Patpass::PatpassComercio::Inscription.new()
+@resp = @inscription.status(token: @token)
+
+## Versión 1.x del SDK
 @response = Transbank::Patpass::PatpassComercio::Inscription::status(token)
 ```
 
 ```python
-response = Inscription.status(token)
+## Versión 3.x del SDK
+ins = Inscription(PatpassComercioOptions(IntegrationCommerceCodes.PATPASS_COMERCIO, IntegrationApiKeys.PATPASS_COMERCIO, IntegrationType.TEST))
+resp = ins.status(token)
+
+## Versión 2.x del SDK
+resp = Inscription.status(token)
 ```
 
 ```http
@@ -413,6 +501,11 @@ response.voucher_url
 ```
 
 ```python
+## Versión 3.x del SDK
+response['status']
+respone['voucher_url']
+
+## Versión 2.x del SDK
 response.status
 response.voucher_url
 ```

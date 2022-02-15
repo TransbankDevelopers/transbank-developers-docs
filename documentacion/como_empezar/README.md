@@ -108,6 +108,7 @@ Ponemos a tu disposición una serie de repositorios en nuestro Github para ayuda
 
 * [Ejemplo en PHP](https://github.com/TransbankDevelopers/transbank-sdk-php-webpay-rest-example)
 * [Ejemplo en .Net](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-webpay-rest-example)
+* [Ejemplo en .Net Core](https://github.com/TransbankDevelopers/transbank-sdk-dotnet-core-webpay-rest-example)
 * [Ejemplo en Java](https://github.com/TransbankDevelopers/transbank-sdk-java-webpay-rest-example)
 * [Ejemplo en Ruby](https://github.com/TransbankDevelopers/transbank-sdk-ruby-webpay-rest-example)
 * [Ejemplo en Python](https://github.com/TransbankDevelopers/transbank-sdk-python-webpay-rest-example)
@@ -457,26 +458,106 @@ using Transbank.Webpay.Common;
 // Webpay Plus
 using Transbank.Webpay.WebpayPlus;
 
+// Versión 4.x del SDK
+
+// Opción A: Crear objeto options y pasarlo en el contructor
+var tx = new Transaction(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+
+// Opción B: Configurar en la instancia 
+var tx = new Transaction();
+tx.ConfigureForProduction("5970TuCodigo", "VeryLongKey");
+
+
+// Versión 3.x del SDK
 Transaction.CommerceCode = "5970TuCodigo";
 Transaction.ApiKey = "VeryLongKey";
 Transaction.IntegrationType = WebpayIntegrationType.Live;
 
+//Webpay Plus Mall
+using Transbank.Webpay.WebpayPlus;
+
+//Versión 4.x del SDK
+
+// Opción A: Crear objeto options y pasarlo en el contructor
+var tx = new MallTransaction(new Options("5970TuCodigo", "TuAPIKeySecret", WebpayIntegrationType.Live));
+
+// Opción B: Configurar en la instancia
+var tx = new MallTransaction();
+tx.ConfigureForProduction("5970TuCodigo", "VeryLongKey");
+
+//Versión 3.x del SDK
+MallTransaction.CommerceCode = "5970TuCodigo";
+MallTransaction.ApiKey = "TuAPIKeySecret";
+MallTransaction.IntegrationType = WebpayIntegrationType.Live;
+
 // Oneclick
 using Transbank.Webpay.Oneclick;
+// Versión 4.x del SDK
 
+// Opción A: Crear objeto options y pasarlo en el contructor
+var ins = new MallInscription(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+var tx = new MallTransaction(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+
+// Opción B: Configurar en la instancia
+var ins = new MallInscription();
+ins.ConfigureForProduction("5970TuCodigo", "VeryLongKey");
+var tx = new MallTransaction();
+tx.ConfigureForProduction("5970TuCodigo", "VeryLongKey");
+
+// Versión 3.x del SDK
 MallTransaction.CommerceCode = "5970TuCodigo";
 MallTransaction.ApiKey = "VeryLongKey";
 MallTransaction.IntegrationType = WebpayIntegrationType.Live;
 
-// TransacciónCompleta
+// Transacción Completa
 using Transbank.Webpay.TransaccionCompleta;
 
+// Versión 4.x del SDK
+
+// Opción A: Crear objeto options y pasarlo en el contructor
+var tx = new FullTransaction(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+
+// Opción B: Configurar en la instancia
+var tx = new FullTransaction();
+tx.ConfigureForProduction("5970TuCodigo", "VeryLongKey");
+
+// Versión 3.x del SDK
 FullTransaction.CommerceCode = "5970TuCodigo";
 FullTransaction.ApiKey = "VeryLongKey";
 FullTransaction.IntegrationType = WebpayIntegrationType.Live;
+
+// Transacción Completa Mall
+using Transbank.Webpay.TransaccionCompletaMall;
+
+// Versión 4.x del SDK
+
+// Opción A: Crear objeto options y pasarlo en el contructor
+var tx = new MallFullTransaction(new Options("5970TuCodigo", "VeryLongKey", WebpayIntegrationType.Live));
+
+// Opción B: Configurar en la instancia
+var tx = new MallFullTransaction();
+tx.ConfigureForProduction("5970TuCodigo", "VeryLongKey");
+
+// Versión 3.x del SDK
+
+TransaccionCompletaMall.CommerceCode = "5970TuCodigo";
+TransaccionCompletaMall.ApiKey = "VeryLongKey";
+TransaccionCompletaMall.IntegrationType = WebpayIntegrationType.Live;
 ```
 
 ```ruby
+## Versión 2.x del SDK
+# Webpay Plus
+tx = Transbank::Webpay::WebpayPlus::Transaction.new("commercecode", "apikey", :production)
+# Oneclick
+ins = Transbank::Webpay::Oneclick::MallInscription.new("commercecode", "apikey", :production)
+# Transaccion Completa
+tx = Transbank::Webpay::TransaccionCompleta::Transaction.new("commercecode", "apikey", :production)
+# Transaccion Completa Mall
+tx = Transbank::Webpay::TransaccionCompleta::MallTransaction.new("commercecode", "apikey", :production)
+
+## Versión 1.x del SDK
+
 # Webpay Plus
 Transbank::Webpay::WebpayPlus::Base.commerce_code = "commercecode"
 Transbank::Webpay::WebpayPlus::Base.api_key = "apikey"
@@ -489,6 +570,28 @@ Transbank::Webpay::Oneclick::Base.integration_type = :LIVE
 ```
 
 ```python
+## Versión 3.x del SDK
+# Webpay Plus
+from transbank.webpay.webpay_plus.transaction import Transaction
+
+tx = Transaction(WebpayOptions("commercecode", "apikey", IntegrationType.LIVE))
+# Oneclick
+from transbank.webpay.oneclick.mall_inscription import MallInscription
+from transbank.webpay.oneclick.mall_transaction import MallTransaction
+
+ins = MallInscription(WebpayOptions("commercecode", "apikey", IntegrationType.LIVE))
+tx = MallTransaction(WebpayOptions("commercecode", "apikey", IntegrationType.LIVE))
+# Transaccion Completa
+from transbank.webpay.transaccion_completa.transaction import Transaction
+
+tx = Transaction(WebpayOptions("commercecode", "apikey", IntegrationType.LIVE))
+# Transaccion Completa Mall
+from transbank.webpay.transaccion_completa.mall_transaction import MallTransaction
+
+tx = MallTransaction(WebpayOptions("commercecode", "apikey", IntegrationType.LIVE))
+
+## Versión 2.x del SDK
+
 # Webpay Plus
 WebpayPlus.configure_for_production('commerce_code', 'apikey')
 
@@ -511,6 +614,16 @@ BaseTransaccionCompleta.integration_type = IntegrationType.LIVE
 
 ```javascript
 // Webpay Plus
+
+// Versión 3.x del SDK
+WebpayPlus.configureForIntegration(commerceCode, apiKey);
+WebpayPlus.configureForProduction(commerceCode, apiKey);
+WebpayPlus.configureForTesting();
+WebpayPlus.configureForTestingDeferred();
+WebpayPlus.configureForTestingMall();
+WebpayPlus.configureForTestingMallDeferred();
+
+// Versión 2.x del SDK
 WebpayPlus.configureForIntegration(commerceCode, apiKey);
 WebpayPlus.configureForProduction(commerceCode, apiKey);
 WebpayPlus.configureWebpayPlusForTesting();
@@ -519,12 +632,34 @@ WebpayPlus.configureWebpayPlusMallForTesting();
 WebpayPlus.configureWebpayPlusMallDeferredForTesting();
 
 // Oneclick
+
+// Versión 3.x del SDK
 Oneclick.configureForIntegration(commerceCode, apiKey);
 Oneclick.configureForProduction(commerceCode, apiKey);
 Oneclick.configureOneclickMallForTesting();
 Oneclick.configureWebpayPlusMallDeferredForTesting();
 
+// Versión 2.x del SDK
+Oneclick.configureForIntegration(commerceCode, apiKey);
+Oneclick.configureForProduction(commerceCode, apiKey);
+Oneclick.configureOneclickMallForTesting();
+Oneclick.configureOneclickMallDeferredForTesting();
+
 // Transacción Completa
+
+// Versión 3.x del SDK
+TransaccionCompleta.configureForIntegration(commerceCode, apiKey);
+TransaccionCompleta.configureForProduction(commerceCode, apiKey);
+TransaccionCompleta.configureForTesting();
+TransaccionCompleta.configureForTestingDeferred();
+TransaccionCompleta.configureForTestingNoCVV();
+TransaccionCompleta.configureForTestingDeferredNoCVV();
+TransaccionCompleta.configureForTestingMall();
+TransaccionCompleta.configureForTestingMallDeferred();
+TransaccionCompleta.configureForTestingMallNoCVV();
+TransaccionCompleta.configureForTestingMallDeferredNoCVV();
+
+// Versión 2.x del SDK
 TransaccionCompleta.configureForIntegration(commerceCode, apiKey);
 TransaccionCompleta.configureForProduction(commerceCode, apiKey);
 TransaccionCompleta.configureTransaccionCompletaForTesting();
@@ -641,11 +776,11 @@ El comercio debe verificar al completar cualquier transacción que los valores
 informados por Transbank (monto de la compra, _buyOrder_, etc.) coinciden con los
 valores entregados por el comercio al principio del flujo transaccional.
 
-<aside class="notice">
+<!-- <aside class="notice">
 Esta nueva documentación hace referencia a los nuevos servicios REST de Transbank.
 Si deseas revisar la documentación de los productos SOAP,
 [haz click aquí](/documentacion/como_empezar_soap)
-</aside>
+</aside> -->
 
 <div class="container slate">
   <div class='slate-after-footer'>
