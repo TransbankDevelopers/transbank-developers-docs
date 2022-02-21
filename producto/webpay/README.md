@@ -181,7 +181,7 @@ Para poder ejecutar una reversa ésta debe ser realizada **antes de 1 hora de ef
 Una vez pasada una hora, siempre se ejecutará una anulación.
   - En transacciones con tarjeta de débito o prepago solo es posible anular por el monto total.
   - En transacciones con tarjeta de crédito puedes anular por cualquier monto igual o menor al total de la compra.
-  - Las transacciones en cuotas no pueden ser anuladas.
+
 En caso que la transacción haya sido abonada al comercio, la anulación generará una retención en los siguientes abonos por el monto previamente autorizado.
 
 El comercio tiene un plazo de 90 días desde la fecha de venta para anular transacciones vía servicios web.
