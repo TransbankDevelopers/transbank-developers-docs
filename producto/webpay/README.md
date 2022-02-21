@@ -168,17 +168,31 @@ Desde el punto de vista de la transacción, lo que ocurre es lo siguiente:
    Importante: en la modalidad de Captura Diferida no se permite la venta en cuotas.
   </aside>
 
-## Anulaciones
+## Anulaciones y Reversas
 
 <div class="pos-title-nav">
   <div tbk-link='/documentacion/webpay-plus#reversar-o-anular-una-transaccion' tbk-link-name='Documentación'></div>
 </div>
 
-Las transacciones Webpay **realizadas con tarjeta de crédito** pueden ser anuladas mediante servicios web. También puedes realizar reversas de las transacciones realizadas con tarjetas de **débito y prepago** con un tiempo máximo de 1 hora desde la creación de la transacción.
+Las transacciones de Webpay se pueden anular o reversar dadas algunas condiciones. Para cualquiera de éstas operaciones se utiliza el mismo servicio web que discernirá si se realizará una reversa o una anulación.
 
-Las anulaciones pueden ser totales o parciales. **Las anulaciones parciales solo están permitidas en la modalidad de Venta Normal (VN)**. En caso que la transacción haya sido abonada al comercio, la anulación generará una retención en los siguientes abonos por el monto previamente autorizado.
+Para poder ejecutar una reversa ésta debe ser realizada **antes de 1 hora de efectuada la transaccion** por el monto total y en compras con tarjeta de crédito, débito o prepago.
+
+Una vez pasada una hora, siempre se ejecutará una anulación.
+  - En transacciones con tarjeta de débito o prepago solo es posible anular por el monto total.
+  - En transacciones con tarjeta de crédito puedes anular por cualquier monto igual o menor al total de la compra.
+  - Las transacciones en cuotas no pueden ser anuladas.
+En caso que la transacción haya sido abonada al comercio, la anulación generará una retención en los siguientes abonos por el monto previamente autorizado.
 
 El comercio tiene un plazo de 90 días desde la fecha de venta para anular transacciones vía servicios web.
+
+En el caso de los productos con modalidad mall es importante destacar que **la reversa** funciona 
+sobre la operación completa del mall, lo que significa que **todas las transacciones realizadas en**
+**la operación mall serán reversadas**.
+
+**La anulación**, en cambio, actúa individualmente sobre las transacciones de
+las _tiendas_ de un mall. Por ende, **la anulación es la operación correcta a**
+**utilizar para fines financieros**, de manera de anular un cargo ya realizado.
 
 <div class="container slate">
   <div class='slate-after-footer'>
