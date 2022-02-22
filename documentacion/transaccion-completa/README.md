@@ -818,25 +818,14 @@ response.balance
   <div tbk-link='/referencia/transaccion-completa#reversar-o-anular-un-pago-transaccion-completa' tbk-link-name='Referencia API'></div>
 </div>
 
-Este método permite a todo comercio habilitado reversar o anular una transacción
-completa. El método permite generar el reembolso del total o parte del monto de
-una transacción dependiendo de la siguiente lógica de negocio la invocación a
-esta operación generará una reversa o una anulación:
+Esta operación permite a todo comercio habilitado, reversar o anular una
+transacción que fue generada en Transacción Completa.
 
-* Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
-* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
+Puedes realizar un reembolso invocando al método refund(), dependiendo de algunas condiciones correspondera a una **Reversa** o **Anulación**.  
 
-La anulación puede realizarse máximo 90 días después de la fecha de la
-transacción original.
-
-Para anular una transacción se debe invocar al método `Transaction.refund()`.
-
-Permite generar el reembolso del total o parte del monto de una transacción completa.
-Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una reversa o una anulación:
-
-* Si se especifica un valor en el campo “amount” se ejecutará siempre una anulación.
-* Si se supera el tiempo máximo para ejecutar una reversa se ejecutará una anulación.
-* Si no se ha dado ninguno de los casos anteriores se ejecutará una reversa.
+Puedes [leer más sobre la anulación en la información del
+producto Webpay](/producto/webpay#anulaciones) para conocer
+más detalles y restricciones.
 
 <div class="language-simple" data-multiple-language></div>
 
@@ -1993,14 +1982,14 @@ detail.balance
   <div tbk-link='/referencia/transaccion-completa#anulacion-transaccion-completa-mall' tbk-link-name='Referencia API'></div>
 </div>
 
-Permite generar el reembolso del total o parte del monto de una transacción completa.
-Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una reversa o una anulación:
+Esta operación permite a todo comercio habilitado, reversar o anular una
+transacción que fue generada en Transacción Completa.
 
-* Si se especifica un valor en el campo “amount” se ejecutará siempre una anulación.
-* Si se supera el tiempo máximo para ejecutar una reversa se ejecutará una anulación.
-* Si no se ha dado ninguno de los casos anteriores se ejecutará una reversa.
+Puedes realizar un reembolso invocando al método refund(), dependiendo de algunas condiciones correspondera a una **Reversa** o **Anulación**.  
 
-Permite solicitar a Webpay la anulación de una transacción realizada previamente y que se encuentre vigente.
+Puedes [leer más sobre la anulación en la información del
+producto Webpay](/producto/webpay#anulaciones) para conocer
+más detalles y restricciones.
 
 <div class="language-simple" data-multiple-language></div>
 
