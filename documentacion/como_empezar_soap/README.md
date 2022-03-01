@@ -334,9 +334,9 @@ Webpay que utilicen algún [plugin oficial](/plugin) existe un formulario especi
 
 Descargar el formulario de envidencias...
 
-* Para integraciones Webpay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay.docx)
-* Para integraciones Webpay que usen un plugin oficial: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-plugins.docx)
-* Para integraciones Onepay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx)
+* Para integraciones Webpay: [**No se aceptan nuevas integraciones SOAP**]
+* Para integraciones Webpay que usen un plugin oficial: [**No se aceptan nuevas integraciones SOAP**]
+* Para integraciones Onepay: [**No se aceptan nuevas integraciones SOAP**]
 
 Soporte validará que los casos de prueba sean consistentes con los registrados
 en los sistemas de Webpay y, de estar todo correcto, se le notificará al
