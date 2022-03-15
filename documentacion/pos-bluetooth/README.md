@@ -10,30 +10,39 @@
 
 ## Requerimientos
 ### Componentes
-*  Librería POS Integrado Bluetooth: Librería encargada de manejar la transacción de POS  integrado Bluetooth, iniciándola y obteniendo la respuesta. 
+
+#### Android
+*  Librería POS Integrado Bluetooth: Librería encargada de manejar la transacción de POS  integrado Bluetooth, iniciándola y obteniendo la respuesta.
+
+#### iOS
+* Framework iSMP(PCL): librería necesaria para comunicación Bluetooth con terminal.
+* Framework Mpos Integrado: Librería encargada de manejar la transacción de Mpos integrado, iniciándola y obteniendo la respuesta.
 
 ### Herramientas
 * IDE Android Studio
+* Xcode, una versión compatible con Swift 4.1 o 3+
 
 ### Observaciones
-* Todas las instrucciones fueron hechas en base Android Studio 4.0.1 y Gradle 5.6.4
+* Todas las instrucciones fueron hechas en base Android Studio 4.0.1, Gradle 5.6.4, Xcode 9.4.1 y Swift 4.1
 
 ### Lenguajes soportados
 * Java Nativo Android
 * Kotlin 1.x
+* Swift
 
 ### Versión mínima de desarrollo
 * Android 4.x (API 14)
+* iOS 10.0
 
-##  Instalación y Configuración
+##  Android
 
 ### Instalación
 Es importante aclarar que la librería cuenta con dos componentes, uno por el lado de la comunicación con el terminal 
 llamado PCL y la parte de POS Integrado Bluetooth la cual se encarga de la transacción. Esta sección explica que es 
-necesario para establecer la comunicación bluetooth entre el terminal de pago (Link2500) y el smarthphone.
+necesario para establecer la comunicación Bluetooth entre el terminal de pago (Link2500) y el smartphone.
 
 * Copiar el archivo “mposintegrado.aar” [**Descargar**](https://transbankdevelopers.cl/files/mposintegrado.aar) en el directorio de librerías (en este caso libs) de la aplicación.
-* En el archivo build.gradle a nivel de proyecto agregar en la sección allprojects->repositories , lo siguiente:
+* En el archivo build.gradle a nivel de proyecto agregar en la sección allProjects->repositories , lo siguiente:
 
 ```java
 flatDir {dirs 'libs'}
@@ -75,7 +84,7 @@ Adicional es necesario agregar los siguientes servicios dentro del tag applicati
 <service android:name="com.ingenico.pclservice.BluetoothService"/>
 ```
 
-## Estableciendo comunicación con el terminal de pago
+### Estableciendo comunicación con el terminal de pago
 
 La comunicación con el terminal como ya se dijo con anterioridad es realizada mediante el componente
 PCL incluido ya en la librería de POS Integrado Bluetooth.
@@ -319,13 +328,13 @@ En las siguientes líneas de código se realiza la elección de terminal y se ll
 ```java
 /*Variable de control si ya se encontró un dispositivo*/
 boolean bFound = false;
-/*Se obtiene con esto la lista de los dipositivos ingenico paired con el
+/*Se obtiene con esto la lista de los dispositivos ingenico paired con el
 terminal*/
 Set<BluetoothCompanion> btComps = mPclUtil.GetPairedCompanions();
 if (btComps != null && (btComps.size() > 0)) {
     /* Loop through paired devices*/
     for (BluetoothCompanion comp : btComps) {
-        /*Aca se revisa si el dipositivo esta activo y lo define como el actual*/
+        /*Aca se revisa si el dispositivo esta activo y lo define como el actual*/
         if (comp.isActivated()) {
             bFound = true;
             mCurrentDevice = comp.getBluetoothDevice().getAddress() + " - " +
@@ -342,7 +351,7 @@ if (btComps != null && (btComps.size() > 0)) {
 
 Para efectos de este ejemplo si no encuentra ninguno activado, activa el primer dispositivo pareado con el Smartphone. Esta lógica debe ser implementada según defina el desarrollador ya que es un flujo que depende de la aplicación misma.  
 
-## Efectuando transacciones con POS Integrado Bluetooth
+### Efectuando transacciones con POS Integrado Bluetooth
 
 Luego de tener el terminal con la comunicación establecida con la caja
 movilizada como se explicó anteriormente, se puede dar inicio a la
@@ -372,7 +381,7 @@ String trxToHex = mposLibobj.convertStringToHex(mensajeriaTrx);
 String obtenerLrc = calcularLRC(trxToHex);
 /*Ahora armo el comando completo de trx*/
 String trxCompleta = stx+trxToHex+ext+ obtenerLrc;
-/*Envio el comando completo para que el POS integrado bluetooth lo procese*/
+/*Envio el comando completo para que el POS integrado Bluetooth lo procese*/
 mposLibobj.stratTransaction(trxCompleta);
 ```
 
