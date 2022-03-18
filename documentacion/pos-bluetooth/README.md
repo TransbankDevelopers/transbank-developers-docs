@@ -423,7 +423,7 @@ Acá el integrador deberá decidir qué hacer con la respuesta obtenida en la va
 
 ### Instalación
 
-#### Framework iSMP(PCL)
+### Framework iSMP(PCL)
 
 Este framework es necesario para establecer la comunicación Bluetooth entre el terminal de pago (Link2500) y el smartphone. Los siguientes pasos son necesarios para su utilización:
 
@@ -440,7 +440,7 @@ Esto agregara el framework al proyecto, luego para importarlo en el código se u
 Import iSMP
 ```
 
-#### Dependencias
+### Dependencias
 
 El iSMP framework requiere que se asocien otros frameworks del iPhone SDK con el “target”. Los cuales son los siguientes:
 
@@ -460,11 +460,11 @@ Estos se deben agregar de la siguiente forma:
 * Hacer click en el bot n “+” y luego seleccionar las librerías requeridas.
 * Hacer click en el bot n “add”.
 
-#### Build settings de la aplicación
+### Build settings de la aplicación
 
 Se debe buscar en los build settings del target del proyecto “C language dialect” y elegir GNU99.
 
-#### Requerimientos de la aplicación
+### Requerimientos de la aplicación
 
 Una aplicación que utilice el frame iSMP debe declarar en su info.plist los “protocol names” que son usados para la comunicación entre el smartphone y el terminal de pago, Los protocolos soportados son:
 
@@ -476,7 +476,7 @@ Una aplicación que utilice el frame iSMP debe declarar en su info.plist los “
 
 Estos se deben agregar al archivo .plist en el key “Supported external accessory protocols”.
 
-#### Framework Mpos Integrado
+### Framework Mpos Integrado
 
 Este framework es necesario para iniciar la transacción y capturar la respuesta. Los siguientes pasos son necesarios para su utilización:
 
@@ -498,7 +498,7 @@ import mPosIntegradoFrameworkiOS
 
 Dependiendo de la aplicación puede ser necesario la activación de “Wireless Accessory Configuration” en la sección capabilities del target del proyecto.
 
-#### Estableciendo comunicación con el terminal de pago
+### Estableciendo comunicación con el terminal de pago
 
 A continuación, se explica cómo funciona la forma de establecer la comunicación. La comunicación con el terminal es realizada mediante el uso el framework iSMP(PCL) y framework de MposIntegrado.
 
@@ -592,7 +592,7 @@ public func pclLogEntry(_ message: String!, withSeverity severity: Int32) {
 }
 ```
 
-#### Realizar un pago con Mpos Integrado
+### Realizar un pago con Mpos Integrado
 
 Luego de tener el terminal con la comunicación establecida como ya se explicó  anteriormente, se puede dar inicio al proceso de pago.
 
@@ -619,7 +619,7 @@ El parámetro payload corresponde al mensaje de POS Integrado disponibles en la 
 
 El resultado será capturado en el callback y corresponde a la respuesta definidas en la [referencia de POS Integrado](https://www.transbankdevelopers.cl/referencia/posintegrado#mensajes) en formato Hex String 
 
-#### Transacción de obtener detalle de ventas
+### Transacción de obtener detalle de ventas
 
 La respuesta de esta transacción tiene el siguiente formato:
 
@@ -635,7 +635,7 @@ El siguiente sería un ejemplo de la respuesta en hex string:
 02303236317C30307C3539373035353535303030317C49334445533137317C307C3735383039387C38313030307C30307C307C383634337C3232377C44427C3030303030307C202020202020202020202020202020202020207C44427C31323039323031387C3132303332367C307C300530307C3539373035353535303030317C49334445533137317C307C3936393233347C38313030307C30307C307C383634337C3232387C44427C3030303030307C202020202020202020202020202020202020207C44427C31323039323031387C3137323431367C307C307C034
 ```
 
-### Efectuando transacciones con POS Integrado Bluetooth
+## Efectuando transacciones con POS Integrado Bluetooth
 
 Luego de tener el terminal con la comunicación establecida con la caja
 movilizada como se explicó anteriormente, se puede dar inicio a la
