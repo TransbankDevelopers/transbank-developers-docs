@@ -146,6 +146,12 @@ Respuestas al <br> comercio | Descripción
 -8 | Tarjeta vencida
 -9 | Transacción no soportada
 -10 | Problema en la transacción
+-11 | Excede límite de reintentos de rechazos
+
+<aside class="warning">
+  Importante: Las marcas están introduciendo un conjunto de nuevas reglas y cuotas (máximos de reintentos) a las transacciones.
+  El código -11 será retornado en caso de cumplir algunas de las condiciones de la marca.
+</aside>
 
 
 ## Autorización y Captura
