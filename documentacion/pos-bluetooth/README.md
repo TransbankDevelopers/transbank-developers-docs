@@ -4,36 +4,49 @@
 
 <img src="/images/documentacion/flujo-POS-bt.svg" class="td_img-night" alt="Modelo de operación">
 
-***La caja movilizada del comercio es la encargada de entregar internet al POS Integrado Bluetooth mediante la conexión bluetooth que se establece entre los dos dispositivos.**  
+***La caja movilizada del comercio es la encargada de entregar internet al POS Integrado Bluetooth mediante la conexión Bluetooth que se establece entre los dos dispositivos.**  
 
 ****Es el POS Integrado Bluetooth quien se comunica con Transbank para toda transacción financiera**
 
 ## Requerimientos
 ### Componentes
-*  Librería POS Integrado Bluetooth: Librería encargada de manejar la transacción de POS  integrado Bluetooth, iniciándola y obteniendo la respuesta. 
+
+#### Android
+*  Librería POS Integrado Bluetooth: Librería encargada de manejar la transacción de POS  integrado Bluetooth, iniciándola y obteniendo la respuesta.
+
+#### iOS
+* Framework iSMP(PCL): librería necesaria para comunicación Bluetooth con terminal.
+* Framework Mpos Integrado: Librería encargada de manejar la transacción de Mpos integrado, iniciándola y obteniendo la respuesta.
 
 ### Herramientas
 * IDE Android Studio
+* Xcode, una versión compatible con Swift 4.1 o 3+
 
 ### Observaciones
-* Todas las instrucciones fueron hechas en base Android Studio 4.0.1 y Gradle 5.6.4
+* Todas las instrucciones fueron hechas en base Android Studio 4.0.1, Gradle 5.6.4, Xcode 9.4.1 y Swift 4.1
 
 ### Lenguajes soportados
 * Java Nativo Android
 * Kotlin 1.x
+* Swift
 
 ### Versión mínima de desarrollo
 * Android 4.x (API 14)
+* iOS 10.0
 
-##  Instalación y Configuración
+### Descarga de librerías
+* [Android](https://transbankdevelopers.cl/files/mposintegrado.aar)
+* [iOS](https://transbankdevelopers.cl/files/mposintegrado-ios.zip)
+
+##  Android
 
 ### Instalación
 Es importante aclarar que la librería cuenta con dos componentes, uno por el lado de la comunicación con el terminal 
 llamado PCL y la parte de POS Integrado Bluetooth la cual se encarga de la transacción. Esta sección explica que es 
-necesario para establecer la comunicación bluetooth entre el terminal de pago (Link2500) y el smarthphone.
+necesario para establecer la comunicación Bluetooth entre el terminal de pago (Link2500) y el smartphone.
 
-* Copiar el archivo “mposintegrado.aar” [**Descargar**](https://transbankdevelopers.cl/files/mposintegrado.aar) en el directorio de librerías (en este caso libs) de la aplicación.
-* En el archivo build.gradle a nivel de proyecto agregar en la sección allprojects->repositories , lo siguiente:
+* Copiar el archivo “mposintegrado.aar” en el directorio de librerías (en este caso libs) de la aplicación.
+* En el archivo build.gradle a nivel de proyecto agregar en la sección allProjects->repositories , lo siguiente:
 
 ```java
 flatDir {dirs 'libs'}
@@ -75,7 +88,7 @@ Adicional es necesario agregar los siguientes servicios dentro del tag applicati
 <service android:name="com.ingenico.pclservice.BluetoothService"/>
 ```
 
-## Estableciendo comunicación con el terminal de pago
+### Estableciendo comunicación con el terminal de pago
 
 La comunicación con el terminal como ya se dijo con anterioridad es realizada mediante el componente
 PCL incluido ya en la librería de POS Integrado Bluetooth.
@@ -319,13 +332,13 @@ En las siguientes líneas de código se realiza la elección de terminal y se ll
 ```java
 /*Variable de control si ya se encontró un dispositivo*/
 boolean bFound = false;
-/*Se obtiene con esto la lista de los dipositivos ingenico paired con el
+/*Se obtiene con esto la lista de los dispositivos ingenico paired con el
 terminal*/
 Set<BluetoothCompanion> btComps = mPclUtil.GetPairedCompanions();
 if (btComps != null && (btComps.size() > 0)) {
     /* Loop through paired devices*/
     for (BluetoothCompanion comp : btComps) {
-        /*Aca se revisa si el dipositivo esta activo y lo define como el actual*/
+        /*Aca se revisa si el dispositivo esta activo y lo define como el actual*/
         if (comp.isActivated()) {
             bFound = true;
             mCurrentDevice = comp.getBluetoothDevice().getAddress() + " - " +
@@ -342,23 +355,9 @@ if (btComps != null && (btComps.size() > 0)) {
 
 Para efectos de este ejemplo si no encuentra ninguno activado, activa el primer dispositivo pareado con el Smartphone. Esta lógica debe ser implementada según defina el desarrollador ya que es un flujo que depende de la aplicación misma.  
 
-## Efectuando transacciones con POS Integrado Bluetooth
-
-Luego de tener el terminal con la comunicación establecida con la caja
-movilizada como se explicó anteriormente, se puede dar inicio a la
-implementación de las diversas transacciones disponibles en la Integración
-Nativa de POS Integrado:
-- [Transacción de Venta](/referencia/posintegrado#mensaje-de-venta)
-- [Transacción Última Venta](/referencia/posintegrado#mensaje-de-ultima-venta)
-- [Transacción Anulación Venta](/referencia/posintegrado#mensaje-de-anulacion)
-- [Transacción de Cierre](/referencia/posintegrado#mensaje-de-cierre)
-- [Transacción Detalle de Ventas](/referencia/posintegrado#mensaje-detalle-de-ventas)
-- [Transacción Totales](/referencia/posintegrado#mensaje-de-totales)
-- [Transacción Carga de Llaves](/referencia/posintegrado#mensaje-de-carga-de-llaves)
-- [Transacción Polling](/referencia/posintegrado#mensaje-de-poll)
+### Efectuando una venta
   
-Por ejemplo, para implementar una Transacción de Venta, lo primero es crear un método que gatillara la acción para transaccionar con el POS integrado bluetooth:
-
+Para implementar una Transacción de Venta, lo primero es crear un método que gatillara la acción para transaccionar con el POS integrado bluetooth:
 
 ```java
 mposLibobj = new mposLib(mPclService);
@@ -372,7 +371,7 @@ String trxToHex = mposLibobj.convertStringToHex(mensajeriaTrx);
 String obtenerLrc = calcularLRC(trxToHex);
 /*Ahora armo el comando completo de trx*/
 String trxCompleta = stx+trxToHex+ext+ obtenerLrc;
-/*Envio el comando completo para que el POS integrado bluetooth lo procese*/
+/*Envio el comando completo para que el POS integrado Bluetooth lo procese*/
 mposLibobj.stratTransaction(trxCompleta);
 ```
 
@@ -419,6 +418,238 @@ mposLibobj.setOnTransactionFinishedListener(new mposLib.onTransactionFinishedLis
 });
 ```
 Acá el integrador deberá decidir qué hacer con la respuesta obtenida en la variable response, cuando se gatille este callback.
+
+## iOS
+
+### Instalación
+
+### Framework iSMP(PCL)
+
+Este framework es necesario para establecer la comunicación Bluetooth entre el terminal de pago (Link2500) y el smartphone. Los siguientes pasos son necesarios para su utilización:
+
+* Copiar el archivo “iSMP.framework” en alg n directorio para su posterior utilización.
+* En la configuración del proyecto seleccionar el “target” el cual utilizara el framework.
+* Ir al tab “Build Phases”.
+* Seleccionar el build step “Link Binary With Libraries”.
+* Hacer click en el bot n “+” y luego en “Add Other”.
+* Ir al directorio donde se tiene el framework y seleccionar “iSMP.framework”.
+
+Esto agregara el framework al proyecto, luego para importarlo en el código se utiliza:
+
+```swift
+Import iSMP
+```
+
+### Dependencias
+
+El iSMP framework requiere que se asocien otros frameworks del iPhone SDK con el “target”. Los cuales son los siguientes:
+
+* Foundation
+* Security
+* UiKit
+* CoreGraphics
+* SystemConfiguration
+* ExternalAccessory
+* CFNetwork
+
+Estos se deben agregar de la siguiente forma:
+
+* En la configuración del proyecto seleccionar el “target” el cual utilizara el framework.
+* Ir al tab “Build Phases”.
+* Seleccionar el build step “Link Binary With Libraries”.
+* Hacer click en el bot n “+” y luego seleccionar las librerías requeridas.
+* Hacer click en el bot n “add”.
+
+### Build settings de la aplicación
+
+Se debe buscar en los build settings del target del proyecto “C language dialect” y elegir GNU99.
+
+### Requerimientos de la aplicación
+
+Una aplicación que utilice el frame iSMP debe declarar en su info.plist los “protocol names” que son usados para la comunicación entre el smartphone y el terminal de pago, Los protocolos soportados son:
+
+* com.ingenico.easypayemv.spm-transaction
+* com.ingenico.easypayemv.spm-configuration
+* com.ingenico.easypayemv.spm-networkaccess
+* com.ingenico.easypayemv.spm-sppchannel
+* com.ingenico.easypayemv.spm-pppchannel
+
+Estos se deben agregar al archivo .plist en el key “Supported external accessory protocols”.
+
+### Framework Mpos Integrado
+
+Este framework es necesario para iniciar la transacción y capturar la respuesta. Los siguientes pasos son necesarios para su utilización:
+
+* Copiar el archivo “mPosIntegradoFrameworkiOS.framework” en algún directorio para su posterior utilización.
+* En la configuración del proyecto seleccionar el “target” el cual utilizara el framework.
+* Ir al tab “Build Phases”.
+* Seleccionar el build step “Link Binary With Libraries”.
+* Hacer click en el bot n “+” y luego en “Add Other”.
+* Ir al directorio donde se tiene el framework y seleccionar "PosIntegradoFrameworkiOS.framework”.
+* Luego agregar un nuevo “Build Phase” del tipo “Copy files Phase”.
+* Dentro de este nuevo phase elegir como Destination “Frameworks” y agrega a la * sta “mPosIntegradoFrameworkiOS.framework” agregado anteriormente.
+* Ponerle como nombre a este phase “Embed Frameworks”.
+
+Todo este proceso agregara el framework al proyecto, luego para importarlo en el código se utiliza:
+
+```swift
+import mPosIntegradoFrameworkiOS
+```
+
+Dependiendo de la aplicación puede ser necesario la activación de “Wireless Accessory Configuration” en la sección capabilities del target del proyecto.
+
+### Estableciendo comunicación con el terminal de pago
+
+A continuación, se explica cómo funciona la forma de establecer la comunicación. La comunicación con el terminal es realizada mediante el uso el framework iSMP(PCL) y framework de MposIntegrado.
+
+Primero se debe contar con una variable del tipo ICPclService la cual se inicializa de la siguiente forma:
+
+```swift
+var pclService = ICPclService.shared()
+```
+
+Esta será utilizada para manejar los distintos métodos del framework que son necesarios para la conexión.
+
+Adicional se deben crear las siguientes variables:
+
+```swift
+var ssl: ICSSLParameters = {
+  let initValue = ICSSLParameters()
+  initValue.isSSL=false
+  initValue.sslCertificateName = "serverb"
+  initValue.sslCertificatePassword = "coucou"
+  return initValue
+}()
+```
+
+Variable utilizada en métodos para establecer la comunicación.
+
+```swift
+var terminals: [ICTerminal] = []
+```
+
+Variable en donde se guardarán los terminales de pago que ya se encuentran emparejados con el dispositivo.
+
+```swift
+var utils = mPosIntegrado()
+```
+
+Variable para manejar los distintos métodos del Framework.
+
+En las siguientes líneas de código se realiza la elección de terminal y se llama a la función de inicio de la comunicación.
+
+```swift
+/*Se setea el objeto pclService que se utilizara en utils*/
+utils.setPclServiceforUtils(service: self.pclService!)
+/*Se detiene el servicio de pcl actual para evitar problemas con alguno iniciado anteriormente*/
+self.pclService?.stop()
+/*Se obtiene el listado de terminales pareados con el Smartphone*/
+terminals=utils.getDevices();
+/*Para efectos del ejemplo se selecciona el primero de la lista obtenida*/
+let terminalSelected = terminals[0]
+/*Se llama la función implementada para conectar al terminal*/
+self.startPclService(terminal: terminalselected, sslParameters: self.ssl)
+
+/*Función encargada de llamar a los m todos necesarios para partir la comunicación con el terminal*/
+func startPclService(terminal:ICTerminal, sslParameters: ICSSLParameters)
+{
+  /*Se inicia el servicio de PCL*/
+  pclService?.start(with: terminal, andSecurity: sslParameters)
+  /*Se obtiene el estado del servidor lo cual gatilla que se active la comunicación si es que estaba inactiva*/
+  pclService?.getState()
+}
+```
+
+Hay algunos callback importantes que están implementados, particularmente los que se gatillan cuando la comunicación se establece correctamente y otro para poder ver el log del proceso en la consola.
+
+Primero se debe agregar en la definición de la clase el siguiente protocolo:
+
+```swift
+ICPclServiceDelegate
+```
+
+También se realizan los siguientes seteos para su correcto funcionamiento (recomendado en el ViewDidLoad)
+
+```swift
+self.pclService?.delegate=self
+```
+
+Luego se implementan los siguientes callback:
+
+```swift
+public func notifyConnection(_ sender: ICPclService!)
+{
+  //DO SOMETHING WHEN THE SERVER IS CONNECTED
+}
+public func notifyDisconnection(_ sender: ICPclService!)
+{
+  //DO SOMETHING WHEN THE SERVER IS DISCONNECTED
+}
+
+/*Este callback se usa para mostrar un log en consola del framework pcl*/
+public func pclLogEntry(_ message: String!, withSeverity severity: Int32) {
+  print("\(ICPclService.severityLevelString(severity) ?? "") \(message ?? "")")
+}
+```
+
+### Realizar un pago con Mpos Integrado
+
+Luego de tener el terminal con la comunicación establecida como ya se explicó  anteriormente, se puede dar inicio al proceso de pago.
+
+Lo primero que se debe hacer es implementar el callback del framework de MposIntegrado encargado de capturar la respuesta luego de finalizada la transacción. Esto se hace de la siguiente forma:
+
+```swift
+utils.onFinishTransaction =
+{
+  result in
+  // DO SOMETHING WITH THE RESPONSE
+  print("RESPONSE: \(result)")
+  // DO SOMETHING WITH THE RESPONSE
+}//NEEDED TO CAPTURE RESULT OF TRANSACTION
+```
+Acá el integrador deber  decidir qu  hacer con la respuesta obtenida en la variable result, cuando se gatille este callback. En el ejemplo simplemente se imprime por consola.
+
+Luego de tener implementado el callback se debe llamar al método startTransaction del framework de MposIntegrado, un ejemplo de llamada seria
+
+```swift
+utils.startTransaction(payload:"02303230307C313030307C3132333435367C7C7C30036B")
+```
+
+El parámetro payload corresponde al mensaje de POS Integrado disponibles en la [referencia de POS Integrado](https://www.transbankdevelopers.cl/referencia/posintegrado#mensajes) en formato Hex String.
+
+El resultado será capturado en el callback y corresponde a la respuesta definidas en la [referencia de POS Integrado](https://www.transbankdevelopers.cl/referencia/posintegrado#mensajes) en formato Hex String 
+
+### Transacción de obtener detalle de ventas
+
+La respuesta de esta transacción tiene el siguiente formato:
+
+```bash
+<STX>0261|Datostransacion1<ENQ>Datostransaccion2<ENQ>Datostransaccion3<ENQ>…..DatostransaccionN<ETX><LRC>
+```
+
+A diferencia de pos integrado regular esta se entrega toda junta y no se va entregando transacción a transacción.
+
+El siguiente sería un ejemplo de la respuesta en hex string:
+
+```bash
+02303236317C30307C3539373035353535303030317C49334445533137317C307C3735383039387C38313030307C30307C307C383634337C3232377C44427C3030303030307C202020202020202020202020202020202020207C44427C31323039323031387C3132303332367C307C300530307C3539373035353535303030317C49334445533137317C307C3936393233347C38313030307C30307C307C383634337C3232387C44427C3030303030307C202020202020202020202020202020202020207C44427C31323039323031387C3137323431367C307C307C034
+```
+
+## Efectuando transacciones con POS Integrado Bluetooth
+
+Luego de tener el terminal con la comunicación establecida con la caja
+movilizada como se explicó anteriormente, se puede dar inicio a la
+implementación de las diversas transacciones disponibles en la Integración
+Nativa de POS Integrado:
+
+- [Transacción de Venta](/referencia/posintegrado#mensaje-de-venta)
+- [Transacción Última Venta](/referencia/posintegrado#mensaje-de-ultima-venta)
+- [Transacción Anulación Venta](/referencia/posintegrado#mensaje-de-anulacion)
+- [Transacción de Cierre](/referencia/posintegrado#mensaje-de-cierre)
+- [Transacción Detalle de Ventas](/referencia/posintegrado#mensaje-detalle-de-ventas)
+- [Transacción Totales](/referencia/posintegrado#mensaje-de-totales)
+- [Transacción Carga de Llaves](/referencia/posintegrado#mensaje-de-carga-de-llaves)
+- [Transacción Polling](/referencia/posintegrado#mensaje-de-poll)
 
 <div class="container slate">
   <div class='slate-after-footer'>

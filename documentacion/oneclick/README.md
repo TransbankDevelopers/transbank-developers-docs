@@ -1235,32 +1235,14 @@ for(detail on details) {
   <div tbk-link='/referencia/oneclick#reversar-o-anular-una-transaccion' tbk-link-name='Referencia API'></div>
 </div>
 
-Para Oneclick Mall hay dos operaciones diferentes para dejar sin efecto
-transacciones autorizadas: La reversa y la anulación.
+Esta operación permite a todo comercio habilitado, reversar o anular una
+transacción que fue generada en Oneclick.
 
-**La reversa** se aplica para **problemas operacionales (lado comercio) o de
-comunicación entre comercio y Transbank que impidan recibir a tiempo la
-respuesta de una autorización**. En tal caso el comercio **debe** intentar
-reversar la transacción de autorización para evitar un posible descuadre entre
-comercio y Transbank. La reversa funciona sobre la operación completa del mall,
-lo que significa que **todas las transacciones realizadas en la operación mall**
-**serán reversadas**.
+Puedes realizar un reembolso invocando al método refund(), dependiendo de algunas condiciones correspondera a una **Reversa** o **Anulación**.  
 
-**La anulación**, en cambio, actúa individualmente sobre las transacciones de
-las _tiendas_ de un mall. Por ende, **la anulación es la operación correcta a
-utilizar para fines financieros**, de manera de anular un cargo ya realizado.
-Permite generar el reembolso del total o parte del monto de una transacción completa.
-Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una
-reversa o una anulación:
-
-<strong>* Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial. </strong>
-
-<strong>* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado **(una hora)**, de lo contrario se ejecutará una anulación.</strong>
-
-<strong>Transaction.refund()</strong>
-
-Permite reversar o anular una transacción de venta autorizada con anterioridad.
-Este método retorna como respuesta un identificador único de la transacción de reversa/anulación.
+Puedes [leer más sobre la anulación en la información del
+producto Webpay](/producto/webpay#anulaciones) para conocer
+más detalles y restricciones.
 
 <div class="language-simple" data-multiple-language></div>
 
