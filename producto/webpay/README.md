@@ -150,12 +150,13 @@ Respuestas al <br> comercio | Descripción
 
 <aside class="warning">
   Importante: Las marcas están introduciendo un conjunto de nuevas reglas y cuotas (máximos de reintentos) a las transacciones.
-  El código -11 será retornado en caso de cumplir algunas de las condiciones de la marca.
-
-  1.- En el caso de **MASTERCARD**, se bloqueará todo reintento de transacción rechazada a partir del reintento número 11° (undécimo) en adelante, dentro de 24 horas de realizada la transacción original. Los criterios que la marca utiliza para identificar un reintento es a través del código de comercio y el número de tarjeta.
-
-  2.- Para el caso de **VISA**, se bloqueará todo reintento de transacción rechazada a partir del reintento número 16° (decimosexto) en adelante, dentro de 30 días de realizada la transacción original. Los criterios que la marca utiliza para identificar un reintento es a través del código de comercio, el número de tarjeta y el monto de la transacción.
 </aside>
+
+El código -11 será retornado en caso de cumplir algunas de las condiciones de la marca.
+
+1.- En el caso de **MASTERCARD**, se bloqueará todo reintento de transacción rechazada a partir del reintento número 11° (undécimo) en adelante, dentro de 24 horas de realizada la transacción original. Los criterios que la marca utiliza para identificar un reintento es a través del código de comercio y el número de tarjeta.
+
+2.- Para el caso de **VISA**, se bloqueará todo reintento de transacción rechazada a partir del reintento número 16° (decimosexto) en adelante, dentro de 30 días de realizada la transacción original. Los criterios que la marca utiliza para identificar un reintento es a través del código de comercio, el número de tarjeta y el monto de la transacción.
 
 
 ## Autorización y Captura
