@@ -103,5 +103,5 @@ Al guardar, el plugin funcionará inmediatamente en ambiente de producción y po
 
 ## Problemas, Dudas, Sugerencias
 
-Si tienes algún problema, duda o sugerencia, puedes contactarnos en nuestra comunidad de Slack, a la que puedes [unirte acá](https://join-transbankdevelopers-slack.herokuapp.com/)
+Si tienes algún problema, duda o sugerencia, puedes contactarnos en nuestra comunidad de Slack, a la que puedes [unirte acá](https://transbank.continuumhq.dev/slack_community)
 Adicionalmente, puedes revisar si más comercios han presentado algún error/dudas similares en los [_issues_ del repositorio github](https://github.com/TransbankDevelopers/transbank-plugin-magento2-webpay-rest/issues). Si nadie ha comentado algo similar, puedes [crear un nuevo _issue_](https://github.com/TransbankDevelopers/transbank-plugin-magento2-webpay-rest/issues/new) con tu sugerencia, bug, problema, etc.
