@@ -38,6 +38,13 @@
 * [Android](https://transbankdevelopers.cl/files/mposintegrado.aar)
 * [iOS](https://transbankdevelopers.cl/files/mposintegrado-ios.zip)
 
+### Proyectos de ejemplos
+
+Se han creado proyectos de ejemplo para Android y iOS para que puedas probar antes de comenzar con tu desarrollo.
+
+* [Android](https://github.com/TransbankDevelopers/transbank-pos-bluetooth-android-example)
+* [iOS](https://github.com/TransbankDevelopers/transbank-pos-bluetooth-ios-example)
+
 ##  Android
 
 ### Instalación
