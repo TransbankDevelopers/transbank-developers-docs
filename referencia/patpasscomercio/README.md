@@ -73,33 +73,33 @@ Host: https://pagoautomaticocontarjetasint.transbank.cl/
 ### Credenciales del Comercio
 
 ```java
-// Tbk-Api-Key-Id: 28299257
-// Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
+// Commercecode: 28299257
+// Authorization: cxxXQgGD9vrVe4M41FIt
 ```
 
 ```php
-// Tbk-Api-Key-Id: 28299257
-// Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
+// Commercecode: 28299257
+// Authorization: cxxXQgGD9vrVe4M41FIt
 ```
 
 ```csharp
-// Tbk-Api-Key-Id: 28299257
-// Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
+// Commercecode: 28299257
+// Authorization: cxxXQgGD9vrVe4M41FIt
 ```
 
 ```ruby
-# Tbk-Api-Key-Id: 28299257
-# Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
+# Commercecode: 28299257
+# Authorization: cxxXQgGD9vrVe4M41FIt
 ```
 
 ```python
-# Tbk-Api-Key-Id: 28299257
-# Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
+# Commercecode: 28299257
+# Authorization: cxxXQgGD9vrVe4M41FIt
 ```
 
 ```http
-Tbk-Api-Key-Id: 28299257
-Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
+Commercecode: 28299257
+Authorization: cxxXQgGD9vrVe4M41FIt
 Content-Type: application/json
 ```
 
@@ -304,8 +304,8 @@ resp = Inscription.start(return_url, name, first_last_name, second_last_name, ru
 
 ```http
 POST restpatpass/v1/services/patInscription
-Tbk-Api-Key-Id: 28299257
-Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
+Commercecode: 28299257
+Authorization: cxxXQgGD9vrVe4M41FIt
 Content-Type: application/json
 {
     "url": "http://misitio.cl/finalizar_suscripcion",
@@ -465,8 +465,8 @@ resp = Inscription.status(token)
 
 ```http
 POST restpatpass/v1/services/status
-Tbk-Api-Key-Id: 28299257
-Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
+Commercecode: 28299257
+Authorization: cxxXQgGD9vrVe4M41FIt
 Content-Type: application/json
 {
     "token": "21383fe8ba4c4cdd9e18518daf4e9bcbaffd9e8e3ad4ec36f66ae2b4e80cc4b5"
