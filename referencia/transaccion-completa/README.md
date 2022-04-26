@@ -287,6 +287,12 @@ Content-Type: application/json
 ```
 
 ```javascript
+const TransaccionCompleta = require("transbank-sdk").TransaccionCompleta; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { TransaccionCompleta } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+
 // Versión 3.x del SDK
 const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.create(
@@ -461,6 +467,12 @@ Content-Type: application/json
 ```
 
 ```javascript
+const TransaccionCompleta = require("transbank-sdk").TransaccionCompleta; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { TransaccionCompleta } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+
 // Versión 3.x del SDK
 const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.installments(token, installmentsNumber);
@@ -652,6 +664,12 @@ Content-Type: application/json
 ```
 
 ```javascript
+const TransaccionCompleta = require("transbank-sdk").TransaccionCompleta; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { TransaccionCompleta } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+
 // Versión 3.x del SDK
 const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.commit(
@@ -893,6 +911,11 @@ Content-Type: application/json
 ```
 
 ```javascript
+const TransaccionCompleta = require("transbank-sdk").TransaccionCompleta; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { TransaccionCompleta } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 3.x del SDK
 const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration));
@@ -1154,6 +1177,12 @@ Content-Type: application/json
 ```
 
 ```javascript
+const TransaccionCompleta = require("transbank-sdk").TransaccionCompleta; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { TransaccionCompleta } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+
 // Versión 3.x del SDK
 const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.refund(token, amount);
@@ -1313,6 +1342,12 @@ Content-Type: application/json
 ```
 
 ```javascript
+const TransaccionCompleta = require("transbank-sdk").TransaccionCompleta; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { TransaccionCompleta } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+
 // Versión 3.x del SDK
 const tx = new TransaccionCompleta.Transaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.capture(
@@ -1652,6 +1687,14 @@ Content-Type: application/json
 ```
 
 ```javascript
+const TransaccionCompleta = require("transbank-sdk").TransaccionCompleta; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+const TransactionDetail = require("transbank-sdk").TransactionDetail;  // CommonJS
+
+import { TransaccionCompleta } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+import { TransactionDetail } from 'transbank-sdk'; // ES6 Modules
+
 const details = [
   new TransactionDetail(amount, commerceCode, childBuyOrder),
   new TransactionDetail(amount2, commerceCode2, childBuyOrder2)
@@ -1872,6 +1915,14 @@ Content-Type: application/json
 ```
 
 ```javascript
+const TransaccionCompleta = require("transbank-sdk").TransaccionCompleta; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+const InstallmentDetail = require("transbank-sdk").InstallmentDetail;  // CommonJS
+
+import { TransaccionCompleta } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+import { InstallmentDetail } from 'transbank-sdk'; // ES6 Modules
+
 const details = [
   new InstallmentDetail(childCommerceCode, childBuyOrder, installmentsNumber),
   new InstallmentDetail(childCommerceCode2, childBuyOrder2, installmentsNumber2)
@@ -2142,6 +2193,14 @@ Content-Type: application/json
 ```
 
 ```javascript
+const TransaccionCompleta = require("transbank-sdk").TransaccionCompleta; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+const CommitDetail = require("transbank-sdk").CommitDetail;  // CommonJS
+
+import { TransaccionCompleta } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+import { CommitDetail } from 'transbank-sdk'; // ES6 Modules
+
 let commitDetails = [
   new CommitDetail(commerceCode, childBuyOrder),
   new CommitDetail(commerceCode2, childBuyOrder2)
@@ -2440,6 +2499,12 @@ Content-Type: application/json
 ```
 
 ```javascript
+const TransaccionCompleta = require("transbank-sdk").TransaccionCompleta; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { TransaccionCompleta } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+
 // Versión 3.x del SDK
 const tx = new TransaccionCompleta.MallTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.status(token);
@@ -2721,6 +2786,13 @@ Content-Type: application/json
 ```
 
 ```javascript
+const TransaccionCompleta = require("transbank-sdk").TransaccionCompleta; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { TransaccionCompleta } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+
+
 // Versión 3.x del SDK
 const tx = new TransaccionCompleta.MallTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.refund(
@@ -2912,6 +2984,13 @@ $transaction->capture($token, $commerceCode, $buyOrder, $authorizationCode, $cap
 ```
 
 ```javascript
+const TransaccionCompleta = require("transbank-sdk").TransaccionCompleta; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { TransaccionCompleta } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+
+
 // Versión 3.x del SDK
 const tx = new TransaccionCompleta.MallTransaction(new Options(IntegrationCommerceCodes.TRANSACCION_COMPLETA_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.refund(
