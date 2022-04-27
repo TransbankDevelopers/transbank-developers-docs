@@ -187,7 +187,11 @@ transbank.webpay.webpay_plus.default_integration_type = IntegrationType.TEST
 ```
 
 ```javascript
-const Environment = require('transbank-sdk').Environment;
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 3.x del SDK
 const tx = new WebpayPlus.Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, Environment.Integration));
@@ -285,7 +289,11 @@ resp = transbank.webpay.webpay_plus.create(buy_order, session_id, amount, return
 ```
 
 ```javascript
-const WebpayPlus = require('transbank-sdk').WebpayPlus;
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 // Versión 3.x del SDK
 const tx = new WebpayPlus.Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.create(buyOrder, sessionId, amount, returnUrl);
@@ -426,7 +434,11 @@ resp = transbank.webpay.webpay_plus.transaction.commit(token)
 ```
 
 ```javascript
-const WebpayPlus = require('transbank-sdk').WebpayPlus;
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 // Versión 3.x del SDK
 const tx = new WebpayPlus.Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.commit(token);
@@ -666,7 +678,12 @@ resp = transbank.webpay.webpay_plus.transaction.status(token)
 ```
 
 ```javascript
-const WebpayPlus = require('transbank-sdk').WebpayPlus;
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+
 // Versión 3.x del SDK
 const tx = new WebpayPlus.Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.status(token);
@@ -913,7 +930,13 @@ response = Transbank.webpay.webpay_plus.refund(token, amount)
 ```
 
 ```javascript
-const WebpayPlus = require('transbank-sdk').WebpayPlus;
+
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+
 // Versión 3.x del SDK
 const tx = new WebpayPlus.Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.refund(token, amount);
@@ -1116,6 +1139,11 @@ resp = DeferredTransaction.capture(
 ```
 
 ```javascript
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 3.x del SDK
 const tx = new WebpayPlus.Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
@@ -1371,8 +1399,14 @@ response = MallTransaction.create(
 ```
 
 ```javascript
-const WebpayPlus = require('transbank-sdk').WebpayPlus;
-const TransactionDetail = require('transbank-sdk').TransactionDetail;
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+const TransactionDetail = require('transbank-sdk').TransactionDetail; // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+import { TransactionDetail } from 'transbank-sdk'; // ES6 Modules
+
 
 let details = [
   new TransactionDetail(
@@ -1545,7 +1579,11 @@ response = MallTransaction.commit(token)
 ```
 
 ```javascript
-const WebpayPlus = require('transbank-sdk').WebpayPlus;
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 3.x del SDK
 const tx = new WebpayPlus.MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
@@ -1809,7 +1847,11 @@ response = MallTransaction.status(token)
 ```
 
 ```javascript
-const WebpayPlus = require('transbank-sdk').WebpayPlus;
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 // Versión 3.x del SDK
 const tx = new WebpayPlus.MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.status(token);
@@ -2070,7 +2112,11 @@ response = Transaction.refund(token, buy_order, commerce_code, amount)
 ```
 
 ```javascript
-const WebpayPlus = require('transbank-sdk').WebpayPlus;
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 // Versión 3.x del SDK
 WebpayPlus.MallTransaction tx = new WebpayPlus.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
 final WebpayPlusTransactionRefundResponse response = tx.refund(token, childBuyOrder, childCommerceCode, amount);

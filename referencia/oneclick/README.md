@@ -223,7 +223,10 @@ resp = MallInscription.start(
 
 ```javascript
 const Oneclick = require("transbank-sdk").Oneclick; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
 import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 3.x del SDK
 const ins = new Oneclick.MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
@@ -378,8 +381,11 @@ resp = MallInscription.finish(token=token)
 ```
 
 ```javascript
-const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
+const Oneclick = require("transbank-sdk").Oneclick; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
 import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 3.x del SDK
 const ins = new Oneclick.MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
@@ -557,8 +563,11 @@ MallInscription.delete(tbk_user, user_name)
 ```
 
 ```javascript
-const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
+const Oneclick = require("transbank-sdk").Oneclick; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
 import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 3.x del SDK
 const ins = new Oneclick.MallInscription(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
@@ -1097,8 +1106,11 @@ resp = MallTransaction.status(buy_order)
 ```
 
 ```javascript
-const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
+const Oneclick = require("transbank-sdk").Oneclick; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
 import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 3.x del SDK
 const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
@@ -1418,8 +1430,11 @@ resp = MallTransaction.refund(buy_order, child_commerce_code, child_buy_order, a
 ```
 
 ```javascript
-const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
+const Oneclick = require("transbank-sdk").Oneclick; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
 import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 3.x del SDK
 const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
@@ -1598,8 +1613,11 @@ resp = tx.capture(child_commerce_code, child_buy_order, authorization_code, capt
 ```
 
 ```javascript
-const Oneclick = require('transbank-sdk').Oneclick; // CommonJS
+const Oneclick = require("transbank-sdk").Oneclick; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
 import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 3.x del SDK
 const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
