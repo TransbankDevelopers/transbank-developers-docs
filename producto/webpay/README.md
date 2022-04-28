@@ -187,9 +187,9 @@ Desde el punto de vista de la transacción, lo que ocurre es lo siguiente:
 
 Las transacciones de Webpay se pueden anular o reversar dadas algunas condiciones. Para cualquiera de éstas operaciones se utiliza el mismo servicio web que discernirá si se realizará una reversa o una anulación.
 
-Para poder ejecutar una reversa ésta debe ser realizada **antes de 1 hora de efectuada la transaccion** por el monto total y en compras con tarjeta de crédito, débito o prepago.
+Para poder ejecutar una reversa ésta debe ser realizada **antes de las 3 horas de efectuada la confirmación** por el monto total y en compras con tarjeta de crédito, débito o prepago.
 
-Una vez pasada una hora, siempre se ejecutará una anulación.
+Una vez pasadas las tres horas, siempre se ejecutará una anulación.
   - En transacciones con tarjeta de débito o prepago solo es posible anular por el monto total.
   - En transacciones con tarjeta de crédito puedes anular por cualquier monto igual o menor al total de la compra.
 
