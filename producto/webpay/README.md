@@ -179,6 +179,47 @@ Desde el punto de vista de la transacción, lo que ocurre es lo siguiente:
    Importante: en la modalidad de Captura Diferida no se permite la venta en cuotas.
   </aside>
 
+## VCI
+
+Al realizar la autorización de una transacción, el comercio recibe una respuesta por parte de Transbank informando el resultado. En esta respuesta, el campo VCI corresponde a la autenticación del tarjetahabiente y es información adicional suplementaria al `responseCode`. 
+El comercio **no** debe validar este campo porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo, que no están necesariamente documentados. 
+(En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)  
+
+Código | Descripción
+------   | -----------
+
+TSY | Autenticación Exitosa
+TSN | Autenticación Rechazada
+NP | No Participa, sin autenticación
+U3 | Falla conexión, Autenticación Rechazada
+INV | Datos Inválidos
+A | Intentó
+CNP1 | Comercio no participa
+EOP | Error operacional
+BNA | BIN no adherido
+ENA | Emisor no adherido  
+
+Para venta extranjera, estos son algunos de los códigos:
+
+Código | Descripción
+------   | -----------
+TSYS | Autenticación exitosa Sin fricción. Resultado autenticación: Autenticación Existosa
+TSAS | (Intento, tarjeta no enrolada / emisor no disponible. Resultado autenticación: Autenticación Exitosa)
+TSNS | (Fallido, no autenticado, denegado / no permite intentos. Resultado autenticación: Autenticación denegada)
+TSRS | (Autenticación rechazada - sin fricción. Resultado autenticación: Autenticación rechazada)
+TSUS | (Autenticación no se pudo realizar por problema técnico u otro motivo. Resultado autenticación: Autenticación fallida)
+TSCF | (Autenticación con fricción (No aceptada por el comercio). Resultado autenticación: Autenticación incompleta)
+TSYF | (Autenticación exitosa con fricción. Resultado autenticación: Autenticación exitosa)
+TSNF | (No autenticado. Transacción denegada con fricción. Resultado autenticación: Autenticación denegada)
+TSUF | (Autenticación con fricción no se pudo realizar por problema técnico u otro. Resultado autenticación: Autenticación fallida)
+NPC  |(Comercio no Participa. Resultado autenticación: Comercio/BIN no participa)
+NPB  |(BIN no participa. Resultado autenticación: Comercio/BIN no participa)
+NPCB | (Comercio y BIN no participan. Resultado autenticación: Comercio/BIN no participa)
+SPCB | (Comercio y BIN sí participan. Resultado autenticación: Autorización incompleta)
+
+
+
+
 ## Anulaciones y Reversas
 
 <div class="pos-title-nav">
