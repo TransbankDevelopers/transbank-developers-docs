@@ -236,7 +236,6 @@ Descargar el formulario de envidencias:
 * Para integraciones Webpay que usen un plugin oficial: usa el formulario indicado más arriba. 
 * Para integraciones Webpay Plus, Webpay Plus Mall y OneClick Mall con SDK o intgración directa al API: usa el formulario indicado más arriba. 
 
-* Para integraciones Onepay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx)
 * Para integraciones Transacción Completa: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-rest.docx)
 * Para integraciones Patpass Comercio: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-patpass-comercio.docx)
 
