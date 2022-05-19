@@ -331,13 +331,13 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-url <br> <i> String </i> | URL de retorno del comercio
+url <br> <i> String </i> | URL de retorno del comercio (no permite 'localhost' ni '127.0.0.1')
 firstName <br> <i> String </i> | Nombre del tarjetahabiente
 fLastname <br> <i> String </i> | Apellido paterno del tarjetahabiente  
 sLastname <br> <i> String </i> | Apellido materno del tarjetahabiente
-rut <br> <i> String </i> | Rut del tarjetahabiente
+rut <br> <i> String </i> | Rut del tarjetahabiente (solo rut válidos o '11111111-1' para pruebas)
 serviceId <br> <i> String </i> | ID del servicio del tarjetahabiente  
-finalUrl <br> <i> String </i> | Url final de la inscripción
+finalUrl <br> <i> String </i> | Url final de la inscripción (no permite 'localhost' ni '127.0.0.1')
 maxAmount <br> <i> String </i> | Monto máximo del PAT a inscribir  
 phoneNumber <br> <i> String </i> | Teléfono fijo del tarjetahabiente
 mobileNumber <br> <i> String </i> | Teléfono celular del tarjetahabiente
