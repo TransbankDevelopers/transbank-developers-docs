@@ -185,7 +185,7 @@ Al realizar la autorización de una transacción, el comercio recibe una respues
 El comercio **no** debe validar este campo porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo, que no están necesariamente documentados. 
 (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)  
 
-Código | Descripción
+Código de respuesta | Descripción
 ------   | -----------
 TSY | Autenticación Exitosa
 TSN | Autenticación Rechazada
@@ -200,7 +200,7 @@ ENA | Emisor no adherido
 
 Para venta extranjera, estos son algunos de los códigos:
 
-Código | Descripción
+Código de respuesta | Descripción
 ------   | -----------
 TSYS | Autenticación exitosa Sin fricción. Resultado autenticación: Autenticación Existosa
 TSAS | (Intento, tarjeta no enrolada / emisor no disponible. Resultado autenticación: Autenticación Exitosa)
