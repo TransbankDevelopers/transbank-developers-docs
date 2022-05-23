@@ -187,7 +187,6 @@ El comercio **no** debe validar este campo porque constantemente se agregan nuev
 
 Código | Descripción
 ------   | -----------
-
 TSY | Autenticación Exitosa
 TSN | Autenticación Rechazada
 NP | No Participa, sin autenticación
