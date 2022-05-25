@@ -34,7 +34,6 @@ Puedes encontrar el repositorio Open Source de este plugin [acá](https://github
 Debes tener instalado previamente [Magento2](https://magento.com/).
 Asegúrate de tener habilitados los siguientes módulos / extensiones para PHP:
 
-* Soap
 * OpenSSL 1.0.1 o superior
 * SimpleXML
 * DOM 2.7.8 o superior

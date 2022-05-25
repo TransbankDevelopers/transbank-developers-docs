@@ -8,7 +8,7 @@
     <h4>Compatibilidad</h4>
     <ul>
       <li>Prestashop >= 1.6</li>
-      <li>PHP >= 5.6</li>
+      <li>PHP >= 7.0</li>
     </ul>
     <h4>Recuerda</h4>
     <ol>
@@ -44,7 +44,7 @@ Estás viendo la nueva documentación REST de este plugin. Si aún estás usando
 Debes tener instalado previamente [Prestashop](https://prestashop.com/).
 Asegúrate de tener habilitados los siguientes módulos / extensiones para PHP:
 
-* PHP 5.6 o superior
+* PHP 7.0 o superior
 
 Al instalar el plugin, podrás revisar si todas estos requisitos se cumplen, a través de la pantalla de diagnóstico que se incluye.
 

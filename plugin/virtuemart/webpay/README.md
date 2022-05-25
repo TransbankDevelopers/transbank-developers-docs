@@ -33,7 +33,6 @@ Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente e
 Debes tener instalado previamente [Virtuemart](https://virtuemart.net/).
 Asegúrate de tener habilitados los siguientes módulos / extensiones para PHP:
 
-* Soap
 * OpenSSL 1.0.1 o superior
 * SimpleXML
 * DOM 2.7.8 o superior
