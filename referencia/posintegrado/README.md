@@ -291,7 +291,7 @@ El resultado de la venta se entrega en la forma de un objeto `SaleResponse` en .
 ```
 
 <aside class="warning">
-El SDK Java y C no soportan el envío de mensajes intermedios. Por esta razón el 3º parámetro de la función en C es siempre falso.
+El SDK de C no soporta el envío de mensajes intermedios. Por esta razón el 3º parámetro de la función en C es siempre falso.
 </aside>
 
 <img class="td_img-night" src="/images/referencia/posintegrado/diagrama-venta.png" alt="Diagrama de Secuencia Venta">
