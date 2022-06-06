@@ -216,7 +216,7 @@ Este comando es enviado por la caja para solicitar la ejecución de una venta. L
 * `Enviar Mensaje`: Este parámetro indica al POS si debe enviar mensajes intermedios a la caja mientras se realiza el proceso de venta.
 
 <aside class="warning">
-El SDK Java y C no soportan el envío de mensajes intermedios. Por esta razón el parámetro `Enviar Mensaje` en `C` será siempre falso.
+El SDK de C no soporta el envío de mensajes intermedios. Por esta razón el parámetro `Enviar Mensaje` en `C` será siempre falso.
 </aside>
   
 * Los mensajes intermedios que envía el POS y que deben ser mostrados por la Caja, deben corresponder según los siguientes códigos:
@@ -265,7 +265,7 @@ POS.doSale(this.total, "ticket1").then((saleDetails) => {
 });
 ```
 
-El resultado de la venta se entrega en la forma de un objeto `SaleResponse` en .NET y Java, o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException` en .NET, o `TransbankException` en Java.
+El resultado de la venta se entrega en la forma de un objeto `SaleResponse` en .NET y Java, o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException` en .NET y en Java.
 
 ```json
 {
@@ -428,7 +428,7 @@ POS.doMulticodeSale(this.total, "ticket12", "597029414301", (data) => {
                 });
 ```
 
-El resultado de la venta se entrega en la forma de un objeto `MultiCodeSaleResponse` en .NET. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankMultiCodeSaleException`.
+El resultado de la venta se entrega en la forma de un objeto `MultiCodeSaleResponse` en .NET y en Java. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankMultiCodeSaleException`.
 
 ```json
 {
@@ -576,7 +576,7 @@ POS.getLastSale().then((response) => {
 })
 ```
 
-El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `LastSaleResponse` en .NET, `SaleResponse` en Java, o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLastSaleException`.
+El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `LastSaleResponse` en .NET y en Java, o un `char*` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLastSaleException`.
 
 ```json
 {
@@ -1031,7 +1031,7 @@ import POS from "transbank-pos-sdk-web";
 POS.getTotals().then(response => console.log(response));
 ```
 
-El resultado de la transacción entrega en la forma de un objeto `TotalsResponse` en .NET o Java, o una estructura `TotalsCResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankTotalsException` en .NET o `TransbankException` en Java.
+El resultado de la transacción entrega en la forma de un objeto `TotalsResponse` en .NET o Java, o una estructura `TotalsCResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankTotalsException` en .NET y en Java.
 
 ```json
 {
@@ -1116,7 +1116,7 @@ boolean printOnPOS = false;
 List<DetailResponse> response = pos.details(printOnPOS);
 ```
 
-El resultado de la transacción entrega una lista de objetos  `DetailResponse` en .NET y Java, o un `char *` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSalesDetailException` o `TransbankException` en Java.
+El resultado de la transacción entrega una lista de objetos  `DetailResponse` en .NET y Java, o un `char *` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSalesDetailException` en .NET y Java.
 
 ```json
 [
@@ -1419,7 +1419,7 @@ let printOnPOS = false;
 POS.loadKeys();
 ```
 
-El resultado de la carga de llaves se entrega en la forma de un objeto `LoadKeysResponse` en .NET, o `KeysResponse` en Java, o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankLoadKeysException`.
+El resultado de la carga de llaves se entrega en la forma de un objeto `LoadKeysResponse` en .NET y en Java, o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al momento de ejecutar la acción en el POS, se lanzará una excepción del tipo `TransbankLoadKeysException`.
 
 ```json
 {
