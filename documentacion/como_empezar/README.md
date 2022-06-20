@@ -239,6 +239,8 @@ Descargar el formulario de envidencias:
 * Para integraciones Transacción Completa: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-rest.docx)
 * Para integraciones Patpass Comercio: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-patpass-comercio.docx)
 
+Para ambos procesos de validación (formulario online o envío de documentación) debes contar con el logo de tu tienda (GIF o PNG 130x59 px). 
+
 Soporte validará que los casos de prueba sean consistentes con los registrados
 en los sistemas de Webpay y, de estar todo correcto, se le notificará al
 comercio la conformidad para pasar a producción, recibiendo las instrucciones
