@@ -663,6 +663,9 @@ ejemplos se efectuarán con el teclado Verifone UX100, el lector de tarjeta Veri
 lector de tarjetas Contactless Verifone UX400 (pago sin contacto)), permitiendo realizar
 transacciones bancarias de Crédito o Débito (redcompra)_
 
+* **Planimetría UX100/300/400** | [UX100](/files/Planimetria-UX-100.pdf), [UX300](/files/Planimetria-UX-300.pdf), [UX400](/files/Planimetria-UX-400.pdf)
+_Estos documentos corresponden a los planos con el detalle de las medidas para los 3 dispositivos que componen el POS Autoservicio._
+
 <div class="container slate">
   <div class='slate-after-footer'>
     <div class='row d-flex align-items-stretch'>
