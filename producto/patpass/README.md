@@ -10,8 +10,6 @@ PatPass se relaciona con los comercios y emisores mediante las siguientes plataf
 
 * **PatPass Emisor** es la plataforma que le permite al tarjetahabiente gestionar los pagos automáticos existentes en su tarjeta desde el sitio web de su banco emisor.
 
-De manera complementaria a esas plataformas, **PatPass by Webpay** permite a los comercios disponibilizar las inscripciones de clientes de manera directa al tarjetahabiente, aprovechando la infraestructura y seguridad ofrecida por la pasarela Webpay.
-
 ## PatPass by Webpay {data-submenuhidden=true}
 
 <div class="pos-title-nav">
