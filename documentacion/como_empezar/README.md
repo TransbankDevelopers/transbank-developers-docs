@@ -301,8 +301,7 @@ Al guardar, el plugin funcionará inmediatamente en ambiente de producción y po
 ### B) Utilizando los SDK
 
 Si ya tienes tu código de comercio de producción y llave secreta, ahora solo debes configurar tu proyecto para que use
-el ambiente de producción, proporcionándole tus credenciales. Te explicamos como hacerlo en los diferentes SDK realizando  
-los siguientes pasos:  
+el ambiente de producción, proporcionándole tus credenciales. Te explicamos como hacerlo en los diferentes SDK realizando los siguientes pasos:  
 
 Definir que se usará el ambiente de producción y pasar el Api Key (Código de comercio) y el Api Key Secret (Llave secreta)
 

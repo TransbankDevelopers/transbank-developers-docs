@@ -43,13 +43,7 @@ inscripción.
 5. Webpay presenta el formulario de inscripción, este es similar al formulario
   de pago actual de Webpay Plus, para que el cliente ingrese los datos de su
   tarjeta. El tiempo en el cual permanece el formulario de Webpay en espera para
-   incluir los datos de la tarjeta es de 5 minutos, en caso extender dicho plazo
-   y no haber terminado la transacción, esta será abortada automáticamente.
-   
-   <aside class="warning">
-   En caso de que se cumpla el tiempo máximo para completar el formulario o el tarjetahabiente presione el botón para anular la inscripción, 
-   el comercio recibirá las variables TBK_ID_SESSION y TBK_ORDEN_COMPRA.
-   </aside>
+   incluir los datos de la tarjeta es de 5 minutos (10 minutos en el ambiente de integración), en caso de extender dicho plazo y no haber terminado la transacción, esta será abortada automáticamente.
 6. El cliente será autenticado por su banco emisor, de forma similar al flujo
   normal de pago. En este punto se realiza una transacción de $50 pesos, la cual
   no se captura (no se verá reflejada en su estado de cuenta).
@@ -59,6 +53,18 @@ inscripción.
   obtener el resultado de la inscripción y el identificador de usuario (`tbkUser`), que
   debe utilizar en el futuro para realizar los pagos.
 9. El comercio presenta al cliente el resultado de la inscripción.
+
+## Resumen de flujos
+
+Para resumir los flujos que puedan existir en la inscripción y las distintas respuestas que se puede recibir en cada uno, puedes guiarte por el siguiente detalle:
+
+1. **Flujo normal**: Cuando el usuario finaliza la transacción (tanto si es un rechazo o una aprobación) llegará solamente `TBK_TOKEN` como retorno a la url del comercio. Esta redirección es por el método GET si utilizas la versión del API 1.1 o superior, para versiones anteriores el retorno es por 'POST'.
+2. **Timeout**: Cuando el usuario permanece por más de 5 minutos en el formulario de Transbank (o 10 minutos en el caso del ambiente de integración), llegará solamente `TBK_TOKEN` como parámetro de retorno a la url del comercio. Esta redirección se realizará con el método GET para versiones de API 1.1 o superiores, para versiones anteriores será por POST.
+3. **Pago abortado (con botón anular compra en el formulario de Webpay)**: Llegará `TBK_TOKEN`, `TBK_ORDEN_COMPRA` y `TBK_ID_SESION`. El retorno a la url del comercio dependerá de la versión de API y el entorno:
+    - Si operas en producción, el método de retorno utilizado en API 1.1 o superior será GET, para versiones anteriores será POST
+    - Para el ambiente de integración, si usas la versión 1.1 del API el retorno es por GET, para los otros casos se utiliza POST.
+
+Recomendamos preparar las integraciones para recibir respuestas por POST y GET con el fin de evitar confusión por la diferencia en los ambientes
 
 ## Autorización (proceso de pago)
 
