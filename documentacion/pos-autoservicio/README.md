@@ -55,7 +55,7 @@ El POS autoservicio cuenta con un puerto LAN, serial y USB para realizar la cone
 
 Con el objetivo de facilitar la integración a los equipos POS Autoservicio, se han creado algunos SDKs para diferentes lenguajes de programación, utilizando licencias Open Source, para que puedan modificar, mejorar o añadir alguna corrección en caso de ser necesario. También pueden reportar incidencias en los respectivos repositorios o indicarlas en la comunidad de Transbank Developers en [Slack](transbankdevelopers.slack.com).
 
-Por el momento, hay un SDK para [.NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet) y estamos trabajando para añadir otros lenguajes a futuro.
+Por el momento, hay SDKs para [.NET](https://github.com/TransbankDevelopers/transbank-pos-sdk-dotnet), [Java](https://github.com/TransbankDevelopers/transbank-pos-sdk-java), [Node.js](https://github.com/TransbankDevelopers/transbank-pos-sdk-nodejs) y estamos trabajando para añadir otros lenguajes a futuro.
 
 ### SDK .NET
 
@@ -64,6 +64,13 @@ Para .NET lo puedes encontrar en [NuGet.org](https://www.nuget.org/packages/Tran
 ```bash
 PM> Install-Package TransbankPosSDK
 ```
+### SDK Node.js
+
+Para utilizar este SDK en tu proyecto, solo debes incluirlo utilizando npm/yarn.
+```bash
+npm install transbank-pos-sdk
+```
+
 ### Integración Nativa
 
 Es recomendable utilizar un SDK disponible a la hora de desarrollar la integración, lo que ahorra tiempo y te despreocupa de desarrollar las comunicaciones con el equipo POS Autoservicio, facilitando bastante la integración, pero en el caso que prefieras realizar la integración por tu cuenta y utilizar los comandos nativos, puedes revisarlos en el manual de integración disponible en la sección de [documentación](/documentacion/pos-autoservicio#documentacion-disponible).
@@ -91,6 +98,10 @@ import cl.transbank.pos.exceptions.autoservicio.*;
 import cl.transbank.pos.responses.common.*;
 import cl.transbank.pos.responses.autoservicio.*;
 ```
+```js
+const { POSAutoservicio } = require('transbank-pos-sdk');
+const pos = new POSAutoservicio()
+```
 
 ### Listar puertos disponibles
 
@@ -111,6 +122,13 @@ import cl.transbank.pos.POSAutoservicio;
 
 POSAutoservicio pos = new POSAutoservicio();
 List<String> ports = pos.listPorts();
+```
+```js
+pos.listPorts().then( (ports) => {
+    console.log(ports);
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
 ```
 
 ### Abrir un puerto Serial
@@ -137,6 +155,15 @@ String port = "COM4";
 int baudRate = 19200;
 pos.openPort(port, baudRate);
 ```
+```js
+let portName = "/dev/tty.usbserial-1410"; //Ejemplo en MAC
+let portName = 'COM4'; //Ejempo en caso de windows
+pos.connect(portName).then( (response) => {
+    console.log('Conectado correctamente');
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', {err});
+});
+```
 
 ### Cerrar un puerto Serial
 
@@ -155,6 +182,13 @@ import cl.transbank.pos.POSAutoservicio;
 
 POSAutoservicio pos = new POSAutoservicio();
 pos.closePort();
+```
+```js
+pos.disconnect().then( (response) => {
+    console.log('Puerto desconectado correctamente');
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
 ```
 
 ## Transacciones
@@ -205,6 +239,25 @@ private void onIntermediateMessageReceived(IntermediateResponse response) {
   //...
 }
 //...
+```
+```js
+// Venta simple sin estados intermedios
+pos.sale(1500, '12423').then( (response) => {
+    console.log('sale finalizado. Respuesta: ', response);
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+}));
+
+// Venta con estados intermedios
+let callback = function (data) {
+    console.log('Mensaje intermedio recibido:  ', data)
+}
+pos.sale(1500, '12423', true, true, callback)
+    .then( (response) => {
+        console.log('sale finalizado. Respuesta: ', response);
+    }).catch( (err) => {
+        console.log('Ocurrió un error inesperado', err);
+});
 ```
 
 El resultado de la venta se entrega en la forma de un objeto `SaleResponse>`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSaleException` en .NET.
@@ -363,6 +416,13 @@ import cl.transbank.pos.responses.autoservicio.*;
 POSAutoservicio pos = new POSAutoservicio();
 LastSaleResponse lastSaleResponse = pos.lastSale();
 ```
+```js
+pos.getLastSale().then( (response) => {
+    console.log('getLastSale ejecutado. Respuesta: ', response);
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
+```
 
 El resultado de la transacción última venta devuelve los mismos datos que una venta normal y se entrega en forma de un objeto `LastSaleResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLastSaleException` en .NET.
 
@@ -422,6 +482,13 @@ import cl.transbank.pos.responses.common.*;
 POSAutoservicio pos = new POSAutoservicio();
 RefundResponse response = pos.refund();
 ```
+```js
+pos.refund('102').then( (response) => {
+    console.log('refund ejecutado. Respuesta: ', response);
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
+```
 
 Como respuesta el **POS** enviará un código de aprobación, acompañado de un código de autorización. En caso de rechazo el código de error está definido en la tabla de respuestas del manual de integración POS Autoservicio. <!-- [Ver tabla de respuestas](/referencia/pos-autoservicio#tabla-de-respuestas) -->
 
@@ -465,6 +532,13 @@ import cl.transbank.pos.responses.autoservicio.*;
 
 POSAutoservicio pos = new POSAutoservicio();
 CloseResponse response = pos.close()
+```
+```js
+pos.closeDay().then( (response) => {
+    console.log('closeDay ejecutado. Respuesta: ', response);
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
 ```
 
 El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException` en .NET.
@@ -516,6 +590,13 @@ import cl.transbank.pos.responses.common.*;
 POSAutoservicio pos = new POSAutoservicio();
 LoadKeysResponse response = pos.loadKeys();
 ```
+```js
+pos.loadKeys().then( (response) => {
+    console.log('loadKeys ejecutado. Respuesta: ', response);
+}).catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
+```
 
 El resultado de la carga de llaves se entrega en la forma de un objeto `LoadKeysResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankLoadKeysException` en .NET.
 
@@ -551,6 +632,14 @@ import cl.transbank.pos.POSAutoservicio;
 POSAutoservicio pos = new POSAutoservicio();
 boolean pollResult = pos.poll();
 ```
+```js
+pos.poll().then((res) => {
+    console.log('Resultado ejecucion:', res)
+})
+.catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
+```
 
 ### Transacción de Inicialización
 
@@ -574,6 +663,14 @@ import cl.transbank.pos.POSAutoservicio;
 
 POSAutoservicio pos = new POSAutoservicio();
 boolean pollResult = pos.initialization();
+```
+```js
+pos.initialization().then((res) => {
+    console.log('Resultado ejecucion:', res)
+})
+.catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
 ```
 
 <aside class="notice">
@@ -600,6 +697,14 @@ import cl.transbank.pos.responses.autoservicio.*;
 
 POSAutoservicio pos = new POSAutoservicio();
 InitializationResponse response = pos.initializationResponse();
+```
+```js
+pos.initializationResponse().then((res) => {
+    console.log('Resultado ejecucion:', res)
+})
+.catch( (err) => {
+    console.log('Ocurrió un error inesperado', err);
+});
 ```
 
 El resultado de la inicialización se entrega en la forma de un objeto `InitializationResponse`. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankInitializationResponseException` en .NET.
