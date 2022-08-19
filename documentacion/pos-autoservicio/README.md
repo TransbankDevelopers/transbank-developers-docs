@@ -98,7 +98,8 @@ import cl.transbank.pos.exceptions.autoservicio.*;
 import cl.transbank.pos.responses.common.*;
 import cl.transbank.pos.responses.autoservicio.*;
 ```
-```js
+
+```javascript
 const { POSAutoservicio } = require('transbank-pos-sdk');
 const pos = new POSAutoservicio()
 ```
@@ -123,7 +124,8 @@ import cl.transbank.pos.POSAutoservicio;
 POSAutoservicio pos = new POSAutoservicio();
 List<String> ports = pos.listPorts();
 ```
-```js
+
+```javascript
 pos.listPorts().then( (ports) => {
     console.log(ports);
 }).catch( (err) => {
@@ -155,7 +157,8 @@ String port = "COM4";
 int baudRate = 19200;
 pos.openPort(port, baudRate);
 ```
-```js
+
+```javascript
 let portName = "/dev/tty.usbserial-1410"; //Ejemplo en MAC
 let portName = 'COM4'; //Ejempo en caso de windows
 pos.connect(portName).then( (response) => {
@@ -183,7 +186,8 @@ import cl.transbank.pos.POSAutoservicio;
 POSAutoservicio pos = new POSAutoservicio();
 pos.closePort();
 ```
-```js
+
+```javascript
 pos.disconnect().then( (response) => {
     console.log('Puerto desconectado correctamente');
 }).catch( (err) => {
@@ -240,7 +244,8 @@ private void onIntermediateMessageReceived(IntermediateResponse response) {
 }
 //...
 ```
-```js
+
+```javascript
 // Venta simple sin estados intermedios
 pos.sale(1500, '12423').then( (response) => {
     console.log('sale finalizado. Respuesta: ', response);
@@ -416,7 +421,8 @@ import cl.transbank.pos.responses.autoservicio.*;
 POSAutoservicio pos = new POSAutoservicio();
 LastSaleResponse lastSaleResponse = pos.lastSale();
 ```
-```js
+
+```javascript
 pos.getLastSale().then( (response) => {
     console.log('getLastSale ejecutado. Respuesta: ', response);
 }).catch( (err) => {
@@ -482,7 +488,8 @@ import cl.transbank.pos.responses.common.*;
 POSAutoservicio pos = new POSAutoservicio();
 RefundResponse response = pos.refund();
 ```
-```js
+
+```javascript
 pos.refund('102').then( (response) => {
     console.log('refund ejecutado. Respuesta: ', response);
 }).catch( (err) => {
@@ -533,7 +540,8 @@ import cl.transbank.pos.responses.autoservicio.*;
 POSAutoservicio pos = new POSAutoservicio();
 CloseResponse response = pos.close()
 ```
-```js
+
+```javascript
 pos.closeDay().then( (response) => {
     console.log('closeDay ejecutado. Respuesta: ', response);
 }).catch( (err) => {
@@ -590,7 +598,8 @@ import cl.transbank.pos.responses.common.*;
 POSAutoservicio pos = new POSAutoservicio();
 LoadKeysResponse response = pos.loadKeys();
 ```
-```js
+
+```javascript
 pos.loadKeys().then( (response) => {
     console.log('loadKeys ejecutado. Respuesta: ', response);
 }).catch( (err) => {
@@ -632,7 +641,8 @@ import cl.transbank.pos.POSAutoservicio;
 POSAutoservicio pos = new POSAutoservicio();
 boolean pollResult = pos.poll();
 ```
-```js
+
+```javascript
 pos.poll().then((res) => {
     console.log('Resultado ejecucion:', res)
 })
@@ -664,7 +674,8 @@ import cl.transbank.pos.POSAutoservicio;
 POSAutoservicio pos = new POSAutoservicio();
 boolean pollResult = pos.initialization();
 ```
-```js
+
+```javascript
 pos.initialization().then((res) => {
     console.log('Resultado ejecucion:', res)
 })
@@ -698,7 +709,8 @@ import cl.transbank.pos.responses.autoservicio.*;
 POSAutoservicio pos = new POSAutoservicio();
 InitializationResponse response = pos.initializationResponse();
 ```
-```js
+
+```javascript
 pos.initializationResponse().then((res) => {
     console.log('Resultado ejecucion:', res)
 })
