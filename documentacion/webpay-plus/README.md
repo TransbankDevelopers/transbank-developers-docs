@@ -50,9 +50,7 @@ Desde el punto de vista técnico, la secuencia es la siguiente:
    y luego la autorización de la transacción).
 9. Una vez resuelta la autorización, Webpay retorna el control al comercio,
    realizando un redireccionamiento HTTPS hacia la página de transición
-   del comercio, en donde se envía por método POST el token de la transacción  
-   en la variable `token_ws` (en la versión 1.1 y superior del API la redirección
-   es por GET). El comercio debe implementar la recepción de esta variable.
+   del comercio, enviando el token de la transacción en la variable `token_ws`. En la versión 1.1 y superiores de la API, esta redirección es por GET. Para versiones anteriores se envía por método POST. El comercio debe implementar la recepción de esta variable.
 10. El navegador Web del tarjetahabiente realiza una petición HTTPS al
     sitio del comercio, en base a la redirección generada por Webpay en el
     punto 9.
@@ -96,7 +94,7 @@ el flujo cambia y los pasos son los siguientes:
 7. Tarjetahabiente hace clic en “anular”, en formulario Webpay.
 8. Webpay retorna el control al comercio, realizando un redireccionamiento
    HTTPS hacia la página de **retorno del comercio**, en donde se envía por
-   método POST el token de la transacción en la variable `TBK_TOKEN` además de las variables `TBK_ORDEN_COMPRA` y `TBK_ID_SESION`.
+   método GET el token de la transacción en la variable `TBK_TOKEN` además de las variables `TBK_ORDEN_COMPRA` y `TBK_ID_SESION` (para el entorno de integración, este redireccionamiento es realizado con el método POST).
    
     <aside class="warning">
     Nota que el nombre de las variables recibidas es diferente. En lugar de `token_ws` acá el token viene en la variable `TBK_TOKEN`.
@@ -107,7 +105,7 @@ confirmar la transacción).
 10. El comercio debe informar al tarjetahabiente que su pago no se completó.
 
 ### Resumen de flujos
-A la URL de `return_url` siempre se llega por POST, aunque desde la versión 1.1 del API, en adelante, la redirección es por GET.
+A la URL de `return_url` siempre se llega por POST, aunque desde la versión 1.1 del API, en adelante, la redirección es por GET (solo en el caso de **pago abortado** en el ambiente de **integración**, el retorno se mantiene por POST).
 Para resumir los diferentes flujos que pueden existir, y las diferentes respuestas que se pueden esperar:
 Hay 4 diferentes flujos, donde cada uno llega con datos distintos:
 
@@ -338,14 +336,14 @@ tarjetas de prueba en la sección de Ambientes</a>.
 </div>
 
 Una vez que el tarjetahabiente ha pagado, Webpay Plus retornará
-el control vía `POST` a la `URL` que indicaste en el `return_url`.
+el control vía `POST` a la `URL` que indicaste en el `return_url` (si la versión de la API es 1.1 o superior, este retorno es por `GET`).
 Recibirás también el parámetro `token_ws` que te permitirá conocer el resultado de la transacción.
 
 En caso de que el tarjetahabiente haya declinado, o haya ocurrido un error, recibirás la variable `TBK_TOKEN`
-además de las variables `TBK_ORDEN_COMPRA` y `TBK_ID_SESION`.
+además de las variables `TBK_ORDEN_COMPRA` y `TBK_ID_SESION`. Para este caso, el retorno en el ambiente de integración es vía `POST`, para producción es por `GET`.
 
 <aside class="notice">
-Para verificar si una transacción fue aprobada, debes confirmar el que código de respuesta `response_code` sea 
+Para verificar si una transacción fue aprobada, debes confirmar que el código de respuesta `response_code` sea 
 exactamente `0` y que el estado `status` sea exactamente `AUTHORIZED`.
 </aside>
 
@@ -2129,7 +2127,7 @@ Si deseas revisar la documentación anterior (SOAP), puedes revisarla [acá](/do
     <div class='row d-flex align-items-stretch'>
       <div class='col-12 col-lg-6'>
         <h3 class='toc-ignore fo-size-22 text-center'>¿Tienes alguna duda de integración?</h3>
-        <a href='https://join-transbankdevelopers-slack.herokuapp.com/' target='_blank'>
+        <a href='https://transbank.continuumhq.dev/slack_community' target='_blank'>
           <div class='td_block_gray'>
             <img src="https://p9.zdassets.com/hc/theme_assets/138842/200037786/logo.png" alt="" >
             <div class='td_pa-txt'>

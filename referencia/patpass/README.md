@@ -392,7 +392,7 @@ cardDetails.cardNumber  <br> <i> xs:string </i> | 4 últimos números de la t
 cardDetails.cardExpirationDate  <br> <i> xs:string </i> |(Opcional) Fecha de expiración de la tarjeta de crédito del tarjetahabiente. Formato YYMM Solo para comercios autorizados por Transbank. Largo máximo: 4
 accoutingDate  <br> <i> xs:string </i> | Fecha de la autorización. Largo: 4, formato MMDD
 transactionDate  <br> <i> xs:string </i> | Fecha y hora de la autorización. Largo: 6, formato: MMDDHHmm
-VCI  <br> <i> xs:string </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), CNP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure), A (Intento de autenticación). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3
+VCI  <br> <i> xs:string </i> | El comercio **no** debe validar este campo porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo, que no están necesariamente documentados.<br>Puedes revisar más detalles en el siguiente [link](/producto/webpay#vci)
 urlRedirection  <br> <i> xs:string </i> | URL de redirección para visualización de voucher. Largo máximo: 256
 detailsOutput  <br> <i> wsTransactionDetailOutput </i> | Lista con resultado de cada una de las `transactionDetails` enviados en `initTransaction()`. Para PatPass by Webpay tiene máximo un elemento.
 detailsOutput[0].authorizationCode  <br> <i> xs:string </i> | Código de autorización de la transacción Largo máximo: 6

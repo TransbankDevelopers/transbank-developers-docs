@@ -186,7 +186,11 @@ transbank.webpay.webpay_plus.default_integration_type = IntegrationType.TEST
 ```
 
 ```javascript
-const Environment = require('transbank-sdk').Environment;
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 3.x del SDK
 const tx = new WebpayPlus.Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, Environment.Integration));
@@ -284,7 +288,11 @@ resp = transbank.webpay.webpay_plus.create(buy_order, session_id, amount, return
 ```
 
 ```javascript
-const WebpayPlus = require('transbank-sdk').WebpayPlus;
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 // Versión 3.x del SDK
 const tx = new WebpayPlus.Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.create(buyOrder, sessionId, amount, returnUrl);
@@ -425,7 +433,11 @@ resp = transbank.webpay.webpay_plus.transaction.commit(token)
 ```
 
 ```javascript
-const WebpayPlus = require('transbank-sdk').WebpayPlus;
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 // Versión 3.x del SDK
 const tx = new WebpayPlus.Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.commit(token);
@@ -592,7 +604,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-vci  <br> <i> String </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure), ACS2 (Autenticación fallida extranjera). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)
+vci  <br> <i> String </i> | El comercio **no** debe validar este campo porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo, que no están necesariamente documentados.<br>Puedes revisar más detalles en el siguiente [link](/producto/webpay#vci)
 amount  <br> <i> Decimal </i> | Formato número entero para transacciones en peso y decimal para transacciones en dólares. Largo máximo: 17
 status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 buy_order  <br> <i> String </i> | Orden de compra de la tienda indicado en `Transaction.create()`. Largo máximo: 26
@@ -603,7 +615,7 @@ accounting_date  <br> <i> String </i> | Fecha de la autorización. Largo: 4, fo
 transaction_date  <br> <i> String </i> | Fecha y hora de la autorización. Largo: 24, formato: ISO 8601 (Ej: yyyy-mm-ddTHH:mm:ss.xxxZ)
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
 payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
-response_code  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> Puedes revisar los códigos de respuesta de rechazo en el siguiente [link](/producto/webpay#codigos-de-respuesta-de-autorizacion)<br>
+response_code  <br> <i> Number </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> Puedes revisar los códigos de respuesta de rechazo en el siguiente [link](/producto/webpay#codigos-de-respuesta-de-autorizacion)<br>
 installments_amount <br> <i> Number </i> | Monto de las cuotas. Largo máximo: 17
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 balance  <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
@@ -665,7 +677,12 @@ resp = transbank.webpay.webpay_plus.transaction.status(token)
 ```
 
 ```javascript
-const WebpayPlus = require('transbank-sdk').WebpayPlus;
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+
 // Versión 3.x del SDK
 const tx = new WebpayPlus.Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.status(token);
@@ -832,7 +849,7 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-vci  <br> <i> String </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure), ACS2 (Autenticación fallida extranjera). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)
+vci  <br> <i> String </i> | El comercio **no** debe validar este campo porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo, que no están necesariamente documentados.<br>Puedes revisar más detalles en el siguiente [link](/producto/webpay#vci)
 amount  <br> <i> Formato número entero para transacciones en peso y decimal para transacciones en dólares. </i> | Monto de la transacción. Largo máximo: 17
 status  <br> <i> String </i> | Estado de la transacción (INITIALIZED, AUTHORIZED, REVERSED, FAILED, NULLIFIED, PARTIALLY_NULLIFIED, CAPTURED). Largo máximo: 64
 buy_order  <br> <i> String </i> | Orden de compra de la tienda indicado en `Transaction.create()`. Largo máximo: 26
@@ -843,7 +860,7 @@ accounting_date  <br> <i> String </i> | Fecha de la autorización. Largo: 4, fo
 transaction_date  <br> <i> String </i> | Fecha y hora de la autorización. Largo: 24, formato: ISO 8601 (Ej: yyyy-mm-ddTHH:mm:ss.xxxZ)
 authorization_code  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
 payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
-response_code  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> Puedes revisar los códigos de respuesta de rechazo en el siguiente [link](/producto/webpay#codigos-de-respuesta-de-autorizacion)<br>
+response_code  <br> <i> Number </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> Puedes revisar los códigos de respuesta de rechazo en el siguiente [link](/producto/webpay#codigos-de-respuesta-de-autorizacion)<br>
 installments_amount <br> <i> Number </i> | Monto de las cuotas. Largo máximo: 17
 installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 balance  <br> <i> Number </i> | Monto restante para un detalle anulado. Largo máximo: 17
@@ -912,7 +929,13 @@ response = Transbank.webpay.webpay_plus.refund(token, amount)
 ```
 
 ```javascript
-const WebpayPlus = require('transbank-sdk').WebpayPlus;
+
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+
 // Versión 3.x del SDK
 const tx = new WebpayPlus.Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.refund(token, amount);
@@ -1123,6 +1146,11 @@ resp = DeferredTransaction.capture(
 ```
 
 ```javascript
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 3.x del SDK
 const tx = new WebpayPlus.Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
@@ -1378,8 +1406,14 @@ response = MallTransaction.create(
 ```
 
 ```javascript
-const WebpayPlus = require('transbank-sdk').WebpayPlus;
-const TransactionDetail = require('transbank-sdk').TransactionDetail;
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+const TransactionDetail = require('transbank-sdk').TransactionDetail; // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+import { TransactionDetail } from 'transbank-sdk'; // ES6 Modules
+
 
 let details = [
   new TransactionDetail(
@@ -1552,7 +1586,11 @@ response = MallTransaction.commit(token)
 ```
 
 ```javascript
-const WebpayPlus = require('transbank-sdk').WebpayPlus;
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 3.x del SDK
 const tx = new WebpayPlus.MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
@@ -1749,11 +1787,11 @@ card_detail  <br> <i> carddetails </i> | Objeto que representa los datos de la t
 card_detail.card_number  <br> <i> String </i> | 4 últimos números de la tarjeta de crédito del tarjetahabiente.Solo para comercios autorizados por Transbank se envía el número completo. Largo máximo: 16.
 accouting_date  <br> <i> String </i> | Fecha de la autorización. Largo: 4, formato MMDD
 transaction_date  <br> <i> String </i> | Fecha y hora de la autorización. Largo: 24, formato: ISO 8601 (Ej: yyyy-mm-ddTHH:mm:ss.xxxZ)
-vci  <br> <i> String </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure), ACS2 (Autenticación fallida extranjera). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)
+vci  <br> <i> String </i> | El comercio **no** debe validar este campo porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo, que no están necesariamente documentados.<br>Puedes revisar más detalles en el siguiente [link](/producto/webpay#vci)
 details  <br> <i> Array </i> | Lista con resultado de cada una de las transacciones enviados en `Transaction.create()`.
 details [].authorization_code  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
 details [].payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
-details [].response_code  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> Puedes revisar los códigos de respuesta de rechazo en el siguiente [link](/producto/webpay#codigos-de-respuesta-de-autorizacion)<br>
+details [].response_code  <br> <i> Number </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> Puedes revisar los códigos de respuesta de rechazo en el siguiente [link](/producto/webpay#codigos-de-respuesta-de-autorizacion)<br>
 details [].amount  <br> <i> Formato número entero para transacciones en peso y decimal para transacciones en dólares. </i> | Monto de la transacción. Largo máximo: 10
 details [].installments_amount  <br> <i> Number </i> | Monto de cada cuota. Largo máximo: 17
 details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
@@ -1816,7 +1854,11 @@ response = MallTransaction.status(token)
 ```
 
 ```javascript
-const WebpayPlus = require('transbank-sdk').WebpayPlus;
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 // Versión 3.x del SDK
 const tx = new WebpayPlus.MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.status(token);
@@ -2011,11 +2053,11 @@ card_detail  <br> <i> carddetails </i> | Objeto que representa los datos de la t
 card_detail.card_number  <br> <i> String </i> | 4 últimos números de la tarjeta de crédito del tarjetahabiente.Solo para comercios autorizados por Transbank se envía el número completo. Largo máximo: 16.
 accouting_date  <br> <i> String </i> | Fecha de la autorización. Largo: 4, formato MMDD
 transaction_date  <br> <i> String </i> | Fecha y hora de la autorización. Largo: 24, formato: ISO 8601 (Ej: yyyy-mm-ddTHH:mm:ss.xxxZ)
-vci  <br> <i> String </i> | Resultado de la autenticación del tarjetahabiente. Puede tomar el valor TSY (Autenticación exitosa), TSN (Autenticación fallida), TO (Tiempo máximo excedido para autenticación), ABO (Autenticación abortada por tarjetahabiente), U3 (Error interno en la autenticación), NP (No Participa, probablemente por ser una tarjeta extranjera que no participa en el programa 3DSecure), ACS2 (Autenticación fallida extranjera). Puede ser vacío si la transacción no se autenticó. Largo máximo: 3. Este campo es información adicional suplementaria al `responseCode` pero el comercio **no** debe validar este campo. Porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo que no están necesariamente documentados. (En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)
+vci  <br> <i> String </i> | El comercio **no** debe validar este campo porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo, que no están necesariamente documentados.<br>Puedes revisar más detalles en el siguiente [link](/producto/webpay#vci)
 details  <br> <i> Array </i> | Lista con resultado de cada una de las transacciones enviados en `Transaction.create()`.
 details [].authorization_code  <br> <i> String </i> | Código de autorización de la transacción Largo máximo: 6
 details [].payment_type_code   <br> <i> String </i> | [Tipo de pago](/producto/webpay#tipos-de-pago) de la transacción.<br> VD = Venta Débito.<br> VN = Venta Normal. <br> VC = Venta en cuotas. <br> SI = 3 cuotas sin interés. <br> S2 = 2 cuotas sin interés. <br> NC = N Cuotas sin interés <br> VP = Venta Prepago.
-details [].response_code  <br> <i> String </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> Puedes revisar los códigos de respuesta de rechazo en el siguiente [link](/producto/webpay#codigos-de-respuesta-de-autorizacion)<br>
+details [].response_code  <br> <i> Number </i> | Código de respuesta de la autorización. Valores posibles: <br> 0 = Transacción aprobada <br> Puedes revisar los códigos de respuesta de rechazo en el siguiente [link](/producto/webpay#codigos-de-respuesta-de-autorizacion)<br>
 details [].amount  <br> <i> Formato número entero para transacciones en peso y decimal para transacciones en dólares. </i> | Monto de la transacción. Largo máximo: 10
 details [].installments_number  <br> <i> Number </i> | Cantidad de cuotas. Largo máximo: 2
 details [].installments_amount  <br> <i> Number </i> | Monto de cada cuota. Largo máximo: 17
@@ -2077,7 +2119,11 @@ response = Transaction.refund(token, buy_order, commerce_code, amount)
 ```
 
 ```javascript
-const WebpayPlus = require('transbank-sdk').WebpayPlus;
+const WebpayPlus = require("transbank-sdk").WebpayPlus; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 // Versión 3.x del SDK
 WebpayPlus.MallTransaction tx = new WebpayPlus.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
 final WebpayPlusTransactionRefundResponse response = tx.refund(token, childBuyOrder, childCommerceCode, amount);

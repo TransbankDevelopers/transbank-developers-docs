@@ -10,8 +10,6 @@ PatPass se relaciona con los comercios y emisores mediante las siguientes plataf
 
 * **PatPass Emisor** es la plataforma que le permite al tarjetahabiente gestionar los pagos automáticos existentes en su tarjeta desde el sitio web de su banco emisor.
 
-De manera complementaria a esas plataformas, **PatPass by Webpay** permite a los comercios disponibilizar las inscripciones de clientes de manera directa al tarjetahabiente, aprovechando la infraestructura y seguridad ofrecida por la pasarela Webpay.
-
 ## PatPass by Webpay {data-submenuhidden=true}
 
 <div class="pos-title-nav">
@@ -111,7 +109,7 @@ Las anulaciones de ventas podrán solicitarse por:
     <div class='row d-flex align-items-stretch'>
       <div class='col-12 col-lg-6'>
         <h3 class='toc-ignore fo-size-22 text-center'>¿Tienes alguna duda de integración?</h3>
-        <a href='https://join-transbankdevelopers-slack.herokuapp.com/' target='_blank'>
+        <a href='https://transbank.continuumhq.dev/slack_community' target='_blank'>
           <div class='td_block_gray'>
             <img src="https://p9.zdassets.com/hc/theme_assets/138842/200037786/logo.png" alt="" >
             <div class='td_pa-txt'>

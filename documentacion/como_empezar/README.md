@@ -236,9 +236,10 @@ Descargar el formulario de envidencias:
 * Para integraciones Webpay que usen un plugin oficial: usa el formulario indicado más arriba. 
 * Para integraciones Webpay Plus, Webpay Plus Mall y OneClick Mall con SDK o intgración directa al API: usa el formulario indicado más arriba. 
 
-* Para integraciones Onepay: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-onepay.docx)
 * Para integraciones Transacción Completa: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-integracion-webpay-rest.docx)
 * Para integraciones Patpass Comercio: [**Descargar**](https://transbankdevelopers.cl/files/evidencia-de-integracion-patpass-comercio.docx)
+
+Para ambos procesos de validación (formulario online o envío de documentación) debes contar con el logo de tu tienda (GIF o PNG 130x59 px). 
 
 Soporte validará que los casos de prueba sean consistentes con los registrados
 en los sistemas de Webpay y, de estar todo correcto, se le notificará al
@@ -300,8 +301,7 @@ Al guardar, el plugin funcionará inmediatamente en ambiente de producción y po
 ### B) Utilizando los SDK
 
 Si ya tienes tu código de comercio de producción y llave secreta, ahora solo debes configurar tu proyecto para que use
-el ambiente de producción, proporcionándole tus credenciales. Te explicamos como hacerlo en los diferentes SDK realizando  
-los siguientes pasos:  
+el ambiente de producción, proporcionándole tus credenciales. Te explicamos como hacerlo en los diferentes SDK realizando los siguientes pasos:  
 
 Definir que se usará el ambiente de producción y pasar el Api Key (Código de comercio) y el Api Key Secret (Llave secreta)
 
@@ -787,7 +787,7 @@ Si deseas revisar la documentación de los productos SOAP,
     <div class='row d-flex align-items-stretch'>
       <div class='col-12 col-lg-6'>
         <h3 class='toc-ignore fo-size-22 text-center'>¿Tienes alguna duda de integración?</h3>
-        <a href='https://join-transbankdevelopers-slack.herokuapp.com/' target='_blank'>
+        <a href='https://transbank.continuumhq.dev/slack_community' target='_blank'>
           <div class='td_block_gray'>
             <img src="https://p9.zdassets.com/hc/theme_assets/138842/200037786/logo.png" alt="" >
             <div class='td_pa-txt'>

@@ -33,7 +33,6 @@ Este plugin oficial ha sido creado para que puedas integrar Webpay fácilmente e
 Debes tener instalado previamente [Virtuemart](https://virtuemart.net/).
 Asegúrate de tener habilitados los siguientes módulos / extensiones para PHP:
 
-* Soap
 * OpenSSL 1.0.1 o superior
 * SimpleXML
 * DOM 2.7.8 o superior
@@ -76,6 +75,6 @@ Al guardar, el plugin funcionará inmediatamente en ambiente de producción y po
 
 ## Problemas, Dudas
 
-Si tienes algún problema, duda o sugerencia, puedes contactarnos en nuestra comunidad de Slack, a la que puedes [unirte acá](https://join-transbankdevelopers-slack.herokuapp.com/)
+Si tienes algún problema, duda o sugerencia, puedes contactarnos en nuestra comunidad de Slack, a la que puedes [unirte acá](https://transbank.continuumhq.dev/slack_community)
 
 Adicionalmente, puedes revisar si más comercios han presentado algun error/dudas similares en los [_issues_ del repositorio github](https://github.com/TransbankDevelopers/transbank-plugin-virtuemart-webpay-rest/issues). Si nadie ha comentado algo similar, puedes [crear un nuevo _issue_](https://github.com/TransbankDevelopers/transbank-plugin-virtuemart-webpay-rest/issues/new) con tu sugerencia, bug, problema, etc.

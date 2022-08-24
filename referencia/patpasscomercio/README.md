@@ -73,33 +73,33 @@ Host: https://pagoautomaticocontarjetasint.transbank.cl/
 ### Credenciales del Comercio
 
 ```java
-// Tbk-Api-Key-Id: 28299257
-// Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
+// Commercecode: 28299257
+// Authorization: cxxXQgGD9vrVe4M41FIt
 ```
 
 ```php
-// Tbk-Api-Key-Id: 28299257
-// Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
+// Commercecode: 28299257
+// Authorization: cxxXQgGD9vrVe4M41FIt
 ```
 
 ```csharp
-// Tbk-Api-Key-Id: 28299257
-// Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
+// Commercecode: 28299257
+// Authorization: cxxXQgGD9vrVe4M41FIt
 ```
 
 ```ruby
-# Tbk-Api-Key-Id: 28299257
-# Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
+# Commercecode: 28299257
+# Authorization: cxxXQgGD9vrVe4M41FIt
 ```
 
 ```python
-# Tbk-Api-Key-Id: 28299257
-# Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
+# Commercecode: 28299257
+# Authorization: cxxXQgGD9vrVe4M41FIt
 ```
 
 ```http
-Tbk-Api-Key-Id: 28299257
-Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
+Commercecode: 28299257
+Authorization: cxxXQgGD9vrVe4M41FIt
 Content-Type: application/json
 ```
 
@@ -304,8 +304,8 @@ resp = Inscription.start(return_url, name, first_last_name, second_last_name, ru
 
 ```http
 POST restpatpass/v1/services/patInscription
-Tbk-Api-Key-Id: 28299257
-Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
+Commercecode: 28299257
+Authorization: cxxXQgGD9vrVe4M41FIt
 Content-Type: application/json
 {
     "url": "http://misitio.cl/finalizar_suscripcion",
@@ -331,13 +331,13 @@ Content-Type: application/json
 
 Nombre  <br> <i> tipo </i> | Descripción
 ------   | -----------
-url <br> <i> String </i> | URL de retorno del comercio
+url <br> <i> String </i> | URL de retorno del comercio (no permite 'localhost' ni '127.0.0.1')
 firstName <br> <i> String </i> | Nombre del tarjetahabiente
 fLastname <br> <i> String </i> | Apellido paterno del tarjetahabiente  
 sLastname <br> <i> String </i> | Apellido materno del tarjetahabiente
-rut <br> <i> String </i> | Rut del tarjetahabiente
+rut <br> <i> String </i> | Rut del tarjetahabiente (solo rut válidos o '11111111-1' para pruebas)
 serviceId <br> <i> String </i> | ID del servicio del tarjetahabiente  
-finalUrl <br> <i> String </i> | Url final de la inscripción
+finalUrl <br> <i> String </i> | Url final de la inscripción (no permite 'localhost' ni '127.0.0.1')
 maxAmount <br> <i> String </i> | Monto máximo del PAT a inscribir  
 phoneNumber <br> <i> String </i> | Teléfono fijo del tarjetahabiente
 mobileNumber <br> <i> String </i> | Teléfono celular del tarjetahabiente
@@ -465,8 +465,8 @@ resp = Inscription.status(token)
 
 ```http
 POST restpatpass/v1/services/status
-Tbk-Api-Key-Id: 28299257
-Tbk-Api-Key-Secret: cxxXQgGD9vrVe4M41FIt
+Commercecode: 28299257
+Authorization: cxxXQgGD9vrVe4M41FIt
 Content-Type: application/json
 {
     "token": "21383fe8ba4c4cdd9e18518daf4e9bcbaffd9e8e3ad4ec36f66ae2b4e80cc4b5"

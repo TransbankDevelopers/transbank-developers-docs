@@ -8,7 +8,7 @@
     <h4>Compatibilidad</h4>
     <ul>
       <li>Prestashop >= 1.6</li>
-      <li>PHP >= 5.6</li>
+      <li>PHP >= 7.0</li>
     </ul>
     <h4>Recuerda</h4>
     <ol>
@@ -44,7 +44,7 @@ Estás viendo la nueva documentación REST de este plugin. Si aún estás usando
 Debes tener instalado previamente [Prestashop](https://prestashop.com/).
 Asegúrate de tener habilitados los siguientes módulos / extensiones para PHP:
 
-* PHP 5.6 o superior
+* PHP 7.0 o superior
 
 Al instalar el plugin, podrás revisar si todas estos requisitos se cumplen, a través de la pantalla de diagnóstico que se incluye.
 
@@ -102,6 +102,6 @@ Al guardar, el plugin funcionará inmediatamente en ambiente de producción y po
 
 ## Problemas, Dudas, Sugerencias
 
-Si tienes algún problema, duda o sugerencia, puedes contactarnos en nuestra comunidad de Slack, a la que puedes [unirte acá](https://join-transbankdevelopers-slack.herokuapp.com/)
+Si tienes algún problema, duda o sugerencia, puedes contactarnos en nuestra comunidad de Slack, a la que puedes [unirte acá](https://transbank.continuumhq.dev/slack_community)
 
 Adicionalmente, puedes revisar si más comercios han presentado algún error o dudas similares en los [_issues_ del repositorio github](https://github.com/TransbankDevelopers/transbank-plugin-prestashop-webpay-rest/issues). Si nadie ha comentado algo similar, puedes [crear un nuevo _issue_](https://github.com/TransbankDevelopers/transbank-plugin-prestashop-webpay-rest/issues/new) con tu sugerencia, bug, problema, etc.

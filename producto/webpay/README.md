@@ -146,6 +146,17 @@ Respuestas al <br> comercio | Descripción
 -8 | Tarjeta vencida
 -9 | Transacción no soportada
 -10 | Problema en la transacción
+-11 | Excede límite de reintentos de rechazos
+
+<aside class="warning">
+  Importante: Las marcas están introduciendo un conjunto de nuevas reglas y cuotas (máximos de reintentos) a las transacciones.
+</aside>
+
+El código -11 será retornado en caso de cumplir algunas de las condiciones de la marca.
+
+1.- En el caso de **MASTERCARD**, se bloqueará todo reintento de transacción rechazada a partir del reintento número 11° (undécimo) en adelante, dentro de 24 horas de realizada la transacción original. Los criterios que la marca utiliza para identificar un reintento es a través del código de comercio y el número de tarjeta.
+
+2.- Para el caso de **VISA**, se bloqueará todo reintento de transacción rechazada a partir del reintento número 16° (decimosexto) en adelante, dentro de 30 días de realizada la transacción original. Los criterios que la marca utiliza para identificar un reintento es a través del código de comercio, el número de tarjeta y el monto de la transacción.
 
 
 ## Autorización y Captura
@@ -168,6 +179,46 @@ Desde el punto de vista de la transacción, lo que ocurre es lo siguiente:
    Importante: en la modalidad de Captura Diferida no se permite la venta en cuotas.
   </aside>
 
+## VCI
+
+Al realizar la autorización de una transacción, el comercio recibe una respuesta por parte de Transbank informando el resultado. En esta respuesta, el campo VCI corresponde a la autenticación del tarjetahabiente y es información adicional suplementaria al `responseCode`. 
+El comercio **no** debe validar este campo porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo, que no están necesariamente documentados. 
+(En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)  
+
+Código de respuesta | Descripción
+------   | -----------
+TSY | Autenticación Exitosa
+TSN | Autenticación Rechazada
+NP | No Participa, sin autenticación
+U3 | Falla conexión, Autenticación Rechazada
+INV | Datos Inválidos
+A | Intentó
+CNP1 | Comercio no participa
+EOP | Error operacional
+BNA | BIN no adherido
+ENA | Emisor no adherido  
+
+Para venta extranjera, estos son algunos de los códigos:
+
+Código de respuesta | Descripción
+------   | -----------
+TSYS | Autenticación exitosa Sin fricción. Resultado autenticación: Autenticación Existosa
+TSAS | (Intento, tarjeta no enrolada / emisor no disponible. Resultado autenticación: Autenticación Exitosa)
+TSNS | (Fallido, no autenticado, denegado / no permite intentos. Resultado autenticación: Autenticación denegada)
+TSRS | (Autenticación rechazada - sin fricción. Resultado autenticación: Autenticación rechazada)
+TSUS | (Autenticación no se pudo realizar por problema técnico u otro motivo. Resultado autenticación: Autenticación fallida)
+TSCF | (Autenticación con fricción (No aceptada por el comercio). Resultado autenticación: Autenticación incompleta)
+TSYF | (Autenticación exitosa con fricción. Resultado autenticación: Autenticación exitosa)
+TSNF | (No autenticado. Transacción denegada con fricción. Resultado autenticación: Autenticación denegada)
+TSUF | (Autenticación con fricción no se pudo realizar por problema técnico u otro. Resultado autenticación: Autenticación fallida)
+NPC  |(Comercio no Participa. Resultado autenticación: Comercio/BIN no participa)
+NPB  |(BIN no participa. Resultado autenticación: Comercio/BIN no participa)
+NPCB | (Comercio y BIN no participan. Resultado autenticación: Comercio/BIN no participa)
+SPCB | (Comercio y BIN sí participan. Resultado autenticación: Autorización incompleta)
+
+
+
+
 ## Anulaciones y Reversas
 
 <div class="pos-title-nav">
@@ -176,21 +227,19 @@ Desde el punto de vista de la transacción, lo que ocurre es lo siguiente:
 
 Las transacciones de Webpay se pueden anular o reversar dadas algunas condiciones. Para cualquiera de éstas operaciones se utiliza el mismo servicio web que discernirá si se realizará una reversa o una anulación.
 
-Para poder ejecutar una reversa ésta debe ser realizada **antes de 1 hora de efectuada la transaccion** por el monto total y en compras con tarjeta de crédito, débito o prepago.
+Para poder ejecutar una reversa ésta debe ser realizada **antes de las 3 horas de efectuada la confirmación** por el monto total y en compras con tarjeta de crédito, débito o prepago. 
 
-Una vez pasada una hora, siempre se ejecutará una anulación.
+Una vez pasadas las tres horas, siempre se ejecutará una anulación.
   - En transacciones con tarjeta de débito o prepago solo es posible anular por el monto total.
   - En transacciones con tarjeta de crédito puedes anular por cualquier monto igual o menor al total de la compra.
 
-En caso que la transacción haya sido abonada al comercio, la anulación generará una retención en los siguientes abonos por el monto previamente autorizado.
+En caso que la transacción haya sido abonada al comercio, la anulación generará una retención en los siguientes abonos por el monto previamente autorizado.  
+
+La anulación de transacciones realizadas con **débito o prepago** se encuentra disponibles a partir de la versión 1.2 del API de Transbank.
 
 El comercio tiene un plazo de 90 días desde la fecha de venta para anular transacciones vía servicios web.
 
-En el caso de los productos con modalidad mall es importante destacar que **la reversa** funciona 
-sobre la operación completa del mall, lo que significa que **todas las transacciones realizadas en**
-**la operación mall serán reversadas**.
-
-**La anulación**, en cambio, actúa individualmente sobre las transacciones de
+En el caso de los productos con modalidad mall es importante destacar que **las anulaciones** actúan individualmente sobre las transacciones de
 las _tiendas_ de un mall. Por ende, **la anulación es la operación correcta a**
 **utilizar para fines financieros**, de manera de anular un cargo ya realizado.
 
@@ -199,7 +248,7 @@ las _tiendas_ de un mall. Por ende, **la anulación es la operación correcta a*
     <div class='row d-flex align-items-stretch'>
       <div class='col-12 col-lg-6'>
         <h3 class='toc-ignore fo-size-22 text-center'>¿Tienes alguna duda de integración?</h3>
-        <a href='https://join-transbankdevelopers-slack.herokuapp.com/' target='_blank'>
+        <a href='https://transbank.continuumhq.dev/slack_community' target='_blank'>
           <div class='td_block_gray'>
             <img src="https://p9.zdassets.com/hc/theme_assets/138842/200037786/logo.png" alt="" >
             <div class='td_pa-txt'>

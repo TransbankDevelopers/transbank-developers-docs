@@ -38,6 +38,13 @@
 * [Android](https://transbankdevelopers.cl/files/mposintegrado.aar)
 * [iOS](https://transbankdevelopers.cl/files/mposintegrado-ios.zip)
 
+### Proyectos de ejemplos
+
+Se han creado proyectos de ejemplo para Android y iOS para que puedas probar antes de comenzar con tu desarrollo.
+
+* [Android](https://github.com/TransbankDevelopers/transbank-pos-bluetooth-android-example)
+* [iOS](https://github.com/TransbankDevelopers/transbank-pos-bluetooth-ios-example)
+
 ##  Android
 
 ### Instalación
@@ -656,7 +663,7 @@ Nativa de POS Integrado:
     <div class='row d-flex align-items-stretch'>
       <div class='col-12 col-lg-6'>
         <h3 class='toc-ignore fo-size-22 text-center'>¿Tienes alguna duda de integración?</h3>
-        <a href='https://join-transbankdevelopers-slack.herokuapp.com/' target='_blank'>
+        <a href='https://transbank.continuumhq.dev/slack_community' target='_blank'>
           <div class='td_block_gray'>
             <img src="https://p9.zdassets.com/hc/theme_assets/138842/200037786/logo.png" alt="" >
             <div class='td_pa-txt'>

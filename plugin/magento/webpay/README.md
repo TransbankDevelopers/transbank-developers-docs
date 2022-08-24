@@ -34,7 +34,6 @@ Puedes encontrar el repositorio Open Source de este plugin [acá](https://github
 Debes tener instalado previamente [Magento2](https://magento.com/).
 Asegúrate de tener habilitados los siguientes módulos / extensiones para PHP:
 
-* Soap
 * OpenSSL 1.0.1 o superior
 * SimpleXML
 * DOM 2.7.8 o superior
@@ -103,5 +102,5 @@ Al guardar, el plugin funcionará inmediatamente en ambiente de producción y po
 
 ## Problemas, Dudas, Sugerencias
 
-Si tienes algún problema, duda o sugerencia, puedes contactarnos en nuestra comunidad de Slack, a la que puedes [unirte acá](https://join-transbankdevelopers-slack.herokuapp.com/)
+Si tienes algún problema, duda o sugerencia, puedes contactarnos en nuestra comunidad de Slack, a la que puedes [unirte acá](https://transbank.continuumhq.dev/slack_community)
 Adicionalmente, puedes revisar si más comercios han presentado algún error/dudas similares en los [_issues_ del repositorio github](https://github.com/TransbankDevelopers/transbank-plugin-magento2-webpay-rest/issues). Si nadie ha comentado algo similar, puedes [crear un nuevo _issue_](https://github.com/TransbankDevelopers/transbank-plugin-magento2-webpay-rest/issues/new) con tu sugerencia, bug, problema, etc.
