@@ -232,7 +232,7 @@ Transaction.create(
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.2/transactions
+POST /rswebpaytransaction/api/webpay/v1.3/transactions
 
 Tbk-Api-Key-Id: 597055555530
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -379,7 +379,7 @@ Transaction.installments(
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/installments
+POST /rswebpaytransaction/api/webpay/v1.3/transactions/{token}/installments
 
 Tbk-Api-Key-Id: 597055555530
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -531,7 +531,7 @@ Transaction.commit(
 ```
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.2/transactions/{token}
+PUT /rswebpaytransaction/api/webpay/v1.3/transactions/{token}
 
 Tbk-Api-Key-Id: 597055555530
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -739,7 +739,7 @@ Transaction.status(token=token)
 ```
 
 ```http
-GET /rswebpaytransaction/api/webpay/v1.2/transactions/{token}
+GET /rswebpaytransaction/api/webpay/v1.3/transactions/{token}
 Tbk-Api-Key-Id: 597055555530
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -956,7 +956,7 @@ Transaction.refund(token=token, amount=amount)
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/refunds
+POST /rswebpaytransaction/api/webpay/v1.3/transactions/{token}/refunds
 Tbk-Api-Key-Id: 597055555530
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -1080,7 +1080,7 @@ Permite solicitar a Webpay la captura diferida de una transacción con
 autorización y sin captura simultánea.
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/capture
+PUT /rswebpaytransaction/api/webpay/v1.3/transactions/{token}/capture
 Tbk-Api-Key-Id: 597055555531
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -1654,7 +1654,7 @@ response = Transaction.create(
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.2/transactions
+POST /rswebpaytransaction/api/webpay/v1.3/transactions
 
 Tbk-Api-Key-Id: 597055555551
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -1852,7 +1852,7 @@ response = Transaction.installments(token=token, details=details)
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/installments
+POST /rswebpaytransaction/api/webpay/v1.3/transactions/{token}/installments
 
 Tbk-Api-Key-Id: 597055555551
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -2083,7 +2083,7 @@ response = Transaction.commit(
 ```
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.2/transactions/{token}
+PUT /rswebpaytransaction/api/webpay/v1.3/transactions/{token}
 
 Tbk-Api-Key-Id: 597055555551
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -2362,7 +2362,7 @@ Transaction.status(token)
 ```
 
 ```http
-GET /rswebpaytransaction/api/webpay/v1.2/transactions/{token}
+GET /rswebpaytransaction/api/webpay/v1.3/transactions/{token}
 Tbk-Api-Key-Id: 597055555551
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -2596,7 +2596,7 @@ Transaction.refund(
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/refunds
+POST /rswebpaytransaction/api/webpay/v1.3/transactions/{token}/refunds
 Tbk-Api-Key-Id: 597055555551
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -2739,7 +2739,7 @@ el código debe ser el código de la tienda virtual específica.
 
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/capture
+PUT /rswebpaytransaction/api/webpay/v1.3/transactions/{token}/capture
 Tbk-Api-Key-Id: 597055555531
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json

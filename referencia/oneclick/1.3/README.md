@@ -216,7 +216,7 @@ const response = await Oneclick.MallInscription.start(
 ```
 
 ```http
-POST /rswebpaytransaction/api/oneclick/v1.2/inscriptions
+POST /rswebpaytransaction/api/oneclick/v1.3/inscriptions
 
 Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -345,7 +345,7 @@ const response = await Oneclick.MallInscription.finish(token);
 ```
 
 ```http
-PUT /rswebpaytransaction/api/oneclick/v1.2/inscriptions/{token}
+PUT /rswebpaytransaction/api/oneclick/v1.3/inscriptions/{token}
 
 Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -495,7 +495,7 @@ const response = await Oneclick.MallInscription.delete(tbkUser, userName);
 ```
 
 ```http
-DELETE /rswebpaytransaction/api/oneclick/v1.2/inscriptions
+DELETE /rswebpaytransaction/api/oneclick/v1.3/inscriptions
 
 Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -702,7 +702,7 @@ const response = await Oneclick.MallTransaction.authorize(
 ```
 
 ```http
-POST /rswebpaytransaction/api/oneclick/v1.2/transactions
+POST /rswebpaytransaction/api/oneclick/v1.3/transactions
 
 Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -988,7 +988,7 @@ const response = await Oneclick.MallTransaction.status(token);
 ```
 
 ```http
-GET /rswebpaytransaction/api/oneclick/v1.2/transactions/{buyOrder}
+GET /rswebpaytransaction/api/oneclick/v1.3/transactions/{buyOrder}
 
 Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -1280,7 +1280,7 @@ const response = await Oneclick.MallTransaction.refund(buyOrder, childCommerceCo
 ```
 
 ```http
-POST /rswebpaytransaction/api/oneclick/v1.2/transactions/{buyOrder}/refunds
+POST /rswebpaytransaction/api/oneclick/v1.3/transactions/{buyOrder}/refunds
 
 Tbk-Api-Key-Id: 597055555541
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -1440,7 +1440,7 @@ const response = Oneclick.MallTransaction.capture(
 ```
 
 ```http
-PUT /rswebpaytransaction/api/oneclick/mall/v1.2/transactions/capture
+PUT /rswebpaytransaction/api/oneclick/mall/v1.3/transactions/capture
 Tbk-Api-Key-Id: 597055555547
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
