@@ -254,7 +254,7 @@ const response = await WebpayPlus.Transaction.create(buyOrder, sessionId, amount
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.2/transactions
+POST /rswebpaytransaction/api/webpay/v1.3/transactions
 
 Tbk-Api-Key-Id: 597055555532
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -371,7 +371,7 @@ const response = await WebpayPlus.Transaction.commit(token);
 ```
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.2/transactions/{token}
+PUT /rswebpaytransaction/api/webpay/v1.3/transactions/{token}
 Tbk-Api-Key-Id: 597055555532
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -575,7 +575,7 @@ const response = await WebpayPlus.Transaction.status(token);
 ```
 
 ```http
-GET /rswebpaytransaction/api/webpay/v1.2/transactions/{token}
+GET /rswebpaytransaction/api/webpay/v1.3/transactions/{token}
 Tbk-Api-Key-Id: 597055555532
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -786,7 +786,7 @@ const response = await WebpayPlus.Transaction.refund(token, amount);
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/refunds
+POST /rswebpaytransaction/api/webpay/v1.3/transactions/{token}/refunds
 Tbk-Api-Key-Id: 597055555532
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -952,7 +952,7 @@ const response  = await WebpayPlus.DeferredTransaction.capture(token, buyOrder, 
 ```
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/capture
+PUT /rswebpaytransaction/api/webpay/v1.3/transactions/{token}/capture
 Tbk-Api-Key-Id: 597055555540
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -1559,7 +1559,7 @@ const createResponse = await WebpayPlus.MallTransaction.create(
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.2/transactions
+POST /rswebpaytransaction/api/webpay/v1.3/transactions
 
 Tbk-Api-Key-Id: 597055555535
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
@@ -1689,7 +1689,7 @@ const response = await WebpayPlus.MallTransaction.commit(token);
 ```
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.2/transactions/{token}
+PUT /rswebpaytransaction/api/webpay/v1.3/transactions/{token}
 Tbk-Api-Key-Id: 597055555535
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -1925,7 +1925,7 @@ const response = await WebpayPlus.MallTransaction.status(token);
 ```
 
 ```http
-GET /rswebpaytransaction/api/webpay/v1.2/transactions/{token}
+GET /rswebpaytransaction/api/webpay/v1.3/transactions/{token}
 Tbk-Api-Key-Id: 597055555535
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -2158,7 +2158,7 @@ const response = await WebpayPlus.MallTransaction.refund(token, buyOrder, commer
 ```
 
 ```http
-POST /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/refunds
+POST /rswebpaytransaction/api/webpay/v1.3/transactions/{token}/refunds
 Tbk-Api-Key-Id: 597055555535
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -2326,7 +2326,7 @@ response = MallDeferredTransaction.capture(
 ```
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/capture
+PUT /rswebpaytransaction/api/webpay/v1.3/transactions/{token}/capture
 Tbk-Api-Key-Id: 597055555581
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
