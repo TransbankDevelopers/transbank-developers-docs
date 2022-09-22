@@ -150,23 +150,25 @@ Para resolver el problema relacionado al direccionamiento con la app 'Onepay' pu
 Transbank provee dos ambientes: **Integración** y **Producción**.
 
 **Ambiente de integración**: En este ambiente el comercio realiza la integración del producto a contratar y testea
-su solución de medio pago.
+su solución de medio pago.  
+
 `HOST: https://webpay3gint.transbank.cl`
 
 **Ambiente de producción**: En este ambiente el comercio operará luego de finalizar el [proceso de puesta en producción](#puesta-en-produccion) y realizará transacciones
 con tarjetas de crédito, débito o prepago **reales**.  
+
 `HOST: https://webpay3g.transbank.cl`
 
 ### Ambiente de integración
 
-En el ambiente de integración existen códigos de comercio previamente creados para todos los productos (Webpay Plus, Oneclick, etc), para cada una de sus modalidades (Captura Diferida, Mall, Mall Captura Diferida, etc) y dependiendo de la moneda que acepten (USD o CLP).
+En el ambiente de integración existen códigos de comercio previamente creados para todos los productos (Webpay Plus, Oneclick Mall, etc), para cada una de sus modalidades (Captura Diferida, Mall, Mall Captura Diferida, etc) y dependiendo de la moneda que acepten (USD o CLP).
 
 Asegúrate de que estés usando el código de comercio de integración que tenga la misma configuración del producto que contrataste.
 
 ### Tarjetas de Prueba
 
 Para las transacciones Webpay en el ambiente de integración se deben usar estas
-tarjetas:
+tarjetas de prueba:
 
 Tipo de tarjeta | Detalle | Resultado
 --------------- | ------- | ----------
