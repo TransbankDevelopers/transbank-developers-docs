@@ -176,11 +176,21 @@ Procura seguir todos los pasos descritos en el sitio de msys2
 </aside>
 
 ## Prueba tu POS
-La manera más simple de hacer una prueba de conexión con tu POS es usar el SDK Web.
+
+### Probando con el agente web
+Una de las maneras más simple de hacer una prueba de conexión con tu POS es usar el SDK Web.
 
 1. [Descarga](https://github.com/TransbankDevelopers/transbank-pos-sdk-web-agent/releases) e instala el agente POS
-2. Entra a [pos.digitalpartner.cl](https://pos.digitalpartner.cl) donde verás el proyecto de ejemplo del SDK Web ya montado y funcionando. 
-3. Prueba la conexión, y las diferentes operaciones. 
+2. Entra a [pos.continuumhq.dev](https://pos.continuumhq.dev) donde verás el proyecto de ejemplo del SDK Web ya montado y funcionando. 
+3. Prueba la conexión, y las diferentes operaciones.
+
+### Probando directamente desde tu navegador
+
+Otra forma de probar tu POS, es con el proyecto de ejemplo de la librería javascript que utiliza la API serial del navegador.
+
+1. Ingresa a [pos-serial.continuumhq.dev](https://pos-serial.continuumhq.dev) y verifica que tu navegador se encuentre soportado.
+2. Configura la velocidad y dale al botón de conectar.
+3. Prueba las diferentes operaciones.
 
 **Nota**: No olvides colocar tu [POS en modo POS integrado](#cambio-modalidad-pos-integrado). 
 
