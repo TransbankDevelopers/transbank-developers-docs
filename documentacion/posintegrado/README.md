@@ -280,20 +280,20 @@ List<String> ports = pos.listPorts();
 ```js
 import POS from "transbank-pos-sdk";
 
-POS.getPorts().then((ports) => {
+POS.listPorts().then((ports) => {
     console.log('ports');
 }).catch(() => {
-    alert("No se pudo obtener puertos. ¿Está corriendo el servicio Transbank POS?");
+    console.log('Ocurrió un error inesperado', err);
 })
 ```
 
 ```javascript
 import POS from "transbank-pos-sdk-web";
 
-pos.listPorts().then( (ports) => {
+pos.getPorts().then( (ports) => {
     console.log(ports);
 }).catch( (err) => {
-    console.log('Ocurrió un error inesperado', err);
+    alert("No se pudo obtener puertos. ¿Está corriendo el servicio Transbank POS?");
 });
 ```
 
@@ -886,7 +886,7 @@ pos.closeDay().then( (response) => {
 ```javascript
 import POS from "transbank-pos-sdk-web";
 
-POS.close()
+POS.closeDay()
 ```
 
 El resultado del cierre de caja se entrega en la forma de un objeto `CloseResponse` o una estructura `BaseResponse` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankCloseException`.
@@ -1008,7 +1008,7 @@ pos.salesDetail().then( (response) => {
 import POS from "transbank-pos-sdk-web";
 
 let printOnPOS = false;
-POS.details(printOnPOS).then(response => console.log(response));
+POS.getDetails(printOnPOS).then(response => console.log(response));
 ```
 
 El resultado de la transacción entrega una lista de objetos  `DetailResponse` o un `char *` en el caso de la librería C. Si ocurre algún error al ejecutar la acción en el POS se lanzará una excepción del tipo `TransbankSalesDetailException`.
