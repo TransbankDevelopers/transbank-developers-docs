@@ -3,7 +3,7 @@ git:
     - filter_type: dir
       # all supported i18n types: https://docs.transifex.com/formats
       file_format: GITHUBMARKDOWN
-      source_file_extension: .md
+      source_file_extension: md
       source_language: es
       source_file_dir: /
       # path expression to translation files, must contain <lang> placeholder
