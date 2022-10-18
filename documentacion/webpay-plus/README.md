@@ -1807,7 +1807,7 @@ transacción que fue generada en Webpay Plus.
 Puedes realizar un reembolso invocando al método refund(), dependiendo de algunas condiciones correspondera a una **Reversa** o **Anulación**.  
 
 Puedes [leer más sobre la anulación en la información del
-producto Webpay](/producto/webpay#anulaciones) para conocer
+producto Webpay](/producto/webpay#anulaciones-y-reversas) para conocer
 más detalles y restricciones.
 
 <div class="language-simple" data-multiple-language></div>
