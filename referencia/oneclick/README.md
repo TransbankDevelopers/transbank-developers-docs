@@ -1727,6 +1727,667 @@ En caso de error apareceran los mismos códigos exclusivos del método `capture
 para captura simpultanea.
 </aside>
 
+### Incrementar el monto de una transacción Mall
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#??????)
+
+Este método está disponible desde la versión 1.3 del API de Transbank y aplica solo a productos con captura diferida.
+
+<strong>Transaction.increaseAmount() Mall</strong>
+
+```java
+// Versión 4.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final IncreaseAmountResponse response = tx.increaseAmount(childCommerceCode, childBuyOrder, authorizationCode, amount);
+```
+
+```php
+// SDK Versión 3.x
+use Transbank\Webpay\Oneclick\MallTransaction;
+
+$response = (new MallTransaction)->increaseAmount($buyOrder, $authorizationCode, $amount, $commerceCode);
+```
+
+```csharp
+// Versión 6.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = tx.IncreaseAmount(childCommerceCode, childBuyOrder, authorizationCode, amount);
+```
+
+```ruby
+## Versión 3.x del SDK
+@tx = Transbank::Webpay::Oneclick::MallTransaction.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL_DEFERRED)
+@resp = @tx.increase_amount(
+  child_commerce_code: @child_commerce_code,
+  child_buy_order: @child_buy_order,
+  authorization_code: @authorization_code,
+  amount: @amount
+)
+```
+
+```python
+## Versión 4.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.increaseAmount(
+  buy_order=buy_order, authorization_code=authorization_code, amount=amount, child_commerce_code=child_commerce_code
+)
+```
+
+```javascript
+const Oneclick = require("transbank-sdk").Oneclick; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+
+// Versión 4.x del SDK
+const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.increaseAmount(childCommerceCode, childBuyOrder, authorizationCode, amount);
+```
+
+```http
+PUT /rswebpaytransaction/api/webpay/v1.3/transactions/amount
+Tbk-Api-Key-Id: 597055555547
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "commerce_code": 597055555548,
+  "buy_order": "415034240",
+  "authorization_code": "12345",
+  "amount": 1000
+}
+```
+
+<strong>Parámetros Transaction.increaseAmount</strong>
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+commerce_code  <br> <i> Number </i> | Código de comercio de la tienda que hizo la transacción. Largo: 12.
+buy_order  <br> <i> String </i> | Orden de compra de la pre-autorización original. Largo máximo: 26.
+authorization_code  <br> <i> String </i> | Código de autorización de la pre-autorización original. Largo máximo: 6.
+amount  <br> <i> Number </i> | Monto que se requiere incrementar de la pre-autorización original. Largo máximo: 17.
+
+<strong>Respuesta Transaction.increaseAmount</strong>
+
+```java
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getTotalAmount();
+response.getExpirationDate();
+response.getResponseCode();
+```
+
+```php
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getTotalAmount();
+$response->getExpirationDate();
+$response->getResponseCode();
+```
+
+```csharp
+response.AuthorizationCode;
+response.AuthorizationDate;
+response.TotalAmount;
+response.ExpirationDate:
+response.ResponseCode;
+```
+
+```ruby
+response.authorization_code
+response.authorization_date
+response.amount
+response.expiration_date
+response.response_code
+```
+
+```python
+response['authorization_code']
+response['authorization_date']
+response['amount']
+response['expiration_date']
+response['response_code']
+```
+
+```javascript
+response.authorization_code
+response.authorization_date
+response.amount
+response.expiration_date
+response.response_code
+```
+
+```http
+200 OK
+Content-Type: application/json
+{
+  "authorization_code": "123456",
+  "authorization_date": "2021-03-05T20:18:20Z",
+  "total_amount": 1000,
+  "expiration_date": "2021-03-20T20:18:20Z",
+  "response_code": 0
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+authorization_code  <br> <i> String </i> | Código de autorización de la pre-autorización incremental de monto. Largo máximo: 6
+authorization_date  <br> <i> ISO8601 </i> | Fecha de autorización de la pre-autorización incremental de monto
+total_amount  <br> <i> Number </i> | Monto total pre-autorizado hasta el momento (sumando incrementos y restando decrementos por reversas). Largo máximo: 17
+expiration_date <br> <i> ISO8601 </i> | Fecha límite para capturar el monto total.
+response_code  <br> <i> Number </i> | Código de resultado de la operación. Será 0 para éxito y cualquier otro valor para fracaso. Largo máximo: 2
+
+
+### Incrementar el plazo de Captura de Transaccion Mall
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#??????)
+
+Este método está disponible desde la versión 1.3 del API de Transbank y aplica solo a productos con captura diferida.
+
+<strong>Transaction.increaseAuthorizationDate()</strong>
+
+```java
+// Versión 4.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final IncreaseAuthorizationDate response = tx.increaseAuthorizationDate(childCommerceCode, childBuyOrder, authorizationCode);
+```
+
+```php
+// SDK Versión 3.x
+use Transbank\Webpay\Oneclick\MallTransaction;
+
+$response = (new MallTransaction)->increaseAuthorizationDate($buyOrder, $authorizationCode, $commerceCode);
+```
+
+```csharp
+// Versión 6.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = tx.IncreaseAuthorizationDate(childCommerceCode, childBuyOrder, authorizationCode);
+```
+
+```ruby
+## Versión 3.x del SDK
+@tx = Transbank::Webpay::Oneclick::MallTransaction.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL_DEFERRED)
+@resp = @tx.increase_authorization_date(
+  child_commerce_code: @child_commerce_code,
+  child_buy_order: @child_buy_order,
+  authorization_code: @auth_code
+)
+```
+
+```python
+## Versión 4.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.increaseAuthorizationDate(
+  buy_order=buy_order, authorization_code=authorization_code, child_commerce_code=child_commerce_code
+)
+```
+
+```javascript
+const Oneclick = require("transbank-sdk").Oneclick; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+
+// Versión 4.x del SDK
+const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.increaseAuthorizationDate(childCommerceCode, childBuyOrder, authorizationCode);
+```
+
+```http
+PUT /rswebpaytransaction/api/webpay/v1.3/transactions/authorization_date
+Tbk-Api-Key-Id: 597055555547
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "commerce_code": 597055555548,
+  "buy_order": "415034240",
+  "authorization_code": "12345"
+}
+```
+
+<strong>Parámetros Transaction.increaseAuthorizationDate</strong>
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+commerce_code  <br> <i> Number </i> | Código de comercio de la tienda que hizo la transacción. Largo: 12.
+buy_order  <br> <i> String </i> | Orden de compra de la pre-autorización originaL. Largo máximo: 26.
+authorization_code  <br> <i> String </i> | Código de autorización de la pre-autorización original. Largo máximo: 6.
+
+<strong>Respuesta Transaction.increaseAuthorizationDate</strong>
+
+```java
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getTotalAmount();
+response.getExpirationDate();
+response.getResponseCode();
+```
+
+```php
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getTotalAmount();
+$response->getExpirationDate();
+$response->getResponseCode();
+```
+
+```csharp
+response.AuthorizationCode;
+response.AuthorizationDate;
+response.TotalAmount;
+response.ExpirationDate:
+response.ResponseCode;
+```
+
+```ruby
+response.authorization_code
+response.authorization_date
+response.amount
+response.expiration_date
+response.response_code
+```
+
+```python
+response['authorization_code']
+response['authorization_date']
+response['amount']
+response['expiration_date']
+response['response_code']
+```
+
+```javascript
+response.authorization_code
+response.authorization_date
+response.amount
+response.expiration_date
+response.response_code
+```
+
+```http
+200 OK
+Content-Type: application/json
+{
+  "authorization_code": "123456",
+  "authorization_date": "2021-03-05T20:18:20Z",
+  "total_amount": 1000,
+  "expiration_date": "2021-03-20T20:18:20Z",
+  "response_code": 0
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+authorization_code  <br> <i> String </i> | Código de autorización de la pre-autorización incremental de plazo. Largo máximo: 6
+authorization_date  <br> <i> ISO8601 </i> | Fecha de autorización de la pre-autorización incremental de plazo
+total_amount  <br> <i> Number </i> | Monto total pre-autorizado hasta el momento (sumando incrementos y restando decrementos por reversas). Largo máximo: 17
+expiration_date <br> <i> ISO8601 </i> | Fecha límite (nueva) para capturar el monto total.
+response_code  <br> <i> Number </i> | Código de resultado de la operación. Será 0 para éxito y cualquier otro valor para fracaso. Largo máximo: 2
+
+
+### Reversa de monto pre-autorizado Mall
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#??????)
+
+Este método está disponible desde la versión 1.3 del API de Transbank y aplica solo a productos con captura diferida.
+
+<strong>Transaction.reversePreAuthorizedAmount()</strong>
+
+```java
+// Versión 4.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final ReversePreAuthorizedAmount response = tx.reversePreAuthorizedAmount(childCommerceCode, childBuyOrder, authorizationCode, amount);
+```
+
+```php
+// SDK Versión 3.x
+use Transbank\Webpay\Oneclick\MallTransaction;
+
+$response = (new MallTransaction)->reversePreAuthorizedAmount($buyOrder, $authorizationCode, $amount, $commerceCode);
+```
+
+```csharp
+// Versión 6.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var response = tx.ReversePreAuthorizedAmount(childCommerceCode, childBuyOrder, authorizationCode, amount);
+```
+
+```ruby
+## Versión 3.x del SDK
+@tx = Transbank::Webpay::Oneclick::MallTransaction.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL_DEFERRED)
+@resp = @tx.reverse_pre_authorized_amount(
+  child_commerce_code: @child_commerce_code,
+  child_buy_order: @child_buy_order,
+  authorization_code: @authorization_code,
+  amount: @amount
+)
+```
+
+```python
+## Versión 4.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.reversePreAuthorizedAmount(
+  buy_order=buy_order, authorization_code=authorization_code, amount=amount, child_commerce_code=child_commerce_code
+)
+```
+
+```javascript
+const Oneclick = require("transbank-sdk").Oneclick; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+
+// Versión 4.x del SDK
+const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.reversePreAuthorizedAmount(childCommerceCode, childBuyOrder, authorizationCode, amount);
+```
+
+```http
+PUT /rswebpaytransaction/api/webpay/v1.3/transactions/reverse/amount
+Tbk-Api-Key-Id: 597055555547
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+  "commerce_code": 597055555548,
+  "buy_order": "415034240",
+  "authorization_code": "12345",
+  "amount": 2000
+}
+```
+
+<strong>Parámetros Transaction.reversePreAuthorizedAmount</strong>
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+commerce_code  <br> <i> Number </i> | Código de comercio de la tienda que hizo la transacción. Largo: 12.
+buy_order  <br> <i> String </i> | Orden de compra de la pre-autorización original. Largo máximo: 26.
+authorization_code  <br> <i> String </i> | Código de autorización de la pre-autorización original. Largo máximo: 6.
+amount  <br> <i> Number </i> | Monto que se requiere disminuir de la pre-autorización original. Largo máximo: 17.
+
+
+<strong>Respuesta Transaction.reversePreAuthorizedAmount</strong>
+
+```java
+response.getAuthorizationCode();
+response.getAuthorizationDate();
+response.getTotalAmount();
+response.getExpirationDate();
+response.getResponseCode();
+```
+
+```php
+$response->getAuthorizationCode();
+$response->getAuthorizationDate();
+$response->getTotalAmount();
+$response->getExpirationDate();
+$response->getResponseCode();
+```
+
+```csharp
+response.AuthorizationCode;
+response.AuthorizationDate;
+response.TotalAmount;
+response.ExpirationDate:
+response.ResponseCode;
+```
+
+```ruby
+response.authorization_code
+response.authorization_date
+response.amount
+response.expiration_date
+response.response_code
+```
+
+```python
+response['authorization_code']
+response['authorization_date']
+response['amount']
+response['expiration_date']
+response['response_code']
+```
+
+```javascript
+response.authorization_code
+response.authorization_date
+response.amount
+response.expiration_date
+response.response_code
+```
+
+```http
+200 OK
+Content-Type: application/json
+{
+  "authorization_code": "123456",
+  "authorization_date": "2021-03-05T20:18:20Z",
+  "total_amount": 1000,
+  "expiration_date": "2021-03-20T20:18:20Z",
+  "response_code": 0
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+authorization_code  <br> <i> String </i> | Código de autorización de la pre-autorización incremental de plazo. Largo máximo: 6
+authorization_date  <br> <i> ISO8601 </i> | Fecha de autorización de la pre-autorización incremental de plazo
+total_amount  <br> <i> Number </i> | Monto total pre-autorizado hasta el momento (sumando incrementos y restando decrementos por reversas). Largo máximo: 17
+expiration_date <br> <i> ISO8601 </i> | Fecha límite (nueva) para capturar el monto total.
+response_code  <br> <i> Number </i> | Código de resultado de la operación. Será 0 para éxito y cualquier otro valor para fracaso. Largo máximo: 2
+
+
+### Historial de transacciones Captura Diferida Mall
+Puedes revisar más detalles de esta operación en [su documentación](/documentacion/webpay-plus#??????)
+
+Este método está disponible desde la versión 1.3 del API de Transbank y aplica solo a productos con captura diferida.
+
+<strong>Transaction.deferredCaptureHistory()</strong>
+
+```java
+// Versión 4.x del SDK
+Oneclick.MallTransaction tx = new Oneclick.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final List<DeferredCaptureHistoryResponse> response = tx.deferredCaptureHistory(childCommerceCode, childBuyOrder, authorizationCode);
+```
+
+```php
+// SDK Versión 3.x
+use Transbank\Webpay\Oneclick\MallTransaction;
+
+$response = (new MallTransaction)->deferredCaptureHistory($authorizationCode, $buy_order, $commerce_code);
+```
+
+```csharp
+// Versión 6.x del SDK
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, WebpayIntegrationType.Test));
+var List<DeferredCaptureHistoryResponse> response = tx.DeferredCaptureHistory(childCommerceCode, childBuyOrder, authorizationCode);
+```
+
+```ruby
+## Versión 3.x del SDK
+@tx = Transbank::Webpay::Oneclick::MallTransaction.new(::Transbank::Common::IntegrationCommerceCodes::ONECLICK_MALL_DEFERRED)
+@resp = @tx.deferred_capture_history(
+  childCommerceCode: @childCommerceCode,
+  childBuyOrder: @childBuyOrder,
+  authorization_code: @authorization_code
+)
+```
+
+```python
+## Versión 4.x del SDK
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+resp = tx.deferredCaptureHistory(authorization_code=authorization_code, buy_order=buy_order, child_commerce_code=child_commerce_code)
+```
+
+```javascript
+const Oneclick = require("transbank-sdk").Oneclick; // CommonJS
+const { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } = require("transbank-sdk"); // CommonJS
+
+import { Oneclick } from 'transbank-sdk'; // ES6 Modules
+import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
+
+// Versión 4.x del SDK
+const tx = new Oneclick.MallTransaction(new Options(IntegrationCommerceCodes.ONECLICK_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const response = await tx.deferredCaptureHistory(childCommerceCode, childBuyOrder, authorizationCode);
+```
+
+```http
+PUT /rswebpaytransaction/api/oneclick/v1.3/transactions/details
+Tbk-Api-Key-Id: 597055555547
+Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
+Content-Type: application/json
+
+{
+    "commerce_code": "597055555548",
+    "buy_order": "ordenCompra12345678",
+    "authorization_code": "123456"
+}
+
+```
+
+<strong>Parámetros Transaction.deferredCaptureHistory</strong>
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+commerce_code  <br> <i> Number </i> | Código de comercio. Largo: 12.
+buy_order  <br> <i> String </i> | Orden de compra de la pre-autorización original. Largo máximo: 26.
+authorization_code  <br> <i> String </i> | Código de autorización de la pre-autorización original. Largo máximo: 6.
+
+
+<strong>Respuesta Transaction.deferredCaptureHistory</strong>
+
+```java
+for (DeferredCaptureHistoryResponse detail : response) {
+    detail.getType();
+    detail.getAmount();
+    detail.getAuthorizationCode();
+    detail.getAuthorizationDate();
+    detail.getTotalAmount();
+    detail.getExpirationDate();
+    detail.getResponseCode();
+}
+```
+
+```php
+foreach($response as $detail){
+    $detail->getType();
+    $detail->getAmount();
+    $detail->getAuthorizationCode();
+    $detail->getAuthorizationDate();
+    $detail->getTotalAmount();
+    $detail->getRxpirationDate();
+    $detail->getResponseCode();
+}
+```
+
+```csharp
+foreach (var detail in response) {
+    detail.Type;
+    detail.Amount;
+    detail.AuthorizationCode;
+    detail.AuthorizationDate;
+    detail.TotalAmount;
+    detail.ExpirationDate;
+    detail.ResponseCode;
+}
+```
+
+```ruby
+response.each do |detail|
+  detail.type
+  detail.amount
+  detail.authorization_code
+  detail.authorization_date
+  detail.total_amount
+  detail.expiration_date
+  detail.response_code
+end
+```
+
+```python
+for detail in response:
+  detail['type']
+  detail['amount']
+  detail['authorization_code']
+  detail['authorization_date']
+  detail['total_amount']
+  detail['expiration_date']
+  detail['response_code']
+```
+
+```javascript
+response.forEach(detail => {
+    detail.type
+    detail.amount
+    detail.authorization_code
+    detail.authorization_date
+    detail.total_amount
+    detail.expiration_date
+    detail.response_code
+});
+```
+
+```http
+200 OK
+Content-Type: application/json
+{
+    "type":: “Preauthorization”,
+    "amount": 30000,
+    "authorization_code": 123456,
+    "authorization_date": "2021-03-05T20:18:20Z",
+    "total_amount": 30000,
+    "expiration_date": "2021-04-05T20:18:20Z",
+    "response_code": 0
+},
+{
+    "type": “Amount adjustment”,
+    "amount": 15000,
+    "authorization_code": 123456,
+    "authorization_date": "2021-03-10T17:21:15Z",
+    "total_amount": 45000,
+    "expiration_date": "2021-04-05T20:18:20Z",
+    "response_code": 0
+},
+{
+    "type": “Amount adjustment”,
+    "amount": -3000,
+    "authorization_code": 123456,
+    "authorization_date": "2021-03-11T22:11:01Z",
+    "total_amount": 42000,
+    "expiration_date": "2021-04-05T20:18:20Z",
+    "response_code": 0
+},
+{
+    "type": “Expiration date adjustment”,
+    "amount": 0,
+    "authorization_code": 123456,
+    "authorization_date": "2021-04-01T11:24:57Z",
+    "total_amount": 42000,
+    "expiration_date": "2021-05-01T11:24:57Z",
+    "response_code": 0
+},
+{
+    "type": “Capture”,
+    "amount": 42000,
+    "authorization_code": 123456,
+    "authorization_date": "2021-04-22T11:24:57Z",
+    "total_amount": 0,
+    "expiration_date": "2021-05-01T11:24:57Z",
+    "response_code": 0
+}
+```
+
+Nombre  <br> <i> tipo </i> | Descripción
+------   | -----------
+type  <br> <i> String </i> | Tipo de operación. Los valores posibles son: “Preauthorization”, “Nullification”, “Capture”, “Amount adjustment” y “Expiration date adjustment”
+amount  <br> <i> Number </i> | Monto involucrado en la operación. Largo máximo: 17
+authorization_code  <br> <i> String </i> | Código de autorización de la pre-autorización incremental de monto. Largo máximo: 6
+authorization_date  <br> <i> ISO8601 </i> | Fecha de autorización de la pre-autorización incremental de monto
+total_amount  <br> <i> Number </i> | Monto total pre-autorizado hasta el momento (sumando incrementos y restando decrementos por reversas). Largo máximo: 17
+expiration_date <br> <i> ISO8601 </i> | Fecha límite para capturar el monto total.
+response_code  <br> <i> Number </i> | Código de resultado de la operación. Será 0 para éxito y cualquier otro valor para fracaso. Largo máximo: 2
+
 
 ## Códigos y mensajes de error
 

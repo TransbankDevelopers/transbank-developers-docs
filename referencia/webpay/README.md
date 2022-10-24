@@ -3106,30 +3106,30 @@ Puedes revisar más detalles de esta operación en [su documentación](/document
 
 Este método está disponible desde la versión 1.3 del API de Transbank y aplica solo a productos con captura diferida.
 
-<strong>Transaction.increaseAmount()</strong>
+<strong>Transaction.increaseAmount() Mall</strong>
 
 ```java
 // Versión 4.x del SDK
-WebpayPlus.Transaction tx = new WebpayPlus.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+WebpayPlus.MallTransaction tx = new WebpayPlus.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
 final IncreaseAmountResponse response = tx.increaseAmount(token, childCommerceCode, childBuyOrder, authorizationCode, amount);
 ```
 
 ```php
 // SDK Versión 3.x
-use Transbank\Webpay\WebpayPlus\Transaction;
+use Transbank\Webpay\WebpayPlus\MallTransaction;
 
-$response = (new Transaction)->increaseAmount($token, $buyOrder, $authorizationCode, $amount, $childCommerceCode);
+$response = (new MallTransaction)->increaseAmount($token, $buyOrder, $authorizationCode, $amount, $childCommerceCode);
 ```
 
 ```csharp
 // Versión 6.x del SDK
-var tx = new Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_DEFERRED, IntegrationApiKeys.WEBPAY_PLUS_MALL_DEFERRED, WebpayIntegrationType.Test));
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_DEFERRED, IntegrationApiKeys.WEBPAY_PLUS_MALL_DEFERRED, WebpayIntegrationType.Test));
 var response = tx.IncreaseAmount(token, childCommerceCode, childBuyOrder, authorizationCode, amount);
 ```
 
 ```ruby
 ## Versión 3.x del SDK
-@tx = Transbank::Webpay::WebpayPlus::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::WEBPAY_PLUS_MALL_DEFERRED)
+@tx = Transbank::Webpay::WebpayPlus::MallTransaction.new(::Transbank::Common::IntegrationCommerceCodes::WEBPAY_PLUS_MALL_DEFERRED)
 @resp = @tx.increase_amount(
   token: @token,
   child_commerce_code: @child_commerce_code,
@@ -3141,7 +3141,7 @@ var response = tx.IncreaseAmount(token, childCommerceCode, childBuyOrder, author
 
 ```python
 ## Versión 4.x del SDK
-tx = Transaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
 resp = tx.increaseAmount(
   token=token, buy_order=buy_order, authorization_code=authorization_code, amount=amount, child_commerce_code=child_commerce_code
 )
@@ -3155,12 +3155,12 @@ import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
 import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 4.x del SDK
-const tx = new WebpayPlus.Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const tx = new WebpayPlus.MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.increaseAmount(token, childCommerceCode, childBuyOrder, authorizationCode, amount);
 ```
 
 ```http
-PUT /rswebpaytransaction/api/webpay/v1.2/transactions/{token}/amount
+PUT /rswebpaytransaction/api/webpay/v1.3/transactions/{token}/amount
 Tbk-Api-Key-Id: 597055555581
 Tbk-Api-Key-Secret: 579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C
 Content-Type: application/json
@@ -3259,30 +3259,30 @@ Puedes revisar más detalles de esta operación en [su documentación](/document
 
 Este método está disponible desde la versión 1.3 del API de Transbank y aplica solo a productos con captura diferida.
 
-<strong>Transaction.increaseAuthorizationDate()</strong>
+<strong>Transaction.increaseAuthorizationDate() Mall</strong>
 
 ```java
 // Versión 4.x del SDK
-WebpayPlus.Transaction tx = new WebpayPlus.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
-final IncreaseAmountResponse response = tx.increaseAuthorizationDate(token, childCommerceCode, childBuyOrder, authorizationCode);
+WebpayPlus.MallTransaction tx = new WebpayPlus.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+final IncreaseAuthorizationDate response = tx.increaseAuthorizationDate(token, childCommerceCode, childBuyOrder, authorizationCode);
 ```
 
 ```php
 // SDK Versión 3.x
-use Transbank\Webpay\WebpayPlus\Transaction;
+use Transbank\Webpay\WebpayPlus\MallTransaction;
 
-$response = (new Transaction)->increaseAuthorizationDate($token, $buyOrder, $authorizationCode, $commerceCode);
+$response = (new MallTransaction)->increaseAuthorizationDate($token, $buyOrder, $authorizationCode, $commerceCode);
 ```
 
 ```csharp
 // Versión 6.x del SDK
-var tx = new Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY_DEFERRED, WebpayIntegrationType.Test));
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY_DEFERRED, WebpayIntegrationType.Test));
 var response = tx.IncreaseAuthorizationDate(token, childCommerceCode, childBuyOrder, authorizationCode);
 ```
 
 ```ruby
 ## Versión 3.x del SDK
-@tx = Transbank::Webpay::WebpayPlus::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::WEBPAY_PLUS_MALL_DEFERRED)
+@tx = Transbank::Webpay::WebpayPlus::MallTransaction.new(::Transbank::Common::IntegrationCommerceCodes::WEBPAY_PLUS_MALL_DEFERRED)
 @resp = @tx.increase_authorization_date(
   token: @token,
   child_commerce_code: @child_commerce_code,
@@ -3293,7 +3293,7 @@ var response = tx.IncreaseAuthorizationDate(token, childCommerceCode, childBuyOr
 
 ```python
 ## Versión 4.x del SDK
-tx = Transaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
 resp = tx.increaseAuthorizationDate(
   token=token, buy_order=buy_order, authorization_code=authorization_code, child_commerce_code=child_commerce_code
 )
@@ -3307,7 +3307,7 @@ import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
 import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 4.x del SDK
-const tx = new WebpayPlus.Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const tx = new WebpayPlus.MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.increaseAuthorizationDate(token, childCommerceCode, childBuyOrder, authorizationCode);
 ```
 
@@ -3409,30 +3409,30 @@ Puedes revisar más detalles de esta operación en [su documentación](/document
 
 Este método está disponible desde la versión 1.3 del API de Transbank y aplica solo a productos con captura diferida.
 
-<strong>Transaction.reversePreAuthorizedAmount()</strong>
+<strong>Transaction.reversePreAuthorizedAmount() Mall</strong>
 
 ```java
 // Versión 4.x del SDK
-WebpayPlus.Transaction tx = new WebpayPlus.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+WebpayPlus.MallTransaction tx = new WebpayPlus.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
 final reversePreAuthorizedAmount response = tx.reversePreAuthorizedAmount(token, childCommerceCode, childBuyOrder, authorizationCode, amount);
 ```
 
 ```php
 // SDK Versión 3.x
-use Transbank\Webpay\WebpayPlus\Transaction;
+use Transbank\Webpay\WebpayPlus\MallTransaction;
 
-$response = (new Transaction)->reversePreAuthorizedAmount($token, $buyOrder, $authorizationCode, $amount, $commerceCode);
+$response = (new MallTransaction)->reversePreAuthorizedAmount($token, $buyOrder, $authorizationCode, $amount, $commerceCode);
 ```
 
 ```csharp
 // Versión 6.x del SDK
-var tx = new Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY_DEFERRED, WebpayIntegrationType.Test));
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY_DEFERRED, WebpayIntegrationType.Test));
 var response = tx.ReversePreAuthorizedAmount(token, childCommerceCode, childBuyOrder, authorizationCode, amount);
 ```
 
 ```ruby
 ## Versión 3.x del SDK
-@tx = Transbank::Webpay::WebpayPlus::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::WEBPAY_PLUS_MALL_DEFERRED)
+@tx = Transbank::Webpay::WebpayPlus::MallTransaction.new(::Transbank::Common::IntegrationCommerceCodes::WEBPAY_PLUS_MALL_DEFERRED)
 @resp = @tx.reverse_pre_authorized_amount(
   token: @token,
   child_commerce_code: @child_commerce_code,
@@ -3444,7 +3444,7 @@ var response = tx.ReversePreAuthorizedAmount(token, childCommerceCode, childBuyO
 
 ```python
 ## Versión 4.x del SDK
-tx = Transaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
 resp = tx.reversePreAuthorizedAmount(
   token=token, buy_order=buy_order, authorization_code=authorization_code, amount=amount, child_commerce_code=child_commerce_code
 )
@@ -3458,7 +3458,7 @@ import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
 import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 4.x del SDK
-const tx = new WebpayPlus.Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const tx = new WebpayPlus.MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.reversePreAuthorizedAmount(token, childCommerceCode, childBuyOrder, authorizationCode, amount);
 ```
 
@@ -3563,30 +3563,30 @@ Puedes revisar más detalles de esta operación en [su documentación](/document
 
 Este método está disponible desde la versión 1.3 del API de Transbank y aplica solo a productos con captura diferida.
 
-<strong>Transaction.deferredCaptureHistory()</strong>
+<strong>Transaction.deferredCaptureHistory() Mall</strong>
 
 ```java
 // Versión 4.x del SDK
-WebpayPlus.Transaction tx = new WebpayPlus.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
+WebpayPlus.MallTransaction tx = new WebpayPlus.MallTransaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
 final List<DeferredCaptureHistoryResponse> response = tx.deferredCaptureHistory(token, childCommerceCode, childBuyOrder);
 ```
 
 ```php
 // SDK Versión 3.x
-use Transbank\Webpay\WebpayPlus\Transaction;
+use Transbank\Webpay\WebpayPlus\MallTransaction;
 
-$response = (new Transaction)->deferredCaptureHistory($token, $buy_order, $commerce_code);
+$response = (new MallTransaction)->deferredCaptureHistory($token, $buy_order, $commerce_code);
 ```
 
 ```csharp
 // Versión 6.x del SDK
-var tx = new Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY_DEFERRED, WebpayIntegrationType.Test));
+var tx = new MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY_DEFERRED, WebpayIntegrationType.Test));
 var List<DeferredCaptureHistoryResponse> response = tx.DeferredCaptureHistory(token, childCommerceCode, childBuyOrder);
 ```
 
 ```ruby
 ## Versión 3.x del SDK
-@tx = Transbank::Webpay::WebpayPlus::Transaction.new(::Transbank::Common::IntegrationCommerceCodes::WEBPAY_PLUS_MALL_DEFERRED)
+@tx = Transbank::Webpay::WebpayPlus::MallTransaction.new(::Transbank::Common::IntegrationCommerceCodes::WEBPAY_PLUS_MALL_DEFERRED)
 @resp = @tx.deferred_capture_history(
   token: @token,
   childCommerceCode: @childCommerceCode,
@@ -3596,7 +3596,7 @@ var List<DeferredCaptureHistoryResponse> response = tx.DeferredCaptureHistory(to
 
 ```python
 ## Versión 4.x del SDK
-tx = Transaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
+tx = MallTransaction(WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_MALL_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST))
 resp = tx.deferredCaptureHistory(token=token, buy_order=buy_order, child_commerce_code, child_commerce_code)
 ```
 
@@ -3608,7 +3608,7 @@ import { WebpayPlus } from 'transbank-sdk'; // ES6 Modules
 import { Options, IntegrationApiKeys, Environment, IntegrationCommerceCodes } from 'transbank-sdk'; // ES6 Modules
 
 // Versión 4.x del SDK
-const tx = new WebpayPlus.Transaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
+const tx = new WebpayPlus.MallTransaction(new Options(IntegrationCommerceCodes.WEBPAY_PLUS_DEFERRED, IntegrationApiKeys.WEBPAY, Environment.Integration));
 const response = await tx.deferredCaptureHistory(token, childCommerceCode, childBuyOrder);
 ```
 
