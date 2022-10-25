@@ -1427,7 +1427,7 @@ Este método está disponible desde la versión 1.3 del API de Transbank y aplic
 ```java
 // Versión 4.x del SDK
 WebpayPlus.Transaction tx = new WebpayPlus.Transaction(new WebpayOptions(IntegrationCommerceCodes.WEBPAY_PLUS_DEFERRED, IntegrationApiKeys.WEBPAY, IntegrationType.TEST));
-final IncreaseAmountResponse response = tx.increaseAuthorizationDate(token, buyOrder, authorizationCode);
+final IncreaseAuthorizationDate response = tx.increaseAuthorizationDate(token, buyOrder, authorizationCode);
 ```
 
 ```php
@@ -1583,7 +1583,7 @@ final reversePreAuthorizedAmount response = tx.reversePreAuthorizedAmount(token,
 // SDK Versión 3.x
 use Transbank\Webpay\WebpayPlus\Transaction;
 
-$response = (new Transaction)->reversePreAuthorizedAmount($token, $buyOrder, $authorizationCode, amount, $commerceCode);
+$response = (new Transaction)->reversePreAuthorizedAmount($token, $buyOrder, $authorizationCode, $amount, $commerceCode);
 ```
 
 ```csharp
@@ -1598,7 +1598,7 @@ var response = tx.ReversePreAuthorizedAmount(token, buyOrder, authorizationCode,
 @resp = @tx.reverse_pre_authorized_amount(
   token: @token,
   buy_order: @buy_order,
-  authorization_code: @auth_code,
+  authorization_code: @authorization_code,
   amount: @amount
 )
 ```
