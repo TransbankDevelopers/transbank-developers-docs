@@ -1084,29 +1084,11 @@ prepaid_balance <br> <i> Number </i> | Saldo de la tarjeta de prepago. Se envía
 
 ### Reversar o Anular un pago Transacción Completa
 
-Este método permite a todo comercio habilitado reversar o anular una transacción
-completa. El método permite generar el reembolso del total o parte del monto de
-una transacción dependiendo de la siguiente lógica de negocio la invocación a
-esta operación generará una reversa o una anulación:
-
-* Si el monto enviado es menor al monto total entonces se ejecutará una anulación parcial.
-* Si el monto enviado es igual al total, entonces se evaluará una anulación o reversa. Será reversa si el tiempo para ejecutarla no ha terminado, de lo contrario se ejecutará una anulación.
-
-La anulación puede realizarse máximo 90 días después de la fecha de la
-transacción original.
-
 Puedes [leer más sobre la anulación en la información del
 producto Webpay](/producto/webpay#anulaciones) para conocer
 más detalles y restricciones.
 
 Para anular una transacción se debe invocar al método `Transaction.refund()`.
-
-Permite generar el reembolso del total o parte del monto de una transacción completa.
-Dependiendo de la siguiente lógica de negocio la invocación a esta operación generará una reversa o una anulación:
-
-* Si se especifica un valor en el campo “amount” se ejecutará siempre una anulación.
-* Si se supera el tiempo máximo para ejecutar una reversa se ejecutará una anulación.
-* Si no se ha dado ninguno de los casos anteriores se ejecutará una reversa.
 
 <strong>Transaction.refund()</strong>
 
@@ -1290,11 +1272,6 @@ response_code  <br> <i> Number </i> | Código de resultado de la anulación. Si 
 ## Captura Diferida
 
 Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo al tarjetahabiente.
-
-**Válido para :**
-
-* Webpay Plus Captura Diferida
-* Transacción Completa Captura Diferida
 
 ### Ejecutar captura diferida Transaccion Completa
 
@@ -2913,11 +2890,6 @@ response_code <br> <i> Number </i> | Código del resultado del pago. Si es exito
 
 Los comercios que están configurados para operar con captura diferida deben ejecutar el método de captura para realizar el cargo al tarjetahabiente.
 
-**Válido para :**
-
-* Webpay Plus Captura Diferida
-* Transacción Completa Captura Diferida
-
 ### Ejecutar captura diferida mall
 
 Puedes [leer más sobre la captura en la información del
@@ -3168,7 +3140,7 @@ Puedes revisar el proceso necesario para operar en el ambiente de producción en
 Si estas utilizando algún SDK oficial de Transbank, entonces debes seguir los siguientes pasos.
 
 <aside class="warning">
-Nunca dejes tu código de comercio y secreto compartido directamente en tu código, te recomendamos utilizar variables de entorno u otro método que te permita mantener tus credenciales seguras.
+Nunca dejes tu código de comercio y Api Key Secret compartido directamente en tu código, te recomendamos utilizar variables de entorno u otro método que te permita mantener tus credenciales seguras.
 </aside>
 
 Revisa [esta sección](/documentacion/como_empezar#b-utilizando-los-sdk) de la documentación para ver el código necesario para configurar tu propio código de comercio y Api Key Secret. 
