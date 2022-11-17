@@ -6,13 +6,12 @@
     <br>
     <h4>Compatibilidad</h4>
     <ul>
-      <li>OpenCart >= 3.x</li>
+      <li>OpenCart >= 3.x < 4.x </li>
       <li>PHP >= 7.0</li>
     </ul>
     <h4>Recuerda</h4>
     <ol>
-      <li>Contar con tu llave privada y pública</li>
-      <li>Contar con Prestashop instalado en tu sitio</li>
+      <li>Contar con OpenCart instalado en tu sitio</li>
       <li>Contar con un sitio 'https' seguro</li>
     </ol>
   </div>
@@ -44,11 +43,11 @@ Al instalar el plugin, podrás revisar si todas estos requisitos se cumplen, a t
 1. [Descargar el archivo .zip del plugin](https://github.com/TransbankDevelopers/transbank-plugin-opencart-webpay-rest/releases/latest)
 2. Sube el archivo zip en la sección Extensions > Installer en el administrador de tu Wordpress
 
-Las instrucciones detalladas de instalación las puedes encontrar en el [siguiente link](https://github.com/TransbankDevelopers/transbank-plugin-opencart-webpay-rest/blob/master/docs/INSTALLATION.md)).
+Las instrucciones detalladas de instalación las puedes encontrar en el [siguiente link](https://github.com/TransbankDevelopers/transbank-plugin-opencart-webpay-rest/blob/master/docs/INSTALLATION.md).
 
 ## Ambiente de pruebas
 
-Una vez instalado el plugin, este viene configurado en el ambiente de **Integración** de Transbank, por lo que puedes realizar todas las pruebas de pago quee necesites, ya que no se usa dinero real.
+Una vez instalado el plugin, este viene configurado en el ambiente de **Integración** de Transbank, por lo que puedes realizar todas las pruebas de pago que necesites, ya que no se usa dinero real.
 En este ambiente solo funcionan las tarjetas de crédito y débito de prueba que puedes [encontrar acá](/documentacion/como_empezar#ambiente-de-integracion).
 
 ## Obtener tu llave secreta (proceso de validación)
