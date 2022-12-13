@@ -183,7 +183,7 @@ Desde el punto de vista de la transacción, lo que ocurre es lo siguiente:
 
 Al realizar la autorización de una transacción, el comercio recibe una respuesta por parte de Transbank informando el resultado. En esta respuesta, el campo VCI corresponde a la autenticación del tarjetahabiente y es información adicional suplementaria al `responseCode`. 
 El comercio **no** debe validar este campo porque constantemente se agregan nuevos mecanismos de autenticación que se traducen en nuevos valores para este campo, que no están necesariamente documentados. 
-(En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio)  
+(En el caso de tarjetas internacionales que no proveen 3D-Secure, la decisión del comercio de aceptarlas o no se realiza a nivel de configuración del comercio en Transbank y debe ser conversada con el ejecutivo del comercio).
 
 Código de respuesta | Descripción
 ------   | -----------
